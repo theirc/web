@@ -39,13 +39,16 @@
     "react-redux": "^5.0.5",
     "react-router": "^4.1.1",
     "react-router-redux": "^5.0.0-alpha.6",
-    "react-scripts": "1.0.10",
+    "react-scripts": "^1.0.10",
     "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.6.0",
+    "redux-promise-middleware": "4.2.1",
+    "redux-thunk": "^2.2.0",
     "serve-favicon": "^2.4.3",
     "superagent": "^3.5.2",
     "superagent-cache": "^2.0.0",
-    "superagent-no-cache": "^0.1.1"
+    "superagent-no-cache": "^0.1.1",
+    "winston": "^2.3.1"
   },
   "scripts": {
     "start": "./node_modules/.bin/react-scripts  build; npm run build-server; npm run run-server",
@@ -53,6 +56,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "build-server": "babel server -s -D -d distServer --presets es2015,stage-0,react",
-    "run-server": "node distServer"
+    "run-server": "node distServer",
+    "postinstall": "./node_modules/.bin/react-scripts build; npm run build-server;"
   }
 }

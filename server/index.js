@@ -43,8 +43,8 @@ app.configure(socketio());
 app.use(notFound());
 app.use(handler());
 
-const port = app.get('port') || 8181;
-const host = app.get('host') || '0.0.0.0';
+const port = app.get('port') || process.env.PORT || 3000;
+const host = app.get('host') || 'localhost';
 
 app.set('port', port);
 app.set('host', host);
