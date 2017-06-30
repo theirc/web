@@ -51,12 +51,12 @@
     "winston": "^2.3.1"
   },
   "scripts": {
-    "start": "./node_modules/.bin/react-scripts  build; npm run build-server; npm run run-server",
+    "start": "node server",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "build-server": "babel server -s -D -d distServer --presets es2015,stage-0,react",
     "run-server": "node distServer",
-    "postinstall": "./node_modules/.bin/react-scripts build; npm run build-server;"
+    "postinstall": "./node_modules/.bin/react-scripts build ; npm run build-server;"
   }
 }
