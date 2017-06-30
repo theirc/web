@@ -77,6 +77,24 @@ hr {
     height: 3px;
   border: 0;
 }
+.title {
+  width: 100%;
+  display: flex;
+    margin: 0;
+    background-color: #f0f0f0;
+    min-height: 60px;
+    flex-direction: row;
+    align-items: center;
+}
+.title > h1 {
+    font-size: 24px;
+    text-transform: uppercase;
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 10px 10px 10px 10px;
+    flex: 1;
+}
 article {
     padding: 5px 5px 5px 5px;
     margin-bottom: 50px;
@@ -90,16 +108,6 @@ article  h1 {
     font-size: 24px;
         text-transform: uppercase;
 
-}
-article  h1.title {
-    font-size: 24px;
-    text-transform: uppercase;
-    padding: 10px 10px 10px 10px;
-    margin-top: -5px;
-    margin-left: -5px;
-    display: block;
-    width: 100%;
-    background-color: #f0f0f0;
 }
 article  h2 {
 

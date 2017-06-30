@@ -34,13 +34,8 @@ class Home extends React.Component {
 
         return (<div>
             <AppHeader />
-            <DetailPage>
-                {[article].map((t) => (<div key={t._id}>
-                    <h1 className="title">
-                        {t.title}
-                    </h1>
-                    <div dangerouslySetInnerHTML={{ __html: t.body }}></div>
-                </div>))}
+            <DetailPage title={article.title}>
+                    <div dangerouslySetInnerHTML={{ __html: article.body }}></div>
             </DetailPage>
             <BottomNav />
         </div>);

@@ -7,8 +7,6 @@ import { FlatButton, IconButton, FontIcon } from 'material-ui';
 import IconLocationOn from 'material-ui/svg-icons/communication/location-on';
 import SearchIcon from 'react-material-icons/icons/action/search';
 
-import './AppHeader.css';
-
 export default class AppHeader extends Component {
     render() {
         const { changeCountry, search, home } = this.props;
@@ -18,6 +16,9 @@ export default class AppHeader extends Component {
                 <img onClick={home} src="logo.png" className="app-bar-logo" />
             )}
             showMenuIconButton={false}
+            style={{
+                position: 'fixed',
+            }}
             iconElementRight={
                 <div className="app-bar-container">
                     <FlatButton labelStyle={{ color: white }} onClick={changeCountry}
