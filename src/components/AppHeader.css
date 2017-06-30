@@ -1,0 +1,41 @@
+/*
+Less me
+*/
+
+.app-bar {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+}
+
+.app-bar-container {
+    display: flex;
+    color: white;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    height: 50;
+    flex-grow: 1
+}
+
+.app-bar-separator {
+    border-left-width: 2px;
+    border-left-color: #29991f;
+    /*
+    ffda1a
+    29991f
+    e60000
+    */
+    border-left-style: solid;
+    border-radius: 1px;
+    height: 25px
+}
+.app-bar-logo
+{
+    height: 40px;
+    margin-top: 10px;
+    background-color: #29991f;
+}
