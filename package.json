@@ -33,6 +33,7 @@
     "moment": "^2.18.1",
     "mustache": "^2.3.0",
     "mustache-express": "^1.2.5",
+    "npm-run": "^4.1.2",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-material-icons": "^1.0.2",
