@@ -52,6 +52,8 @@ const store = applyMiddleware(...middleware)(createStore)(
   }),
   compose(window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 )
+
+
 class App extends Component {
   render() {
     return (
@@ -59,11 +61,11 @@ class App extends Component {
         <MuiThemeProvider muiTheme={muiTheme}>
           { /* ConnectedRouter will use the store from Provider automatically */}
           <ConnectedRouter history={history}>
-            <div>
+            <span>
               <Route exact path="/" component={Home} />
               <Route path="/about" component={() => <div>about</div>} />
               <Route path="/topics" component={() => <div>topics</div>} />
-            </div>
+            </span>
           </ConnectedRouter>
         </MuiThemeProvider>
       </Provider>
