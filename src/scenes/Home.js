@@ -33,9 +33,9 @@ class Home extends React.Component {
 
 
         return (<div>
-            <AppHeader />
+                <AppHeader />
             <DetailPage title={article.title}>
-                    <div dangerouslySetInnerHTML={{ __html: article.body }}></div>
+                <div dangerouslySetInnerHTML={{ __html: article.body }}></div>
             </DetailPage>
             <BottomNav />
         </div>);

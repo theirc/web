@@ -6,33 +6,36 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import { FlatButton, IconButton, FontIcon } from 'material-ui';
 import IconLocationOn from 'material-ui/svg-icons/communication/location-on';
 import SearchIcon from 'react-material-icons/icons/action/search';
+import Headroom from 'react-headrooms';
 
 export default class AppHeader extends Component {
     render() {
         const { changeCountry, search, home } = this.props;
-        return (<AppBar
-            className="app-bar"
-            title={(
-                <img onClick={home} src="logo.png" className="app-bar-logo" />
-            )}
-            showMenuIconButton={false}
-            style={{
-                position: 'fixed',
-            }}
-            iconElementRight={
-                <div className="app-bar-container">
-                    <FlatButton labelStyle={{ color: white }} onClick={changeCountry}
-                        label="Greece">
-                    </FlatButton>
-                    <div className="app-bar-separator"></div>
-                    <IconButton
-                        onClick={search}
-                        iconStyle={{ color: white }}>
-                        <SearchIcon />
-                    </IconButton>
-                </div>
-            }
-        />);
+        return (<Headroom tolerance={5} offset={200}>
+            <AppBar
+                className="app-bar"
+                title={(
+                    <img onClick={home} src="logo.png" className="app-bar-logo" />
+                )}
+                showMenuIconButton={false}
+                style={{
+                    position: 'fixed',
+                }}
+                iconElementRight={
+                    <div className="app-bar-container">
+                        <FlatButton labelStyle={{ color: white }} onClick={changeCountry}
+                            label="Greece">
+                        </FlatButton>
+                        <div className="app-bar-separator"></div>
+                        <IconButton
+                            onClick={search}
+                            iconStyle={{ color: white }}>
+                            <SearchIcon />
+                        </IconButton>
+                    </div>
+                }
+            />
+        </Headroom>);
     }
 
 }

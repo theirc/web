@@ -32,8 +32,6 @@ Less me
     display: flex;
     flex: 1;
     justify-content: center;
-    position: fixed;
-    top: 0;
 }
 
 .app-bar-container {
@@ -120,4 +118,27 @@ article  h3 {
 article  p,article  li,article  a,article  em {
     color: #404040;
     font-size: 14px;
+}
+
+
+.headroom {
+  top: 0;
+  left: 0;
+  right: 0;
+  zIndex: 1;
+}
+.headroom--unfixed {
+  position: relative;
+  transform: translateY(0);
+}
+.headroom--scrolled {
+  transition: transform 200ms ease-in-out;
+}
+.headroom--unpinned {
+  position: fixed;
+  transform: translateY(-100%);
+}
+.headroom--pinned {
+  position: fixed;
+  transform: translateY(0%);
 }

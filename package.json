@@ -36,6 +36,8 @@
     "npm-run": "^4.1.2",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-headroom": "^2.1.5",
+    "react-headrooms": "^1.0.5",
     "react-material-icons": "^1.0.2",
     "react-redux": "^5.0.5",
     "react-router": "^4.1.1",
