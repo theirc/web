@@ -70,10 +70,14 @@ html, body {
 }
 hr {
     width:20%;
-    color: #FDDA1A;
-    background-color: #FDDA1A;
-    height: 3px;
-  border: 0;
+    color: #29991f;
+    border-color: #29991f;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 2px; 
+    height: 0px;
+    margin-left: 0px;
+
 }
 .title {
   width: 100%;
@@ -97,16 +101,19 @@ article {
     padding: 5px 5px 5px 5px;
     margin-bottom: 50px;
 }
-article  img {
+img.hero {
+    max-width: 100%;
+}
+article img {
     max-width: 100%;
     margin: auto;
     display: block;
 }
 article  h1 {
     font-size: 24px;
-        text-transform: uppercase;
-
+    text-transform: uppercase;
 }
+
 article  h2 {
 
     font-size: 18px;
@@ -118,27 +125,4 @@ article  h3 {
 article  p,article  li,article  a,article  em {
     color: #404040;
     font-size: 14px;
-}
-
-
-.headroom {
-  top: 0;
-  left: 0;
-  right: 0;
-  zIndex: 1;
-}
-.headroom--unfixed {
-  position: relative;
-  transform: translateY(0);
-}
-.headroom--scrolled {
-  transition: transform 200ms ease-in-out;
-}
-.headroom--unpinned {
-  position: fixed;
-  transform: translateY(-100%);
-}
-.headroom--pinned {
-  position: fixed;
-  transform: translateY(0%);
 }

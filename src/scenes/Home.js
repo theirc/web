@@ -28,13 +28,13 @@ class Home extends React.Component {
     render() {
         const { articles } = this.props;
         if (!articles) return (<div />);
-        let article = _.first((articles.queryResult || []))
+        let article =  articles.data;
         if (!article) return (<div />);
 
 
         return (<div>
-                <AppHeader />
-            <DetailPage title={article.title}>
+            <AppHeader />
+            <DetailPage title={article.title} hero={article.hero}>
                 <div dangerouslySetInnerHTML={{ __html: article.body }}></div>
             </DetailPage>
             <BottomNav />
@@ -52,7 +52,7 @@ const mapState = (s, p) => {
 const mapDispatch = (d, p) => {
     return {
         onLoad: () => {
-            d(services.articles.find());
+            d(services.articles.get('the-title-of-this-article-style-title'));
         }
     };
 };
