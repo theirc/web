@@ -7,7 +7,8 @@ import {
     DetailPage,
     AppHeader,
     BottomNav,
-    WarningDialog
+    WarningDialog,
+    Footer
 } from '../components';
 import _ from 'lodash';
 
@@ -28,15 +29,19 @@ class Home extends React.Component {
     render() {
         const { articles } = this.props;
         if (!articles) return (<div />);
-        let article =  articles.data;
+        let article = articles.data;
         if (!article) return (<div />);
 
 
         return (<div>
             <AppHeader />
+            <WarningDialog type="red">
+                This is still just a mockup.
+                </WarningDialog>
             <DetailPage title={article.title} hero={article.hero}>
                 <div dangerouslySetInnerHTML={{ __html: article.body }}></div>
             </DetailPage>
+            <Footer />
             <BottomNav />
         </div>);
         /* return (); */

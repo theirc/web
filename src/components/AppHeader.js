@@ -12,6 +12,7 @@ export default class AppHeader extends Component {
     render() {
         const { changeCountry, search, home } = this.props;
         return (<Headroom tolerance={5} offset={200}>
+            <div>
             <AppBar
                 className="app-bar"
                 title={(
@@ -35,6 +36,8 @@ export default class AppHeader extends Component {
                     </div>
                 }
             />
+            <div style={{ display: 'block', width: '100%', height: 64 }}></div>
+</div>
         </Headroom>);
     }
 
