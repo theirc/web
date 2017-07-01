@@ -1,0 +1,95 @@
+/*
+Less me
+*/
+@import '../includes.scss';
+
+.app-bar {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+}
+
+.app-bar-container {
+  display: flex;
+  color: white;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  height: 50;
+  flex-grow: 1;
+}
+
+.app-bar-separator {
+  border-left-width: 2px;
+  border-left-color: #ffffff;
+  border-left-style: solid;
+  border-radius: 1px;
+  height: 25px;
+
+  .irc & {
+    border-left-color: $accentIRC;
+  }
+
+  .nrc & {
+    border-left-color: $accentNRC;
+  }
+
+  .generic & {
+    border-left-color: $accentGreen;
+  }
+
+  .mc & {
+    border-left-color: $accentRed;
+  }
+}
+
+.app-bar-logo {
+  height: 40px;
+  margin-top: 10px;
+  background-color: #ffffff;
+
+  .irc & {
+    background-color: $accentIRC;
+  }
+
+  .nrc & {
+    background-color: $accentNRC;
+  }
+
+  .generic & {
+    background-color: $accentGreen;
+  }
+
+  .mc & {
+    background-color: $accentRed;
+  }
+}
+
+.headroom {
+  top: 0;
+  left: 0;
+  right: 0;
+  zIndex: 1;
+}
+
+.headroom--unfixed {
+  position: relative;
+  transform: translateY(0);
+}
+
+.headroom--scrolled {
+  transition: transform 200ms ease-in-out;
+}
+
+.headroom--unpinned {
+  position: fixed;
+  transform: translateY(-100%);
+}
+
+.headroom--pinned {
+  position: fixed;
+  transform: translateY(0%);
+}

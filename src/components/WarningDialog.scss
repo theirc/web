@@ -1,18 +1,24 @@
+@import '../includes.scss';
+
 .warning-dialog-container-yellow {
   padding: 20px 20px 20px 15px;
   background-color: #ffda1a;
-  color: black; }
+  color: black;
+}
 
 .warning-dialog-container-red {
   padding: 20px;
   background-color: #e60000;
-  color: white; }
+  color: white;
+}
 
 .warning-dialog-container-green {
   padding: 20px;
   background-color: #29991f;
-  color: white; }
+  color: white;
+}
 
 .warning-dialog-container-inner {
   border-left: 4px solid white;
-  padding-left: 15px; }
+  padding-left: 15px;
+}

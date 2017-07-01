@@ -8,6 +8,9 @@ import IconLocationOn from 'material-ui/svg-icons/communication/location-on';
 import SearchIcon from 'react-material-icons/icons/action/search';
 import Headroom from 'react-headrooms';
 
+import './AppHeader.css'
+
+
 export default class AppHeader extends Component {
     render() {
         const { changeCountry, search, home } = this.props;
