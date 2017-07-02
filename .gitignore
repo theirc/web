@@ -78,3 +78,4 @@ fastlane/screenshots
 src/components/*.css
 native/node_modules
 native/src
+webserver

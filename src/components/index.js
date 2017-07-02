@@ -3,13 +3,11 @@ import AppHeader  from './AppHeader';
 import BottomNav  from './BottomNav';
 import WarningDialog  from './WarningDialog';
 import Footer  from './Footer';
-import Empty  from './Empty';
 
-export default {
+export  {
     DetailPage,
     AppHeader,
     BottomNav,
     WarningDialog,
     Footer,
-    Empty,
 };

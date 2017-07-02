@@ -39,22 +39,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(favicon(path.join('build', 'favicon.ico')));
 
-app.get('/server-css', (req, res) => {
-    let host = req.headers.host;
-    host = host.split(':')[0];
-
-    fs.readFile(path.join(path.dirname(__filename), "css", `${host}.less`), (err, file) => {
-        if (err) {
-            res.send('');
-            return;
-        }
-        
-        less.render(file.toString()).then((o) => {
-            res.type('text/css').send(o.css);
-        })
-    })
-})
-
 // Host the public folder
 app.use('/', feathers.static('build'));
 
