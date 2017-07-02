@@ -76,4 +76,5 @@ fastlane/Preview.html
 fastlane/screenshots
 
 src/components/*.css
-RefugeeInfo/node_modules
+native/node_modules
+native/src

@@ -45,7 +45,6 @@
     "react-headroom": "^2.1.5",
     "react-headrooms": "^1.0.5",
     "react-material-icons": "^1.0.2",
-    "react-native": "0.45.1",
     "react-redux": "^5.0.5",
     "react-router": "^4.1.1",
     "react-router-redux": "^5.0.0-alpha.6",

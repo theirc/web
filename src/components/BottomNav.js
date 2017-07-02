@@ -19,16 +19,7 @@ export default class BottomNav extends Component {
     }
 
     select(selectedIndex = 0) {
-        const { swithOrganizations } = this.props;
-        if (selectedIndex == 0) {
-            swithOrganizations('irc');
-        } else if (selectedIndex == 1) {
-            swithOrganizations('mc');
-        } else if (selectedIndex == 2) {
-            swithOrganizations('nrc');
-        } else if (selectedIndex == 3) {
-            swithOrganizations('generic');
-        }
+       
 
         this.setState({ selectedIndex });
     }
