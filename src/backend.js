@@ -10,7 +10,7 @@ const supercache = require('superagent-cache');
 const superagent = require('superagent');
 const rest = require('feathers-rest/client');
 
-const url = process.env.BACKEND_URL || 'http://localhost:8080/api'
+const url = 'http://backend.refugee.info/api';
 const restClient = rest(url);
 
 const client = feathers()
