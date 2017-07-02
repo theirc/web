@@ -6,13 +6,11 @@ import { IconLocationOn } from 'material-ui-icons';
 import SearchIcon from 'react-material-icons/icons/action/search';
 import Headroom from 'react-headrooms';
 import Toolbar from 'material-ui/Toolbar';
-import {connect} from 'react-redux';
-import actions from '../actions';
 
 import './AppHeader.css'
 
 
-class AppHeader extends Component {
+export default class AppHeader extends Component {
     render() {
         const { changeCountry, search, home } = this.props;
         return (
@@ -40,5 +38,3 @@ class AppHeader extends Component {
     }
 
 }
-
-export default AppHeader;

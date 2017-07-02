@@ -3,12 +3,10 @@ import { AppBar, Paper, } from 'material-ui';
 import BottomNavigation, { BottomNavigationButton } from 'material-ui/BottomNavigation';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
 import { MoreHoriz, Home, Map, List } from 'material-ui-icons';
-import actions from '../actions';
 
-class BottomNav extends Component {
+export default class BottomNav extends Component {
     static PropTypes = {
         classes: PropTypes.object.isRequired
     }
@@ -64,19 +62,3 @@ class BottomNav extends Component {
         );
     }
 }
-
-const mapStateToProps = ({ organization }) => {
-    return {
-        organization
-    }
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        swithOrganizations: (o) => {
-            return dispatch(actions.changeOrganization(o));
-        }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(BottomNav);
