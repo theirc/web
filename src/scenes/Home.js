@@ -49,7 +49,6 @@ class Home extends React.Component {
 }
 
 const mapState = (s, p) => {
-    console.log(s);
     return {
         articles: s.articles
     };

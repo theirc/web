@@ -1,14 +1,17 @@
 import React, { Component, } from 'react';
-import { AppBar, Paper, BottomNavigation, BottomNavigationItem } from 'material-ui';
-import { cyan500, black, white } from 'material-ui/styles/colors';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import { FlatButton, IconButton, FontIcon } from 'material-ui';
+import { AppBar, Paper, } from 'material-ui';
+import BottomNavigation, { BottomNavigationButton } from 'material-ui/BottomNavigation';
+import { withStyles, createStyleSheet } from 'material-ui/styles';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-import {CommunicationLocationOn, ActionHome, ActionSearch} from 'material-ui/svg-icons';
+import { MoreHoriz, Home, Map, List } from 'material-ui-icons';
+import actions from '../actions';
 
-
-export default class BottomNav extends Component {
+class BottomNav extends Component {
+    static PropTypes = {
+        classes: PropTypes.object.isRequired
+    }
     constructor() {
         super();
 
@@ -18,34 +21,62 @@ export default class BottomNav extends Component {
     }
 
     select(selectedIndex = 0) {
+        const { swithOrganizations } = this.props;
+        if (selectedIndex == 0) {
+            swithOrganizations('irc');
+        } else if (selectedIndex == 1) {
+            swithOrganizations('mc');
+        } else if (selectedIndex == 2) {
+            swithOrganizations('nrc');
+        } else if (selectedIndex == 3) {
+            swithOrganizations('generic');
+        }
+
         this.setState({ selectedIndex });
     }
 
     render() {
         return (
-            <Paper zDepth={1} style={{
+            <Paper style={{
                 position: 'fixed',
                 bottom: 0,
                 width: '100%',
             }}>
-                <BottomNavigation selectedIndex={this.state.selectedIndex}>
-                    <BottomNavigationItem
+                <BottomNavigation index={this.state.selectedIndex} onChange={(e, i) => this.select(i)}>
+                    <BottomNavigationButton
                         label="Home"
-                        icon={<ActionHome />}
-                        onTouchTap={() => this.select(0)}
+                        icon={<Home />}
                     />
-                    <BottomNavigationItem
-                        label="Search"
-                        icon={<ActionSearch />}
-                        onTouchTap={() => this.select(1)}
+                    <BottomNavigationButton
+                        label="Categories"
+                        icon={<List />}
                     />
-                    <BottomNavigationItem
-                        label="Nearby"
-                        icon={<CommunicationLocationOn />}
-                        onTouchTap={() => this.select(2)}
+                    <BottomNavigationButton
+                        label="Services"
+                        icon={<Map />}
+                    />
+                    <BottomNavigationButton
+                        label="More"
+                        icon={<MoreHoriz />}
                     />
                 </BottomNavigation>
             </Paper>
         );
     }
 }
+
+const mapStateToProps = ({ organization }) => {
+    return {
+        organization
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        swithOrganizations: (o) => {
+            return dispatch(actions.changeOrganization(o));
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BottomNav);

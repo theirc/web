@@ -4,19 +4,35 @@ Less me
 .app-bar {
   display: flex;
   flex: 1;
-  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
   position: fixed;
-  top: 0; }
+  width: 100%;
+  top: 0;
+  height: 64px;
+  box-shadow: 0 1px 1px 0;
+  background-color: #000000; }
+  .rtl .app-bar {
+    flex-direction: row-reverse; }
 
 .app-bar-container {
+  padding-right: 5px;
+  padding-left: 5px;
   display: flex;
   color: white;
   flex: 1;
-  align-items: center;
-  justify-content: center;
   flex-direction: row;
-  height: 50;
-  flex-grow: 1; }
+  align-items: flex-start;
+  justify-content: flex-start;
+  height: 50; }
+
+.app-bar-buttons {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: row; }
 
 .app-bar-separator {
   border-left-width: 2px;
@@ -35,7 +51,6 @@ Less me
 
 .app-bar-logo {
   height: 40px;
-  margin-top: 10px;
   background-color: #ffffff; }
   .irc .app-bar-logo {
     background-color: #ffda1a; }
@@ -50,18 +65,18 @@ Less me
   top: 0;
   left: 0;
   right: 0;
-  zIndex: 1; }
+  z-index: 1; }
 
 .headroom--unfixed {
   position: relative;
   transform: translateY(0); }
 
-.headroom--scrolled {
+.headroom--scrolled, .headroom--unpinned, .headroom--pinned {
   transition: transform 200ms ease-in-out; }
 
 .headroom--unpinned {
   position: fixed;
-  transform: translateY(-100%); }
+  transform: translateY(-65px); }
 
 .headroom--pinned {
   position: fixed;

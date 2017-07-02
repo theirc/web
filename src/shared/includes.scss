@@ -1,0 +1,39 @@
+$accentIRC: #ffda1a;
+$accentGreen: #29991f;
+$accentRed: #e60000;
+$accentNRC: #FF7602;
+@mixin brand-colors($prop) {
+  .irc & {
+    #{$prop}: $accentIRC;
+  }
+
+  .nrc & {
+    #{$prop}: $accentNRC;
+  }
+
+  .generic & {
+    #{$prop}: $accentGreen;
+  }
+
+  .mc & {
+    #{$prop}: $accentRed;
+  }
+}
+
+@mixin brand-colors-inverse($prop) {
+  .irc & {
+    #{$prop}: #000000;
+  }
+
+  .nrc & {
+    #{$prop}: #ffffff;
+  }
+
+  .generic & {
+    #{$prop}: #FFFFFF;
+  }
+
+  .mc & {
+    #{$prop}: #ffffff;
+  }
+}

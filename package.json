@@ -5,9 +5,11 @@
   "dependencies": {
     "babel-cli": "^6.9.0",
     "babel-core": "^6.9.0",
+    "babel-jest": "20.0.3",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.0.0",
+    "babel-preset-react-native": "2.0.0",
     "babel-preset-stage-0": "^6.5.0",
     "babel-runtime": "^6.23.0",
     "body-parser": "^1.17.2",
@@ -27,10 +29,12 @@
     "glamorous": "^3.23.2",
     "helmet": "^3.6.1",
     "history": "^4.6.3",
+    "jest": "20.0.4",
     "js-htmlencode": "^0.3.0",
     "less": "^2.7.2",
     "lodash": "^4.17.4",
-    "material-ui": "^0.18.3",
+    "material-ui": "^1.0.0-alpha.20",
+    "material-ui-icons": "^1.0.0-alpha.19",
     "moment": "^2.18.1",
     "mustache": "^2.3.0",
     "mustache-express": "^1.2.5",
@@ -41,12 +45,15 @@
     "react-headroom": "^2.1.5",
     "react-headrooms": "^1.0.5",
     "react-material-icons": "^1.0.2",
+    "react-native": "0.45.1",
     "react-redux": "^5.0.5",
     "react-router": "^4.1.1",
     "react-router-redux": "^5.0.0-alpha.6",
     "react-scripts": "^1.0.10",
     "react-tap-event-plugin": "^2.0.1",
+    "react-test-renderer": "16.0.0-alpha.12",
     "redux": "^3.6.0",
+    "redux-actions": "^2.1.0",
     "redux-promise-middleware": "4.2.1",
     "redux-thunk": "^2.2.0",
     "serve-favicon": "^2.4.3",
@@ -62,9 +69,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "build-server": "babel server -s -D -d distServer --presets es2015,stage-0,react",
-    "run-server": "node distServer",
-    "postinstall": "./node_modules/.bin/react-scripts build ; npm run build-server;"
+    "build-server": "babel src/server -s -D -d webserver --presets es2015,stage-0,react",
+    "run-server": "node webserver"
   }
 }
-
