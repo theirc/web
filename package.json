@@ -69,6 +69,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "build-server": "babel src/server -s -D -d webserver --presets es2015,stage-0,react",
-    "run-server": "node server"
+    "run-server": "node server",
+    "postinstall": "npm run build-css ; ./node_modules/.bin/react-scripts build; npm run build-server "
   }
 }
