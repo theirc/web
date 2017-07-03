@@ -129,7 +129,7 @@ echo "Building Server."
 eval $NPM_CMD run build-server
 
 echo "Building Client code."
-eval ./node_modules/.bin/react-script build
+eval ./node_modules/.bin/react-scripts build
 
 
 echo "Finished successfully."
