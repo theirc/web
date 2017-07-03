@@ -1,10 +1,9 @@
 import services from './backend';
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import actions from './actions';
 
 function changeOrganization(state = 'irc', action) {
   switch (action.type) {
-    case actions.actionTypes.CHANGE_ORGANIZATION:
+    case actions.actionTypes.changeOrganization:
       return action.payload;
     default:
       return state

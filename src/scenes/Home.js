@@ -1,21 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import services from '../backend';
 import { connect } from 'react-redux'
-import htmlEncode from 'js-htmlencode';
 import {
-    DetailPage,
+    ArticlePage,
     AppHeader,
     BottomNav,
     WarningDialog,
     Footer
 } from '../components';
-import _ from 'lodash';
 
 class Home extends React.Component {
-    static PropTypes = {
-
-    }
     constructor() {
         super();
 
@@ -33,14 +27,13 @@ class Home extends React.Component {
         if (!article) return (<div />);
 
 
-        return (<div>
+        return (<div className="">
             <AppHeader />
-            <WarningDialog type="red">
+            <WarningDialog type="red" dismiss={true}>
                 This is still just a mockup.
                 </WarningDialog>
-            <DetailPage title={article.title} hero={article.hero}>
-                <div dangerouslySetInnerHTML={{ __html: article.body }}></div>
-            </DetailPage>
+            <ArticlePage article={article}>
+            </ArticlePage>
             <Footer />
             <BottomNav />
         </div>);

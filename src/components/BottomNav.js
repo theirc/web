@@ -1,15 +1,16 @@
 import React, { Component, } from 'react';
-import { AppBar, Paper, } from 'material-ui';
+import { Paper, } from 'material-ui';
 import BottomNavigation, { BottomNavigationButton } from 'material-ui/BottomNavigation';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
 import PropTypes from 'prop-types';
 
 import { MoreHoriz, Home, Map, List } from 'material-ui-icons';
 
 export default class BottomNav extends Component {
     static PropTypes = {
-        classes: PropTypes.object.isRequired
+        classes: PropTypes.object.isRequired,
+        onButtonClicked: PropTypes.func,
     }
+
     constructor() {
         super();
 
@@ -19,9 +20,16 @@ export default class BottomNav extends Component {
     }
 
     select(selectedIndex = 0) {
-       
+        const { onButtonClicked } = this.props;
+        if (onButtonClicked) {
+            onButtonClicked(selectedIndex);
+        }
+        if (selectedIndex === 3) {
+            this.setState({ selectedIndex: -1 });
+        } else {
+            this.setState({ selectedIndex });
+        }
 
-        this.setState({ selectedIndex });
     }
 
     render() {
@@ -45,6 +53,7 @@ export default class BottomNav extends Component {
                         icon={<Map />}
                     />
                     <BottomNavigationButton
+                    
                         label="More"
                         icon={<MoreHoriz />}
                     />

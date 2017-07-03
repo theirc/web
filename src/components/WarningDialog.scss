@@ -23,3 +23,15 @@
   border-left: 4px solid white;
   padding-left: 15px;
 }
+
+.warning--hiding {
+  padding: 0;
+  margin: 0;
+  transition: padding 1s;
+}
+
+
+
+.warning--hiding .warning-dialog-container-inner {
+  display: none;
+}

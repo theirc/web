@@ -41,6 +41,10 @@ Less me
   align-items: center;
   justify-content: flex-end;
   flex-direction: row;
+  
+  .rtl & {
+    flex-direction: row-reverse;
+  }
 }
 
 .app-bar-separator {
