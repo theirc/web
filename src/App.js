@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Provider, connect } from 'react-redux';
 import { Route } from 'react-router';
 import { ConnectedRouter, } from 'react-router-redux'
-import { Home } from './scenes';
+import { Home, Article } from './scenes';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { createMuiTheme } from 'material-ui/styles';
 import {store, history, } from './store'
@@ -26,7 +26,7 @@ class ThemedApp extends Component {
                 <ConnectedRouter history={history}>
                     <span className={organization}>
                         <Route exact path="/" component={Home} />
-                        <Route path="/about" component={() => <div>about</div>} />
+                        <Route path="/:country/:category/:article" component={Article} />
                         <Route path="/topics" component={() => <div>topics</div>} />
                     </span>
                 </ConnectedRouter>

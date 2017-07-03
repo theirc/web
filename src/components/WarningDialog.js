@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import './WarningDialog.css';
 
 export default class WarningDialog extends Component {
-    static PropTypes = {
+    static propTypes = {
         text: PropTypes.string,
         type: PropTypes.string,
         dismiss: PropTypes.bool,

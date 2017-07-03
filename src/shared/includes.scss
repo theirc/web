@@ -2,6 +2,10 @@ $accentIRC: #ffda1a;
 $accentGreen: #29991f;
 $accentRed: #e60000;
 $accentNRC: #FF7602;
+
+$titleBackground:  #f0f0f0;
+$dividerColor: darken($titleBackground, 30%);
+
 @mixin brand-colors($prop) {
   .irc & {
     #{$prop}: $accentIRC;

@@ -1,5 +1,6 @@
 @import '../shared/includes.scss';
 @import '../shared/includes.scss';
+.DetailPage {
 
 hr {
   width: 20%;
@@ -97,4 +98,6 @@ article {
     color: #404040;
     font-size: 14px;
   }
+}
+
 }

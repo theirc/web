@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import './DetailPage.css';
 
 export default class DetailPage extends Component {
-    static PropTypes =  {
+    static propTypes =  {
         title: PropTypes.string,
         hero: PropTypes.string,
         body: PropTypes.string,

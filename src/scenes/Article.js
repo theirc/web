@@ -2,13 +2,25 @@ import React from 'react';
 import services from '../backend';
 import { connect } from 'react-redux'
 import {
+    ArticlePage,
+    ArticleFooter,
     AppHeader,
     BottomNav,
     WarningDialog,
     Footer
 } from '../components';
+import PropTypes from 'prop-types';
 
-class Home extends React.Component {
+class Article extends React.Component {
+    static propTypes = {
+        match: PropTypes.shape({
+            params: PropTypes.shape({
+                country: PropTypes.string.isRequired,
+                category: PropTypes.string.isRequired,
+                article: PropTypes.string.isRequired,
+            }).isRequired
+        }).isRequired
+    }
     constructor() {
         super();
 
@@ -16,12 +28,13 @@ class Home extends React.Component {
     }
 
     componentWillMount() {
-        this.props.onLoad();
+        this.props.onLoad(this.props.match.params.article);
     }
 
     render() {
         const { articles } = this.props;
         if (!articles) return (<div />);
+
         let article = articles.data;
         if (!article) return (<div />);
 
@@ -31,6 +44,9 @@ class Home extends React.Component {
             <WarningDialog type="red" dismiss={true}>
                 This is still just a mockup.
                 </WarningDialog>
+            <ArticlePage article={article}>
+            </ArticlePage>
+            <ArticleFooter />
             <Footer />
             <BottomNav />
         </div>);
@@ -40,15 +56,16 @@ class Home extends React.Component {
 
 const mapState = (s, p) => {
     return {
-        articles: s.articles
+        articles: s.articles,
+        match: p.match
     };
 };
 const mapDispatch = (d, p) => {
     return {
-        onLoad: () => {
-            d(services.articles.get('the-title-of-this-article-style-title'));
+        onLoad: (slug) => {
+            d(services.articles.get(slug));
         }
     };
 };
 
-export default connect(mapState, mapDispatch)(Home);
+export default connect(mapState, mapDispatch)(Article);

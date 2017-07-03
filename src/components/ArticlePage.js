@@ -7,7 +7,7 @@ import './ArticlePage.css';
  * 
  */
 export default class ArticlePage extends Component {
-    static PropTypes =  {
+    static propTypes =  {
         article: PropTypes.shape({
             title: PropTypes.string,
             hero: PropTypes.string,
@@ -19,14 +19,13 @@ export default class ArticlePage extends Component {
         const { article } = this.props;
         const { title, body, hero } = article;
 
-        return (<div style={{
-        }}>
+        return (<div className="ArticlePage">
             <div className="title">
                 <h1>{title}</h1>
             </div>
-            <div className="hero">
+            {hero && (<div className="hero">
                 <img src={hero} alt="" />
-            </div>
+            </div>)}
             <article>
                 <div dangerouslySetInnerHTML={{ __html: body }}></div>
             </article>

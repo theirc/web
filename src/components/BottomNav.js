@@ -6,8 +6,8 @@ import PropTypes from 'prop-types';
 import { MoreHoriz, Home, Map, List } from 'material-ui-icons';
 
 export default class BottomNav extends Component {
-    static PropTypes = {
-        classes: PropTypes.object.isRequired,
+    static propTypes = {
+        classes: PropTypes.object,
         onButtonClicked: PropTypes.func,
     }
 
