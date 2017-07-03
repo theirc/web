@@ -51,6 +51,12 @@
     padding: 10px;
     flex: 1;
   }
+  .title > h1 > small {
+    font-size: 12px;
+    display: block;
+    width: 100%;
+    color: lighten(black, 50%);
+  }
 
   article {
     padding: 5px;
