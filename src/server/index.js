@@ -61,6 +61,9 @@ app.get('/config', (rq, res) => {
 // Host the public folder
 app.use('/', feathers.static('build'));
 
+app.get('*', function(request, response, next) {
+  response.sendfile(path.join(__dirname, 'build') + '/index.html');
+});
 
 app.use(notFound());
 app.use(handler());
