@@ -6,6 +6,7 @@ import { EditLocation, Language, } from 'material-ui-icons';
 
 export default class Footer extends Component {
     render() {
+        const { onChangeLocation, onChangeLanguage } = this.props;
         const year = moment().year();
 
         return (
@@ -15,14 +16,14 @@ export default class Footer extends Component {
                     <a href="http://www.facebook.com/refugee.info/"><h3>Ask us any question on Facebook</h3></a>
                 </div>
                 <div className="dark">
-                    <div className="button-container">
+                    <div className="button-container" onTouchTap={onChangeLocation}>
                         <div className="button left">
                             <div className="icon-container">
                                 <EditLocation />
                             </div>
                             <span>Change Location</span>
                         </div>
-                        <div className="button">
+                        <div className="button" onTouchTap={onChangeLanguage}>
                             <div className="icon-container">
                                 <Language />
                             </div>

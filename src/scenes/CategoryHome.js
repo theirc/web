@@ -20,7 +20,8 @@ class CategoryHome extends React.Component {
         const { country, category } = match.params;
 
         return (<div>
-            <Skeletton country={country} match={match} >
+            <Skeletton country={country} match={match}>
+                <div>List of articles in category</div>
             </Skeletton>
         </div>);
     }
@@ -34,7 +35,7 @@ const mapState = (s, p) => {
 };
 const mapDispatch = (d, p) => {
     return {
-        onLoad: () => {
+        onMount: () => {
             d(services.articles.get('the-title-of-this-article-style-title'));
         }
     };

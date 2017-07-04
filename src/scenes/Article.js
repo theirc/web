@@ -16,7 +16,8 @@ class Article extends React.Component {
                 category: PropTypes.string.isRequired,
                 article: PropTypes.string.isRequired,
             }).isRequired
-        }).isRequired
+        }).isRequired,
+        onMount: PropTypes.func.isRequired,
     }
     constructor() {
         super();
@@ -25,7 +26,7 @@ class Article extends React.Component {
     }
 
     componentWillMount() {
-        this.props.onLoad(this.props.match.params.article);
+        this.props.onMount(this.props.match.params.article);
     }
 
     render() {
@@ -57,7 +58,7 @@ const mapState = (s, p) => {
 };
 const mapDispatch = (d, p) => {
     return {
-        onLoad: (slug) => {
+        onMount: (slug) => {
             d(services.articles.get(slug));
         }
     };

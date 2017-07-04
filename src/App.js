@@ -50,13 +50,18 @@ class ThemedApp extends Component {
                         <Route exact path="/" component={Home} />
                         <Switch>
                             <Route exact path="/country-selector" component={() => <div />} />
+                            <Route exact path="/language-selector" component={() => <div />} />
                             <Route exact path="/:country" component={CountryHome} />
                         </Switch>
 
-                        <Route exact path="/:country/:category" component={CategoryHome} />
                         <Route path="/:country" component={CountrySwitcher} />
-                        <Route path="/:country/categories" component={Categories} />
-                        <Route path="/:country/:category/:article" component={Article} />
+
+                        <Switch>
+                            <Route exact path="/:country/categories" component={Categories} />
+                            <Route exact path="/:country/search" component={() => <div>Search</div>} />
+                            <Route exact path="/:country/:category" component={CategoryHome} />
+                            <Route exact path="/:country/:category/:article" component={Article} />
+                        </Switch>
                     </span>
                 </ConnectedRouter>
             </MuiThemeProvider>

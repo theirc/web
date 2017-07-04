@@ -15,19 +15,22 @@ class Skeletton extends React.Component {
             children,
             country,
             match,
-            onHomeTap,
-            onSearchTap,
-            onCountryTap
+            onGoHome,
+            onGoToSearch,
+            onChangeLocation,
+            onChangeCountry,
         } = this.props;
 
         return (<div>
             <AppHeader country={country}
-                onHomeTap={onHomeTap}
-                onSearchTap={onSearchTap}
-                onCountryTap={onCountryTap}
+                onGoHome={onGoHome}
+                onGoToSearch={onGoToSearch}
+                onChangeCountry={onChangeCountry}
             />
             {children}
-            <Footer />
+            <Footer
+                onChangeLocation={onChangeLocation} 
+                onChangeCountry={onChangeCountry} />
             <BottomNavContainer match={match} />
         </div>);
     }
@@ -39,14 +42,17 @@ const mapState = (s, p) => {
 };
 const mapDispatch = (d, p) => {
     return {
-        onHomeTap: () => {
+        onGoHome: () => {
             d(push(`/${p.match.params.country||''}`))
         },
-        onSearchTap: () => {
+        onGoToSearch: () => {
             d(push(`/${p.match.params.country}/search`))
         },
-        onCountryTap: () => {
+        onChangeCountry: () => {
             d(push(`/country-selector`))
+        },
+        onChangeLocation: () => {
+            d(push(`/language-selector`))
         },
     };
 };

@@ -9,33 +9,45 @@ import './ArticleFooter.css';
  */
 export default class ArticleFooter extends Component {
     static propTypes = {
+        country: PropTypes.string,
         match: PropTypes.shape({
             pathName: PropTypes.string
         }),
-        previous: PropTypes.object,
-        next: PropTypes.object,
+        previous: PropTypes.shape({
+            slug: PropTypes.string,
+            title: PropTypes.string
+        }),
+        next: PropTypes.shape({
+            slug: PropTypes.string,
+            title: PropTypes.string
+        }),
     }
 
     render() {
         const rtl = false;
+        const { previous, next, country, onNavigateTo } = this.props;
 
         return (<div className="ArticleFooter">
-            <div className="selector">
+            {previous && <div className="selector" onTouchTap={() => {
+                onNavigateTo(country, previous.slug);
+            }}>
                 <h1>
                     <small>PREVIOUS PAGE:</small>
-                    Getting an Ikka Ikka ptwang card
+                    {previous.title}
                 </h1>
                 {!rtl ? <NavigateBefore className="icon" /> : <NavigateNext className="icon" />}
-            </div>
-            <hr />
-            <div className="selector">
+            </div>}
+            {previous && <hr />}
+            {next && <div className="selector" onTouchTap={() => {
+                onNavigateTo(country, next.slug);
+            }}>
                 <h1>
-                    <small>NEXT PAGE:</small>
-                    Getting an Ikka Ikka ptwang card
+                    <small>NEXT PAGE:</small>                    
+                    {next.title}
                 </h1>
                 {!rtl ? <NavigateNext className="icon" /> : <NavigateBefore className="icon" />}
-            </div>
-            <hr />
+            </div>}
+            {next && <hr />}
             <div className="selector">
                 <h1>Share this page</h1>
                 <Share className="icon" />

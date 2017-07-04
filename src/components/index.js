@@ -1,4 +1,3 @@
-import DetailPage  from './DetailPage';
 import AppHeader  from './AppHeader';
 import BottomNav  from './BottomNav';
 import WarningDialog  from './WarningDialog';
@@ -7,7 +6,6 @@ import ArticlePage  from './ArticlePage';
 import ArticleFooter  from './ArticleFooter';
 
 export  {
-    DetailPage,
     AppHeader,
     BottomNav,
     WarningDialog,

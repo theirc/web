@@ -9,27 +9,27 @@ import './AppHeader.css'
 
 export default class AppHeader extends Component {
     static propTypes = {
-        onCountryTap: PropTypes.func, 
-        onSearchTap:PropTypes.func, 
-        onHomeTap: PropTypes.func, 
+        onChangeCountry: PropTypes.func, 
+        onGoToSearch:PropTypes.func, 
+        onGoHome: PropTypes.func, 
         country: PropTypes.string, 
     }
     
     render() {
-        const { onCountryTap, onSearchTap, onHomeTap, country } = this.props;
+        const { onChangeCountry, onGoToSearch, onGoHome, country } = this.props;
         const noop = () => {console.log('noop')};
         return (
             <div>
                 <Headroom tolerance={5} offset={200}>
                     <div className="app-bar">
-                        <div className="app-bar-container" onTouchTap={onHomeTap||noop}>
-                            <img onClick={onHomeTap} src="/logo.png" className="app-bar-logo" alt=" " />
+                        <div className="app-bar-container" onTouchTap={onGoHome||noop}>
+                            <img onClick={onGoHome} src="/logo.png" className="app-bar-logo" alt=" " />
                         </div>
                         <div className="app-bar-container">
                             <div className="app-bar-buttons">
-                                <Button color="contrast" onTouchTap={onCountryTap||noop}>{country||" "}</Button>
+                                <Button color="contrast" onTouchTap={onChangeCountry||noop}>{country||" "}</Button>
                                 <div className="app-bar-separator"></div>
-                                <IconButton color="contrast" onTouchTap={onSearchTap||noop}><Search /></IconButton>
+                                <IconButton color="contrast" onTouchTap={onGoToSearch||noop}><Search /></IconButton>
                             </div>
                         </div>
                     </div>

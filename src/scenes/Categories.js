@@ -11,19 +11,13 @@ class Categories extends React.Component {
         match: PropTypes.shape({
             params: PropTypes.shape({
                 country: PropTypes.string.isRequired,
-                category: PropTypes.string.isRequired,
-                article: PropTypes.string.isRequired,
             }).isRequired
-        }).isRequired
-    }
-    constructor() {
-        super();
-
-        this.state = {};
+        }).isRequired,
+        onMount: PropTypes.func.isRequired
     }
 
     componentWillMount() {
-        this.props.onLoad(this.props.match.params.article);
+        this.props.onMount(this.props.match.params.country);
     }
 
     render() {
@@ -31,6 +25,7 @@ class Categories extends React.Component {
 
         return (<div>
             <Skeletton  match={match} >
+                <div>List of categories</div>
             </Skeletton>
         </div>);
     }
@@ -45,7 +40,7 @@ const mapState = (s, p) => {
 };
 const mapDispatch = (d, p) => {
     return {
-        onLoad: (slug) => {
+        onMount: (slug) => {
         }
     };
 };

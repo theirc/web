@@ -21,6 +21,7 @@ class CountryHome extends React.Component {
 
         return (<div>
             <Skeletton country={country} match={match} >
+                <div>Country Home</div>
             </Skeletton>
         </div>);
     }
@@ -34,7 +35,7 @@ const mapState = (s, p) => {
 };
 const mapDispatch = (d, p) => {
     return {
-        onLoad: () => {
+        onMount: () => {
             d(services.articles.get('the-title-of-this-article-style-title'));
         }
     };

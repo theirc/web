@@ -18,7 +18,6 @@ class Home extends React.Component {
     render() {
         const { match } = this.props;
 
-
         return (<div>
             <Skeletton match={match} >
             </Skeletton>
@@ -34,7 +33,7 @@ const mapState = (s, p) => {
 };
 const mapDispatch = (d, p) => {
     return {
-        onLoad: () => {
+        onMount: () => {
             d(services.articles.get('the-title-of-this-article-style-title'));
         }
     };
