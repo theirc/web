@@ -5,7 +5,7 @@ import {
 } from '../components';
 import Skeletton from './Skeletton'
 
-class Home extends React.Component {
+class CategoryHome extends React.Component {
     constructor() {
         super();
 
@@ -17,10 +17,10 @@ class Home extends React.Component {
 
     render() {
         const { match } = this.props;
-
+        const { country, category } = match.params;
 
         return (<div>
-            <Skeletton match={match} >
+            <Skeletton country={country} match={match} >
             </Skeletton>
         </div>);
     }
@@ -40,4 +40,4 @@ const mapDispatch = (d, p) => {
     };
 };
 
-export default connect(mapState, mapDispatch)(Home);
+export default connect(mapState, mapDispatch)(CategoryHome);

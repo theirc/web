@@ -9,10 +9,11 @@
   hr {
     padding: 0;
     margin: auto;
-    border-color: $dividerColor;
-    border-style: solid;
+    border: 0;
+    border-top-width: 1px;    
+    border-top-color: $dividerColor;
+    border-style: dashed;
     border-radius: 1px;
-    border-width: 1px;
     height: 0;
     width: 95%;
   }

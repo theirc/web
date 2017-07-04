@@ -9,27 +9,46 @@ export default class BottomNav extends Component {
     static propTypes = {
         classes: PropTypes.object,
         onButtonClicked: PropTypes.func,
+        onGoToCategories: PropTypes.func,
     }
 
-    constructor() {
+    constructor(props) {
         super();
 
         this.state = {
-            selectedIndex: 0,
+            selectedIndex: (props.category && 1) || 0,
         };
     }
 
     select(selectedIndex = 0) {
-        const { onButtonClicked } = this.props;
-        if (onButtonClicked) {
-            onButtonClicked(selectedIndex);
-        }
+        const { onGoHome, onGoToCategories, onGoToServices, onGoToMore } = this.props;
+
         if (selectedIndex === 3) {
             this.setState({ selectedIndex: -1 });
         } else {
             this.setState({ selectedIndex });
         }
 
+        if (selectedIndex === 0) {
+            if (onGoHome) {
+                return onGoHome();
+            }
+        }
+        else if (selectedIndex === 1) {
+            if (onGoToCategories) {
+                return onGoToCategories();
+            }
+        }
+        else if (selectedIndex === 2) {
+            if (onGoToServices) {
+                return onGoToServices();
+            }
+        }
+        else if (selectedIndex === 3) {
+            if (onGoToMore) {
+                return onGoToMore();
+            }
+        }
     }
 
     render() {
@@ -53,7 +72,7 @@ export default class BottomNav extends Component {
                         icon={<Map />}
                     />
                     <BottomNavigationButton
-                    
+
                         label="More"
                         icon={<MoreHoriz />}
                     />

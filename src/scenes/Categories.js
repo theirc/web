@@ -2,13 +2,11 @@ import React from 'react';
 import services from '../backend';
 import { connect } from 'react-redux'
 import {
-    ArticlePage,
-    ArticleFooter,
 } from '../components';
 import PropTypes from 'prop-types';
 import Skeletton from './Skeletton'
 
-class Article extends React.Component {
+class Categories extends React.Component {
     static propTypes = {
         match: PropTypes.shape({
             params: PropTypes.shape({
@@ -29,20 +27,10 @@ class Article extends React.Component {
     }
 
     render() {
-        const { match, articles } = this.props;
-        const { country, category } = match.params;
-        
-
-        if (!articles) return (<div />);
-
-        let article = articles.data;
-        if (!article) return (<div />);
+        const { match } = this.props;
 
         return (<div>
-            <Skeletton country={country} match={match} >
-                <ArticlePage article={article}>
-                </ArticlePage>
-                <ArticleFooter />
+            <Skeletton  match={match} >
             </Skeletton>
         </div>);
     }
@@ -58,9 +46,8 @@ const mapState = (s, p) => {
 const mapDispatch = (d, p) => {
     return {
         onLoad: (slug) => {
-            d(services.articles.get(slug));
         }
     };
 };
 
-export default connect(mapState, mapDispatch)(Article);
+export default connect(mapState, mapDispatch)(Categories);

@@ -4,7 +4,8 @@ import createHistory from 'history/createBrowserHistory'
 import reducers from './reducers'; // Or wherever you keep your reducers
 import actions from './actions';
 
-import {  routerReducer, routerMiddleware } from 'react-router-redux'
+import {   routerMiddleware } from 'react-router-redux'
+import {  routerReducer } from 'react-router-redux'
 
 import reduxThunk from 'redux-thunk';
 import reduxPromiseMiddleware from 'redux-promise-middleware';
