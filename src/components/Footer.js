@@ -16,14 +16,11 @@ export default class Footer extends Component {
                 </div>
                 <div className="dark">
                     <div className="button-container">
-                        <div className="button">
+                        <div className="button left">
                             <div className="icon-container">
                                 <EditLocation />
                             </div>
                             <span>Change Location</span>
-                        </div>
-                        <div className="button-separator">
-                            <div className="middle"/>
                         </div>
                         <div className="button">
                             <div className="icon-container">

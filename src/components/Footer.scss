@@ -60,22 +60,6 @@
       border-bottom: 1px $dividerColor solid;
     }
 
-    .button-separator {
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      align-content: center;
-
-      .middle {
-          height: 100%;
-          border: 0;
-          background-color: $dividerColor;
-          width: 1px;
-      }
-    }
-
     .button {
       flex-grow: 3;
 
@@ -84,6 +68,15 @@
       justify-content: center;
       align-items: center;
       align-content: center;
+
+
+      &.left {
+          height: 100%;
+          border: 0;
+          border-right-color: $dividerColor;
+          border-right-width: 1px;
+          border-right-style: solid;
+      }
 
       .icon-container {
         @include brand-colors( 'color');
