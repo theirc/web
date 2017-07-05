@@ -2,6 +2,7 @@ $accentIRC: #ffda1a;
 $accentGreen: #29991f;
 $accentRed: #e60000;
 $accentNRC: #FF7602;
+$accentPG: #59c2ed;
 
 $titleBackground:  #f0f0f0;
 $dividerColor: darken($titleBackground, 30%);
@@ -22,6 +23,10 @@ $dividerColor: darken($titleBackground, 30%);
   .mc & {
     #{$prop}: $accentRed;
   }
+
+  .pg & {
+    #{$prop}: $accentPG;
+  }
 }
 
 @mixin brand-colors-inverse($prop) {
@@ -38,6 +43,10 @@ $dividerColor: darken($titleBackground, 30%);
   }
 
   .mc & {
+    #{$prop}: #ffffff;
+  }
+
+  .pg & {
     #{$prop}: #ffffff;
   }
 }

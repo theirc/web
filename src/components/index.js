@@ -4,6 +4,7 @@ import WarningDialog  from './WarningDialog';
 import Footer  from './Footer';
 import ArticlePage  from './ArticlePage';
 import ArticleFooter  from './ArticleFooter';
+import CategoryList  from './CategoryList';
 
 export  {
     AppHeader,
@@ -12,4 +13,5 @@ export  {
     Footer,
     ArticlePage,
     ArticleFooter,
+    CategoryList,
 };

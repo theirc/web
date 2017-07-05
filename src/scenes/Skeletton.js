@@ -19,18 +19,19 @@ class Skeletton extends React.Component {
             onGoToSearch,
             onChangeLocation,
             onChangeCountry,
+            onChangeLanguage,
         } = this.props;
 
         return (<div>
             <AppHeader country={country}
-                onGoHome={onGoHome}
-                onGoToSearch={onGoToSearch}
+                onGoHome={onGoHome(country)}
+                onGoToSearch={onGoToSearch(country)}
                 onChangeCountry={onChangeCountry}
             />
             {children}
             <Footer
-                onChangeLocation={onChangeLocation} 
-                onChangeCountry={onChangeCountry} />
+                onChangeLocation={onChangeLocation}
+                onChangeLanguage={onChangeLanguage} />
             <BottomNavContainer match={match} />
         </div>);
     }
@@ -43,11 +44,11 @@ const mapState = (s, p) => {
 };
 const mapDispatch = (d, p) => {
     return {
-        onGoHome: () => {
-            d(push(`/${p.match.params.country||''}`))
+        onGoHome: (country) => () => {
+            d(push(`/${country.slug || ''}`))
         },
-        onGoToSearch: () => {
-            d(push(`/${p.match.params.country}/search`))
+        onGoToSearch: (country) => () => {
+            d(push(`/${country.slug}/search`))
         },
         onChangeCountry: () => {
             d(push(`/country-selector`))

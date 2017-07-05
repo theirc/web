@@ -25,11 +25,15 @@ class Article extends React.Component {
     constructor() {
         super();
 
-        this.state = {};
+        this.state = { loading: false };
     }
 
     componentWillMount() {
-        this.props.onMount(this.props.match.params.article);
+        this.setState({ loading: true });
+
+        this.props.onMount(this.props.match.params.article).then((s) => {
+            return this.setState({ loading: false });
+        });
     }
 
     componentWillUnmount() {
@@ -37,16 +41,20 @@ class Article extends React.Component {
 
     componentWillUpdate(nextProps, b) {
         if (this.props.match && nextProps.match && this.props.match.params.article != nextProps.match.params.article) {
-            this.props.onMount(nextProps.match.params.article);
+            this.setState({ loading: true });
+            this.props.onMount(nextProps.match.params.article).then((s) => {
+                return this.setState({ loading: false });
+            });
         }
     }
 
     render() {
+        const { loading } = this.state;
         const { match, article } = this.props;
         const { category, country, onNavigateTo } = this.props;
 
 
-        if (!article || !category) return (<div />);
+        if (!article || !category) return (<div style={{height: 100}} />);
 
         let next = null, previous = null;
         if (category) {
@@ -62,7 +70,7 @@ class Article extends React.Component {
         }
 
         return (<div>
-            <ArticlePage category={category.category} article={article}>
+            <ArticlePage category={category.category} article={article} loading={loading}>
             </ArticlePage>
             <ArticleFooter previous={previous} next={next} onNavigateTo={onNavigateTo(category, country)} />
         </div>);
@@ -80,8 +88,8 @@ const mapState = (s, p) => {
 const mapDispatch = (d, p) => {
     return {
         onMount: (slug) => {
-            d(services.articles.get(slug)).then((a) => {
-                d(actions.selectArticle(a.value));
+            return d(services.articles.get(slug)).then((a) => {
+                return d(actions.selectArticle(a.value));
             });
         },
         onNavigateTo: (category, country) => (slug) => {

@@ -1,6 +1,15 @@
 @import '../shared/includes.scss';
 
 .ArticlePage {
+  &.loading {
+    opacity: .2;
+    transition: opacity 0.2s ease-in-out;
+  }
+  &.loaded {
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out;
+  }
+
   hr {
     width: 20%;
     border-width: 1px;

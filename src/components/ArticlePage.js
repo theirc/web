@@ -21,10 +21,10 @@ export default class ArticlePage extends Component {
     }
 
     render() {
-        const { article, category } = this.props;
+        const { article, category, loading } = this.props;
         const { title, body, hero } = article;
 
-        return (<div className="ArticlePage">
+        return (<div className={["ArticlePage", loading ? "loading" : "loaded"].join(' ')}>
             <div className="title">
                 <h1><small>{category.name}:</small>{title}</h1>
             </div>
