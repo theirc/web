@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Provider, connect } from 'react-redux';
-import { Route, Switch } from 'react-router';
+import { Route, Switch, withRouter, } from 'react-router';
 import { ConnectedRouter, } from 'react-router-redux'
-import { Home, Article, Categories, CountryHome, CategoryHome, } from './scenes';
+import { Skeletton, Home, Article, Categories, CountryHome, CategoryHome, } from './scenes';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { createMuiTheme } from 'material-ui/styles';
-import { store, history, actions } from './store'
+import services from './backend';
+import { store, history, actions } from './store';
+import _ from 'lodash';
 
 const theme = createMuiTheme({
     overrides: {
@@ -34,10 +36,51 @@ CountrySwitcher = connect((s, p) => {
 }, (d, p) => {
     return {
         onMount: (country) => {
-            d(actions.changeCountry(country))
+            d(services.countries.get(country)).then((c) => d(actions.changeCountry(c.value)));
         }
     };
 })(CountrySwitcher);
+
+
+class CategorySwitcher extends Component {
+    componentDidUpdate() {
+        const { match, country, onRender } = this.props;
+        if (country) {
+            const category = _.first(country.content.filter(c => c.category && c.category.slug == match.params.category));
+            onRender(category);
+        }
+    }
+
+    render() {
+        return null;
+    }
+}
+
+CategorySwitcher = connect((s, p) => {
+    return {
+        country: s.country,
+    };
+}, (d, p) => {
+    return {
+        onRender: (category) => {
+            d(actions.selectCategory(category));
+        }
+    };
+})(CategorySwitcher);
+
+class ScrollToTop extends Component {
+    componentDidUpdate(prevProps) {
+        if (this.props.location !== prevProps.location) {
+            window.scrollTo(0, 0)
+        }
+    }
+
+    render() {
+        return null;
+    }
+}
+
+ScrollToTop = withRouter(ScrollToTop)
 
 class ThemedApp extends Component {
     render() {
@@ -45,33 +88,40 @@ class ThemedApp extends Component {
 
         return (
             <MuiThemeProvider theme={theme}>
-                <ConnectedRouter history={history}>
-                    <span className={organization}>
-                        <Route exact path="/" component={Home} />
-                        <Switch>
-                            <Route exact path="/country-selector" component={() => <div />} />
-                            <Route exact path="/language-selector" component={() => <div />} />
-                            <Route exact path="/:country" component={CountryHome} />
-                        </Switch>
+                <span className={organization}>
+                    <Skeletton>
+                        <ConnectedRouter history={history}>
+                            <span >
+                                <ScrollToTop />
+                                <Route exact path="/" component={Home} />
+                                <Switch>
+                                    <Route exact path="/country-selector" component={() => <div />} />
+                                    <Route exact path="/language-selector" component={() => <div />} />
+                                    <Route exact path="/:country" component={CountryHome} />
+                                </Switch>
 
-                        <Route path="/:country" component={CountrySwitcher} />
+                                <Route path="/:country" component={CountrySwitcher} />
+                                <Route path="/:country/:category" component={CategorySwitcher} />
 
-                        <Switch>
-                            <Route exact path="/:country/categories" component={Categories} />
-                            <Route exact path="/:country/search" component={() => <div>Search</div>} />
-                            <Route exact path="/:country/:category" component={CategoryHome} />
-                            <Route exact path="/:country/:category/:article" component={Article} />
-                        </Switch>
-                    </span>
-                </ConnectedRouter>
+                                <Switch>
+                                    <Route exact path="/:country/categories" component={Categories} />
+                                    <Route exact path="/:country/search" component={() => <div>Search</div>} />
+                                    <Route exact path="/:country/:category" component={CategoryHome} />
+                                    <Route exact path="/:country/:category/:article" component={Article} />
+                                </Switch>
+                            </span>
+
+                        </ConnectedRouter>
+                    </Skeletton>
+                </span>
             </MuiThemeProvider>
         );
     }
 }
 
-ThemedApp = connect(({ organization }) => {
+ThemedApp = connect(({ organization, match }) => {
     return {
-        organization
+        organization,
     }
 })(ThemedApp);
 

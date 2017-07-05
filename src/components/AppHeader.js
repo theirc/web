@@ -12,7 +12,7 @@ export default class AppHeader extends Component {
         onChangeCountry: PropTypes.func, 
         onGoToSearch:PropTypes.func, 
         onGoHome: PropTypes.func, 
-        country: PropTypes.string, 
+        country: PropTypes.object, 
     }
     
     render() {
@@ -27,7 +27,7 @@ export default class AppHeader extends Component {
                         </div>
                         <div className="app-bar-container">
                             <div className="app-bar-buttons">
-                                <Button color="contrast" onTouchTap={onChangeCountry||noop}>{country||" "}</Button>
+                                <Button color="contrast" onTouchTap={onChangeCountry||noop}>{(country&&country.name)||" "}</Button>
                                 <div className="app-bar-separator"></div>
                                 <IconButton color="contrast" onTouchTap={onGoToSearch||noop}><Search /></IconButton>
                             </div>

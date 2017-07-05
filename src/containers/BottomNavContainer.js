@@ -15,7 +15,7 @@ class BottomNavContainer extends React.Component {
                 category: PropTypes.string,
                 article: PropTypes.string,
             }).isRequired
-        }).isRequired
+        })
     }
     constructor() {
         super();
@@ -27,23 +27,30 @@ class BottomNavContainer extends React.Component {
     }
 
     render() {
-        const { match, onGoToCategories } = this.props;
-        const {country, category, article} = match.params;
+        const { category, country, onGoToCategories, onGoHome } = this.props;
 
-        return (<BottomNav category={category} country={country} onGoToCategories={onGoToCategories} />);
+        return (<BottomNav 
+        category={category&&category.category.slug} 
+        country={country&&country.slug} 
+        onGoToCategories={()=>onGoToCategories(country.slug)}
+        onGoHome={()=>onGoHome(country.slug)}
+         />);
     }
 }
 
-const mapState = (s, p) => {
+const mapState = ({ category, country }, p) => {
     return {
+        category,
+        country
     };
 };
 const mapDispatch = (d, p) => {
     return {
-        onGoToCategories: () => {
-            const {country} = p.match.params;
-
+        onGoToCategories: (country) => {
             d(push(`/${country}/categories`))
+        },
+        onGoHome: (country) => {
+            d(push(`/${country}`))
         }
     };
 };

@@ -20,9 +20,7 @@ class CountryHome extends React.Component {
         const { country } = match.params;
 
         return (<div>
-            <Skeletton country={country} match={match} >
                 <div>Country Home</div>
-            </Skeletton>
         </div>);
     }
 }

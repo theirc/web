@@ -13,15 +13,20 @@ export default class ArticlePage extends Component {
             hero: PropTypes.string,
             body: PropTypes.string,
         }),
+        category: PropTypes.shape({
+            name: PropTypes.string,
+            slug: PropTypes.string,
+            translations: PropTypes.array,
+        }),
     }
 
     render() {
-        const { article } = this.props;
+        const { article, category } = this.props;
         const { title, body, hero } = article;
 
         return (<div className="ArticlePage">
             <div className="title">
-                <h1><small>Working in Greece:</small>{title}</h1>
+                <h1><small>{category.name}:</small>{title}</h1>
             </div>
             {hero && (<div className="hero">
                 <img src={hero} alt="" />

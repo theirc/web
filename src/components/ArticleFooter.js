@@ -9,7 +9,8 @@ import './ArticleFooter.css';
  */
 export default class ArticleFooter extends Component {
     static propTypes = {
-        country: PropTypes.string,
+        onNavigateTo: PropTypes.func,
+        country: PropTypes.object,
         match: PropTypes.shape({
             pathName: PropTypes.string
         }),
@@ -28,18 +29,8 @@ export default class ArticleFooter extends Component {
         const { previous, next, country, onNavigateTo } = this.props;
 
         return (<div className="ArticleFooter">
-            {previous && <div className="selector" onTouchTap={() => {
-                onNavigateTo(country, previous.slug);
-            }}>
-                <h1>
-                    <small>PREVIOUS PAGE:</small>
-                    {previous.title}
-                </h1>
-                {!rtl ? <NavigateBefore className="icon" /> : <NavigateNext className="icon" />}
-            </div>}
-            {previous && <hr />}
             {next && <div className="selector" onTouchTap={() => {
-                onNavigateTo(country, next.slug);
+                onNavigateTo(next.slug);
             }}>
                 <h1>
                     <small>NEXT PAGE:</small>                    
@@ -48,6 +39,16 @@ export default class ArticleFooter extends Component {
                 {!rtl ? <NavigateNext className="icon" /> : <NavigateBefore className="icon" />}
             </div>}
             {next && <hr />}
+            {previous && <div className="selector" onTouchTap={() => {
+                onNavigateTo(previous.slug);
+            }}>
+                <h1>
+                    <small>PREVIOUS PAGE:</small>
+                    {previous.title}
+                </h1>
+                {!rtl ? <NavigateBefore className="icon" /> : <NavigateNext className="icon" />}
+            </div>}
+            {previous && <hr />}
             <div className="selector">
                 <h1>Share this page</h1>
                 <Share className="icon" />

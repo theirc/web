@@ -38,6 +38,7 @@ class Skeletton extends React.Component {
 
 const mapState = (s, p) => {
     return {
+        country: s.country,
     };
 };
 const mapDispatch = (d, p) => {

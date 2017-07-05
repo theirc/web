@@ -17,12 +17,14 @@ class CategoryHome extends React.Component {
 
     render() {
         const { match } = this.props;
-        const { country, category } = match.params;
+        const { country, category } =this.props;
+
+        if(!country || !category) {
+            return null;
+        }
 
         return (<div>
-            <Skeletton country={country} match={match}>
-                <div>List of articles in category</div>
-            </Skeletton>
+                <div>{category.category.name}</div>
         </div>);
     }
 }
@@ -30,7 +32,8 @@ class CategoryHome extends React.Component {
 const mapState = (s, p) => {
     return {
         articles: s.articles,
-        country: s.country
+        country: s.country,
+        category: s.category,
     };
 };
 const mapDispatch = (d, p) => {

@@ -19,8 +19,6 @@ class Home extends React.Component {
         const { match } = this.props;
 
         return (<div>
-            <Skeletton match={match} >
-            </Skeletton>
         </div>);
     }
 }
@@ -28,7 +26,6 @@ class Home extends React.Component {
 const mapState = (s, p) => {
     return {
         articles: s.articles,
-        country: s.country
     };
 };
 const mapDispatch = (d, p) => {

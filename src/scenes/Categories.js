@@ -4,7 +4,9 @@ import { connect } from 'react-redux'
 import {
 } from '../components';
 import PropTypes from 'prop-types';
+import { push } from 'react-router-redux';
 import Skeletton from './Skeletton'
+
 
 class Categories extends React.Component {
     static propTypes = {
@@ -21,13 +23,24 @@ class Categories extends React.Component {
     }
 
     render() {
-        const { match } = this.props;
+        const { country, onNavigate } = this.props;
 
-        return (<div>
-            <Skeletton  match={match} >
-                <div>List of categories</div>
-            </Skeletton>
-        </div>);
+        if (!country) {
+            return null;
+        }
+
+        return (<ul>
+            {country.content.filter(c => c.category && c.category.slug).map(c => (<li key={c._id}>
+                {c.category && c.category.name}
+                <ul>
+                    {c.articles && c.articles.map(a => (
+                        <li key={a.id}>
+                            <div onTouchTap={() => onNavigate(`/${country.slug}/${c.category.slug}/${a.slug}`)}> {a.title}</div>
+                        </li>
+                    ))}
+                </ul>
+            </li>))}
+        </ul>);
     }
 }
 
@@ -41,6 +54,11 @@ const mapState = (s, p) => {
 const mapDispatch = (d, p) => {
     return {
         onMount: (slug) => {
+        },
+        onNavigate: (path) => {
+            setTimeout(() => {
+                d(push(path));
+            }, 200);
         }
     };
 };
