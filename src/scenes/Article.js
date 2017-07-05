@@ -29,7 +29,10 @@ class Article extends React.Component {
     }
 
     componentWillMount() {
-            this.props.onMount(this.props.match.params.article);
+        this.props.onMount(this.props.match.params.article);
+    }
+
+    componentWillUnmount() {
     }
 
     componentWillUpdate(nextProps, b) {
@@ -59,9 +62,9 @@ class Article extends React.Component {
         }
 
         return (<div>
-                <ArticlePage category={category.category} article={article}>
-                </ArticlePage>
-                <ArticleFooter previous={previous} next={next} onNavigateTo={onNavigateTo(category, country)} />
+            <ArticlePage category={category.category} article={article}>
+            </ArticlePage>
+            <ArticleFooter previous={previous} next={next} onNavigateTo={onNavigateTo(category, country)} />
         </div>);
     }
 }
@@ -77,12 +80,14 @@ const mapState = (s, p) => {
 const mapDispatch = (d, p) => {
     return {
         onMount: (slug) => {
-            d(services.articles.get(slug)).then((a)=>{
+            d(services.articles.get(slug)).then((a) => {
                 d(actions.selectArticle(a.value));
             });
         },
         onNavigateTo: (category, country) => (slug) => {
-            history.push(`/${country.slug}/${category.category.slug}/${slug}`);
+            setTimeout(() => {
+                history.push(`/${country.slug}/${category.category.slug}/${slug}`);
+            }, 200);
         }
     };
 };

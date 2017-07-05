@@ -34,7 +34,7 @@ class Categories extends React.Component {
                 {c.category && c.category.name}
                 <ul>
                     {c.articles && c.articles.map(a => (
-                        <li key={a.id}>
+                        <li key={a._id}>
                             <div onTouchTap={() => onNavigate(`/${country.slug}/${c.category.slug}/${a.slug}`)}> {a.title}</div>
                         </li>
                     ))}
