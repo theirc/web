@@ -2,10 +2,13 @@ import services from './backend';
 import actions from './actions';
 
 let defaultLanguage = '';
-if(global.navigator.language) {
+if (global.navigator.language) {
   defaultLanguage = global.navigator.language.split('-')[0];
+  if (defaultLanguage == 'en') {
+    defaultLanguage = null;
+  }
 }
-const getDirection = (l) => ['ar','fa'].indexOf(l) > -1 ? 'rtl' : 'ltr';
+const getDirection = (l) => ['ar', 'fa'].indexOf(l) > -1 ? 'rtl' : 'ltr';
 
 function changeOrganization(state = 'irc', action) {
   switch (action.type) {

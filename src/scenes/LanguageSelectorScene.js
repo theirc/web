@@ -10,14 +10,19 @@ import {
 import { actions } from '../store';
 
 class LanguageSelectorScene extends React.Component {
+    constructor() {
+        super();
+
+        this.state = {};
+    }
     componentWillMount() {
-        const { onMountOrUpdate } = this.props;
+        const { onMountOrUpdate, language } = this.props;
         onMountOrUpdate();
     }
 
     render() {
-        const { country, language } = this.props;
-        const { countryList, onGoTo, onSelectLanguage } = this.props;
+        const { country, language, countryList, onGoTo, onSelectLanguage } = this.props;
+        const { initialLanguage } = this.state;
 
         const languages = [
             ['ar', 'Arabic'],
@@ -25,11 +30,11 @@ class LanguageSelectorScene extends React.Component {
             ['fa', 'Farsi'],
         ]
 
-        if (!language || language == 'en') {
+        if (!language) {
             if (!country) {
                 return <LanguageSelector languages={languages} onSelectLanguage={(c) => onSelectLanguage(c) && onGoTo('country-selector')} />;
             } else {
-                return <LanguageSelector languages={languages} onSelectLanguage={(c) => setTimeout(()=>{onSelectLanguage(c) && onGoTo(country.slug)}, 200)} />;
+                return <LanguageSelector languages={languages} onSelectLanguage={(c) => setTimeout(() => { onSelectLanguage(c) && onGoTo(country.slug) }, 200)} />;
 
             }
         } else {
@@ -58,7 +63,7 @@ const mapDispatch = (d, p) => {
             d(actions.changeLanguage(code));
         },
         onGoTo: (slug) => {
-                d(push(`/${slug}`))
+            d(push(`/${slug}`))
         }
     };
 };
