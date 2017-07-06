@@ -34,7 +34,6 @@
     background-color: #000000;
     color: #ffffff;
 
-
     img.app-store-logo {
       max-width: 200px;
     }
@@ -50,38 +49,48 @@
 
   }
 
-    .button-container {
-      display: flex;
-      flex-direction: row;
-      width: 100%;
-      padding-top: 1em;
-      padding-bottom: 1em;
-      margin-bottom: 1em;
-      border-bottom: 1px $dividerColor solid;
+  .button-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+    border-bottom: 1px $dividerColor solid;
+
+  }
+
+  .button {
+    flex-grow: 3;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+
+    &.left {
+      height: 100%;
+      border: 0;
+      border-right-color: $dividerColor;
+      border-right-width: 1px;
+      border-right-style: solid;
+
+      .rtl & {
+        border-right-width: 0;
+
+        border-left-color: $dividerColor;
+        border-left-width: 1px;
+        border-left-style: solid;
+
+      }
     }
 
-    .button {
-      flex-grow: 3;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      align-content: center;
-
-
-      &.left {
-          height: 100%;
-          border: 0;
-          border-right-color: $dividerColor;
-          border-right-width: 1px;
-          border-right-style: solid;
-      }
-
-      .icon-container {
-        @include brand-colors( 'color');
-      }
+    .icon-container {
+      @include brand-colors( 'color');
     }
+  }
+
   & {
     margin-bottom: 57px;
   }

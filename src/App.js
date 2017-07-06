@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Provider, connect } from 'react-redux';
-import { Skeletton,  } from './scenes';
+import { Skeleton,  } from './scenes';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { createMuiTheme } from 'material-ui/styles';
 import { store,  } from './store';
@@ -19,23 +19,24 @@ const theme = createMuiTheme({
 
 class ThemedApp extends Component {
     render() {
-        const { organization } = this.props;
+        const { organization, direction } = this.props;
 
         return (
             <MuiThemeProvider theme={theme}>
-                <span className={organization}>
-                    <Skeletton>
+                <span className={[organization, direction].join(' ')}>
+                    <Skeleton>
                         <Router />
-                    </Skeletton>
+                    </Skeleton>
                 </span>
             </MuiThemeProvider >
         );
     }
 }
 
-ThemedApp = connect(({ organization, match }) => {
+ThemedApp = connect(({ organization, direction }) => {
     return {
         organization,
+        direction,
     }
 })(ThemedApp);
 

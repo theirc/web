@@ -1,4 +1,5 @@
 import React from 'react';
+import {actions} from '../store';
 import { connect } from 'react-redux'
 import {
     AppHeader,
@@ -7,11 +8,14 @@ import {
 import { BottomNavContainer } from '../containers'
 import { push, } from 'react-router-redux';
 
-class Skeletton extends React.Component {
+import './Skeleton.css';
+
+class Skeleton extends React.Component {
     render() {
         const {
             children,
             country,
+            language,
             match,
             onGoHome,
             onGoToSearch,
@@ -20,42 +24,46 @@ class Skeletton extends React.Component {
             onChangeLanguage,
         } = this.props;
 
-        return (<div>
-            {country && <AppHeader country={country}
+        return (<div className="Skeleton">
+            <AppHeader country={country}
+            language={language}
                 onGoHome={onGoHome(country)}
                 onGoToSearch={onGoToSearch(country)}
                 onChangeCountry={onChangeCountry}
-            />}
+            />
             {children}
-            {country && <Footer
+            {(country&&language) && <Footer
                 onChangeLocation={onChangeLocation}
                 onChangeLanguage={onChangeLanguage} />}
-            {country && <BottomNavContainer match={match} />
+            {(country&&language) && <BottomNavContainer match={match} />
             }
         </div>);
     }
 }
 
-const mapState = (s, p) => {
+const mapState = ({country, language}, p) => {
     return {
-        country: s.country,
+        country, 
+        language
     };
 };
 const mapDispatch = (d, p) => {
     return {
         onGoHome: (country) => () => {
-            d(push(`/${country.slug || ''}`))
+            d(push(`/${country.slug || ''}`));
         },
         onGoToSearch: (country) => () => {
-            d(push(`/${country.slug}/search`))
+            d(push(`/${country.slug}/search`));
         },
         onChangeLocation: () => {
-            d(push(`/country-selector`))
+            d(actions.changeCountry(null));
+            d(push(`/country-selector`));
         },
         onChangeLanguage: () => {
-            d(push(`/language-selector`))
+            d(actions.changeLanguage(null));
+            d(push(`/language-selector`));
         },
     };
 };
 
-export default connect(mapState, mapDispatch)(Skeletton);
+export default connect(mapState, mapDispatch)(Skeleton);

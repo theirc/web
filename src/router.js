@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch, withRouter, } from 'react-router';
 import { ConnectedRouter, } from 'react-router-redux'
-import { Home, Article, Categories, CountryHome, CategoryHome, } from './scenes';
+import { Home, Article, Categories, CountryHome, CategoryHome, CountrySelectorScene, LanguageSelectorScene, } from './scenes';
 import services from './backend';
 import { history, actions } from './store';
 import _ from 'lodash';
@@ -74,21 +74,23 @@ class Router extends Component {
     render() {
         return (
             <ConnectedRouter history={history}>
-                <span>
+                <span >
                     <ScrollToTop />
                     <Route exact path="/" component={Home} />
                     <Switch>
-                        <Route exact path="/country-selector" component={() => <div>Country Selector</div>} />
-                        <Route exact path="/language-selector" component={() => <div>Language Selector</div>} />
-                        <Route exact path="/:country">
-                            <div>
+                        <Route exact path="/country-selector" component={CountrySelectorScene} />
+                        <Route exact path="/language-selector" component={LanguageSelectorScene} />
+                        <Route path="/:country">
+                            <div >
+                                <Route path="/:country/categories" component={Categories} />
+
                                 <Route path="/:country" component={CountrySwitcher} />
                                 <Route exact path="/:country" component={CountryHome} />
+
                                 <Route path="/:country/:category">
                                     <div>
                                         <Route path="/:country/:category" component={CategorySwitcher} />
                                         <Switch>
-                                            <Route exact path="/:country/categories" component={Categories} />
                                             <Route exact path="/:country/search" component={() => <div>Search</div>} />
                                             <Route exact path="/:country/:category" component={CategoryHome} />
                                             <Route exact path="/:country/:category/:article" component={Article} />

@@ -60,20 +60,15 @@ export default class BottomNav extends Component {
             }}>
                 <BottomNavigation index={this.state.selectedIndex} onChange={(e, i) => this.select(i)}>
                     <BottomNavigationButton
-                        label="Home"
                         icon={<Home />}
                     />
                     <BottomNavigationButton
-                        label="Categories"
                         icon={<List />}
                     />
                     <BottomNavigationButton
-                        label="Services"
                         icon={<Map />}
                     />
                     <BottomNavigationButton
-
-                        label="More"
                         icon={<MoreHoriz />}
                     />
                 </BottomNavigation>

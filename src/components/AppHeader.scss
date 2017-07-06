@@ -5,7 +5,6 @@ Less me
 
 .app-bar {
   display: flex;
-  flex: 1;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
@@ -18,9 +17,6 @@ Less me
 
   background-color: #000000;
 
-  .rtl & {
-    flex-direction: row-reverse;
-  }
 }
 
 .app-bar-container {
@@ -34,6 +30,12 @@ Less me
   justify-content: flex-start;
   height: 50;
 }
+
+.logo-centered {
+  align-items: center;
+  justify-content: center;
+}
+
 
 .app-bar-buttons {
   flex: 1;

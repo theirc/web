@@ -48,7 +48,7 @@ class Article extends React.Component {
 
     render() {
         const { loading } = this.state;
-        const {  article } = this.props;
+        const {  article, direction } = this.props;
         const { category, country, onNavigateTo } = this.props;
 
 
@@ -70,7 +70,7 @@ class Article extends React.Component {
         return (<div>
             <ArticlePage category={category.category} article={article} loading={loading}>
             </ArticlePage>
-            <ArticleFooter previous={previous} next={next} onNavigateTo={onNavigateTo(category, country)} />
+            <ArticleFooter onNavigateTo={onNavigateTo(category, country)} {...{direction, previous, next}} />
         </div>);
     }
 }
@@ -81,6 +81,7 @@ const mapState = (s, p) => {
         match: p.match,
         country: s.country,
         category: s.category,
+        direction: s.direction,
     };
 };
 const mapDispatch = (d, p) => {

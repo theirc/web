@@ -1,0 +1,7 @@
+@import '../shared/includes.scss';
+
+.Skeleton {
+  .rtl & {
+    direction: rtl;
+  }
+}

@@ -31,7 +31,6 @@ const mapState = (s, p) => {
 const mapDispatch = (d, p) => {
     return {
         onMount: () => {
-            d(services.articles.get('the-title-of-this-article-style-title'));
         }
     };
 };

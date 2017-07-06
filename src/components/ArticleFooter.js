@@ -11,6 +11,7 @@ export default class ArticleFooter extends Component {
     static propTypes = {
         onNavigateTo: PropTypes.func,
         country: PropTypes.object,
+        direction: PropTypes.string,
         match: PropTypes.shape({
             pathName: PropTypes.string
         }),
@@ -25,8 +26,8 @@ export default class ArticleFooter extends Component {
     }
 
     render() {
-        const rtl = false;
-        const { previous, next, onNavigateTo } = this.props;
+        const { previous, next, onNavigateTo, direction } = this.props;
+        const rtl = direction==='rtl';
 
         return (<div className="ArticleFooter">
             {next && <div className="selector" onTouchTap={() => {

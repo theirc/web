@@ -62,7 +62,7 @@ app.get('/config', (rq, res) => {
 app.use('/', feathers.static('build'));
 
 app.get('*', function(request, response, next) {
-  response.sendfile(path.join(path.dirname( __dirname), 'build') + '/index.html');
+  response.sendfile(path.join(path.dirname(path.dirname( __dirname)), 'build') + '/index.html');
 });
 
 app.use(notFound());
