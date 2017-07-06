@@ -10,11 +10,6 @@ import {
 import { actions } from '../store';
 
 class LanguageSelectorScene extends React.Component {
-    constructor() {
-        super();
-
-        this.state = {};
-    }
     componentWillMount() {
         const { onMountOrUpdate, language } = this.props;
         onMountOrUpdate();
@@ -22,7 +17,6 @@ class LanguageSelectorScene extends React.Component {
 
     render() {
         const { country, language, countryList, onGoTo, onSelectLanguage } = this.props;
-        const { initialLanguage } = this.state;
 
         const languages = [
             ['ar', 'Arabic'],
