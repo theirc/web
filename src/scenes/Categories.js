@@ -1,11 +1,9 @@
 import React from 'react';
-import services from '../backend';
 import { connect } from 'react-redux'
 import {
 } from '../components';
 import PropTypes from 'prop-types';
 import { push } from 'react-router-redux';
-import Skeletton from './Skeletton';
 import {CategoryList} from '../components';
 
 

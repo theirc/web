@@ -26,7 +26,7 @@ export default class ArticleFooter extends Component {
 
     render() {
         const rtl = false;
-        const { previous, next, country, onNavigateTo } = this.props;
+        const { previous, next, onNavigateTo } = this.props;
 
         return (<div className="ArticleFooter">
             {next && <div className="selector" onTouchTap={() => {

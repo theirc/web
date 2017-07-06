@@ -3,7 +3,6 @@ import services from '../backend';
 import { connect } from 'react-redux'
 import {
 } from '../components';
-import Skeletton from './Skeletton'
 
 class Home extends React.Component {
     constructor() {
@@ -16,8 +15,6 @@ class Home extends React.Component {
     }
 
     render() {
-        const { match } = this.props;
-
         return (<div>
         </div>);
     }

@@ -6,9 +6,7 @@ import {
     ArticleFooter,
 } from '../components';
 import PropTypes from 'prop-types';
-import Skeletton from './Skeletton';
 import { withRouter } from 'react-router';
-import { push, } from 'react-router-redux';
 import { history, actions } from '../store';
 
 class Article extends React.Component {
@@ -40,7 +38,7 @@ class Article extends React.Component {
     }
 
     componentWillUpdate(nextProps, b) {
-        if (this.props.match && nextProps.match && this.props.match.params.article != nextProps.match.params.article) {
+        if (this.props.match && nextProps.match && this.props.match.params.article !== nextProps.match.params.article) {
             this.setState({ loading: true });
             this.props.onMount(nextProps.match.params.article).then((s) => {
                 return this.setState({ loading: false });
@@ -50,7 +48,7 @@ class Article extends React.Component {
 
     render() {
         const { loading } = this.state;
-        const { match, article } = this.props;
+        const {  article } = this.props;
         const { category, country, onNavigateTo } = this.props;
 
 

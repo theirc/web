@@ -4,13 +4,25 @@ import createHistory from 'history/createBrowserHistory'
 import reducers from './reducers'; // Or wherever you keep your reducers
 import actions from './actions';
 
-import {   routerMiddleware } from 'react-router-redux'
-import {  routerReducer } from 'react-router-redux'
+import { routerMiddleware } from 'react-router-redux'
+import { routerReducer } from 'react-router-redux'
 
 import reduxThunk from 'redux-thunk';
 import reduxPromiseMiddleware from 'redux-promise-middleware';
 
-const history = createHistory();
+let history;
+if (global.window.document) {
+    history = createHistory();
+} else {
+    history = {
+        listen: ()=>{}
+    };
+}
+
+let initialState = {};
+if(global.window && global.window.initialState) {
+    initialState = global.window.initialState;
+}
 
 const middleware = [
     reduxThunk, // Thunk middleware for Redux
@@ -23,6 +35,7 @@ const store = applyMiddleware(...middleware)(createStore)(
         ...reducers,
         router: routerReducer
     }),
+    initialState,
     compose(window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 )
 

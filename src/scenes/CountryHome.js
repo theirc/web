@@ -3,7 +3,6 @@ import services from '../backend';
 import { connect } from 'react-redux'
 import {
 } from '../components';
-import Skeletton from './Skeletton'
 
 class CountryHome extends React.Component {
     constructor() {
@@ -16,8 +15,6 @@ class CountryHome extends React.Component {
     }
 
     render() {
-        const { match } = this.props;
-        const { country } = match.params;
 
         return (<div>
                 <div>Country Home</div>

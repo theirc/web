@@ -1,9 +1,7 @@
 import React from 'react';
-import services from '../backend';
 import { connect } from 'react-redux'
 import {
     AppHeader,
-    WarningDialog,
     Footer
 } from '../components';
 import { BottomNavContainer } from '../containers'
@@ -50,10 +48,10 @@ const mapDispatch = (d, p) => {
         onGoToSearch: (country) => () => {
             d(push(`/${country.slug}/search`))
         },
-        onChangeCountry: () => {
+        onChangeLocation: () => {
             d(push(`/country-selector`))
         },
-        onChangeLocation: () => {
+        onChangeLanguage: () => {
             d(push(`/language-selector`))
         },
     };

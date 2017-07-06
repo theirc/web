@@ -7,7 +7,7 @@ const superagent = require('superagent');
 const rest = require('feathers-rest/client');
 const { siteConfig } = window;
 
-const url = (siteConfig && siteConfig.serverUrl) || 'http://backend.refugee.info/api';
+const url = (siteConfig && siteConfig.serverUrl) || 'http://localhost:8080/api';
 const restClient = rest(url);
 
 const client = feathers()

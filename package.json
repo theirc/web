@@ -13,6 +13,7 @@
     "babel-preset-stage-0": "^6.5.0",
     "babel-runtime": "^6.23.0",
     "body-parser": "^1.17.2",
+    "cheerio": "^1.0.0-rc.2",
     "cors": "^2.8.3",
     "feathers": "^2.1.4",
     "feathers-client": "^2.2.0",
@@ -48,6 +49,7 @@
     "react-redux": "^5.0.5",
     "react-router": "^4.1.1",
     "react-router-redux": "^5.0.0-alpha.6",
+    "react-router-server": "^4.2.1",
     "react-scripts": "^1.0.10",
     "react-tap-event-plugin": "^2.0.1",
     "react-test-renderer": "16.0.0-alpha.12",
@@ -59,9 +61,9 @@
     "superagent": "^3.5.2",
     "superagent-cache": "^2.0.0",
     "superagent-no-cache": "^0.1.1",
-    "winston": "^2.3.1"
+    "winston": "^2.3.1",
+    "babel-plugin-remove-nonjs": "^0.1.1"
   },
-  
   "scripts": {
     "build-css": "./node_modules/.bin/node-sass-chokidar src/ -o src/",
     "watch-css": "npm run build-css && ./node_modules/.bin/node-sass-chokidar src/ -o src/ --watch --recursive",
@@ -69,7 +71,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "build-server": "babel src/server -s -D -d webserver --presets es2015,stage-0,react",
+    "build-server": "babel src -s -D -d webserver --plugins remove-nonjs --presets es2015,stage-0,react",
     "run-server": "node server"
+  },
+  "devDependencies": {
   }
 }

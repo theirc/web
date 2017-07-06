@@ -1,5 +1,4 @@
 import React from 'react';
-import services from '../backend';
 import { connect } from 'react-redux'
 import {
     BottomNav,

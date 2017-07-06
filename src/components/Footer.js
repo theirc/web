@@ -16,8 +16,8 @@ export default class Footer extends Component {
                     <a href="http://www.facebook.com/refugee.info/"><h3>Ask us any question on Facebook</h3></a>
                 </div>
                 <div className="dark">
-                    <div className="button-container" onTouchTap={onChangeLocation}>
-                        <div className="button left">
+                    <div className="button-container">
+                        <div className="button left" onTouchTap={onChangeLocation}>
                             <div className="icon-container">
                                 <EditLocation />
                             </div>
