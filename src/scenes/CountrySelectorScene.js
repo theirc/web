@@ -6,6 +6,7 @@ import {
     CountrySelector
 } from '../components';
 import { actions } from '../store';
+import { Redirect } from 'react-router';
 
 class CountrySelectorScene extends React.Component {
     componentWillMount() {
@@ -21,8 +22,14 @@ class CountrySelectorScene extends React.Component {
             return (<div></div>);
         }
 
-        if(!country) {
+        if (!country) {
             return <CountrySelector onGoTo={onGoTo} countryList={countryList} />;
+        } else {
+            if (!language) {
+                return (<Redirect to={`/language-selector`} />);
+            } else {
+                return (<Redirect to={`/${country.slug}`} />);
+            }
         }
 
         return <div>{countryList.map((c, i) => (
@@ -43,9 +50,6 @@ const mapState = ({ countryList, country, language }, p) => {
 const mapDispatch = (d, p) => {
     return {
         onMountOrUpdate: () => {
-            d(actions.selectArticle(null));
-            d(actions.selectCategory(null));
-            d(actions.changeCountry(null));
             d(services.countries.find()).then(s => d(actions.selectCountryList(s.value)));
         },
         onGoTo: (slug) => {

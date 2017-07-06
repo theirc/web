@@ -25,7 +25,7 @@ class LanguageSelectorScene extends React.Component {
             ['fa', 'Farsi'],
         ]
 
-        if (!language) {
+        if (!language || language == 'en') {
             if (!country) {
                 return <LanguageSelector languages={languages} onSelectLanguage={(c) => onSelectLanguage(c) && onGoTo('country-selector')} />;
             } else {
@@ -37,7 +37,6 @@ class LanguageSelectorScene extends React.Component {
                 return (<Redirect to={`/country-selector`} />);
             } else {
                 return (<Redirect to={`/${country.slug}`} />);
-
             }
         }
 
@@ -54,7 +53,6 @@ const mapState = ({ countryList, country, language }, p) => {
 const mapDispatch = (d, p) => {
     return {
         onMountOrUpdate: () => {
-            d(actions.changeLanguage(null));
         },
         onSelectLanguage: (code) => {
             d(actions.changeLanguage(code));
