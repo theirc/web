@@ -21,16 +21,17 @@ class Skeletton extends React.Component {
         } = this.props;
 
         return (<div>
-            <AppHeader country={country}
+            {country && <AppHeader country={country}
                 onGoHome={onGoHome(country)}
                 onGoToSearch={onGoToSearch(country)}
                 onChangeCountry={onChangeCountry}
-            />
+            />}
             {children}
-            <Footer
+            {country && <Footer
                 onChangeLocation={onChangeLocation}
-                onChangeLanguage={onChangeLanguage} />
-            <BottomNavContainer match={match} />
+                onChangeLanguage={onChangeLanguage} />}
+            {country && <BottomNavContainer match={match} />
+            }
         </div>);
     }
 }

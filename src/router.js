@@ -80,7 +80,7 @@ class Router extends Component {
                     <Switch>
                         <Route exact path="/country-selector" component={() => <div>Country Selector</div>} />
                         <Route exact path="/language-selector" component={() => <div>Language Selector</div>} />
-                        <Route path="/:country">
+                        <Route exact path="/:country">
                             <div>
                                 <Route path="/:country" component={CountrySwitcher} />
                                 <Route exact path="/:country" component={CountryHome} />
