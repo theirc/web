@@ -17,12 +17,14 @@ class CountrySelectorScene extends React.Component {
     render() {
         const { country, language } = this.props;
         const { countryList, onGoTo } = this.props;
+        const { firstRequest } = global.window.localStorage;
+        const firstTimeHere = !firstRequest;
 
         if (!countryList) {
             return (<div></div>);
         }
 
-        if (!country) {
+        if (firstTimeHere || !country) {
             return <CountrySelector onGoTo={onGoTo} countryList={countryList} />;
         } else {
             if (!language) {

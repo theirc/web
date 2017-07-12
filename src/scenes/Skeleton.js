@@ -1,5 +1,5 @@
 import React from 'react';
-import {actions} from '../store';
+import { actions } from '../store';
 import { connect } from 'react-redux'
 import {
     AppHeader,
@@ -11,6 +11,10 @@ import { push, } from 'react-router-redux';
 import './Skeleton.css';
 
 class Skeleton extends React.Component {
+
+    componentWillMount() {
+    }
+
     render() {
         const {
             children,
@@ -26,34 +30,36 @@ class Skeleton extends React.Component {
 
         return (<div className="Skeleton">
             <AppHeader country={country}
-            language={language}
+                language={language}
                 onGoHome={onGoHome(country)}
                 onGoToSearch={onGoToSearch(country)}
-                onChangeCountry={onChangeCountry}
+                onChangeCountry={onChangeLocation}
             />
             {children}
-            {(country&&language) && <Footer
+            {(country && language) && <Footer
                 onChangeLocation={onChangeLocation}
                 onChangeLanguage={onChangeLanguage} />}
-            {(country&&language) && <BottomNavContainer match={match} />
+            {(country && language) && <BottomNavContainer match={match} />
             }
         </div>);
     }
 }
 
-const mapState = ({country, language}, p) => {
+const mapState = ({ country, language }, p) => {
     return {
-        country, 
+        country,
         language
     };
 };
 const mapDispatch = (d, p) => {
     return {
         onGoHome: (country) => () => {
-            d(push(`/${country.slug || ''}`));
+            if (country)
+                d(push(`/${country.slug || ''}`));
         },
         onGoToSearch: (country) => () => {
-            d(push(`/${country.slug}/search`));
+            if (country)
+                d(push(`/${country.slug}/search`));
         },
         onChangeLocation: () => {
             d(actions.changeCountry(null));

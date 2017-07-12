@@ -8,6 +8,7 @@ const actionTypes = {
     selectArticle: 'SELECT_ARTICLE',
     recordMatch: 'RECORD_MATCH',
     selectCountryList: 'SELECT_COUNTRY_LIST',
+    recordCoordinates: 'RECORD_COORDINATES',
 
 }
 
@@ -19,5 +20,6 @@ export default {
     selectCategory: createAction(actionTypes.selectCategory),
     selectArticle: createAction(actionTypes.selectArticle),
     recordMatch: createAction(actionTypes.recordMatch),
+    recordCoordinates: createAction(actionTypes.recordCoordinates),
     selectCountryList: createAction(actionTypes.selectCountryList),
 }

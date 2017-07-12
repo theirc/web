@@ -22,7 +22,6 @@ class CategoryHome extends React.Component {
         }
 
         return (<div>
-                <div>{category.category.name}</div>
         </div>);
     }
 }

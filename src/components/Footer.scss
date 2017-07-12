@@ -58,6 +58,9 @@
     margin-bottom: 1em;
     border-bottom: 1px $dividerColor solid;
 
+    .rtl & {
+      flex-direction: row-reverse;
+    }
   }
 
   .button {
@@ -76,14 +79,6 @@
       border-right-width: 1px;
       border-right-style: solid;
 
-      .rtl & {
-        border-right-width: 0;
-
-        border-left-color: $dividerColor;
-        border-left-width: 1px;
-        border-left-style: solid;
-
-      }
     }
 
     .icon-container {

@@ -6,6 +6,7 @@
     "babel-cli": "^6.9.0",
     "babel-core": "^6.9.0",
     "babel-jest": "20.0.3",
+    "babel-plugin-remove-nonjs": "^0.1.1",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.0.0",
@@ -48,6 +49,7 @@
     "react-material-icons": "^1.0.2",
     "react-redux": "^5.0.5",
     "react-router": "^4.1.1",
+    "react-router-dom": "^4.1.1",
     "react-router-redux": "^5.0.0-alpha.6",
     "react-router-server": "^4.2.1",
     "react-scripts": "^1.0.10",
@@ -61,8 +63,7 @@
     "superagent": "^3.5.2",
     "superagent-cache": "^2.0.0",
     "superagent-no-cache": "^0.1.1",
-    "winston": "^2.3.1",
-    "babel-plugin-remove-nonjs": "^0.1.1"
+    "winston": "^2.3.1"
   },
   "scripts": {
     "build-css": "./node_modules/.bin/node-sass-chokidar src/ -o src/",
@@ -74,6 +75,5 @@
     "build-server": "babel src -s -D -d webserver --plugins remove-nonjs --presets es2015,stage-0,react",
     "run-server": "node server"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }

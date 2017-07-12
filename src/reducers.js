@@ -4,9 +4,6 @@ import actions from './actions';
 let defaultLanguage = '';
 if (global.navigator.language) {
   defaultLanguage = global.navigator.language.split('-')[0];
-  if (defaultLanguage == 'en') {
-    defaultLanguage = null;
-  }
 }
 const getDirection = (l) => ['ar', 'fa'].indexOf(l) > -1 ? 'rtl' : 'ltr';
 
@@ -90,9 +87,21 @@ function changeDirection(state = getDirection(defaultLanguage), action) {
   }
 }
 
+
+function recordCoordinates(state = null, action) {
+  switch (action.type) {
+    case actions.actionTypes.recordCoordinates:
+      return action.payload;
+    default:
+      return state
+  }
+}
+
 // Configure Redux store & reducers
 export default {
   match: recordMatch,
+  currentCoordinates: recordCoordinates,
+  
   country: changeCountry,
   category: selectCategory,
   article: selectArticle,

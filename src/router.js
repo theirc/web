@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Route, Switch, withRouter, } from 'react-router';
+import { BrowserRouter } from 'react-router-dom'
+
+import { Route, Switch, withRouter} from 'react-router';
 import { ConnectedRouter, } from 'react-router-redux'
 import { Home, Article, Categories, CountryHome, CategoryHome, CountrySelectorScene, LanguageSelectorScene, } from './scenes';
 import services from './backend';
@@ -82,7 +84,7 @@ class Router extends Component {
                         <Route exact path="/language-selector" component={LanguageSelectorScene} />
                         <Route path="/:country">
                             <div >
-                                <Route path="/:country/categories" component={Categories} />
+                                <Route exact path="/:country/categories" component={Categories} />
 
                                 <Route path="/:country" component={CountrySwitcher} />
                                 <Route exact path="/:country" component={CountryHome} />

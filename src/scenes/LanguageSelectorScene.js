@@ -10,13 +10,30 @@ import {
 import { actions } from '../store';
 
 class LanguageSelectorScene extends React.Component {
+    constructor() {
+        super();
+        this.state = { selected: false };
+    }
     componentWillMount() {
         const { onMountOrUpdate, language } = this.props;
         onMountOrUpdate();
     }
 
+    selectLanguage(redirect, language) {
+        const { onGoTo, onSelectLanguage } = this.props;
+        this.setState({ selected: true }, () => {
+            setTimeout(() => {
+                onSelectLanguage(language);
+                onGoTo(redirect);
+            }, 300)
+        });
+    }
+
     render() {
         const { country, language, countryList, onGoTo, onSelectLanguage } = this.props;
+        const { firstRequest } = global.window.localStorage;
+        const { selected } = this.state;
+        const firstTimeHere = !firstRequest;
 
         const languages = [
             ['ar', 'Arabic'],
@@ -24,12 +41,12 @@ class LanguageSelectorScene extends React.Component {
             ['fa', 'Farsi'],
         ]
 
-        if (!language) {
-            if (!country) {
-                return <LanguageSelector languages={languages} onSelectLanguage={(c) => onSelectLanguage(c) && onGoTo('country-selector')} />;
-            } else {
-                return <LanguageSelector languages={languages} onSelectLanguage={(c) => setTimeout(() => { onSelectLanguage(c) && onGoTo(country.slug) }, 200)} />;
 
+        if ((!selected) && (firstTimeHere || !language)) {
+            if (!country) {
+                return <LanguageSelector languages={languages} onSelectLanguage={this.selectLanguage.bind(this, 'country-selector')} />;
+            } else {
+                return <LanguageSelector languages={languages} onSelectLanguage={this.selectLanguage.bind(this, country.slug)} />;
             }
         } else {
             if (!country) {

@@ -11,11 +11,12 @@ const url = (siteConfig && siteConfig.serverUrl) || 'http://localhost:8080/api';
 const restClient = rest(url);
 
 const client = feathers()
-    .configure(restClient.superagent(superagent))
+    .configure(restClient.fetch(window.fetch.bind(window)))
     .configure(hooks())
     .configure(auth())
     ;
 
-const services = reduxifyServices(client, ['articles', 'countries', 'categories']);
+const services = reduxifyServices(client, ['articles', 'countries', 'locations', 'categories']);
+console.log(client);
 
 export default services;
