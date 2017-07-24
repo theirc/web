@@ -15,9 +15,8 @@ export default class CategoryList extends Component {
                 {categories.filter(c => c.category && c.category.slug).map((c, i) => (<li key={c._id}>
                     <hr className="line" />
                     <input type="checkbox" name={"tab"} id={`tab-${i}`} />
-
                     <div className="container">
-                        <i className="material-icons">accessibility</i>
+                        <i className={c.category.iconClass || "material-icons"}>{c.category.iconText || ((!c.category.iconClass || c.category.iconClass==='material-icons') && "add") }</i>
                         <label htmlFor={`tab-${i}`}><strong>{c.category && c.category.name}</strong></label>
                         <div className="up"><i className="material-icons">keyboard_arrow_up</i></div>
                         <div className="down"><i className="material-icons">keyboard_arrow_down</i></div>
