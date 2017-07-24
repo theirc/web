@@ -8,6 +8,8 @@ import {
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { history, actions } from '../store';
+import { push, } from 'react-router-redux';
+
 
 class Article extends React.Component {
     static propTypes = {
@@ -48,11 +50,10 @@ class Article extends React.Component {
 
     render() {
         const { loading } = this.state;
-        const {  article, direction } = this.props;
+        const { article, direction } = this.props;
         const { category, country, onNavigateTo } = this.props;
 
-
-        if (!article || !category) return (<div style={{height: 100}} />);
+        if (!article || !category) return (<div style={{ height: 100 }} />);
 
         let next = null, previous = null;
         if (category) {
@@ -70,7 +71,7 @@ class Article extends React.Component {
         return (<div>
             <ArticlePage category={category.category} article={article} loading={loading}>
             </ArticlePage>
-            <ArticleFooter onNavigateTo={onNavigateTo(category, country)} {...{direction, previous, next}} />
+            <ArticleFooter onNavigateTo={onNavigateTo(category, country)} {...{ direction, previous, next }} />
         </div>);
     }
 }
@@ -79,8 +80,8 @@ const mapState = (s, p) => {
     return {
         article: s.article,
         match: p.match,
-        country: s.country,
-        category: s.category,
+        country: p.country || s.country,
+        category:  p.category || s.category,
         direction: s.direction,
     };
 };
@@ -93,10 +94,10 @@ const mapDispatch = (d, p) => {
         },
         onNavigateTo: (category, country) => (slug) => {
             setTimeout(() => {
-                history.push(`/${country.slug}/${category.category.slug}/${slug}`);
+                d(push(`/${country.slug}/${category.category.slug}/${slug}`));
             }, 200);
         }
     };
 };
 
-export default connect(mapState, mapDispatch)(withRouter(Article));
+export default connect(mapState, mapDispatch)(Article);

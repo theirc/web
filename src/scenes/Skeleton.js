@@ -7,6 +7,7 @@ import {
 } from '../components';
 import { BottomNavContainer } from '../containers'
 import { push, } from 'react-router-redux';
+import {history} from '../store';
 
 import './Skeleton.css';
 

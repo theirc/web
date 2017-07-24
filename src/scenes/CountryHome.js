@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import {
 } from '../components';
 
+
 class CountryHome extends React.Component {
     constructor() {
         super();
@@ -16,12 +17,17 @@ class CountryHome extends React.Component {
     requestLocation() {
         const { geolocation } = global.navigator;
         const { onLocationRequested, country } = this.props;
-        console.log(this.props)
 
         if (geolocation) {
             geolocation.getCurrentPosition((c) => {
                 onLocationRequested(c.coords, country);
-            })
+            }, (e) => {
+                console.log('Error with geolocation', e);
+            },
+                {
+                    enableHighAccuracy: true,
+                    timeout: 5000,
+                })
         }
 
     }
@@ -41,18 +47,16 @@ class CountryHome extends React.Component {
 
     render() {
         const { currentCoordinates } = this.props;
-        return (<div>
-            <div>Country Home</div>
-            <div>{currentCoordinates && currentCoordinates.latitude}</div>
-            <div>{currentCoordinates && currentCoordinates.longitude}</div>
-        </div>);
+        return (<img style={{
+            width: '100%',
+            margin: 'auto'
+        }} src="/images/mock.jpg" />);
     }
 }
 
 const mapState = (s, p) => {
     return {
         articles: s.articles,
-        country: s.country,
         currentCoordinates: s.currentCoordinates
     };
 };
@@ -64,8 +68,7 @@ const mapDispatch = (d, p) => {
             if (country) {
                 d(services.locations.get(`near/${coords.longitude}, ${coords.latitude}`)).then((a) => {
                     if (country.locations.map(l => l.location._id).indexOf(a._id) > -1) {
-                        console.log(a);
-
+                        console.log('This is closest to you', a);
                     }
                 });
             }

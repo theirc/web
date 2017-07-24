@@ -8,6 +8,7 @@ import {
     LanguageSelector
 } from '../components';
 import { actions } from '../store';
+import {history} from '../store';
 
 class LanguageSelectorScene extends React.Component {
     constructor() {

@@ -7,6 +7,7 @@ import {
 } from '../components';
 import { actions } from '../store';
 import { Redirect } from 'react-router';
+import {history} from '../store';
 
 class CountrySelectorScene extends React.Component {
     componentWillMount() {

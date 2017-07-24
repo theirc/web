@@ -5,6 +5,7 @@ import {
 } from '../components';
 import PropTypes from 'prop-types';
 import { push, } from 'react-router-redux';
+import {history} from '../store';
 
 class BottomNavContainer extends React.Component {
     static propTypes = {
