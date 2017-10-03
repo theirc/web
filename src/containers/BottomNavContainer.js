@@ -30,7 +30,7 @@ class BottomNavContainer extends React.Component {
         const { category, country, onGoToCategories, onGoHome } = this.props;
 
         return (<BottomNav 
-        category={category&&category.category.slug} 
+        category={category&&category.fields.slug} 
         country={country&&country.slug} 
         onGoToCategories={()=>onGoToCategories(country.slug)}
         onGoHome={()=>onGoHome(country.slug)}

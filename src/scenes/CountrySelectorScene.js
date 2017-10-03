@@ -7,6 +7,7 @@ import { actions } from "../store";
 import { Redirect } from "react-router";
 import { history } from "../store";
 import cms from "../content/cms";
+import _ from "lodash";
 
 class CountrySelectorScene extends React.Component {
 	componentWillMount() {
@@ -22,8 +23,8 @@ class CountrySelectorScene extends React.Component {
 
 		if (!countryList) {
 			return <div />;
-        }
-        
+		}
+
 		if (countryList.length === 1) {
 			onGoTo(countryList[0].slug);
 
@@ -71,7 +72,9 @@ const mapDispatch = (d, p) => {
 		onMountOrUpdate: () => {
 			cms.client
 				.getEntries({ content_type: "country" })
-				.then(e => e.items.map(a => ({ id: a.sys.id, ...a.fields })))
+				.then(e =>
+					e.items.map(a => ({ id: a.sys.id, ...a.fields, ...a }))
+				)
 				.then(e => {
 					console.log(e);
 					d(actions.selectCountryList(e));

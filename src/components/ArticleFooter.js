@@ -31,21 +31,21 @@ export default class ArticleFooter extends Component {
 
         return (<div className="ArticleFooter">
             {next && <div className="selector" onClick={() => {
-                onNavigateTo(next.slug);
+                onNavigateTo(next.fields.slug);
             }}>
                 <h1>
                     <small>NEXT PAGE:</small>                    
-                    {next.title}
+                    {next.fields.title}
                 </h1>
                 {!rtl ? <NavigateNext className="icon" /> : <NavigateBefore className="icon" />}
             </div>}
             {next && <hr />}
             {previous && <div className="selector" onClick={() => {
-                onNavigateTo(previous.slug);
+                onNavigateTo(previous.fields.slug);
             }}>
                 <h1>
                     <small>PREVIOUS PAGE:</small>
-                    {previous.title}
+                    {previous.fields.title}
                 </h1>
                 {!rtl ? <NavigateBefore className="icon" /> : <NavigateNext className="icon" />}
             </div>}

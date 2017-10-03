@@ -66,11 +66,7 @@ const mapDispatch = (d, p) => {
         },
         onLocationRequested: (coords, country) => {
             if (country) {
-                d(services.locations.get(`near/${coords.longitude}, ${coords.latitude}`)).then((a) => {
-                    if (country.locations.map(l => l.location._id).indexOf(a._id) > -1) {
-                        console.log('This is closest to you', a);
-                    }
-                });
+              
             }
         },
 

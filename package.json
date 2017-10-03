@@ -60,6 +60,7 @@
     "redux-actions": "^2.1.0",
     "redux-promise-middleware": "4.2.1",
     "redux-thunk": "^2.2.0",
+    "remarkable": "^1.7.1",
     "serve-favicon": "^2.4.3",
     "superagent": "^3.5.2",
     "superagent-cache": "^2.0.0",
