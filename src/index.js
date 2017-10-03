@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import {store} from './store';
-import injectTapEventPlugin from 'react-tap-event-plugin';
+//import injectTapEventPlugin from 'react-tap-event-plugin';
 
-// Needed for onTouchTap
+// Needed for onClick
 // http://stackoverflow.com/a/34015469/988941
-injectTapEventPlugin();
+//injectTapEventPlugin();
 
 
 ReactDOM.render(<App />, document.getElementById('root'));

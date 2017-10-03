@@ -30,7 +30,7 @@ export default class ArticleFooter extends Component {
         const rtl = direction==='rtl';
 
         return (<div className="ArticleFooter">
-            {next && <div className="selector" onTouchTap={() => {
+            {next && <div className="selector" onClick={() => {
                 onNavigateTo(next.slug);
             }}>
                 <h1>
@@ -40,7 +40,7 @@ export default class ArticleFooter extends Component {
                 {!rtl ? <NavigateNext className="icon" /> : <NavigateBefore className="icon" />}
             </div>}
             {next && <hr />}
-            {previous && <div className="selector" onTouchTap={() => {
+            {previous && <div className="selector" onClick={() => {
                 onNavigateTo(previous.slug);
             }}>
                 <h1>

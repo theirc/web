@@ -3,7 +3,6 @@ const favicon = require('serve-favicon');
 const compress = require('compression');
 const cors = require('cors');
 const helmet = require('helmet');
-const middleware = require('./middleware');
 const bodyParser = require('body-parser');
 
 const feathers = require('feathers');
@@ -18,20 +17,12 @@ const mustacheExpress = require('mustache-express');
 const logger = require('winston');
 const less = require('less');
 const fs = require('fs');
-
+const conf = require('./config');
 
 const app = feathers();
 
-app.engine('mustache', mustacheExpress());
-app.set('view engine', 'mustache');
-app.set('views', __dirname + '/views');
-
-// Load app configuration
 app.configure(configuration());
 
-app.use(middleware);
-
-// Enable CORS, security, compression, favicon and body parsing
 app.use(cors());
 app.use(helmet());
 app.use(compress());
@@ -46,14 +37,16 @@ app.configure(socketio());
 
 
 app.get('/config', (rq, res) => {
-    let config = JSON.stringify({
+    let serverConf = JSON.stringify({
         serverUrl: process.env.BACKEND_URL,
         hostname: rq.headers.host
     });
+
+    let config =  Object.assign(serverConf, conf)
     let responseText = `
     window.siteConfig =  ${config}
     `;
-    
+
     res.contentType("application/javascript");
     res.send(responseText);
 })
@@ -61,8 +54,8 @@ app.get('/config', (rq, res) => {
 // Host the public folder
 app.use('/', feathers.static('build'));
 
-app.get('*', function(request, response, next) {
-  response.sendfile(path.join(path.dirname(path.dirname( __dirname)), 'build') + '/index.html');
+app.get('*', function (request, response, next) {
+    response.sendfile(path.join(path.dirname(path.dirname(__dirname)), 'build') + '/index.html');
 });
 
 app.use(notFound());

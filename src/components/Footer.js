@@ -17,13 +17,13 @@ export default class Footer extends Component {
                 </div>
                 <div className="dark">
                     <div className="button-container">
-                        <div className="button left" onTouchTap={onChangeLocation}>
+                        <div className="button left" onClick={onChangeLocation}>
                             <div className="icon-container">
                                 <EditLocation />
                             </div>
                             <span>Change Location</span>
                         </div>
-                        <div className="button" onTouchTap={onChangeLanguage}>
+                        <div className="button" onClick={onChangeLanguage}>
                             <div className="icon-container">
                                 <Language />
                             </div>

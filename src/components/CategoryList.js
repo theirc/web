@@ -26,7 +26,7 @@ export default class CategoryList extends Component {
                         {c.articles && c.articles.map(a => (
                             <li key={a._id}>
                                 <div className="inner-container">
-                                    <div onTouchTap={() => onNavigate(`/${country.slug}/${c.category.slug}/${a.slug}`)}> {a.title}</div>
+                                    <div onClick={() => onNavigate(`/${country.slug}/${c.category.slug}/${a.slug}`)}> {a.title}</div>
                                 </div>
                             </li>
                         ))}

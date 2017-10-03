@@ -20,7 +20,7 @@ export default class LanguageSelector extends Component {
         return <div className="LanguageSelector">
             <div className="spacer"></div>
             {languages.map((c, i) => (
-                <button className="item " key={i} onTouchTap={() => { onSelectLanguage(c[0]) }}>{c[1]}</button>
+                <button className="item " key={i} onClick={() => { onSelectLanguage(c[0]) }}>{c[1]}</button>
             ))}
             <div className="spacer"></div>
             <div className="bottom"></div>

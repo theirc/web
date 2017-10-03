@@ -3,6 +3,7 @@ import services from '../backend';
 import { connect } from 'react-redux';
 import { push, } from 'react-router-redux';
 import { Redirect } from 'react-router';
+import cms from "../content/cms";
 
 import {
     LanguageSelector
@@ -36,11 +37,7 @@ class LanguageSelectorScene extends React.Component {
         const { selected } = this.state;
         const firstTimeHere = !firstRequest;
 
-        const languages = [
-            ['ar', 'Arabic'],
-            ['en', 'English'],
-            ['fa', 'Farsi'],
-        ]
+        const languages = cms.siteConfig.languages;
 
 
         if ((!selected) && (firstTimeHere || !language)) {
