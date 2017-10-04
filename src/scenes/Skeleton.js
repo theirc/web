@@ -44,6 +44,10 @@ class Skeleton extends React.Component {
 				{country &&
 					language && (
 						<Footer
+							questionLink={cms.siteConfig.questionLink}
+							disableCountrySelector={
+								!!cms.siteConfig.disableCountrySelector
+							}
 							onChangeLocation={onChangeLocation}
 							onChangeLanguage={onChangeLanguage}
 						/>

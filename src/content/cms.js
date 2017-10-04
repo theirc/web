@@ -15,20 +15,28 @@ for (let key of Object.keys(config)) {
 	}
 }
 
-function loadCountry(slug) {
-	const entriesAsDictionary = e => {
-		return _.fromPairs(e.map(o => [o.sys.id, o.fields]));
-	};
+function loadCountry(slug, language = "en") {
+    let { languageDictionary } = config;
+
+    if(siteConfig) {
+        languageDictionary = Object.assign(languageDictionary, siteConfig.languageDictionary);
+    }
+
 	return client
-		.getEntries({ content_type: "country", "fields.slug": slug, include: 10 })
+		.getEntries({
+			content_type: "country",
+			"fields.slug": slug,
+			include: 10,
+			locale: languageDictionary[language],
+		})
 		.then(e => {
 			let { includes, items } = e;
 
 			if (items.length == 0) {
 				throw Error("No Country Found");
-            }
+			}
 
-            return items[0].fields;
+			return items[0].fields;
 		});
 }
 

@@ -1,4 +1,9 @@
 export default {
+	languageDictionary: {
+		en: 'en-US',
+		ar: 'ar-001',
+		fa: 'fa-AF',
+	},
 	"refugee.info": {
 		theme: "irc",
 		accessToken:
@@ -7,6 +12,7 @@ export default {
 		languages: [["en", "English"], ["ar", "العربيـة"]],
 		logo: "/logo.png",
 		title: "Refugee Info",
+		questionLink: "https://fb.me/refugee.info",
 	},
 	"khabrona.info": {
 		theme: "mc",
@@ -16,6 +22,8 @@ export default {
 		languages: [["en", "English"], ["ar", "العربيـة"]],
 		logo: "/ki-logo.png",
 		title: "Khabrona.Info",
+		disableCountrySelector: true,
+		questionLink: "mailto:tellus@khabrona.info",
 	},
 	localhost: {
 		theme: "mc",
@@ -25,5 +33,7 @@ export default {
 		languages: [["en", "English"], ["ar", "العربيـة"]],
 		logo: "/ki-logo.png",
 		title: "Khabrona.Info",
+		disableCountrySelector: true,
+		questionLink: "mailto:tellus@khabrona.info",
 	},
 };
