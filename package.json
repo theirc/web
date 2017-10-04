@@ -43,6 +43,7 @@
     "mustache-express": "^1.2.5",
     "node-sass-chokidar": "0.0.3",
     "npm-run": "^4.1.2",
+    "react-native": "0.48.4",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-headroom": "^2.1.5",
@@ -77,5 +78,8 @@
     "build-server": "babel src -s -D -d webserver --plugins remove-nonjs --presets es2015,stage-0,react",
     "run-server": "node server"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "babel-preset-react-native": "4.0.0",
+    "react-test-renderer": "16.0.0"
+  }
 }

@@ -15,12 +15,22 @@ for (let key of Object.keys(config)) {
 	}
 }
 
-function loadCountry(slug, language = "en") {
-    let { languageDictionary } = config;
+if (!client) {
+	siteConfig = config["refugee.info"];
+	client = contentful.createClient({
+		...siteConfig,
+	});
+}
 
-    if(siteConfig) {
-        languageDictionary = Object.assign(languageDictionary, siteConfig.languageDictionary);
-    }
+function loadCountry(slug, language = "en") {
+	let { languageDictionary } = config;
+
+	if (siteConfig) {
+		languageDictionary = Object.assign(
+			languageDictionary,
+			siteConfig.languageDictionary
+		);
+	}
 
 	return client
 		.getEntries({
