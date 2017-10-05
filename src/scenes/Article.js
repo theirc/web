@@ -77,6 +77,7 @@ class Article extends React.Component {
 			}
 		}
 
+		console.log(country)
 		return (
 			<div>
 				<ArticlePage
@@ -123,7 +124,7 @@ const mapDispatch = (d, p) => {
 		},
 		onNavigateTo: (category, country) => slug => {
 			setTimeout(() => {
-				d(push(`/${country.slug}/${category.fields.slug}/${slug}`));
+				d(push(`/${country.fields.slug}/${category.fields.slug}/${slug}`));
 			}, 200);
 		},
 	};

@@ -52,7 +52,7 @@ export default class AppHeader extends Component {
 											color="contrast"
 											onClick={onChangeCountry || noop}
 										>
-											{(country && country.name) || " "}
+											{(country && country.fields.name) || " "}
 										</Button>
 										<div className="app-bar-separator" />
 										<IconButton

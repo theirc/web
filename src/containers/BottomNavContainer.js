@@ -32,8 +32,8 @@ class BottomNavContainer extends React.Component {
         return (<BottomNav 
         category={category&&category.fields.slug} 
         country={country&&country.slug} 
-        onGoToCategories={()=>onGoToCategories(country.slug)}
-        onGoHome={()=>onGoHome(country.slug)}
+        onGoToCategories={()=>onGoToCategories(country.fields.slug)}
+        onGoHome={()=>onGoHome(country.fields.slug)}
          />);
     }
 }

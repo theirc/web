@@ -29,7 +29,7 @@ class Categories extends React.Component {
             return null;
         }
 
-        return <CategoryList categories={country.categories} country={country} onNavigate={onNavigate} />;
+        return <CategoryList categories={country.fields.categories} country={country} onNavigate={onNavigate} />;
     }
 }
 

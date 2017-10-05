@@ -90,7 +90,7 @@ function withCategory(WrappedComponent) {
             console.log('Mount')
 			if (country) {
 				const category = _.first(
-					country.categories.filter(
+					country.fields.categories.filter(
 						c =>
                         c &&
                         c.fields.slug === match.params.category
@@ -106,7 +106,7 @@ function withCategory(WrappedComponent) {
 
 			if (country) {
 				const category = _.first(
-					country.categories.filter(
+					country.fields.categories.filter(
 						c =>
 							c &&
 							c.fields.slug === match.params.category

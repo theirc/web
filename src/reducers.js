@@ -1,117 +1,128 @@
-import services from './backend';
-import actions from './actions';
+import services from "./backend";
+import actions from "./actions";
 
-let defaultLanguage = '';
+let defaultLanguage = "";
 if (global.navigator.language) {
-  defaultLanguage = global.navigator.language.split('-')[0];
+	defaultLanguage = global.navigator.language.split("-")[0];
 }
-const getDirection = (l) => ['ar', 'fa'].indexOf(l) > -1 ? 'rtl' : 'ltr';
+const getDirection = l => (["ar", "fa"].indexOf(l) > -1 ? "rtl" : "ltr");
+const device = navigator.userAgent.toLowerCase().indexOf("android") > -1
+	? "Android"
+	: navigator.userAgent.toLowerCase().indexOf("iphone") > -1 ? "iPhone" : "other";
+console.log(device);
 
-function changeOrganization(state = 'irc', action) {
-  switch (action.type) {
-    case actions.actionTypes.changeOrganization:
-      return action.payload;
-    default:
-      return state
-  }
+function changeDeviceType(state = device, action) {
+	switch (action.type) {
+		case actions.actionTypes.changeDeviceType:
+			return action.payload;
+		default:
+			return state;
+	}
+}
+function changeOrganization(state = "irc", action) {
+	switch (action.type) {
+		case actions.actionTypes.changeOrganization:
+			return action.payload;
+		default:
+			return state;
+	}
 }
 function changeCountry(state = null, action) {
-  switch (action.type) {
-    case actions.actionTypes.changeCountry:
-      return action.payload;
-    default:
-      return state
-  }
+	switch (action.type) {
+		case actions.actionTypes.changeCountry:
+			return action.payload;
+		default:
+			return state;
+	}
 }
 
 function changeCountrySlug(state = null, action) {
-  switch (action.type) {
-    case actions.actionTypes.changeCountry:
-      return (action.payload && action.payload.slug) || null;
-    default:
-      return state
-  }
+	switch (action.type) {
+		case actions.actionTypes.changeCountry:
+			return (action.payload && action.payload.fields.slug) || null;
+		default:
+			return state;
+	}
 }
 function selectCategory(state = null, action) {
-  switch (action.type) {
-    case actions.actionTypes.selectCategory:
-      return action.payload || null;
-    default:
-      return state
-  }
+	switch (action.type) {
+		case actions.actionTypes.selectCategory:
+			return action.payload || null;
+		default:
+			return state;
+	}
 }
 function selectArticle(state = null, action) {
-  switch (action.type) {
-    case actions.actionTypes.selectArticle:
-      return action.payload || null;
-    default:
-      return state
-  }
+	switch (action.type) {
+		case actions.actionTypes.selectArticle:
+			return action.payload || null;
+		default:
+			return state;
+	}
 }
 
 function recordMatch(state = null, action) {
-  switch (action.type) {
-    case actions.actionTypes.recordMatch:
-      return action.payload || null;
-    default:
-      return state
-  }
+	switch (action.type) {
+		case actions.actionTypes.recordMatch:
+			return action.payload || null;
+		default:
+			return state;
+	}
 }
-
 
 function selectCountryList(state = null, action) {
-  switch (action.type) {
-    case actions.actionTypes.selectCountryList:
-      return action.payload || null;
-    default:
-      return state
-  }
+	switch (action.type) {
+		case actions.actionTypes.selectCountryList:
+			return action.payload || null;
+		default:
+			return state;
+	}
 }
 
-
 function changeLanguage(state = defaultLanguage, action) {
-  switch (action.type) {
-    case actions.actionTypes.changeLanguage:
-      return action.payload || null;
-    default:
-      return state
-  }
+	switch (action.type) {
+		case actions.actionTypes.changeLanguage:
+			return action.payload || null;
+		default:
+			return state;
+	}
 }
 
 function changeDirection(state = getDirection(defaultLanguage), action) {
-  switch (action.type) {
-    case actions.actionTypes.changeLanguage:
-      return getDirection(action.payload);
-    default:
-      return state
-  }
+	switch (action.type) {
+		case actions.actionTypes.changeLanguage:
+			return getDirection(action.payload);
+		default:
+			return state;
+	}
 }
 
-
 function recordCoordinates(state = null, action) {
-  switch (action.type) {
-    case actions.actionTypes.recordCoordinates:
-      return action.payload;
-    default:
-      return state
-  }
+	switch (action.type) {
+		case actions.actionTypes.recordCoordinates:
+			return action.payload;
+		default:
+			return state;
+	}
 }
 
 // Configure Redux store & reducers
 export default {
-  match: recordMatch,
+	match: recordMatch,
   currentCoordinates: recordCoordinates,
-  
-  country: changeCountry,
-  category: selectCategory,
-  article: selectArticle,
-  language: changeLanguage,
-  direction: changeDirection,
-  countryList: selectCountryList,
-  countrySlug: changeCountrySlug,
-  organization: changeOrganization,
 
-  articles: services.articles.reducer,
-  countries: services.countries.reducer,
-  categories: services.categories.reducer,
+	deviceType: changeDeviceType,
+
+	country: changeCountry,
+	category: selectCategory,
+	article: selectArticle,
+	language: changeLanguage,
+	direction: changeDirection,
+	countryList: selectCountryList,
+	countrySlug: changeCountrySlug,
+	organization: changeOrganization,
+
+	articles: services.articles.reducer,
+	countries: services.countries.reducer,
+	categories: services.categories.reducer,
 };

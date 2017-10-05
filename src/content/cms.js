@@ -32,6 +32,13 @@ function loadCountry(slug, language = "en") {
 		);
 	}
 
+	if(sessionStorage.country) {
+		const country = JSON.parse(sessionStorage.country);
+		if(country[slug]) {
+			return Promise.resolve(country[slug].items[0]);
+		}
+	}
+
 	return client
 		.getEntries({
 			content_type: "country",
@@ -46,7 +53,7 @@ function loadCountry(slug, language = "en") {
 				throw Error("No Country Found");
 			}
 
-			return items[0].fields;
+			return items[0];
 		});
 }
 

@@ -26,7 +26,7 @@ class CountrySelectorScene extends React.Component {
 		}
 
 		if (countryList.length === 1) {
-			onGoTo(countryList[0].slug);
+			onGoTo(countryList[0].fields.slug);
 
 			return <div />;
 		}
@@ -39,7 +39,7 @@ class CountrySelectorScene extends React.Component {
 			if (!language) {
 				return <Redirect to={`/language-selector`} />;
 			} else {
-				return <Redirect to={`/${country.slug}`} />;
+				return <Redirect to={`/${country.fields.slug}`} />;
 			}
 		}
 
@@ -49,10 +49,10 @@ class CountrySelectorScene extends React.Component {
 					<div
 						key={c.id}
 						onClick={() => {
-							onGoTo(c.slug);
+							onGoTo(c.fields.slug);
 						}}
 					>
-						{c.name}
+						{c.fields.name}
 					</div>
 				))}
 			</div>

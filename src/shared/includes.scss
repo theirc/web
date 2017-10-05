@@ -1,52 +1,73 @@
 $accentIRC: #ffda1a;
 $accentGreen: #29991f;
 $accentRed: #e60000;
-$accentNRC: #FF7602;
+$accentNRC: #ff7602;
 $accentPG: #59c2ed;
 
-$titleBackground:  #f0f0f0;
+$titleBackground: #f0f0f0;
 $dividerColor: darken($titleBackground, 30%);
 
+@mixin darken-brand-colors($prop, $per) {
+	.irc & {
+		#{$prop}: darken($accentIRC, $per);
+	}
+
+	.nrc & {
+		#{$prop}: darken($accentNRC, $per);
+	}
+
+	.generic & {
+		#{$prop}: darken($accentGreen, $per);
+	}
+
+	.mc & {
+		#{$prop}: darken($accentRed, $per);
+	}
+
+	.pg & {
+		#{$prop}: darken($accentPG, $per);
+	}
+}
 @mixin brand-colors($prop) {
-  .irc & {
-    #{$prop}: $accentIRC;
-  }
+	.irc & {
+		#{$prop}: $accentIRC;
+	}
 
-  .nrc & {
-    #{$prop}: $accentNRC;
-  }
+	.nrc & {
+		#{$prop}: $accentNRC;
+	}
 
-  .generic & {
-    #{$prop}: $accentGreen;
-  }
+	.generic & {
+		#{$prop}: $accentGreen;
+	}
 
-  .mc & {
-    #{$prop}: $accentRed;
-  }
+	.mc & {
+		#{$prop}: $accentRed;
+	}
 
-  .pg & {
-    #{$prop}: $accentPG;
-  }
+	.pg & {
+		#{$prop}: $accentPG;
+	}
 }
 
 @mixin brand-colors-inverse($prop) {
-  .irc & {
-    #{$prop}: #000000;
-  }
+	.irc & {
+		#{$prop}: #000000;
+	}
 
-  .nrc & {
-    #{$prop}: #ffffff;
-  }
+	.nrc & {
+		#{$prop}: #ffffff;
+	}
 
-  .generic & {
-    #{$prop}: #FFFFFF;
-  }
+	.generic & {
+		#{$prop}: #ffffff;
+	}
 
-  .mc & {
-    #{$prop}: #ffffff;
-  }
+	.mc & {
+		#{$prop}: #ffffff;
+	}
 
-  .pg & {
-    #{$prop}: #ffffff;
-  }
+	.pg & {
+		#{$prop}: #ffffff;
+	}
 }

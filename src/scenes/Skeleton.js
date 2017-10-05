@@ -25,6 +25,7 @@ class Skeleton extends React.Component {
 			onChangeLocation,
 			onChangeCountry,
 			onChangeLanguage,
+			deviceType,
 		} = this.props;
 
 		return (
@@ -50,6 +51,7 @@ class Skeleton extends React.Component {
 							}
 							onChangeLocation={onChangeLocation}
 							onChangeLanguage={onChangeLanguage}
+							deviceType={deviceType}
 						/>
 					)}
 				{country && language && <BottomNavContainer match={match} />}
@@ -58,16 +60,17 @@ class Skeleton extends React.Component {
 	}
 }
 
-const mapState = ({ country, language }, p) => {
+const mapState = ({ country, language, deviceType }, p) => {
 	return {
 		country,
 		language,
+		deviceType,
 	};
 };
 const mapDispatch = (d, p) => {
 	return {
 		onGoHome: country => () => {
-			if (country) d(push(`/${country.slug || ""}`));
+			if (country) d(push(`/${country.fields.slug || ""}`));
 		},
 		onGoToSearch: country => () => {
 			if (country) d(push(`/${country.slug}/search`));

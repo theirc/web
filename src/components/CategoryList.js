@@ -27,7 +27,7 @@ export default class CategoryList extends Component {
                         {c.fields.articles && c.fields.articles.map(a => (a.fields &&
                             <li key={a.sys.id}>
                                 <div className="inner-container">
-                                    <div onClick={() => onNavigate(`/${country.slug}/${c.fields.slug}/${a.fields.slug}`)}> {a.fields.title}</div>
+                                    <div onClick={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${a.fields.slug}`)}> {a.fields.title}</div>
                                 </div>
                             </li>
                         ))}

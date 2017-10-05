@@ -10,6 +10,7 @@ export default class Footer extends Component {
 			onChangeLanguage,
 			disableCountrySelector,
 			questionLink,
+			deviceType,
 		} = this.props;
 		const year = moment().year();
 
@@ -42,11 +43,16 @@ export default class Footer extends Component {
 						</div>
 					</div>
 					<span>Mission statement.</span>
-					<img
+					{deviceType === "Android" && <img
 						src="/google-play-badge.png"
 						className="app-store-logo"
 						alt="Get it on Google Play"
-					/>
+					/>}
+					{deviceType === "iPhone" && <img
+						src="/app-store-badge.svg"
+						className="app-store-logo"
+						alt="Get it on the App Store"
+					/>}
 					<span className="padded">
 						Part of the{" "}
 						<a href="http://signpost.ngo">Signpost Project</a>.

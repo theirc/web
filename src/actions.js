@@ -9,11 +9,13 @@ const actionTypes = {
     recordMatch: 'RECORD_MATCH',
     selectCountryList: 'SELECT_COUNTRY_LIST',
     recordCoordinates: 'RECORD_COORDINATES',
+    changeDeviceType: 'CHANGE_DEVICE_TYPE',
 
 }
 
 export default {
     actionTypes,
+    changeDeviceType: createAction(actionTypes.changeDeviceType),
     changeOrganization: createAction(actionTypes.changeOrganization),
     changeCountry: createAction(actionTypes.changeCountry),
     changeLanguage: createAction(actionTypes.changeLanguage),

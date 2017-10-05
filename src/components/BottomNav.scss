@@ -1,0 +1,7 @@
+@import '../shared/includes.scss';
+
+.BottomNav {
+    .Selected {
+        @include darken-brand-colors( 'color', 10%);
+    }
+}
