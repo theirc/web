@@ -48,7 +48,6 @@ function withCountry(WrappedComponent) {
 		componentWillUpdate(newProps) {
 			const { match, onMount } = this.props;
 			if (newProps.match.params.country !== match.params.country) {
-                console.log('UPDATING?')
 				onMount(match.params.country).then(c => {});
 			}
 		}
@@ -87,7 +86,6 @@ function withCategory(WrappedComponent) {
 			const { match, country, onRender } = this.props;
 
 
-            console.log('Mount')
 			if (country) {
 				const category = _.first(
 					country.fields.categories.filter(
@@ -114,8 +112,6 @@ function withCategory(WrappedComponent) {
 				);
                 onRender(category);
                 
-            console.log('Update', country, category)
-            
 			}
 		}
 

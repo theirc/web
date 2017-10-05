@@ -1,15 +1,13 @@
 import services from "./backend";
 import actions from "./actions";
+import isMobile from "./shared/isMobile";
 
 let defaultLanguage = "";
 if (global.navigator.language) {
 	defaultLanguage = global.navigator.language.split("-")[0];
 }
 const getDirection = l => (["ar", "fa"].indexOf(l) > -1 ? "rtl" : "ltr");
-const device = navigator.userAgent.toLowerCase().indexOf("android") > -1
-	? "Android"
-	: navigator.userAgent.toLowerCase().indexOf("iphone") > -1 ? "iPhone" : "other";
-console.log(device);
+const device = global.window ? (isMobile.Android() ? "Android" : (isMobile.iOS) ? "iPhone" : "") : "";
 
 function changeDeviceType(state = device, action) {
 	switch (action.type) {

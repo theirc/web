@@ -17,10 +17,8 @@ class Home extends React.Component {
     }
 
     componentWillUpdate(nextProps) {
-        console.log('Update', this.context, JSON.stringify(nextProps.match));
     }
     componentWillMount() {
-        console.log('Mount', this.context, JSON.stringify(this.props.match));
     }
 
     render() {

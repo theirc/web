@@ -36,7 +36,7 @@ export default class ArticlePage extends Component {
                 <h1><small>{category.fields.name}:</small>{title}</h1>
             </div>
             {hero && (<div className="hero">
-                <img src={hero} alt="" />
+                <img src={hero.fields.file.url + "?fm=jpg&fl=progressive"} alt="" />
             </div>)}
             <article>
                 <div dangerouslySetInnerHTML={{ __html: md.render(content) }}></div>

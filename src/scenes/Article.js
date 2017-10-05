@@ -63,21 +63,21 @@ class Article extends React.Component {
 
 		let next = null,
 			previous = null;
+		const articles = category.fields.articles || []; 
 		if (category) {
-			let index = category.fields.articles
+			let index = articles
 				.map(a => a.fields.slug)
 				.indexOf(article.fields.slug);
 
 			if (index > 0) {
-				previous = category.fields.articles[index - 1];
+				previous = articles[index - 1];
 			}
 
-			if (index + 1 < category.fields.articles.length) {
-				next = category.fields.articles[index + 1];
+			if (index + 1 < articles.length) {
+				next = articles[index + 1];
 			}
 		}
-
-		console.log(country)
+;
 		return (
 			<div>
 				<ArticlePage
@@ -106,25 +106,39 @@ const mapState = (s, p) => {
 const mapDispatch = (d, p) => {
 	return {
 		onMount: (category, slug) => {
-			if (category && category.fields.articles) {
-				return Promise.resolve(
-					d(
-						actions.selectArticle(
-							_.first(
-								category.fields.articles.filter(
-									a => a.fields.slug === slug
+			if (
+				category &&
+				(category.fields.articles || category.fields.overview)
+			) {
+				if (category.fields.overview && category.fields.overview.fields.slug == slug) {
+					return Promise.resolve(
+						d(actions.selectArticle(category.fields.overview))
+					);
+				} else if (category.fields.articles) {
+					return Promise.resolve(
+						d(
+							actions.selectArticle(
+								_.first(
+									category.fields.articles
+										.filter(_.identity)
+										.filter(a => a.fields.slug === slug)
 								)
 							)
 						)
-					)
-				);
-            }
-            
-            return Promise.resolve(true);
+					);
+				}
+			}
+
+			return Promise.resolve(true);
 		},
 		onNavigateTo: (category, country) => slug => {
 			setTimeout(() => {
-				d(push(`/${country.fields.slug}/${category.fields.slug}/${slug}`));
+				d(
+					push(
+						`/${country.fields.slug}/${category.fields
+							.slug}/${slug}`
+					)
+				);
 			}, 200);
 		},
 	};

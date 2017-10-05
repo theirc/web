@@ -42,7 +42,9 @@ export default class Footer extends Component {
 							<span>Change Language</span>
 						</div>
 					</div>
+					{/*
 					<span>Mission statement.</span>
+					*/}
 					{deviceType === "Android" && <img
 						src="/google-play-badge.png"
 						className="app-store-logo"
