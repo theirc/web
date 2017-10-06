@@ -65,7 +65,6 @@ function withCountry(WrappedComponent) {
 		(d, p) => {
 			return {
 				onMount: country => {
-					console.log("->", country);
 					return cms
 						.loadCountry(country)
 						.then(c => {

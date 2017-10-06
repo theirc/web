@@ -56,6 +56,7 @@ export default class BottomNav extends Component {
 	}
 
 	render() {
+		const { showServiceMap } = this.props;
 		return (
 			<Paper
 				style={{
@@ -75,6 +76,7 @@ export default class BottomNav extends Component {
 						}
 						icon={<Home />}
 						label="Home"
+						value={0}
 					/>
 					<BottomNavigationButton
 						className={
@@ -82,15 +84,27 @@ export default class BottomNav extends Component {
 						}
 						icon={<List />}
 						label="Categories"
+						value={1}
 					/>
+					{showServiceMap ? (
+						<BottomNavigationButton
+							className={
+								this.state.selectedIndex == 2 ? "Selected" : ""
+							}
+							icon={<Map />}
+							label="Map"
+							value={2}
+						/>
+					): <div />}
+
 					<BottomNavigationButton
 						className={
-							this.state.selectedIndex == 2 ? "Selected" : ""
-						} icon={<Map />} label="Map" />
-					<BottomNavigationButton 
-						className={
 							this.state.selectedIndex == 3 ? "Selected" : ""
-						}icon={<MoreHoriz />} label="More" />
+						}
+						icon={<MoreHoriz />}
+						label="More"
+						value={3}
+					/>
 				</BottomNavigation>
 			</Paper>
 		);

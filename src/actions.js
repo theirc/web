@@ -10,11 +10,13 @@ const actionTypes = {
     selectCountryList: 'SELECT_COUNTRY_LIST',
     recordCoordinates: 'RECORD_COORDINATES',
     changeDeviceType: 'CHANGE_DEVICE_TYPE',
+    toggleServiceMap: "TOGGLE_SERVICE_MAP",
 
 }
 
 export default {
     actionTypes,
+    toggleServiceMap: createAction(actionTypes.toggleServiceMap),
     changeDeviceType: createAction(actionTypes.changeDeviceType),
     changeOrganization: createAction(actionTypes.changeOrganization),
     changeCountry: createAction(actionTypes.changeCountry),

@@ -1,17 +1,28 @@
 import services from "./backend";
 import actions from "./actions";
 import isMobile from "./shared/isMobile";
+import cms from "./content/cms";
 
 let defaultLanguage = "";
 if (global.navigator.language) {
 	defaultLanguage = global.navigator.language.split("-")[0];
 }
 const getDirection = l => (["ar", "fa"].indexOf(l) > -1 ? "rtl" : "ltr");
-const device = global.window ? (isMobile.Android() ? "Android" : (isMobile.iOS) ? "iPhone" : "") : "";
+const device = global.window
+	? isMobile.Android() ? "Android" : isMobile.iOS ? "iPhone" : ""
+	: "";
 
 function changeDeviceType(state = device, action) {
 	switch (action.type) {
 		case actions.actionTypes.changeDeviceType:
+			return action.payload;
+		default:
+			return state;
+	}
+}
+function toggleServiceMap(state = !cms.siteConfig.hideServiceMap, action) {
+	switch (action.type) {
+		case actions.actionTypes.toggleServiceMap:
 			return action.payload;
 		default:
 			return state;
@@ -107,9 +118,10 @@ function recordCoordinates(state = null, action) {
 // Configure Redux store & reducers
 export default {
 	match: recordMatch,
-  currentCoordinates: recordCoordinates,
+	currentCoordinates: recordCoordinates,
 
 	deviceType: changeDeviceType,
+	showServiceMap: toggleServiceMap,
 
 	country: changeCountry,
 	category: selectCategory,

@@ -26,7 +26,7 @@ export default class CategoryList extends Component {
 			<div className="CategoryList">
 				<ul>
 					{categories.filter(c => c && c.fields.slug).map((c, i) => (
-						<li key={c._id}>
+						<li key={c.sys.id}>
 							<hr className="line" />
 							<input
 								type="checkbox"

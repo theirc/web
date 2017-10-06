@@ -24,6 +24,7 @@ export default {
 		title: "Khabrona.Info",
 		disableCountrySelector: true,
 		questionLink: "mailto:tellus@khabrona.info",
+		hideServiceMap: true,
 	},
 	localhost: {
 		theme: "mc",
@@ -33,7 +34,10 @@ export default {
 		languages: [["en", "English"], ["ar", "العربيـة"]],
 		logo: "/ki-logo.png",
 		title: "Khabrona.Info",
+		
 		disableCountrySelector: true,
+		hideServiceMap: true,
+		
 		questionLink: "mailto:tellus@khabrona.info",
 	},
 };

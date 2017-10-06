@@ -7,7 +7,8 @@ const Remarkable = require('remarkable');
 const md = new Remarkable('full', {
     html: true,
     linkify: true,
-    typographer: true
+    typographer: true,
+    breaks: true,
   });
 
 /**
