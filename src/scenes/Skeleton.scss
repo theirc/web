@@ -12,25 +12,8 @@ s {
 		padding-right: 5px;
 		font-size: 1em;
 
-		.irc & {
-			color: $accentIRC;
-			border-color: $accentIRC;
-		}
-
-		.nrc & {
-			color: $accentNRC;
-			border-color: $accentNRC;
-		}
-
-		.generic & {
-			color: $accentGreen;
-			border-color: $accentGreen;
-		}
-
-		.mc & {
-			color: $accentRed;
-			border-color: $accentRed;
-		}
+		@include brand-colors("color");
+		@include brand-colors("border-color");
 	}
 }
 

@@ -10,25 +10,43 @@ export default class HomeWidget extends Component {
 	renderWidget(w) {
 		if (w.fields.type === "Latest Article of Category") {
 			let category = _.first(w.fields.related);
-			let article = _.last(
-				_.sortBy(category.fields.articles, a =>
-					moment(a.sys.updatedAt).unix()
-				)
-			);
-			console.log(category.fields.articles);
-			return this.renderArticle(article);
+			if (category) {
+				let article = _.last(
+					_.sortBy(category.fields.articles, a =>
+						moment(a.sys.updatedAt).unix()
+					)
+				);
+				return this.renderArticle(article);
+			}
+		} else if (w.fields.type === "First Article of Category") {
+			let category = _.first(w.fields.related);
+			if (category) {
+				let article =
+					category.fields.overview ||
+					_.first(category.fields.articles);
+				return this.renderArticle(article);
+			}
+		}else if (w.fields.type === "Top Categories") {
+			let categories = Array.from(w.fields.related || []);
+			return null;
 		}
 		return <div className="Widget">{w.fields.type}</div>;
 	}
 
 	renderArticle(a) {
+        if(!a) {
+            // Anti pattern, but saves 1 or more ifs.
+            return null;
+        }
+
 		return (
 			<div className="Article">
 				{a.fields.hero && (
 					<div className="hero">
 						<img
 							src={
-								a.fields.hero.fields.file.url + "?fm=jpg&fl=progressive"
+								a.fields.hero.fields.file.url +
+								"?fm=jpg&fl=progressive"
 							}
 							alt=""
 						/>

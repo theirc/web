@@ -46,11 +46,12 @@ class CountryHome extends React.Component {
 	}
 
 	render() {
-		const { currentCoordinates, country } = this.props;
-		if (!country) {
+        const { currentCoordinates, country } = this.props;
+        
+		if (!country || !country.fields.home) {
 			return null;
-		}
-		console.log();
+        }
+        
 		return country.fields.home.map(e => (
 			<HomeWidget content={e} key={e.sys.id} />
 		));

@@ -55,7 +55,7 @@ export default class Footer extends Component {
 						className="app-store-logo"
 						alt="Get it on the App Store"
 					/>}
-					<span className="padded">
+					<span className="padded Signpost">
 						Part of the{" "}
 						<a href="http://signpost.ngo">Signpost Project</a>.
 						&copy; {year}.
