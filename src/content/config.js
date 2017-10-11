@@ -7,8 +7,8 @@ export default {
 	"refugee.info": {
 		theme: "irc",
 		accessToken:
-			"55bea7f7ed5d0e812aa1d48e378dd9a2edb8f9f78c17bd9d2ffa6a014ea3ee2b",
-		space: "l4oa58axtceh",
+			"0cd5c6bfefa4f7f33a98c487012e6f34c2031aee1ff2f6858b11be592ab349d9",
+		space: "ktglofo8nf88",
 		languages: [["en", "English"], ["ar", "العربيـة"]],
 		logo: "/logo.png",
 		title: "Refugee Info",
@@ -27,17 +27,13 @@ export default {
 		hideServiceMap: true,
 	},
 	localhost: {
-		theme: "mc",
+		theme: "irc",
 		accessToken:
-			"55bea7f7ed5d0e812aa1d48e378dd9a2edb8f9f78c17bd9d2ffa6a014ea3ee2b",
-		space: "l4oa58axtceh",
+			"0cd5c6bfefa4f7f33a98c487012e6f34c2031aee1ff2f6858b11be592ab349d9",
+		space: "ktglofo8nf88",
 		languages: [["en", "English"], ["ar", "العربيـة"]],
-		logo: "/ki-logo.png",
-		title: "Khabrona.Info",
-		
-		disableCountrySelector: true,
-		hideServiceMap: true,
-		
-		questionLink: "mailto:tellus@khabrona.info",
+		logo: "/logo.png",
+		title: "Refugee Info",
+		questionLink: "https://fb.me/refugee.info",
 	},
 };

@@ -10,39 +10,7 @@
 		transition: opacity 0.2s ease-in-out;
 	}
 
-	s {
-		text-decoration: none;
-		& > a {
-			text-decoration: none;
-			text-transform: uppercase;
-			font-weight: bold;
-		}
-		& > a:before {
-			content: "□";
-			padding-right: 5px;
-			font-size: 1em;
-
-			.irc & {
-				color: $accentIRC;
-				border-color: $accentIRC;
-			}
-
-			.nrc & {
-				color: $accentNRC;
-				border-color: $accentNRC;
-			}
-
-			.generic & {
-				color: $accentGreen;
-				border-color: $accentGreen;
-			}
-
-			.mc & {
-				color: $accentRed;
-				border-color: $accentRed;
-			}
-		}
-	}
+	
 	blockquote {
 		border-left-width: 3px;
 		border-left-style: solid;
@@ -148,14 +116,6 @@
 
 		ul li {
 			list-style-type: square;
-		}
-
-		a,
-		em,
-		li,
-		p {
-			color: #404040;
-			font-size: 14px;
 		}
 	}
 }

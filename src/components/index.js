@@ -7,6 +7,7 @@ import ArticleFooter  from './ArticleFooter';
 import CategoryList  from './CategoryList';
 import CountrySelector  from './CountrySelector';
 import LanguageSelector  from './LanguageSelector';
+import HomeWidget  from './HomeWidget';
 
 export  {
     AppHeader,
@@ -18,4 +19,5 @@ export  {
     CategoryList,
     CountrySelector,
     LanguageSelector,
+    HomeWidget,
 };

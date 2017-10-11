@@ -29,16 +29,30 @@ class BottomNavContainer extends React.Component {
 			country,
 			onGoToCategories,
 			onGoHome,
-            showServiceMap,
-            router,
-        } = this.props;
-        
-        console.log(router);
+			showServiceMap,
+			router,
+		} = this.props;
+
+		console.log(router);
+
+		let pathParts = router.location.pathname.split("/");
+		let selectedIndex = 0;
+		if (pathParts.length > 2) {
+			if (pathParts[2] === "article") {
+				selectedIndex = -1;
+			} else if (pathParts[2] === "menu") {
+				selectedIndex = -1;
+			} else if (pathParts[2] === "services") {
+				selectedIndex = 2;
+			} else {
+				selectedIndex = 1;
+			}
+		}
 
 		return (
 			<BottomNav
 				showServiceMap={showServiceMap}
-				category={category && category.fields.slug}
+				index={selectedIndex}
 				country={country && country.slug}
 				onGoToCategories={() => onGoToCategories(country.fields.slug)}
 				onGoHome={() => onGoHome(country.fields.slug)}
@@ -51,8 +65,8 @@ const mapState = ({ category, country, showServiceMap, router }, p) => {
 	return {
 		category,
 		country,
-        showServiceMap,
-        router,
+		showServiceMap,
+		router,
 	};
 };
 const mapDispatch = (d, p) => {

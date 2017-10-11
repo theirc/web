@@ -18,7 +18,7 @@ export default class BottomNav extends Component {
 		super();
 
 		this.state = {
-			selectedIndex: (props.category && 1) || 0,
+			selectedIndex: props.index
 		};
 	}
 
@@ -67,7 +67,7 @@ export default class BottomNav extends Component {
 				className="BottomNav"
 			>
 				<BottomNavigation
-					value={this.state.selectedIndex}
+					value={this.props.index}
 					onChange={(e, i) => this.select(i)}
 				>
 					<BottomNavigationButton

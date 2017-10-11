@@ -1,7 +1,49 @@
-@import '../shared/includes.scss';
+@import "../shared/includes.scss";
+
+s {
+	text-decoration: none;
+	& > a {
+		text-decoration: none;
+		text-transform: uppercase;
+		font-weight: bold;
+	}
+	& > a:before {
+		content: "□";
+		padding-right: 5px;
+		font-size: 1em;
+
+		.irc & {
+			color: $accentIRC;
+			border-color: $accentIRC;
+		}
+
+		.nrc & {
+			color: $accentNRC;
+			border-color: $accentNRC;
+		}
+
+		.generic & {
+			color: $accentGreen;
+			border-color: $accentGreen;
+		}
+
+		.mc & {
+			color: $accentRed;
+			border-color: $accentRed;
+		}
+	}
+}
+
+a,
+em,
+li,
+p {
+	color: #404040;
+	font-size: 14px;
+}
 
 .Skeleton {
-  .rtl & {
-    direction: rtl;
-  }
+	.rtl & {
+		direction: rtl;
+	}
 }
