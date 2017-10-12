@@ -32,6 +32,7 @@ class Skeleton extends React.Component {
 			<div className="Skeleton">
 				<Helmet>
 					<title>{cms.siteConfig.title}</title>
+					<link rel="shortcut icon" href={cms.siteConfig.favicon} />
 				</Helmet>
 				<AppHeader
 					country={country}

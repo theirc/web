@@ -80,11 +80,9 @@ export default class HomeWidget extends Component {
 
 	renderCategory(c) {
 		return (
-			<div>
-				<div className="Category">
-					<h3>{c.fields.name}</h3>
-				</div>
-				{c.fields.articles.map(a => this.renderArticle(a, c, false))}
+			<div className="Category">
+				<h3>{c.fields.name}</h3>
+				{(c.fields.articles||[]).map(a => this.renderArticle(a, c, false))}
 			</div>
 		);
 	}

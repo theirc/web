@@ -13,6 +13,7 @@ export default {
 		logo: "/logo.png",
 		title: "Refugee Info",
 		questionLink: "https://fb.me/refugee.info",
+		favicon: "/ri-favicon.png",
 	},
 	"khabrona.info": {
 		theme: "mc",
@@ -25,6 +26,7 @@ export default {
 		disableCountrySelector: true,
 		questionLink: "mailto:tellus@khabrona.info",
 		hideServiceMap: true,
+		favicon: "/ki-favicon.png",
 	},
 	localhost: {
 		theme: "irc",
@@ -35,5 +37,6 @@ export default {
 		logo: "/logo.png",
 		title: "Refugee Info",
 		questionLink: "https://fb.me/refugee.info",
+		favicon: "/ri-favicon.png",
 	},
 };
