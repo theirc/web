@@ -5,6 +5,8 @@ import { actions } from "../store";
 import { connect } from "react-redux";
 import { HomeWidget } from "../components";
 
+import {history} from '../store';
+
 class CountryHome extends React.Component {
 	constructor() {
 		super();
@@ -39,21 +41,21 @@ class CountryHome extends React.Component {
 		}
 		const { onMount } = this.props;
 		onMount();
-		this.requestLocation();
+		//this.requestLocation();
 	}
 	componentWillUpdate() {
-		this.requestLocation();
+		//this.requestLocation();
 	}
 
 	render() {
-        const { currentCoordinates, country } = this.props;
+        const { currentCoordinates, country, onNavigate } = this.props;
         
 		if (!country || !country.fields.home) {
 			return null;
         }
         
 		return country.fields.home.map(e => (
-			<HomeWidget content={e} key={e.sys.id} />
+			<HomeWidget onNavigate={onNavigate} country={country} content={e} key={e.sys.id} />
 		));
 	}
 }
@@ -72,6 +74,11 @@ const mapDispatch = (d, p) => {
 			if (country) {
 			}
 		},
+        onNavigate: (path) => {
+            setTimeout(() => {
+                history.push(path);
+            }, 200);
+        }
 	};
 };
 

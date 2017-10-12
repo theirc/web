@@ -16,7 +16,7 @@ export default class HomeWidget extends Component {
 						moment(a.sys.updatedAt).unix()
 					)
 				);
-				return this.renderArticle(article);
+				return this.renderArticle(article, category);
 			}
 		} else if (w.fields.type === "First Article of Category") {
 			let category = _.first(w.fields.related);
@@ -24,38 +24,55 @@ export default class HomeWidget extends Component {
 				let article =
 					category.fields.overview ||
 					_.first(category.fields.articles);
-				return this.renderArticle(article);
+				return this.renderArticle(article, category);
 			}
-		}else if (w.fields.type === "Top Categories") {
+		} else if (w.fields.type === "Top Categories") {
 			let categories = Array.from(w.fields.related || []);
 			return null;
 		}
 		return <div className="Widget">{w.fields.type}</div>;
 	}
 
-	renderArticle(a) {
-        if(!a) {
-            // Anti pattern, but saves 1 or more ifs.
-            return null;
-        }
+	renderArticle(article, category, showHero = true) {
+		const { country, onNavigate } = this.props;
+		if (!article) {
+			// Anti pattern, but saves 1 or more ifs.
+			return null;
+		}
+
+		let categorySlug = "article";
+		if (category) {
+			categorySlug = category.fields.slug;
+		}
 
 		return (
-			<div className="Article">
-				{a.fields.hero && (
-					<div className="hero">
-						<img
-							src={
-								a.fields.hero.fields.file.url +
-								"?fm=jpg&fl=progressive"
-							}
-							alt=""
-						/>
-					</div>
-				)}
-				<h3>{a.fields.title}</h3>
-				<p>{a.fields.lead}</p>
+			<div className="Article" key={article.sys.id}>
+				{article.fields.hero &&
+					showHero && (
+						<div className="hero">
+							<img
+								src={
+									article.fields.hero.fields.file.url +
+									"?fm=jpg&fl=progressive"
+								}
+								alt=""
+							/>
+						</div>
+					)}
+				<h3>{article.fields.title}</h3>
+				<p>{article.fields.lead}</p>
 				<s>
-					<a href={"/"}>Read more</a>
+					<a
+						href="#"
+						onClick={() =>
+							onNavigate(
+								`/${country.fields
+									.slug}/${categorySlug}/${article.fields
+									.slug}`
+							)}
+					>
+						Read more
+					</a>
 				</s>
 			</div>
 		);
@@ -63,8 +80,11 @@ export default class HomeWidget extends Component {
 
 	renderCategory(c) {
 		return (
-			<div className="Category">
-				<h3>{c.fields.name}</h3>
+			<div>
+				<div className="Category">
+					<h3>{c.fields.name}</h3>
+				</div>
+				{c.fields.articles.map(a => this.renderArticle(a, c, false))}
 			</div>
 		);
 	}

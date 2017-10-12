@@ -22,10 +22,13 @@ export default class CategoryList extends Component {
 					c.fields.type !== "News")
 			);
 		};
+
+		const showCategory = (c) => c && c.fields.slug && (c.fields.overview || c.fields.articles);
+
 		return (
 			<div className="CategoryList">
 				<ul>
-					{categories.filter(c => c && c.fields.slug).map((c, i) => (
+					{categories.filter(showCategory).map((c, i) => (
 						<li key={c.sys.id}>
 							<hr className="line" />
 							<input
@@ -33,7 +36,7 @@ export default class CategoryList extends Component {
 								name={"tab"}
 								id={`tab-${i}`}
 							/>
-							{showToggle(c) && (
+							{showToggle(c) && [
 								<div className="container">
 									<i
 										className={
@@ -62,8 +65,35 @@ export default class CategoryList extends Component {
 											keyboard_arrow_down
 										</i>
 									</div>
-								</div>
-							)}
+								</div>,
+								<ul>
+									{c.fields.articles &&
+										c.fields.articles.map(
+											a =>
+												a.fields && (
+													<li key={a.sys.id}>
+														<div className="inner-container">
+															<div
+																onClick={() =>
+																	onNavigate(
+																		`/${country
+																			.fields
+																			.slug}/${c
+																			.fields
+																			.slug}/${a
+																			.fields
+																			.slug}`
+																	)}
+															>
+																{" "}
+																{a.fields.title}
+															</div>
+														</div>
+													</li>
+												)
+										)}
+								</ul>,
+							]}
 							{!showToggle(c) &&
 								c.fields.overview && (
 									<div className="container">
@@ -84,8 +114,8 @@ export default class CategoryList extends Component {
 											onClick={() =>
 												onNavigate(
 													`/${country.fields.slug}/${c
-														.fields.slug}/${c.fields.overview.fields
-														.slug}`
+														.fields.slug}/${c.fields
+														.overview.fields.slug}`
 												)}
 										>
 											<strong>
@@ -94,34 +124,6 @@ export default class CategoryList extends Component {
 										</label>
 									</div>
 								)}
-
-							<ul>
-								{c.fields.articles &&
-									c.fields.articles.map(
-										a =>
-											a.fields && (
-												<li key={a.sys.id}>
-													<div className="inner-container">
-														<div
-															onClick={() =>
-																onNavigate(
-																	`/${country
-																		.fields
-																		.slug}/${c
-																		.fields
-																		.slug}/${a
-																		.fields
-																		.slug}`
-																)}
-														>
-															{" "}
-															{a.fields.title}
-														</div>
-													</div>
-												</li>
-											)
-									)}
-							</ul>
 						</li>
 					))}
 				</ul>

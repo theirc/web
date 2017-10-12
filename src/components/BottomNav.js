@@ -72,7 +72,7 @@ export default class BottomNav extends Component {
 				>
 					<BottomNavigationButton
 						className={
-							this.state.selectedIndex == 0 ? "Selected" : ""
+							this.props.index == 0 ? "Selected" : ""
 						}
 						icon={<Home />}
 						label="Home"
@@ -80,7 +80,7 @@ export default class BottomNav extends Component {
 					/>
 					<BottomNavigationButton
 						className={
-							this.state.selectedIndex == 1 ? "Selected" : ""
+							this.props.index == 1 ? "Selected" : ""
 						}
 						icon={<List />}
 						label="Categories"
@@ -89,7 +89,7 @@ export default class BottomNav extends Component {
 					{showServiceMap ? (
 						<BottomNavigationButton
 							className={
-								this.state.selectedIndex == 2 ? "Selected" : ""
+								this.props.index == 2 ? "Selected" : ""
 							}
 							icon={<Map />}
 							label="Map"
@@ -99,7 +99,7 @@ export default class BottomNav extends Component {
 
 					<BottomNavigationButton
 						className={
-							this.state.selectedIndex == 3 ? "Selected" : ""
+							this.props.index == 3 ? "Selected" : ""
 						}
 						icon={<MoreHoriz />}
 						label="More"
