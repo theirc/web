@@ -63,7 +63,7 @@ class Article extends React.Component {
 
 		let next = null,
 			previous = null;
-		const articles = category.fields.articles || []; 
+		const articles = category.fields.articles || [];
 		if (category) {
 			let index = articles
 				.map(a => a.fields.slug)
@@ -77,20 +77,17 @@ class Article extends React.Component {
 				next = articles[index + 1];
 			}
 		}
-;
-		return (
-			<div>
-				<ArticlePage
-					category={category}
-					article={article}
-					loading={loading}
-				/>
-				<ArticleFooter
-					onNavigateTo={onNavigateTo(category, country)}
-					{...{ direction, previous, next }}
-				/>
-			</div>
-		);
+		return [
+			<ArticlePage
+				category={category}
+				article={article}
+				loading={loading}
+			/>,
+			<ArticleFooter
+				onNavigateTo={onNavigateTo(category, country)}
+				{...{ direction, previous, next }}
+			/>,
+		];
 	}
 }
 
@@ -110,7 +107,10 @@ const mapDispatch = (d, p) => {
 				category &&
 				(category.fields.articles || category.fields.overview)
 			) {
-				if (category.fields.overview && category.fields.overview.fields.slug == slug) {
+				if (
+					category.fields.overview &&
+					category.fields.overview.fields.slug == slug
+				) {
 					return Promise.resolve(
 						d(actions.selectArticle(category.fields.overview))
 					);
