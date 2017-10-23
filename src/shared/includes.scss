@@ -4,8 +4,35 @@ $accentRed: #e60000;
 $accentNRC: #ff7602;
 $accentPG: #59c2ed;
 
+$desktopBreakpoint: 1000px;
+$bigDesktopBreakpoint: 1400px;
+$desktopPaddingWidth: 15vw;
+$bigDesktopPaddingWidth: 20vw;
+
 $titleBackground: #f0f0f0;
 $dividerColor: darken($titleBackground, 30%);
+
+@mixin grayscale-brand-colors($prop) {
+	.irc & {
+		#{$prop}: lighten(grayscale($accentIRC), 20%);
+	}
+
+	.nrc & {
+		#{$prop}: lighten(grayscale($accentNRC), 20%);
+	}
+
+	.generic & {
+		#{$prop}: lighten(grayscale($accentGreen), 20%);
+	}
+
+	.mc & {
+		#{$prop}: lighten(grayscale($accentRed), 20%);
+	}
+
+	.pg & {
+		#{$prop}: lighten(grayscale($accentPG), 20%);
+	}
+}
 
 @mixin darken-brand-colors($prop, $per) {
 	.irc & {
@@ -26,6 +53,28 @@ $dividerColor: darken($titleBackground, 30%);
 
 	.pg & {
 		#{$prop}: darken($accentPG, $per);
+	}
+}
+
+@mixin lighten-brand-colors($prop, $per) {
+	.irc & {
+		#{$prop}: lighten($accentIRC, $per);
+	}
+
+	.nrc & {
+		#{$prop}: lighten($accentNRC, $per);
+	}
+
+	.generic & {
+		#{$prop}: lighten($accentGreen, $per);
+	}
+
+	.mc & {
+		#{$prop}: lighten($accentRed, $per);
+	}
+
+	.pg & {
+		#{$prop}: lighten($accentPG, $per);
 	}
 }
 @mixin brand-colors($prop) {
@@ -71,4 +120,3 @@ $dividerColor: darken($titleBackground, 30%);
 		#{$prop}: #ffffff;
 	}
 }
-

@@ -1,9 +1,30 @@
 @import "../shared/includes.scss";
 
 .Footer {
+	#lang-icn {
+		height: 24px;
+	}
+
+	.fill-clr {
+		@include brand-colors("fill");
+	}
+
+	.cls-1 {
+		fill: none;
+	}
+	.cls-2 {
+		clip-path: url(#clip-path);
+	}
+	.cls-3 {
+		clip-path: url(#clip-path-2);
+	}
+	.cls-5 {
+		clip-path: url(#clip-path-3);
+	}
+
 	.Signpost {
 		a {
-      @include brand-colors("color");
+			@include brand-colors("color");
 		}
 	}
 

@@ -3,9 +3,9 @@ import moment from "moment";
 import services from "../backend";
 import { actions } from "../store";
 import { connect } from "react-redux";
-import { HomeWidget } from "../components";
+import { HomeWidget, HomeWidgetCollection } from "../components";
 
-import {history} from '../store';
+import { history } from "../store";
 
 class CountryHome extends React.Component {
 	constructor() {
@@ -48,15 +48,24 @@ class CountryHome extends React.Component {
 	}
 
 	render() {
-        const { currentCoordinates, country, onNavigate } = this.props;
-        
+		const { currentCoordinates, country, onNavigate } = this.props;
+
 		if (!country || !country.fields.home) {
 			return null;
-        }
-        
-		return country.fields.home.map(e => (
-			<HomeWidget onNavigate={onNavigate} country={country} content={e} key={e.sys.id} />
-		));
+		}
+
+		return (
+			<HomeWidgetCollection>
+				{country.fields.home.map(e => (
+					<HomeWidget
+						onNavigate={onNavigate}
+						country={country}
+						content={e}
+						key={e.sys.id}
+					/>
+				))}
+			</HomeWidgetCollection>
+		);
 	}
 }
 
@@ -74,11 +83,11 @@ const mapDispatch = (d, p) => {
 			if (country) {
 			}
 		},
-        onNavigate: (path) => {
-            setTimeout(() => {
-                history.push(path);
-            }, 200);
-        }
+		onNavigate: path => {
+			setTimeout(() => {
+				history.push(path);
+			}, 200);
+		},
 	};
 };
 

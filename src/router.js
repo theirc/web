@@ -141,7 +141,7 @@ class Router extends Component {
 	render() {
 		return (
 			<ConnectedRouter history={history}>
-				<span>
+				<div className="SkeletonContainer">
 					<ScrollToTop />
 					<Switch>
 						<Route exact path="/" component={Home} />
@@ -178,7 +178,7 @@ class Router extends Component {
 							component={withCountry(CountryHome)}
 						/>
 					</Switch>
-				</span>
+				</div>
 			</ConnectedRouter>
 		);
 	}

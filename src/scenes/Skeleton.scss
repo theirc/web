@@ -1,4 +1,52 @@
 @import "../shared/includes.scss";
+#root {
+	background-color: white;
+
+}
+
+body {
+ background-color: darken(gray, 30%);;
+}
+@media (min-width: $desktopBreakpoint) {
+	.app-bar-container {
+		margin-left: $desktopPaddingWidth;
+		margin-right: $desktopPaddingWidth;
+	}
+	footer {
+		border-bottom-width: 0;
+		border-top-width: 0;
+		border-right-width: $desktopPaddingWidth;
+		border-left-width: $desktopPaddingWidth;
+		border-style: solid;
+
+		border-color: darken(gray, 30%);
+	}
+	.SkeletonContainer {
+		border-bottom-width: 0;
+		border-top-width: 0;
+		border-right-width: $desktopPaddingWidth;
+		border-left-width: $desktopPaddingWidth;
+		border-style: solid;
+
+		border-color: darken(gray, 30%);
+		//@include grayscale-brand-colors("border-color");
+	}
+}
+
+@media (min-width: $bigDesktopBreakpoint) {
+	.app-bar-container {
+		margin-left: $bigDesktopPaddingWidth;
+		margin-right: $bigDesktopPaddingWidth;
+	}
+	footer {
+		border-right-width: $bigDesktopPaddingWidth;
+		border-left-width: $bigDesktopPaddingWidth;
+	}
+	.SkeletonContainer {
+		border-right-width: $bigDesktopPaddingWidth;
+		border-left-width: $bigDesktopPaddingWidth;
+	}
+}
 
 s {
 	text-decoration: none;

@@ -8,6 +8,7 @@ import CategoryList  from './CategoryList';
 import CountrySelector  from './CountrySelector';
 import LanguageSelector  from './LanguageSelector';
 import HomeWidget  from './HomeWidget';
+import HomeWidgetCollection  from './HomeWidgetCollection';
 
 export  {
     AppHeader,
@@ -20,4 +21,5 @@ export  {
     CountrySelector,
     LanguageSelector,
     HomeWidget,
+    HomeWidgetCollection,
 };

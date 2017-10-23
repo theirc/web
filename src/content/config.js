@@ -1,8 +1,8 @@
 export default {
 	languageDictionary: {
-		en: 'en-US',
-		ar: 'ar-001',
-		fa: 'fa-AF',
+		en: "en-US",
+		ar: "ar-001",
+		fa: "fa-AF",
 	},
 	"refugee.info": {
 		theme: "irc",
@@ -28,8 +28,19 @@ export default {
 		hideServiceMap: true,
 		favicon: "/ki-favicon.png",
 	},
+	"237eadae.ngrok.io": {
+		theme: "mc",
+		accessToken:
+			"0cd5c6bfefa4f7f33a98c487012e6f34c2031aee1ff2f6858b11be592ab349d9",
+		space: "ktglofo8nf88",
+		languages: [["en", "English"], ["ar", "العربيـة"]],
+		logo: "/logo.png",
+		title: "Refugee Info",
+		questionLink: "https://fb.me/refugee.info",
+		favicon: "/ri-favicon.png",
+	},
 	localhost: {
-		theme: "irc",
+		theme: "mc",
 		accessToken:
 			"0cd5c6bfefa4f7f33a98c487012e6f34c2031aee1ff2f6858b11be592ab349d9",
 		space: "ktglofo8nf88",

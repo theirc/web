@@ -2,15 +2,42 @@
 
 .HomeWidget {
 	padding: 20px 20px;
+	.hero {
+			margin-right: -20px;
+			margin-left: -20px;
+			margin-top: -20px;
+	}
+
+	@media (min-width: $desktopBreakpoint) {
+		& {
+			flex-basis: calc(50% - 40px);
+		}
+		&.Highlighted {
+			flex-basis: 100%;
+		}
+		& .hero {
+		}
+
+		&:first-child.Highlighted .hero {
+
+			background-color: black;
+			//@include brand-colors("background-color");
+		}
+	}
+
+	s.Read-More {
+		display: flex;
+		flex-direction: row-reverse;
+	}
 
 	.Category {
 		h3 {
 			text-transform: uppercase;
 		}
 		.Article {
-            font-size: 80%;
+			font-size: 80%;
 			h3 {
-                text-transform: none;
+				text-transform: none;
 				margin-bottom: 3px;
 			}
 		}

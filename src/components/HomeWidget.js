@@ -59,9 +59,17 @@ export default class HomeWidget extends Component {
 							/>
 						</div>
 					)}
-				<h3>{article.fields.title}</h3>
+				<h3
+					onClick={() =>
+						onNavigate(
+							`/${country.fields.slug}/${categorySlug}/${article
+								.fields.slug}`
+						)}
+				>
+					{article.fields.title}
+				</h3>
 				<p>{article.fields.lead}</p>
-				<s>
+				<s className="Read-More">
 					<a
 						href="#"
 						onClick={() =>
@@ -82,7 +90,9 @@ export default class HomeWidget extends Component {
 		return (
 			<div className="Category">
 				<h3>{c.fields.name}</h3>
-				{(c.fields.articles||[]).map(a => this.renderArticle(a, c, false))}
+				{(c.fields.articles || []).map(a =>
+					this.renderArticle(a, c, false)
+				)}
 			</div>
 		);
 	}
@@ -108,6 +118,16 @@ export default class HomeWidget extends Component {
 			default:
 				rendered = null;
 		}
-		return <div className="HomeWidget">{rendered}</div>;
+		
+		return (
+			<div
+				className={[
+					"HomeWidget",
+					content.fields.highlighted ? "Highlighted" : "",
+				].join(" ")}
+			>
+				{rendered}
+			</div>
+		);
 	}
 }

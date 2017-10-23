@@ -1,0 +1,11 @@
+@import "../shared/includes.scss";
+
+.HomeWidgetCollection {
+	@media (min-width: $desktopBreakpoint) {
+		& {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+		}
+	}
+}
