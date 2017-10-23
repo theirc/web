@@ -129,7 +129,7 @@ echo "Building Server."
 eval $NPM_CMD run build-server
 
 echo "Building Client code."
-eval ./node_modules/.bin/node scripts/build
+eval $NODE_EXE scripts/build
 
 
 echo "Finished successfully."
