@@ -8,6 +8,7 @@ import _ from "lodash";
 import Router from "./router";
 import cms from "./content/cms";
 
+
 const theme = createMuiTheme({
 	overrides: {
 		MuiBottomNavigationButton: {
