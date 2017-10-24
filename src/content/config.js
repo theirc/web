@@ -40,7 +40,7 @@ export default {
 		favicon: "/ri-favicon.png",
 	},
 	localhost: {
-		theme: "mc",
+		theme: "irc",
 		accessToken:
 			"0cd5c6bfefa4f7f33a98c487012e6f34c2031aee1ff2f6858b11be592ab349d9",
 		space: "ktglofo8nf88",

@@ -83,11 +83,11 @@ function withCategory(WrappedComponent) {
 	class CategorySwitcher extends Component {
 		componentDidMount() {
 			const { match, country, onRender } = this.props;
-
-
 			if (country) {
+				const categoryParts = match.params.category.split('--');
+
 				const category = _.first(
-					country.fields.categories.filter(
+					_.flattenDeep(country.fields.categories.map(c=>[c, c.fields.categories])).filter(_.identity).filter(
 						c =>
                         c &&
                         c.fields.slug === match.params.category
@@ -102,8 +102,10 @@ function withCategory(WrappedComponent) {
 			const { country, match } = nextProps;
 
 			if (country) {
+				const categoryParts = match.params.category.split('--');
+
 				const category = _.first(
-					country.fields.categories.filter(
+					_.flattenDeep(country.fields.categories.map(c=>[c, c.fields.categories])).filter(_.identity).filter(
 						c =>
 							c &&
 							c.fields.slug === match.params.category
