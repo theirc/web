@@ -5,19 +5,13 @@ import { EditLocation, Language } from "material-ui-icons";
 
 export default class Footer extends Component {
 	render() {
-		const {
-			onChangeLocation,
-			onChangeLanguage,
-			disableCountrySelector,
-			questionLink,
-			deviceType,
-		} = this.props;
+		const { onChangeLocation, onChangeLanguage, disableCountrySelector, questionLink, deviceType } = this.props;
 		const year = moment().year();
 
 		return (
 			<footer className="Footer">
 				<div className="light">
-					<p>Can't find specific information?</p>
+					<p>Can&apos;t find specific information?</p>
 					<a href={questionLink}>
 						<h3>Ask us a question</h3>
 					</a>
@@ -25,10 +19,7 @@ export default class Footer extends Component {
 				<div className="dark">
 					<div className="button-container">
 						{!disableCountrySelector && (
-							<div
-								className="button left"
-								onClick={onChangeLocation}
-							>
+							<div className="button left" onClick={onChangeLocation}>
 								<div className="icon-container">
 									<EditLocation />
 								</div>
@@ -37,10 +28,24 @@ export default class Footer extends Component {
 						)}
 						<div className="button" onClick={onChangeLanguage}>
 							<div className="icon-container">
-								<svg
-									id="lang-icn"
-									viewBox="0 0 53 54"
-								>
+								<Language />
+							</div>
+							<span>Change Language</span>
+						</div>
+					</div>
+					{/*
+					<span>Mission statement.</span>
+					*/}
+					{deviceType === "Android" && <img src="/google-play-badge.png" className="app-store-logo" alt="Get it on Google Play" />}
+					{deviceType === "iPhone" && <img src="/app-store-badge.svg" className="app-store-logo" alt="Get it on the App Store" />}
+					<span className="padded Signpost">
+						Part of the <a href="http://signpost.ngo">Signpost Project</a>. &copy; {year}.
+					</span>
+
+
+					<div style={{display:'none'}} onClick={onChangeLanguage}>
+							<div className="icon-container">
+								<svg id="lang-icn" viewBox="0 0 53 54">
 									<defs>
 										<clipPath id="clip-path">
 											<path
@@ -49,13 +54,7 @@ export default class Footer extends Component {
 											/>
 										</clipPath>
 										<clipPath id="clip-path-2">
-											<rect
-												className="cls-1"
-												x="-1288.43"
-												y="-2272.44"
-												width="1752"
-												height="2667"
-											/>
+											<rect className="cls-1" x="-1288.43" y="-2272.44" width="1752" height="2667" />
 										</clipPath>
 										<clipPath id="clip-path-3">
 											<path
@@ -67,53 +66,18 @@ export default class Footer extends Component {
 
 									<g className="cls-2">
 										<g className="cls-3">
-											<rect
-												className="fill-clr"
-												x="-5"
-												y="-5"
-												width="36.73"
-												height="39.47"
-											/>
+											<rect className="fill-clr" x="-5" y="-5" width="36.73" height="39.47" />
 										</g>
 									</g>
 									<g className="cls-5">
 										<g className="cls-3">
-											<rect
-												className="fill-clr"
-												x="23.8"
-												y="15.41"
-												width="34.66"
-												height="43.21"
-											/>
+											<rect className="fill-clr" x="23.8" y="15.41" width="34.66" height="43.21" />
 										</g>
 									</g>
 								</svg>
 							</div>
 							<span>Change Language</span>
 						</div>
-					</div>
-					{/*
-					<span>Mission statement.</span>
-					*/}
-					{deviceType === "Android" && (
-						<img
-							src="/google-play-badge.png"
-							className="app-store-logo"
-							alt="Get it on Google Play"
-						/>
-					)}
-					{deviceType === "iPhone" && (
-						<img
-							src="/app-store-badge.svg"
-							className="app-store-logo"
-							alt="Get it on the App Store"
-						/>
-					)}
-					<span className="padded Signpost">
-						Part of the{" "}
-						<a href="http://signpost.ngo">Signpost Project</a>.
-						&copy; {year}.
-					</span>
 				</div>
 			</footer>
 		);
