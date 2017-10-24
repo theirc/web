@@ -1,5 +1,5 @@
 "use strict";
-
+const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
 const autoprefixer = require("autoprefixer");
 const path = require("path");
 const webpack = require("webpack");
@@ -66,8 +66,12 @@ module.exports = {
 		// We inferred the "public path" (such as / or /my-project) from homepage.
 		publicPath: publicPath,
 		// Point sourcemap entries to original disk location
-		devtoolModuleFilenameTemplate: info =>
-			path.relative(paths.appSrc, info.absoluteResourcePath),
+		devtoolModuleFilenameTemplate: info => path.relative(paths.appSrc, info.absoluteResourcePath),
+	},
+	externals: {
+		lodash: "_",
+		moment: "moment",
+		Autolinker: "Autolinker",
 	},
 	resolve: {
 		// This allows you to set a fallback for where Webpack should look for modules.
@@ -128,16 +132,7 @@ module.exports = {
 			// "file" loader makes sure those assets end up in the `build` folder.
 			// When you `import` an asset, you get its filename.
 			{
-				exclude: [
-					/\.html$/,
-					/\.(js|jsx)$/,
-					/\.css$/,
-					/\.json$/,
-					/\.bmp$/,
-					/\.gif$/,
-					/\.jpe?g$/,
-					/\.png$/,
-				],
+				exclude: [/\.html$/, /\.(js|jsx)$/, /\.css$/, /\.json$/, /\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
 				loader: require.resolve("file-loader"),
 				options: {
 					name: "static/media/[name].[hash:8].[ext]",
@@ -158,6 +153,25 @@ module.exports = {
 				test: /\.(js|jsx)$/,
 				include: paths.appSrc,
 				loader: require.resolve("babel-loader"),
+				options: {
+					plugins: [
+						[
+							"import",
+							[
+								{
+									libraryName: "material-ui",
+									libraryDirectory: "", // default: lib
+									camel2DashComponentName: false, // default: true
+								},
+								{
+									libraryName: "material-ui-icons",
+									libraryDirectory: "", // default: lib
+									camel2DashComponentName: false, // default: true
+								},
+							],
+						],
+					],
+				},
 			},
 			// The notation here is somewhat confusing.
 			// "postcss" loader applies autoprefixer to our CSS.
@@ -303,6 +317,7 @@ module.exports = {
 		// https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
 		// You can remove this if you don't use Moment.js:
 		new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+		new UglifyJSPlugin(),
 	],
 	// Some libraries import Node modules but don't use them in the browser.
 	// Tell Webpack to provide empty mocks for them so importing them works.
