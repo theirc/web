@@ -12,7 +12,17 @@ import "./Skeleton.css";
 import { Helmet } from "react-helmet";
 
 class Skeleton extends React.Component {
-	componentWillMount() {}
+	componentDidMount() {
+		if(global.window) {
+			console.log('MOUNTED');
+			const document = global.window.document;
+			var intro = document.querySelector('.intro');
+			var root = document.querySelector('#root');
+	  
+			intro.remove();
+			root.className = "";
+		}
+	}
 
 	render() {
 		const {

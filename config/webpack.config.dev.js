@@ -54,13 +54,6 @@ module.exports = {
 		// initialization, it doesn't blow up the WebpackDevServer client, and
 		// changing JS code would still trigger a refresh.
 	],
-	externals: {
-		lodash: "_",
-		moment: "moment",
-		autolinker: "Autolinker",
-		contentful: "contentful",
-		remarkable: "Remarkable",
-	},
 	output: {
 		// Next line is not used in dev but WebpackDevServer crashes without it:
 		path: paths.appBuild,
@@ -166,21 +159,7 @@ module.exports = {
 					// directory for faster rebuilds.
 					cacheDirectory: true,
 					plugins: [
-						[
-							"import",
-							[
-								{
-									libraryName: "material-ui",
-									libraryDirectory: "", // default: lib
-									camel2DashComponentName: false, // default: true
-								},
-								{
-									libraryName: "material-ui-icons",
-									libraryDirectory: "", // default: lib
-									camel2DashComponentName: false, // default: true
-								},
-							],
-						],
+						
 					],
 				},
 			},
@@ -254,7 +233,6 @@ module.exports = {
 		// https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
 		// You can remove this if you don't use Moment.js:
 		new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-		new UglifyJSPlugin(),
 	],
 	// Some libraries import Node modules but don't use them in the browser.
 	// Tell Webpack to provide empty mocks for them so importing them works.

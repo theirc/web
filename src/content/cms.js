@@ -1,5 +1,6 @@
-import config from "./config";
 import _ from "lodash";
+
+const config = require('./config').default;
 const contentful = require("contentful");
 let client = null;
 let siteConfig = null;
