@@ -3,6 +3,14 @@ import moment from "moment";
 import _ from "lodash";
 
 import "./HomeWidget.css";
+const Remarkable = require('remarkable');
+
+const md = new Remarkable('full', {
+    html: true,
+    linkify: true,
+    typographer: true,
+    breaks: true,
+  });
 
 export default class HomeWidget extends Component {
 	// Maybe these can be a Separate Component?
@@ -68,7 +76,7 @@ export default class HomeWidget extends Component {
 				>
 					{article.fields.title}
 				</h3>
-				<p>{article.fields.lead}</p>
+				<p dangerouslySetInnerHTML={{ __html: md.render(article.fields.lead) }}></p>
 				<s className="Read-More">
 					<a
 						href="#"

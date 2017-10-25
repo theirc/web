@@ -71,7 +71,9 @@ module.exports = {
 	externals: {
 		lodash: "_",
 		moment: "moment",
-		Autolinker: "Autolinker",
+		autolinker: "Autolinker",
+		contentful: "contentful",
+		remarkable: "Remarkable",
 	},
 	resolve: {
 		// This allows you to set a fallback for where Webpack should look for modules.

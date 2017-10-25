@@ -57,7 +57,9 @@ module.exports = {
 	externals: {
 		lodash: "_",
 		moment: "moment",
-		Autolinker: "Autolinker",
+		autolinker: "Autolinker",
+		contentful: "contentful",
+		remarkable: "Remarkable",
 	},
 	output: {
 		// Next line is not used in dev but WebpackDevServer crashes without it:

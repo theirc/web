@@ -3,9 +3,9 @@
 .HomeWidget {
 	padding: 20px 20px;
 	.hero {
-			margin-right: -20px;
-			margin-left: -20px;
-			margin-top: -20px;
+		margin-right: -20px;
+		margin-left: -20px;
+		margin-top: -20px;
 	}
 
 	@media (min-width: $desktopBreakpoint) {
@@ -19,7 +19,6 @@
 		}
 
 		&:first-child.Highlighted .hero {
-
 			background-color: black;
 			//@include brand-colors("background-color");
 		}
@@ -33,6 +32,11 @@
 	.Category {
 		h3 {
 			text-transform: uppercase;
+		}
+		h3:hover {
+			text-transform: uppercase;
+			text-decoration: underline;
+			cursor: pointer;
 		}
 		.Article {
 			font-size: 80%;
