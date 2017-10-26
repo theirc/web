@@ -11,6 +11,7 @@ module.exports = {
 			space: "ktglofo8nf88",
 			languages: [["en", "English"], ["ar", "العربيـة"]],
 			logo: "/logo.png",
+			hideServiceMap: true,
 			title: "Refugee Info",
 			questionLink: "https://fb.me/refugee.info",
 			favicon: "/ri-favicon.png",
