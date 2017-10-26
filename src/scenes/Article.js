@@ -68,6 +68,7 @@ class Article extends React.Component {
 				next = articles[index + 1];
 			}
 		}
+
 		return [
 			<ArticlePage key={"Article"} category={category} article={article} loading={loading} />,
 			<ArticleFooter key={"ArticleFooter"} onNavigateTo={onNavigateTo(category, country)} {...{ direction, previous, next }} />,

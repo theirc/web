@@ -35,7 +35,7 @@ export default class CategoryList extends Component {
 									</div>
 								</label>,
 								c.fields.categories && (
-									<ul  key="a-2" className="sub-categories">
+									<ul  key="a-2">
 										{c.fields.categories.map(
 											a =>
 												a.fields && (
