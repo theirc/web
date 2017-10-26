@@ -28,29 +28,22 @@ class Article extends React.Component {
 	componentWillMount() {
 		this.setState({ loading: true });
 
-		this.props
-			.onMount(this.props.category, this.props.match.params.article)
-			.then(s => {
-				return this.setState({ loading: false });
-			});
+		this.props.onMount(this.props.category, this.props.match.params.article).then(s => {
+			return this.setState({ loading: false });
+		});
 	}
 
 	componentWillUnmount() {}
 
 	componentWillUpdate(nextProps, b) {
-		const articleChanged =
-			this.props.match &&
-			nextProps.match &&
-			this.props.match.params.article !== nextProps.match.params.article;
+		const articleChanged = this.props.match && nextProps.match && this.props.match.params.article !== nextProps.match.params.article;
 		const categoryChanged = this.props.category !== nextProps.category;
 
 		if (articleChanged || categoryChanged) {
 			this.setState({ loading: true });
-			this.props
-				.onMount(nextProps.category, nextProps.match.params.article)
-				.then(s => {
-					return this.setState({ loading: false });
-				});
+			this.props.onMount(nextProps.category, nextProps.match.params.article).then(s => {
+				return this.setState({ loading: false });
+			});
 		}
 	}
 
@@ -65,9 +58,7 @@ class Article extends React.Component {
 			previous = null;
 		const articles = category.fields.articles || [];
 		if (category) {
-			let index = articles
-				.map(a => a.fields.slug)
-				.indexOf(article.fields.slug);
+			let index = articles.map(a => a.fields.slug).indexOf(article.fields.slug);
 
 			if (index > 0) {
 				previous = articles[index - 1];
@@ -78,15 +69,8 @@ class Article extends React.Component {
 			}
 		}
 		return [
-			<ArticlePage
-				category={category}
-				article={article}
-				loading={loading}
-			/>,
-			<ArticleFooter
-				onNavigateTo={onNavigateTo(category, country)}
-				{...{ direction, previous, next }}
-			/>,
+			<ArticlePage key={"Article"} category={category} article={article} loading={loading} />,
+			<ArticleFooter key={"ArticleFooter"} onNavigateTo={onNavigateTo(category, country)} {...{ direction, previous, next }} />,
 		];
 	}
 }
@@ -103,29 +87,11 @@ const mapState = (s, p) => {
 const mapDispatch = (d, p) => {
 	return {
 		onMount: (category, slug) => {
-			if (
-				category &&
-				(category.fields.articles || category.fields.overview)
-			) {
-				if (
-					category.fields.overview &&
-					category.fields.overview.fields.slug == slug
-				) {
-					return Promise.resolve(
-						d(actions.selectArticle(category.fields.overview))
-					);
+			if (category && (category.fields.articles || category.fields.overview)) {
+				if (category.fields.overview && category.fields.overview.fields.slug == slug) {
+					return Promise.resolve(d(actions.selectArticle(category.fields.overview)));
 				} else if (category.fields.articles) {
-					return Promise.resolve(
-						d(
-							actions.selectArticle(
-								_.first(
-									category.fields.articles
-										.filter(_.identity)
-										.filter(a => a.fields.slug === slug)
-								)
-							)
-						)
-					);
+					return Promise.resolve(d(actions.selectArticle(_.first(category.fields.articles.filter(_.identity).filter(a => a.fields.slug === slug)))));
 				}
 			}
 
@@ -133,12 +99,7 @@ const mapDispatch = (d, p) => {
 		},
 		onNavigateTo: (category, country) => slug => {
 			setTimeout(() => {
-				d(
-					push(
-						`/${country.fields.slug}/${category.fields
-							.slug}/${slug}`
-					)
-				);
+				d(push(`/${country.fields.slug}/${category.fields.slug}/${slug}`));
 			}, 200);
 		},
 	};

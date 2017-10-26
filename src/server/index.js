@@ -18,9 +18,15 @@ const less = require("less");
 const fs = require("fs");
 const nunjucks = require("nunjucks");
 const conf = require("../content/config").default;
+const cms = require("../content/cms").default;
+const ReactApp = require("../App").default;
+
+const React = require("react");
+const renderToString = require("react-dom/server").renderToString;
+const { store, history } = require("../store");
+const Provider = require("react-redux").Provider;
 
 const app = feathers();
-
 app.configure(configuration());
 
 app.use(cors());
@@ -33,6 +39,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.configure(hooks());
 app.configure(rest());
 app.configure(socketio());
+
 
 app.get("/config", (rq, res) => {
 	let serverConf = JSON.stringify({
@@ -53,6 +60,21 @@ app.get("/config", (rq, res) => {
 app.use("/", feathers.static("build"));
 
 app.get("*", function(request, response, next) {
+	/* let urlParts = request.url.split("?");
+	history.location.pathname = urlParts[0];
+	history.location.query = urlParts[1];
+	try {
+		console.log(
+			renderToString(
+				<Provider store={store}>
+					<ReactApp />
+				</Provider>
+			)
+		);
+	} catch (e) {
+		console.log(e);
+	}*/
+	
 	fs.readFile(path.join(path.dirname(path.dirname(__dirname)), "build", "index.html"), (err, data) => {
 		if (err) throw err;
 		nunjucks.renderString(data.toString(), {}, function(err, compiled) {

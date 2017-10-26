@@ -33,8 +33,8 @@ function loadCountry(slug, language = "en") {
 		);
 	}
 
-	if(sessionStorage.country) {
-		const country = JSON.parse(sessionStorage.country);
+	if(global.sessionStorage && global.sessionStorage.country) {
+		const country = JSON.parse(global.sessionStorage.country);
 		if(country[slug]) {
 			return Promise.resolve(country[slug].items[0]);
 		}

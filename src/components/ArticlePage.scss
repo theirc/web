@@ -9,15 +9,38 @@
 		opacity: 1;
 		transition: opacity 0.2s ease-in-out;
 	}
-
 	
+	btn {
+		display: block;
+		text-transform: capitalize;
+		height: 5em;
+		@include brand-colors("background-color");
+	}
+
+	square {
+		text-decoration: none;
+		& > a {
+			text-decoration: none;
+			text-transform: uppercase;
+			font-weight: bold;
+		}
+		& > a:before {
+			content: "□";
+			padding-right: 5px;
+			font-size: 1em;
+
+			@include brand-colors("color");
+			@include brand-colors("border-color");
+		}
+	}
+
 	blockquote {
 		border-left-width: 3px;
 		border-left-style: solid;
 		padding-left: 1em;
 		margin: 2px;
 
-		@include darken-brand-colors('border-left-color', 5%);
+		@include darken-brand-colors("border-left-color", 5%);
 	}
 
 	hr {

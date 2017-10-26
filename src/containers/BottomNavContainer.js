@@ -33,7 +33,6 @@ class BottomNavContainer extends React.Component {
 			router,
 		} = this.props;
 
-		console.log(router);
 
 		let pathParts = router.location.pathname.split("/");
 		let selectedIndex = 0;

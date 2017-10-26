@@ -35,9 +35,11 @@ class CountryHome extends React.Component {
 	}
 
 	componentWillMount() {
-		const { firstRequest } = global.window.localStorage;
-		if (!firstRequest) {
-			global.window.localStorage.firstRequest = moment().toString();
+		if (global.window) {
+			const { firstRequest } = global.window.localStorage;
+			if (!firstRequest) {
+				global.window.localStorage.firstRequest = moment().toString();
+			}
 		}
 		const { onMount } = this.props;
 		onMount();
@@ -54,18 +56,7 @@ class CountryHome extends React.Component {
 			return null;
 		}
 
-		return (
-			<HomeWidgetCollection>
-				{country.fields.home.map(e => (
-					<HomeWidget
-						onNavigate={onNavigate}
-						country={country}
-						content={e}
-						key={e.sys.id}
-					/>
-				))}
-			</HomeWidgetCollection>
-		);
+		return <HomeWidgetCollection>{country.fields.home.map(e => <HomeWidget onNavigate={onNavigate} country={country} content={e} key={e.sys.id} />)}</HomeWidgetCollection>;
 	}
 }
 

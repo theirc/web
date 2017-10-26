@@ -18,8 +18,11 @@ class CountrySelectorScene extends React.Component {
 	render() {
 		const { country, language } = this.props;
 		const { countryList, onGoTo } = this.props;
-		const { firstRequest } = global.window.localStorage;
-		const firstTimeHere = !firstRequest;
+		let firstTimeHere = false;
+		if (global.window) {
+			const { firstRequest } = global.window.localStorage;
+			firstTimeHere = !firstRequest;
+		}
 
 		if (!countryList) {
 			return <div />;
@@ -32,9 +35,7 @@ class CountrySelectorScene extends React.Component {
 		}
 
 		if (firstTimeHere || !country) {
-			return (
-				<CountrySelector onGoTo={onGoTo} countryList={countryList} />
-			);
+			return <CountrySelector onGoTo={onGoTo} countryList={countryList} />;
 		} else {
 			if (!language) {
 				return <Redirect to={`/language-selector`} />;
@@ -72,9 +73,7 @@ const mapDispatch = (d, p) => {
 		onMountOrUpdate: () => {
 			cms.client
 				.getEntries({ content_type: "country" })
-				.then(e =>
-					e.items.map(a => ({ id: a.sys.id, ...a.fields, ...a }))
-				)
+				.then(e => e.items.map(a => ({ id: a.sys.id, ...a.fields, ...a })))
 				.then(e => {
 					console.log(e);
 					d(actions.selectCountryList(e));

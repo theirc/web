@@ -10,18 +10,24 @@ import { routerReducer } from 'react-router-redux'
 import reduxThunk from 'redux-thunk';
 import reduxPromiseMiddleware from 'redux-promise-middleware';
 
+const window = (global.window || {});
 let history;
-if (global.window.document) {
+if (window && window.document) {
     history = createHistory();
 } else {
     history = {
-        listen: ()=>{}
+        listen: ()=>{},
+        location: {
+            pathname: ''
+        },
+        push: () =>{},
+        replace: () =>{},
     };
 }
 
 let initialState = {};
-if(global.window && global.window.initialState) {
-    initialState = global.window.initialState;
+if(window && window.initialState) {
+    initialState = window.initialState;
 }
 
 const middleware = [

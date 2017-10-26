@@ -13,30 +13,20 @@ import { Helmet } from "react-helmet";
 
 class Skeleton extends React.Component {
 	componentDidMount() {
-		if(global.window) {
-			console.log('MOUNTED');
-			const document = global.window.document;
-			var intro = document.querySelector('.intro');
-			var root = document.querySelector('#root');
-	  
-			intro.remove();
-			root.className = "";
+		if (global.window) {
+			if (global.window && global.window.document) {
+				const document = global.window.document;
+				var intro = document.querySelector(".intro");
+				var root = document.querySelector("#root");
+
+				intro.remove();
+				root.className = "";
+			}
 		}
 	}
 
 	render() {
-		const {
-			children,
-			country,
-			language,
-			match,
-			onGoHome,
-			onGoToSearch,
-			onChangeLocation,
-			onChangeCountry,
-			onChangeLanguage,
-			deviceType,
-		} = this.props;
+		const { children, country, language, match, onGoHome, onGoToSearch, onChangeLocation, onChangeCountry, onChangeLanguage, deviceType } = this.props;
 
 		return (
 			<div className="Skeleton">
@@ -44,22 +34,13 @@ class Skeleton extends React.Component {
 					<title>{cms.siteConfig.title}</title>
 					<link rel="shortcut icon" href={cms.siteConfig.favicon} />
 				</Helmet>
-				<AppHeader
-					country={country}
-					language={language}
-					onGoHome={onGoHome(country)}
-					onGoToSearch={onGoToSearch(country)}
-					onChangeCountry={onChangeLocation}
-					logo={cms.siteConfig.logo}
-				/>
+				<AppHeader country={country} language={language} onGoHome={onGoHome(country)} onGoToSearch={onGoToSearch(country)} onChangeCountry={onChangeLocation} logo={cms.siteConfig.logo} />
 				{children}
 				{country &&
 					language && (
 						<Footer
 							questionLink={cms.siteConfig.questionLink}
-							disableCountrySelector={
-								!!cms.siteConfig.disableCountrySelector
-							}
+							disableCountrySelector={!!cms.siteConfig.disableCountrySelector}
 							onChangeLocation={onChangeLocation}
 							onChangeLanguage={onChangeLanguage}
 							deviceType={deviceType}

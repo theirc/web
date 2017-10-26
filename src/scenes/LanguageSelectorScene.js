@@ -33,9 +33,13 @@ class LanguageSelectorScene extends React.Component {
 
     render() {
         const { country, language, countryList, onGoTo, onSelectLanguage } = this.props;
-        const { firstRequest } = global.window.localStorage;
         const { selected } = this.state;
-        const firstTimeHere = !firstRequest;
+        
+		let firstTimeHere = false;
+		if (global.window) {
+			const { firstRequest } = global.window.localStorage;
+			firstTimeHere = !firstRequest;
+		}
 
         const languages = cms.siteConfig.languages;
 

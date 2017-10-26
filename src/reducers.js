@@ -4,7 +4,7 @@ import isMobile from "./shared/isMobile";
 import cms from "./content/cms";
 
 let defaultLanguage = "";
-if (global.navigator.language) {
+if (global.navigator && global.navigator.language) {
 	defaultLanguage = global.navigator.language.split("-")[0];
 }
 const getDirection = l => (["ar", "fa"].indexOf(l) > -1 ? "rtl" : "ltr");

@@ -8,12 +8,20 @@
 	}
 
 	.article-title:hover {
+		cursor: pointer;
 		text-decoration: underline;
 	}
 
 	.fa {
 		font-size: 20px;
 		width: 31px;
+	}
+	.article-container {
+		padding: 15px;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
 	}
 
 	ul li .container {
@@ -25,12 +33,12 @@
 	}
 	& > ul li .container > i {
 		padding-right: 10px;
+		width: 25px;
+		
 	}
 
 	ul li .inner-container {
-		padding: 44px;
-		padding-top: 10px;
-		padding-bottom: 10px;
+		padding: 10px;
 		display: flex;
 		flex-direction: row;
 	}
@@ -39,6 +47,7 @@
 		font-size: 18px;
 		display: block;
 		margin: 0;
+		cursor: pointer;
 	}
 	.category-name {
 		flex-grow: 9;
@@ -49,6 +58,27 @@
 		display: none;
 		margin: 0;
 		padding: 0;
+		margin-right: 40px; 
+		margin-left: 40px; 
+		&.sub-categories {
+			margin-right: 50px; 
+			margin-left: 50px; 
+			padding-right: 10px; 
+			padding-left: 10px; 
+			@include brand-colors('border-left-color');
+			@include brand-colors('border-right-color');
+			
+			.ltr & {
+				border-left-width: 3px;
+				border-left-style: solid;
+			} 
+			
+			.rtl & {
+				border-right-width: 3px;
+				border-right-style: solid;
+			} 
+			
+		}
 	}
 
 	hr {
@@ -70,18 +100,18 @@
 	.up {
 		display: none;
 		flex-grow: 1;
-    align-self: flex-end;
-    align-items: flex-end;
-    flex-direction: column;
+		align-self: flex-end;
+		align-items: flex-end;
+		flex-direction: column;
 	}
 
 	.down {
 		display: flex;
 		flex-grow: 1;
-    align-self: flex-end;
-    
-    align-items: flex-end;
-    flex-direction: column;
+		align-self: flex-end;
+
+		align-items: flex-end;
+		flex-direction: column;
 	}
 
 	input:checked + label > .up {
@@ -96,8 +126,5 @@
 		display: block;
 
 		transition: display 2s ease-in-out;
-  }
-  
-
-  
+	}
 }
