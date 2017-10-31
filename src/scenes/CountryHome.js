@@ -4,6 +4,7 @@ import services from "../backend";
 import { actions } from "../store";
 import { connect } from "react-redux";
 import { HomeWidget, HomeWidgetCollection } from "../components";
+import { push } from "react-router-redux";
 
 import { history } from "../store";
 
@@ -55,8 +56,13 @@ class CountryHome extends React.Component {
 		if (!country || !country.fields.home) {
 			return null;
 		}
+		
+		let hostname = 'www.refugee.info';
+		if(global.location)  {
+			hostname = global.location.hostname;
+		}
 
-		return <HomeWidgetCollection>{country.fields.home.map(e => <HomeWidget onNavigate={onNavigate} country={country} content={e} key={e.sys.id} />)}</HomeWidgetCollection>;
+		return <HomeWidgetCollection>{country.fields.home.map(e => <HomeWidget onNavigate={onNavigate} hostname={hostname} country={country} content={e} key={e.sys.id} />)}</HomeWidgetCollection>;
 	}
 }
 
@@ -75,9 +81,7 @@ const mapDispatch = (d, p) => {
 			}
 		},
 		onNavigate: path => {
-			setTimeout(() => {
-				history.push(path);
-			}, 200);
+			d(push(path));
 		},
 	};
 };

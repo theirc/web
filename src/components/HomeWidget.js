@@ -80,6 +80,25 @@ export default class HomeWidget extends Component {
 			</div>
 		);
 	}
+	componentDidMount() {
+		const { onNavigate, hostname } = this.props;
+		let anchors = Array.from(this._ref.querySelectorAll("a"));
+		anchors = anchors.filter(a => a.href.indexOf("http") || a.hostname === hostname);
+
+		for (let anchor of anchors) {
+			let href = anchor.href + "";
+			if (href.indexOf("http") >= 0) {
+				href =
+					"/" +
+					href
+						.split("/")
+						.slice(3)
+						.join("/");
+			}
+			anchor.href = "javascript:void(0)";
+			anchor.onclick = () => onNavigate(href);
+		}
+	}
 
 	render() {
 		const { content } = this.props;
@@ -103,6 +122,10 @@ export default class HomeWidget extends Component {
 				rendered = null;
 		}
 
-		return <div className={["HomeWidget", content.fields.highlighted ? "Highlighted" : ""].join(" ")}>{rendered}</div>;
+		return (
+			<div ref={r => (this._ref = r)} className={["HomeWidget", content.fields.highlighted ? "Highlighted" : ""].join(" ")}>
+				{rendered}
+			</div>
+		);
 	}
 }
