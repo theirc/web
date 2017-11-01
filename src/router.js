@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import { Route, Switch, withRouter } from "react-router";
-import { HashRouter, BrowserRouter } from "react-router-dom";
 
 import { ConnectedRouter } from "react-router-redux";
 import {
@@ -14,7 +13,6 @@ import {
 	CountrySelectorScene,
 	LanguageSelectorScene,
 } from "./scenes";
-import services from "./backend";
 import cms from "./content/cms";
 import { history, actions } from "./store";
 import _ from "lodash";
@@ -53,7 +51,6 @@ function withCountry(WrappedComponent) {
 		}
 
 		render() {
-			const { loaded } = this.state;
 			return <WrappedComponent {...this.props} />;
 		}
 	}
@@ -84,8 +81,6 @@ function withCategory(WrappedComponent) {
 		componentDidMount() {
 			const { match, country, onRender } = this.props;
 			if (country) {
-				const categoryParts = match.params.category.split('--');
-
 				const category = _.first(
 					_.flattenDeep(country.fields.categories.map(c=>[c, c.fields.categories])).filter(_.identity).filter(
 						c =>
@@ -102,8 +97,6 @@ function withCategory(WrappedComponent) {
 			const { country, match } = nextProps;
 
 			if (country) {
-				const categoryParts = match.params.category.split('--');
-
 				const category = _.first(
 					_.flattenDeep(country.fields.categories.map(c=>[c, c.fields.categories])).filter(_.identity).filter(
 						c =>

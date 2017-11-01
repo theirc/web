@@ -39,6 +39,7 @@ export default class ArticlePage extends Component {
 
 		let anchors = Array.from(this._ref.querySelectorAll("a"));
 		anchors = anchors.filter(a => a.href.indexOf("http") || a.hostname === hostname);
+		// eslint-disable-next-line
 		let isPhoneOrAlreadyProcessed = h => h.indexOf("javascript:void") === -1 && h.indexOf("tel:") === -1;
 
 		for (let anchor of anchors.filter(a => isPhoneOrAlreadyProcessed(a.href))) {
@@ -51,6 +52,7 @@ export default class ArticlePage extends Component {
 						.slice(3)
 						.join("/");
 			}
+			// eslint-disable-next-line
 			anchor.href = "javascript:void(0)";
 			anchor.onclick = () => onNavigate(href);
 		}

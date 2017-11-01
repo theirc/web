@@ -31,14 +31,14 @@ class HomeWidget extends Component {
 				return this.renderArticle(article, category, true, w.fields.showFullArticle);
 			}
 		} else if (w.fields.type === "Top Categories") {
-			let categories = Array.from(w.fields.related || []);
+			// let categories = Array.from(w.fields.related || []);
 			return null;
 		}
 		return <div className="Widget">{w.fields.type}</div>;
 	}
 
 	renderArticle(article, category, showHero = true, showFullArticle = false) {
-		const { country, onNavigate , t} = this.props;
+		const { country, onNavigate, t } = this.props;
 		if (!article) {
 			// Anti pattern, but saves 1 or more ifs.
 			return null;
@@ -51,6 +51,8 @@ class HomeWidget extends Component {
 
 		let content = showFullArticle ? article.fields.content : article.fields.lead;
 
+		/*jshint ignore:start*/
+		/*eslint-disable*/
 		return (
 			<div className="Article" key={article.sys.id}>
 				{article.fields.hero &&
@@ -70,13 +72,15 @@ class HomeWidget extends Component {
 				)}
 			</div>
 		);
+		/*eslint-enable*/
+		/*jshint ignore:end*/
 	}
 
 	renderCategory(c) {
 		return (
 			<div className="Category">
 				<h3>{c.fields.name}</h3>
-				{(c.fields.articles || []).splice(0,5).map(a => this.renderArticle(a, c, false))}
+				{(c.fields.articles || []).splice(0, 5).map(a => this.renderArticle(a, c, false))}
 			</div>
 		);
 	}
@@ -101,6 +105,7 @@ class HomeWidget extends Component {
 						.slice(3)
 						.join("/");
 			}
+			// eslint-disable-next-line
 			anchor.href = "javascript:void(0)";
 			anchor.onclick = () => onNavigate(href);
 		}
@@ -108,7 +113,6 @@ class HomeWidget extends Component {
 
 	render() {
 		const { content } = this.props;
-		const year = moment().year();
 		if (!content) {
 			return null;
 		}

@@ -1,7 +1,12 @@
-@import '../shared/includes.scss';
+@import "../shared/includes.scss";
 
 .BottomNav {
-    .Selected {
-        @include darken-brand-colors( 'color', 10%);
-    }
+	.Selected {
+		@include darken-brand-colors( "color", 5%);
+	}
+
+	.Selected > span > span {
+        color: black;
+        font-weight: bold;
+	}
 }

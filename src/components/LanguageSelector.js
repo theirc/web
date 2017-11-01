@@ -1,14 +1,10 @@
 import React, { Component, } from 'react';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 
 import './LanguageSelector.css';
 
 export default class LanguageSelector extends Component {
     static propTypes = {
-    }
-
-    constructor() {
-        super();
     }
 
     componentDidMount() {

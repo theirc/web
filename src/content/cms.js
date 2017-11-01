@@ -1,5 +1,3 @@
-import _ from "lodash";
-
 const config = require('./config').default;
 const contentful = require("contentful");
 let client = null;
@@ -48,9 +46,9 @@ function loadCountry(slug, language = "en") {
 			locale: languageDictionary[language],
 		})
 		.then(e => {
-			let { includes, items } = e;
+			let { items } = e;
 
-			if (items.length == 0) {
+			if (items.length === 0) {
 				throw Error("No Country Found");
 			}
 

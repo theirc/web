@@ -1,14 +1,10 @@
 import React, { Component, } from 'react';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 
 import './CountrySelector.css';
 
 export default class CountrySelector extends Component {
     static propTypes = {
-    }
-
-    constructor() {
-        super();
     }
 
     componentDidMount() {

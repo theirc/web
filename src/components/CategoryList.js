@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { KeyboardArrowUp, KeyboardArrowDown, Share, ModeEdit } from "material-ui-icons";
+//import PropTypes from "prop-types";
 
 import "./CategoryList.css";
 
@@ -8,7 +7,7 @@ export default class CategoryList extends Component {
 	static propTypes = {};
 
 	render() {
-		const { text, country, categories, onNavigate } = this.props;
+		const {  country, categories, onNavigate } = this.props;
 		const showToggle = c => {
 			return (c.fields.subCategories && c.fields.subCategories.length) || (c.fields.articles && c.fields.articles.length && c.fields.type !== "News" && !c.fields.overview);
 		};

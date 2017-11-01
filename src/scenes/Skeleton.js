@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { AppHeader, Footer } from "../components";
 import { BottomNavContainer } from "../containers";
 import { push } from "react-router-redux";
-import { history } from "../store";
 import cms from "../content/cms";
 
 import { Helmet } from "react-helmet";
@@ -28,7 +27,7 @@ class Skeleton extends React.Component {
 	}
 
 	render() {
-		const { children, country, language, match, onGoHome, onGoToSearch, onChangeLocation, onChangeCountry, onChangeLanguage, deviceType } = this.props;
+		const { children, country, language, match, onGoHome, onGoToSearch, onChangeLocation, onChangeLanguage, deviceType } = this.props;
 
 		return (
 			<I18nextProvider i18n={i18n}>

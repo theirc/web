@@ -1,10 +1,8 @@
 import React from "react";
-import services from "../backend";
 import { connect } from "react-redux";
 import { ArticlePage, ArticleFooter } from "../components";
 import PropTypes from "prop-types";
-import { withRouter } from "react-router";
-import { history, actions } from "../store";
+import { actions } from "../store";
 import { push } from "react-router-redux";
 import _ from "lodash";
 
@@ -89,7 +87,7 @@ const mapDispatch = (d, p) => {
 	return {
 		onMount: (category, slug) => {
 			if (category && (category.fields.articles || category.fields.overview)) {
-				if (category.fields.overview && category.fields.overview.fields.slug == slug) {
+				if (category.fields.overview && category.fields.overview.fields.slug === slug) {
 					return Promise.resolve(d(actions.selectArticle(category.fields.overview)));
 				} else if (category.fields.articles) {
 					return Promise.resolve(d(actions.selectArticle(_.first(category.fields.articles.filter(_.identity).filter(a => a.fields.slug === slug)))));

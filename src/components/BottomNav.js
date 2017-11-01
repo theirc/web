@@ -4,7 +4,7 @@ import BottomNavigation, { BottomNavigationButton } from "material-ui/BottomNavi
 import PropTypes from "prop-types";
 import { translate } from "react-i18next";
 
-import { MoreHoriz, Home, Map, List } from "material-ui-icons";
+import { Home, Map, List, Search } from "material-ui-icons";
 import "./BottomNav.css";
 class BottomNav extends Component {
 	static propTypes = {
@@ -22,13 +22,9 @@ class BottomNav extends Component {
 	}
 
 	select(selectedIndex = 0) {
-		const { onGoHome, onGoToCategories, onGoToServices, onGoToMore } = this.props;
+		const { onGoHome, onGoToCategories, onGoToSearch, onGoToServices, onGoToMore } = this.props;
 
-		if (selectedIndex === 3) {
-			this.setState({ selectedIndex: -1 });
-		} else {
-			this.setState({ selectedIndex });
-		}
+		this.setState({ selectedIndex });
 
 		if (selectedIndex === 0) {
 			if (onGoHome) {
@@ -39,12 +35,12 @@ class BottomNav extends Component {
 				return onGoToCategories();
 			}
 		} else if (selectedIndex === 2) {
-			if (onGoToServices) {
-				return onGoToServices();
+			if (onGoToSearch) {
+				return onGoToSearch();
 			}
 		} else if (selectedIndex === 3) {
 			if (onGoToMore) {
-				return onGoToMore();
+				return onGoToServices();
 			}
 		}
 	}
@@ -61,10 +57,10 @@ class BottomNav extends Component {
 				className="BottomNav"
 			>
 				<BottomNavigation value={this.props.index} onChange={(e, i) => this.select(i)}>
-					<BottomNavigationButton className={this.props.index == 0 ? "Selected" : ""} icon={<Home />} label={t("Home")} value={0} />
-					<BottomNavigationButton className={this.props.index == 1 ? "Selected" : ""} icon={<List />} label={t("Categories")} value={1} />
-					{showServiceMap ? <BottomNavigationButton className={this.props.index == 2 ? "Selected" : ""} icon={<Map />} label={t("Map")} value={2} /> : <div />}
-					<BottomNavigationButton className={this.props.index == 3 ? "Selected" : ""} icon={<MoreHoriz />} label={t("More")} value={3} />
+					<BottomNavigationButton className={this.props.index === 0 ? "Selected" : ""} icon={<Home />} label={t("Home")} value={0} />
+					<BottomNavigationButton className={this.props.index === 1 ? "Selected" : ""} icon={<List />} label={t("Categories")} value={1} />
+					<BottomNavigationButton className={this.props.index === 2 ? "Selected" : ""} icon={<Search />} label={t("Search")} value={2} />
+					{showServiceMap ? <BottomNavigationButton className={this.props.index === 3 ? "Selected" : ""} icon={<Map />} label={t("Map")} value={3} /> : <div />}
 				</BottomNavigation>
 			</Paper>
 		);
