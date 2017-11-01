@@ -7,6 +7,8 @@ import { store } from "./store";
 import _ from "lodash";
 import Router from "./router";
 import cms from "./content/cms";
+//importing transitions
+import TransitionGroup from "react-transition-group/TransitionGroup";
 
 
 const theme = createMuiTheme({
@@ -41,6 +43,8 @@ ThemedApp = connect(({ organization, direction }) => {
 		direction,
 	};
 })(ThemedApp);
+
+
 
 class App extends Component {
 	render() {

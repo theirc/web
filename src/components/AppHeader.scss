@@ -13,15 +13,13 @@ Less me
   top: 0;
   height: 64px;
   box-shadow: 0 1px 1px 0;
-
-
   background-color: #000000;
 
 }
 
 .app-bar-container {
-  padding-right: 5px;
-  padding-left: 5px;
+  padding-right: 18px;
+  padding-left: 18px;
   display: flex;
   color: white;
   flex: 1;
@@ -30,6 +28,7 @@ Less me
   justify-content: flex-start;
   height: 50;
 }
+
 
 .logo-centered {
   align-items: center;
@@ -43,10 +42,6 @@ Less me
   align-items: center;
   justify-content: flex-end;
   flex-direction: row;
-  
-  .rtl & {
-    flex-direction: row-reverse;
-  }
 }
 
 .app-bar-separator {
@@ -60,8 +55,7 @@ Less me
 
 .app-bar-logo {
   height: 40px;
-  background-color: #ffffff;
-  @include brand-colors( 'background-color');
+
 }
 
 .headroom {

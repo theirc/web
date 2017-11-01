@@ -39,7 +39,7 @@ export default class AppHeader extends Component {
 						>
 							<img
 								onClick={onGoHome}
-								src={this.props.logo || "/logo.png"}
+								src={this.props.logo || "/logo.svg"}
 								className="app-bar-logo"
 								alt=" "
 							/>

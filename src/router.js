@@ -18,6 +18,7 @@ import services from "./backend";
 import cms from "./content/cms";
 import { history, actions } from "./store";
 import _ from "lodash";
+import TransitionGroup from "react-transition-group/TransitionGroup";
 
 class ScrollToTop extends Component {
 	componentDidUpdate(prevProps) {
@@ -112,7 +113,7 @@ function withCategory(WrappedComponent) {
 					)
 				);
                 onRender(category);
-                
+
 			}
 		}
 
@@ -139,6 +140,12 @@ function withCategory(WrappedComponent) {
 	return CategorySwitcher;
 }
 
+//rendering single child
+const firstChild = props => {
+  const childrenArray = React.Children.toArray(props.children);
+  return childrenArray[0] || null;
+};
+
 class Router extends Component {
 	render() {
 		return (
@@ -146,7 +153,13 @@ class Router extends Component {
 				<div className="SkeletonContainer">
 					<ScrollToTop />
 					<Switch>
-						<Route exact path="/" component={Home} />
+						{/* <Route exact path="/" component={Home} /> */}
+						<Route exact path="/" children={({ match, ...rest }) => (
+    					<TransitionGroup component={firstChild}>
+      				{match && <Home {...rest} />}
+    					</TransitionGroup>
+						)}/>
+
 						<Route
 							exact
 							path="/country-selector"

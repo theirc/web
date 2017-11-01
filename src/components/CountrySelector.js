@@ -2,8 +2,9 @@ import React, { Component, } from 'react';
 import PropTypes from 'prop-types';
 
 import './CountrySelector.css';
+import AnimatedWrapper from "./AnimatedWrapper";
 
-export default class CountrySelector extends Component {
+class CountrySelector extends Component {
     static propTypes = {
     }
 
@@ -27,5 +28,6 @@ export default class CountrySelector extends Component {
 
         </div>;
     }
-
 }
+const AnimCountrySelector = AnimatedWrapper(CountrySelector);
+export default AnimCountrySelector;
