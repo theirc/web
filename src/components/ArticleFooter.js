@@ -26,6 +26,21 @@ class ArticleFooter extends Component {
 		}),
 	};
 
+	share() {
+		if (global.window) {
+			const { FB } = global.window;
+			if (FB) {
+				FB.ui(
+					{
+						method: "share",
+						href: window.location.href,
+					},
+					function(response) {}
+				);
+			}
+		}
+	}
+
 	render() {
 		const { previous, next, onNavigateTo, direction, t } = this.props;
 		const rtl = direction === "rtl";
@@ -62,7 +77,7 @@ class ArticleFooter extends Component {
 					</div>
 				)}
 				{previous && <hr />}
-				<div className="selector">
+				<div className="selector" onClick={() => this.share()}>
 					<h1>{t("Share this page")}</h1>
 					<Share className="icon" />
 				</div>

@@ -101,6 +101,28 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
   <title></title>
+  <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+  <script>
+    window.fbAsyncInit = function () {
+      FB.init({
+        appId: '708254579325899',
+        autoLogAppEvents: true,
+        xfbml: true,
+        version: 'v2.10'
+      });
+      FB.AppEvents.logPageView();
+    };
+
+
+    (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) { return; }
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+  </script>
 </head>
 
 <body>
@@ -184,12 +206,6 @@
     -->
   <script>
     window.removeSplash = function () {
-      console.log("Loaded");
-      var intro = document.querySelector('.intro');
-      var root = document.querySelector('#root');
-
-      intro.remove();
-      root.className = "";
 
     }
   </script>
@@ -201,6 +217,7 @@
   <script src="https://unpkg.com/contentful@5.0.1/dist/contentful.browser.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/remarkable/1.7.1/remarkable.min.js"></script>
 
+  <div id="fb-root"></div>
 </body>
 
 </html>
