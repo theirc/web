@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import moment from "moment";
 import _ from "lodash";
 
+import { translate } from "react-i18next";
+
 import "./HomeWidget.css";
 const Remarkable = require("remarkable");
 
@@ -12,12 +14,10 @@ const md = new Remarkable("full", {
 	breaks: true,
 });
 
-export default class HomeWidget extends Component {
+class HomeWidget extends Component {
 	// Maybe these can be a Separate Component?
 
 	renderWidget(w) {
-		console.log(w);
-
 		if (w.fields.type === "Latest Article of Category") {
 			let category = _.first(w.fields.related);
 			if (category) {
@@ -38,7 +38,7 @@ export default class HomeWidget extends Component {
 	}
 
 	renderArticle(article, category, showHero = true, showFullArticle = false) {
-		const { country, onNavigate } = this.props;
+		const { country, onNavigate , t} = this.props;
 		if (!article) {
 			// Anti pattern, but saves 1 or more ifs.
 			return null;
@@ -64,7 +64,7 @@ export default class HomeWidget extends Component {
 				{!showFullArticle && (
 					<s className="Read-More">
 						<a href="#" onClick={() => onNavigate(`/${country.fields.slug}/${categorySlug}/${article.fields.slug}`)}>
-							Read more
+							{t("Read More")}
 						</a>
 					</s>
 				)}
@@ -76,9 +76,34 @@ export default class HomeWidget extends Component {
 		return (
 			<div className="Category">
 				<h3>{c.fields.name}</h3>
-				{(c.fields.articles || []).map(a => this.renderArticle(a, c, false))}
+				{(c.fields.articles || []).splice(0,5).map(a => this.renderArticle(a, c, false))}
 			</div>
 		);
+	}
+	componentDidMount() {
+		const { onNavigate } = this.props;
+
+		let hostname = "www.refugee.info";
+		if (global.location) {
+			hostname = global.location.hostname;
+		}
+
+		let anchors = Array.from(this._ref.querySelectorAll("a"));
+		anchors = anchors.filter(a => a.href.indexOf("http") || a.hostname === hostname);
+
+		for (let anchor of anchors) {
+			let href = anchor.href + "";
+			if (href.indexOf("http") >= 0) {
+				href =
+					"/" +
+					href
+						.split("/")
+						.slice(3)
+						.join("/");
+			}
+			anchor.href = "javascript:void(0)";
+			anchor.onclick = () => onNavigate(href);
+		}
 	}
 
 	render() {
@@ -103,6 +128,12 @@ export default class HomeWidget extends Component {
 				rendered = null;
 		}
 
-		return <div className={["HomeWidget", content.fields.highlighted ? "Highlighted" : ""].join(" ")}>{rendered}</div>;
+		return (
+			<div ref={r => (this._ref = r)} className={["HomeWidget", content.fields.highlighted ? "Highlighted" : ""].join(" ")}>
+				{rendered}
+			</div>
+		);
 	}
 }
+
+export default translate()(HomeWidget);

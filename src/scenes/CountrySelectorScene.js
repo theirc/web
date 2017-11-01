@@ -75,7 +75,6 @@ const mapDispatch = (d, p) => {
 				.getEntries({ content_type: "country" })
 				.then(e => e.items.map(a => ({ id: a.sys.id, ...a.fields, ...a })))
 				.then(e => {
-					console.log(e);
 					d(actions.selectCountryList(e));
 				});
 		},

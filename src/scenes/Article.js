@@ -50,7 +50,7 @@ class Article extends React.Component {
 	render() {
 		const { loading } = this.state;
 		const { article, direction } = this.props;
-		const { category, country, onNavigateTo } = this.props;
+		const { category, country, onNavigateTo, onNavigate } = this.props;
 
 		if (!article || !category) return <div style={{ height: 100 }} />;
 
@@ -70,7 +70,7 @@ class Article extends React.Component {
 		}
 
 		return [
-			<ArticlePage key={"Article"} category={category} article={article} loading={loading} />,
+			<ArticlePage key={"Article"} category={category} article={article} loading={loading} onNavigate={onNavigate} />,
 			<ArticleFooter key={"ArticleFooter"} onNavigateTo={onNavigateTo(category, country)} {...{ direction, previous, next }} />,
 		];
 	}
@@ -102,6 +102,10 @@ const mapDispatch = (d, p) => {
 			setTimeout(() => {
 				d(push(`/${country.fields.slug}/${category.fields.slug}/${slug}`));
 			}, 200);
+		},
+
+		onNavigate: path => {
+			d(push(path));
 		},
 	};
 };

@@ -2,15 +2,23 @@ import services from "./backend";
 import actions from "./actions";
 import isMobile from "./shared/isMobile";
 import cms from "./content/cms";
-
+import i18n from "./i18n";
+let sessionStorage = {};
 let defaultLanguage = "";
-if (global.navigator && global.navigator.language) {
-	defaultLanguage = global.navigator.language.split("-")[0];
+
+if (global.window) {
+	sessionStorage = global.sessionStorage;
+	
+	if (!sessionStorage.language) {
+		defaultLanguage = global.navigator.language.split("-")[0];
+	} else {
+		defaultLanguage = sessionStorage.language;
+	}
+
 }
+
 const getDirection = l => (["ar", "fa"].indexOf(l) > -1 ? "rtl" : "ltr");
-const device = global.window
-	? isMobile.Android() ? "Android" : isMobile.iOS ? "iPhone" : ""
-	: "";
+const device = global.window ? (isMobile.Android() ? "Android" : isMobile.iOS ? "iPhone" : "") : "";
 
 function changeDeviceType(state = device, action) {
 	switch (action.type) {
@@ -91,6 +99,8 @@ function selectCountryList(state = null, action) {
 function changeLanguage(state = defaultLanguage, action) {
 	switch (action.type) {
 		case actions.actionTypes.changeLanguage:
+			sessionStorage.language = action.payload;
+			i18n.changeLanguage(sessionStorage.language);
 			return action.payload || null;
 		default:
 			return state;

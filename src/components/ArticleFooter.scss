@@ -1,50 +1,49 @@
-@import '../shared/includes.scss';
+@import "../shared/includes.scss";
 
 .ArticleFooter {
+	& {
+		background: $titleBackground;
+	}
 
-  & {
-    background: $titleBackground;
-  }
-
-  hr {
-    padding: 0;
-    margin: auto;
-    border: 0;
-    border-top-width: 1px;    
-    border-top-color: $dividerColor;
-    border-style: solid;
-    border-radius: 1px;
-    height: 0;
-    width: 95%;
-  }
-
+	hr {
+		padding: 0;
+		margin: auto;
+		border: 0;
+		border-top-width: 1px;
+		border-top-color: $dividerColor;
+		border-style: solid;
+		border-radius: 1px;
+		height: 0;
+		width: 95%;
+  } 
   .icon {
-    padding-right: 5px;
-  }
+		padding-right: 5px;
+		padding-left: 5px;
+	}
 
-  .selector {
-    width: 100%;
-    display: flex;
-    margin: 0;
-    background-color: $titleBackground;
-    min-height: 60px;
-    flex-direction: row;
-    align-items: center;
-  }
+	.selector {
+		width: 100%;
+		display: flex;
+		margin: 0;
+		background-color: $titleBackground;
+		min-height: 60px;
+		flex-direction: row;
+		align-items: center;
+	}
 
-  .selector > h1 {
-    font-size: 18px;
-    display: block;
-    width: 100%;
-    margin: 0;
-    padding: 10px;
-    flex: 1;
-  }
+	.selector > h1 {
+		font-size: 18px;
+		display: block;
+		width: 100%;
+		margin: 0;
+		padding: 10px;
+		flex: 1;
+	}
 
-  .selector > h1 > small {
-    font-size: 12px;
-    display: block;
-    width: 100%;
-    color: lighten(black, 50%);
-  }
+	.selector > h1 > small {
+		font-size: 12px;
+		display: block;
+		width: 100%;
+		color: lighten(black, 50%);
+	}
 }

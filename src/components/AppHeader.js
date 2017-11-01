@@ -3,10 +3,11 @@ import { Button, IconButton } from "material-ui";
 import Headroom from "react-headrooms";
 import PropTypes from "prop-types";
 import { Search } from "material-ui-icons";
+import { translate } from "react-i18next";
 
 import "./AppHeader.css";
 
-export default class AppHeader extends Component {
+class AppHeader extends Component {
 	static propTypes = {
 		onChangeCountry: PropTypes.func,
 		onGoToSearch: PropTypes.func,
@@ -16,13 +17,7 @@ export default class AppHeader extends Component {
 	};
 
 	render() {
-		const {
-			onChangeCountry,
-			onGoToSearch,
-			onGoHome,
-			country,
-			language,
-		} = this.props;
+		const { onChangeCountry, onGoToSearch, onGoHome, country, language } = this.props;
 		const noop = () => {
 			console.log("noop");
 		};
@@ -30,35 +25,18 @@ export default class AppHeader extends Component {
 			<div>
 				<Headroom tolerance={5} offset={200}>
 					<div className="app-bar">
-						<div
-							className={[
-								"app-bar-container",
-								!(country && language) ? "logo-centered" : "",
-							].join(" ")}
-							onClick={onGoHome || noop}
-						>
-							<img
-								onClick={onGoHome}
-								src={this.props.logo || "/logo.png"}
-								className="app-bar-logo"
-								alt=" "
-							/>
+						<div className={["app-bar-container", !(country && language) ? "logo-centered" : ""].join(" ")} onClick={onGoHome || noop}>
+							<img onClick={onGoHome} src={this.props.logo || "/logo.png"} className="app-bar-logo" alt=" " />
 						</div>
 						{country &&
 							language && (
 								<div className="app-bar-container">
 									<div className="app-bar-buttons">
-										<Button
-											color="contrast"
-											onClick={onChangeCountry || noop}
-										>
+										<Button color="contrast" onClick={onChangeCountry || noop}>
 											{(country && country.fields.name) || " "}
 										</Button>
 										<div className="app-bar-separator" />
-										<IconButton
-											color="contrast"
-											onClick={onGoToSearch || noop}
-										>
+										<IconButton color="contrast" onClick={onGoToSearch || noop}>
 											<Search />
 										</IconButton>
 									</div>
@@ -78,3 +56,5 @@ export default class AppHeader extends Component {
 		);
 	}
 }
+
+export default translate()(AppHeader);

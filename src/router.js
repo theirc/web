@@ -41,14 +41,14 @@ function withCountry(WrappedComponent) {
 			this.state = { loaded: false };
 		}
 		componentWillMount() {
-			const { match, onMount } = this.props;
-			onMount(match.params.country).then(c => {});
+			const { match, onMount,language } = this.props;
+			onMount(match.params.country, language).then(c => {});
 		}
 
 		componentWillUpdate(newProps) {
-			const { match, onMount } = this.props;
+			const { match, onMount, language } = this.props;
 			if (newProps.match.params.country !== match.params.country) {
-				onMount(match.params.country).then(c => {});
+				onMount(match.params.country, language).then(c => {});
 			}
 		}
 
@@ -59,14 +59,14 @@ function withCountry(WrappedComponent) {
 	}
 
 	CountrySwitcher = connect(
-		({ country }, p) => {
-			return { country };
+		({ country, language }, p) => {
+			return { country, language };
 		},
 		(d, p) => {
 			return {
-				onMount: country => {
+				onMount:( country, language) => {
 					return cms
-						.loadCountry(country)
+						.loadCountry(country, language)
 						.then(c => {
 							d(actions.changeCountry(c));
 							return Promise.resolve(c);

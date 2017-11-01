@@ -26,14 +26,41 @@ export default class ArticlePage extends Component {
 			slug: PropTypes.string,
 			translations: PropTypes.array,
 		}),
+		onNavigate: PropTypes.func,
 	};
+
+	componentDidMount() {
+		const { onNavigate } = this.props;
+
+		let hostname = "www.refugee.info";
+		if (global.location) {
+			hostname = global.location.hostname;
+		}
+
+		let anchors = Array.from(this._ref.querySelectorAll("a"));
+		anchors = anchors.filter(a => a.href.indexOf("http") || a.hostname === hostname);
+
+		for (let anchor of anchors) {
+			let href = anchor.href + "";
+			if (href.indexOf("http") >= 0) {
+				href =
+					"/" +
+					href
+						.split("/")
+						.slice(3)
+						.join("/");
+			}
+			anchor.href = "javascript:void(0)";
+			anchor.onclick = () => onNavigate(href);
+		}
+	}
 
 	render() {
 		const { article, category, loading } = this.props;
 		const { title, content, hero } = article.fields;
 
 		return (
-			<div className={["ArticlePage", loading ? "loading" : "loaded"].join(" ")}>
+			<div ref={r => (this._ref = r)} className={["ArticlePage", loading ? "loading" : "loaded"].join(" ")}>
 				<div className="title">
 					<h1>
 						<small>{category.fields.name}:</small>
