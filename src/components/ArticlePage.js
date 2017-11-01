@@ -29,7 +29,7 @@ export default class ArticlePage extends Component {
 		onNavigate: PropTypes.func,
 	};
 
-	componentDidMount() {
+	replaceLinks() {
 		const { onNavigate } = this.props;
 
 		let hostname = "www.refugee.info";
@@ -39,8 +39,9 @@ export default class ArticlePage extends Component {
 
 		let anchors = Array.from(this._ref.querySelectorAll("a"));
 		anchors = anchors.filter(a => a.href.indexOf("http") || a.hostname === hostname);
+		let isPhoneOrAlreadyProcessed = h => h.indexOf("javascript:void") === -1 && h.indexOf("tel:") === -1;
 
-		for (let anchor of anchors) {
+		for (let anchor of anchors.filter(a => isPhoneOrAlreadyProcessed(a.href))) {
 			let href = anchor.href + "";
 			if (href.indexOf("http") >= 0) {
 				href =
@@ -54,10 +55,20 @@ export default class ArticlePage extends Component {
 			anchor.onclick = () => onNavigate(href);
 		}
 	}
+	componentDidUpdate() {
+		this.replaceLinks();
+	}
+
+	componentDidMount() {
+		this.replaceLinks();
+	}
 
 	render() {
 		const { article, category, loading } = this.props;
 		const { title, content, hero } = article.fields;
+		//\+[1-9]{1}[0-9]{3,14}
+		let html = md.render(content);
+		html = html.replace(/(\+[1-9]{1}[0-9]{3,14})/g, `<a class="tel" href="tel:$1">$1</a>`);
 
 		return (
 			<div ref={r => (this._ref = r)} className={["ArticlePage", loading ? "loading" : "loaded"].join(" ")}>
@@ -73,7 +84,7 @@ export default class ArticlePage extends Component {
 					</div>
 				)}
 				<article>
-					<div dangerouslySetInnerHTML={{ __html: md.render(content) }} />
+					<div dangerouslySetInnerHTML={{ __html: html }} />
 				</article>
 			</div>
 		);
