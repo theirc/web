@@ -2,7 +2,7 @@ import i18n from 'i18next';
 import XHR from 'i18next-xhr-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { reactI18nextModule } from 'react-i18next';
-import i18nConfig from './config.json';
+import i18nConfig from './config.js';
 
 i18n
   .use(LanguageDetector)
