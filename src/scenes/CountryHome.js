@@ -57,12 +57,7 @@ class CountryHome extends React.Component {
 			return null;
 		}
 		
-		let hostname = 'www.refugee.info';
-		if(global.location)  {
-			hostname = global.location.hostname;
-		}
-
-		return <HomeWidgetCollection>{country.fields.home.map(e => <HomeWidget onNavigate={onNavigate} hostname={hostname} country={country} content={e} key={e.sys.id} />)}</HomeWidgetCollection>;
+		return <HomeWidgetCollection>{country.fields.home.map(e => <HomeWidget onNavigate={onNavigate} country={country} content={e} key={e.sys.id} />)}</HomeWidgetCollection>;
 	}
 }
 

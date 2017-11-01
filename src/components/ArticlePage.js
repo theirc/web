@@ -30,7 +30,13 @@ export default class ArticlePage extends Component {
 	};
 
 	componentDidMount() {
-		const { onNavigate, hostname } = this.props;
+		const { onNavigate } = this.props;
+
+		let hostname = "www.refugee.info";
+		if (global.location) {
+			hostname = global.location.hostname;
+		}
+
 		let anchors = Array.from(this._ref.querySelectorAll("a"));
 		anchors = anchors.filter(a => a.href.indexOf("http") || a.hostname === hostname);
 

@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { NavigateBefore, NavigateNext, Share, ModeEdit } from "material-ui-icons";
+import { translate } from "react-i18next";
 
 import "./ArticleFooter.css";
 
 /**
  * 
  */
-export default class ArticleFooter extends Component {
+class ArticleFooter extends Component {
 	static propTypes = {
 		onNavigateTo: PropTypes.func,
 		country: PropTypes.object,
@@ -26,7 +27,7 @@ export default class ArticleFooter extends Component {
 	};
 
 	render() {
-		const { previous, next, onNavigateTo, direction } = this.props;
+		const { previous, next, onNavigateTo, direction, t } = this.props;
 		const rtl = direction === "rtl";
 
 		return (
@@ -39,7 +40,7 @@ export default class ArticleFooter extends Component {
 						}}
 					>
 						<h1>
-							<small>NEXT PAGE:</small>
+							<small>{t("NEXT PAGE")}:</small>
 							{next.fields.title}
 						</h1>
 						{!rtl ? <NavigateNext className="icon" /> : <NavigateBefore className="icon" />}
@@ -54,7 +55,7 @@ export default class ArticleFooter extends Component {
 						}}
 					>
 						<h1>
-							<small>PREVIOUS PAGE:</small>
+							<small>{t("PREVIOUS PAGE")}:</small>
 							{previous.fields.title}
 						</h1>
 						{!rtl ? <NavigateBefore className="icon" /> : <NavigateNext className="icon" />}
@@ -62,15 +63,17 @@ export default class ArticleFooter extends Component {
 				)}
 				{previous && <hr />}
 				<div className="selector">
-					<h1>Share this page</h1>
+					<h1>{t("Share this page")}</h1>
 					<Share className="icon" />
 				</div>
 				<hr />
 				<div className="selector">
-					<h1>Suggest changes to this page</h1>
+					<h1>{t("Suggest changes to this page")}</h1>
 					<ModeEdit className="icon" />
 				</div>
 			</div>
 		);
 	}
 }
+
+export default translate()(ArticleFooter);

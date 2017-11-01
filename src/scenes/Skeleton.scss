@@ -1,11 +1,10 @@
 @import "../shared/includes.scss";
 #root {
 	background-color: white;
-
 }
 
 body {
- background-color: darken(gray, 30%);;
+	background-color: darken(gray, 30%);
 }
 @media (min-width: $desktopBreakpoint) {
 	.app-bar-container {
@@ -55,13 +54,21 @@ s {
 		text-transform: uppercase;
 		font-weight: bold;
 	}
-	& > a:before {
+	& > a:before { 
+
+		@include darken-brand-colors("color", 10%);
+		@include brand-colors("border-color");
+	}
+	.ltr & > a:before {
 		content: "□";
 		padding-right: 5px;
 		font-size: 1em;
+	}
+	.rtl & > a:before {
+		content: "□";
+		padding-left: 5px;
+		font-size: 1em;
 
-		@include brand-colors("color");
-		@include brand-colors("border-color");
 	}
 }
 
