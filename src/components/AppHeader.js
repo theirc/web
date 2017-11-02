@@ -25,8 +25,19 @@ class AppHeader extends Component {
 			<div>
 				<Headroom tolerance={5} offset={200}>
 					<div className="app-bar">
-						<div className={["app-bar-container", !(country && language) ? "logo-centered" : ""].join(" ")} onClick={onGoHome || noop}>
-							<img onClick={onGoHome} src={this.props.logo || "/logo.png"} className="app-bar-logo" alt=" " />
+						<div
+							className={[
+								"app-bar-container",
+								!(country && language) ? "logo-centered" : "",
+							].join(" ")}
+							onClick={onGoHome || noop}
+						>
+							<img
+								onClick={onGoHome}
+								src={this.props.logo || "/logo.svg"}
+								className="app-bar-logo"
+								alt=" "
+							/>
 						</div>
 						{country &&
 							language && (

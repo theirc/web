@@ -21,8 +21,10 @@ class LanguageSelectorScene extends React.Component {
 		const { onGoTo, onSelectLanguage } = this.props;
 		this.setState({ selected: true }, () => {
 			setTimeout(() => {
-				onSelectLanguage(language);
-				onGoTo(redirect);
+                onSelectLanguage(language);
+				setTimeout(() => {
+					onGoTo(redirect);
+				}, 300);
 			}, 300);
 		});
 	}

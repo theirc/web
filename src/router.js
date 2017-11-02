@@ -2,17 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import { Route, Switch, withRouter } from "react-router";
+import { AnimatedSwitch } from "react-router-transition";
 
 import { ConnectedRouter } from "react-router-redux";
-import {
-	Home,
-	Article,
-	Categories,
-	CountryHome,
-	CategoryHome,
-	CountrySelectorScene,
-	LanguageSelectorScene,
-} from "./scenes";
+import { Home, Article, Categories, CountryHome, CategoryHome, CountrySelectorScene, LanguageSelectorScene } from "./scenes";
 import cms from "./content/cms";
 import { history, actions } from "./store";
 import _ from "lodash";
@@ -39,13 +32,18 @@ function withCountry(WrappedComponent) {
 			this.state = { loaded: false };
 		}
 		componentWillMount() {
-			const { match, onMount,language } = this.props;
+			const { match, onMount, language } = this.props;
+
 			onMount(match.params.country, language).then(c => {});
 		}
 
 		componentWillUpdate(newProps) {
 			const { match, onMount, language } = this.props;
-			if (newProps.match.params.country !== match.params.country) {
+			console.log(newProps.language, language);
+
+			if (newProps.language !== language) {
+				onMount(match.params.country, newProps.language).then(c => {});
+			} else if (newProps.match.params.country !== match.params.country) {
 				onMount(match.params.country, language).then(c => {});
 			}
 		}
@@ -61,13 +59,11 @@ function withCountry(WrappedComponent) {
 		},
 		(d, p) => {
 			return {
-				onMount:( country, language) => {
-					return cms
-						.loadCountry(country, language)
-						.then(c => {
-							d(actions.changeCountry(c));
-							return Promise.resolve(c);
-						});
+				onMount: (country, language) => {
+					return cms.loadCountry(country, language).then(c => {
+						d(actions.changeCountry(c));
+						return Promise.resolve(c);
+					});
 				},
 			};
 		}
@@ -82,11 +78,9 @@ function withCategory(WrappedComponent) {
 			const { match, country, onRender } = this.props;
 			if (country) {
 				const category = _.first(
-					_.flattenDeep(country.fields.categories.map(c=>[c, c.fields.categories])).filter(_.identity).filter(
-						c =>
-                        c &&
-                        c.fields.slug === match.params.category
-					)
+					_.flattenDeep(country.fields.categories.map(c => [c, c.fields.categories]))
+						.filter(_.identity)
+						.filter(c => c && c.fields.slug === match.params.category)
 				);
 				onRender(category);
 			}
@@ -98,14 +92,11 @@ function withCategory(WrappedComponent) {
 
 			if (country) {
 				const category = _.first(
-					_.flattenDeep(country.fields.categories.map(c=>[c, c.fields.categories])).filter(_.identity).filter(
-						c =>
-							c &&
-							c.fields.slug === match.params.category
-					)
+					_.flattenDeep(country.fields.categories.map(c => [c, c.fields.categories]))
+						.filter(_.identity)
+						.filter(c => c && c.fields.slug === match.params.category)
 				);
-                onRender(category);
-                
+				onRender(category);
 			}
 		}
 
@@ -132,47 +123,28 @@ function withCategory(WrappedComponent) {
 	return CategorySwitcher;
 }
 
+//rendering single child
+const firstChild = props => {
+	const childrenArray = React.Children.toArray(props.children);
+	return childrenArray[0] || null;
+};
+
 class Router extends Component {
 	render() {
 		return (
 			<ConnectedRouter history={history}>
 				<div className="SkeletonContainer">
 					<ScrollToTop />
-					<Switch>
+					<AnimatedSwitch atEnter={{ opacity: 0.5 }} atLeave={{ opacity: 0.5 }} atActive={{ opacity: 1 }} className="switch-wrapper">
 						<Route exact path="/" component={Home} />
-						<Route
-							exact
-							path="/country-selector"
-							component={CountrySelectorScene}
-						/>
-						<Route
-							exact
-							path="/:country/search"
-							component={() => <div>Search</div>}
-						/>
-						<Route
-							exact
-							path="/language-selector"
-							component={LanguageSelectorScene}
-						/>
-						<Route
-							exact
-							path="/:country/categories"
-							component={withCountry(Categories)}
-						/>
-						<Route
-							path="/:country/:category/:article"
-							component={withCountry(withCategory(Article))}
-						/>
-						<Route
-							path="/:country/:category"
-							component={withCountry(withCategory(CategoryHome))}
-						/>
-						<Route
-							path="/:country"
-							component={withCountry(CountryHome)}
-						/>
-					</Switch>
+						<Route exact path="/country-selector" component={CountrySelectorScene} />
+						<Route exact path="/:country/search" component={() => <div>Search</div>} />
+						<Route exact path="/language-selector" component={LanguageSelectorScene} />
+						<Route exact path="/:country/categories" component={withCountry(Categories)} />
+						<Route path="/:country/:category/:article" component={withCountry(withCategory(Article))} />
+						<Route path="/:country/:category" component={withCountry(withCategory(CategoryHome))} />
+						<Route path="/:country" component={withCountry(CountryHome)} />
+					</AnimatedSwitch>
 				</div>
 			</ConnectedRouter>
 		);

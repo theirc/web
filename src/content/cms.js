@@ -1,4 +1,4 @@
-const config = require('./config').default;
+const config = require("./config").default;
 const contentful = require("contentful");
 let client = null;
 let siteConfig = null;
@@ -25,17 +25,12 @@ function loadCountry(slug, language = "en") {
 	let { languageDictionary } = config;
 
 	if (siteConfig) {
-		languageDictionary = Object.assign(
-			languageDictionary,
-			siteConfig.languageDictionary
-		);
+		languageDictionary = Object.assign(languageDictionary, siteConfig.languageDictionary);
 	}
 
-	if(global.sessionStorage && global.sessionStorage.country) {
+	if (global.sessionStorage && global.sessionStorage.country) {
 		const country = JSON.parse(global.sessionStorage.country);
-		if(country[slug]) {
-			return Promise.resolve(country[slug].items[0]);
-		}
+		return Promise.resolve(client.parseEntries(country).items[0]);
 	}
 
 	return client
@@ -44,9 +39,15 @@ function loadCountry(slug, language = "en") {
 			"fields.slug": slug,
 			include: 10,
 			locale: languageDictionary[language],
+			resolveLinks: false,
 		})
-		.then(e => {
-			let { items } = e;
+		.then((e, r) => {
+			let toStore = e.stringifySafe();
+			global.sessionStorage.country = toStore;
+			//console.log(toStore, '\n\n\n\n', client);
+
+			let entities = client.parseEntries(e);
+			let { items } = entities;
 
 			if (items.length === 0) {
 				throw Error("No Country Found");
