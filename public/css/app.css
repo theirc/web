@@ -1,3 +1,4 @@
+
 .App {
   text-align: center;
 }
@@ -23,13 +24,9 @@
   to { transform: rotate(360deg); }
 }
 
-
-
-
 html, body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Cairo', sans-serif;
     margin: 0;
     padding: 0;
     min-height: 100vh;
 }
-

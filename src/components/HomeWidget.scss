@@ -26,7 +26,7 @@
 
 	s.Read-More {
 		display: flex;
-		flex-direction: row-reverse;
+		flex-direction: row;
 	}
 
 	.Category {
@@ -43,6 +43,7 @@
 			h3 {
 				text-transform: none;
 				margin-bottom: 3px;
+				font-weight: 700;
 			}
 		}
 	}
@@ -52,6 +53,7 @@
 		}
 		p {
 			margin-top: 0;
+			font-weight: 300;
 		}
 
 		.hero {
