@@ -1,7 +1,7 @@
 import React from "react";
 import moment from "moment";
 import { connect } from "react-redux";
-import { HomeWidget, HomeWidgetCollection, WarningDialog } from "../components";
+import { HomeWidget, HomeWidgetCollection,  } from "../components";
 import { push } from "react-router-redux";
 
 class CountryHome extends React.Component {
@@ -52,28 +52,12 @@ class CountryHome extends React.Component {
 		if (!country || !country.fields.home) {
 			return null;
 		}
-		const notificationType = n => {
-			switch (n.fields.type) {
-				case "Warning":
-					return "red";
-				case "Announcement":
-					return "green";
-				default:
-					return "yellow";
-			}
-		};
-		let notifications = (country.fields.notifications||[]).filter(n => moment(n.fields.expirationDate).unix() > moment().unix()).map(n => (
-			<WarningDialog type={notificationType(n)} key={n.sys.id}>
-				{n.fields.content}
-			</WarningDialog>
-		));
-		console.log(notifications);
-
-		return (notifications || []).concat([
+		
+		return [
 			<HomeWidgetCollection key={"HomeWidgetCollection"}>
 				{country.fields.home.map(e => <HomeWidget onNavigate={onNavigate} country={country} content={e} key={e.sys.id} />)}
 			</HomeWidgetCollection>,
-		]);
+		];
 	}
 }
 

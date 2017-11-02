@@ -44,7 +44,6 @@ function loadCountry(slug, language = "en") {
 		.then((e, r) => {
 			let toStore = e.stringifySafe();
 			global.sessionStorage.country = toStore;
-			//console.log(toStore, '\n\n\n\n', client);
 
 			let entities = client.parseEntries(e);
 			let { items } = entities;

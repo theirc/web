@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+import { Close } from "material-ui-icons";
 import "./WarningDialog.css";
 
 const Remarkable = require("remarkable");
@@ -17,6 +18,7 @@ export default class WarningDialog extends Component {
 		text: PropTypes.string,
 		type: PropTypes.string,
 		dismiss: PropTypes.bool,
+		onHide: PropTypes.func,
 	};
 
 	constructor() {
@@ -30,16 +32,23 @@ export default class WarningDialog extends Component {
 	componentDidMount() {
 		if (this.props.dismiss) {
 			setTimeout(() => {
-				this.setState({
-					hiding: true,
-				});
-				setTimeout(() => {
-					this.setState({
-						hide: true,
-					});
-				}, 1000);
+				this.hide();
 			}, 30 * 1000);
 		}
+	}
+	hide() {
+		this.setState({
+			hiding: true,
+		});
+		setTimeout(() => {
+			this.setState({
+				hide: true,
+            });
+            
+            if(this.props.onHide) {
+                this.props.onHide();
+            }
+		}, 1000);
 	}
 
 	render() {
@@ -49,12 +58,15 @@ export default class WarningDialog extends Component {
 		if (hide) {
 			return null;
 		}
-		let html = md.render(children||text);
+		let html = md.render(children || text);
 		html = html.replace(/(\+[1-9]{1}[0-9]{3,14})/g, `<a class="tel" href="tel:$1">$1</a>`);
 
 		return (
 			<div className={[containerClassName, (hiding && "warning--hiding") || ""].join(" ")}>
 				<div className="warning-dialog-container-inner" dangerouslySetInnerHTML={{ __html: html }} />
+				<div className="warning-dialog-close" onClick={() => this.hide()}>
+					<Close />
+				</div>
 			</div>
 		);
 	}

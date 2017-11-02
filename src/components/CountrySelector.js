@@ -10,6 +10,7 @@ class CountrySelector extends Component {
 	componentDidMount() {
 		if (global.window) {
 			delete global.window.sessionStorage.country;
+			delete global.window.sessionStorage.dismissedNotifications;
 		}
 	}
 

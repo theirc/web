@@ -38,7 +38,6 @@ function withCountry(WrappedComponent) {
 
 		componentWillUpdate(newProps) {
 			const { match, onMount, language } = this.props;
-			console.log(newProps.language, language);
 
 			if (newProps.language !== language) {
 				onMount(match.params.country, newProps.language).then(c => {});
