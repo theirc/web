@@ -55,23 +55,7 @@ app.get("/config", (rq, res) => {
 	res.send(responseText);
 });
 
-// Host the public folder
-app.get("*", function(request, response, next) {
-	/* let urlParts = request.url.split("?");
-	history.location.pathname = urlParts[0];
-	history.location.query = urlParts[1];
-	try {
-		console.log(
-			renderToString(
-				<Provider store={store}>
-					<ReactApp />
-				</Provider>
-			)
-		);
-	} catch (e) {
-		console.log(e);
-	}*/
-
+var mainRequest = function(request, response, next) {
 	fs.readFile(path.join(path.dirname(path.dirname(__dirname)), "build", "index.html"), (err, data) => {
 		if (err) throw err;
 
@@ -81,7 +65,13 @@ app.get("*", function(request, response, next) {
 			response.send(compiled);
 		});
 	});
-});
+};
+
+// Host the public folder
+app.get("/", mainRequest);
+app.use("/", feathers.static("build"));
+
+app.get("*", mainRequest);
 
 app.use(notFound());
 app.use(handler());
