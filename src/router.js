@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Route, Switch, withRouter } from "react-router";
 
 import { ConnectedRouter } from "react-router-redux";
-import { Home, Article, Categories, CountryHome, CategoryHome, CountrySelectorScene, LanguageSelectorScene } from "./scenes";
+import { Home, Article, Categories, CountryHome, CategoryHome, CountrySelectorScene, LanguageSelectorScene, Search } from "./scenes";
 import cms from "./content/cms";
 import { history, actions } from "./store";
 import _ from "lodash";
@@ -148,8 +148,8 @@ class Router extends Component {
 					<Switch>
 						<Route exact path="/" component={Home} />
 						<Route exact path="/country-selector" component={CountrySelectorScene} />
-						<Route exact path="/:country/search" component={() => <div>Search</div>} />
 						<Route exact path="/language-selector" component={LanguageSelectorScene} />
+						<Route exact path="/:country/search" component={withCountry(Search)} />
 						<Route exact path="/:country/categories" component={withCountry(Categories)} />
 						<Route path="/:country/:category/:article" component={withCountry(withCategory(Article))} />
 						<Route path="/:country/:category" component={withCountry(withCategory(CategoryHome))} />

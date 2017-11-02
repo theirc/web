@@ -56,8 +56,6 @@ app.get("/config", (rq, res) => {
 });
 
 // Host the public folder
-app.use("/", feathers.static("build"));
-
 app.get("*", function(request, response, next) {
 	/* let urlParts = request.url.split("?");
 	history.location.pathname = urlParts[0];
