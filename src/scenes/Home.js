@@ -1,6 +1,5 @@
 import React from 'react';
 import {Redirect} from 'react-router';
-import services from '../backend';
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 import {
@@ -28,8 +27,6 @@ class Home extends React.Component {
         } else {
             return (<Redirect to={`/language-selector`} />);
         }
-        return (<div>
-        </div>);
     }
 }
 

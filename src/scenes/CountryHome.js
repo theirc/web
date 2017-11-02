@@ -1,12 +1,9 @@
 import React from "react";
 import moment from "moment";
-import services from "../backend";
-import { actions } from "../store";
 import { connect } from "react-redux";
 import { HomeWidget, HomeWidgetCollection } from "../components";
 import { push } from "react-router-redux";
 
-import { history } from "../store";
 
 class CountryHome extends React.Component {
 	constructor() {
@@ -51,7 +48,7 @@ class CountryHome extends React.Component {
 	}
 
 	render() {
-		const { currentCoordinates, country, onNavigate } = this.props;
+		const { country, onNavigate } = this.props;
 
 		if (!country || !country.fields.home) {
 			return null;

@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { BottomNav } from "../components";
 import PropTypes from "prop-types";
 import { push } from "react-router-redux";
-import { history } from "../store";
 
 class BottomNavContainer extends React.Component {
 	static propTypes = {
@@ -24,25 +23,17 @@ class BottomNavContainer extends React.Component {
 	componentWillMount() {}
 
 	render() {
-		const {
-			category,
-			country,
-			onGoToCategories,
-			onGoHome,
-			showServiceMap,
-			router,
-		} = this.props;
-
+		const {  country, onGoToCategories, onGoHome,onGoToSearch, showServiceMap, router } = this.props;
 
 		let pathParts = router.location.pathname.split("/");
 		let selectedIndex = 0;
 		if (pathParts.length > 2) {
 			if (pathParts[2] === "article") {
 				selectedIndex = -1;
-			} else if (pathParts[2] === "menu") {
-				selectedIndex = -1;
-			} else if (pathParts[2] === "services") {
+			} else if (pathParts[2] === "search") {
 				selectedIndex = 2;
+			} else if (pathParts[2] === "services") {
+				selectedIndex = 3;
 			} else {
 				selectedIndex = 1;
 			}
@@ -55,6 +46,7 @@ class BottomNavContainer extends React.Component {
 				country={country && country.slug}
 				onGoToCategories={() => onGoToCategories(country.fields.slug)}
 				onGoHome={() => onGoHome(country.fields.slug)}
+				onGoToSearch={() => onGoToSearch(country.fields.slug)}
 			/>
 		);
 	}
@@ -75,6 +67,9 @@ const mapDispatch = (d, p) => {
 		},
 		onGoHome: country => {
 			d(push(`/${country}`));
+		},
+		onGoToSearch: country => {
+			d(push(`/${country}/search`));
 		},
 	};
 };

@@ -28,7 +28,7 @@ const isMobile = {
         return /Android/i.test(isMobile.getUserAgent()) && !isMobile.Windows();
     },
     BlackBerry: function() {
-        return /BlackBerry|BB10|PlayBook/i.test(isMobile.getUserAgent());;
+        return /BlackBerry|BB10|PlayBook/i.test(isMobile.getUserAgent());
     },
     iPhone: function() {
         return /iPhone/i.test(isMobile.getUserAgent()) && !isMobile.iPad() && !isMobile.Windows();

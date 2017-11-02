@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { Provider, connect } from "react-redux";
+import {  connect } from "react-redux";
 import { Skeleton } from "./scenes";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import { createMuiTheme } from "material-ui/styles";
-import { store } from "./store";
-import _ from "lodash";
 import Router from "./router";
 import cms from "./content/cms";
+//importing transitions
+import TransitionGroup from "react-transition-group/TransitionGroup";
 
 
 const theme = createMuiTheme({
@@ -41,15 +41,5 @@ ThemedApp = connect(({ organization, direction }) => {
 		direction,
 	};
 })(ThemedApp);
-
-class App extends Component {
-	render() {
-		return (
-			<Provider store={store}>
-				<ThemedApp />
-			</Provider>
-		);
-	}
-}
 
 export default ThemedApp;

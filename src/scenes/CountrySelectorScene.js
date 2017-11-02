@@ -1,13 +1,10 @@
 import React from "react";
-import services from "../backend";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
 import { CountrySelector } from "../components";
 import { actions } from "../store";
 import { Redirect } from "react-router";
-import { history } from "../store";
 import cms from "../content/cms";
-import _ from "lodash";
 
 class CountrySelectorScene extends React.Component {
 	componentWillMount() {
@@ -25,13 +22,13 @@ class CountrySelectorScene extends React.Component {
 		}
 
 		if (!countryList) {
-			return <div />;
+			return null;
 		}
 
 		if (countryList.length === 1) {
 			onGoTo(countryList[0].fields.slug);
 
-			return <div />;
+			return null;
 		}
 
 		if (firstTimeHere || !country) {
@@ -43,21 +40,6 @@ class CountrySelectorScene extends React.Component {
 				return <Redirect to={`/${country.fields.slug}`} />;
 			}
 		}
-
-		return (
-			<div>
-				{countryList.map((c, i) => (
-					<div
-						key={c.id}
-						onClick={() => {
-							onGoTo(c.fields.slug);
-						}}
-					>
-						{c.fields.name}
-					</div>
-				))}
-			</div>
-		);
 	}
 }
 

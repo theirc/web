@@ -1,18 +1,19 @@
 import React, { Component, } from 'react';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 
 import './CountrySelector.css';
+import AnimatedWrapper from "./AnimatedWrapper";
 
-export default class CountrySelector extends Component {
+class CountrySelector extends Component {
     static propTypes = {
     }
 
-    constructor() {
-        super();
-    }
+	componentDidMount() {
+		if (global.window) {
+			delete global.window.sessionStorage.country;
+		}
+	}
 
-    componentDidMount() {
-    }
 
     render() {
         const { countryList, onGoTo } = this.props;
@@ -27,5 +28,5 @@ export default class CountrySelector extends Component {
 
         </div>;
     }
-
 }
+export default CountrySelector;

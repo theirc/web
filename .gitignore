@@ -75,7 +75,7 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
 
-src/components/*.css
+src/components/**/*.css
 native/node_modules
 native/src
 webserver

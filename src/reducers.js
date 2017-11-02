@@ -8,13 +8,12 @@ let defaultLanguage = "";
 
 if (global.window) {
 	sessionStorage = global.sessionStorage;
-	
+
 	if (!sessionStorage.language) {
 		defaultLanguage = global.navigator.language.split("-")[0];
 	} else {
 		defaultLanguage = sessionStorage.language;
 	}
-
 }
 
 const getDirection = l => (["ar", "fa"].indexOf(l) > -1 ? "rtl" : "ltr");
@@ -101,6 +100,11 @@ function changeLanguage(state = defaultLanguage, action) {
 		case actions.actionTypes.changeLanguage:
 			sessionStorage.language = action.payload;
 			i18n.changeLanguage(sessionStorage.language);
+
+			if (global.window) {
+				delete global.window.sessionStorage.country;
+			}
+			
 			return action.payload || null;
 		default:
 			return state;

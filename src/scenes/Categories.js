@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import {
 } from '../components';
 import PropTypes from 'prop-types';
-import { push } from 'react-router-redux';
 import {CategoryList} from '../components';
 import {history} from '../store';
 
