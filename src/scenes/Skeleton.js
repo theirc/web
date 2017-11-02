@@ -60,7 +60,7 @@ class Skeleton extends React.Component {
 			};
 
 			notifications = (country.fields.notifications || []).filter(notificationFilter).map(n => (
-				<WarningDialog type={notificationType(n)} key={n.sys.id} onHide={() => hideNotification(n)}>
+				<WarningDialog type={notificationType(n)} key={n.sys.id} onHide={() => hideNotification(n)} autoDismiss={n.fields.autoDismiss} dismissable={n.fields.dismissable}>
 					{n.fields.content}
 				</WarningDialog>
 			));

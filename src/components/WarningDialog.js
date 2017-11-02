@@ -17,7 +17,8 @@ export default class WarningDialog extends Component {
 	static propTypes = {
 		text: PropTypes.string,
 		type: PropTypes.string,
-		dismiss: PropTypes.bool,
+		autoDismiss: PropTypes.bool,
+		dismissable: PropTypes.bool,
 		onHide: PropTypes.func,
 	};
 
@@ -30,7 +31,7 @@ export default class WarningDialog extends Component {
 	}
 
 	componentDidMount() {
-		if (this.props.dismiss) {
+		if (this.props.autoDismiss) {
 			setTimeout(() => {
 				this.hide();
 			}, 30 * 1000);
@@ -43,16 +44,16 @@ export default class WarningDialog extends Component {
 		setTimeout(() => {
 			this.setState({
 				hide: true,
-            });
-            
-            if(this.props.onHide) {
-                this.props.onHide();
-            }
+			});
+
+			if (this.props.onHide) {
+				this.props.onHide();
+			}
 		}, 1000);
 	}
 
 	render() {
-		const { text, children, type } = this.props;
+		const { text, children, type, dismissable } = this.props;
 		const { hide, hiding } = this.state;
 		const containerClassName = `warning-dialog-container-${type || "yellow"}`;
 		if (hide) {
@@ -64,9 +65,11 @@ export default class WarningDialog extends Component {
 		return (
 			<div className={[containerClassName, (hiding && "warning--hiding") || ""].join(" ")}>
 				<div className="warning-dialog-container-inner" dangerouslySetInnerHTML={{ __html: html }} />
-				<div className="warning-dialog-close" onClick={() => this.hide()}>
-					<Close />
-				</div>
+				{dismissable && (
+					<div className="warning-dialog-close" onClick={() => this.hide()}>
+						<Close />
+					</div>
+				)}
 			</div>
 		);
 	}
