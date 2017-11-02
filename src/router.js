@@ -122,6 +122,24 @@ function withCategory(WrappedComponent) {
 }
 
 class Router extends Component {
+	componentDidMount() {
+		if (global.window) {
+			if (global.window && global.window.document) {
+				setTimeout(() => {
+					const document = global.window.document;
+
+					var intro = document.querySelector(".intro");
+					var root = document.querySelector("#root");
+
+					if (intro) {
+						intro.remove();
+					}
+					root.className = "";
+				}, 500);
+			}
+		}
+	}
+
 	render() {
 		return (
 			<ConnectedRouter history={history}>

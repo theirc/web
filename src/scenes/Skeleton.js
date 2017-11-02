@@ -14,24 +14,6 @@ import i18n from "../i18n"; // initialized i18next instance
 import "./Skeleton.css";
 
 class Skeleton extends React.Component {
-	componentDidMount() {
-		if (global.window) {
-			if (global.window && global.window.document) {
-				setTimeout(() => {
-					const document = global.window.document;
-
-					var intro = document.querySelector(".intro");
-					var root = document.querySelector("#root");
-
-					if (intro) {
-						intro.remove();
-					}
-					root.className = "";
-				}, 200);
-			}
-		}
-	}
-
 	render() {
 		const { children, country, language, match, onGoHome, onGoToSearch, onChangeLocation, onChangeLanguage, deviceType } = this.props;
 

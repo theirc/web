@@ -8,7 +8,7 @@ i18n
   .use(reactI18nextModule) // if not using I18nextProvider
   .init({
     fallbackLng: 'en',
-    debug: true,
+    debug: false,
 
     interpolation: {
       escapeValue: false, // not needed for react!!
