@@ -1,36 +1,48 @@
-@import '../shared/includes.scss';
+@import "../shared/includes.scss";
 
 .warning-dialog-container-yellow {
-  padding: 20px 20px 20px 15px;
-  background-color: #ffda1a;
-  color: black;
+	padding: 20px 20px 20px 15px;
+	background-color: #ffda1a;
+	color: black;
+	p {
+		color: black;
+	}
 }
 
 .warning-dialog-container-red {
-  padding: 20px;
-  background-color: #e60000;
-  color: white;
+	padding: 20px;
+	background-color: #e60000;
+	color: white;
+	p {
+		color: white;
+	}
 }
 
 .warning-dialog-container-green {
-  padding: 20px;
-  background-color: #29991f;
-  color: white;
+	padding: 20px;
+	background-color: #29991f;
+	color: white;
+	p {
+		color: white;
+	}
 }
 
 .warning-dialog-container-inner {
-  border-left: 4px solid white;
-  padding-left: 15px;
+	border-left: 4px solid white;
+	padding-left: 15px;
+
+	p {
+		padding: 0;
+		margin: 0;
+	}
 }
 
 .warning--hiding {
-  padding: 0;
-  margin: 0;
-  transition: padding 1s;
+	padding: 0;
+	margin: 0;
+	transition: padding 1s;
 }
 
-
-
 .warning--hiding .warning-dialog-container-inner {
-  display: none;
+	display: none;
 }

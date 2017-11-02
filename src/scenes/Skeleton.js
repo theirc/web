@@ -19,8 +19,9 @@ class Skeleton extends React.Component {
 				const document = global.window.document;
 				var intro = document.querySelector(".intro");
 				var root = document.querySelector("#root");
-
-				intro.remove();
+				if (intro) {
+					intro.remove();
+				}
 				root.className = "";
 			}
 		}

@@ -40,7 +40,6 @@ app.configure(hooks());
 app.configure(rest());
 app.configure(socketio());
 
-
 app.get("/config", (rq, res) => {
 	let serverConf = JSON.stringify({
 		serverUrl: process.env.BACKEND_URL,
@@ -74,10 +73,13 @@ app.get("*", function(request, response, next) {
 	} catch (e) {
 		console.log(e);
 	}*/
-	
+
 	fs.readFile(path.join(path.dirname(path.dirname(__dirname)), "build", "index.html"), (err, data) => {
 		if (err) throw err;
-		nunjucks.renderString(data.toString(), {}, function(err, compiled) {
+
+		let hostname = request.headers.host;
+
+		nunjucks.renderString(data.toString(), { hostname: hostname }, function(err, compiled) {
 			response.send(compiled);
 		});
 	});

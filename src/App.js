@@ -5,8 +5,6 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import { createMuiTheme } from "material-ui/styles";
 import Router from "./router";
 import cms from "./content/cms";
-//importing transitions
-import TransitionGroup from "react-transition-group/TransitionGroup";
 
 
 const theme = createMuiTheme({

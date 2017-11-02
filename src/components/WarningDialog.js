@@ -1,53 +1,61 @@
-import React, { Component, } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
-import './WarningDialog.css';
+import "./WarningDialog.css";
+
+const Remarkable = require("remarkable");
+
+const md = new Remarkable("full", {
+	html: true,
+	linkify: true,
+	typographer: true,
+	breaks: true,
+});
 
 export default class WarningDialog extends Component {
-    static propTypes = {
-        text: PropTypes.string,
-        type: PropTypes.string,
-        dismiss: PropTypes.bool,
-    }
+	static propTypes = {
+		text: PropTypes.string,
+		type: PropTypes.string,
+		dismiss: PropTypes.bool,
+	};
 
-    constructor() {
-        super();
-        this.state = {
-            hide: false,
-            hiding: false,
-        };
-    }
+	constructor() {
+		super();
+		this.state = {
+			hide: false,
+			hiding: false,
+		};
+	}
 
-    componentDidMount() {
-        if (this.props.dismiss) {
-            setTimeout(() => {
-                this.setState({
-                    hiding: true
-                });
-                setTimeout(() => {
-                    this.setState({
-                        hide: true
-                    });
-                }, 1000);
-            }, 30 * 1000)
-        }
-    }
+	componentDidMount() {
+		if (this.props.dismiss) {
+			setTimeout(() => {
+				this.setState({
+					hiding: true,
+				});
+				setTimeout(() => {
+					this.setState({
+						hide: true,
+					});
+				}, 1000);
+			}, 30 * 1000);
+		}
+	}
 
+	render() {
+		const { text, children, type } = this.props;
+		const { hide, hiding } = this.state;
+		const containerClassName = `warning-dialog-container-${type || "yellow"}`;
+		if (hide) {
+			return null;
+		}
+		let html = md.render(children||text);
+		html = html.replace(/(\+[1-9]{1}[0-9]{3,14})/g, `<a class="tel" href="tel:$1">$1</a>`);
 
-
-    render() {
-        const { text, children, type } = this.props;
-        const { hide, hiding } = this.state;
-        const containerClassName = `warning-dialog-container-${type || 'yellow'}`;
-        if (hide) {
-            return null;
-        }
-
-        return (<div className={[containerClassName, (hiding && "warning--hiding") || ""].join(' ')}>
-            <div className="warning-dialog-container-inner">
-                {text || children}
-            </div>
-        </div>);
-    }
-
+		return (
+			<div className={[containerClassName, (hiding && "warning--hiding") || ""].join(" ")}>
+				<div className="warning-dialog-container-inner" dangerouslySetInnerHTML={{ __html: html }} />
+			</div>
+		);
+	}
 }

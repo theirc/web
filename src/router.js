@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import { Route, Switch, withRouter } from "react-router";
-import { AnimatedSwitch } from "react-router-transition";
 
 import { ConnectedRouter } from "react-router-redux";
 import { Home, Article, Categories, CountryHome, CategoryHome, CountrySelectorScene, LanguageSelectorScene } from "./scenes";
@@ -123,19 +122,13 @@ function withCategory(WrappedComponent) {
 	return CategorySwitcher;
 }
 
-//rendering single child
-const firstChild = props => {
-	const childrenArray = React.Children.toArray(props.children);
-	return childrenArray[0] || null;
-};
-
 class Router extends Component {
 	render() {
 		return (
 			<ConnectedRouter history={history}>
 				<div className="SkeletonContainer">
 					<ScrollToTop />
-					<AnimatedSwitch atEnter={{ opacity: 0.5 }} atLeave={{ opacity: 0.5 }} atActive={{ opacity: 1 }} className="switch-wrapper">
+					<Switch>
 						<Route exact path="/" component={Home} />
 						<Route exact path="/country-selector" component={CountrySelectorScene} />
 						<Route exact path="/:country/search" component={() => <div>Search</div>} />
@@ -144,7 +137,7 @@ class Router extends Component {
 						<Route path="/:country/:category/:article" component={withCountry(withCategory(Article))} />
 						<Route path="/:country/:category" component={withCountry(withCategory(CategoryHome))} />
 						<Route path="/:country" component={withCountry(CountryHome)} />
-					</AnimatedSwitch>
+					</Switch>
 				</div>
 			</ConnectedRouter>
 		);
