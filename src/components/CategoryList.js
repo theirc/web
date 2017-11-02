@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-//import PropTypes from "prop-types";
+import { translate } from "react-i18next";
 
 import "./CategoryList.css";
 
-export default class CategoryList extends Component {
+class CategoryList extends Component {
 	static propTypes = {};
 
 	render() {
-		const {  country, categories, onNavigate } = this.props;
+		const { country, categories, onNavigate, t } = this.props;
 		const showToggle = c => {
 			return (c.fields.subCategories && c.fields.subCategories.length) || (c.fields.articles && c.fields.articles.length && c.fields.type !== "News" && !c.fields.overview);
 		};
@@ -17,10 +17,11 @@ export default class CategoryList extends Component {
 
 		return (
 			<div className="CategoryList">
+				<div className="CategoryTitle">{t("Categories")}</div>
 				<ul>
 					{categories.filter(showCategory).map((c, i) => (
 						<li key={c.sys.id}>
-							<hr className="line" />
+							{i > 0 && <hr className="line" />}
 							<input type="checkbox" name={"tab"} id={`tab-${i}`} />
 							{showToggle(c) && [
 								<label key="a-1" htmlFor={`tab-${i}`} className="container">
@@ -34,7 +35,7 @@ export default class CategoryList extends Component {
 									</div>
 								</label>,
 								c.fields.categories && (
-									<ul  key="a-2">
+									<ul key="a-2">
 										{c.fields.categories.map(
 											a =>
 												a.fields && (
@@ -80,3 +81,5 @@ export default class CategoryList extends Component {
 		);
 	}
 }
+
+export default translate()(CategoryList);

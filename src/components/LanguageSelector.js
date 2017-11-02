@@ -1,25 +1,28 @@
 import React, { Component } from "react";
-//import PropTypes from 'prop-types';
+import { translate } from "react-i18next";
 
 import "./LanguageSelector.css";
 
-export default class LanguageSelector extends Component {
+class LanguageSelector extends Component {
 	static propTypes = {};
 
 	componentDidMount() {
 		if (global.window) {
 			delete global.window.sessionStorage.country;
 			delete global.window.sessionStorage.dismissedNotifications;
-			
 		}
 	}
 
 	render() {
-		const { languages, onSelectLanguage } = this.props;
-
+		const { languages, onSelectLanguage, t } = this.props;
+		console.log(t);
 		return (
 			<div className="LanguageSelector">
 				<div className="spacer" />
+				<div className="text">
+					<i className="material-icons">translate</i>
+					{languages.map((c, i) => <h1>{t("Choose your language", { lng: c[0] })}</h1>)}
+				</div>
 				{languages.map((c, i) => (
 					<button
 						className="item "
@@ -31,9 +34,10 @@ export default class LanguageSelector extends Component {
 						{c[1]}
 					</button>
 				))}
-				<div className="spacer" />
 				<div className="bottom" />
 			</div>
 		);
 	}
 }
+
+export default translate()(LanguageSelector);

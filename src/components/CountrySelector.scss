@@ -1,32 +1,5 @@
-@import '../shared/includes.scss';
+@import "./Selectors.scss";
 
 .CountrySelector {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-
-  min-height: unquote("calc(100vh)");
-  margin-top: -64px;
-
-  .spacer {
-    flex: 4;
-  }
-
-  .item {
-    flex: 1;
-    margin: 10px;
-    border: 0;
-    padding: 5px;
-    background-color: $titleBackground;
-    font-weight: bold;
-    color: lighten(black, 30%);
-    font-size: 18px;
-    outline: none;
-  }
-
-  .bottom {
-    flex: 1;
-    flex-grow: 1;
-
-  }
+	@include selectors();
 }

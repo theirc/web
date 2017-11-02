@@ -27,9 +27,15 @@
 
 
 html, body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+html .rtl, body .rtl {
+  font-family: 'Cairo', sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
 }
 

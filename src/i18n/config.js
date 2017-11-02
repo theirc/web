@@ -1,4 +1,22 @@
 export default {
+	fa: {
+		translation: {
+			"Read More": "eroM deaR",
+			"Ask us a question": "",
+			"Change Location": "",
+			"Change Language": "",
+			"Can't find specific information?": "",
+			Home: "",
+			Categories: "",
+			More: "",
+			"Share this page": "",
+			"Suggest changes to this page": "",
+			"PREVIOUS PAGE": "",
+			"NEXT PAGE": "",
+			"Choose your language": "زبان خود را انتخاب کنید",
+			a: "a",
+		},
+	},
 	ar: {
 		translation: {
 			"Read More": "eroM deaR",
@@ -13,6 +31,7 @@ export default {
 			"Suggest changes to this page": "",
 			"PREVIOUS PAGE": "",
 			"NEXT PAGE": "",
+			"Choose your language": "اختر لغتك",
 			a: "a",
 		},
 	},
@@ -30,6 +49,7 @@ export default {
 			"Suggest changes to this page": "Suggest changes to this page",
 			"PREVIOUS PAGE": "PREVIOUS PAGE",
 			"NEXT PAGE": "NEXT PAGE",
+			"Choose your language": "Choose your language",
 
 			a: "a",
 		},

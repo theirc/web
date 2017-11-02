@@ -11,6 +11,19 @@
 		cursor: pointer;
 		text-decoration: underline;
 	}
+	.CategoryTitle {
+		height: 72px;
+		padding-left: 16px;
+		padding-right: 16px;
+		text-transform: uppercase;
+		background: #F2F2F2;
+		font-size: 18px;
+		line-height: 20px;
+		font-weight: bold;
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+	}
 
 	.fa {
 		font-size: 20px;
@@ -25,7 +38,7 @@
 	}
 
 	ul li .container {
-		padding: 15px;
+		padding: 16px;
 		display: flex;
 		flex-direction: row;
 		justify-content: center;
@@ -34,7 +47,6 @@
 	& > ul li .container > i {
 		padding-right: 10px;
 		width: 25px;
-		
 	}
 
 	ul li .inner-container {
@@ -58,26 +70,25 @@
 		display: none;
 		margin: 0;
 		padding: 0;
-		margin-right: 40px; 
-		margin-left: 40px; 
+		margin-right: 40px;
+		margin-left: 40px;
 		&.sub-categories {
-			margin-right: 50px; 
-			margin-left: 50px; 
-			padding-right: 10px; 
-			padding-left: 10px; 
-			@include brand-colors('border-left-color');
-			@include brand-colors('border-right-color');
-			
+			margin-right: 50px;
+			margin-left: 50px;
+			padding-right: 10px;
+			padding-left: 10px;
+			@include brand-colors("border-left-color");
+			@include brand-colors("border-right-color");
+
 			.ltr & {
 				border-left-width: 3px;
 				border-left-style: solid;
-			} 
-			
+			}
+
 			.rtl & {
 				border-right-width: 3px;
 				border-right-style: solid;
-			} 
-			
+			}
 		}
 	}
 

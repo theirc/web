@@ -45,10 +45,9 @@ Less me
 }
 
 .app-bar-separator {
-  border-left-width: 2px;
+  border-left-width: 1px;
   border-left-color: #ffffff;
   border-left-style: solid;
-  border-radius: 1px;
   height: 25px;
   @include brand-colors( 'border-left-color');
 }

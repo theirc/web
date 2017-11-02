@@ -1,0 +1,56 @@
+@import "../shared/includes.scss";
+
+
+@mixin selectors() {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+
+	min-height: unquote("calc(100vh)");
+	margin-top: -64px;
+
+	.spacer {
+		flex-grow: 1;
+    }
+    .bottom {
+        height: 100px;
+    }
+
+	.item {
+		margin: 10px;
+		border: 0;
+		padding: 5px;
+		background-color: $titleBackground;
+		outline: none;
+		height: 52px;
+
+		font-size: 16px;
+		color: #5e5e5e;
+		letter-spacing: 0;
+		line-height: 20px;
+	}
+
+	.text {
+		height: 180px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		align-content: center;
+		justify-content: center;
+		i {
+			display: block;
+			font-size: 40px;
+			@include brand-colors("color");
+		}
+
+		h1 {
+			font-size: 18px;
+			color: #000000;
+			letter-spacing: 0;
+			line-height: 20px;
+			font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 0;
+		}
+	}
+}
