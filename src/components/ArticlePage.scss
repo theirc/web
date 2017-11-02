@@ -9,7 +9,7 @@
 		opacity: 1;
 		transition: opacity 0.2s ease-in-out;
 	}
-	
+
 	btn {
 		display: block;
 		text-transform: capitalize;
@@ -22,7 +22,7 @@
 		& > a {
 			text-decoration: none;
 			text-transform: uppercase;
-			font-weight: bold;
+			font-weight: 700;
 		}
 		& > a:before {
 			content: "□";

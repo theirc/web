@@ -26,6 +26,16 @@
 		a {
 			@include brand-colors("color");
 		}
+		.rtl & {
+			display: flex;
+			flex-direction: row-reverse;
+			a{
+				margin: 0 3px 0 3px;
+			}
+		}
+		span{
+			padding:0 3px 0 3px;
+		}
 	}
 
 	.light {
@@ -33,7 +43,6 @@
 		justify-content: center;
 		align-items: center;
 		flex-direction: column;
-
 		min-height: 100px;
 		padding: 5px;
 
@@ -53,9 +62,7 @@
 		justify-content: center;
 		align-items: center;
 		align-content: center;
-
 		flex-direction: column;
-
 		min-height: 200px;
 		padding: 5px;
 		background-color: #000000;

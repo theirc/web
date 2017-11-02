@@ -52,9 +52,9 @@ s {
 	& > a {
 		text-decoration: none;
 		text-transform: uppercase;
-		font-weight: bold;
+		font-weight: 700;
 	}
-	& > a:before { 
+	& > a:before {
 
 		@include darken-brand-colors("color", 10%);
 		@include brand-colors("border-color");
