@@ -25,7 +25,7 @@ class Skeleton extends React.Component {
 		}
 	}
 	render() {
-		const { children, country, language, match, onGoHome, onGoToSearch, onChangeLocation, onChangeLanguage, deviceType, router } = this.props;
+		const { children, country, language, match, onGoHome, onGoToSearch, onChangeLocation, onChangeLanguage, deviceType, router, hideFooter } = this.props;
 
 		let notifications = [];
 		const notificationType = n => {
@@ -58,6 +58,8 @@ class Skeleton extends React.Component {
 			));
 		}
 
+		let showFooter = !hideFooter && country && language;
+
 		return (
 			<I18nextProvider i18n={i18n}>
 				<div className="Skeleton">
@@ -68,16 +70,15 @@ class Skeleton extends React.Component {
 					<AppHeader country={country} language={language} onGoHome={onGoHome(country)} onGoToSearch={onGoToSearch(country)} onChangeCountry={onChangeLocation} logo={cms.siteConfig.logo} />
 					{notifications}
 					{children}
-					{country &&
-						language && (
-							<Footer
-								questionLink={cms.siteConfig.questionLink}
-								disableCountrySelector={!!cms.siteConfig.disableCountrySelector}
-								onChangeLocation={onChangeLocation}
-								onChangeLanguage={onChangeLanguage.bind(this, router.location.pathname)}
-								deviceType={deviceType}
-							/>
-						)}
+					{showFooter && (
+						<Footer
+							questionLink={cms.siteConfig.questionLink}
+							disableCountrySelector={!!cms.siteConfig.disableCountrySelector}
+							onChangeLocation={onChangeLocation}
+							onChangeLanguage={onChangeLanguage.bind(this, router.location.pathname)}
+							deviceType={deviceType}
+						/>
+					)}
 					{country && language && <BottomNavContainer match={match} />}
 				</div>
 			</I18nextProvider>

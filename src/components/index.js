@@ -10,5 +10,6 @@ import LanguageSelector from "./LanguageSelector";
 import HomeWidget from "./HomeWidget";
 import HomeWidgetCollection from "./HomeWidgetCollection";
 import SearchPage from "./SearchPage";
+import ServiceMap from "./ServiceMap";
 
-export { AppHeader, BottomNav, WarningDialog, Footer, ArticlePage, ArticleFooter, CategoryList, CountrySelector, LanguageSelector, HomeWidget, HomeWidgetCollection, SearchPage };
+export { AppHeader, BottomNav, WarningDialog, Footer, ArticlePage, ArticleFooter, CategoryList, CountrySelector, LanguageSelector, HomeWidget, HomeWidgetCollection, SearchPage, ServiceMap };

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import {  connect } from "react-redux";
-import { Skeleton } from "./scenes";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import { createMuiTheme } from "material-ui/styles";
 import Router from "./router";
@@ -25,9 +24,8 @@ class ThemedApp extends Component {
 		return (
 			<MuiThemeProvider theme={theme}>
 				<span className={[organization, direction].join(" ")}>
-					<Skeleton>
 						<Router />
-					</Skeleton>
+				
 				</span>
 			</MuiThemeProvider>
 		);

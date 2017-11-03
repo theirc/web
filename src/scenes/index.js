@@ -5,7 +5,8 @@ import CountryHome from "./CountryHome";
 import CategoryHome from "./CategoryHome";
 import Skeleton from "./Skeleton";
 import CountrySelectorScene from "./CountrySelectorScene";
-import Search from "./Search";
 import LanguageSelectorScene from "./LanguageSelectorScene";
+import Services from "./Services";
+import Search from "./Search";
 
-export { Home, Article, Categories, CountryHome, CategoryHome, Skeleton, CountrySelectorScene, LanguageSelectorScene, Search };
+export { Home, Article, Categories, CountryHome, CategoryHome, Skeleton, CountrySelectorScene, LanguageSelectorScene, Search, Services };

@@ -23,7 +23,7 @@ class BottomNavContainer extends React.Component {
 	componentWillMount() {}
 
 	render() {
-		const {  country, onGoToCategories, onGoHome,onGoToSearch, showServiceMap, router } = this.props;
+		const { country, onGoToCategories, onGoHome, onGoToSearch, showServiceMap, onGoToServices, router } = this.props;
 
 		let pathParts = router.location.pathname.split("/");
 		let selectedIndex = 0;
@@ -44,9 +44,10 @@ class BottomNavContainer extends React.Component {
 				showServiceMap={showServiceMap}
 				index={selectedIndex}
 				country={country && country.slug}
-				onGoToCategories={() => onGoToCategories(country.fields.slug)}
-				onGoHome={() => onGoHome(country.fields.slug)}
-				onGoToSearch={() => onGoToSearch(country.fields.slug)}
+				onGoToCategories={onGoToCategories.bind(null, country.fields.slug)}
+				onGoHome={onGoHome.bind(null, country.fields.slug)}
+				onGoToSearch={onGoToSearch.bind(null, country.fields.slug)}
+				onGoToServices={onGoToServices.bind(null, country.fields.slug)}
 			/>
 		);
 	}
@@ -70,6 +71,9 @@ const mapDispatch = (d, p) => {
 		},
 		onGoToSearch: country => {
 			d(push(`/${country}/search`));
+		},
+		onGoToServices: country => {
+			d(push(`/${country}/services`));
 		},
 	};
 };

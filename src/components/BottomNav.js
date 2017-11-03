@@ -39,7 +39,7 @@ class BottomNav extends Component {
 				return onGoToSearch();
 			}
 		} else if (selectedIndex === 3) {
-			if (onGoToMore) {
+			if (onGoToServices) {
 				return onGoToServices();
 			}
 		}
