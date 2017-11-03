@@ -14,7 +14,7 @@ module.exports = {
 			hideServiceMap: true,
 			title: "Refugee Info",
 			questionLink: "https://fb.me/refugee.info",
-			favicon: "/ri-favicon.png",
+			favicon: "public/favicon.ico",
 		},
 		"khabrona.info": {
 			theme: "mc",
@@ -37,7 +37,7 @@ module.exports = {
 			hideServiceMap: true,
 			title: "Refugee Info",
 			questionLink: "https://fb.me/refugee.info",
-			favicon: "/ri-favicon.png",
+			favicon: "public/favicon.ico",
 		},
 	},
 };

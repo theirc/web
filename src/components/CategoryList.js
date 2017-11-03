@@ -17,7 +17,7 @@ class CategoryList extends Component {
 
 		return (
 			<div className="CategoryList">
-				<div className="CategoryTitle">{t("Categories")}</div>
+				<div className="CategoryTitle"><h3>{t("Categories")}</h3></div>
 				<ul>
 					{categories.filter(showCategory).map((c, i) => (
 						<li key={c.sys.id}>

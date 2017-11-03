@@ -45,11 +45,14 @@
 		flex-direction: column;
 		min-height: 100px;
 		padding: 5px;
-
+		h3 {
+			.rtl & {
+				line-height: 3px;
+			}
+		}
 		p {
 			margin-bottom: 0;
 		}
-
 		&,
 		a {
 			@include brand-colors( "background-color");

@@ -42,6 +42,11 @@ Less me
   align-items: center;
   justify-content: flex-end;
   flex-direction: row;
+  span{
+    .rtl & {
+        font-family: "Cairo", sans-serif;
+    }
+  }
 }
 
 .app-bar-separator {
@@ -54,7 +59,6 @@ Less me
 
 .app-bar-logo {
   height: 40px;
-
 }
 
 .headroom {
