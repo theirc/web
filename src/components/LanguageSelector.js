@@ -15,7 +15,6 @@ class LanguageSelector extends Component {
 
 	render() {
 		const { languages, onSelectLanguage, t } = this.props;
-		console.log(t);
 		return (
 			<div className="LanguageSelector">
 				<div className="spacer" />
@@ -23,6 +22,7 @@ class LanguageSelector extends Component {
 					<i className="material-icons">translate</i>
 					{languages.map((c, i) => <h1>{t("Choose your language", { lng: c[0] })}</h1>)}
 				</div>
+				<div className="spacer" />
 				{languages.map((c, i) => (
 					<button
 						className="item "

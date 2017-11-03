@@ -8,8 +8,8 @@ import cms from "../content/cms";
 
 class CountrySelectorScene extends React.Component {
 	componentWillMount() {
-		const { onMountOrUpdate } = this.props;
-		onMountOrUpdate();
+		const { onMountOrUpdate, language } = this.props;
+		onMountOrUpdate(language);
 	}
 
 	render() {
@@ -52,9 +52,8 @@ const mapState = ({ countryList, country, language }, p) => {
 };
 const mapDispatch = (d, p) => {
 	return {
-		onMountOrUpdate: () => {
-			cms.client
-				.getEntries({ content_type: "country" })
+		onMountOrUpdate: (language) => {
+			cms.listCountries(language)
 				.then(e => e.items.map(a => ({ id: a.sys.id, ...a.fields, ...a })))
 				.then(e => {
 					d(actions.selectCountryList(e));

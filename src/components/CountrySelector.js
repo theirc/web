@@ -22,9 +22,10 @@ class CountrySelector extends Component {
 				<div className="spacer" />
 
 				<div className="text">
-                    <i className="material-icons">my_location</i>
+					<i className="material-icons">my_location</i>
 					<h1>{t("Where are you now?")}</h1>
 				</div>
+				<div className="spacer" />
 				{countryList.map((c, i) => (
 					<button
 						className="item "

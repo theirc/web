@@ -21,6 +21,18 @@ if (!client) {
 	});
 }
 
+function listCountries(language = "en") {
+	let { languageDictionary } = config;
+	if (siteConfig) {
+		languageDictionary = Object.assign(languageDictionary, siteConfig.languageDictionary);
+	}
+
+	return client.getEntries({
+		content_type: "country",
+		locale: languageDictionary[language],
+	});
+}
+
 function loadCountry(slug, language = "en") {
 	let { languageDictionary } = config;
 
@@ -28,10 +40,12 @@ function loadCountry(slug, language = "en") {
 		languageDictionary = Object.assign(languageDictionary, siteConfig.languageDictionary);
 	}
 
+	/*
 	if (global.sessionStorage && global.sessionStorage.country) {
 		const country = JSON.parse(global.sessionStorage.country);
 		return Promise.resolve(client.parseEntries(country).items[0]);
 	}
+	*/
 
 	return client
 		.getEntries({
@@ -60,4 +74,5 @@ export default {
 	client,
 	loadCountry,
 	siteConfig,
+	listCountries,
 };

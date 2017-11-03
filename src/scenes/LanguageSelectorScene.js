@@ -21,8 +21,14 @@ class LanguageSelectorScene extends React.Component {
 		const { onGoTo, onSelectLanguage } = this.props;
 		this.setState({ selected: true }, () => {
 			setTimeout(() => {
-                onSelectLanguage(language);
+				onSelectLanguage(language);
 				setTimeout(() => {
+					if (global.sessionStorage) {
+						delete global.sessionStorage.redirect;
+					}
+					if (/^\//.test(redirect)) {
+						redirect = redirect.substr(1);
+					}
 					onGoTo(redirect);
 				}, 300);
 			}, 300);
@@ -32,11 +38,14 @@ class LanguageSelectorScene extends React.Component {
 	render() {
 		const { country, language } = this.props;
 		const { selected } = this.state;
+		let redirect = null;
 
 		let firstTimeHere = false;
-		if (global.window) {
-			const { firstRequest } = global.window.localStorage;
+		if (global.localStorage) {
+			const { firstRequest } = global.localStorage;
 			firstTimeHere = !firstRequest;
+
+			redirect = global.sessionStorage.redirect;
 		}
 
 		const languages = cms.siteConfig.languages;
@@ -45,7 +54,7 @@ class LanguageSelectorScene extends React.Component {
 			if (!country) {
 				return <LanguageSelector languages={languages} onSelectLanguage={this.selectLanguage.bind(this, "country-selector")} />;
 			} else {
-				return <LanguageSelector languages={languages} onSelectLanguage={this.selectLanguage.bind(this, country.fields.slug)} />;
+				return <LanguageSelector languages={languages} onSelectLanguage={this.selectLanguage.bind(this, redirect || country.fields.slug)} />;
 			}
 		} else {
 			if (!country) {

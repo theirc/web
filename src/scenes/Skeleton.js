@@ -15,7 +15,7 @@ import "./Skeleton.css";
 
 class Skeleton extends React.Component {
 	render() {
-		const { children, country, language, match, onGoHome, onGoToSearch, onChangeLocation, onChangeLanguage, deviceType } = this.props;
+		const { children, country, language, match, onGoHome, onGoToSearch, onChangeLocation, onChangeLanguage, deviceType, router } = this.props;
 
 		let notifications = [];
 		const notificationType = n => {
@@ -64,7 +64,7 @@ class Skeleton extends React.Component {
 								questionLink={cms.siteConfig.questionLink}
 								disableCountrySelector={!!cms.siteConfig.disableCountrySelector}
 								onChangeLocation={onChangeLocation}
-								onChangeLanguage={onChangeLanguage}
+								onChangeLanguage={onChangeLanguage.bind(this, router.location.pathname)}
 								deviceType={deviceType}
 							/>
 						)}
@@ -75,11 +75,12 @@ class Skeleton extends React.Component {
 	}
 }
 
-const mapState = ({ country, language, deviceType }, p) => {
+const mapState = ({ country, language, deviceType, router }, p) => {
 	return {
 		country,
 		language,
 		deviceType,
+		router,
 	};
 };
 const mapDispatch = (d, p) => {
@@ -94,7 +95,10 @@ const mapDispatch = (d, p) => {
 			d(actions.changeCountry(null));
 			d(push(`/country-selector`));
 		},
-		onChangeLanguage: () => {
+		onChangeLanguage: redirect => {
+			if (global && global.sessionStorage) {
+				global.sessionStorage.redirect = redirect;
+			}
 			d(actions.changeLanguage(null));
 			d(push(`/language-selector`));
 		},

@@ -27,7 +27,7 @@ class AppHeader extends Component {
 					<div className="app-bar">
 						<div
 							className={[
-								"app-bar-container",
+								"app-bar-container logo",
 								!(country && language) ? "logo-centered" : "",
 							].join(" ")}
 							onClick={onGoHome || noop}
@@ -41,7 +41,7 @@ class AppHeader extends Component {
 						</div>
 						{country &&
 							language && (
-								<div className="app-bar-container">
+								<div className="app-bar-container buttons">
 									<div className="app-bar-buttons">
 										<Button color="contrast" onClick={onChangeCountry || noop}>
 											{(country && country.fields.name) || " "}

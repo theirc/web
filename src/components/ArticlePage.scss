@@ -53,30 +53,18 @@
 		border-style: solid;
 		border-radius: 2px;
 		height: 0;
-		margin-left: 0;
+		.ltr & {
+			margin-left: 0;
+		}
+		.rtl & {
+			margin-right: 0;
+		}
 
 		color: #000000;
 		border-color: #000000;
 
-		.irc & {
-			color: $accentIRC;
-			border-color: $accentIRC;
-		}
-
-		.nrc & {
-			color: $accentNRC;
-			border-color: $accentNRC;
-		}
-
-		.generic & {
-			color: $accentGreen;
-			border-color: $accentGreen;
-		}
-
-		.mc & {
-			color: $accentRed;
-			border-color: $accentRed;
-		}
+		@include brand-colors('color');
+		@include brand-colors('border-color');
 	}
 
 	.title {

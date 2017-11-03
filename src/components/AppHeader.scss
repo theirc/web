@@ -1,87 +1,100 @@
 /*
 Less me
 */
-@import '../shared/includes.scss';
+@import "../shared/includes.scss";
 
 .app-bar {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  height: 64px;
-  box-shadow: 0 1px 1px 0;
-  background-color: #000000;
-
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+	position: fixed;
+	width: 100%;
+	top: 0;
+	height: 64px;
+	box-shadow: 0 1px 1px 0;
+	background-color: #000000;
 }
 
 .app-bar-container {
-  padding-right: 18px;
-  padding-left: 18px;
-  display: flex;
-  color: white;
-  flex: 1;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: flex-start;
+	display: flex;
+	color: white;
+	flex: 1;
+	flex-direction: row;
+	align-items: flex-start;
+	justify-content: flex-start;
   height: 50;
+  
+	@media (max-width: $desktopBreakpoint) {
+		&.logo {
+			.rtl & {
+				padding-right: 18px;
+			}
+			.ltr & {
+				padding-left: 18px;
+			}
+		}
+		&.buttons {
+			.ltr & {
+				padding-right: 18px;
+			}
+			.rtl & {
+				padding-left: 18px;
+			}
+		}
+	}
 }
-
 
 .logo-centered {
-  align-items: center;
-  justify-content: center;
+	align-items: center;
+	justify-content: center;
 }
 
-
 .app-bar-buttons {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  flex-direction: row;
+	flex: 1;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	flex-direction: row;
 }
 
 .app-bar-separator {
-  border-left-width: 1px;
-  border-left-color: #ffffff;
-  border-left-style: solid;
-  height: 25px;
-  @include brand-colors( 'border-left-color');
+	border-left-width: 1px;
+	border-left-color: #ffffff;
+	border-left-style: solid;
+	height: 25px;
+	@include brand-colors( "border-left-color");
 }
 
 .app-bar-logo {
-  height: 40px;
-
+	height: 40px;
 }
 
 .headroom {
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 1;
 }
 
 .headroom--unfixed {
-  position: relative;
-  transform: translateY(0);
+	position: relative;
+	transform: translateY(0);
 }
 
 .headroom--scrolled {
-  transition: transform 200ms ease-in-out;
+	transition: transform 200ms ease-in-out;
 }
 
 .headroom--unpinned {
-  @extend .headroom--scrolled;
-  position: fixed;
-  transform: translateY(-65px);
+	@extend .headroom--scrolled;
+	position: fixed;
+	transform: translateY(-65px);
 }
 
 .headroom--pinned {
-  @extend .headroom--scrolled;
+	@extend .headroom--scrolled;
 
-  position: fixed;
-  transform: translateY(0%);
+	position: fixed;
+	transform: translateY(0%);
 }
