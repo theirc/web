@@ -23,7 +23,7 @@ export default {
 			"Ask us a question": "اسألنا سؤالا",
 			"Change Location": "تغير المكان",
 			"Change Language": "تغيير اللغة",
-			"Can't find specific information?": "لم تستطيع العثور على معلومات محددة؟",
+			"Can't find specific information?": "لم تستطع العثور على معلومات محددة؟",
 			Home: "الصفحة الرئيسية",
 			Categories: "الاقسام",
 			More: "المزيد",
