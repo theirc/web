@@ -3,16 +3,21 @@ import actions from "./actions";
 import isMobile from "./shared/isMobile";
 import cms from "./content/cms";
 import i18n from "./i18n";
+import queryString from "query-string";
+
 let sessionStorage = {};
 let defaultLanguage = "";
 
 if (global.window) {
 	sessionStorage = global.sessionStorage;
 
-	if (!sessionStorage.language) {
-		defaultLanguage = global.navigator.language.split("-")[0];
-	} else {
+	const parsed = queryString.parse(global.location.search);
+	if (sessionStorage.language) {
 		defaultLanguage = sessionStorage.language;
+	} else if (parsed.language) {
+		defaultLanguage = parsed.language;
+	} else {
+		defaultLanguage = global.navigator.language.split("-")[0];
 	}
 }
 
@@ -99,12 +104,11 @@ function changeLanguage(state = defaultLanguage, action) {
 	switch (action.type) {
 		case actions.actionTypes.changeLanguage:
 			sessionStorage.language = action.payload;
-			i18n.changeLanguage(sessionStorage.language);
 
 			if (global.window) {
 				delete global.window.sessionStorage.country;
 			}
-			
+
 			return action.payload || null;
 		default:
 			return state;

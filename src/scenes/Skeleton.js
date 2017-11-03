@@ -14,6 +14,16 @@ import i18n from "../i18n"; // initialized i18next instance
 import "./Skeleton.css";
 
 class Skeleton extends React.Component {
+	componentDidMount() {
+		const { language } = this.props;
+		i18n.changeLanguage(language);
+	}
+	componentWillUpdate(newProps) {
+		const { language } = this.props;
+		if (language !== newProps.language) {
+			i18n.changeLanguage(newProps.language);
+		}
+	}
 	render() {
 		const { children, country, language, match, onGoHome, onGoToSearch, onChangeLocation, onChangeLanguage, deviceType, router } = this.props;
 
