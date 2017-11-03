@@ -37,3 +37,13 @@ html .ltr, body .ltr {
     font-family: 'Roboto', sans-serif;
     padding: 0;
 }
+
+ltr {
+  display: inline;
+  direction: ltr!important;
+}
+
+rtl {
+  display: inline;
+  direction: rtl!important;
+}
