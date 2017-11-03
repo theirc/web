@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@turf/turf": "^4.7.3",
     "animated": "^0.2.0",
     "babel-cli": "^6.9.0",
     "babel-core": "^6.9.0",

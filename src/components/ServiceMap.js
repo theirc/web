@@ -1,7 +1,10 @@
 /* global window */
 import React, { Component, PureComponent } from "react";
 import MapGL, { NavigationControl, Marker } from "react-map-gl";
+import _ from "lodash";
 import "mapbox-gl/dist/mapbox-gl.css";
+
+const turf = require("@turf/turf");
 
 const MAPBOX_TOKEN = "pk.eyJ1IjoicmV5cm9kcmlndWVzIiwiYSI6ImNpbHA5d3BqdzA4a3d1Y2tuNnF6aGJlN2QifQ.j1WVzYEdyGfNuSDv9nuf1Q"; // Set your mapbox token here
 
@@ -38,9 +41,9 @@ export default class App extends Component {
 	state = {
 		mapStyle: "",
 		viewport: {
-			latitude: 37.805,
-			longitude: -122.447,
-			zoom: 15.5,
+			latitude: 0,
+			longitude: 0,
+			zoom: 4,
 			bearing: 0,
 			pitch: 0,
 			width: 100,
@@ -50,7 +53,30 @@ export default class App extends Component {
 
 	componentDidMount() {
 		window.addEventListener("resize", this._resize);
+
 		this._resize();
+    }
+    
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.services !== this.props.services) {
+			const { services } = nextProps;
+
+			let features = turf.featureCollection(
+				services
+					.map(s => s.location)
+					.filter(_.identity)
+					.map(s => turf.point(s.coordinates))
+			);
+			let center = turf.center(features);
+			let [long, lat] = center.geometry.coordinates;
+			this.setState({
+				viewport: {
+					...this.state.viewport,
+					latitude: lat,
+					longitude: long,
+				},
+			});
+		}
 	}
 
 	componentWillUnmount() {
@@ -83,7 +109,7 @@ export default class App extends Component {
 	render() {
 		const { viewport, mapStyle } = this.state;
 		const { services } = this.props;
-		console.log(services);
+
 		return (
 			<MapGL {...viewport} onViewportChange={this._onViewportChange} mapboxApiAccessToken={MAPBOX_TOKEN}>
 				{services.filter(s => s.location).map(this._renderMarker)}
