@@ -2,11 +2,13 @@
 
 .BottomNav {
 	.Selected {
+		font-family: "Cairo", sans-serif;
 		@include darken-brand-colors( "color", 5%);
 	}
 
 	.Selected > span > span {
-        color: black;
-        font-weight: 700;
+		font-family: "Cairo", sans-serif;
+		color: black;
+		font-weight: 700;
 	}
 }

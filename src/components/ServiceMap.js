@@ -107,7 +107,7 @@ export default class App extends Component {
 	};
 
 	render() {
-		const { viewport, mapStyle } = this.state;
+		const { viewport,  } = this.state;
 		const { services } = this.props;
 
 		return (

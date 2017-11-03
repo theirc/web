@@ -22,7 +22,7 @@ class BottomNav extends Component {
 	}
 
 	select(selectedIndex = 0) {
-		const { onGoHome, onGoToCategories, onGoToSearch, onGoToServices, onGoToMore } = this.props;
+		const { onGoHome, onGoToCategories, onGoToSearch, onGoToServices,  } = this.props;
 
 		this.setState({ selectedIndex });
 

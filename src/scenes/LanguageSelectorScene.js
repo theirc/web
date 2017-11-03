@@ -57,10 +57,14 @@ class LanguageSelectorScene extends React.Component {
 				return <LanguageSelector languages={languages} onSelectLanguage={this.selectLanguage.bind(this, redirect || country.fields.slug)} />;
 			}
 		} else {
-			if (!country) {
-				return <Redirect to={`/country-selector`} />;
+			if (!selected && language) {
+				if (!country) {
+					return <Redirect to={`/country-selector`} />;
+				} else {
+					return <Redirect to={`/${country.fields.slug}`} />;
+				}
 			} else {
-				return <Redirect to={`/${country.fields.slug}`} />;
+				return <div />;
 			}
 		}
 	}

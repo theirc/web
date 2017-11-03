@@ -2,7 +2,6 @@ import services from "./backend";
 import actions from "./actions";
 import isMobile from "./shared/isMobile";
 import cms from "./content/cms";
-import i18n from "./i18n";
 import queryString from "query-string";
 
 let sessionStorage = {};
