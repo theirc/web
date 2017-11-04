@@ -78,7 +78,6 @@ module.exports = {
 		"@turf/turf": "turf",
 		immutable: "Immutable",
 		bluebird: "Promise",
-		react: "React",
 		"react-dom": "ReactDOM",
 	},
 	resolve: {
