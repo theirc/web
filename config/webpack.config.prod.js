@@ -74,6 +74,12 @@ module.exports = {
 		autolinker: "Autolinker",
 		contentful: "contentful",
 		remarkable: "Remarkable",
+		"mapbox-gl": "mapboxgl",
+		"@turf/turf": "turf",
+		immutable: "Immutable",
+		bluebird: "Promise",
+		react: "React",
+		"react-dom": "ReactDOM",
 	},
 	resolve: {
 		// This allows you to set a fallback for where Webpack should look for modules.
