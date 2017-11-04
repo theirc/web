@@ -1,6 +1,6 @@
 @import "../shared/includes.scss";
 
-.ServiceHome {
+.ServiceCategoryList {
 	display: flex;
 	flex-wrap: wrap;
 
@@ -113,6 +113,13 @@
 
 		cursor: pointer;
 
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+
 		@media (min-width: $desktopBreakpoint) {
 			flex-basis: 50%;
 		}
@@ -185,6 +192,74 @@
 			small {
 				display: block;
 			}
+		}
+	}
+}
+
+.ServiceDetail {
+	display: flex;
+	flex-wrap: wrap;
+
+	.Title {
+		width: 100%;
+		display: flex;
+		margin: 0;
+		background-color: $titleBackground;
+		min-height: 60px;
+		flex-direction: row;
+		align-items: center;
+	}
+
+	.Title > h1 {
+		font-size: 18px;
+		display: block;
+		width: 100%;
+		margin: 0;
+		padding: 10px;
+		flex: 1;
+	}
+	.Title > h1 > small {
+		font-size: 12px;
+		display: block;
+		width: 100%;
+		color: lighten(black, 50%);
+	}
+
+	.hero {
+		background-color: #000000;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.hero > img {
+		max-width: 100%;
+	}
+
+	article {
+		margin-left: 5px;
+		margin-right: 5px;
+
+		img {
+			max-width: 100%;
+			margin: auto;
+			display: block;
+		}
+
+		h1 {
+			font-size: 24px;
+		}
+
+		h2 {
+			font-size: 18px;
+		}
+
+		h3 {
+			font-size: 16px;
+		}
+
+		ul li {
+			list-style-type: square;
 		}
 	}
 }

@@ -9,10 +9,11 @@ import { push } from "react-router-redux";
 import request from "superagent";
 import Promise from "bluebird";
 import { translate } from "react-i18next";
+import _ from "lodash";
 
 var tinycolor = require("tinycolor2");
 
-class ServiceHome extends React.Component {
+class ServiceCategoryList extends React.Component {
 	state = {
 		categories: [],
 	};
@@ -60,7 +61,7 @@ class ServiceHome extends React.Component {
 		const { t } = this.props;
 
 		return (
-			<div className="ServiceHome">
+			<div className="ServiceCategoryList">
 				<div className="ServiceCategoryTitle">
 					<h1>{t("Service Categories")}</h1>
 				</div>
@@ -70,18 +71,18 @@ class ServiceHome extends React.Component {
 	}
 }
 
-ServiceHome = translate()(ServiceHome);
+ServiceCategoryList = translate()(ServiceCategoryList);
 
-class ServiceCategoryList extends React.Component {
+class ServiceList extends React.Component {
 	state = {
 		category: {},
 		services: [],
 		loaded: false,
 	};
 	componentDidMount() {
-		const { fetchServices } = this.props;
-		if (fetchServices) {
-			fetchServices().then(({ services, category }) => this.setState({ services, category, loaded: true }));
+		const { servicesByType } = this.props;
+		if (servicesByType) {
+			servicesByType().then(({ services, category }) => this.setState({ services, category, loaded: true }));
 		}
 	}
 	renderService(s) {
@@ -97,6 +98,7 @@ class ServiceCategoryList extends React.Component {
 
 			color = tinycolor(color)
 				.saturate(30)
+				.darken(10)
 				.toHexString();
 
 			return {
@@ -145,7 +147,54 @@ class ServiceCategoryList extends React.Component {
 		);
 	}
 }
-ServiceCategoryList = translate()(ServiceCategoryList);
+ServiceList = translate()(ServiceList);
+
+class ServiceDetail extends React.Component {
+	state = {
+		service: null,
+	};
+	componentDidMount() {
+		const { fetchService } = this.props;
+		if (fetchService) {
+			fetchService().then(service => this.setState({ service }));
+		}
+	}
+	render() {
+		const { service } = this.state;
+		const { t } = this.props;
+		if (!service) {
+			return null;
+		}
+
+		return (
+			<div className="ServiceDetail">
+				<div className="Title">
+					<h1>
+						<small>{_.first(service.types).name}:</small>
+						{service.name}
+					</h1>
+				</div>
+				{service.image && (
+					<div className="hero">
+						<img src={service.image} alt={service.provider.name} />
+					</div>
+				)}
+				<article>
+					<p dangerouslySetInnerHTML={{ __html: service.description }} />
+					{service.additional_information && [<h3>{t("Additional Information")}</h3>, <p dangerouslySetInnerHTML={{ __html: service.additional_information }} />]}
+					<h3>{t("Address")}</h3>
+					<p>
+						<a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(service['address_en'])}`} target="_blank">
+							{service.address}
+						</a>
+					</p>
+					<p dangerouslySetInnerHTML={{ __html: service.address_in_country_language }} />
+				</article>
+			</div>
+		);
+	}
+}
+ServiceDetail = translate()(ServiceDetail);
 
 class Services extends React.Component {
 	servicesByType(props) {
@@ -180,6 +229,26 @@ class Services extends React.Component {
 		});
 	}
 
+	fetchService(props) {
+		const { language } = this.props;
+		const { match } = props;
+		const serviceId = match.params.serviceId;
+
+		return new Promise((resolve, reject) => {
+			request
+				.get(`https://admin.next.refugee.info/e/production/v2/services/search/?id=${serviceId}`)
+				.set("Accept-Language", language)
+				.end((err, res) => {
+					if (err) {
+						reject(err);
+					}
+					let service = _.first(res.body);
+
+					resolve(service);
+				});
+		});
+	}
+
 	serviceTypes() {
 		return new Promise((resolve, reject) => {
 			const { language } = this.props;
@@ -197,28 +266,6 @@ class Services extends React.Component {
 		});
 	}
 
-	componentWillReceiveProps(nextProps) {
-		/**
-		const typePromise = new Promise((resolve, reject) => {
-			request.get(`https://admin.next.refugee.info/e/production/v2/service-types/`).end((err, res) => {
-				if (err) {
-					reject(err);
-				}
-				
-				resolve(res.body);
-			});
-		});
-		
-		Promise.all([typePromise]).then(results => {
-			const [types] = results;
-			this.setState({
-				types,
-			});
-		});
-		 * 
-		 */
-	}
-
 	render() {
 		const { match, listServicesInCategory, goToService } = this.props;
 		const onSelectCategory = c => {
@@ -232,7 +279,7 @@ class Services extends React.Component {
 					component={props => (
 						<Skeleton>
 							<div className="SkeletonContainer">
-								<div>Service Detail</div>
+								<ServiceDetail {...props} fetchService={() => this.fetchService(props)} />
 							</div>
 						</Skeleton>
 					)}
@@ -242,7 +289,7 @@ class Services extends React.Component {
 					component={props => (
 						<Skeleton>
 							<div className="SkeletonContainer">
-								<ServiceCategoryList {...props} goToService={goToService} fetchServices={() => this.servicesByType(props)} />
+								<ServiceList {...props} goToService={goToService} servicesByType={() => this.servicesByType(props)} />
 							</div>
 						</Skeleton>
 					)}
@@ -253,7 +300,7 @@ class Services extends React.Component {
 					component={() => (
 						<Skeleton>
 							<div className="SkeletonContainer">
-								<ServiceHome fetchCategories={() => this.serviceTypes()} onSelectCategory={onSelectCategory} />
+								<ServiceCategoryList fetchCategories={() => this.serviceTypes()} onSelectCategory={onSelectCategory} />
 							</div>
 						</Skeleton>
 					)}
