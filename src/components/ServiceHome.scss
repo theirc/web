@@ -1,8 +1,66 @@
 @import "../shared/includes.scss";
 
+@mixin service-common() {
+	hr {
+		padding: 0;
+		margin: auto;
+		border: 0;
+		border-top-width: 1px;
+		border-top-color: $dividerColor;
+		border-style: solid;
+		border-radius: 1px;
+		height: 0;
+		width: 95%;
+	}
+	.Icon {
+		padding-right: 5px;
+		padding-left: 5px;
+	}
+
+	.Spacer {
+		height: 30vh;
+		display: block;
+		width: 100%;
+		display: flex;
+		align-items: center;
+		align-content: center;
+		justify-items: center;
+		justify-content: center;
+	}
+
+	.Selector {
+		width: 100%;
+		display: flex;
+		margin: 0;
+		background-color: $titleBackground;
+		min-height: 60px;
+		flex-direction: row;
+		align-items: center;
+		cursor: pointer;
+	}
+
+	.Selector > h1 {
+		font-size: 18px;
+		display: block;
+		width: 100%;
+		margin: 0;
+		padding: 10px;
+		flex: 1;
+	}
+
+	.Selector > h1 > small {
+		font-size: 12px;
+		display: block;
+		width: 100%;
+		color: lighten(black, 50%);
+	}
+}
+
 .ServiceCategoryList {
 	display: flex;
 	flex-wrap: wrap;
+
+	@include service-common();
 
 	.CategoryContainer {
 		flex: 1;
@@ -37,7 +95,7 @@
 		}
 	}
 
-	.ServiceCategoryTitle {
+	& > .Title {
 		width: 100%;
 		display: flex;
 		margin: 0;
@@ -47,7 +105,7 @@
 		align-items: center;
 	}
 
-	.ServiceCategoryTitle > h1 {
+	.Title > h1 {
 		font-size: 18px;
 		display: block;
 		width: 100%;
@@ -55,7 +113,7 @@
 		padding: 10px;
 		flex: 1;
 	}
-	.ServiceCategoryTitle > h1 > small {
+	.Title > h1 > small {
 		font-size: 12px;
 		display: block;
 		width: 100%;
@@ -67,7 +125,9 @@
 	display: flex;
 	flex-wrap: wrap;
 
-	.ServiceListTitle {
+	@include service-common();
+
+	.Title {
 		width: 100%;
 		display: flex;
 		margin: 0;
@@ -77,7 +137,7 @@
 		align-items: center;
 	}
 
-	.ServiceListTitle > h1 {
+	.Title > h1 {
 		font-size: 18px;
 		display: block;
 		width: 100%;
@@ -85,13 +145,13 @@
 		padding: 10px;
 		flex: 1;
 	}
-	.ServiceListTitle > h1 > small {
+	.Title > h1 > small {
 		font-size: 12px;
 		display: block;
 		width: 100%;
 		color: lighten(black, 50%);
 	}
-	.ServiceListItems {
+	.Items {
 		flex: 1;
 		flex-grow: 1;
 		display: flex;
@@ -142,7 +202,7 @@
 	.Icons {
 		display: flex;
 		flex-wrap: wrap;
-		flex-direction: row;
+		flex-direction: column;
 		width: 60px;
 
 		align-items: stretch;
@@ -199,6 +259,8 @@
 .ServiceDetail {
 	display: flex;
 	flex-wrap: wrap;
+
+	@include service-common();
 
 	.Title {
 		width: 100%;

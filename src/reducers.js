@@ -123,9 +123,24 @@ function changeDirection(state = getDirection(defaultLanguage), action) {
 	}
 }
 
-function recordCoordinates(state = null, action) {
+function recordCoordinates(state = !sessionStorage.recordedCoordinates ? null : JSON.parse(sessionStorage.recordedCoordinates), action) {
 	switch (action.type) {
 		case actions.actionTypes.recordCoordinates:
+			sessionStorage.recordedCoordinates = JSON.stringify(action.payload);
+
+			return action.payload;
+		default:
+			return state;
+	}
+}
+function toggleServiceGeolocation(state = sessionStorage.serviceGeolocation === "true", action) {
+	switch (action.type) {
+		case actions.actionTypes.toggleServiceGeolocation:
+			sessionStorage.serviceGeolocation = action.payload;
+			if (!action.payload) {
+				delete sessionStorage.recordedCoordinates;
+			}
+
 			return action.payload;
 		default:
 			return state;
@@ -148,6 +163,8 @@ export default {
 	countryList: selectCountryList,
 	countrySlug: changeCountrySlug,
 	organization: changeOrganization,
+
+	serviceGeolocation: toggleServiceGeolocation,
 
 	articles: services.articles.reducer,
 	countries: services.countries.reducer,

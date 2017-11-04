@@ -11,5 +11,25 @@ import HomeWidget from "./HomeWidget";
 import HomeWidgetCollection from "./HomeWidgetCollection";
 import SearchPage from "./SearchPage";
 import ServiceMap from "./ServiceMap";
+import ServiceCategoryList from "./ServiceCategoryList";
+import ServiceList from "./ServiceList";
+import ServiceDetail from "./ServiceDetail";
 
-export { AppHeader, BottomNav, WarningDialog, Footer, ArticlePage, ArticleFooter, CategoryList, CountrySelector, LanguageSelector, HomeWidget, HomeWidgetCollection, SearchPage, ServiceMap };
+export {
+	AppHeader,
+	BottomNav,
+	WarningDialog,
+	Footer,
+	ArticlePage,
+	ArticleFooter,
+	CategoryList,
+	CountrySelector,
+	LanguageSelector,
+	HomeWidget,
+	HomeWidgetCollection,
+	SearchPage,
+	ServiceMap,
+	ServiceCategoryList,
+	ServiceList,
+	ServiceDetail,
+};
