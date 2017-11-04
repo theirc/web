@@ -12,9 +12,26 @@
 		height: 0;
 		width: 95%;
 	}
-	.Icon {
-		padding-right: 5px;
-		padding-left: 5px;
+	.MenuIcon {
+		padding-right: 10px;
+		padding-left: 10px;
+		
+				font-size: 20px;
+				width: 24px;
+				height: 24px;
+				text-align: center;
+	}
+
+	.footer {
+		flex: 1;
+		flex-basis: 100%;
+		background-color: $titleBackground;
+		border-top: 1px black solid;
+		border-top-color: $dividerColor;
+
+		hr:last-child {
+			display: none;
+		}
 	}
 
 	.Spacer {
@@ -45,7 +62,13 @@
 		width: 100%;
 		margin: 0;
 		padding: 10px;
+		line-height: 20px;
 		flex: 1;
+		a {
+			line-height: 20px;
+			margin-left: 5px;
+			margin-right: 5px;
+		}
 	}
 
 	.Selector > h1 > small {
@@ -164,8 +187,6 @@
 		flex-basis: 100%;
 		padding-top: 0.25em;
 		padding-bottom: 0.25em;
-		padding-left: 1em;
-		padding-right: 1em;
 		border-bottom: 1px $titleBackground solid;
 		min-height: 60px;
 
@@ -186,6 +207,9 @@
 		i.material-icons {
 			justify-self: center;
 			align-self: center;
+			padding-left: 5px;
+			padding-right: 5px;
+			
 			.rtl &:after {
 				content: "keyboard_arrow_left";
 			}
@@ -259,9 +283,40 @@
 .ServiceDetail {
 	display: flex;
 	flex-wrap: wrap;
+	flex-direction: column;
 
 	@include service-common();
+	.openingTable {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
 
+	table {
+		border-collapse: collapse;
+		margin-bottom: 1em;
+
+		@media (max-width: 500px) {
+			min-width: 100%;
+		}
+		@media (min-width: 800px) {
+			min-width: 400px;
+		}
+		tr {
+			border-bottom: 1px $dividerColor solid;
+			height: 30px;
+		}
+
+		td {
+			text-align: center;
+		}
+		td:nth-child(1) {
+			font-weight: bold;
+			text-align: start;
+			padding-left: 5px;
+			padding-right: 5px;
+		}
+	}
 	.Title {
 		width: 100%;
 		display: flex;
@@ -299,8 +354,9 @@
 	}
 
 	article {
-		margin-left: 5px;
-		margin-right: 5px;
+		margin-left: 16px;
+		margin-right: 16px;
+		flex: 1;
 
 		img {
 			max-width: 100%;

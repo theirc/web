@@ -1,7 +1,6 @@
 import React from "react";
 import "./ServiceHome.css";
 import { translate } from "react-i18next";
-import { CircularProgress } from "material-ui/Progress";
 import _ from "lodash";
 
 var tinycolor = require("tinycolor2");
@@ -51,16 +50,14 @@ class ServiceCategoryList extends React.Component {
 	}
 	render() {
 		const { categories } = this.state;
-		const { t, locationEnabled, toggleLocation } = this.props;
+		const { t, locationEnabled, toggleLocation, listAllServices } = this.props;
 		if ((categories || []).length === 0) {
 			return (
 				<div className="ServiceCategoryList">
 					<div className="Title">
 						<h1>{t("Service Categories")}</h1>
 					</div>
-					<div className="Spacer">
-						<CircularProgress />
-					</div>
+					<div className="Spacer" />
 				</div>
 			);
 		}
@@ -71,14 +68,20 @@ class ServiceCategoryList extends React.Component {
 					<h1>{t("Service Categories")}</h1>
 				</div>
 				{(categories || []).map(this.renderCategory.bind(this))}
-
-				{navigator.geolocation && (
-					<div className="Selector" onClick={toggleLocation || _.identity}>
-						<h1>{t("Order results by distance to me")}</h1>
-						{!locationEnabled && <i className="Icon material-icons">radio_button_unchecked</i>}
-						{locationEnabled && <i className="Icon material-icons">radio_button_checked</i>}
+				<div className="footer">
+					<div className="Selector" onClick={listAllServices}>
+						<h1>{t("All Services")}</h1>
+						<i className="MenuIcon fa fa-envelope-o" aria-hidden="true" />
 					</div>
-				)}
+					<hr />
+					{navigator.geolocation && (
+						<div className="Selector" onClick={toggleLocation || _.identity}>
+							<h1>{t("Order results by distance to me")}</h1>
+							{!locationEnabled && <i className="MenuIcon material-icons">radio_button_unchecked</i>}
+							{locationEnabled && <i className="MenuIcon material-icons">radio_button_checked</i>}
+						</div>
+					)}
+				</div>
 				{/*
 				<hr />
 				<div className="Selector">

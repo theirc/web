@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { ServiceMap, ServiceCategoryList, ServiceList, ServiceDetail } from "../components";
-import { Route } from "react-router";
+import { Route, Switch } from "react-router";
 import { Skeleton } from ".";
 import "../components/ServiceHome.css";
 import { push } from "react-router-redux";
@@ -67,6 +67,27 @@ class Services extends React.Component {
 				});
 		});
 	}
+	fetchAllServices() {
+		const { country, language, currentCoordinates } = this.props;
+
+		const orderByDistance = c => (currentCoordinates ? _.sortBy(c, s => measureDistance(currentCoordinates, language, true)(s.location)) : _.identity(c));
+
+		return new Promise((resolve, reject) => {
+			request
+				.get(`https://admin.next.refugee.info/e/production/v2/services/search/?filter=relatives&geographic_region=${country.fields.slug}&page=1&page_size=1000&type_numbers=`)
+				.set("Accept-Language", language)
+				.end((err, res) => {
+					if (err) {
+						reject(err);
+					}
+					let services = orderByDistance(res.body.results);
+					resolve({
+						category: null,
+						services,
+					});
+				});
+		});
+	}
 
 	fetchService(props) {
 		const { language } = this.props;
@@ -106,23 +127,43 @@ class Services extends React.Component {
 	}
 
 	render() {
-		const { match, listServicesInCategory, goToService, serviceGeolocation, toogleServiceGeolocation, currentCoordinates, language } = this.props;
+		const { match, listServicesInCategory, goToService, serviceGeolocation, toogleServiceGeolocation, currentCoordinates, language, listAllServices } = this.props;
 		const onSelectCategory = c => {
 			listServicesInCategory(c);
 		};
 		return (
 			<div>
-				<Route
-					path={`${match.url}/:serviceId/`}
-					exact
-					component={props => (
-						<Skeleton>
-							<div className="SkeletonContainer">
-								<ServiceDetail {...props} fetchService={() => this.fetchService(props)} />
-							</div>
-						</Skeleton>
-					)}
-				/>
+				<Switch>
+					<Route
+						path={`${match.url}/all/`}
+						exact
+						component={props => (
+							<Skeleton>
+								<div className="SkeletonContainer">
+									<ServiceList
+										{...props}
+										goToService={goToService}
+										locationEnabled={serviceGeolocation}
+										measureDistance={measureDistance(currentCoordinates, language)}
+										toggleLocation={() => toogleServiceGeolocation(!serviceGeolocation)}
+										servicesByType={() => this.fetchAllServices()}
+									/>
+								</div>
+							</Skeleton>
+						)}
+					/>
+					<Route
+						path={`${match.url}/:serviceId/`}
+						exact
+						component={props => (
+							<Skeleton>
+								<div className="SkeletonContainer">
+									<ServiceDetail {...props} fetchService={() => this.fetchService(props)} />
+								</div>
+							</Skeleton>
+						)}
+					/>
+				</Switch>
 				<Route
 					path={`${match.url}/by-category/:categoryId/`}
 					component={props => (
@@ -151,6 +192,7 @@ class Services extends React.Component {
 									locationEnabled={serviceGeolocation}
 									toggleLocation={() => toogleServiceGeolocation(!serviceGeolocation)}
 									onSelectCategory={onSelectCategory}
+									listAllServices={listAllServices}
 								/>
 							</div>
 						</Skeleton>
@@ -179,6 +221,10 @@ const mapDispatch = (d, p) => {
 		},
 		goToService(id) {
 			return d(push(`/${p.country.fields.slug}/services/${id}/`));
+		},
+
+		listAllServices() {
+			return d(push(`/${p.country.fields.slug}/services/all/`));
 		},
 		toogleServiceGeolocation(value) {
 			d(actions.toggleServiceGeolocation(value));

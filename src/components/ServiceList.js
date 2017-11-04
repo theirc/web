@@ -1,7 +1,6 @@
 import React from "react";
 import "./ServiceHome.css";
 import { translate } from "react-i18next";
-import { CircularProgress } from "material-ui/Progress";
 import _ from "lodash";
 
 var tinycolor = require("tinycolor2");
@@ -74,9 +73,7 @@ class ServiceList extends React.Component {
 					<div className="Title">
 						<h1>{t("Services")}</h1>
 					</div>
-					<div className="Spacer">
-						<CircularProgress />
-					</div>
+					<div className="Spacer" />
 				</div>
 			);
 		}
@@ -85,18 +82,20 @@ class ServiceList extends React.Component {
 			<div className="ServiceList">
 				<div className="Title">
 					<h1>
-						<small>{category.name}:</small>
+						{category && <small>{category.name}:</small>}
 						{t("Services")}
 					</h1>
 				</div>
 				<div className="Items">{services.map(this.renderService.bind(this))}</div>
-				{navigator.geolocation && (
-					<div className="Selector" onClick={toggleLocation || _.identity}>
-						<h1>{t("Order results by distance to me")}</h1>
-						{!locationEnabled && <i className="Icon material-icons">radio_button_unchecked</i>}
-						{locationEnabled && <i className="Icon material-icons">radio_button_checked</i>}
-					</div>
-				)}
+				<div className="footer">
+					{navigator.geolocation && (
+						<div className="Selector" onClick={toggleLocation || _.identity}>
+							<h1>{t("Order results by distance to me")}</h1>
+							{!locationEnabled && <i className="MenuIcon material-icons">radio_button_unchecked</i>}
+							{locationEnabled && <i className="MenuIcon material-icons">radio_button_checked</i>}
+						</div>
+					)}
+				</div>
 			</div>
 		);
 	}
