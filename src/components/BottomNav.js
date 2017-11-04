@@ -60,7 +60,7 @@ class BottomNav extends Component {
 					<BottomNavigationButton className={this.props.index === 0 ? "Selected" : ""} icon={<Home />} label={t("Home")} value={0} />
 					<BottomNavigationButton className={this.props.index === 1 ? "Selected" : ""} icon={<List />} label={t("Categories")} value={1} />
 					<BottomNavigationButton className={this.props.index === 2 ? "Selected" : ""} icon={<Search />} label={t("Search")} value={2} />
-					{showServiceMap ? <BottomNavigationButton className={this.props.index === 3 ? "Selected" : ""} icon={<Map />} label={t("Map")} value={3} /> : <div />}
+					{showServiceMap ? <BottomNavigationButton className={this.props.index === 3 ? "Selected" : ""} icon={<Map />} label={t("Services")} value={3} /> : <div />}
 				</BottomNavigation>
 			</Paper>
 		);

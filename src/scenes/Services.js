@@ -85,6 +85,8 @@ class ServiceCategoryList extends React.Component {
 		}
 	}
 	renderService(s) {
+		const { goToService } = this.props;
+
 		let iconWithPrefix = vector_icon => vector_icon.split("-")[0] + " " + vector_icon;
 		let categoryStyle = color => {
 			if (!color) {
@@ -104,7 +106,7 @@ class ServiceCategoryList extends React.Component {
 		};
 
 		return [
-			<div key={s.id} className="Item">
+			<div key={s.id} className="Item" onClick={() => goToService(s.id)}>
 				<div className="Icons">
 					{s.types.map((t, idx) => (
 						<div className="Icon" key={`${s.id}-${idx}`}>
@@ -118,7 +120,7 @@ class ServiceCategoryList extends React.Component {
 						{s.provider.name} <small>{s.region.title}</small>
 					</h2>
 				</div>
-				<i className="material-icons"></i>
+				<i className="material-icons" />
 			</div>,
 		];
 	}
@@ -218,18 +220,29 @@ class Services extends React.Component {
 	}
 
 	render() {
-		const { match, listServicesInCategory } = this.props;
+		const { match, listServicesInCategory, goToService } = this.props;
 		const onSelectCategory = c => {
 			listServicesInCategory(c);
 		};
 		return (
 			<div>
 				<Route
-					path={`${match.url}/by-category/:categoryId`}
+					path={`${match.url}/:serviceId/`}
+					exact
 					component={props => (
 						<Skeleton>
 							<div className="SkeletonContainer">
-								<ServiceCategoryList {...props} fetchServices={() => this.servicesByType(props)} />
+								<div>Service Detail</div>
+							</div>
+						</Skeleton>
+					)}
+				/>
+				<Route
+					path={`${match.url}/by-category/:categoryId/`}
+					component={props => (
+						<Skeleton>
+							<div className="SkeletonContainer">
+								<ServiceCategoryList {...props} goToService={goToService} fetchServices={() => this.servicesByType(props)} />
 							</div>
 						</Skeleton>
 					)}
@@ -246,7 +259,7 @@ class Services extends React.Component {
 					)}
 				/>
 				<Route
-					path={`${match.url}/map`}
+					path={`${match.url}/map/`}
 					component={() => (
 						<Skeleton hideFooter={true}>
 							<ServiceMap services={[]} />
@@ -264,7 +277,10 @@ const mapState = ({ country, language }, p) => {
 const mapDispatch = (d, p) => {
 	return {
 		listServicesInCategory(category) {
-			return d(push(`/${p.country.fields.slug}/services/by-category/${category.id}`));
+			return d(push(`/${p.country.fields.slug}/services/by-category/${category.id}/`));
+		},
+		goToService(id) {
+			return d(push(`/${p.country.fields.slug}/services/${id}/`));
 		},
 	};
 };
