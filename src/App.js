@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import {  connect } from "react-redux";
+import { connect } from "react-redux";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import { createMuiTheme } from "material-ui/styles";
 import Router from "./router";
 import cms from "./content/cms";
-
 
 const theme = createMuiTheme({
 	overrides: {
@@ -18,14 +17,13 @@ const theme = createMuiTheme({
 
 class ThemedApp extends Component {
 	render() {
-        const {  direction } = this.props;
-        const organization = cms.siteConfig.theme;
-
+		const { direction } = this.props;
+		const organization = cms.siteConfig.theme;
+		
 		return (
 			<MuiThemeProvider theme={theme}>
 				<span className={[organization, direction].join(" ")}>
-						<Router />
-				
+					<Router />
 				</span>
 			</MuiThemeProvider>
 		);

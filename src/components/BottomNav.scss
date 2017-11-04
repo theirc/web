@@ -1,18 +1,18 @@
 @import "../shared/includes.scss";
 
 .BottomNav {
-	.Selected {
-		.rtl & {
-			font-family: "Cairo", sans-serif;
-		}
-		@include darken-brand-colors( "color", 5%);
-	}
+    .Selected {
+        .rtl & {
+            font-family: "Cairo", sans-serif;
+        }
+        @include darken-brand-colors( "color", 5%);
+    }
 
-	.Selected > span > span {
-		.rtl & {
-			font-family: "Cairo", sans-serif;
-		}
-		color: black;
-		font-weight: 700;
-	}
+    .Selected > span > span {
+        .rtl & {
+            font-family: "Cairo", sans-serif;
+        }
+        color: black;
+        font-weight: 700;
+    }
 }

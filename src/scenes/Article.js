@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import { actions } from "../store";
 import { push } from "react-router-redux";
 import _ from "lodash";
+const Promise = require('bluebird');
 
 class Article extends React.Component {
 	static propTypes = {

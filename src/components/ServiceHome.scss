@@ -1,0 +1,185 @@
+@import "../shared/includes.scss";
+
+.ServiceHome {
+	display: flex;
+	flex-wrap: wrap;
+
+	.CategoryContainer {
+		flex: 1;
+		flex-grow: 1;
+		flex-basis: 50%;
+		display: flex;
+		flex-direction: column;
+		height: 100px;
+		i {
+			font-size: 35px;
+		}
+	}
+	.Category {
+		display: flex;
+		flex-direction: column;
+		margin: 2px 2px;
+		border: 2px black solid;
+
+		flex: 1;
+		flex-grow: 1;
+		flex-basis: 100%;
+		align-items: center;
+		align-content: center;
+		justify-items: center;
+		justify-content: center;
+
+		text-align: center;
+
+		span {
+			line-height: 20px;
+			font-size: 16px;
+		}
+	}
+
+	.ServiceCategoryTitle {
+		width: 100%;
+		display: flex;
+		margin: 0;
+		background-color: $titleBackground;
+		min-height: 60px;
+		flex-direction: row;
+		align-items: center;
+	}
+
+	.ServiceCategoryTitle > h1 {
+		font-size: 18px;
+		display: block;
+		width: 100%;
+		margin: 0;
+		padding: 10px;
+		flex: 1;
+	}
+	.ServiceCategoryTitle > h1 > small {
+		font-size: 12px;
+		display: block;
+		width: 100%;
+		color: lighten(black, 50%);
+	}
+}
+
+.ServiceList {
+	display: flex;
+	flex-wrap: wrap;
+
+	.ServiceListTitle {
+		width: 100%;
+		display: flex;
+		margin: 0;
+		background-color: $titleBackground;
+		min-height: 60px;
+		flex-direction: row;
+		align-items: center;
+	}
+
+	.ServiceListTitle > h1 {
+		font-size: 18px;
+		display: block;
+		width: 100%;
+		margin: 0;
+		padding: 10px;
+		flex: 1;
+	}
+	.ServiceListTitle > h1 > small {
+		font-size: 12px;
+		display: block;
+		width: 100%;
+		color: lighten(black, 50%);
+	}
+	.ServiceListItems {
+		flex: 1;
+		flex-grow: 1;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+	}
+
+	.Item {
+		flex: 1;
+		flex-basis: 100%;
+		padding-top: 0.25em;
+		padding-bottom: 0.25em;
+		margin-left: 1em;
+		margin-right: 1em;
+		border-bottom: 1px $titleBackground solid;
+		min-height: 60px;
+
+		display: flex;
+
+		@media (min-width: $desktopBreakpoint) {
+			flex-basis: 50%;
+		}
+		i.material-icons {
+			justify-self: center;
+			align-self: center;
+			.rtl &:after {
+				content: "keyboard_arrow_left";
+			}
+			.ltr &:after {
+				content: "keyboard_arrow_right";
+			}
+		}
+	}
+
+	.Icons {
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+		background-color: #fff;
+		width: 120px;
+
+		align-items: stretch;
+		align-content: stretch;
+
+		justify-content: center;
+
+		.Icon {
+			display: flex;
+
+			flex: 1;
+			flex-grow: 1;
+
+			flex-basis: 50%;
+			align-items: center;
+			justify-content: center;
+			align-content: center;
+
+			i {
+				width: 100%;
+				height: 100%;
+				font-size: 25px;
+				text-align: center;
+				align-items: center;
+				display: flex;
+				justify-content: center;
+			}
+		}
+	}
+
+	.Info {
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+
+		h1 {
+			padding: 0;
+			margin: 0;
+			font-size: 120%;
+		}
+		h2 {
+			padding: 0;
+			margin: 0;
+			font-size: 100%;
+			font-weight: normal;
+
+			small {
+				display: block;
+			}
+		}
+	}
+}

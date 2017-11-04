@@ -10,6 +10,7 @@ import { history, actions } from "./store";
 import _ from "lodash";
 
 import { Skeleton } from "./scenes";
+const Promise = require("bluebird");
 
 class ScrollToTop extends Component {
 	componentDidUpdate(prevProps) {
@@ -37,8 +38,7 @@ function withCountry(WrappedComponent) {
 
 			onMount(match.params.country, language).then(c => {});
 		}
-
-		componentWillUpdate(newProps) {
+		compomentWillReceiveProps(newProps) {
 			const { match, onMount, language } = this.props;
 
 			if (newProps.language !== language) {
@@ -49,6 +49,7 @@ function withCountry(WrappedComponent) {
 		}
 
 		render() {
+			if (!this.props.country) return null;
 			return <WrappedComponent {...this.props} />;
 		}
 	}
@@ -86,7 +87,7 @@ function withCategory(WrappedComponent) {
 			}
 		}
 
-		componentWillUpdate(nextProps) {
+		compomentWillReceiveProps(nextProps) {
 			const { onRender } = this.props;
 			const { country, match } = nextProps;
 
@@ -150,15 +151,7 @@ class Router extends Component {
 					<ScrollToTop />
 
 					<Switch>
-						<Route
-							exact
-							path="/:country/services"
-							component={props => (
-								<Skeleton hideFooter={true}>
-									<ServicesWithCountry {...props} />
-								</Skeleton>
-							)}
-						/>
+						<Route path="/:country/services" component={props => <ServicesWithCountry {...props} />} />
 						<Skeleton>
 							<div className="SkeletonContainer">
 								<Switch>
@@ -179,11 +172,5 @@ class Router extends Component {
 		);
 	}
 }
-
-Router = connect(({ organization }) => {
-	return {
-		organization,
-	};
-})(Router);
 
 export default Router;
