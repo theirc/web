@@ -3,6 +3,7 @@ import "./ServiceHome.css";
 import { translate } from "react-i18next";
 import _ from "lodash";
 import { Share } from "material-ui-icons";
+import { Helmet } from "react-helmet";
 
 // eslint-disable-next-line
 var tinycolor = require("tinycolor2");
@@ -54,6 +55,9 @@ class ServiceDetail extends React.Component {
 
 		return (
 			<div className="ServiceDetail">
+				<Helmet>
+					<title>{service.name}</title>
+				</Helmet>
 				<div className="Title">
 					<h1>
 						<small>{_.first(service.types).name}:</small>

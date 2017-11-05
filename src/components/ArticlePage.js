@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import "./ArticlePage.css";
+import { Helmet } from "react-helmet";
 
 const Remarkable = require("remarkable");
 
@@ -74,6 +75,9 @@ export default class ArticlePage extends Component {
 
 		return (
 			<div ref={r => (this._ref = r)} className={["ArticlePage", loading ? "loading" : "loaded"].join(" ")}>
+				<Helmet>
+					<title>{title}</title>
+				</Helmet>
 				<div className="title">
 					<h1>
 						<small>{category.fields.name}:</small>
