@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { actions } from "../store";
 import { push } from "react-router-redux";
 import _ from "lodash";
-const Promise = require('bluebird');
+const Promise = require("bluebird");
 
 class Article extends React.Component {
 	static propTypes = {
@@ -49,7 +49,7 @@ class Article extends React.Component {
 	render() {
 		const { loading } = this.state;
 		const { article, direction } = this.props;
-		const { category, country, onNavigateTo, onNavigate } = this.props;
+		const { category, country, onNavigateTo, onNavigate, language } = this.props;
 
 		if (!article || !category) return <div style={{ height: 100 }} />;
 
@@ -70,7 +70,7 @@ class Article extends React.Component {
 
 		return [
 			<ArticlePage key={"Article"} category={category} article={article} loading={loading} onNavigate={onNavigate} />,
-			<ArticleFooter key={"ArticleFooter"} onNavigateTo={onNavigateTo(category, country)} {...{ direction, previous, next }} />,
+			<ArticleFooter key={"ArticleFooter"} onNavigateTo={onNavigateTo(category, country)} language={language} {...{ direction, previous, next }} />,
 		];
 	}
 }
@@ -82,6 +82,7 @@ const mapState = (s, p) => {
 		country: p.country || s.country,
 		category: p.category || s.category,
 		direction: s.direction,
+		language: s.language,
 	};
 };
 const mapDispatch = (d, p) => {

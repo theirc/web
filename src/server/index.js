@@ -151,7 +151,7 @@ app.get("/:country/:category/:article", function(req, res, err) {
 						return mainRequest({
 							title: match.fields.title,
 							description: match.fields.lead.replace(/&nbsp;/gi, " "),
-							image: (match.fields.hero && match.fields.hero.fields.file.url) || "",
+							image: (match.fields.hero && "https:" + match.fields.hero.fields.file.url) || "",
 						})(req, res, err);
 					}
 					F;

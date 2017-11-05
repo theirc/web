@@ -6,8 +6,6 @@ import { Skeleton } from ".";
 import "../components/ServiceHome.css";
 import { push } from "react-router-redux";
 
-import request from "superagent";
-import Promise from "bluebird";
 import _ from "lodash";
 
 import actions from "../actions";
@@ -105,7 +103,7 @@ class Services extends React.Component {
 						component={props => (
 							<Skeleton>
 								<div className="SkeletonContainer">
-									<ServiceDetail {...props} fetchService={() => this.fetchService(props)} />
+									<ServiceDetail {...props} language={language} fetchService={() => this.fetchService(props)} />
 								</div>
 							</Skeleton>
 						)}
