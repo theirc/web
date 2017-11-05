@@ -1,4 +1,4 @@
-const config = require("./config").default;
+const config = require("./config");
 const contentful = require("contentful");
 let client = null;
 let siteConfig = null;

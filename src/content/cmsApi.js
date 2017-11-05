@@ -1,14 +1,14 @@
 const contentful = require("contentful");
-function cmsApi(config) {
+
+function cmsApi(config, languageDictionary) {
+	if (config) {
+		languageDictionary = Object.assign((languageDictionary||{}), config.languageDictionary || {});
+	}
+
 	let client = contentful.createClient({
 		...config,
 	});
 	function listCountries(language = "en") {
-		let { languageDictionary } = config;
-		if (siteConfig) {
-			languageDictionary = Object.assign(languageDictionary, siteConfig.languageDictionary);
-		}
-
 		return client.getEntries({
 			content_type: "country",
 			locale: languageDictionary[language],
@@ -16,12 +16,6 @@ function cmsApi(config) {
 	}
 
 	function loadCountry(slug, language = "en") {
-		let { languageDictionary } = config;
-
-		if (siteConfig) {
-			languageDictionary = Object.assign(languageDictionary, siteConfig.languageDictionary);
-		}
-
 		/*
         if (global.sessionStorage && global.sessionStorage.country) {
             const country = JSON.parse(global.sessionStorage.country);

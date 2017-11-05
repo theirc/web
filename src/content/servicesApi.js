@@ -33,10 +33,18 @@ module.exports = {
 				});
 		});
 	},
-	fetchAllServices(country, language, categoryId) {
+	fetchAllServices(country, language, categoryId, searchTerm, pageSize = 1000) {
 		return new Promise((resolve, reject) => {
+			var requestUrl =
+				"/services/search/?filter=relatives&geographic_region=" +
+				country +
+				"&page=1&page_size=" +
+				pageSize +
+				"&type_numbers=" +
+				(categoryId || "") +
+				(searchTerm ? "&search=" + searchTerm : "");
 			request
-				.get(RI_URL + "/services/search/?filter=relatives&geographic_region=" + country + "&page=1&page_size=1000&type_numbers=" + (categoryId || ""))
+				.get(RI_URL + requestUrl)
 				.set("Accept-Language", language)
 				.end((err, res) => {
 					if (err) {

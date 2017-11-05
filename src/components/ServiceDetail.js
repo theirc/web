@@ -56,7 +56,7 @@ class ServiceDetail extends React.Component {
 		const firstOrDefault = a => _.first(a) || {};
 		const toUrl = u => (u.indexOf("http") === -1 ? `http://${u}` : u);
 		const hasHours = o => {
-			return o["24/7"] || weekDays.map(w => o[w.toLowerCase()].map(h => !!!(h.open || h.close)).indexOf(true) > -1).indexOf(true) > -1;
+			return o["24/7"] || weekDays.map(w => o[w.toLowerCase()].map(h => !!(h.open || h.close)).indexOf(true) > -1).indexOf(true) > -1;
 		};
 
 		return (
@@ -86,8 +86,8 @@ class ServiceDetail extends React.Component {
 							{!service.opening_time["24/7"] && (
 								<table>
 									<tbody>
-										{weekDays.map(w => (
-											<tr>
+										{weekDays.map((w, i) => (
+											<tr key={`tr-${i}`}>
 												<td>{t(w)}</td>
 												{!firstOrDefault(service.opening_time[w.toLowerCase()]).open && <td colSpan="2">{t("Closed")}</td>}
 												{firstOrDefault(service.opening_time[w.toLowerCase()]).open && [

@@ -15,29 +15,49 @@ class AppHeader extends Component {
 		country: PropTypes.object,
 		language: PropTypes.string,
 	};
+	state = {
+		search: false,
+		searchText: "",
+	};
+	toggleSearch() {
+		const { search } = this.state;
+		if (!search) {
+			window.scrollTo(0, 0);
+		}
+		this.setState({ search: !search });
+	}
+	handleInputChange(event) {
+		const target = event.target;
+		const value = target.type === "checkbox" ? target.checked : target.value;
+		const name = target.name;
+
+		this.setState({
+			[name]: value,
+		});
+	}
+	handleSubmit(event) {
+		const { onGoToSearch } = this.props;
+		const { searchText } = this.state;
+
+		onGoToSearch(searchText);
+		setTimeout(() => {
+			this.setState({ search: false, searchText: "" });
+		}, 200);
+		event.preventDefault();
+	}
 
 	render() {
-		const { onChangeCountry, onGoToSearch, onGoHome, country, language } = this.props;
+		const { onChangeCountry, onGoHome, country, language, t } = this.props;
+		const { search, searchText } = this.state;
 		const noop = () => {
 			console.log("noop");
 		};
 		return (
-			<div>
+			<div className="AppHeader">
 				<Headroom tolerance={5} offset={200}>
 					<div className="app-bar">
-						<div
-							className={[
-								"app-bar-container logo",
-								!(country && language) ? "logo-centered" : "",
-							].join(" ")}
-							onClick={onGoHome || noop}
-						>
-							<img
-								onClick={onGoHome}
-								src={this.props.logo || "/logo.svg"}
-								className="app-bar-logo"
-								alt=" "
-							/>
+						<div className={["app-bar-container logo", !(country && language) ? "logo-centered" : ""].join(" ")} onClick={onGoHome || noop}>
+							<img onClick={onGoHome} src={this.props.logo || "/logo.svg"} className="app-bar-logo" alt=" " />
 						</div>
 						{country &&
 							language && (
@@ -47,7 +67,7 @@ class AppHeader extends Component {
 											{(country && country.fields.name) || " "}
 										</Button>
 										<div className="app-bar-separator" />
-										<IconButton color="contrast" onClick={onGoToSearch || noop}>
+										<IconButton color="contrast" onClick={this.toggleSearch.bind(this)}>
 											<Search />
 										</IconButton>
 									</div>
@@ -63,6 +83,13 @@ class AppHeader extends Component {
 						height: 64,
 					}}
 				/>
+				{search && (
+					<form onSubmit={this.handleSubmit.bind(this)} className="SearchBar">
+						<input autoComplete="off" name="searchText" placeholder={t("Search")} type="text" value={searchText} onChange={this.handleInputChange.bind(this)} />
+						{searchText && <i className="fa fa-times-circle" onClick={() => this.setState({ searchText: "" })} />}
+						<i className="fa fa-search" onClick={this.handleSubmit.bind(this)} />
+					</form>
+				)}
 			</div>
 		);
 	}

@@ -17,7 +17,7 @@ const logger = require("winston");
 const less = require("less");
 const fs = require("fs");
 const nunjucks = require("nunjucks");
-const conf = require("../content/config").default;
+const conf = require("../content/config");
 const cms = require("../content/cms").default;
 const servicesApi = require("../content/servicesApi");
 const cmsApi = require("../content/cmsApi").default;
@@ -29,6 +29,7 @@ const { store, history } = require("../store");
 const Provider = require("react-redux").Provider;
 const _ = require("lodash");
 const toMarkdown = require("to-markdown");
+let { languageDictionary } = conf;
 
 const app = feathers();
 app.configure(configuration());
@@ -122,7 +123,8 @@ app.get("/:country/services/:serviceId/", function(req, res, err) {
 			})
 			.catch(e => mainRequest({})(req, res, err));
 	} catch (e) {
-		res.send(500);
+		console.log(e);
+		mainRequest({})(req, res, err);
 	}
 });
 app.get("/:country/:category/:article", function(req, res, err) {
@@ -137,11 +139,15 @@ app.get("/:country/:category/:article", function(req, res, err) {
 	try {
 		if (configKey) {
 			const { accessToken, space } = conf[configKey];
-			let cms = cmsApi(conf[configKey]);
+			languageDictionary = Object.assign(languageDictionary, conf[configKey]);
+
+			let cms = cmsApi(conf[configKey], languageDictionary);
+
 			cms.client
 				.getEntries({
 					content_type: "article",
 					"fields.slug": article,
+					locale: languageDictionary[selectedLanguage],
 				})
 				.then(c => {
 					let match = _.first(c.items.filter(i => i.fields.country.fields.slug === country && i.fields.category.fields.slug === category));
@@ -154,12 +160,12 @@ app.get("/:country/:category/:article", function(req, res, err) {
 							image: (match.fields.hero && "https:" + match.fields.hero.fields.file.url) || "",
 						})(req, res, err);
 					}
-					F;
 				})
 				.catch(e => mainRequest({})(req, res, err));
 		}
 	} catch (e) {
-		res.send(500);
+		console.log(e);
+		mainRequest({})(req, res, err);
 	}
 });
 

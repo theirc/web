@@ -4,10 +4,9 @@ import { connect } from "react-redux";
 import { AppHeader, Footer, WarningDialog } from "../components";
 import { BottomNavContainer } from "../containers";
 import { push } from "react-router-redux";
-import cms from "../content/cms";
 import moment from "moment";
+import cms from "../content/cms";
 
-import { Helmet } from "react-helmet";
 import { I18nextProvider } from "react-i18next";
 import i18n from "../i18n"; // initialized i18next instance
 
@@ -63,11 +62,14 @@ class Skeleton extends React.Component {
 		return (
 			<I18nextProvider i18n={i18n}>
 				<div className="Skeleton">
-					<Helmet>
-						<title>{cms.siteConfig.title}</title>
-						<link rel="shortcut icon" href={cms.siteConfig.favicon} />
-					</Helmet>
-					<AppHeader country={country} language={language} onGoHome={onGoHome(country)} onGoToSearch={onGoToSearch(country)} onChangeCountry={onChangeLocation} logo={cms.siteConfig.logo} />
+					<AppHeader
+						country={country}
+						language={language}
+						onGoHome={onGoHome(country)}
+						onGoToSearch={q => onGoToSearch(country, q)}
+						onChangeCountry={onChangeLocation}
+						logo={cms.siteConfig.logo}
+					/>
 					{notifications}
 					{children}
 					{showFooter && (
@@ -99,8 +101,8 @@ const mapDispatch = (d, p) => {
 		onGoHome: country => () => {
 			if (country) d(push(`/${country.fields.slug || ""}`));
 		},
-		onGoToSearch: country => () => {
-			if (country) d(push(`/${country.slug}/search`));
+		onGoToSearch: (country, query) => {
+			if (country) d(push(`/${country.fields.slug}/search?q=${query}`));
 		},
 		onChangeLocation: () => {
 			d(actions.changeCountry(null));

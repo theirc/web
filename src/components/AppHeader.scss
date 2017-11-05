@@ -51,16 +51,16 @@ Less me
 }
 
 .app-bar-buttons {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  flex-direction: row;
-  span{
-    .rtl & {
-        font-family: "Cairo", sans-serif;
-    }
-  }
+	flex: 1;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	flex-direction: row;
+	span {
+		.rtl & {
+			font-family: "Cairo", sans-serif;
+		}
+	}
 }
 
 .app-bar-separator {
@@ -72,7 +72,7 @@ Less me
 }
 
 .app-bar-logo {
-  height: 40px;
+	height: 40px;
 }
 
 .headroom {
@@ -113,4 +113,37 @@ Less me
 	-moz-transform: translateY(0%);
 	-webkit-transform: translateY(0%);
 	transform: translateY(0%);
+}
+.AppHeader {
+	.SearchBar {
+		display: flex;
+		height: 30px;
+		padding-bottom: 1em;
+		padding-left: 16px;
+		padding-right: 16px;
+		background-color: black;
+
+		input {
+			line-height: 25px;
+			font-size: 20px;
+			flex: 1;
+			border: 0;
+			background-color: black;
+			border-bottom: 2px white solid;
+			color: white;
+		}
+		input:focus {
+			outline: none;
+		}
+		.fa-times-circle {
+			position: relative;
+			margin-inline-start: -30px;
+		}
+		.fa {
+			color: white;
+			width: 30px;
+			font-size: 20px;
+			text-align: end;
+		}
+	}
 }

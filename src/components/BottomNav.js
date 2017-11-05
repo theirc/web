@@ -4,7 +4,7 @@ import BottomNavigation, { BottomNavigationButton } from "material-ui/BottomNavi
 import PropTypes from "prop-types";
 import { translate } from "react-i18next";
 
-import { Home, Map, List, Search } from "material-ui-icons";
+import { Home, Map, List } from "material-ui-icons";
 import "./BottomNav.css";
 class BottomNav extends Component {
 	static propTypes = {
@@ -22,7 +22,7 @@ class BottomNav extends Component {
 	}
 
 	select(selectedIndex = 0) {
-		const { onGoHome, onGoToCategories, onGoToSearch, onGoToServices,  } = this.props;
+		const { onGoHome, onGoToCategories, onGoToSearch, onGoToServices } = this.props;
 
 		this.setState({ selectedIndex });
 
@@ -59,7 +59,6 @@ class BottomNav extends Component {
 				<BottomNavigation value={this.props.index} onChange={(e, i) => this.select(i)}>
 					<BottomNavigationButton className={this.props.index === 0 ? "Selected" : ""} icon={<Home />} label={t("Home")} value={0} />
 					<BottomNavigationButton className={this.props.index === 1 ? "Selected" : ""} icon={<List />} label={t("Categories")} value={1} />
-					<BottomNavigationButton className={this.props.index === 2 ? "Selected" : ""} icon={<Search />} label={t("Search")} value={2} />
 					{showServiceMap ? <BottomNavigationButton className={this.props.index === 3 ? "Selected" : ""} icon={<Map />} label={t("Services")} value={3} /> : <div />}
 				</BottomNavigation>
 			</Paper>

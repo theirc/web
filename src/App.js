@@ -5,6 +5,8 @@ import { createMuiTheme } from "material-ui/styles";
 import Router from "./router";
 import cms from "./content/cms";
 
+import { Helmet } from "react-helmet";
+
 const theme = createMuiTheme({
 	overrides: {
 		MuiBottomNavigationButton: {
@@ -23,6 +25,10 @@ class ThemedApp extends Component {
 		return (
 			<MuiThemeProvider theme={theme}>
 				<span className={[organization, direction].join(" ")}>
+					<Helmet>
+						<title>{cms.siteConfig.title}</title>
+						<link rel="shortcut icon" href={cms.siteConfig.favicon} />
+					</Helmet>
 					<Router />
 				</span>
 			</MuiThemeProvider>

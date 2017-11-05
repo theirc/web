@@ -1,49 +1,91 @@
 import React from "react";
 import { translate } from "react-i18next";
-import './SearchPage.css';
+import "./SearchPage.css";
 
-const words = [];
+const Remarkable = require("remarkable");
+
+const md = new Remarkable("full", {
+	html: true,
+	linkify: true,
+	typographer: true,
+	breaks: true,
+});
+
 class SearchPage extends React.Component {
-	state = { suggestions: [] };
-
-	handleClear() {
-		this.setState({
-			suggestions: [],
-		});
-	}
-
-	handleChange(input) {
-		this.setState({
-			suggestions: words.filter(word => word.startsWith(input)),
-		});
-	}
-
-	handleSelection(value) {
-		if (value) {
-			console.info(`Selected "${value}"`);
-		}
-	}
-
-	handleSearch(value) {
-		if (value) {
-			console.info(`Searching "${value}"`);
-		}
-	}
-
-	suggestionRenderer(suggestion, searchTerm) {
-		return (
-			<span>
-				<span>{searchTerm}</span>
-				<strong>{suggestion.substr(searchTerm.length)}</strong>
-			</span>
-		);
-	}
-
 	render() {
+		const { hideServices, searching, articles, services, term, t, onNavigate, country } = this.props;
+		/*jshint ignore:start*/
+		/*eslint-disable*/
 		return (
 			<div className="SearchPage">
+				<div className="Title">
+					<h1>
+						{t("Search Results")}: "{term}"
+					</h1>
+				</div>
+				<div className="results">
+					<h1>
+						<i class="fa fa-book" aria-hidden="true" />
+						Articles
+					</h1>
+					<hr />
+
+					{searching && articles.length === 0 && <div className="loader">{t("Searching")}...</div>}
+					{articles.map(article => (
+						<div key={article.sys.id} className="Article">
+							<h2> {article.fields.title}</h2>
+							{article.fields.hero && <img src={article.fields.hero.fields.file.url} alt={article.fields.title} />}
+							<p dangerouslySetInnerHTML={{ __html: md.render(article.fields.lead) }} />
+							<s className="Read-More">
+								<a href="#" onClick={() => onNavigate(`/${article.fields.country.fields.slug}/${article.fields.category.fields.slug}/${article.fields.slug}`)}>
+									{t("Read More")}
+								</a>
+							</s>
+						</div>
+					))}
+					{!searching &&
+						articles.length === 0 && (
+							<div>
+								<em>{t("No articles found with the keywords used.")}</em>
+							</div>
+						)}
+				</div>
+				{!hideServices && [
+					<div key="services" className="results">
+						<h1>
+							<i class="fa fa-map-marker" aria-hidden="true" />
+							Services
+						</h1>
+						<hr key="divider" />
+
+						{searching && services.length === 0 && <div className="loader">{t("Searching")}...</div>}
+						{services.map(s => (
+							<div key={s.id} className="Service">
+								<h2>{s.name}</h2>
+								{s.image && <img src={s.image} alt={s.name} />}
+
+								<h3>
+									{s.provider.name} <small>{s.region.title}</small>
+								</h3>
+								<s className="Read-More">
+									<a href="#" onClick={() => onNavigate(`/${country.fields.slug}/services/${s.id}/`)}>
+										{t("Read More")}
+									</a>
+								</s>
+							</div>
+						))}
+						{!searching &&
+							services.length === 0 && (
+								<div>
+									<em>{t("No services found with the keywords used.")}</em>
+								</div>
+							)}
+					</div>,
+				]}
 			</div>
 		);
+		/*eslint-enable*/
+		/*jshint ignore:end*/
 	}
 }
 
