@@ -79,7 +79,7 @@ class ServiceDetail extends React.Component {
 										{weekDays.map(w => (
 											<tr>
 												<td>{t(w)}</td>
-												{!firstOrDefault(service.opening_time[w.toLowerCase()]).open && <td colspan="2">{t("Closed")}</td>}
+												{!firstOrDefault(service.opening_time[w.toLowerCase()]).open && <td colSpan="2">{t("Closed")}</td>}
 												{firstOrDefault(service.opening_time[w.toLowerCase()]).open && [
 													<td>{firstOrDefault(service.opening_time[w.toLowerCase()]).open}</td>,
 													<td>{firstOrDefault(service.opening_time[w.toLowerCase()]).close}</td>,
@@ -99,7 +99,7 @@ class ServiceDetail extends React.Component {
 						<p>{service.address_in_country_language}</p>,
 					]}
 					{service.provider.name && [
-						<h3>{t("Service provider")}</h3>,
+						<h3>{t("Service Provider")}</h3>,
 						<p>
 							{service.provider.website ? (
 								<a href={service.provider} rel="noopener noreferrer" target="_blank">

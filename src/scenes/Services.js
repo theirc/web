@@ -11,6 +11,8 @@ import Promise from "bluebird";
 import _ from "lodash";
 
 import actions from "../actions";
+
+import servicesApi from "../content/servicesApi";
 const turf = require("@turf/turf");
 
 const measureDistance = (a, language, noFormat) => b => {
@@ -40,53 +42,21 @@ class Services extends React.Component {
 		const categoryId = match.params.categoryId;
 
 		const orderByDistance = c => (currentCoordinates ? _.sortBy(c, s => measureDistance(currentCoordinates, language, true)(s.location)) : _.identity(c));
-
-		return new Promise((resolve, reject) => {
-			request
-				.get(`https://admin.next.refugee.info/e/production/v2/services/search/?filter=relatives&geographic_region=${country.fields.slug}&page=1&page_size=1000&type_numbers=${categoryId}`)
-				.set("Accept-Language", language)
-				.end((err, res) => {
-					if (err) {
-						reject(err);
-					}
-					let services = orderByDistance(res.body.results);
-
-					request
-						.get(`https://admin.next.refugee.info/e/production/v2/service-types/${categoryId}/`)
-						.set("Accept-Language", language)
-						.end((err, res) => {
-							if (err) {
-								reject(err);
-							}
-
-							resolve({
-								category: res.body,
-								services,
-							});
-						});
-				});
-		});
+		return servicesApi
+			.fetchAllServices(country.fields.slug, language, categoryId)
+			.then(s => orderByDistance(s.results))
+			.then(services => servicesApi.fetchCategoryById(language, categoryId).then(category => ({ services, category })));
 	}
+
 	fetchAllServices() {
 		const { country, language, currentCoordinates } = this.props;
 
 		const orderByDistance = c => (currentCoordinates ? _.sortBy(c, s => measureDistance(currentCoordinates, language, true)(s.location)) : _.identity(c));
 
-		return new Promise((resolve, reject) => {
-			request
-				.get(`https://admin.next.refugee.info/e/production/v2/services/search/?filter=relatives&geographic_region=${country.fields.slug}&page=1&page_size=1000&type_numbers=`)
-				.set("Accept-Language", language)
-				.end((err, res) => {
-					if (err) {
-						reject(err);
-					}
-					let services = orderByDistance(res.body.results);
-					resolve({
-						category: null,
-						services,
-					});
-				});
-		});
+		return servicesApi
+			.fetchAllServices(country.fields.slug, language)
+			.then(s => orderByDistance(s.results))
+			.then(services => ({ services, category: null }));
 	}
 
 	fetchService(props) {
@@ -94,36 +64,13 @@ class Services extends React.Component {
 		const { match } = props;
 		const serviceId = match.params.serviceId;
 
-		return new Promise((resolve, reject) => {
-			request
-				.get(`https://admin.next.refugee.info/e/production/v2/services/search/?id=${serviceId}`)
-				.set("Accept-Language", language)
-				.end((err, res) => {
-					if (err) {
-						reject(err);
-					}
-					let service = _.first(res.body);
-
-					resolve(service);
-				});
-		});
+		return servicesApi.fetchServiceById(language, serviceId);
 	}
 
 	serviceTypes() {
-		return new Promise((resolve, reject) => {
-			const { language } = this.props;
+		const { language } = this.props;
 
-			request
-				.get(`https://admin.next.refugee.info/e/production/v2/service-types/`)
-				.set("Accept-Language", language)
-				.end((err, res) => {
-					if (err) {
-						reject(err);
-					}
-
-					resolve(res.body);
-				});
-		});
+		return servicesApi.fetchCategories(language);
 	}
 
 	render() {

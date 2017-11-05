@@ -71,7 +71,7 @@ class ServiceCategoryList extends React.Component {
 				<div className="footer">
 					<div className="Selector" onClick={listAllServices}>
 						<h1>{t("All Services")}</h1>
-						<i className="MenuIcon fa fa-envelope-o" aria-hidden="true" />
+						<i className="MenuIcon fa fa-list" aria-hidden="true" />
 					</div>
 					<hr />
 					{navigator.geolocation && (
