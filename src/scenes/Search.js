@@ -46,13 +46,13 @@ class Search extends React.Component {
 					content_type: "article",
 					"fields.country.sys.id": country.sys.id,
 					query: qs.q,
-					locale: config.languageDictionary[language]
+					locale: config.languageDictionary[language],
 				})
 				.then(response => this.setState({ articles: response.items }))
 				.catch(console.error);
 			const servicePromise = servicesApi.fetchAllServices(country.fields.slug, language, null, qs.q, 20).then(response => this.setState({ services: response.results }));
 
-			Promise.all([articlePromise, servicePromise]).then(() => this.setState({ searching: false }));
+			Promise.race([articlePromise, servicePromise]).then(() => this.setState({ searching: false }));
 		}, 10);
 	}
 	render() {
