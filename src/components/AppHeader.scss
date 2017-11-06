@@ -183,7 +183,7 @@ $color: #ffffff;
 	transform: rotate(45deg);
   transition: all $transition-duration, background-color .0s linear .0s;
 }
-.MuiIconButton-label-30:active:before {
+.active > span:nth-child(1):before {
   width: 0;
   height: 100%;
   border-radius: 0;
@@ -206,7 +206,7 @@ $color: #ffffff;
   transform: translate(-50%, -50%) rotate(-45deg) ;
   transition: all $transition-duration;
 }
-.MuiIconButton-label-30:active:after {
+.active > span:nth-child(1):after {
   height: 100%;
   left: 50%;
   top: 50%;
