@@ -6,6 +6,7 @@ import Router from "./router";
 import cms from "./content/cms";
 
 import { Helmet } from "react-helmet";
+import "./App.css";
 
 const theme = createMuiTheme({
 	overrides: {

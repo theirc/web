@@ -13,6 +13,7 @@ module.exports = {
 				.end((err, res) => {
 					if (err) {
 						reject(err);
+						return;
 					}
 
 					resolve(res.body);
@@ -27,6 +28,7 @@ module.exports = {
 				.end((err, res) => {
 					if (err) {
 						reject(err);
+						return;
 					}
 
 					resolve(res.body);
@@ -49,6 +51,7 @@ module.exports = {
 				.end((err, res) => {
 					if (err) {
 						reject(err);
+						return;
 					}
 					let services = res.body;
 
@@ -64,6 +67,7 @@ module.exports = {
 				.end((err, res) => {
 					if (err) {
 						reject(err);
+						return;
 					}
 					let services = _.first(res.body);
 

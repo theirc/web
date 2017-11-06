@@ -49,7 +49,7 @@ class ServiceDetail extends React.Component {
 					<div className="Title">
 						<h1>{t("Service Detail")}</h1>
 					</div>
-					<div className="Spacer" />
+					<div className="loader" />
 				</div>
 			);
 		}

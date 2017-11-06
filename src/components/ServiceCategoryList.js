@@ -57,7 +57,7 @@ class ServiceCategoryList extends React.Component {
 					<div className="Title">
 						<h1>{t("Service Categories")}</h1>
 					</div>
-					<div className="Spacer" />
+					<div className="loader" />
 				</div>
 			);
 		}

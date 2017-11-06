@@ -1,4 +1,3 @@
-
 $accentIRC: #ffda1a;
 $accentGreen: #29991f;
 $accentRed: #e60000;
@@ -13,111 +12,44 @@ $bigDesktopPaddingWidth: 20vw;
 $titleBackground: #f0f0f0;
 $dividerColor: darken($titleBackground, 30%);
 
+$colorMap: (irc: $accentIRC, nrc: $accentNRC, generic: $accentGreen, mc: $accentRed, pg: $accentPG);
+$colorInverseMap: (irc: #000000, nrc: #ffffff, generic: #ffffff, mc: #ffffff, pg: #ffffff);
+
 @mixin grayscale-brand-colors($prop) {
-	.irc & {
-		#{$prop}: lighten(grayscale($accentIRC), 20%);
-	}
-
-	.nrc & {
-		#{$prop}: lighten(grayscale($accentNRC), 20%);
-	}
-
-	.generic & {
-		#{$prop}: lighten(grayscale($accentGreen), 20%);
-	}
-
-	.mc & {
-		#{$prop}: lighten(grayscale($accentRed), 20%);
-	}
-
-	.pg & {
-		#{$prop}: lighten(grayscale($accentPG), 20%);
+	@each $org in map-keys($map: $colorMap) {
+		.#{$org} & {
+			#{$prop}: lighten(grayscale(map-get($map: $colorMap, $key: $org)), 20%);
+		}
 	}
 }
 
 @mixin darken-brand-colors($prop, $per) {
-	.irc & {
-		#{$prop}: darken($accentIRC, $per);
-	}
-
-	.nrc & {
-		#{$prop}: darken($accentNRC, $per);
-	}
-
-	.generic & {
-		#{$prop}: darken($accentGreen, $per);
-	}
-
-	.mc & {
-		#{$prop}: darken($accentRed, $per);
-	}
-
-	.pg & {
-		#{$prop}: darken($accentPG, $per);
+	@each $org in map-keys($map: $colorMap) {
+		.#{$org} &  {
+			#{$prop}: darken(map-get($map: $colorMap, $key: $org), $per);
+		}
 	}
 }
 
 @mixin lighten-brand-colors($prop, $per) {
-	.irc & {
-		#{$prop}: lighten($accentIRC, $per);
-	}
-
-	.nrc & {
-		#{$prop}: lighten($accentNRC, $per);
-	}
-
-	.generic & {
-		#{$prop}: lighten($accentGreen, $per);
-	}
-
-	.mc & {
-		#{$prop}: lighten($accentRed, $per);
-	}
-
-	.pg & {
-		#{$prop}: lighten($accentPG, $per);
+	@each $org in map-keys($map: $colorMap) {
+		.#{$org} & {
+			#{$prop}: lighten(map-get($map: $colorMap, $key: $org), $per);
+		}
 	}
 }
 @mixin brand-colors($prop) {
-	.irc & {
-		#{$prop}: $accentIRC;
-	}
-
-	.nrc & {
-		#{$prop}: $accentNRC;
-	}
-
-	.generic & {
-		#{$prop}: $accentGreen;
-	}
-
-	.mc & {
-		#{$prop}: $accentRed;
-	}
-
-	.pg & {
-		#{$prop}: $accentPG;
+	@each $org in map-keys($map: $colorMap) {
+		.#{$org} &  {
+			#{$prop}: map-get($map: $colorMap, $key: $org);
+		}
 	}
 }
 
 @mixin brand-colors-inverse($prop) {
-	.irc & {
-		#{$prop}: #000000;
-	}
-
-	.nrc & {
-		#{$prop}: #ffffff;
-	}
-
-	.generic & {
-		#{$prop}: #ffffff;
-	}
-
-	.mc & {
-		#{$prop}: #ffffff;
-	}
-
-	.pg & {
-		#{$prop}: #ffffff;
+	@each $org in map-keys($map: $colorInverseMap) {
+		.#{$org} &  {
+			#{$prop}: map-get($map: $colorInverseMap, $key: $org);
+		}
 	}
 }
