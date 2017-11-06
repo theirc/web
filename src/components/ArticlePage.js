@@ -39,7 +39,7 @@ export default class ArticlePage extends Component {
 		}
 
 		let anchors = Array.from(this._ref.querySelectorAll("a"));
-		anchors = anchors.filter(a => a.href.indexOf("http") || a.hostname === hostname);
+		anchors = anchors.filter(a => a.href.indexOf("http") || a.hostname === hostname || a.hostname === "www.refugee.info");
 		// eslint-disable-next-line
 		let isPhoneOrAlreadyProcessed = h => h.indexOf("javascript:void") === -1 && h.indexOf("tel:") === -1;
 

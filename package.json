@@ -55,6 +55,7 @@
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-facebook-player": "^0.1.0",
+    "react-ga": "^2.3.5",
     "react-headroom": "^2.1.5",
     "react-headrooms": "^1.0.5",
     "react-helmet": "^5.2.0",
