@@ -18,7 +18,8 @@ class Search extends React.Component {
 	state = {
 		articles: [],
 		services: [],
-		searching: true,
+		searchingArticles: true,
+		searchingServices: true,
 		term: "",
 	};
 	componentDidMount() {
@@ -38,7 +39,7 @@ class Search extends React.Component {
 	search(props) {
 		const { location, country, language } = props;
 		const qs = queryString.parse(location.search);
-		this.setState({ articles: [], services: [], searching: true, term: qs.q });
+		this.setState({ articles: [], services: [], searchingArticles: true, searchingServices: true, term: qs.q });
 
 		setTimeout(s => {
 			const articlePromise = cms.client
@@ -48,17 +49,35 @@ class Search extends React.Component {
 					query: qs.q,
 					locale: config.languageDictionary[language],
 				})
-				.then(response => this.setState({ articles: response.items }))
-				.catch(console.error);
-			const servicePromise = servicesApi.fetchAllServices(country.fields.slug, language, null, qs.q, 20).then(response => this.setState({ services: response.results }));
-
-			Promise.race([articlePromise, servicePromise]).then(() => this.setState({ searching: false }));
+				.then(response => this.setState({ articles: response.items, searchingArticles: false }))
+				.catch(e => {
+					console.log(e);
+					this.setState({ articles: [], searchingArticles: false });
+				});
+			const servicePromise = servicesApi
+				.fetchAllServices(country.fields.slug, language, null, qs.q, 20)
+				.then(response => this.setState({ services: response.results, searchingServices: false }))
+				.catch(e => {
+					console.log(e);
+					this.setState({ services: [], searchingServices: false });
+				});
 		}, 10);
 	}
 	render() {
-		const { searching, articles, services, term } = this.state;
+		const { searchingArticles, searchingServices, articles, services, term } = this.state;
 		const { onNavigate, country } = this.props;
-		return <SearchPage hideServices={siteConfig.hideServiceMap} country={country} searching={searching} articles={articles} services={services} term={term} onNavigate={onNavigate} />;
+		return (
+			<SearchPage
+				hideServices={siteConfig.hideServiceMap}
+				country={country}
+				searchingArticles={searchingArticles}
+				searchingServices={searchingServices}
+				articles={articles}
+				services={services}
+				term={term}
+				onNavigate={onNavigate}
+			/>
+		);
 	}
 }
 

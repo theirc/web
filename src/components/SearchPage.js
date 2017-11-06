@@ -13,7 +13,7 @@ const md = new Remarkable("full", {
 
 class SearchPage extends React.Component {
 	render() {
-		const { hideServices, searching, articles, services, term, t, onNavigate, country } = this.props;
+		const { hideServices, searchingArticles, searchingServices, articles, services, term, t, onNavigate, country } = this.props;
 		/*jshint ignore:start*/
 		/*eslint-disable*/
 		return (
@@ -30,7 +30,7 @@ class SearchPage extends React.Component {
 					</h1>
 					<hr />
 
-					{searching && articles.length === 0 && <div className="loader">{t("Searching")}...</div>}
+					{searchingArticles && <div className="loader">{t("Searching")}...</div>}
 					{articles.map(article => (
 						<div key={article.sys.id} className="Article">
 							<h2> {article.fields.title}</h2>
@@ -43,7 +43,7 @@ class SearchPage extends React.Component {
 							</s>
 						</div>
 					))}
-					{!searching &&
+					{!searchingArticles &&
 						articles.length === 0 && (
 							<div>
 								<em>{t("No articles found with the keywords used.")}</em>
@@ -58,7 +58,7 @@ class SearchPage extends React.Component {
 						</h1>
 						<hr key="divider" />
 
-						{searching && services.length === 0 && <div className="loader">{t("Searching")}...</div>}
+						{searchingServices && <div className="loader">{t("Searching")}...</div>}
 						{services.map(s => (
 							<div key={s.id} className="Service">
 								<h2>{s.name}</h2>
@@ -74,7 +74,7 @@ class SearchPage extends React.Component {
 								</s>
 							</div>
 						))}
-						{!searching &&
+						{!searchingServices &&
 							services.length === 0 && (
 								<div>
 									<em>{t("No services found with the keywords used.")}</em>
