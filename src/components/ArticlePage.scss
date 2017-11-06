@@ -17,6 +17,14 @@
 		@include brand-colors("background-color");
 	}
 
+	.Facebook {
+		width: 100%;
+	}
+
+	.YouTube {
+		width: 100%;
+	}
+
 	square {
 		text-decoration: none;
 		& > a {
@@ -63,8 +71,8 @@
 		color: #000000;
 		border-color: #000000;
 
-		@include brand-colors('color');
-		@include brand-colors('border-color');
+		@include brand-colors("color");
+		@include brand-colors("border-color");
 	}
 
 	.title {

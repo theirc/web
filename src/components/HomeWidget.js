@@ -3,6 +3,8 @@ import moment from "moment";
 import _ from "lodash";
 
 import { translate } from "react-i18next";
+import FacebookPlayer from "react-facebook-player";
+import YouTube from "react-youtube";
 
 import "./HomeWidget.css";
 const Remarkable = require("remarkable");
@@ -13,6 +15,7 @@ const md = new Remarkable("full", {
 	typographer: true,
 	breaks: true,
 });
+const APP_ID = 708254579325899;
 
 class HomeWidget extends Component {
 	// Maybe these can be a Separate Component?
@@ -37,6 +40,20 @@ class HomeWidget extends Component {
 		return <div className="Widget">{w.fields.type}</div>;
 	}
 
+	renderVideo(article) {
+		const { title, url } = article.fields;
+
+		if (/facebook.com/.test(url)) {
+			let videoId = url.replace(/.*facebook.com\/.*\/videos\/(.*)\/.*/, "$1");
+
+			return <FacebookPlayer className={"Facebook"} videoId={videoId} appId={APP_ID} />;
+		} else if (/youtube.com/) {
+			let videoId = url.replace(/^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/, "$7");
+			return <YouTube videoId={videoId} className={"YouTube"} />;
+		}
+		return null;
+	}
+
 	renderArticle(article, category, showHero = true, showFullArticle = false) {
 		const { country, onNavigate, t } = this.props;
 		if (!article) {
@@ -50,6 +67,11 @@ class HomeWidget extends Component {
 		}
 
 		let content = showFullArticle ? article.fields.content : article.fields.lead;
+		const { contentType } = article.sys;
+		if (contentType.sys.id === "video") {
+			content = article.fields.lead;
+			showFullArticle = true;
+		}
 
 		/*jshint ignore:start*/
 		/*eslint-disable*/
@@ -62,6 +84,7 @@ class HomeWidget extends Component {
 						</div>
 					)}
 				{showFullArticle ? <h3>{article.fields.title}</h3> : <h3 onClick={() => onNavigate(`/${country.fields.slug}/${categorySlug}/${article.fields.slug}`)}>{article.fields.title}</h3>}
+				{contentType.sys.id === "video" && this.renderVideo(article)}
 				<p dangerouslySetInnerHTML={{ __html: md.render(content) }} />
 				{!showFullArticle && (
 					<s className="Read-More">
@@ -133,7 +156,7 @@ class HomeWidget extends Component {
 		}
 
 		return (
-			<div ref={r => (this._ref = r)} className={["HomeWidget", content.fields.highlighted ? "Highlighted" : ""].join(" ")}>
+			<div ref={r => (this._ref = r)} className={["HomeWidget", content.fields.highlighted ? "Highlighted" : "", `CT-${content.sys.contentType.sys.id}`].join(" ")}>
 				{rendered}
 			</div>
 		);

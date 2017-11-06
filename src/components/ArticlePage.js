@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import "./ArticlePage.css";
 import { Helmet } from "react-helmet";
+import FacebookPlayer from "react-facebook-player";
+import YouTube from "react-youtube";
+const APP_ID = 708254579325899;
 
 const Remarkable = require("remarkable");
 
@@ -11,6 +14,7 @@ const md = new Remarkable("full", {
 	typographer: true,
 	breaks: true,
 });
+
 
 /**
  * 
@@ -65,12 +69,28 @@ export default class ArticlePage extends Component {
 	componentDidMount() {
 		this.replaceLinks();
 	}
+	renderVideo() {
+		const { article } = this.props;
+		const { title, url } = article.fields;
+
+		if (/facebook.com/.test(url)) {
+			let videoId = url.replace(/.*facebook.com\/.*\/videos\/(.*)\/.*/, "$1");
+
+			return <FacebookPlayer className={"Facebook"} videoId={videoId} appId={APP_ID} />;
+		} else if (/youtube.com/) {
+			let videoId = url.replace(/^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/, "$7");
+			return <YouTube videoId={videoId} 
+			className={"YouTube"}  />;
+		}
+		return null;
+	}
 
 	render() {
 		const { article, category, loading } = this.props;
-		const { title, content, hero } = article.fields;
-		//\+[1-9]{1}[0-9]{3,14}
-		let html = md.render(content);
+		const { title, content, hero, lead } = article.fields;
+		const { contentType } = article.sys;
+
+		let html = md.render(content || lead);
 		html = html.replace(/(\+[1-9]{1}[0-9]{3,14})/g, `<a class="tel" href="tel:$1">$1</a>`);
 
 		return (
@@ -89,6 +109,7 @@ export default class ArticlePage extends Component {
 						<img src={hero.fields.file.url + "?fm=jpg&fl=progressive"} alt="" />
 					</div>
 				)}
+				{contentType.sys.id === "video" && this.renderVideo()}
 				<article>
 					<div dangerouslySetInnerHTML={{ __html: html }} />
 				</article>
