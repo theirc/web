@@ -15,10 +15,16 @@ class AppHeader extends Component {
 		country: PropTypes.object,
 		language: PropTypes.string,
 	};
+
 	state = {
 		search: false,
 		searchText: "",
+		active: false,
 	};
+	toggleClass() {
+        const { currentState } = this.state.active;
+        this.setState({ active: !currentState });
+  };
 	toggleSearch() {
 		const { search } = this.state;
 		if (!search) {
@@ -67,7 +73,10 @@ class AppHeader extends Component {
 											{(country && country.fields.name) || " "}
 										</Button>
 										<div className="app-bar-separator" />
-										<IconButton color="contrast" onClick={this.toggleSearch.bind(this)}>
+										<IconButton
+											className={this.state.active ? 'MuiIconButton-label-30':':active'}
+											color="contrast"
+											onClick={() => { this.toggleSearch.bind(this); this.toggleClass.bind(this); }}>
 											<Search />
 										</IconButton>
 									</div>
@@ -84,13 +93,16 @@ class AppHeader extends Component {
 					}}
 				/>
 				{search && (
+
 					<form onSubmit={this.handleSubmit.bind(this)} className="SearchBar">
-						<input autoComplete="off" name="searchText" placeholder={t("Search")} type="text" value={searchText} onChange={this.handleInputChange.bind(this)} />
+						<input autoComplete="off" autoFocus name="searchText" placeholder={t("Search")} type="text" value={searchText} onChange={this.handleInputChange.bind(this)} />
 						{searchText && <i className="fa fa-times-circle" onClick={() => this.setState({ searchText: "" })} />}
 						<i className="fa fa-search" onClick={this.handleSubmit.bind(this)} />
 					</form>
+
 				)}
 			</div>
+
 		);
 	}
 }
