@@ -12,12 +12,13 @@ class CategoryList extends Component {
 			return (c.fields.subCategories && c.fields.subCategories.length) || (c.fields.articles && c.fields.articles.length && c.fields.type !== "News" && !c.fields.overview);
 		};
 
-		const showCategory = c => c && !c.fields.hide && c.fields.slug && (c.fields.overview || c.fields.articles);
+		let showCategory = c => c && !c.fields.hide && c.fields.slug && (c.fields.overview || c.fields.articles);
 		const overviewOrFirst = c => c.fields.overview || (c.fields.articles.length && c.fields.articles[0]);
-
 		return (
 			<div className="CategoryList">
-				<div className="CategoryTitle"><h3>{t("Categories")}</h3></div>
+				<div className="CategoryTitle">
+					<h3>{t("Categories")}</h3>
+				</div>
 				<ul>
 					{categories.filter(showCategory).map((c, i) => (
 						<li key={c.sys.id}>

@@ -11,10 +11,28 @@
 	}
 
 	btn {
-		display: block;
+		display: flex;
 		text-transform: capitalize;
-		height: 5em;
+		min-height: 3em;
 		@include brand-colors("background-color");
+		@include brand-colors-inverse("color");
+		text-align: center;
+		align-items: center;
+		justify-content: center;
+		font-size: 125%;
+		font-weight: bold;
+
+		&:active {
+			border: 1px black solid;
+			@include darken-brand-colors("border-color",40%);
+			@include darken-brand-colors("background-color",10%);
+		}
+
+		a {
+			font-size: 125%;
+			text-decoration: none;
+			@include brand-colors-inverse("color");
+		}
 	}
 
 	.Facebook {

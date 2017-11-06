@@ -16,7 +16,6 @@ i18n
 		resources: i18nConfig,
 		saveMissing: true,
 		missingKeyHandler: function(lng, ns, key, fallbackValue) {
-			console.log(key);
 			window.missingKey = window.missingKey || {};
 			window.missingKey[lng] = window.missingKey[lng] || [];
 			window.missingKey[lng].push(key);
