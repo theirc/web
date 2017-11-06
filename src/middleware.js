@@ -1,3 +1,5 @@
+/*jshint ignore:start*/
+/*eslint-disable*/
 export function analyticsMiddleware(ga) {
 	/**
      * This middleware parses all changes in route and sends a pageview to google analytics
@@ -15,3 +17,5 @@ export function analyticsMiddleware(ga) {
 		};
 	};
 }
+/*eslint-enable*/
+/*jshint ignore:end*/

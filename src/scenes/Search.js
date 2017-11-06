@@ -4,7 +4,6 @@ import cmsApi from "../content/cmsApi";
 import servicesApi from "../content/servicesApi";
 import c from "../content/cms";
 import config from "../content/config";
-import Promise from "bluebird";
 import { SearchPage } from "../components";
 import queryString from "query-string";
 import { push } from "react-router-redux";
@@ -42,7 +41,7 @@ class Search extends React.Component {
 		this.setState({ articles: [], services: [], searchingArticles: true, searchingServices: true, term: qs.q });
 
 		setTimeout(s => {
-			const articlePromise = cms.client
+			cms.client
 				.getEntries({
 					content_type: "article",
 					"fields.country.sys.id": country.sys.id,
@@ -54,7 +53,7 @@ class Search extends React.Component {
 					console.log(e);
 					this.setState({ articles: [], searchingArticles: false });
 				});
-			const servicePromise = servicesApi
+			servicesApi
 				.fetchAllServices(country.fields.slug, language, null, qs.q, 20)
 				.then(response => this.setState({ services: response.results, searchingServices: false }))
 				.catch(e => {

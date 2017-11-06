@@ -71,14 +71,14 @@ export default class ArticlePage extends Component {
 	}
 	renderVideo() {
 		const { article } = this.props;
-		const { title, url } = article.fields;
+		const {  url } = article.fields;
 
 		if (/facebook.com/.test(url)) {
 			let videoId = url.replace(/.*facebook.com\/.*\/videos\/(.*)\/.*/, "$1");
 
 			return <FacebookPlayer className={"Facebook"} videoId={videoId} appId={APP_ID} />;
 		} else if (/youtube.com/) {
-			let videoId = url.replace(/^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/, "$7");
+			let videoId = url.replace(/^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/, "$7");
 			return <YouTube videoId={videoId} 
 			className={"YouTube"}  />;
 		}
