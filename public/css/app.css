@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Cairo:300,400,600,700|Roboto:400,400i,500i,700,700i,900i&subset=arabic,cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese");
+
 .App {
 	text-align: center;
 }
@@ -36,7 +38,7 @@ body {
 ::selection {background-color:black; color: #FDDA14}
 html .rtl,
 body .rtl {
-	font-family: "Cairo", sans-serif;
+	font-family: "Cairo", "Roboto", sans-serif;
 }
 html .ltr,
 body .ltr {
@@ -76,5 +78,9 @@ rtl {
 }
 
 a:before {
+<<<<<<< HEAD
 	content: " "
+=======
+	content: " ";
+>>>>>>> c3b86aabb22c9c4e312b503827417b78dfee7019
 }

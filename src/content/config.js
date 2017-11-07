@@ -13,6 +13,7 @@ module.exports = {
 		title: "Refugee Info",
 		questionLink: "https://fb.me/refugee.info",
 		favicon: "public/favicon.ico",
+		gaTracker: "UA-68574649-6",
 	},
 	"khabrona.info": {
 		theme: "mc",
@@ -25,6 +26,7 @@ module.exports = {
 		questionLink: "mailto:tellus@khabrona.info",
 		hideServiceMap: true,
 		favicon: "/ki-favicon.png",
+		gaTracker: "UA-68574649-7",
 	},
 	localhost: {
 		theme: "irc",
@@ -35,5 +37,6 @@ module.exports = {
 		title: "Refugee Info",
 		questionLink: "https://fb.me/refugee.info",
 		favicon: "public/favicon.ico",
+		gaTracker: "UA-68574649-7",
 	},
 };

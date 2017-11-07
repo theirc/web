@@ -80,3 +80,6 @@ native/node_modules
 native/src
 webserver
 stats.json
+
+t2t.py
+translations*.json

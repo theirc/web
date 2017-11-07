@@ -30,7 +30,7 @@ class SearchPage extends React.Component {
 					</h1>
 					<hr />
 
-					{searchingArticles && <div className="loader">{t("Searching")}...</div>}
+					{searchingArticles && <div className="loader" />}
 					{articles.map(article => (
 						<div key={article.sys.id} className="Article">
 							<h2> {article.fields.title}</h2>
@@ -58,7 +58,7 @@ class SearchPage extends React.Component {
 						</h1>
 						<hr key="divider" />
 
-						{searchingServices && <div className="loader">{t("Searching")}...</div>}
+						{searchingServices && <div className="loader" />}
 						{services.map(s => (
 							<div key={s.id} className="Service">
 								<h2>{s.name}</h2>
