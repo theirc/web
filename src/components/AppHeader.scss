@@ -115,7 +115,6 @@ Less me
 }
 .AppHeader {
 	.SearchBar {
-		display: flex;
 		height: 30px;
 		padding-bottom: 1em;
 		padding-left: 16px;
@@ -123,9 +122,10 @@ Less me
 		background-color: black;
 
 		input {
+			-webkit-appearance: none;
 			line-height: 25px;
 			font-size: 20px;
-			flex: 1;
+			width: 100%;
 			border: 0;
 			background-color: black;
 			border-bottom: 2px white solid;
@@ -135,82 +135,105 @@ Less me
 			outline: none;
 		}
 		.fa-times-circle {
-			position: relative;
-			margin-inline-start: -30px;
+			margin-inline-start: -33px;
+			margin: 5px 5px;
+			top: 60px;
+
+			.ltr & {
+				right: 35px;
+			}
+			.rtl & {
+				left: 35px;
+			}
+		}
+		.fa-search {
+			margin: 5px 5px;
+			top: 60px;
+			.ltr & {
+				right: 5px;
+			}
+			.rtl & {
+				left: 5px;
+			}
 		}
 		.fa {
 			color: white;
 			width: 25px;
 			font-size: 20px;
-			text-align: end;
+
+			position: absolute;
 		}
 	}
 }
 
-$icon-width: 24px;
-$icon-height: 24px;
+$icon-width: 20px;
+$icon-height: 20px;
 $border-width: 2px;
-$transition-duration: .3s;
+$transition-duration: 0.3s;
 $color: #ffffff;
 
-.MuiIconButton-label-30 {
-  display: block;
-  position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  text-align: center;
-  max-width: $icon-width;
-  height: $icon-height;
-  cursor: pointer;
-	margin-top: 20px;
+.SearchButton {
+	width: 100%;
+	display: flex;
+	align-items: inherit;
+	justify-content: inherit;
+	transform: translate(-50%, -50%);
+	text-align: center;
+	max-width: $icon-width;
+	height: $icon-height;
+	cursor: pointer;
+	margin-top: 24px;
+	margin-left: 20px;
 }
 
-.MuiIconButton-label-30:before, .MuiIconButton-label-30:after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  box-sizing: border-box;
-  border: $border-width solid $color;
+.SearchButton:before,
+.SearchButton:after {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	box-sizing: border-box;
+	border: $border-width solid $color;
 }
 
-.MuiIconButton-label-30:before {
-  width: 75%;
-  height: 75%;
-  border-radius: 50%;
+.SearchButton:before {
+	width: 75%;
+	height: 75%;
+	border-radius: 50%;
 	border-width: $border-width;
 	transform: rotate(45deg);
-  transition: all $transition-duration, background-color .0s linear .0s;
+	transition: all $transition-duration, background-color 0s linear 0s;
 }
-.active > span:nth-child(1):before {
-  width: 0;
-  height: 100%;
-  border-radius: 0;
-  border-width: ($border-width / 2);
-  left: 50%;
-  background-color: $color;
-  transition: all $transition-duration, background-color .0s linear .3s;
-  transform: translateX(-$border-width / 2) rotate(45deg);
-}
-
-.MuiIconButton-label-30:after {
-  border-width: ($border-width / 2);
-  width: 0;
-  height: 35%;
-  left: 75%;
-  top: 75%;
-  margin-left: 0;
-  margin-top: 0;
-  background-color: $color;
-  transform: translate(-50%, -50%) rotate(-45deg) ;
-  transition: all $transition-duration;
-}
-.active > span:nth-child(1):after {
-  height: 100%;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%) rotate(-45deg) ;
+.active .SearchButton:before {
+	width: 0;
+	height: 100%;
+	border-radius: 0;
+	border-width: ($border-width / 2);
+	left: 50%;
+	background-color: $color;
+	transition: all $transition-duration, background-color 0s linear 0.3s;
+	transform: translateX(-$border-width / 2) rotate(45deg);
 }
 
-.MuiIconButton-label-30 svg {display: none;}
+.SearchButton:after {
+	border-width: ($border-width / 2);
+	width: 0;
+	height: 35%;
+	left: 75%;
+	top: 75%;
+	margin-left: 0;
+	margin-top: 0;
+	background-color: $color;
+	transform: translate(-50%, -50%) rotate(-45deg);
+	transition: all $transition-duration;
+}
+.active .SearchButton:after {
+	height: 100%;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.SearchButton svg {
+	display: none;
+}

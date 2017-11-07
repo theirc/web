@@ -3,6 +3,7 @@ import createHistory from "history/createBrowserHistory";
 
 import reducers from "./reducers"; // Or wherever you keep your reducers
 import actions from "./actions";
+import c from "./content/cms";
 
 import { routerMiddleware } from "react-router-redux";
 import { routerReducer } from "react-router-redux";
@@ -10,8 +11,8 @@ import { routerReducer } from "react-router-redux";
 import reduxThunk from "redux-thunk";
 import reduxPromiseMiddleware from "redux-promise-middleware";
 import { analyticsMiddleware } from "./middleware.js";
-import ReactGA from 'react-ga';
-ReactGA.initialize('UA-68574649-6');
+import ReactGA from "react-ga";
+ReactGA.initialize(c.siteConfig.gaTracker);
 
 const window = global.window || {};
 let history;

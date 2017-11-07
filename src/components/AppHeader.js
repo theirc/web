@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Button, IconButton } from "material-ui";
 import Headroom from "react-headrooms";
 import PropTypes from "prop-types";
-import { Search } from "material-ui-icons";
 import { translate } from "react-i18next";
 
 import "./AppHeader.css";
@@ -74,7 +73,7 @@ class AppHeader extends Component {
 										</Button>
 										<div className="app-bar-separator" />
 										<IconButton className={[this.state.search && "active"].join(" ")} color="contrast" onClick={this.toggleSearch.bind(this)}>
-											<Search />
+											<div className="SearchButton" />
 										</IconButton>
 									</div>
 								</div>
@@ -91,9 +90,9 @@ class AppHeader extends Component {
 				/>
 				{search && (
 					<form onSubmit={this.handleSubmit.bind(this)} className="SearchBar">
-						<input autoComplete="off" autoFocus name="searchText" placeholder={t("Search")} type="text" value={searchText} onChange={this.handleInputChange.bind(this)} />
 						{searchText && <i className="fa fa-times-circle" onClick={() => this.setState({ searchText: "" })} />}
 						<i className="fa fa-search" onClick={this.handleSubmit.bind(this)} />
+						<input autoComplete="off" autoFocus name="searchText" placeholder={t("Search")} type="text" value={searchText} onChange={this.handleInputChange.bind(this)} />
 					</form>
 				)}
 			</div>
