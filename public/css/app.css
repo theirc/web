@@ -29,10 +29,11 @@
 html,
 body {
 	min-height: 100vh;
+	max-width: 100vw;
 	padding: 0;
 	margin: 0;
 }
-
+::selection {background-color:black; color: #FDDA14}
 html .rtl,
 body .rtl {
 	font-family: "Cairo", sans-serif;

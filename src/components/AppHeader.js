@@ -73,7 +73,7 @@ class AppHeader extends Component {
 											{(country && country.fields.name) || " "}
 										</Button>
 										<div className="app-bar-separator" />
-										<IconButton className={[this.state.search && "active"].join(" ")} color="contrast" onClick={this.toggleSearch.bind(this)}>
+										<IconButton className={`search-close ${[this.state.search && "active"].join(" ")}`} color="contrast" onClick={this.toggleSearch.bind(this)}>
 											<Search />
 										</IconButton>
 									</div>
