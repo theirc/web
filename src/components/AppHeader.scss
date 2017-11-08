@@ -167,18 +167,16 @@ Less me
 	}
 }
 
-<<<<<<< HEAD
+
 $icon-width: 22px;
 $icon-height: 22px;
-=======
 $icon-width: 20px;
 $icon-height: 20px;
->>>>>>> c3b86aabb22c9c4e312b503827417b78dfee7019
 $border-width: 2px;
 $transition-duration: 0.3s;
 $color: #ffffff;
 
-<<<<<<< HEAD
+
 .search-close > span:first-of-type {
   position: relative;
   top: 50%;
@@ -209,7 +207,16 @@ $color: #ffffff;
   border-radius: 50%;
 	border-width: $border-width;
 	transform: rotate(45deg);
+	-moz-transform: rotate(45deg);  /* FF3.5/3.6 */
+	-o-transform: rotate(45deg);  /* Opera 10.5 */
+	-webkit-transform: rotate(45deg);  /* Saf3.1+ */
   transition: all $transition-duration, background-color .0s linear .0s;
+	filter: progid:DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand',
+	M11=0.7071067811865476,
+	M12=-0.7071067811865475,
+	M21=0.7071067811865475,
+	M22=0.7071067811865476); /* IE6,IE7 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Matrix(SizingMethod='auto expand', M11=0.7071067811865476, M12=-0.7071067811865475, M21=0.7071067811865475, M22=0.7071067811865476)"; /* IE8 */
 }
 
 .search-close > span:first-of-type:after {
@@ -242,7 +249,7 @@ $color: #ffffff;
   transform: translate(-50%, -50%) rotate(-45deg) ;
 }
 .MuiIconButton-label-30 > svg, .MuiSvgIcon-root-102 {display: none;}
-=======
+
 .SearchButton {
 	width: 100%;
 	display: flex;
@@ -308,4 +315,3 @@ $color: #ffffff;
 .SearchButton svg {
 	display: none;
 }
->>>>>>> c3b86aabb22c9c4e312b503827417b78dfee7019
