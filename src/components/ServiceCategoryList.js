@@ -16,18 +16,22 @@ class ServiceCategoryList extends React.Component {
 		}
 	}
 
+	fixColor(color) {
+		if (!color) {
+			color = "#FFF";
+		} else if (color.indexOf("#") === -1) {
+			color = `#${color}`;
+		}
+		return color;
+	}
+
 	renderCategory(c) {
 		let { onSelectCategory } = this.props;
 		onSelectCategory = onSelectCategory || (() => console.log("noop"));
 
 		let { id, color, name, vector_icon } = c;
 
-		if (!color) {
-			color = "#FFF";
-		} else if (color.indexOf("#") === -1) {
-			color = `#${color}`;
-		}
-
+		color = this.fixColor(color);
 		color = tinycolor(color)
 			.saturate(30)
 			.toHexString();
@@ -61,13 +65,16 @@ class ServiceCategoryList extends React.Component {
 				</div>
 			);
 		}
-
+		let sortedCategories = _.sortBy(categories || [], c => {
+			const { h, s } = tinycolor(this.fixColor(c.color)).toHsv();
+			return [h, s];
+		});
 		return (
 			<div className="ServiceCategoryList">
 				<div className="Title">
 					<h1>{t("Service Categories")}</h1>
 				</div>
-				{(categories || []).map(this.renderCategory.bind(this))}
+				{sortedCategories.map(this.renderCategory.bind(this))}
 				<div className="footer">
 					<div className="Selector" onClick={listAllServices}>
 						<h1>{t("All Services")}</h1>

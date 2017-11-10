@@ -15,7 +15,6 @@ const md = new Remarkable("full", {
 	breaks: true,
 });
 
-
 /**
  * 
  */
@@ -71,7 +70,7 @@ export default class ArticlePage extends Component {
 	}
 	renderVideo() {
 		const { article } = this.props;
-		const {  url } = article.fields;
+		const { url } = article.fields;
 
 		if (/facebook.com/.test(url)) {
 			let videoId = url.replace(/.*facebook.com\/.*\/videos\/(.*)\/.*/, "$1");
@@ -79,8 +78,7 @@ export default class ArticlePage extends Component {
 			return <FacebookPlayer className={"Facebook"} videoId={videoId} appId={APP_ID} />;
 		} else if (/youtube.com/) {
 			let videoId = url.replace(/^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/, "$7");
-			return <YouTube videoId={videoId} 
-			className={"YouTube"}  />;
+			return <YouTube videoId={videoId} className={"YouTube"} />;
 		}
 		return null;
 	}
@@ -105,8 +103,11 @@ export default class ArticlePage extends Component {
 					</h1>
 				</div>
 				{hero && (
-					<div className="hero">
-						<img src={hero.fields.file.url + "?fm=jpg&fl=progressive"} alt="" />
+					<div>
+						<div className="hero">
+							<img src={hero.fields.file.url + "?fm=jpg&fl=progressive"} alt="" />
+						</div>
+						{hero.fields.description && <credit>{hero.fields.description}</credit>}
 					</div>
 				)}
 				{contentType.sys.id === "video" && this.renderVideo()}

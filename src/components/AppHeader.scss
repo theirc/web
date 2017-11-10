@@ -126,11 +126,14 @@ Less me
 			line-height: 25px;
 			font-size: 20px;
 			width: 100%;
-			box-sizing : border-box;
+			box-sizing: border-box;
 			border: 0;
 			background-color: black;
 			border-bottom: 2px white solid;
 			color: white;
+
+			padding: 0;
+			border-radius: 0;
 		}
 		input:focus {
 			outline: none;
@@ -167,7 +170,6 @@ Less me
 	}
 }
 
-
 $icon-width: 22px;
 $icon-height: 22px;
 $icon-width: 20px;
@@ -176,79 +178,78 @@ $border-width: 2px;
 $transition-duration: 0.3s;
 $color: #ffffff;
 
-
 .search-close > span:first-of-type {
-  position: relative;
-  top: 50%;
-  left: 35%;
-  transform: translate(-50%,-50%);
-  text-align: center;
-  max-width: $icon-width;
-  height: $icon-height;
-  cursor: pointer;
+	position: relative;
+	top: 50%;
+	left: 35%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+	max-width: $icon-width;
+	height: $icon-height;
+	cursor: pointer;
 	margin-top: 22px;
 	.rtl & {
-		left:0;
+		left: 0;
 	}
 }
 
-.search-close > span:first-of-type:before, .search-close > span:first-of-type:after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  box-sizing: border-box;
-  border: $border-width solid $color;
+.search-close > span:first-of-type:before,
+.search-close > span:first-of-type:after {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	box-sizing: border-box;
+	border: $border-width solid $color;
 }
 
 .search-close > span:first-of-type:before {
-  width: 75%;
-  height: 75%;
-  border-radius: 50%;
+	width: 75%;
+	height: 75%;
+	border-radius: 50%;
 	border-width: $border-width;
 	transform: rotate(45deg);
-	-moz-transform: rotate(45deg);  /* FF3.5/3.6 */
-	-o-transform: rotate(45deg);  /* Opera 10.5 */
-	-webkit-transform: rotate(45deg);  /* Saf3.1+ */
-  transition: all $transition-duration, background-color .0s linear .0s;
-	filter: progid:DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand',
-	M11=0.7071067811865476,
-	M12=-0.7071067811865475,
-	M21=0.7071067811865475,
-	M22=0.7071067811865476); /* IE6,IE7 */
+	-moz-transform: rotate(45deg); /* FF3.5/3.6 */
+	-o-transform: rotate(45deg); /* Opera 10.5 */
+	-webkit-transform: rotate(45deg); /* Saf3.1+ */
+	transition: all $transition-duration, background-color 0s linear 0s;
+	filter: progid:DXImageTransform.Microsoft.Matrix(sizingMethod="auto expand", M11=0.7071067811865476, M12=-0.7071067811865475, M21=0.7071067811865475, M22=0.7071067811865476); /* IE6,IE7 */
 	-ms-filter: "progid:DXImageTransform.Microsoft.Matrix(SizingMethod='auto expand', M11=0.7071067811865476, M12=-0.7071067811865475, M21=0.7071067811865475, M22=0.7071067811865476)"; /* IE8 */
 }
 
 .search-close > span:first-of-type:after {
-  border-width: ($border-width / 2);
-  width: 0;
-  height: 35%;
-  left: 75%;
-  top: 75%;
-  margin-left: 0;
-  margin-top: 0;
-  background-color: $color;
-  transform: translate(-50%, -50%) rotate(-45deg) ;
-  transition: all $transition-duration;
+	border-width: ($border-width / 2);
+	width: 0;
+	height: 35%;
+	left: 75%;
+	top: 75%;
+	margin-left: 0;
+	margin-top: 0;
+	background-color: $color;
+	transform: translate(-50%, -50%) rotate(-45deg);
+	transition: all $transition-duration;
 }
 
 .active > span:first-of-type:before {
-  width: 0;
-  height: 100%;
-  border-radius: 0;
-  border-width: ($border-width / 2);
-  left: 50%;
-  background-color: $color;
-  transition: all $transition-duration, background-color .0s linear .3s;
-  transform: translateX(-$border-width / 2) rotate(45deg);
+	width: 0;
+	height: 100%;
+	border-radius: 0;
+	border-width: ($border-width / 2);
+	left: 50%;
+	background-color: $color;
+	transition: all $transition-duration, background-color 0s linear 0.3s;
+	transform: translateX(-$border-width / 2) rotate(45deg);
 }
 .active > span:first-of-type:after {
-  height: 100%;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%) rotate(-45deg) ;
+	height: 100%;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%) rotate(-45deg);
 }
-.MuiIconButton-label-30 > svg, .MuiSvgIcon-root-102 {display: none;}
+.MuiIconButton-label-30 > svg,
+.MuiSvgIcon-root-102 {
+	display: none;
+}
 
 .SearchButton {
 	width: 100%;

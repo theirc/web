@@ -23,7 +23,6 @@
 			background: -o-linear-gradient(left, $color 10%, rgba(0, 0, 0, 0) 42%);
 			background: -ms-linear-gradient(left, $color 10%, rgba(0, 0, 0, 0) 42%);
 			background: linear-gradient(to right, $color 10%, rgba(0, 0, 0, 0) 42%);
-			
 		}
 	}
 }
@@ -56,4 +55,35 @@
 	left: 0;
 	bottom: 0;
 	right: 0;
+}
+
+credit:before {
+	content: " ";
+	padding-right: 5px;
+	padding-left: 5px;
+}
+credit::after {
+	content: " ";
+	padding-right: 5px;
+	padding-left: 5px;
+}
+credit {
+	display: block;
+	background-color: rgba(0, 0, 0, 0.5);
+	color: white;
+	position: relative;
+	width: 100%;
+	margin-top: -30px;
+	height: 30px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	text-align: right;
+	line-height: 30px;
+}
+imagelabel {
+	display: block;
+	width: 100%;
+	overflow: hidden;
+	text-align: center;
+    font-style: italic;
 }
