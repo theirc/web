@@ -86,18 +86,7 @@
     "to-markdown": "^3.1.0",
     "uglifyjs-webpack-plugin": "^1.0.1",
     "webpack-dev-middleware": "^1.12.0",
-    "winston": "^2.3.1"
-  },
-  "scripts": {
-    "build-css": "./node_modules/.bin/node-sass-chokidar src/ -o src/",
-    "watch-css": "npm run build-css && ./node_modules/.bin/node-sass-chokidar src/ -o src/ --watch --recursive",
-    "start": "node server",
-    "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom",
-    "build-server": "babel src -s -D -d webserver --plugins remove-nonjs --presets es2015,stage-0,react",
-    "run-server": "node server"
-  },
-  "devDependencies": {
+    "winston": "^2.3.1",
     "autoprefixer": "7.1.0",
     "babel-core": "6.24.1",
     "babel-eslint": "7.2.3",
@@ -137,6 +126,15 @@
     "webpack-dev-server": "2.4.5",
     "webpack-manifest-plugin": "1.1.0",
     "whatwg-fetch": "2.0.3"
+  },
+  "scripts": {
+    "build-css": "./node_modules/.bin/node-sass-chokidar src/ -o src/",
+    "watch-css": "npm run build-css && ./node_modules/.bin/node-sass-chokidar src/ -o src/ --watch --recursive",
+    "start": "node server",
+    "build": "node scripts/build.js",
+    "test": "node scripts/test.js --env=jsdom",
+    "build-server": "babel src -s -D -d webserver --plugins remove-nonjs --presets es2015,stage-0,react",
+    "run-server": "node server"
   },
   "jest": {
     "collectCoverageFrom": [
