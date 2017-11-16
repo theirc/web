@@ -38,7 +38,8 @@
 		& > a:before {
 			content: "□";
 			padding-right: 5px;
-			font-size: 1em;
+			font-size: 2em;
+			vertical-align: sub;
 
 			@include brand-colors("color");
 			@include brand-colors("border-color");

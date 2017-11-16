@@ -15,7 +15,7 @@
 	.MenuIcon {
 		padding-right: 10px;
 		padding-left: 10px;
-		
+
 				font-size: 20px;
 				width: 24px;
 				height: 24px;
@@ -209,7 +209,7 @@
 			align-self: center;
 			padding-left: 5px;
 			padding-right: 5px;
-			
+
 			.rtl &:after {
 				content: "keyboard_arrow_left";
 			}
@@ -236,10 +236,8 @@
 
 		.Icon {
 			display: flex;
-
 			flex: 1;
 			flex-grow: 1;
-
 			flex-basis: 50%;
 			align-items: center;
 			justify-content: center;
