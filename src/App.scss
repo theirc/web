@@ -85,5 +85,30 @@ imagelabel {
 	width: 100%;
 	overflow: hidden;
 	text-align: center;
-    font-style: italic;
+	font-style: italic;
+}
+
+btn {
+	display: flex;
+	text-transform: capitalize;
+	min-height: 2.5em;
+	@include brand-colors("background-color");
+	@include brand-colors-inverse("color");
+	text-align: center;
+	align-items: center;
+	justify-content: center;
+	font-size: 100%;
+	font-weight: bold;
+
+	&:active {
+		border: 1px black solid;
+		@include darken-brand-colors("border-color",40%);
+		@include darken-brand-colors("background-color",10%);
+	}
+
+	a {
+		font-size: 100%;
+		text-decoration: none;
+		@include brand-colors-inverse("color");
+	}
 }

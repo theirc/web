@@ -102,7 +102,7 @@ export default class ArticlePage extends Component {
 						{title}
 					</h1>
 				</div>
-				{hero && (
+				{hero && hero.fields && hero.fields.file && (
 					<div>
 						<div className="hero">
 							<img src={hero.fields.file.url + "?fm=jpg&fl=progressive"} alt="" />

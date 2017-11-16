@@ -31,18 +31,22 @@ class SearchPage extends React.Component {
 					<hr />
 
 					{searchingArticles && <div className="loader" />}
-					{articles.map(article => (
-						<div key={article.sys.id} className="Article">
-							<h2> {article.fields.title}</h2>
-							{article.fields.hero && <img src={article.fields.hero.fields.file.url} alt={article.fields.title} />}
-							<p dangerouslySetInnerHTML={{ __html: md.render(article.fields.lead) }} />
-							<s className="Read-More">
-								<a href="#" onClick={() => onNavigate(`/${article.fields.country.fields.slug}/${article.fields.category.fields.slug}/${article.fields.slug}`)}>
-									{t("Read More")}
-								</a>
-							</s>
-						</div>
-					))}
+					{articles.map(article => {
+						let hero = article.fields.hero;
+
+						return (
+							<div key={article.sys.id} className="Article">
+								<h2> {article.fields.title}</h2>
+								{article.fields.hero && <img src={article.fields.hero.fields.file.url} alt={article.fields.title} />}
+								<p dangerouslySetInnerHTML={{ __html: md.render(article.fields.lead) }} />
+								<s className="Read-More">
+									<a href="#" onClick={() => onNavigate(`/${article.fields.country.fields.slug}/${article.fields.category.fields.slug}/${article.fields.slug}`)}>
+										{t("Read More")}
+									</a>
+								</s>
+							</div>
+						);
+					})}
 					{!searchingArticles &&
 						articles.length === 0 && (
 							<div>

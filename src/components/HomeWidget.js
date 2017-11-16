@@ -34,14 +34,41 @@ class HomeWidget extends Component {
 				return this.renderArticle(article, category, true, w.fields.showFullArticle);
 			}
 		} else if (w.fields.type === "Top Categories") {
-			// let categories = Array.from(w.fields.related || []);
-			return null;
+			let categories = Array.from(w.fields.related || []);
+			return this.renderTopCategories(categories);
 		}
-		return <div className="Widget">{w.fields.type}</div>;
+		return null;
+	}
+
+	renderTopCategories(categories) {
+		let articleFunc = category => category.fields.overview || _.first(category.fields.articles);
+		const { country, onNavigate, t } = this.props;
+
+		return (
+			<div className="TopCategories">
+				<s>
+					<a href="javascript:void(0)" onClick={() => onNavigate(`/${country.fields.slug}/categories`)}>
+						{t("See More")}
+					</a>
+				</s>
+				<h3>{t("Top Categories")}</h3>
+				{categories.map(c => {
+					let article = articleFunc(c);
+					return (
+						<div key={c.sys.id} className="TopCategory" onClick={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${article.fields.slug}`)}>
+							<div className="icon">
+								<i className={c.fields.iconClass || "material-icons"}>{c.fields.iconText || ((!c.fields.iconClass || c.fields.iconClass === "material-icons") && "add")}</i>
+							</div>
+							{c.fields.name}
+						</div>
+					);
+				})}
+			</div>
+		);
 	}
 
 	renderVideo(article) {
-		const {  url } = article.fields;
+		const { url } = article.fields;
 
 		if (/facebook.com/.test(url)) {
 			let videoId = url.replace(/.*facebook.com\/.*\/videos\/(.*)\/.*/, "$1");
@@ -72,12 +99,15 @@ class HomeWidget extends Component {
 			content = article.fields.lead;
 			showFullArticle = true;
 		}
+		let hero = article.fields.hero;
 
 		/*jshint ignore:start*/
 		/*eslint-disable*/
 		return (
 			<div className="Article" key={article.sys.id}>
-				{article.fields.hero &&
+				{hero &&
+					hero.fields &&
+					hero.fields.file &&
 					showHero && (
 						<div className="hero">
 							<img src={article.fields.hero.fields.file.url + "?fm=jpg&fl=progressive"} alt="" />
@@ -88,7 +118,7 @@ class HomeWidget extends Component {
 				<p dangerouslySetInnerHTML={{ __html: md.render(content) }} />
 				{!showFullArticle && (
 					<s className="Read-More">
-						<a href="#" onClick={() => onNavigate(`/${country.fields.slug}/${categorySlug}/${article.fields.slug}`)}>
+						<a href="javascript:void(0)" onClick={() => onNavigate(`/${country.fields.slug}/${categorySlug}/${article.fields.slug}`)}>
 							{t("Read More")}
 						</a>
 					</s>
@@ -100,10 +130,19 @@ class HomeWidget extends Component {
 	}
 
 	renderCategory(c) {
+		const { country, onNavigate, t } = this.props;
+
+		let html = md.render(c.fields.description);
+		let article = c.fields.overview || _.first(c.fields.articles);
 		return (
 			<div className="Category">
 				<h3>{c.fields.name}</h3>
-				{(c.fields.articles || []).splice(0, 5).map(a => this.renderArticle(a, c, false))}
+				<p dangerouslySetInnerHTML={{ __html: html }} />
+				<s>
+					<a href="javascript:void(0)" onClick={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${article.fields.slug}`)}>
+						{t("Read More")}
+					</a>
+				</s>
 			</div>
 		);
 	}
@@ -143,7 +182,7 @@ class HomeWidget extends Component {
 		let rendered = null;
 		switch (content.sys.contentType.sys.id) {
 			case "article":
-				rendered = this.renderArticle(content);
+				rendered = this.renderArticle(content, content.fields.category, true, true);
 				break;
 			case "widget":
 				rendered = this.renderWidget(content);
