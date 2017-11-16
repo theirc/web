@@ -48,7 +48,7 @@ body {
 }
 
 s {
-	text-decoration: none;
+	text-decoration: none; transform: translate(0px, -9px);
 	& > a {
 		text-decoration: none;
 		text-transform: uppercase;
