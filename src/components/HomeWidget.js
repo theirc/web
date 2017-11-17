@@ -34,10 +34,53 @@ class HomeWidget extends Component {
 				return this.renderArticle(article, category, true, w.fields.showFullArticle);
 			}
 		} else if (w.fields.type === "Top Categories") {
-			let categories = Array.from(w.fields.related || []);
+			let categories = Array.from(w.fields.related || []).filter(r => r.sys.contentType.sys.id === "category");
 			return this.renderTopCategories(categories);
+		} else if (w.fields.type === "Local Guide") {
+			let guideItems = Array.from(w.fields.related || []).filter(r => r.sys.contentType.sys.id === "localGuideItem");
+			return this.renderLocalGuide(guideItems);
 		}
 		return null;
+	}
+
+	renderLocalGuide(guideItems) {
+		const { country, onNavigate, t } = this.props;
+
+		return (
+			<div className="LocalGuide">
+				<s>
+					<a href="javascript:void(0)" onClick={() => onNavigate(`/${country.fields.slug}/categories`)}>
+						{t("See More")}
+					</a>
+				</s>
+				<h3>{t("Local Guide")}</h3>
+				<div className="Container">
+					{guideItems.map(c => {
+						let image =
+							c.fields.backgroundImage && c.fields.backgroundImage.fields.file ? (
+								<img src={`${c.fields.backgroundImage.fields.file.url}?fm=jpg&fl=progressive`} />
+							) : (
+								<img src="https://upload.wikimedia.org/wikipedia/en/4/48/Blank.JPG" />
+							);
+						let link = c => {
+							if (c.fields.url.indexOf("/") === 0) {
+								return onNavigate(c.fields.url);
+							} else {
+								return (global.document.location = c.fields.url);
+							}
+						};
+						return (
+							<div key={c.sys.id} className="LocalGuideItem">
+								{image}
+								<div className="Overlay" onClick={link.bind(null, c)}>
+									{c.fields.title}
+								</div>
+							</div>
+						);
+					})}
+				</div>
+			</div>
+		);
 	}
 
 	renderTopCategories(categories) {

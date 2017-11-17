@@ -14,22 +14,24 @@ import servicesApi from "../content/servicesApi";
 const turf = require("@turf/turf");
 
 const measureDistance = (a, language, noFormat) => b => {
-	if (a && b) {
-		const currentGeoJSON = {
-			type: "Point",
-			coordinates: [a.longitude, a.latitude],
-		};
+	try {
+		if (a && b) {
+			const currentGeoJSON = {
+				type: "Point",
+				coordinates: [a.longitude, a.latitude],
+			};
 
-		let distance = turf.distance(currentGeoJSON, b, "kilometers");
-		if (!noFormat) {
-			distance = distance.toFixed(3);
-			if (Intl.NumberFormat) {
-				let i18 = new Intl.NumberFormat(language);
-				distance = i18.format(distance);
+			let distance = turf.distance(currentGeoJSON, b, "kilometers");
+			if (!noFormat) {
+				distance = distance.toFixed(3);
+				if (Intl.NumberFormat) {
+					let i18 = new Intl.NumberFormat(language);
+					distance = i18.format(distance);
+				}
 			}
+			return distance;
 		}
-		return distance;
-	}
+	} catch (e) {}
 	return null;
 };
 
