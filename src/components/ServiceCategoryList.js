@@ -45,7 +45,7 @@ class ServiceCategoryList extends React.Component {
 
 		return (
 			<div key={id} className="CategoryContainer">
-				<button className="Category" style={style} onClick={() => setTimeout(() => onSelectCategory(c), 300)}>
+				<button className="Category"onClick={() => setTimeout(() => onSelectCategory(c), 300)}>
 					<i className={`${iconPrefix} ${vector_icon}`} />
 					<span>{name}</span>
 				</button>
@@ -66,8 +66,7 @@ class ServiceCategoryList extends React.Component {
 			);
 		}
 		let sortedCategories = _.sortBy(categories || [], c => {
-			const { h, s } = tinycolor(this.fixColor(c.color)).toHsv();
-			return [h, s];
+			return c.name_en;
 		});
 		return (
 			<div className="ServiceCategoryList">

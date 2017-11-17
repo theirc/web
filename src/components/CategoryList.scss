@@ -125,10 +125,6 @@
 		width: 95%;
 	}
 
-	input {
-		display: none;
-	}
-
 	.up {
 		display: none;
 		flex-grow: 1;
@@ -144,6 +140,10 @@
 
 		align-items: flex-end;
 		flex-direction: column;
+	}
+
+	input {
+		display: none;
 	}
 
 	input:checked + label > .up {

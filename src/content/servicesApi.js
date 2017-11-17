@@ -8,32 +8,42 @@ var RI_URL = "https://admin.refugee.info/e/production/v2";
 module.exports = {
 	fetchCategories(language) {
 		return new Promise((resolve, reject) => {
-			request
-				.get(RI_URL + "/service-types/")
-				.set("Accept-Language", language)
-				.end((err, res) => {
-					if (err) {
-						reject(err);
-						return;
-					}
-
-					resolve(res.body);
-				});
+			const sessionStorage = global.sessionStorage || {};
+			if (sessionStorage[`${language}-service-categories`]) {
+				resolve(JSON.parse(sessionStorage[`${language}-service-categories`]));
+			} else {
+				request
+					.get(RI_URL + "/service-types/")
+					.set("Accept-Language", language)
+					.end((err, res) => {
+						if (err) {
+							reject(err);
+							return;
+						}
+						sessionStorage[`${language}-service-categories`] = JSON.stringify(res.body);
+						resolve(res.body);
+					});
+			}
 		});
 	},
 	fetchCategoryById(language, categoryId) {
 		return new Promise((resolve, reject) => {
-			request
-				.get(RI_URL + "/service-types/" + categoryId + "/")
-				.set("Accept-Language", language)
-				.end((err, res) => {
-					if (err) {
-						reject(err);
-						return;
-					}
+			if (sessionStorage[`${language}-service-categories`]) {
+				let categories = JSON.parse(sessionStorage[`${language}-service-categories`]);
+				resolve(_.first(categories.filter(c => c.id === categoryId)));
+			} else {
+				request
+					.get(RI_URL + "/service-types/" + categoryId + "/")
+					.set("Accept-Language", language)
+					.end((err, res) => {
+						if (err) {
+							reject(err);
+							return;
+						}
 
-					resolve(res.body);
-				});
+						resolve(res.body);
+					});
+			}
 		});
 	},
 	fetchAllServices(country, language, categoryId, searchTerm, pageSize = 1000) {

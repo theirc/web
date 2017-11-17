@@ -9,15 +9,17 @@
 		opacity: 1;
 		transition: opacity 0.2s ease-in-out;
 	}
+	u {
+		text-decoration: none;
+	}
+	a:hover {
+		text-decoration: none;
+		border-bottom: 2px black solid;
+		@include brand-colors("border-bottom-color");
+	}
+
 	.with-lines {
-		u {
-			text-decoration: none;
-		}
-		a {
-			text-decoration: none;
-			border-bottom: 2px black solid;
-			@include brand-colors("border-bottom-color");
-		}
+		
 	}
 	.pos,
 	.neg {

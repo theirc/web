@@ -47,7 +47,7 @@ class ArticleFooter extends Component {
 	}
 
 	render() {
-		const { previous, next, onNavigateTo, direction, t } = this.props;
+		const { previous, next, onNavigateTo, direction, other, t } = this.props;
 		const rtl = direction === "rtl";
 
 		return (
@@ -66,7 +66,7 @@ class ArticleFooter extends Component {
 						{!rtl ? <NavigateNext className="icon" /> : <NavigateBefore className="icon" />}
 					</div>
 				)}
-				{next && <hr />}
+				{next && <hr className={!previous ? "divider" : ""} />}
 				{previous && (
 					<div
 						className="selector"
@@ -81,7 +81,7 @@ class ArticleFooter extends Component {
 						{!rtl ? <NavigateBefore className="icon" /> : <NavigateNext className="icon" />}
 					</div>
 				)}
-				{previous && <hr />}
+				{previous && <hr className="divider" />}
 				<div className="selector" onClick={() => this.share()}>
 					<h1>{t("Share this page")}</h1>
 					<Share className="icon" />

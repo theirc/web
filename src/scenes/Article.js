@@ -55,7 +55,7 @@ class Article extends React.Component {
 
 		let next = null,
 			previous = null;
-		const articles = category.fields.articles || [];
+		const articles = ([category.fields.overview].concat(category.fields.articles) || []).filter(_.identity);
 		if (category) {
 			let index = articles.map(a => a.fields.slug).indexOf(article.fields.slug);
 
@@ -68,8 +68,10 @@ class Article extends React.Component {
 			}
 		}
 
+		const other = articles.filter(a => a.sys.id === article.sys.id);
+
 		return [
-			<ArticlePage key={"Article"} category={category} article={article} loading={loading} onNavigate={onNavigate} />,
+			<ArticlePage key={"Article"} category={category} other={other} article={article} loading={loading} onNavigate={onNavigate} />,
 			<ArticleFooter key={"ArticleFooter"} onNavigateTo={onNavigateTo(category, country)} language={language} {...{ direction, previous, next }} />,
 		];
 	}
@@ -80,7 +82,6 @@ const mapState = (s, p) => {
 		article: s.article,
 		match: p.match,
 		country: p.country || s.country,
-		category: p.category || s.category,
 		direction: s.direction,
 		language: s.language,
 	};

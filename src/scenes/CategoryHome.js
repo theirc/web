@@ -30,7 +30,6 @@ const mapState = (s, p) => {
     return {
         articles: s.articles,
         country: s.country,
-        category: s.category,
     };
 };
 const mapDispatch = (d, p) => {

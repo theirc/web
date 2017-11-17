@@ -3,6 +3,7 @@
 .ArticleFooter {
 	& {
 		background: $titleBackground;
+		border-top: 1px black solid;
 	}
 
 	hr {
@@ -15,6 +16,13 @@
 		border-radius: 1px;
 		height: 0;
 		width: 95%;
+	}
+
+	.divider {
+		border-top-color: black;
+		@include darken-brand-colors("border-top-color",20%);
+		
+		width: 100%;
 	}
 	.icon {
 		padding-right: 10px;
@@ -46,5 +54,28 @@
 		display: block;
 		width: 100%;
 		color: lighten(black, 50%);
+	}
+
+	.up {
+		display: none;
+	}
+
+
+	input {
+		display: none;
+	}
+
+	input:checked + label > .up {
+		display: flex;
+	}
+
+	input:checked + label > .down {
+		display: none;
+	}
+
+	input:checked ~ ul {
+		display: block;
+
+		transition: display 2s ease-in-out;
 	}
 }

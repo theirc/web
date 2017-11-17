@@ -29,7 +29,7 @@ class Footer extends Component {
 						)}
 						<div className="button" onClick={onChangeLanguage}>
 							<div className="icon-container">
-								<Language />
+								<i className="material-icons">translate</i>
 							</div>
 							<span>{t("Change Language")}</span>
 						</div>

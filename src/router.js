@@ -75,19 +75,25 @@ function withCountry(WrappedComponent) {
 
 function withCategory(WrappedComponent) {
 	class CategorySwitcher extends Component {
+		state = {
+			category: null,
+		};
 		componentDidMount() {
 			const { match, country, onRender } = this.props;
+
 			if (country) {
 				const category = _.first(
 					_.flattenDeep(country.fields.categories.map(c => [c, c.fields.categories]))
 						.filter(_.identity)
 						.filter(c => c && c.fields.slug === match.params.category)
 				);
+
+				this.setState({ category });
 				onRender(category);
 			}
 		}
 
-		compomentWillReceiveProps(nextProps) {
+		componentWillReceiveProps(nextProps) {
 			const { onRender } = this.props;
 			const { country, match } = nextProps;
 
@@ -97,19 +103,21 @@ function withCategory(WrappedComponent) {
 						.filter(_.identity)
 						.filter(c => c && c.fields.slug === match.params.category)
 				);
+				this.setState({ category });
 				onRender(category);
 			}
 		}
 
 		render() {
-			return <WrappedComponent {...this.props} />;
+			const { category } = this.state;
+			return <WrappedComponent {...{ category, ...this.props }} />;
 		}
 	}
 
 	CategorySwitcher = connect(
 		(s, p) => {
 			return {
-				category: p.category || s.category,
+				location: s.router.location,
 			};
 		},
 		(d, p) => {

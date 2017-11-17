@@ -28,11 +28,11 @@
 			$color: map-get($map: $colorMap, $key: $org);
 
 			background: $color;
-			background: -moz-linear-gradient(left, $color 10%, rgba(0, 0, 0, 0) 42%);
-			background: -webkit-linear-gradient(left, $color 10%, rgba(0, 0, 0, 0) 42%);
-			background: -o-linear-gradient(left, $color 10%, rgba(0, 0, 0, 0) 42%);
-			background: -ms-linear-gradient(left, $color 10%, rgba(0, 0, 0, 0) 42%);
-			background: linear-gradient(to right, $color 10%, rgba(0, 0, 0, 0) 42%);
+			background: -moz-linear-gradient(left, $color 10%, white 42%);
+			background: -webkit-linear-gradient(left, $color 10%, swhite 42%);
+			background: -o-linear-gradient(left, $color 10%, white 42%);
+			background: -ms-linear-gradient(left, $color 10%, white 42%);
+			background: linear-gradient(to right, $color 10%, white 42%);
 		}
 	}
 }
