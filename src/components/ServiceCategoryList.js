@@ -3,7 +3,6 @@ import "./ServiceHome.css";
 import { translate } from "react-i18next";
 import _ from "lodash";
 
-var tinycolor = require("tinycolor2");
 
 class ServiceCategoryList extends React.Component {
 	state = {
@@ -29,23 +28,25 @@ class ServiceCategoryList extends React.Component {
 		let { onSelectCategory } = this.props;
 		onSelectCategory = onSelectCategory || (() => console.log("noop"));
 
-		let { id, color, name, vector_icon } = c;
-
+		let { id, name, vector_icon } = c;
+		let iconPrefix = vector_icon.split("-")[0];
+		
+		/*
 		color = this.fixColor(color);
 		color = tinycolor(color)
 			.saturate(30)
 			.toHexString();
 
-		let iconPrefix = vector_icon.split("-")[0];
 		let style = {
 			backgroundColor: color,
 			borderColor: tinycolor(color).darken(10),
 			color: tinycolor.mostReadable(color, ["#000", "#444", "#888", "#FFF"]).toHexString(),
 		};
+		*/
 
 		return (
 			<div key={id} className="CategoryContainer">
-				<button className="Category"onClick={() => setTimeout(() => onSelectCategory(c), 300)}>
+				<button className="Category" onClick={() => setTimeout(() => onSelectCategory(c), 300)}>
 					<i className={`${iconPrefix} ${vector_icon}`} />
 					<span>{name}</span>
 				</button>

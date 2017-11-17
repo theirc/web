@@ -14,6 +14,7 @@ module.exports = {
 		questionLink: "https://fb.me/refugee.info",
 		favicon: "public/favicon.ico",
 		gaTracker: "UA-68574649-6",
+		appId: "708254579325899",
 	},
 	"khabrona.info": {
 		theme: "mc",
@@ -27,6 +28,7 @@ module.exports = {
 		hideServiceMap: true,
 		favicon: "/ki-favicon.png",
 		gaTracker: "UA-68574649-7",
+		appId: "708254579325899",
 	},
 	localhost: {
 		theme: "irc",
@@ -38,5 +40,6 @@ module.exports = {
 		questionLink: "https://fb.me/refugee.info",
 		favicon: "public/favicon.ico",
 		gaTracker: "UA-68574649-7",
+		appId: "708254579325899",
 	},
 };

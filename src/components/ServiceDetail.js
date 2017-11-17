@@ -2,6 +2,7 @@ import React from "react";
 import "./ServiceHome.css";
 import { translate } from "react-i18next";
 import _ from "lodash";
+import moment from "moment";
 import { Share } from "material-ui-icons";
 import { Helmet } from "react-helmet";
 
@@ -41,7 +42,7 @@ class ServiceDetail extends React.Component {
 	}
 	render() {
 		const { service } = this.state;
-		const { t } = this.props;
+		const { t, language } = this.props;
 		const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 		if (!service) {
 			return (
@@ -59,6 +60,22 @@ class ServiceDetail extends React.Component {
 			return o["24/7"] || weekDays.map(w => o[w.toLowerCase()].map(h => !!(h.open || h.close)).indexOf(true) > -1).indexOf(true) > -1;
 		};
 
+		const amPmTime = time => {
+			const m = moment(moment(`2001-01-01 ${time}`).toJSON())
+				.locale(false)
+				.locale(language);
+			return `${m.format("hh:mm")} ${m.hour() >= 12 ? t("pm") : t("am")}`;
+		};
+		const serviceProviderElement = s => {
+			return s.provider.website ? (
+				<a href={toUrl(s.provider.website)} rel="noopener noreferrer" target="_blank">
+					{s.provider.name}
+				</a>
+			) : (
+				s.provider.name
+			);
+		};
+
 		return (
 			<div className="ServiceDetail">
 				<Helmet>
@@ -70,11 +87,14 @@ class ServiceDetail extends React.Component {
 						{service.name}
 					</h1>
 				</div>
-				{service.image && (
-					<div className="hero">
-						<img src={service.image} alt={service.provider.name} />
-					</div>
-				)}
+				<div className="hero">
+					<h2>
+						<small>{t("Service Provider")}:</small>
+						{serviceProviderElement(service)}
+					</h2>
+					{service.image && <img src={service.image} alt={service.provider.name} />}
+				</div>
+
 				<article>
 					<p dangerouslySetInnerHTML={{ __html: service.description }} />
 					{service.additional_information && [<h3>{t("Additional Information")}</h3>, <p dangerouslySetInnerHTML={{ __html: service.additional_information }} />]}
@@ -91,8 +111,8 @@ class ServiceDetail extends React.Component {
 												<td>{t(w)}</td>
 												{!firstOrDefault(service.opening_time[w.toLowerCase()]).open && <td colSpan="2">{t("Closed")}</td>}
 												{firstOrDefault(service.opening_time[w.toLowerCase()]).open && [
-													<td>{firstOrDefault(service.opening_time[w.toLowerCase()]).open}</td>,
-													<td>{firstOrDefault(service.opening_time[w.toLowerCase()]).close}</td>,
+													<td>{amPmTime(firstOrDefault(service.opening_time[w.toLowerCase()]).open)}</td>,
+													<td>{amPmTime(firstOrDefault(service.opening_time[w.toLowerCase()]).close)}</td>,
 												]}
 											</tr>
 										))}
@@ -107,18 +127,6 @@ class ServiceDetail extends React.Component {
 						service.address_city && [<h4>{t("City")}</h4>, <p>{service.address_city}</p>],
 						<h3>{t("Address in Country Language")}</h3>,
 						<p>{service.address_in_country_language}</p>,
-					]}
-					{service.provider.name && [
-						<h3>{t("Service Provider")}</h3>,
-						<p>
-							{service.provider.website ? (
-								<a href={service.provider} rel="noopener noreferrer" target="_blank">
-									{toUrl(service.provider.name)}
-								</a>
-							) : (
-								service.provider.name
-							)}
-						</p>,
 					]}
 				</article>
 				<div className="footer">

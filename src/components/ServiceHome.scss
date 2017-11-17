@@ -105,6 +105,7 @@
 		flex-direction: column;
 		margin: 2px 2px;
 		border: 1px black solid;
+		border-radius: 5px;
 		//@include darken-brand-colors("border-color", 20%);
 		@include brand-colors("background-color");
 		@include brand-colors-inverse("color");
@@ -122,6 +123,10 @@
 		span {
 			line-height: 20px;
 			font-size: 16px;
+		}
+
+		&:active {
+			@include darken-brand-colors("background-color", 30%);
 		}
 	}
 
@@ -352,8 +357,20 @@
 	.hero {
 		background-color: #000000;
 		display: flex;
-		align-items: center;
-		justify-content: center;
+		flex-direction: column;
+
+		h2 {
+			color: white;
+			font-size: 100%;
+			padding: 10px;
+			padding-top: 2px;
+			padding-bottom: 2px;
+			small {
+				font-size: 12px;
+				display: block;
+				color: lighten(black, 50%);
+			}
+		}
 	}
 
 	.hero > img {

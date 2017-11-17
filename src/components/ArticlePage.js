@@ -4,7 +4,9 @@ import "./ArticlePage.css";
 import { Helmet } from "react-helmet";
 import FacebookPlayer from "react-facebook-player";
 import YouTube from "react-youtube";
-const APP_ID = 708254579325899;
+
+import cms from "../content/cms";
+const APP_ID = cms.siteConfig.appId;
 
 const Remarkable = require("remarkable");
 
@@ -98,18 +100,20 @@ export default class ArticlePage extends Component {
 				</Helmet>
 				<div className="title">
 					<h1>
-						<small>{category.fields.name}:</small>
+						{(category.fields.articles || []).length > 1 && <small>{category.fields.name}:</small>}
 						{title}
 					</h1>
 				</div>
-				{hero && hero.fields && hero.fields.file && (
-					<div>
-						<div className="hero">
-							<img src={hero.fields.file.url + "?fm=jpg&fl=progressive"} alt="" />
+				{hero &&
+					hero.fields &&
+					hero.fields.file && (
+						<div>
+							<div className="hero">
+								<img src={hero.fields.file.url + "?fm=jpg&fl=progressive"} alt="" />
+							</div>
+							{hero.fields.description && <credit>{hero.fields.description}</credit>}
 						</div>
-						{hero.fields.description && <credit>{hero.fields.description}</credit>}
-					</div>
-				)}
+					)}
 				{contentType.sys.id === "video" && this.renderVideo()}
 				<article>
 					<div dangerouslySetInnerHTML={{ __html: html }} />

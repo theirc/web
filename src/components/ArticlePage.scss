@@ -67,23 +67,6 @@
 		width: 100%;
 	}
 
-	square {
-		text-decoration: none;
-		& > a {
-			text-decoration: none;
-			text-transform: uppercase;
-			font-weight: 700;
-		}
-		& > a:before {
-			content: "□";
-			padding-right: 5px;
-			font-size: 2em;
-			vertical-align: sub;
-
-			@include brand-colors("color");
-			@include brand-colors("border-color");
-		}
-	}
 
 	.tel {
 		direction: ltr;
