@@ -48,7 +48,7 @@ body {
 }
 
 s {
-	text-decoration: none;
+	text-decoration: none; transform: translate(0px, -9px);
 	& > a {
 		text-decoration: none;
 		text-transform: uppercase;
@@ -62,12 +62,14 @@ s {
 	.ltr & > a:before {
 		content: "□";
 		padding-right: 5px;
-		font-size: 1em;
+		font-size: 2em;
+		vertical-align: sub;
 	}
 	.rtl & > a:before {
 		content: "□";
 		padding-left: 5px;
-		font-size: 1em;
+		font-size: 2em;
+		vertical-align: sub;
 
 	}
 }
