@@ -2,8 +2,8 @@ var request = require("superagent");
 var Promise = require("bluebird");
 var _ = require("lodash");
 
-//var RI_URL = "https://admin.refugee.info/e/production/v2";
-var RI_URL = "http://localhost:8000/e/production/v2";
+var RI_URL = "https://admin.refugee.info/e/production/v2";
+//var RI_URL = "http://localhost:8000/e/production/v2";
 
 module.exports = {
 	fetchCategories(language) {
