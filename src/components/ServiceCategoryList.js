@@ -1,8 +1,9 @@
 import React from "react";
 import "./ServiceHome.css";
 import { translate } from "react-i18next";
-import _ from "lodash";
 
+import HeaderBar from "./HeaderBar";
+import _ from "lodash";
 
 class ServiceCategoryList extends React.Component {
 	state = {
@@ -30,7 +31,7 @@ class ServiceCategoryList extends React.Component {
 
 		let { id, name, vector_icon } = c;
 		let iconPrefix = vector_icon.split("-")[0];
-		
+
 		/*
 		color = this.fixColor(color);
 		color = tinycolor(color)
@@ -69,34 +70,20 @@ class ServiceCategoryList extends React.Component {
 		let sortedCategories = _.sortBy(categories || [], c => {
 			return c.name_en;
 		});
-		return (
-			<div className="ServiceCategoryList">
-				<div className="Title">
-					<h1>{t("Service Categories")}</h1>
-				</div>
-				{sortedCategories.map(this.renderCategory.bind(this))}
-				<div className="footer">
-					<div className="Selector" onClick={listAllServices}>
-						<h1>{t("All Services")}</h1>
-						<i className="MenuIcon fa fa-list" aria-hidden="true" />
-					</div>
-					<hr />
-					{navigator.geolocation && (
-						<div className="Selector" onClick={toggleLocation || _.identity}>
-							<h1>{t("Order results by distance to me")}</h1>
-							{!locationEnabled && <i className="MenuIcon material-icons">radio_button_unchecked</i>}
-							{locationEnabled && <i className="MenuIcon material-icons">radio_button_checked</i>}
-						</div>
-					)}
-				</div>
-				{/*
-				<hr />
-				<div className="Selector">
-					<h1>{t("Suggest changes to this page")}</h1>
-				</div>
-                */}
-			</div>
-		);
+		return [
+			<HeaderBar title={t("Service Categories").toUpperCase()}>
+				<li onClick={toggleLocation || _.identity}>
+					<h1>{t("Order results by distance to me")}</h1>
+					{!locationEnabled && <i className="MenuIcon material-icons">radio_button_unchecked</i>}
+					{locationEnabled && <i className="MenuIcon material-icons">radio_button_checked</i>}
+				</li>
+				<li onClick={listAllServices}>
+					<h1>{t("All Services")}</h1>
+					<i className="MenuIcon fa fa-list" aria-hidden="true" />
+				</li>
+			</HeaderBar>,
+			<div className="ServiceCategoryList">{sortedCategories.map(this.renderCategory.bind(this))}</div>,
+		];
 	}
 }
 

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Button, IconButton } from "material-ui";
 import Headroom from "react-headrooms";
 import PropTypes from "prop-types";
-import { Search } from "material-ui-icons";
 import { translate } from "react-i18next";
 
 import "./AppHeader.css";

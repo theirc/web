@@ -2,6 +2,7 @@ import React from "react";
 import "./ServiceHome.css";
 import { translate } from "react-i18next";
 import _ from "lodash";
+import HeaderBar from "./HeaderBar";
 
 var tinycolor = require("tinycolor2");
 
@@ -70,9 +71,15 @@ class ServiceList extends React.Component {
 		if (!loaded) {
 			return (
 				<div className="ServiceList">
-					<div className="Title">
-						<h1>{t("Services")}</h1>
-					</div>
+					<HeaderBar title={t("Services")}>
+						{navigator.geolocation && (
+							<li onClick={toggleLocation || _.identity}>
+								<h1>{t("Order results by distance to me")}</h1>
+								{!locationEnabled && <i className="MenuIcon material-icons">radio_button_unchecked</i>}
+								{locationEnabled && <i className="MenuIcon material-icons">radio_button_checked</i>}
+							</li>
+						)}
+					</HeaderBar>
 					<div className="loader" />
 				</div>
 			);
@@ -80,12 +87,15 @@ class ServiceList extends React.Component {
 
 		return (
 			<div className="ServiceList">
-				<div className="Title">
-					<h1>
-						{category && <small>{category.name}:</small>}
-						{t("Services")}
-					</h1>
-				</div>
+				<HeaderBar subtitle={category && `${category.name}:`} title={t("Services")}>
+					{navigator.geolocation && (
+						<li onClick={toggleLocation || _.identity}>
+							<h1>{t("Order results by distance to me")}</h1>
+							{!locationEnabled && <i className="MenuIcon material-icons">radio_button_unchecked</i>}
+							{locationEnabled && <i className="MenuIcon material-icons">radio_button_checked</i>}
+						</li>
+					)}
+				</HeaderBar>
 				<div className="Items">{services.map(this.renderService.bind(this))}</div>
 				<div className="footer">
 					{navigator.geolocation && (

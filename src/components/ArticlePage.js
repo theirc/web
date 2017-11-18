@@ -4,6 +4,7 @@ import "./ArticlePage.css";
 import { Helmet } from "react-helmet";
 import FacebookPlayer from "react-facebook-player";
 import YouTube from "react-youtube";
+import HeaderBar from "./HeaderBar";
 
 import cms from "../content/cms";
 const APP_ID = cms.siteConfig.appId;
@@ -98,12 +99,7 @@ export default class ArticlePage extends Component {
 				<Helmet>
 					<title>{title}</title>
 				</Helmet>
-				<div className="title">
-					<h1>
-						{(category.fields.articles || []).length > 1 && <small>{category.fields.name}:</small>}
-						{title}
-					</h1>
-				</div>
+				<HeaderBar subtitle={(category.fields.articles || []).length > 1 && `${category.fields.name}:`} title={title} />
 				{hero &&
 					hero.fields &&
 					hero.fields.file && (

@@ -5,6 +5,7 @@ import _ from "lodash";
 import moment from "moment";
 import { Share } from "material-ui-icons";
 import { Helmet } from "react-helmet";
+import HeaderBar from "./HeaderBar";
 
 // eslint-disable-next-line
 var tinycolor = require("tinycolor2");
@@ -47,9 +48,7 @@ class ServiceDetail extends React.Component {
 		if (!service) {
 			return (
 				<div className="ServiceDetail">
-					<div className="Title">
-						<h1>{t("Service Detail")}</h1>
-					</div>
+					<HeaderBar title={t("Service Detail")} />
 					<div className="loader" />
 				</div>
 			);
@@ -81,12 +80,7 @@ class ServiceDetail extends React.Component {
 				<Helmet>
 					<title>{service.name}</title>
 				</Helmet>
-				<div className="Title">
-					<h1>
-						<small>{_.first(service.types).name}:</small>
-						{service.name}
-					</h1>
-				</div>
+				<HeaderBar subtitle={`${_.first(service.types).name}:`} title={service.name} />
 				<div className="hero">
 					<h2>
 						<small>{t("Service Provider")}:</small>

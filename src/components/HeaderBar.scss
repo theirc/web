@@ -1,0 +1,108 @@
+@import "../shared/includes.scss";
+
+.HeaderBar {
+	ul {
+		display: none;
+		padding: 0;
+		margin: 0;
+		list-style: none;
+		border-top: 1px $dividerColor solid;
+		border-bottom: 1px $dividerColor solid;
+	}
+
+	ul > li {
+		width: 100%;
+		display: flex;
+		margin: 0;
+		background-color: lighten($titleBackground,2%);
+		min-height: 60px;
+		flex-direction: row;
+		align-items: center;
+		cursor: pointer;
+	}
+
+	ul > li > h1 {
+		font-size: 18px;
+		display: block;
+		width: 100%;
+		margin: 0;
+		padding: 10px;
+		flex: 1;
+	}
+
+	ul > li > h1 > small {
+		font-size: 12px;
+		display: block;
+		width: 100%;
+		color: lighten(black, 50%);
+	}
+
+	li:not(:nth-child(1)) {
+		border-top: 1px black solid;
+	}
+
+	input {
+		display: none;
+	}
+
+	input:checked + label > .up {
+		display: flex;
+	}
+
+	input:checked + label > .down {
+		display: none;
+	}
+
+	input:checked + label ~ ul {
+		display: block;
+
+		transition: display 2s;
+	}
+
+	label {
+		min-height: 72px;
+		padding: 10px;
+		padding-top: 0;
+		padding-bottom: 0;
+		background: $titleBackground;
+		font-size: 18px;
+		line-height: 20px;
+		font-weight: 700;
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+	}
+
+	h1 {
+		font-size: 18px;
+		display: block;
+		width: 100%;
+		margin: 0;
+		flex: 1;
+	}
+	h1 > small {
+		font-size: 12px;
+		display: block;
+		width: 100%;
+		color: lighten(black, 50%);
+	}
+
+	.up {
+		display: none;
+	}
+
+	.up,
+	.down {
+		width: 30px;
+	}
+
+	i {
+		padding-right: 10px;
+		padding-left: 10px;
+
+		font-size: 20px;
+		width: 24px;
+		height: 24px;
+		text-align: center;
+	}
+}
