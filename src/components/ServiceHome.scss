@@ -372,6 +372,10 @@
 				color: lighten(black, 50%);
 			}
 		}
+
+		a {
+			color: white;
+		}
 	}
 
 	.hero > img {
@@ -423,7 +427,6 @@
 			p {
 				padding: 0;
 				margin: 0;
-
 			}
 
 			& > li {
