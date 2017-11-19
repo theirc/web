@@ -57,7 +57,7 @@ class SearchPage extends React.Component {
 				{!hideServices && [
 					<div key="services" className="results">
 						<h1>
-							<i class="fa fa-map-marker" aria-hidden="true" />
+							<i className="fa fa-map-marker" aria-hidden="true" />
 							Services
 						</h1>
 						<hr key="divider" />

@@ -5,6 +5,8 @@ import { translate } from "react-i18next";
 import HeaderBar from "./HeaderBar";
 import _ from "lodash";
 
+import tinycolor from "tinycolor2";
+
 class ServiceCategoryList extends React.Component {
 	state = {
 		categories: [],
@@ -32,19 +34,25 @@ class ServiceCategoryList extends React.Component {
 		let { id, name, vector_icon } = c;
 		let iconPrefix = vector_icon.split("-")[0];
 
-		/*
-		color = this.fixColor(color);
+		let color = this.fixColor(c.color);
 		color = tinycolor(color)
 			.saturate(30)
 			.toHexString();
 
 		let style = {
-			backgroundColor: color,
-			borderColor: tinycolor(color).darken(10),
-			color: tinycolor.mostReadable(color, ["#000", "#444", "#888", "#FFF"]).toHexString(),
+			color: color === "#ffffff" ? "black" : color,
 		};
-		*/
 
+		return (
+			<li>
+				<hr className="line" />
+				<div className="container" onClick={() => setTimeout(() => onSelectCategory(c), 300)}>
+					<i className={`${iconPrefix} ${vector_icon}`} style={style} />
+					<strong>{c.name}</strong>
+				</div>
+			</li>
+		);
+		/*
 		return (
 			<div key={id} className="CategoryContainer">
 				<button className="Category" onClick={() => setTimeout(() => onSelectCategory(c), 300)}>
@@ -53,6 +61,7 @@ class ServiceCategoryList extends React.Component {
 				</button>
 			</div>
 		);
+		*/
 	}
 	render() {
 		const { categories } = this.state;
@@ -83,7 +92,15 @@ class ServiceCategoryList extends React.Component {
 				</li>
 			</HeaderBar>,
 			<div key={"List"} className="ServiceCategoryList">
-				{sortedCategories.map(this.renderCategory.bind(this))}
+				<ul>
+					<li>
+						<div className="container">
+							<i className="fa fa-compass" />
+							<strong>Near Me</strong>
+						</div>
+					</li>
+					{sortedCategories.map(c => this.renderCategory(c))}
+				</ul>
 			</div>,
 		];
 	}
