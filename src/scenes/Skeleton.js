@@ -1,5 +1,6 @@
 import React from "react";
 import { actions } from "../store";
+import _ from "lodash";
 import { connect } from "react-redux";
 import { AppHeader, Footer, WarningDialog } from "../components";
 import { BottomNavContainer } from "../containers";
@@ -58,18 +59,12 @@ class Skeleton extends React.Component {
 		}
 
 		let showFooter = !hideFooter && country && language;
+		let logo = _.template(cms.siteConfig.logo)({ language: language || "en" });
 
 		return (
 			<I18nextProvider i18n={i18n}>
 				<div className="Skeleton">
-					<AppHeader
-						country={country}
-						language={language}
-						onGoHome={onGoHome(country)}
-						onGoToSearch={q => onGoToSearch(country, q)}
-						onChangeCountry={onChangeLocation}
-						logo={cms.siteConfig.logo}
-					/>
+					<AppHeader country={country} language={language} onGoHome={onGoHome(country)} onGoToSearch={q => onGoToSearch(country, q)} onChangeCountry={onChangeLocation} logo={logo} />
 					{notifications}
 					{children}
 					{showFooter && (

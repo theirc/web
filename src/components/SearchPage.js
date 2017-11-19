@@ -25,7 +25,7 @@ class SearchPage extends React.Component {
 				</div>
 				<div className="results">
 					<h1>
-						<i class="fa fa-book" aria-hidden="true" />
+						<i className="fa fa-book" aria-hidden="true" />
 						Articles
 					</h1>
 					<hr />

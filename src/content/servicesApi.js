@@ -3,6 +3,7 @@ var Promise = require("bluebird");
 var _ = require("lodash");
 
 var RI_URL = "https://admin.refugee.info/e/production/v2";
+
 //var RI_URL = "http://localhost:8000/e/production/v2";
 
 module.exports = {
@@ -81,6 +82,23 @@ module.exports = {
 						return;
 					}
 					let services = _.first(res.body);
+
+					resolve(services);
+				});
+		});
+	},
+	fetchServicesInSameLocation(language, serviceId) {
+		// get_same_coordinates_services
+		return new Promise((resolve, reject) => {
+			request
+				.get(RI_URL + "/services/" + serviceId + "/get_same_coordinates_services/")
+				.set("Accept-Language", language)
+				.end((err, res) => {
+					if (err) {
+						reject(err);
+						return;
+					}
+					let services = res.body.results.filter(r => r.id !== serviceId);
 
 					resolve(services);
 				});

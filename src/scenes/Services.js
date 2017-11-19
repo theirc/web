@@ -67,6 +67,14 @@ class Services extends React.Component {
 		return servicesApi.fetchServiceById(language, serviceId);
 	}
 
+	fetchServicesInSameLocation(props) {
+		const { language } = this.props;
+		const { match } = props;
+		const serviceId = match.params.serviceId;
+
+		return servicesApi.fetchServicesInSameLocation(language, serviceId);
+	}
+
 	serviceTypes() {
 		const { language } = this.props;
 
@@ -105,7 +113,13 @@ class Services extends React.Component {
 						component={props => (
 							<Skeleton>
 								<div className="SkeletonContainer">
-									<ServiceDetail {...props} language={language} fetchService={() => this.fetchService(props)} />
+									<ServiceDetail
+										{...props}
+										language={language}
+										goToService={goToService}
+										fetchService={() => this.fetchService(props)}
+										fetchServicesInSameLocation={() => this.fetchServicesInSameLocation(props)}
+									/>
 								</div>
 							</Skeleton>
 						)}

@@ -97,15 +97,6 @@ class ServiceList extends React.Component {
 					)}
 				</HeaderBar>
 				<div className="Items">{services.map(this.renderService.bind(this))}</div>
-				<div className="footer">
-					{navigator.geolocation && (
-						<div className="Selector" onClick={toggleLocation || _.identity}>
-							<h1>{t("Order results by distance to me")}</h1>
-							{!locationEnabled && <i className="MenuIcon material-icons">radio_button_unchecked</i>}
-							{locationEnabled && <i className="MenuIcon material-icons">radio_button_checked</i>}
-						</div>
-					)}
-				</div>
 			</div>
 		);
 	}

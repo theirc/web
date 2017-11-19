@@ -110,18 +110,46 @@ imagelabel {
 	text-align: center;
 	font-style: italic;
 }
-
-btn {
+btn, btn-muted {
 	display: flex;
 	text-transform: capitalize;
-	min-height: 2.5em;
-	@include brand-colors("background-color");
-	@include brand-colors-inverse("color");
-	text-align: center;
+
 	align-items: center;
 	justify-content: center;
-	font-size: 100%;
+	text-align: center;
+	
+	min-height: 44px;
+	
+	font-size: 16px;
+	letter-spacing: 0;
 	font-weight: bold;
+	line-height: 20px;
+
+	padding-right: 5px;
+	padding-left: 5px;
+
+	padding-bottom: 3px;
+	padding-top: 3px;
+
+}
+
+btn-muted {
+	background-color: #f2f2f2;
+	color: lighten(black, 20%);
+
+	&:active {
+		background-color: $dividerColor;
+	}
+
+	a {
+		font-size: 100%;
+		text-decoration: none;
+	}
+}
+
+btn {
+	@include brand-colors("background-color");
+	@include brand-colors-inverse("color");
 
 	&:active {
 		border: 1px black solid;

@@ -38,7 +38,7 @@
 	}
 
 	li:not(:nth-child(1)) {
-		border-top: 1px black solid;
+		border-top: 1px lighten($dividerColor,2%) solid;
 	}
 
 	input {
@@ -99,8 +99,7 @@
 	i {
 		padding-right: 10px;
 		padding-left: 10px;
-
-		font-size: 20px;
+		font-size: 25px;
 		width: 24px;
 		height: 24px;
 		text-align: center;
