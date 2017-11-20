@@ -5,43 +5,103 @@ import { Route, Switch } from "react-router";
 import { Skeleton } from ".";
 import "../components/ServiceHome.css";
 import { push } from "react-router-redux";
+import { translate } from "react-i18next";
 
 import _ from "lodash";
 
 import actions from "../actions";
 
 import servicesApi from "../content/servicesApi";
+import { Promise } from "es6-promise";
 const turf = require("@turf/turf");
 
-const measureDistance = (a, language, noFormat) => b => {
-	try {
-		if (a && b) {
-			const currentGeoJSON = {
-				type: "Point",
-				coordinates: [a.longitude, a.latitude],
-			};
-
-			let distance = turf.distance(currentGeoJSON, b, "kilometers");
-			if (!noFormat) {
-				distance = distance.toFixed(3);
-				if (Intl.NumberFormat) {
-					let i18 = new Intl.NumberFormat(language);
-					distance = i18.format(distance);
-				}
-			}
-			return distance;
-		}
-	} catch (e) {}
-	return null;
-};
-
 class Services extends React.Component {
-	servicesByType(props) {
-		const { country, language, currentCoordinates } = this.props;
-		const { match } = props;
+	state = {
+		sortingByLocationEnabled: false,
+		fetchingLocation: false,
+		errorWithGeolocation: false,
+		geolocation: null,
+	};
+
+	measureDistance(a, language, sort) {
+		return b => {
+			try {
+				if (a && b) {
+					const currentGeoJSON = {
+						type: "Point",
+						coordinates: [a.longitude, a.latitude],
+					};
+
+					let originalDistance = turf.distance(currentGeoJSON, b, "kilometers");
+					let distance = originalDistance;
+					let unit = "km";
+					if (distance < 2) {
+						unit = "m";
+						distance = Math.round(distance * 1000);
+					}
+					if (!sort) {
+						distance = distance.toFixed(1);
+						if (Intl.NumberFormat) {
+							let i18 = new Intl.NumberFormat(language);
+							distance = i18.format(distance);
+						}
+						return `${distance} ${unit}`;
+					} else {
+						return originalDistance * 1000;
+					}
+				}
+			} catch (e) {}
+			return null;
+		};
+	}
+
+	findUsersPosition() {
+		return new Promise((res, rej) => {
+			const rejectMe = () => rej({ message: "Unable to determine position" });
+
+			if (!navigator.geolocation) {
+				rejectMe();
+			}
+
+			navigator.geolocation.getCurrentPosition(
+				p => {
+					const { latitude, longitude } = p.coords;
+					res({ latitude, longitude });
+				},
+				e => {
+					rejectMe();
+				}
+			);
+		});
+	}
+
+	servicesByType(routeProps) {
+		const { country, language, showErrorMessage, t } = this.props;
+		const { sortingByLocationEnabled, errorWithGeolocation, fetchingLocation, geolocation } = this.state;
+		const { match } = routeProps;
 		const categoryId = match.params.categoryId;
 
-		const orderByDistance = c => (currentCoordinates ? _.sortBy(c, s => measureDistance(currentCoordinates, language, true)(s.location)) : _.identity(c));
+		if (!errorWithGeolocation) {
+			if (sortingByLocationEnabled && fetchingLocation) {
+				return new Promise(() => {});
+			}
+
+			if (sortingByLocationEnabled && !fetchingLocation) {
+				this.setState({ fetchingLocation: true });
+				this.findUsersPosition()
+					.then(pos => {
+						this.setState({ fetchingLocation: false, geolocation: pos });
+					})
+					.catch(e => {
+						showErrorMessage("Error loading geolocation");
+						this.setState({ errorWithGeolocation: true });
+					});
+
+				return new Promise(() => {});
+			}
+		}
+
+		const orderByDistance = c => (sortingByLocationEnabled && geolocation ? _.sortBy(c, s => this.measureDistance(geolocation, language, true)(s.location)) : _.identity(c));
 		return servicesApi
 			.fetchAllServices(country.fields.slug, language, categoryId)
 			.then(s => orderByDistance(s.results))
@@ -49,12 +109,70 @@ class Services extends React.Component {
 	}
 
 	fetchAllServices() {
-		const { country, language, currentCoordinates } = this.props;
+		const { country, language, showErrorMessage, t } = this.props;
+		const { sortingByLocationEnabled, errorWithGeolocation, fetchingLocation, geolocation } = this.state;
 
-		const orderByDistance = c => (currentCoordinates ? _.sortBy(c, s => measureDistance(currentCoordinates, language, true)(s.location)) : _.identity(c));
+		if (!errorWithGeolocation) {
+			if (sortingByLocationEnabled && fetchingLocation) {
+				return new Promise(() => {});
+			}
 
+			if (sortingByLocationEnabled && !errorWithGeolocation && !fetchingLocation) {
+				this.setState({ fetchingLocation: true });
+				this.findUsersPosition()
+					.then(pos => {
+						this.setState({ fetchingLocation: false, geolocation: pos });
+					})
+					.catch(e => {
+						showErrorMessage("Error loading geolocation");
+						this.setState({ errorWithGeolocation: true });
+					});
+
+				return new Promise(() => {});
+			}
+		}
+
+		const orderByDistance = c => (sortingByLocationEnabled && geolocation ? _.sortBy(c, s => this.measureDistance(geolocation, language, true)(s.location)) : _.identity(c));
 		return servicesApi
 			.fetchAllServices(country.fields.slug, language)
+			.then(s => orderByDistance(s.results))
+			.then(services => ({ services, category: null }));
+	}
+
+	fetchAllServicesNearby() {
+		const { country, language } = this.props;
+		const { fetchingLocation, errorWithGeolocation, geolocation } = this.state;
+
+		if (errorWithGeolocation) {
+			return Promise.reject({
+				message: "We cannot determine your location",
+			});
+		} else if (!geolocation && !fetchingLocation) {
+			this.setState({ fetchingLocation: true });
+			this.findUsersPosition()
+				.then(pos => {
+					this.setState({ fetchingLocation: false, geolocation: pos });
+				})
+				.catch(e => {
+					this.setState({ errorWithGeolocation: true });
+				});
+
+			return new Promise(() => {});
+		}
+
+		if (fetchingLocation) {
+			return new Promise(() => {});
+		} else if (!geolocation) {
+			return Promise.reject({
+				message: "We cannot determine your location",
+			});
+		}
+
+		const { latitude, longitude } = geolocation;
+		const orderByDistance = c => (geolocation ? _.sortBy(c, s => this.measureDistance(geolocation, language, true)(s.location)) : _.identity(c));
+
+		return servicesApi
+			.fetchAllServicesNearby(country.fields.slug, language, [longitude, latitude])
 			.then(s => orderByDistance(s.results))
 			.then(services => ({ services, category: null }));
 	}
@@ -82,10 +200,14 @@ class Services extends React.Component {
 	}
 
 	render() {
-		const { match, listServicesInCategory, goToService, serviceGeolocation, toogleServiceGeolocation, currentCoordinates, language, listAllServices } = this.props;
+		const { match, listServicesInCategory, goToNearby, goToService, language, listAllServices } = this.props;
+
+		const { sortingByLocationEnabled, fetchingLocation, geolocation, errorWithGeolocation } = this.state;
+
 		const onSelectCategory = c => {
 			listServicesInCategory(c);
 		};
+
 		return (
 			<div>
 				<Switch>
@@ -98,10 +220,29 @@ class Services extends React.Component {
 									<ServiceList
 										{...props}
 										goToService={goToService}
-										locationEnabled={serviceGeolocation}
-										measureDistance={measureDistance(currentCoordinates, language)}
-										toggleLocation={() => toogleServiceGeolocation(!serviceGeolocation)}
+										locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
+										measureDistance={this.measureDistance(geolocation, language)}
+										toggleLocation={() => this.setState({ sortingByLocationEnabled: true })}
 										servicesByType={() => this.fetchAllServices()}
+									/>
+								</div>
+							</Skeleton>
+						)}
+					/>{" "}
+					<Route
+						path={`${match.url}/nearby/`}
+						exact
+						component={props => (
+							<Skeleton>
+								<div className="SkeletonContainer">
+									<ServiceList
+										{...props}
+										goToService={goToService}
+										locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
+										measureDistance={this.measureDistance(geolocation, language)}
+										toggleLocation={() => _.identity()}
+										servicesByType={() => this.fetchAllServicesNearby()}
+										nearby={true}
 									/>
 								</div>
 							</Skeleton>
@@ -133,9 +274,9 @@ class Services extends React.Component {
 								<ServiceList
 									{...props}
 									goToService={goToService}
-									locationEnabled={serviceGeolocation}
-									measureDistance={measureDistance(currentCoordinates, language)}
-									toggleLocation={() => toogleServiceGeolocation(!serviceGeolocation)}
+									locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
+									measureDistance={this.measureDistance(geolocation, language)}
+									toggleLocation={() => this.setState({ sortingByLocationEnabled: true })}
 									servicesByType={() => this.servicesByType(props)}
 								/>
 							</div>
@@ -150,10 +291,11 @@ class Services extends React.Component {
 							<div className="SkeletonContainer">
 								<ServiceCategoryList
 									fetchCategories={() => this.serviceTypes()}
-									locationEnabled={serviceGeolocation}
-									toggleLocation={() => toogleServiceGeolocation(!serviceGeolocation)}
+									locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
+									toggleLocation={() => this.setState({ sortingByLocationEnabled: true })}
 									onSelectCategory={onSelectCategory}
 									listAllServices={listAllServices}
+									goToNearby={() => goToNearby()}
 								/>
 							</div>
 						</Skeleton>
@@ -172,8 +314,8 @@ class Services extends React.Component {
 	}
 }
 
-const mapState = ({ country, language, serviceGeolocation, currentCoordinates }, p) => {
-	return { country, language, serviceGeolocation, currentCoordinates };
+const mapState = ({ country, language }, p) => {
+	return { country, language };
 };
 const mapDispatch = (d, p) => {
 	return {
@@ -187,14 +329,17 @@ const mapDispatch = (d, p) => {
 		listAllServices() {
 			return d(push(`/${p.country.fields.slug}/services/all/`));
 		},
-		toogleServiceGeolocation(value) {
-			d(actions.toggleServiceGeolocation(value));
-			if (navigator.geolocation) {
-				navigator.geolocation.getCurrentPosition(p => {
-					const { latitude, longitude } = p.coords;
-					d(actions.recordCoordinates({ latitude, longitude }));
-				});
-			}
+		goToNearby() {
+			return d(push(`/${p.country.fields.slug}/services/nearby/`));
+		},
+		showErrorMessage(error) {
+			d(actions.showErrorMessage(error));
+		},
+		toggleServiceGeolocation(value) {
+			console.log("NOOP");
+		},
+		loadGeolocation() {
+			console.log("NOOP");
 		},
 	};
 };

@@ -11,11 +11,14 @@ class ServiceList extends React.Component {
 		category: {},
 		services: [],
 		loaded: false,
+		errorMessage: null,
 	};
 	componentDidMount() {
 		const { servicesByType } = this.props;
 		if (servicesByType) {
-			servicesByType().then(({ services, category }) => this.setState({ services, category, loaded: true }));
+			servicesByType()
+				.then(({ services, category }) => this.setState({ services, category, loaded: true }))
+				.catch(c => this.setState({ errorMessage: c.message, category: null, loaded: true }));
 		}
 	}
 	renderService(s) {
@@ -56,7 +59,7 @@ class ServiceList extends React.Component {
 						{s.provider.name}{" "}
 						<small>
 							{s.region.title}
-							{distance && ` - ${distance} Km`}
+							{distance && ` - ${distance}`}
 						</small>
 					</h2>
 				</div>
@@ -65,20 +68,21 @@ class ServiceList extends React.Component {
 		];
 	}
 	render() {
-		const { services, category, loaded } = this.state;
-		const { t, locationEnabled, toggleLocation } = this.props;
+		const { services, category, loaded, errorMessage } = this.state;
+		const { t, locationEnabled, toggleLocation, nearby } = this.props;
 
 		if (!loaded) {
 			return (
 				<div className="ServiceList">
-					<HeaderBar title={t("Services")}>
-						{navigator.geolocation && (
-							<li onClick={toggleLocation || _.identity}>
-								<h1>{t("Order results by distance to me")}</h1>
-								{!locationEnabled && <i className="MenuIcon material-icons">radio_button_unchecked</i>}
-								{locationEnabled && <i className="MenuIcon material-icons">radio_button_checked</i>}
-							</li>
-						)}
+					<HeaderBar title={nearby ? t("Nearby Services") : t("Services")}>
+						{!nearby &&
+							navigator.geolocation && (
+								<li onClick={toggleLocation || _.identity}>
+									<h1>{t("Order results by distance to me")}</h1>
+									{!locationEnabled && <i className="MenuIcon material-icons">radio_button_unchecked</i>}
+									{locationEnabled && <i className="MenuIcon material-icons">radio_button_checked</i>}
+								</li>
+							)}
 					</HeaderBar>
 					<div className="loader" />
 				</div>
@@ -87,16 +91,27 @@ class ServiceList extends React.Component {
 
 		return (
 			<div className="ServiceList">
-				<HeaderBar subtitle={category && `${category.name}:`} title={t("Services")}>
-					{navigator.geolocation && (
-						<li onClick={toggleLocation || _.identity}>
-							<h1>{t("Order results by distance to me")}</h1>
-							{!locationEnabled && <i className="MenuIcon material-icons">radio_button_unchecked</i>}
-							{locationEnabled && <i className="MenuIcon material-icons">radio_button_checked</i>}
-						</li>
-					)}
+				<HeaderBar subtitle={category && `${category.name}:`} title={nearby ? t("Nearby Services") : t("Services")}>
+					{!nearby &&
+						navigator.geolocation && (
+							<li onClick={toggleLocation || _.identity}>
+								<h1>{t("Order results by distance to me")}</h1>
+								{!locationEnabled && <i className="MenuIcon material-icons">radio_button_unchecked</i>}
+								{locationEnabled && <i className="MenuIcon material-icons">radio_button_checked</i>}
+							</li>
+						)}
 				</HeaderBar>
-				<div className="Items">{services.map(this.renderService.bind(this))}</div>
+				{errorMessage && (
+					<div>
+						<em>{errorMessage}</em>
+					</div>
+				)}
+				{services.length === 0 && !errorMessage &&(
+					<div>
+						<em>{t("No services found")}</em>
+					</div>
+				)}
+				{services.length > 0 && <div className="Items">{services.map(this.renderService.bind(this))}</div>}
 			</div>
 		);
 	}

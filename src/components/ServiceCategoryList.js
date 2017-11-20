@@ -44,11 +44,11 @@ class ServiceCategoryList extends React.Component {
 		};
 
 		return (
-			<li>
+			<li key={id}>
 				<hr className="line" />
 				<div className="container" onClick={() => setTimeout(() => onSelectCategory(c), 300)}>
 					<i className={`${iconPrefix} ${vector_icon}`} style={style} />
-					<strong>{c.name}</strong>
+					<strong>{name}</strong>
 				</div>
 			</li>
 		);
@@ -65,7 +65,7 @@ class ServiceCategoryList extends React.Component {
 	}
 	render() {
 		const { categories } = this.state;
-		const { t, locationEnabled, toggleLocation, listAllServices } = this.props;
+		const { t, locationEnabled, toggleLocation, listAllServices, goToNearby } = this.props;
 		if ((categories || []).length === 0) {
 			return (
 				<div className="ServiceCategoryList">
@@ -94,7 +94,7 @@ class ServiceCategoryList extends React.Component {
 			<div key={"List"} className="ServiceCategoryList">
 				<ul>
 					<li>
-						<div className="container">
+						<div className="container" onClick={() => goToNearby()}>
 							<i className="fa fa-compass" />
 							<strong>Near Me</strong>
 						</div>

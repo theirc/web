@@ -71,6 +71,23 @@ module.exports = {
 				});
 		});
 	},
+	fetchAllServicesNearby(country, language, position = [], distance = 5, pageSize = 50) {
+		return new Promise((resolve, reject) => {
+			var requestUrl = `/services/search/?filter=relatives&geographic_region=${country}&page=1&page_size=${pageSize}&near=${position.join(", ")}&near_km=${distance}`;
+			request
+				.get(RI_URL + requestUrl)
+				.set("Accept-Language", language)
+				.end((err, res) => {
+					if (err) {
+						reject(err);
+						return;
+					}
+					let services = res.body;
+
+					resolve(services);
+				});
+		});
+	},
 	fetchServiceById(language, serviceId) {
 		return new Promise((resolve, reject) => {
 			request

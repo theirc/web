@@ -12,21 +12,39 @@ import { I18nextProvider } from "react-i18next";
 import i18n from "../i18n"; // initialized i18next instance
 
 import "./Skeleton.css";
+import { access } from "fs";
 
 class Skeleton extends React.Component {
+	state = {
+		errorMessage: null,
+	};
 	componentDidMount() {
-		const { language } = this.props;
+		const { language, errorMessage } = this.props;
 		i18n.changeLanguage(language);
+
+		if (errorMessage) {
+			this.setState({ errorMessage });
+			setTimeout(() => {
+				this.setState({ errorMessage: null });
+			}, 20 * 1000);
+		}
 	}
 	componentWillUpdate(newProps) {
-		const { language } = this.props;
+		const { language, errorMessage } = this.props;
 		if (language !== newProps.language) {
 			i18n.changeLanguage(newProps.language);
 		}
+
+		if (newProps.errorMessage && errorMessage !== newProps.errorMessage) {
+			this.setState({ errorMessage: newProps.errorMessage });
+			setTimeout(() => {
+				this.setState({ errorMessage: null });
+			}, 20 * 1000);
+		}
 	}
 	render() {
-		const { children, country, language, match, onGoHome, onGoToSearch, onChangeLocation, onChangeLanguage, deviceType, router, hideFooter } = this.props;
-
+		const { children, country, language, match, onGoHome, onGoToSearch, onChangeLocation, onChangeLanguage, deviceType, router, hideFooter, removeErrorMessage } = this.props;
+		const { errorMessage } = this.state;
 		let notifications = [];
 		const notificationType = n => {
 			switch (n.fields.type) {
@@ -57,6 +75,14 @@ class Skeleton extends React.Component {
 				</WarningDialog>
 			));
 		}
+		if (errorMessage) {
+			let error = (
+				<WarningDialog type={"red"} key={"Error"} onHide={() => removeErrorMessage()} autoDismiss={true} dismissable={true}>
+					{errorMessage}
+				</WarningDialog>
+			);
+			notifications = [error].concat(notifications);
+		}
 
 		let showFooter = !hideFooter && country && language;
 		let logo = _.template(cms.siteConfig.logo)({ language: language || "en" });
@@ -83,12 +109,13 @@ class Skeleton extends React.Component {
 	}
 }
 
-const mapState = ({ country, language, deviceType, router }, p) => {
+const mapState = ({ country, language, deviceType, router, errorMessage }, p) => {
 	return {
 		country,
 		language,
 		deviceType,
 		router,
+		errorMessage,
 	};
 };
 const mapDispatch = (d, p) => {
@@ -109,6 +136,9 @@ const mapDispatch = (d, p) => {
 			}
 			d(actions.changeLanguage(null));
 			d(push(`/language-selector`));
+		},
+		removeErrorMessage() {
+			d(actions.showErrorMessage(null));
 		},
 	};
 };
