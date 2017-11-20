@@ -85,7 +85,7 @@ class Services extends React.Component {
 				return new Promise(() => {});
 			}
 
-			if (sortingByLocationEnabled && !fetchingLocation) {
+			if (sortingByLocationEnabled && !fetchingLocation && !geolocation) {
 				this.setState({ fetchingLocation: true });
 				this.findUsersPosition()
 					.then(pos => {
@@ -93,9 +93,8 @@ class Services extends React.Component {
 					})
 					.catch(e => {
 						showErrorMessage("Error loading geolocation");
-						this.setState({ errorWithGeolocation: true });
+						this.setState({ errorWithGeolocation: true, fetchingLocation: false });
 					});
-
 				return new Promise(() => {});
 			}
 		}
@@ -116,7 +115,7 @@ class Services extends React.Component {
 				return new Promise(() => {});
 			}
 
-			if (sortingByLocationEnabled && !errorWithGeolocation && !fetchingLocation) {
+			if (sortingByLocationEnabled && !fetchingLocation && !geolocation) {
 				this.setState({ fetchingLocation: true });
 				this.findUsersPosition()
 					.then(pos => {
@@ -124,7 +123,7 @@ class Services extends React.Component {
 					})
 					.catch(e => {
 						showErrorMessage("Error loading geolocation");
-						this.setState({ errorWithGeolocation: true });
+						this.setState({ errorWithGeolocation: true, fetchingLocation: false });
 					});
 
 				return new Promise(() => {});
@@ -146,7 +145,7 @@ class Services extends React.Component {
 			return Promise.reject({
 				message: "We cannot determine your location",
 			});
-		} else if (!geolocation && !fetchingLocation) {
+		} else if (!fetchingLocation && !geolocation) {
 			this.setState({ fetchingLocation: true });
 			this.findUsersPosition()
 				.then(pos => {
