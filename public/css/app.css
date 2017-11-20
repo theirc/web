@@ -28,6 +28,10 @@ body .ltr {
 	padding: 0;
 }
 
+#root {
+	overflow: hidden;
+}
+
 a:before {
 	content: " ";
 }
