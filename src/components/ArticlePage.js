@@ -92,7 +92,7 @@ export default class ArticlePage extends Component {
 		const { contentType } = article.sys;
 
 		let html = md.render(content || lead);
-		html = html.replace(/(\+[1-9]{1}[0-9]{3,14})/g, `<a class="tel" href="tel:$1">$1</a>`);
+		html = html.replace(/(\+[1-9]{1}[0-9]{3,14})|00[0-9]{3,15}/g, `<a class="tel" href="tel:$1">$1</a>`);
 
 		return (
 			<div ref={r => (this._ref = r)} className={["ArticlePage", loading ? "loading" : "loaded"].join(" ")}>

@@ -110,16 +110,17 @@ imagelabel {
 	text-align: center;
 	font-style: italic;
 }
-btn, btn-muted {
+btn,
+btn-muted {
 	display: flex;
 	text-transform: capitalize;
 
 	align-items: center;
 	justify-content: center;
 	text-align: center;
-	
+
 	min-height: 44px;
-	
+
 	font-size: 16px;
 	letter-spacing: 0;
 	font-weight: bold;
@@ -130,7 +131,6 @@ btn, btn-muted {
 
 	padding-bottom: 3px;
 	padding-top: 3px;
-
 }
 
 btn-muted {
@@ -162,4 +162,8 @@ btn {
 		text-decoration: none;
 		@include brand-colors-inverse("color");
 	}
+}
+
+#root {
+	background-color: darken(gray, 30%);
 }

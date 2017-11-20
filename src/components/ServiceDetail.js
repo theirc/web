@@ -10,6 +10,7 @@ import HeaderBar from "./HeaderBar";
 // eslint-disable-next-line
 var tinycolor = require("tinycolor2");
 const GMAPS_API_KEY = "AIzaSyA7eG6jYi03E6AjJ8lhedMuaLS9mVoJjJ8";
+const hotlinkTels = input => input.replace(/(\+[1-9]{1}[0-9]{3,19}|00[0-9]{3,15})/g, `<a class="tel" href="tel:$1">$1</a>`);
 
 class ServiceDetail extends React.Component {
 	state = {
@@ -98,10 +99,10 @@ class ServiceDetail extends React.Component {
 				</div>
 
 				<article>
-					<p dangerouslySetInnerHTML={{ __html: service.description }} />
+					<p dangerouslySetInnerHTML={{ __html: hotlinkTels(service.description) }} />
 
-					{service.additional_information && <h3>{t("Additional Information")}</h3>}
-					{service.additional_information && <p dangerouslySetInnerHTML={{ __html: service.additional_information }} />}
+					{service.additional_info && <h3>{t("Additional Information")}</h3>}
+					{service.additional_info && <p dangerouslySetInnerHTML={{ __html: hotlinkTels(service.additional_info) }} />}
 
 					{service.languages_spoken && <h3>{t("Languages Spoken")}</h3>}
 					{service.languages_spoken && <p dangerouslySetInnerHTML={{ __html: service.languages_spoken }} />}
