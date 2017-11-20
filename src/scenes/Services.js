@@ -5,7 +5,6 @@ import { Route, Switch } from "react-router";
 import { Skeleton } from ".";
 import "../components/ServiceHome.css";
 import { push } from "react-router-redux";
-import { translate } from "react-i18next";
 
 import _ from "lodash";
 
@@ -76,7 +75,7 @@ class Services extends React.Component {
 	}
 
 	servicesByType(routeProps) {
-		const { country, language, showErrorMessage, t } = this.props;
+		const { country, language, showErrorMessage } = this.props;
 		const { sortingByLocationEnabled, errorWithGeolocation, fetchingLocation, geolocation } = this.state;
 		const { match } = routeProps;
 		const categoryId = match.params.categoryId;
@@ -109,7 +108,7 @@ class Services extends React.Component {
 	}
 
 	fetchAllServices() {
-		const { country, language, showErrorMessage, t } = this.props;
+		const { country, language, showErrorMessage } = this.props;
 		const { sortingByLocationEnabled, errorWithGeolocation, fetchingLocation, geolocation } = this.state;
 
 		if (!errorWithGeolocation) {
@@ -202,7 +201,7 @@ class Services extends React.Component {
 	render() {
 		const { match, listServicesInCategory, goToNearby, goToService, language, listAllServices } = this.props;
 
-		const { sortingByLocationEnabled, fetchingLocation, geolocation, errorWithGeolocation } = this.state;
+		const { sortingByLocationEnabled, geolocation, errorWithGeolocation } = this.state;
 
 		const onSelectCategory = c => {
 			listServicesInCategory(c);

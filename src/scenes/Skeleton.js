@@ -12,7 +12,6 @@ import { I18nextProvider } from "react-i18next";
 import i18n from "../i18n"; // initialized i18next instance
 
 import "./Skeleton.css";
-import { access } from "fs";
 
 class Skeleton extends React.Component {
 	state = {
