@@ -31,10 +31,11 @@ class SearchPage extends React.Component {
 					<hr />
 
 					{searchingArticles && <div className="loader" />}
-					{articles.map(article => {
+					{articles.map((article, i) => {
 						let hero = article.fields.hero;
 
-						return (
+						return [
+							i > 0 && <hr className="line" key={`hr-${article.sys.id}`} />,
 							<div
 								key={article.sys.id}
 								className="Article"
@@ -48,8 +49,8 @@ class SearchPage extends React.Component {
 								<s className="Read-More">
 									<a href="#">{t("Read More")}</a>
 								</s>
-							</div>
-						);
+							</div>,
+						];
 					})}
 					{!searchingArticles &&
 						articles.length === 0 && (
@@ -67,7 +68,8 @@ class SearchPage extends React.Component {
 						<hr key="divider" />
 
 						{searchingServices && <div className="loader" />}
-						{services.map(s => (
+						{services.map((s, i) => [
+							i > 0 && <hr className="line" key={`hr-${s.id}`} />,
 							<div key={s.id} className="Service" onClick={() => onNavigate(`/${country.fields.slug}/services/${s.id}/`)}>
 								{s.image && <div className="Image" style={{ backgroundImage: `url('${s.image}')` }} />}
 								<div className="Text">
@@ -80,8 +82,8 @@ class SearchPage extends React.Component {
 								<s className="Read-More">
 									<a href="#">{t("Read More")}</a>
 								</s>
-							</div>
-						))}
+							</div>,
+						])}
 						{!searchingServices &&
 							services.length === 0 && (
 								<div>
