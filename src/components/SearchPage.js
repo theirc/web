@@ -35,14 +35,18 @@ class SearchPage extends React.Component {
 						let hero = article.fields.hero;
 
 						return (
-							<div key={article.sys.id} className="Article">
-								<h2> {article.fields.title}</h2>
-								{article.fields.hero && <img src={article.fields.hero.fields.file.url} alt={article.fields.title} />}
-								<p dangerouslySetInnerHTML={{ __html: md.render(article.fields.lead) }} />
+							<div
+								key={article.sys.id}
+								className="Article"
+								onClick={() => onNavigate(`/${article.fields.country.fields.slug}/${article.fields.category.fields.slug}/${article.fields.slug}`)}
+							>
+								{article.fields.hero && <div className="Image" style={{ backgroundImage: `url('${article.fields.hero.fields.file.url}')` }} />}
+								<div className="Text">
+									<h2> {article.fields.title}</h2>
+									<p dangerouslySetInnerHTML={{ __html: md.render(article.fields.lead) }} />
+								</div>
 								<s className="Read-More">
-									<a href="#" onClick={() => onNavigate(`/${article.fields.country.fields.slug}/${article.fields.category.fields.slug}/${article.fields.slug}`)}>
-										{t("Read More")}
-									</a>
+									<a href="#">{t("Read More")}</a>
 								</s>
 							</div>
 						);
@@ -64,17 +68,17 @@ class SearchPage extends React.Component {
 
 						{searchingServices && <div className="loader" />}
 						{services.map(s => (
-							<div key={s.id} className="Service">
-								<h2>{s.name}</h2>
-								{s.image && <img src={s.image} alt={s.name} />}
+							<div key={s.id} className="Service" onClick={() => onNavigate(`/${country.fields.slug}/services/${s.id}/`)}>
+								{s.image && <div className="Image" style={{ backgroundImage: `url('${s.image}')` }} />}
+								<div className="Text">
+									<h2>{s.name}</h2>
 
-								<h3>
-									{s.provider.name} <small>{s.region.title}</small>
-								</h3>
+									<h3>
+										{s.provider.name} <small>{s.region.title}</small>
+									</h3>
+								</div>
 								<s className="Read-More">
-									<a href="#" onClick={() => onNavigate(`/${country.fields.slug}/services/${s.id}/`)}>
-										{t("Read More")}
-									</a>
+									<a href="#">{t("Read More")}</a>
 								</s>
 							</div>
 						))}

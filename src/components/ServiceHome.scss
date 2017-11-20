@@ -294,7 +294,7 @@
 		display: flex;
 		flex-wrap: wrap;
 		flex-direction: column;
-		width: 60px;
+		width: 75px;
 
 		align-items: stretch;
 		align-content: stretch;
@@ -342,6 +342,10 @@
 				display: block;
 			}
 		}
+	}
+
+	.Error {
+		padding: 16px 16px;
 	}
 }
 

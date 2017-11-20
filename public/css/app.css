@@ -30,6 +30,11 @@ body .ltr {
 
 #root {
 	overflow: hidden;
+	background-color: black;
+	
+}
+#root > span>div {
+	background-color: white;
 }
 
 a:before {
