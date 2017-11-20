@@ -13,10 +13,16 @@ const actionTypes = {
 	toggleServiceMap: "TOGGLE_SERVICE_MAP",
 
 	toggleServiceGeolocation: "TOGGLE_SERVICE_GEOLOCATION",
+	loadingGeolocation: "LOADING_GEOLOCATION",
+	errorGeolocation: "ERROR_GEOLOCATION",
+	showErrorMessage: "SHOW_ERROR_MESSAGE",
 };
 
 export default {
 	actionTypes,
+	showErrorMessage: createAction(actionTypes.showErrorMessage),
+	errorGeolocation: createAction(actionTypes.errorGeolocation),
+	loadingGeolocation: createAction(actionTypes.loadingGeolocation),
 	toggleServiceMap: createAction(actionTypes.toggleServiceMap),
 	changeDeviceType: createAction(actionTypes.changeDeviceType),
 	changeOrganization: createAction(actionTypes.changeOrganization),

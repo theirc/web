@@ -29,6 +29,7 @@ class ThemedApp extends Component {
 					<Helmet>
 						<title>{cms.siteConfig.title}</title>
 						<link rel="shortcut icon" href={cms.siteConfig.favicon} />
+						<link rel="icon" href={cms.siteConfig.favicon} />
 					</Helmet>
 					<Router />
 				</span>

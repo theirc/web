@@ -2,6 +2,7 @@ import React from "react";
 import "./ServiceHome.css";
 import { translate } from "react-i18next";
 import _ from "lodash";
+import HeaderBar from "./HeaderBar";
 
 var tinycolor = require("tinycolor2");
 
@@ -10,11 +11,14 @@ class ServiceList extends React.Component {
 		category: {},
 		services: [],
 		loaded: false,
+		errorMessage: null,
 	};
 	componentDidMount() {
 		const { servicesByType } = this.props;
 		if (servicesByType) {
-			servicesByType().then(({ services, category }) => this.setState({ services, category, loaded: true }));
+			servicesByType()
+				.then(({ services, category }) => this.setState({ services, category, loaded: true }))
+				.catch(c => this.setState({ errorMessage: c.message, category: null, loaded: true }));
 		}
 	}
 	renderService(s) {
@@ -55,7 +59,7 @@ class ServiceList extends React.Component {
 						{s.provider.name}{" "}
 						<small>
 							{s.region.title}
-							{distance && ` - ${distance} Km`}
+							{distance && ` - ${distance}`}
 						</small>
 					</h2>
 				</div>
@@ -64,15 +68,22 @@ class ServiceList extends React.Component {
 		];
 	}
 	render() {
-		const { services, category, loaded } = this.state;
-		const { t, locationEnabled, toggleLocation } = this.props;
+		const { services, category, loaded, errorMessage } = this.state;
+		const { t, locationEnabled, toggleLocation, nearby } = this.props;
 
 		if (!loaded) {
 			return (
 				<div className="ServiceList">
-					<div className="Title">
-						<h1>{t("Services")}</h1>
-					</div>
+					<HeaderBar title={nearby ? t("Nearby Services") : t("Services")}>
+						{!nearby &&
+							navigator.geolocation && (
+								<li onClick={toggleLocation || _.identity}>
+									<h1>{t("Order results by distance to me")}</h1>
+									{!locationEnabled && <i className="MenuIcon material-icons">radio_button_unchecked</i>}
+									{locationEnabled && <i className="MenuIcon material-icons">radio_button_checked</i>}
+								</li>
+							)}
+					</HeaderBar>
 					<div className="loader" />
 				</div>
 			);
@@ -80,22 +91,28 @@ class ServiceList extends React.Component {
 
 		return (
 			<div className="ServiceList">
-				<div className="Title">
-					<h1>
-						{category && <small>{category.name}:</small>}
-						{t("Services")}
-					</h1>
-				</div>
-				<div className="Items">{services.map(this.renderService.bind(this))}</div>
-				<div className="footer">
-					{navigator.geolocation && (
-						<div className="Selector" onClick={toggleLocation || _.identity}>
-							<h1>{t("Order results by distance to me")}</h1>
-							{!locationEnabled && <i className="MenuIcon material-icons">radio_button_unchecked</i>}
-							{locationEnabled && <i className="MenuIcon material-icons">radio_button_checked</i>}
+				<HeaderBar subtitle={category && `${category.name}:`} title={nearby ? t("Nearby Services") : t("Services")}>
+					{!nearby &&
+						navigator.geolocation && (
+							<li onClick={toggleLocation || _.identity}>
+								<h1>{t("Order results by distance to me")}</h1>
+								{!locationEnabled && <i className="MenuIcon material-icons">radio_button_unchecked</i>}
+								{locationEnabled && <i className="MenuIcon material-icons">radio_button_checked</i>}
+							</li>
+						)}
+				</HeaderBar>
+				{errorMessage && (
+					<div className="Error">
+						<em>{errorMessage}</em>
+					</div>
+				)}
+				{services.length === 0 &&
+					!errorMessage && (
+						<div className="Error">
+							<em>{t("No services found")}</em>
 						</div>
 					)}
-				</div>
+				{services.length > 0 && <div className="Items">{services.map(this.renderService.bind(this))}</div>}
 			</div>
 		);
 	}

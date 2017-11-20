@@ -31,6 +31,7 @@ function changeDeviceType(state = device, action) {
 			return state;
 	}
 }
+
 function toggleServiceMap(state = !cms.siteConfig.hideServiceMap, action) {
 	switch (action.type) {
 		case actions.actionTypes.toggleServiceMap:
@@ -39,6 +40,7 @@ function toggleServiceMap(state = !cms.siteConfig.hideServiceMap, action) {
 			return state;
 	}
 }
+
 function changeOrganization(state = "irc", action) {
 	switch (action.type) {
 		case actions.actionTypes.changeOrganization:
@@ -47,6 +49,7 @@ function changeOrganization(state = "irc", action) {
 			return state;
 	}
 }
+
 function changeCountry(state = null, action) {
 	switch (action.type) {
 		case actions.actionTypes.changeCountry:
@@ -64,6 +67,7 @@ function changeCountrySlug(state = null, action) {
 			return state;
 	}
 }
+
 function selectCategory(state = null, action) {
 	switch (action.type) {
 		case actions.actionTypes.selectCategory:
@@ -72,6 +76,7 @@ function selectCategory(state = null, action) {
 			return state;
 	}
 }
+
 function selectArticle(state = null, action) {
 	switch (action.type) {
 		case actions.actionTypes.selectArticle:
@@ -133,6 +138,7 @@ function recordCoordinates(state = !sessionStorage.recordedCoordinates ? null : 
 			return state;
 	}
 }
+
 function toggleServiceGeolocation(state = sessionStorage.serviceGeolocation === "true", action) {
 	switch (action.type) {
 		case actions.actionTypes.toggleServiceGeolocation:
@@ -147,10 +153,39 @@ function toggleServiceGeolocation(state = sessionStorage.serviceGeolocation === 
 	}
 }
 
+function loadingGeolocation(state = false, action) {
+	switch (action.type) {
+		case actions.actionTypes.loadingGeolocation:
+			return action.payload;
+		default:
+			return state;
+	}
+}
+
+function errorGeolocation(state = false, action) {
+	switch (action.type) {
+		case actions.actionTypes.errorGeolocation:
+			return action.payload;
+		default:
+			return state;
+	}
+}
+function errorMessage(state = false, action) {
+	switch (action.type) {
+		case actions.actionTypes.showErrorMessage:
+			return action.payload;
+		default:
+			return state;
+	}
+}
+
 // Configure Redux store & reducers
 export default {
 	match: recordMatch,
 	currentCoordinates: recordCoordinates,
+	loadingGeolocation: loadingGeolocation,
+	errorGeolocation: errorGeolocation,
+	errorMessage: errorMessage,
 
 	deviceType: changeDeviceType,
 	showServiceMap: toggleServiceMap,

@@ -1,9 +1,11 @@
 import React from "react";
 import "./ServiceHome.css";
 import { translate } from "react-i18next";
+
+import HeaderBar from "./HeaderBar";
 import _ from "lodash";
 
-var tinycolor = require("tinycolor2");
+import tinycolor from "tinycolor2";
 
 class ServiceCategoryList extends React.Component {
 	state = {
@@ -29,32 +31,41 @@ class ServiceCategoryList extends React.Component {
 		let { onSelectCategory } = this.props;
 		onSelectCategory = onSelectCategory || (() => console.log("noop"));
 
-		let { id, color, name, vector_icon } = c;
+		let { id, name, vector_icon } = c;
+		let iconPrefix = vector_icon.split("-")[0];
 
-		color = this.fixColor(color);
+		let color = this.fixColor(c.color);
 		color = tinycolor(color)
 			.saturate(30)
 			.toHexString();
 
-		let iconPrefix = vector_icon.split("-")[0];
 		let style = {
-			backgroundColor: color,
-			borderColor: tinycolor(color).darken(10),
-			color: tinycolor.mostReadable(color, ["#000", "#444", "#888", "#FFF"]).toHexString(),
+			color: color === "#ffffff" ? "black" : color,
 		};
 
 		return (
+			<li key={id}>
+				<hr className="line" />
+				<div className="container" onClick={() => setTimeout(() => onSelectCategory(c), 300)}>
+					<i className={`${iconPrefix} ${vector_icon}`} style={style} />
+					<strong>{name}</strong>
+				</div>
+			</li>
+		);
+		/*
+		return (
 			<div key={id} className="CategoryContainer">
-				<button className="Category"onClick={() => setTimeout(() => onSelectCategory(c), 300)}>
+				<button className="Category" onClick={() => setTimeout(() => onSelectCategory(c), 300)}>
 					<i className={`${iconPrefix} ${vector_icon}`} />
 					<span>{name}</span>
 				</button>
 			</div>
 		);
+		*/
 	}
 	render() {
 		const { categories } = this.state;
-		const { t, locationEnabled, toggleLocation, listAllServices } = this.props;
+		const { t, locationEnabled, toggleLocation, listAllServices, goToNearby } = this.props;
 		if ((categories || []).length === 0) {
 			return (
 				<div className="ServiceCategoryList">
@@ -68,34 +79,30 @@ class ServiceCategoryList extends React.Component {
 		let sortedCategories = _.sortBy(categories || [], c => {
 			return c.name_en;
 		});
-		return (
-			<div className="ServiceCategoryList">
-				<div className="Title">
-					<h1>{t("Service Categories")}</h1>
-				</div>
-				{sortedCategories.map(this.renderCategory.bind(this))}
-				<div className="footer">
-					<div className="Selector" onClick={listAllServices}>
-						<h1>{t("All Services")}</h1>
-						<i className="MenuIcon fa fa-list" aria-hidden="true" />
-					</div>
-					<hr />
-					{navigator.geolocation && (
-						<div className="Selector" onClick={toggleLocation || _.identity}>
-							<h1>{t("Order results by distance to me")}</h1>
-							{!locationEnabled && <i className="MenuIcon material-icons">radio_button_unchecked</i>}
-							{locationEnabled && <i className="MenuIcon material-icons">radio_button_checked</i>}
+		return [
+			<HeaderBar key={"Header"} title={t("Service Categories").toUpperCase()}>
+				<li onClick={toggleLocation || _.identity}>
+					<h1>{t("Order results by distance to me")}</h1>
+					{!locationEnabled && <i className="MenuIcon material-icons">radio_button_unchecked</i>}
+					{locationEnabled && <i className="MenuIcon material-icons">radio_button_checked</i>}
+				</li>
+				<li onClick={listAllServices}>
+					<h1>{t("All Services")}</h1>
+					<i className="MenuIcon fa fa-list" aria-hidden="true" />
+				</li>
+			</HeaderBar>,
+			<div key={"List"} className="ServiceCategoryList">
+				<ul>
+					<li>
+						<div className="container" onClick={() => goToNearby()}>
+							<i className="fa fa-compass" />
+							<strong>Near Me</strong>
 						</div>
-					)}
-				</div>
-				{/*
-				<hr />
-				<div className="Selector">
-					<h1>{t("Suggest changes to this page")}</h1>
-				</div>
-                */}
-			</div>
-		);
+					</li>
+					{sortedCategories.map(c => this.renderCategory(c))}
+				</ul>
+			</div>,
+		];
 	}
 }
 

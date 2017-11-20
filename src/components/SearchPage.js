@@ -25,27 +25,32 @@ class SearchPage extends React.Component {
 				</div>
 				<div className="results">
 					<h1>
-						<i class="fa fa-book" aria-hidden="true" />
+						<i className="fa fa-book" aria-hidden="true" />
 						Articles
 					</h1>
 					<hr />
 
 					{searchingArticles && <div className="loader" />}
-					{articles.map(article => {
+					{articles.map((article, i) => {
 						let hero = article.fields.hero;
 
-						return (
-							<div key={article.sys.id} className="Article">
-								<h2> {article.fields.title}</h2>
-								{article.fields.hero && <img src={article.fields.hero.fields.file.url} alt={article.fields.title} />}
-								<p dangerouslySetInnerHTML={{ __html: md.render(article.fields.lead) }} />
+						return [
+							i > 0 && <hr className="line" key={`hr-${article.sys.id}`} />,
+							<div
+								key={article.sys.id}
+								className="Article"
+								onClick={() => onNavigate(`/${article.fields.country.fields.slug}/${article.fields.category.fields.slug}/${article.fields.slug}`)}
+							>
+								{article.fields.hero && <div className="Image" style={{ backgroundImage: `url('${article.fields.hero.fields.file.url}')` }} />}
+								<div className="Text">
+									<h2> {article.fields.title}</h2>
+									<p dangerouslySetInnerHTML={{ __html: md.render(article.fields.lead) }} />
+								</div>
 								<s className="Read-More">
-									<a href="#" onClick={() => onNavigate(`/${article.fields.country.fields.slug}/${article.fields.category.fields.slug}/${article.fields.slug}`)}>
-										{t("Read More")}
-									</a>
+									<a href="#">{t("Read More")}</a>
 								</s>
-							</div>
-						);
+							</div>,
+						];
 					})}
 					{!searchingArticles &&
 						articles.length === 0 && (
@@ -57,27 +62,28 @@ class SearchPage extends React.Component {
 				{!hideServices && [
 					<div key="services" className="results">
 						<h1>
-							<i class="fa fa-map-marker" aria-hidden="true" />
+							<i className="fa fa-map-marker" aria-hidden="true" />
 							Services
 						</h1>
 						<hr key="divider" />
 
 						{searchingServices && <div className="loader" />}
-						{services.map(s => (
-							<div key={s.id} className="Service">
-								<h2>{s.name}</h2>
-								{s.image && <img src={s.image} alt={s.name} />}
+						{services.map((s, i) => [
+							i > 0 && <hr className="line" key={`hr-${s.id}`} />,
+							<div key={s.id} className="Service" onClick={() => onNavigate(`/${country.fields.slug}/services/${s.id}/`)}>
+								{s.image && <div className="Image" style={{ backgroundImage: `url('${s.image}')` }} />}
+								<div className="Text">
+									<h2>{s.name}</h2>
 
-								<h3>
-									{s.provider.name} <small>{s.region.title}</small>
-								</h3>
+									<h3>
+										{s.provider.name} <small>{s.region.title}</small>
+									</h3>
+								</div>
 								<s className="Read-More">
-									<a href="#" onClick={() => onNavigate(`/${country.fields.slug}/services/${s.id}/`)}>
-										{t("Read More")}
-									</a>
+									<a href="#">{t("Read More")}</a>
 								</s>
-							</div>
-						))}
+							</div>,
+						])}
 						{!searchingServices &&
 							services.length === 0 && (
 								<div>

@@ -20,7 +20,7 @@ class LanguageSelector extends Component {
 				<div className="spacer" style={{ minHeight: 65 }} />
 				<div className="text">
 					<i className="material-icons">translate</i>
-					{languages.map((c, i) => <h1>{t("Choose your language", { lng: c[0] })}</h1>)}
+					{languages.map((c, i) => <h1 key={`choose-${c[0]}`}>{t("Choose your language", { lng: c[0] })}</h1>)}
 				</div>
 				<div className="spacer" />
 				{languages.map((c, i) => (

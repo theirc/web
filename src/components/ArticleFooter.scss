@@ -20,7 +20,7 @@
 
 	.divider {
 		border-top-color: black;
-		@include darken-brand-colors("border-top-color",20%);
+		border-top-color: darken($dividerColor, 20%);
 		
 		width: 100%;
 	}

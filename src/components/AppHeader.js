@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Button, IconButton } from "material-ui";
 import Headroom from "react-headrooms";
 import PropTypes from "prop-types";
-import { Search } from "material-ui-icons";
 import { translate } from "react-i18next";
 
 import "./AppHeader.css";
@@ -74,7 +73,6 @@ class AppHeader extends Component {
 										</Button>
 										<div className="app-bar-separator" />
 										<IconButton className={`search-close ${[this.state.search && "active"].join(" ")}`} color="contrast" onClick={this.toggleSearch.bind(this)}>
-											<Search />
 										</IconButton>
 									</div>
 								</div>

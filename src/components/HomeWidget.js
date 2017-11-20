@@ -5,17 +5,18 @@ import _ from "lodash";
 import { translate } from "react-i18next";
 import FacebookPlayer from "react-facebook-player";
 import YouTube from "react-youtube";
-
+import cms from "../content/cms";
 import "./HomeWidget.css";
-const Remarkable = require("remarkable");
 
+const APP_ID = cms.siteConfig.appId;
+const Remarkable = require("remarkable");
 const md = new Remarkable("full", {
 	html: true,
 	linkify: true,
 	typographer: true,
 	breaks: true,
 });
-const APP_ID = 708254579325899;
+
 
 class HomeWidget extends Component {
 	// Maybe these can be a Separate Component?
@@ -46,6 +47,8 @@ class HomeWidget extends Component {
 	renderLocalGuide(guideItems) {
 		const { country, onNavigate, t } = this.props;
 
+		/*jshint ignore:start*/
+		/*eslint-disable*/
 		return (
 			<div className="LocalGuide">
 				<s>
@@ -58,9 +61,9 @@ class HomeWidget extends Component {
 					{guideItems.map(c => {
 						let image =
 							c.fields.backgroundImage && c.fields.backgroundImage.fields.file ? (
-								<img src={`${c.fields.backgroundImage.fields.file.url}?fm=jpg&fl=progressive`} />
+								<img alt={c.fields.title} src={`${c.fields.backgroundImage.fields.file.url}?fm=jpg&fl=progressive`} />
 							) : (
-								<img src="https://upload.wikimedia.org/wikipedia/en/4/48/Blank.JPG" />
+								<img alt={c.fields.title} src="https://upload.wikimedia.org/wikipedia/en/4/48/Blank.JPG" />
 							);
 						let link = c => {
 							if (c.fields.url.indexOf("/") === 0) {
@@ -81,12 +84,16 @@ class HomeWidget extends Component {
 				</div>
 			</div>
 		);
+		/*eslint-enable*/
+		/*jshint ignore:end*/
 	}
 
 	renderTopCategories(categories) {
 		let articleFunc = category => category.fields.overview || _.first(category.fields.articles);
 		const { country, onNavigate, t } = this.props;
 
+		/*jshint ignore:start*/
+		/*eslint-disable*/
 		return (
 			<div className="TopCategories">
 				<s>
@@ -108,6 +115,8 @@ class HomeWidget extends Component {
 				})}
 			</div>
 		);
+		/*eslint-enable*/
+		/*jshint ignore:end*/
 	}
 
 	renderVideo(article) {
@@ -177,6 +186,9 @@ class HomeWidget extends Component {
 
 		let html = md.render(c.fields.description);
 		let article = c.fields.overview || _.first(c.fields.articles);
+
+		/*jshint ignore:start*/
+		/*eslint-disable*/
 		return (
 			<div className="Category">
 				<h3>{c.fields.name}</h3>
@@ -188,6 +200,8 @@ class HomeWidget extends Component {
 				</s>
 			</div>
 		);
+		/*eslint-enable*/
+		/*jshint ignore:end*/
 	}
 	componentDidMount() {
 		const { onNavigate } = this.props;

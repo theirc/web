@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { translate } from "react-i18next";
-
+import HeaderBar from "./HeaderBar";
 import "./CategoryList.css";
 
 class CategoryList extends Component {
@@ -16,9 +16,7 @@ class CategoryList extends Component {
 		const overviewOrFirst = c => c.fields.overview || (c.fields.articles.length && c.fields.articles[0]);
 		return (
 			<div className="CategoryList">
-				<div className="CategoryTitle">
-					<h3>{t("Categories")}</h3>
-				</div>
+				<HeaderBar title={t("Categories").toUpperCase()} />
 				<ul>
 					{categories.filter(showCategory).map((c, i) => (
 						<li key={c.sys.id}>

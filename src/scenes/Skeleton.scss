@@ -1,7 +1,4 @@
 @import "../shared/includes.scss";
-#root {
-	background-color: white;
-}
 
 body {
 	background-color: darken(gray, 30%);
@@ -47,30 +44,37 @@ body {
 	}
 }
 
-s {
-	text-decoration: none; transform: translate(0px, -9px);
+s,
+square {
+	text-decoration: none;
+	transform: translate(0px, -9px);
 	& > a {
 		text-decoration: none;
 		text-transform: uppercase;
 		font-weight: 700;
 	}
 	& > a:before {
-
 		@include darken-brand-colors("color", 10%);
 		@include brand-colors("border-color");
 	}
-	.ltr & > a:before {
+	& > a:before {
 		content: "□";
-		padding-right: 5px;
-		font-size: 2em;
+		font-size: 28px;
 		vertical-align: sub;
+		margin-top: -4px;
+
+		@media only screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: $desktopBreakpoint),
+			only screen and (min--moz-device-pixel-ratio: 2) and (max-width: $desktopBreakpoint),
+			only screen and (-o-min-device-pixel-ratio: 2/1) and (max-width: $desktopBreakpoint),
+			only screen and (min-device-pixel-ratio: 2) and (max-width: $desktopBreakpoint) {
+			font-size: 20px;
+		}
+	}
+	.ltr & > a:before {
+		padding-right: 5px;
 	}
 	.rtl & > a:before {
-		content: "□";
 		padding-left: 5px;
-		font-size: 2em;
-		vertical-align: sub;
-
 	}
 }
 

@@ -47,7 +47,7 @@ class ArticleFooter extends Component {
 	}
 
 	render() {
-		const { previous, next, onNavigateTo, direction, other, t } = this.props;
+		const { previous, next, onNavigateTo, direction,  t } = this.props;
 		const rtl = direction === "rtl";
 
 		return (
