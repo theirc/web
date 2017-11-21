@@ -179,5 +179,43 @@
 		.hero > img {
 			max-width: 100%;
 		}
+
+		.pos,
+		.neg {
+			display: none;
+			visibility: hidden;
+			height: 0;
+			width: 0;
+			margin: 0;
+			padding: 0;
+		}
+		.pos + ul,
+		.neg + ul {
+			padding: 0;
+
+			li {
+				list-style: none;
+
+				&::before {
+					font-family: "FontAwesome";
+				}
+			}
+		}
+		.pos + ul {
+			li {
+				&::before {
+					content: "\f00c ";
+					color: green;
+				}
+			}
+		}
+		.neg + ul {
+			li {
+				&::before {
+					content: "\f00d ";
+					color: red;
+				}
+			}
+		}
 	}
 }
