@@ -33,8 +33,8 @@ module.exports = {
 	},
 	"digannos.info": {
 		theme: "generic",
-		accessToken: "0cd5c6bfefa4f7f33a98c487012e6f34c2031aee1ff2f6858b11be592ab349d9",
-		space: "ktglofo8nf88",
+		accessToken: "ae539c7e07d5c7c489c71e704fd79ef975fde737dee7c0df269894a3266628de",
+		space: "ols6uhkswrja",
 		languages: [["en", "English"]],
 		logo: "/di-logo.png",
 		title: "Digannos",
@@ -45,8 +45,8 @@ module.exports = {
 	},
 	localhost: {
 		theme: "generic",
-		accessToken: "0cd5c6bfefa4f7f33a98c487012e6f34c2031aee1ff2f6858b11be592ab349d9",
-		space: "ktglofo8nf88",
+		accessToken: "ae539c7e07d5c7c489c71e704fd79ef975fde737dee7c0df269894a3266628de",
+		space: "ols6uhkswrja",
 		languages: [["en", "English"]],
 		logo: "/di-logo.png",
 		title: "Digannos",

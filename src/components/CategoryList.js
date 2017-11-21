@@ -18,7 +18,7 @@ class CategoryList extends Component {
 			<div className="CategoryList">
 				<HeaderBar title={t("Categories").toUpperCase()} />
 				<ul>
-					{categories.filter(showCategory).map((c, i) => (
+					{(categories || []).filter(showCategory).map((c, i) => (
 						<li key={c.sys.id}>
 							{i > 0 && <hr className="line" />}
 							<input type="checkbox" name={"tab"} id={`tab-${i}`} />

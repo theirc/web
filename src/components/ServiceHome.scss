@@ -88,7 +88,7 @@
 		list-style: none;
 		margin: 0;
 		padding: 0;
-		width: 100%
+		width: 100%;
 	}
 	ul li .container {
 		padding: 16px;
@@ -107,22 +107,18 @@
 		&:active {
 			background-color: #f6f6f6;
 		}
-
 	}
 	& > ul li .container > i {
 		padding-right: 10px;
 		width: 25px;
 		font-size: 18px;
 		line-height: 24px;
-		
 	}
 	& > ul li .container > strong {
 		font-size: 18px;
 		min-height: 24px;
 		line-height: 24px;
-		
 	}
-
 
 	hr {
 		padding: 0;
@@ -443,6 +439,44 @@
 		margin-left: 16px;
 		margin-right: 16px;
 		flex: 1;
+
+		.pos,
+		.neg {
+			display: none;
+			visibility: hidden;
+			height: 0;
+			width: 0;
+			margin: 0;
+			padding: 0;
+		}
+		.pos + ul,
+		.neg + ul {
+			padding: 0;
+
+			li {
+				list-style: none;
+
+				&::before {
+					font-family: "FontAwesome";
+				}
+			}
+		}
+		.pos + ul {
+			li {
+				&::before {
+					content: "\f00c ";
+					color: green;
+				}
+			}
+		}
+		.neg + ul {
+			li {
+				&::before {
+					content: "\f00d ";
+					color: red;
+				}
+			}
+		}
 
 		img {
 			max-width: 100%;
