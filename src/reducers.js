@@ -15,6 +15,8 @@ if (global.window) {
 		defaultLanguage = sessionStorage.language;
 	} else if (parsed.language) {
 		defaultLanguage = parsed.language;
+	} else if (global.navigator.languages) {
+		defaultLanguage = global.navigator.languages[0].split("-")[0];
 	} else {
 		defaultLanguage = global.navigator.language.split("-")[0];
 	}
