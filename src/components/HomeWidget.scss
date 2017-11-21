@@ -61,8 +61,8 @@
 			.LocalGuideItem {
 				display: block;
 				flex-basis: calc(50% - 10px);
-				margin-right: 10px;
-				margin-bottom: 10px;
+				margin: 0px 10px 10px 0px;
+				.rtl & {margin: 0px 0px 10px 10px;}
 				text-align: center;
 				justify-content: center;
 
@@ -81,6 +81,7 @@
 				display: flex;
 				position: relative;
 				top: -76px;
+				.rtl &{top:-80px;}
 				background-color: rgba(0, 0, 0, 0.7);
 				color: white;
 				height: 72px;

@@ -1,6 +1,7 @@
 @import "../shared/includes.scss";
 
 .BottomNav {
+	.rtl & span {font-size: 12px;}
 	.Selected {
 		.rtl & {
 			font-family: "Cairo", sans-serif;
@@ -18,8 +19,8 @@
 
 	.BottomButton {
 		@media (max-width: 375px) {
-			font-size: 75%;
-		} 
+			font-size: 75%!important;
+		}
 		.rtl & {
 			font-family: "Cairo", "Roboto", sans-serif;
 		}

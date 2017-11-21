@@ -47,11 +47,12 @@ body {
 s,
 square {
 	text-decoration: none;
-	transform: translate(0px, -9px);
+	transform: translate(0px, -14px);
+
 	& > a {
 		text-decoration: none;
 		text-transform: uppercase;
-		font-weight: 700;
+	  font-size: 14px;
 	}
 	& > a:before {
 		@include darken-brand-colors("color", 10%);
@@ -59,15 +60,15 @@ square {
 	}
 	& > a:before {
 		content: "□";
-		font-size: 28px;
 		vertical-align: sub;
 		margin-top: -4px;
+		font-size: 30px;
 
 		@media only screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: $desktopBreakpoint),
 			only screen and (min--moz-device-pixel-ratio: 2) and (max-width: $desktopBreakpoint),
 			only screen and (-o-min-device-pixel-ratio: 2/1) and (max-width: $desktopBreakpoint),
 			only screen and (min-device-pixel-ratio: 2) and (max-width: $desktopBreakpoint) {
-			font-size: 20px;
+			a{font-size: 20px;}
 		}
 	}
 	.ltr & > a:before {
