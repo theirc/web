@@ -20,12 +20,12 @@ const theme = createMuiTheme({
 
 class ThemedApp extends Component {
 	render() {
-		const { direction } = this.props;
+		const { direction, language } = this.props;
 		const organization = cms.siteConfig.theme;
-		
+
 		return (
 			<MuiThemeProvider theme={theme}>
-				<span className={[organization, direction].join(" ")}>
+				<span className={[organization, direction, language].join(" ")}>
 					<Helmet>
 						<title>{cms.siteConfig.title}</title>
 						<link rel="shortcut icon" href={cms.siteConfig.favicon} />
@@ -38,9 +38,10 @@ class ThemedApp extends Component {
 	}
 }
 
-ThemedApp = connect(({ organization, direction }) => {
+ThemedApp = connect(({ organization, direction, language }) => {
 	return {
 		direction,
+		language,
 	};
 })(ThemedApp);
 

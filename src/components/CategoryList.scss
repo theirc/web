@@ -103,6 +103,10 @@
 				border-right-style: solid;
 			}
 		}
+
+		&> li {
+			font-size: 14px;
+		}
 	}
 	.category-name {
 		flex-grow: 9;

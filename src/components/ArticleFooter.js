@@ -86,11 +86,13 @@ class ArticleFooter extends Component {
 					<h1>{t("Share this page")}</h1>
 					<Share className="icon" />
 				</div>
+				{/*
 				<hr />
 				<div className="selector">
 					<h1>{t("Suggest changes to this page")}</h1>
 					<ModeEdit className="icon" />
 				</div>
+				*/}
 			</div>
 		);
 	}

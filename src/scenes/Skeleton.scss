@@ -52,7 +52,8 @@ square {
 	& > a {
 		text-decoration: none;
 		text-transform: uppercase;
-	  font-size: 14px;
+		font-size: 14px;
+		font-weight: bold;
 	}
 	& > a:before {
 		@include darken-brand-colors("color", 10%);
@@ -68,7 +69,7 @@ square {
 			only screen and (min--moz-device-pixel-ratio: 2) and (max-width: $desktopBreakpoint),
 			only screen and (-o-min-device-pixel-ratio: 2/1) and (max-width: $desktopBreakpoint),
 			only screen and (min-device-pixel-ratio: 2) and (max-width: $desktopBreakpoint) {
-			a{font-size: 20px;}
+			font-size: 20px;
 		}
 	}
 	.ltr & > a:before {

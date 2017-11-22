@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import moment from "moment";
 import "./Footer.css";
-import { EditLocation } from "material-ui-icons";
+import { MyLocation } from "material-ui-icons";
 import { translate } from "react-i18next";
 
 class Footer extends Component {
@@ -22,7 +22,7 @@ class Footer extends Component {
 						{!disableCountrySelector && (
 							<div className="button left" onClick={onChangeLocation}>
 								<div className="icon-container">
-									<EditLocation />
+									<MyLocation />
 								</div>
 								<span>{t("Change Location")}</span>
 							</div>
