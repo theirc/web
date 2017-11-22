@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { ServiceMap, ServiceCategoryList, ServiceList, ServiceDetail } from "../components";
 import { Route, Switch } from "react-router";
 import { Skeleton } from ".";
-import "../components/ServiceHome.css";
 import { push } from "react-router-redux";
 
 import _ from "lodash";

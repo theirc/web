@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { NavigateBefore, NavigateNext, Share, ModeEdit } from "material-ui-icons";
+import { NavigateBefore, NavigateNext, Share } from "material-ui-icons";
 import { translate } from "react-i18next";
 
 import "./ArticleFooter.css";

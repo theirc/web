@@ -1,16 +1,10 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-
 import { Route, Switch, withRouter } from "react-router";
-
 import { ConnectedRouter } from "react-router-redux";
 import { Home, Article, Categories, CountryHome, CategoryHome, CountrySelectorScene, LanguageSelectorScene, Search, Services } from "./scenes";
-import cms from "./content/cms";
-import { history, actions } from "./store";
-import _ from "lodash";
-
+import { history } from "./store";
 import { Skeleton } from "./scenes";
-const Promise = require("bluebird");
+import { withCountry, withCategory } from "./shared/hoc";
 
 class ScrollToTop extends Component {
 	componentDidUpdate(prevProps) {
@@ -25,112 +19,6 @@ class ScrollToTop extends Component {
 }
 
 ScrollToTop = withRouter(ScrollToTop);
-
-function withCountry(WrappedComponent) {
-	class CountrySwitcher extends Component {
-		constructor() {
-			super();
-
-			this.state = { loaded: false };
-		}
-		componentWillMount() {
-			const { match, onMount, language } = this.props;
-
-			onMount(match.params.country, language).then(c => {});
-		}
-		compomentWillReceiveProps(newProps) {
-			const { match, onMount, language } = this.props;
-
-			if (newProps.language !== language) {
-				onMount(match.params.country, newProps.language).then(c => {});
-			} else if (newProps.match.params.country !== match.params.country) {
-				onMount(match.params.country, language).then(c => {});
-			}
-		}
-
-		render() {
-			if (!this.props.country) return null;
-			return <WrappedComponent {...this.props} />;
-		}
-	}
-
-	CountrySwitcher = connect(
-		({ country, language }, p) => {
-			return { country, language };
-		},
-		(d, p) => {
-			return {
-				onMount: (country, language) => {
-					return cms.loadCountry(country, language).then(c => {
-						d(actions.changeCountry(c));
-						return Promise.resolve(c);
-					});
-				},
-			};
-		}
-	)(CountrySwitcher);
-
-	return CountrySwitcher;
-}
-
-function withCategory(WrappedComponent) {
-	class CategorySwitcher extends Component {
-		state = {
-			category: null,
-		};
-		componentDidMount() {
-			const { match, country, onRender } = this.props;
-
-			if (country) {
-				const category = _.first(
-					_.flattenDeep(country.fields.categories.map(c => [c, c.fields.categories]))
-						.filter(_.identity)
-						.filter(c => c && c.fields.slug === match.params.category)
-				);
-
-				this.setState({ category });
-				onRender(category);
-			}
-		}
-
-		componentWillReceiveProps(nextProps) {
-			const { onRender } = this.props;
-			const { country, match } = nextProps;
-
-			if (country) {
-				const category = _.first(
-					_.flattenDeep(country.fields.categories.map(c => [c, c.fields.categories]))
-						.filter(_.identity)
-						.filter(c => c && c.fields.slug === match.params.category)
-				);
-				this.setState({ category });
-				onRender(category);
-			}
-		}
-
-		render() {
-			const { category } = this.state;
-			return <WrappedComponent {...{ category, ...this.props }} />;
-		}
-	}
-
-	CategorySwitcher = connect(
-		(s, p) => {
-			return {
-				location: s.router.location,
-			};
-		},
-		(d, p) => {
-			return {
-				onRender: category => {
-					d(actions.selectCategory(category));
-				},
-			};
-		}
-	)(CategorySwitcher);
-
-	return CategorySwitcher;
-}
 
 class Router extends Component {
 	componentDidMount() {
@@ -152,12 +40,12 @@ class Router extends Component {
 	}
 
 	render() {
+		const Placeholder = props => props.children;
 		const ServicesWithCountry = withCountry(Services);
 		return (
 			<ConnectedRouter history={history}>
-				<div>
+				<Placeholder>
 					<ScrollToTop />
-
 					<Switch>
 						<Route path="/:country/services" component={props => <ServicesWithCountry {...props} />} />
 						<Skeleton>
@@ -175,7 +63,7 @@ class Router extends Component {
 							</div>
 						</Skeleton>
 					</Switch>
-				</div>
+				</Placeholder>
 			</ConnectedRouter>
 		);
 	}

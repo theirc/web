@@ -1,10 +1,10 @@
 import i18n from "i18next";
-import LanguageDetector from "i18next-browser-languagedetector";
+//import LanguageDetector from "i18next-browser-languagedetector";
 import { reactI18nextModule } from "react-i18next";
 import i18nConfig from "./config.js";
 
 i18n
-	.use(LanguageDetector)
+//	.use(LanguageDetector)
 	.use(reactI18nextModule) // if not using I18nextProvider
 	.init({
 		fallbackLng: "en",

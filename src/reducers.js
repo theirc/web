@@ -7,7 +7,7 @@ import queryString from "query-string";
 let sessionStorage = {};
 let defaultLanguage = "";
 
-if (global.window) {
+if (global.window && global.location && global.sessionStorage && global.navigator) {
 	sessionStorage = global.sessionStorage;
 
 	const parsed = queryString.parse(global.location.search);
@@ -109,9 +109,8 @@ function selectCountryList(state = null, action) {
 function changeLanguage(state = defaultLanguage, action) {
 	switch (action.type) {
 		case actions.actionTypes.changeLanguage:
-			sessionStorage.language = action.payload;
-
-			if (global.window) {
+			if (global.sessionStorage) {
+				sessionStorage.language = action.payload;
 				delete global.window.sessionStorage.country;
 			}
 

@@ -1,23 +1,26 @@
-import React from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
 import { CountrySelector } from "../components";
-import { actions } from "../store";
 import { Redirect } from "react-router";
 import cms from "../content/cms";
 
-class CountrySelectorScene extends React.Component {
+class CountrySelectorScene extends Component {
+	state = {
+		countryList: [],
+	};
 	componentWillMount() {
 		const { onMountOrUpdate, language } = this.props;
-		onMountOrUpdate(language);
+		onMountOrUpdate(language).then(countryList => this.setState({ countryList }));
 	}
 
 	render() {
-		const { country, language } = this.props;
-		const { countryList, onGoTo } = this.props;
+		const { country, language, onGoTo } = this.props;
+		const { countryList } = this.state;
+
 		let firstTimeHere = false;
-		if (global.window) {
-			const { firstRequest } = global.window.localStorage;
+		if (global.localStorage) {
+			const { firstRequest } = global.localStorage;
 			firstTimeHere = !firstRequest;
 		}
 
@@ -52,12 +55,8 @@ const mapState = ({ countryList, country, language }, p) => {
 };
 const mapDispatch = (d, p) => {
 	return {
-		onMountOrUpdate: (language) => {
-			cms.listCountries(language)
-				.then(e => e.items.map(a => ({ id: a.sys.id, ...a.fields, ...a })))
-				.then(e => {
-					d(actions.selectCountryList(e));
-				});
+		onMountOrUpdate: language => {
+			return cms.listCountries(language).then(e => e.items.map(a => ({ id: a.sys.id, ...a.fields, ...a })));
 		},
 		onGoTo: slug => {
 			d(push(`/${slug}`));

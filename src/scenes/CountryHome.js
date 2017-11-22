@@ -1,7 +1,7 @@
 import React from "react";
 import moment from "moment";
 import { connect } from "react-redux";
-import { HomeWidget, HomeWidgetCollection,  } from "../components";
+import { HomeWidget, HomeWidgetCollection } from "../components";
 import { push } from "react-router-redux";
 
 class CountryHome extends React.Component {
@@ -52,12 +52,12 @@ class CountryHome extends React.Component {
 		if (!country || !country.fields.home) {
 			return null;
 		}
-		
-		return [
+
+		return (
 			<HomeWidgetCollection key={"HomeWidgetCollection"}>
 				{country.fields.home.map(e => <HomeWidget onNavigate={onNavigate} country={country} content={e} key={e.sys.id} />)}
-			</HomeWidgetCollection>,
-		];
+			</HomeWidgetCollection>
+		);
 	}
 }
 

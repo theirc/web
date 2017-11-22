@@ -49,6 +49,7 @@ class LanguageSelectorScene extends React.Component {
 		}
 
 		const languages = cms.siteConfig.languages;
+		console.log('Rendereed Language Selection');
 
 		if (!selected && (firstTimeHere || !language)) {
 			if (!country) {
@@ -64,7 +65,7 @@ class LanguageSelectorScene extends React.Component {
 					return <Redirect to={`/${country.fields.slug}`} />;
 				}
 			} else {
-				return <div />;
+				return null;
 			}
 		}
 	}
