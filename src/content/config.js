@@ -53,6 +53,6 @@ module.exports = {
 		questionLink: "https://fb.me/refugee.info",
 		favicon: "/favicon.ico",
 		gaTracker: "UA-68574649-6",
-		appId: "708254579325899",
+		appId: "154471931830995",
 	},
 };

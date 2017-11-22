@@ -62,6 +62,17 @@ app.get("/config", (rq, res) => {
 
 var mainRequest = function(context) {
 	return function(request, response, next) {
+		let configKey = _.first(
+			Object.keys(conf).filter(k => {
+				return request.headers.host.indexOf(k) > -1;
+			})
+		);
+
+		if (configKey) {
+			const { appId } = conf[configKey];
+			context = Object.assign(context || {}, { appId: appId });
+		}
+
 		fs.readFile(path.join(path.dirname(path.dirname(__dirname)), "build", "index.html"), (err, data) => {
 			if (err) throw err;
 

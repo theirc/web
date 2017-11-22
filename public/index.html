@@ -32,13 +32,13 @@
   <meta property="og:title" content="{{ title }}" />
   <meta property="og:description" content="{{ description }}" />
   <meta property="og:image" content="{{ image}}" />
-  <meta property="fb:app_id" content="708254579325899" />
+  <meta property="fb:app_id" content="{{ appId }}" />
 
   <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
   <script>
     window.fbAsyncInit = function () {
       FB.init({
-        appId: '708254579325899',
+        appId: '{{ appId }}',
         autoLogAppEvents: true,
         xfbml: true,
         version: 'v2.10'
