@@ -103,7 +103,7 @@ class Services extends React.Component {
 			.then(s => orderByDistance(s.results))
 			.then(services => servicesApi.fetchCategoryById(language, categoryId).then(category => ({ services, category })))
 			.catch(e => {
-				alert(e.stack);
+				console.log(e.stack);
 				throw e;
 			});
 	}
