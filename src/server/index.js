@@ -176,6 +176,7 @@ app.get("/:country/:category/:article", function(req, res, err) {
 									res.redirect("/");
 								}
 							});
+							
 					} else {
 						return mainRequest({
 							title: match.fields.title,
