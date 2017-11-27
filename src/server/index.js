@@ -118,41 +118,6 @@ const markdownOptions = {
 // Host the public folder
 app.get("/", mainRequest({}));
 app.use("/", feathers.static("build"));
-app.get("/:country/", function(req, res, err) {
-	const selectedLanguage = parseLanguage(req);
-	let configKey = _.first(
-		Object.keys(conf).filter(k => {
-			return req.headers.host.indexOf(k) > -1;
-		})
-	);
-	let context = {};
-	const { country, category, article } = req.params;
-	try {
-		if (configKey) {
-			const { accessToken, space } = conf[configKey];
-			languageDictionary = Object.assign(languageDictionary, conf[configKey]);
-
-			let cms = cmsApi(conf[configKey], languageDictionary);
-
-			cms.client
-				.getEntries({
-					content_type: "country",
-					"fields.slug": country,
-					locale: languageDictionary[selectedLanguage],
-				})
-				.then(c => {
-					if (c.items.length > 0) {
-						res.redirect("/" + country);
-					} else {
-						res.redirect("/");
-					}
-				});
-		}
-	} catch (e) {
-		console.log(e);
-		mainRequest({})(req, res, err);
-	}
-});
 app.get("/:country/services/:serviceId/", function(req, res, err) {
 	const selectedLanguage = parseLanguage(req);
 	const { country, serviceId } = req.params;

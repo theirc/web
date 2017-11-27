@@ -4,14 +4,13 @@ import { ServiceMap, ServiceCategoryList, ServiceList, ServiceDetail } from "../
 import { Route, Switch } from "react-router";
 import { Skeleton } from ".";
 import { push } from "react-router-redux";
+import * as measureDistance from "@turf/distance";
 
 import _ from "lodash";
+import Promise from "bluebird";
 
 import actions from "../actions";
 import servicesApi from "../content/servicesApi";
-const Promise = require("bluebird");
-
-const turf = require("@turf/turf");
 
 class Services extends React.Component {
 	state = {
@@ -30,7 +29,7 @@ class Services extends React.Component {
 						coordinates: [a.longitude, a.latitude],
 					};
 
-					let originalDistance = turf.distance(currentGeoJSON, b, "kilometers");
+					let originalDistance = measureDistance(currentGeoJSON, b, "kilometers");
 					let distance = originalDistance;
 					let unit = "km";
 					if (distance < 2) {

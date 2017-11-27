@@ -4,10 +4,11 @@ Less me
 @import "../shared/includes.scss";
 
 .app-bar {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: flex-start;
+	@include flexbox();
+	@include flex-direction(row);
+	@include align-items(center);
+	@include justify-content(flex-start);
+	
 	position: fixed;
 	width: 100%;
 	top: 0;
@@ -17,7 +18,13 @@ Less me
 }
 
 .app-bar-container {
+	
+    display: -webkit-box;
+    display: -webkit-flex;
+	display: -ms-flexbox;
 	display: flex;
+	
+
 	color: white;
 	flex: 1;
 	flex-direction: row;
