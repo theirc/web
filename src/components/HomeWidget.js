@@ -52,7 +52,7 @@ class HomeWidget extends Component {
 		return (
 			<div className="LocalGuide">
 				<s>
-					<a href="javascript:void(0)" onClick={() => onNavigate(`/${country.fields.slug}/categories`)}>
+					<a href="javascript:void(0)" onClick={() => onNavigate(`/${country.fields.slug}/services`)}>
 						{t("See More")}
 					</a>
 				</s>
