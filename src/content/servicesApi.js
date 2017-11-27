@@ -1,3 +1,5 @@
+import getSessionStorage from "../shared/sessionStorage";
+
 var request = require("superagent");
 var Promise = require("bluebird");
 var _ = require("lodash");
@@ -9,7 +11,7 @@ var RI_URL = "https://admin.refugee.info/e/production/v2";
 module.exports = {
 	fetchCategories(language) {
 		return new Promise((resolve, reject) => {
-			const sessionStorage = global.sessionStorage || {};
+			const sessionStorage =  getSessionStorage();
 			if (sessionStorage[`${language}-service-categories`]) {
 				resolve(JSON.parse(sessionStorage[`${language}-service-categories`]));
 			} else {
@@ -29,6 +31,7 @@ module.exports = {
 	},
 	fetchCategoryById(language, categoryId) {
 		return new Promise((resolve, reject) => {
+			const sessionStorage =  getSessionStorage();
 			if (sessionStorage[`${language}-service-categories`]) {
 				let categories = JSON.parse(sessionStorage[`${language}-service-categories`]);
 				resolve(_.first(categories.filter(c => c.id === categoryId)));

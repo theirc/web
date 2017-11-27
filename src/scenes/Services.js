@@ -8,9 +8,9 @@ import { push } from "react-router-redux";
 import _ from "lodash";
 
 import actions from "../actions";
-
 import servicesApi from "../content/servicesApi";
-import { Promise } from "es6-promise";
+const Promise = require("bluebird");
+
 const turf = require("@turf/turf");
 
 class Services extends React.Component {
@@ -102,7 +102,11 @@ class Services extends React.Component {
 		return servicesApi
 			.fetchAllServices(country.fields.slug, language, categoryId)
 			.then(s => orderByDistance(s.results))
-			.then(services => servicesApi.fetchCategoryById(language, categoryId).then(category => ({ services, category })));
+			.then(services => servicesApi.fetchCategoryById(language, categoryId).then(category => ({ services, category })))
+			.catch(e => {
+				alert(e.stack);
+				throw e;
+			});
 	}
 
 	fetchAllServices() {

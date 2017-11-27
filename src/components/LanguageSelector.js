@@ -2,14 +2,17 @@ import React, { Component } from "react";
 import { translate } from "react-i18next";
 
 import "./LanguageSelector.css";
+import getSessionStorage from "../shared/sessionStorage";
 
 class LanguageSelector extends Component {
 	static propTypes = {};
 
 	componentDidMount() {
 		if (global.window) {
-			delete global.window.sessionStorage.country;
-			delete global.window.sessionStorage.dismissedNotifications;
+			const sessionStorage = getSessionStorage();
+			
+			delete sessionStorage.country;
+			delete sessionStorage.dismissedNotifications;
 		}
 	}
 

@@ -6,6 +6,7 @@ import cms from "../content/cms";
 
 import { LanguageSelector } from "../components";
 import { actions } from "../store";
+import getSessionStorage from "../shared/sessionStorage";
 
 class LanguageSelectorScene extends React.Component {
 	constructor() {
@@ -23,8 +24,9 @@ class LanguageSelectorScene extends React.Component {
 			setTimeout(() => {
 				onSelectLanguage(language);
 				setTimeout(() => {
-					if (global.sessionStorage) {
-						delete global.sessionStorage.redirect;
+					const sessionStorage = getSessionStorage();
+					if (sessionStorage) {
+						delete sessionStorage.redirect;
 					}
 					if (/^\//.test(redirect)) {
 						redirect = redirect.substr(1);
@@ -41,15 +43,16 @@ class LanguageSelectorScene extends React.Component {
 		let redirect = null;
 
 		let firstTimeHere = false;
-		if (global.localStorage) {
-			const { firstRequest } = global.localStorage;
+		const sessionStorage = getSessionStorage();
+		if (sessionStorage) {
+			const { firstRequest } = sessionStorage;
 			firstTimeHere = !firstRequest;
 
-			redirect = global.sessionStorage.redirect;
+			redirect = sessionStorage.redirect;
 		}
 
 		const languages = cms.siteConfig.languages;
-		console.log('Rendereed Language Selection');
+		console.log("Rendereed Language Selection");
 
 		if (!selected && (firstTimeHere || !language)) {
 			if (!country) {

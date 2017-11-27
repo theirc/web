@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { AppHeader, Footer, WarningDialog } from "../components";
 import { BottomNavContainer } from "../containers";
 import { push } from "react-router-redux";
+import { withRouter } from "react-router-dom";
 import moment from "moment";
 import cms from "../content/cms";
 
@@ -12,6 +13,7 @@ import { I18nextProvider } from "react-i18next";
 import i18n from "../i18n"; // initialized i18next instance
 
 import "./Skeleton.css";
+import getSessionStorage from "../shared/sessionStorage";
 
 class Skeleton extends React.Component {
 	state = {
@@ -56,7 +58,7 @@ class Skeleton extends React.Component {
 			}
 		};
 		if (country && language) {
-			const { sessionStorage } = global.window;
+			const  sessionStorage  = getSessionStorage();
 			const dismissed = JSON.parse(sessionStorage.dismissedNotifications || "[]");
 
 			const notificationFilter = n => {
@@ -130,8 +132,9 @@ const mapDispatch = (d, p) => {
 			d(push(`/country-selector`));
 		},
 		onChangeLanguage: redirect => {
-			if (global && global.sessionStorage) {
-				global.sessionStorage.redirect = redirect;
+			const sessionStorage = getSessionStorage();
+			if (sessionStorage) {
+				sessionStorage.redirect = redirect;
 			}
 			d(actions.changeLanguage(null));
 			d(push(`/language-selector`));
@@ -142,4 +145,4 @@ const mapDispatch = (d, p) => {
 	};
 };
 
-export default connect(mapState, mapDispatch)(Skeleton);
+export default withRouter(connect(mapState, mapDispatch)(Skeleton));

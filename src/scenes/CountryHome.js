@@ -3,6 +3,7 @@ import moment from "moment";
 import { connect } from "react-redux";
 import { HomeWidget, HomeWidgetCollection } from "../components";
 import { push } from "react-router-redux";
+import getSessionStorage from "../shared/sessionStorage";
 
 class CountryHome extends React.Component {
 	constructor() {
@@ -33,9 +34,10 @@ class CountryHome extends React.Component {
 
 	componentWillMount() {
 		if (global.window) {
-			const { firstRequest } = global.window.localStorage;
+			const sessionStorage = getSessionStorage();
+			const { firstRequest } = sessionStorage;
 			if (!firstRequest) {
-				global.window.localStorage.firstRequest = moment().toString();
+				sessionStorage.firstRequest = moment().toString();
 			}
 		}
 		const { onMount } = this.props;

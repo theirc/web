@@ -4,6 +4,7 @@ import { push } from "react-router-redux";
 import { CountrySelector } from "../components";
 import { Redirect } from "react-router";
 import cms from "../content/cms";
+import getSessionStorage from "../shared/sessionStorage";
 
 class CountrySelectorScene extends Component {
 	state = {
@@ -19,8 +20,10 @@ class CountrySelectorScene extends Component {
 		const { countryList } = this.state;
 
 		let firstTimeHere = false;
-		if (global.localStorage) {
-			const { firstRequest } = global.localStorage;
+		const sessionStorage = getSessionStorage();
+		
+		if (sessionStorage) {
+			const { firstRequest } = sessionStorage;
 			firstTimeHere = !firstRequest;
 		}
 

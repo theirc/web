@@ -3,13 +3,11 @@ import actions from "./actions";
 import isMobile from "./shared/isMobile";
 import cms from "./content/cms";
 import queryString from "query-string";
+import getSessionStorage from "./shared/sessionStorage";
 
-let sessionStorage = {};
 let defaultLanguage = "";
-
-if (global.window && global.location && global.sessionStorage && global.navigator) {
-	sessionStorage = global.sessionStorage;
-
+const sessionStorage = getSessionStorage();
+if (global.window && global.location && global.navigator) {
 	const parsed = queryString.parse(global.location.search);
 	if (sessionStorage.language) {
 		defaultLanguage = sessionStorage.language;
@@ -19,6 +17,10 @@ if (global.window && global.location && global.sessionStorage && global.navigato
 		defaultLanguage = global.navigator.languages[0].split("-")[0];
 	} else {
 		defaultLanguage = global.navigator.language.split("-")[0];
+	}
+
+	if(cms.siteConfig.languages.map(l=>l[0]).indexOf(defaultLanguage) === -1) {
+		defaultLanguage = 'en';
 	}
 }
 
@@ -109,9 +111,9 @@ function selectCountryList(state = null, action) {
 function changeLanguage(state = defaultLanguage, action) {
 	switch (action.type) {
 		case actions.actionTypes.changeLanguage:
-			if (global.sessionStorage) {
+			if (sessionStorage) {
 				sessionStorage.language = action.payload;
-				delete global.window.sessionStorage.country;
+				delete sessionStorage.country;
 			}
 
 			return action.payload || null;

@@ -1,3 +1,5 @@
+import getSessionStorage from "../shared/sessionStorage";
+
 const config = require("./config");
 const contentful = require("contentful");
 let client = null;
@@ -40,13 +42,6 @@ function loadCountry(slug, language = "en") {
 		languageDictionary = Object.assign(languageDictionary, siteConfig.languageDictionary);
 	}
 
-	/*
-	if (global.sessionStorage && global.sessionStorage.country) {
-		const country = JSON.parse(global.sessionStorage.country);
-		return Promise.resolve(client.parseEntries(country).items[0]);
-	}
-	*/
-
 	return client
 		.getEntries({
 			content_type: "country",
@@ -57,8 +52,10 @@ function loadCountry(slug, language = "en") {
 		})
 		.then((e, r) => {
 			let toStore = e.stringifySafe();
-			if (global.sessionStorage) {
-				global.sessionStorage.country = toStore;
+
+			const sessionStorage = getSessionStorage();
+			if (sessionStorage) {
+				sessionStorage.country = toStore;
 			}
 
 			let entities = client.parseEntries(e);

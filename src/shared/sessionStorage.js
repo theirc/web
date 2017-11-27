@@ -1,0 +1,33 @@
+import _ from "lodash";
+
+function lsTest() {
+	var test = "test";
+	try {
+		global.localStorage.setItem(test, test);
+		global.localStorage.removeItem(test);
+		return true;
+	} catch (e) {
+		return false;
+	}
+}
+
+export default function getSessionStorage() {
+	if (lsTest) {
+		//global.window.sessionStorage = null;
+		if (global.Proxy) {
+			var handler = {
+				get: function(target, name) {
+					return target[name];
+				},
+				set: function(target, name, value) {
+					target[name] = _.isObjectLike(value) ? JSON.stringify(value) : _.toString(value);
+				},
+			};
+
+            var p = new Proxy({}, handler);
+            global.window.mockSessionStorage = p;
+            return p;
+		}
+		return {};
+	} else return global.sessionStorage;
+}

@@ -8,7 +8,6 @@ export function withCountry(WrappedComponent) {
 	class CountrySwitcher extends Component {
 		state = {
 			country: null,
-			loaded: false,
 		};
 		componentWillMount() {
 			const { match, onMount, language } = this.props;
@@ -21,14 +20,10 @@ export function withCountry(WrappedComponent) {
 			const { match, onMount, language } = this.props;
 
 			if (newProps.language !== language) {
-				this.setState({ loaded: false });
-
 				onMount(match.params.country, newProps.language).then(c => {
 					this.setState({ country: c, loaded: true });
 				});
 			} else if (newProps.match.params.country !== match.params.country) {
-				this.setState({ loaded: false });
-
 				onMount(match.params.country, language).then(c => {
 					this.setState({ country: c, loaded: true });
 				});
@@ -36,19 +31,19 @@ export function withCountry(WrappedComponent) {
 		}
 
 		render() {
-			const { country, loaded } = this.state;
-			if (!loaded) return null;
+			let country = this.state.country || this.props.country;
+			if (!country) return null;
+
 			return <WrappedComponent {...{ country, ...this.props }} />;
 		}
 	}
 
 	CountrySwitcher = connect(
-		({ language }) => ({ language }),
+		({ language, country }) => ({ language, country }),
 		(d, p) => {
 			return {
 				onMount: (country, language) => {
 					return cms.loadCountry(country, language).then(c => {
-						console.log(">>?", country, language);
 						d(actions.changeCountry(c));
 						return Promise.resolve(c);
 					});
@@ -96,7 +91,9 @@ export function withCategory(WrappedComponent) {
 		}
 
 		render() {
-			const { category } = this.state;
+			let category = this.state.category || this.props.category;
+			if (!category) return null;
+
 			return <WrappedComponent {...{ category, ...this.props }} />;
 		}
 	}
@@ -104,7 +101,8 @@ export function withCategory(WrappedComponent) {
 	CategorySwitcher = connect(
 		(s, p) => {
 			return {
-				location: s.router.location,
+                location: s.router.location,
+                category: s.category
 			};
 		},
 		(d, p) => {
