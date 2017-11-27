@@ -113,57 +113,71 @@ imagelabel {
 btn,
 btn-muted,
 btnmuted {
-	display: flex;
-	text-transform: capitalize;
+	& > a {
+		display: flex;
+		text-transform: capitalize;
 
-	align-items: center;
-	justify-content: center;
-	text-align: center;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
 
-	min-height: 44px;
+		min-height: 44px;
 
-	font-size: 16px;
-	letter-spacing: 0;
-	font-weight: bold;
-	line-height: 20px;
+		font-size: 16px;
+		letter-spacing: 0;
+		font-weight: bold;
+		line-height: 20px;
 
-	padding-right: 5px;
-	padding-left: 5px;
+		padding-right: 5px;
+		padding-left: 5px;
 
-	padding-bottom: 3px;
-	padding-top: 3px;
+		padding-bottom: 3px;
+		padding-top: 3px;
+	}
 }
 
 btn {
-	@include brand-colors("background-color");
-	@include brand-colors-inverse("color");
-
-	&:active {
-		border: 1px black solid;
-		@include darken-brand-colors("border-color",40%);
-		@include darken-brand-colors("background-color",10%);
-	}
-
-	a {
-		font-size: 100%;
-		text-decoration: none;
+	& > a {
+		@include brand-colors("background-color");
 		@include brand-colors-inverse("color");
+
+		&:active {
+			border: 1px black solid;
+			@include darken-brand-colors("border-color",40%);
+			@include darken-brand-colors("background-color",10%);
+		}
+		&:hover {
+			border: 0;
+		}
+
+		& {
+			font-size: 100%;
+			text-decoration: none;
+			@include brand-colors-inverse("color");
+			border: 0;
+		}
 	}
 }
 
 btn-muted,
 btn.muted,
 btnmuted {
-	background-color: #f2f2f2;
-	color: lighten(black, 20%);
+	& > a {
+		background-color: #f2f2f2;
+		color: lighten(black, 20%);
 
-	&:active {
-		background-color: $dividerColor;
-	}
+		&:active {
+			background-color: $dividerColor;
+		}
+		&:hover {
+			border: 0;
+		}
 
-	a {
-		font-size: 100%;
-		text-decoration: none;
+		a {
+			font-size: 100%;
+			text-decoration: none;
+			border: 0;
+		}
 	}
 }
 

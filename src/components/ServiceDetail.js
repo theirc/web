@@ -10,7 +10,7 @@ import HeaderBar from "./HeaderBar";
 // eslint-disable-next-line
 var tinycolor = require("tinycolor2");
 const GMAPS_API_KEY = "AIzaSyA7eG6jYi03E6AjJ8lhedMuaLS9mVoJjJ8";
-const hotlinkTels = input => input.replace(/(\+[1-9]{1}[0-9]{3,19}|00[0-9]{3,15})/g, `<a class="tel" href="tel:$1">$1</a>`);
+const hotlinkTels = input => input; //input.replace(/\s(\+[1-9]{1}[0-9]{5,14})|00[0-9]{5,15}/g, `<a class="tel" href="tel:$1">$1</a>`);
 
 class ServiceDetail extends React.Component {
 	state = {

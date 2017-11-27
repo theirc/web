@@ -60,7 +60,7 @@ export default class WarningDialog extends Component {
 			return null;
 		}
 		let html = md.render(children || text);
-		html = html.replace(/(\+[1-9]{1}[0-9]{3,14})/g, `<a class="tel" href="tel:$1">$1</a>`);
+		//html = html.replace(/\s(\+[1-9]{1}[0-9]{5,14})|00[0-9]{5,15}/g, `<a class="tel" href="tel:$1">$1</a>`);
 
 		return (
 			<div className={[containerClassName, (hiding && "warning--hiding") || ""].join(" ")}>
