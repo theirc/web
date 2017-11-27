@@ -24,9 +24,11 @@ export default function getSessionStorage() {
 				},
 			};
 
-            var p = new Proxy({}, handler);
-            global.window.mockSessionStorage = p;
-            return p;
+			var p = new Proxy({}, handler);
+			if (global.window) {
+				global.window.mockSessionStorage = p;
+			}
+			return p;
 		}
 		return {};
 	} else return global.sessionStorage;

@@ -76,6 +76,7 @@ module.exports = {
 		remarkable: "Remarkable",
 		"mapbox-gl": "mapboxgl",
 		"turf": "turf",
+		"@turf": "turf",
 		immutable: "Immutable",
 		bluebird: "Promise",
 		"react-dom": "ReactDOM",
