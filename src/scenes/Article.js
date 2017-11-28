@@ -4,6 +4,7 @@ import { ArticlePage, ArticleFooter } from "../components";
 import PropTypes from "prop-types";
 import { actions } from "../store";
 import { push } from "react-router-redux";
+import Placeholder from "../shared/placeholder";
 import _ from "lodash";
 const Promise = require("bluebird");
 
@@ -51,7 +52,7 @@ class Article extends React.Component {
 		const { article, direction } = this.props;
 		const { category, country, onNavigateTo, onNavigate, language } = this.props;
 
-		if (!article || !category) return <div style={{ height: 100 }} />;
+		if (!article || !category) return null;//<div style={{ height: 100 }} />;
 
 		let next = null;
 		let previous = null;
@@ -71,11 +72,14 @@ class Article extends React.Component {
 		}
 
 		const other = articles.filter(a => a.sys.id === article.sys.id);
+		const PH = props => props.children;
 
-		return [
-			<ArticlePage key={"Article"} category={category} other={other} article={article} loading={loading} onNavigate={onNavigate} />,
-			<ArticleFooter key={"ArticleFooter"} onNavigateTo={onNavigateTo(category, country)} language={language} {...{ direction, previous, next }} />,
-		];
+		return (
+			<Placeholder>
+				<ArticlePage key={"Article"} category={category} other={other} article={article} loading={loading} onNavigate={onNavigate} />
+				<ArticleFooter key={"ArticleFooter"} onNavigateTo={onNavigateTo(category, country)} language={language} {...{ direction, previous, next }} />
+			</Placeholder>
+		);
 	}
 }
 

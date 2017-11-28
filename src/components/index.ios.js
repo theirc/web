@@ -1,6 +1,11 @@
 import LanguageSelector from "./native/LanguageSelector";
 import AppHeader from "./native/AppHeader";
 import CountrySelector from "./native/CountrySelector";
+import CategoryList from "./native/CategoryList";
+import HeaderBar from "./native/HeaderBar";
+import ArticleFooter from "./native/ArticleFooter";
+import ArticlePage from "./native/ArticlePage";
+
 import React from "react";
 import { View, Text, Button } from "react-native";
 
@@ -46,11 +51,12 @@ module.exports = {
 	BottomNav: () => <View />,
 	WarningDialog: () => <View />,
 	Footer: () => <View />,
-	ArticlePage: () => <View />,
-	ArticleFooter: () => <View />,
-	CategoryList: () => <View />,
+	ArticlePage,
+	ArticleFooter,
+	CategoryList,
 	CountrySelector,
 	LanguageSelector,
+	HeaderBar,
 	HomeWidget: () => <View />,
 	HomeWidgetCollection: props => (
 		<View>

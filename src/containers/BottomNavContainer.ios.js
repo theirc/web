@@ -3,6 +3,7 @@ import { translate } from "react-i18next";
 import { View, Text, Button, Dimensions } from "react-native";
 import { BottomNavigation, ThemeProvider } from "react-native-material-ui";
 import { connect } from "react-redux";
+import { push } from "react-router-redux";
 
 const window = Dimensions.get("window");
 
@@ -12,6 +13,26 @@ class BottomNavContainer extends Component {
 		active: "home",
 	};
 
+	changeState(dest) {
+		const { active } = this.state;
+		const { onGoToCategories, onGoHome, country } = this.props;
+		if (active !== dest) {
+			this.setState({ active: dest });
+
+			switch (dest) {
+				case "home":
+					onGoHome(country.fields.slug);
+					break;
+				case "categories":
+					onGoToCategories(country.fields.slug);
+					break;
+				default:
+					break;
+			}
+		} else {
+		}
+	}
+
 	render() {
 		const { t, match } = this.props;
 		const { country, onGoToCategories, onGoHome, onGoToSearch, showServiceMap, onGoToServices, router } = this.props;
@@ -19,7 +40,7 @@ class BottomNavContainer extends Component {
 		console.log(router, match);
 		let pathParts = ["", ""]; //router.location.pathname.split("/");
 
-		let active = "home";
+		let { active } = this.state;
 		if (pathParts.length > 2) {
 			if (pathParts[2] === "services") {
 				active = "services-list";
@@ -44,9 +65,9 @@ class BottomNavContainer extends Component {
 					}}
 				>
 					<BottomNavigation active={active} hidden={false}>
-						<BottomNavigation.Action key="home" icon="home" label={t("Home")} onPress={() => this.setState({ active: "home" })} />
-						<BottomNavigation.Action key="categories" icon="assignment" label={t("Categories")} onPress={() => this.setState({ active: "categories" })} />
-						<BottomNavigation.Action key="services-list" icon="list" label={t("Service List")} onPress={() => this.setState({ active: "services-list" })} />
+						<BottomNavigation.Action key="home" icon="home" label={t("Home")} onPress={() => this.changeState("home")} />
+						<BottomNavigation.Action key="categories" icon="assignment" label={t("Categories")} onPress={() => this.changeState("categories")} />
+						{/*<BottomNavigation.Action key="services-list" icon="list" label={t("Service List")} onPress={() => this.setState({ active: "services-list" })} />*/}
 					</BottomNavigation>
 				</ThemeProvider>
 			</View>

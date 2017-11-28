@@ -9,18 +9,19 @@ let defaultLanguage = "";
 const sessionStorage = getSessionStorage();
 if (global.window && global.location && global.navigator) {
 	const parsed = queryString.parse(global.location.search);
+	
 	if (sessionStorage.language) {
 		defaultLanguage = sessionStorage.language;
 	} else if (parsed.language) {
 		defaultLanguage = parsed.language;
 	} else if (global.navigator.languages) {
 		defaultLanguage = global.navigator.languages[0].split("-")[0];
-	} else {
+	} else if (global.navigator.language) {
 		defaultLanguage = global.navigator.language.split("-")[0];
 	}
 
-	if(cms.siteConfig.languages.map(l=>l[0]).indexOf(defaultLanguage) === -1) {
-		defaultLanguage = 'en';
+	if (cms.siteConfig.languages.map(l => l[0]).indexOf(defaultLanguage) === -1) {
+		defaultLanguage = "en";
 	}
 }
 

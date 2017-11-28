@@ -12,7 +12,7 @@ function lsTest() {
 }
 
 export default function getSessionStorage() {
-	if (lsTest) {
+	if (!lsTest()) {
 		//global.window.sessionStorage = null;
 		if (global.Proxy) {
 			var handler = {
@@ -28,6 +28,7 @@ export default function getSessionStorage() {
 			if (global.window) {
 				global.window.mockSessionStorage = p;
 			}
+
 			return p;
 		}
 		return {};

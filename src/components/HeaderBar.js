@@ -9,7 +9,7 @@ const generateKey = pre => {
 
 class HeaderBar extends Component {
 	static propTypes = {
-		subtitle: PropTypes.string,
+		subtitle: PropTypes.any,
 		title: PropTypes.string.isRequired,
 	};
 
