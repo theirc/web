@@ -335,6 +335,7 @@ export default {
 			"See More": "See More",
 			"Top Categories": "Top Categories",
 			"Local Guide": "Local Guide",
+			"Near me": "Near me",
 		},
 	},
 };

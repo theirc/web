@@ -138,6 +138,16 @@ app.get("/:country/services/:serviceId/", function(req, res, err) {
 		mainRequest({})(req, res, err);
 	}
 });
+app.get("/:country/services/", function(req, res, err) {
+	const selectedLanguage = parseLanguage(req);
+	const { country, serviceId } = req.params;
+
+	if (req.query.type) {
+		res.redirect(`/${country}/services/by-category/${req.query.type}/`);
+	} else {
+		mainRequest({})(req, res, err);
+	}
+});
 app.get("/:country/:category/:article", function(req, res, err) {
 	const selectedLanguage = parseLanguage(req);
 	let configKey = _.first(
@@ -176,7 +186,6 @@ app.get("/:country/:category/:article", function(req, res, err) {
 									res.redirect("/");
 								}
 							});
-							
 					} else {
 						return mainRequest({
 							title: match.fields.title,
