@@ -65,7 +65,7 @@ export function withCategory(WrappedComponent) {
 
 			if (country) {
 				const category = _.first(
-					_.flattenDeep(country.fields.categories.map(c => [c, c.fields.categories]))
+					_.flattenDeep(country.fields.categories.filter(c => c.fields).map(c => [c, c.fields.categories]))
 						.filter(_.identity)
 						.filter(c => c && c.fields.slug === match.params.category)
 				);
@@ -81,7 +81,7 @@ export function withCategory(WrappedComponent) {
 
 			if (country) {
 				const category = _.first(
-					_.flattenDeep(country.fields.categories.map(c => [c, c.fields.categories]))
+					_.flattenDeep(country.fields.categories.filter(c => c.fields).map(c => [c, c.fields.categories]))
 						.filter(_.identity)
 						.filter(c => c && c.fields.slug === match.params.category)
 				);
@@ -101,8 +101,8 @@ export function withCategory(WrappedComponent) {
 	CategorySwitcher = connect(
 		(s, p) => {
 			return {
-                location: s.router.location,
-                category: s.category
+				location: s.router.location,
+				category: s.category,
 			};
 		},
 		(d, p) => {

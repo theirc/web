@@ -53,9 +53,11 @@ class Article extends React.Component {
 
 		if (!article || !category) return <div style={{ height: 100 }} />;
 
-		let next = null,
-			previous = null;
-		const articles = ([category.fields.overview].concat(category.fields.articles) || []).filter(_.identity);
+		let next = null;
+		let previous = null;
+
+		const articles = ([category.fields.overview].concat(category.fields.articles) || []).filter(a => a && a.fields);
+
 		if (category) {
 			let index = articles.map(a => a.fields.slug).indexOf(article.fields.slug);
 
@@ -93,7 +95,7 @@ const mapDispatch = (d, p) => {
 				if (category.fields.overview && category.fields.overview.fields.slug === slug) {
 					return Promise.resolve(d(actions.selectArticle(category.fields.overview)));
 				} else if (category.fields.articles) {
-					return Promise.resolve(d(actions.selectArticle(_.first(category.fields.articles.filter(_.identity).filter(a => a.fields.slug === slug)))));
+					return Promise.resolve(d(actions.selectArticle(_.first(category.fields.articles.filter(a => a && a.fields).filter(a => a.fields.slug === slug)))));
 				}
 			}
 

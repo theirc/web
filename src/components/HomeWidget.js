@@ -17,7 +17,6 @@ const md = new Remarkable("full", {
 	breaks: true,
 });
 
-
 class HomeWidget extends Component {
 	// Maybe these can be a Separate Component?
 
@@ -211,22 +210,24 @@ class HomeWidget extends Component {
 			hostname = global.location.hostname;
 		}
 
-		let anchors = Array.from(this._ref.querySelectorAll("a"));
-		anchors = anchors.filter(a => a.href.indexOf("http") || a.hostname === hostname);
+		if (this._ref) {
+			let anchors = Array.from(this._ref.querySelectorAll("a"));
+			anchors = anchors.filter(a => a.href.indexOf("http") || a.hostname === hostname);
 
-		for (let anchor of anchors) {
-			let href = anchor.href + "";
-			if (href.indexOf("http") >= 0) {
-				href =
-					"/" +
-					href
-						.split("/")
-						.slice(3)
-						.join("/");
+			for (let anchor of anchors) {
+				let href = anchor.href + "";
+				if (href.indexOf("http") >= 0) {
+					href =
+						"/" +
+						href
+							.split("/")
+							.slice(3)
+							.join("/");
+				}
+				// eslint-disable-next-line
+				anchor.href = "javascript:void(0)";
+				anchor.onclick = () => onNavigate(href);
 			}
-			// eslint-disable-next-line
-			anchor.href = "javascript:void(0)";
-			anchor.onclick = () => onNavigate(href);
 		}
 	}
 
@@ -235,27 +236,31 @@ class HomeWidget extends Component {
 		if (!content) {
 			return null;
 		}
+		try {
+			let rendered = null;
+			switch (content.sys.contentType.sys.id) {
+				case "article":
+					rendered = this.renderArticle(content, content.fields.category, true, true);
+					break;
+				case "widget":
+					rendered = this.renderWidget(content);
+					break;
+				case "category":
+					rendered = this.renderCategory(content);
+					break;
+				default:
+					rendered = null;
+			}
 
-		let rendered = null;
-		switch (content.sys.contentType.sys.id) {
-			case "article":
-				rendered = this.renderArticle(content, content.fields.category, true, true);
-				break;
-			case "widget":
-				rendered = this.renderWidget(content);
-				break;
-			case "category":
-				rendered = this.renderCategory(content);
-				break;
-			default:
-				rendered = null;
+			return (
+				<div ref={r => (this._ref = r)} className={["HomeWidget", content.fields.highlighted ? "Highlighted" : "", `CT-${content.sys.contentType.sys.id}`].join(" ")}>
+					{rendered}
+				</div>
+			);
+		} catch (e) {
+			console.log("Ignoring", e);
+			return null;
 		}
-
-		return (
-			<div ref={r => (this._ref = r)} className={["HomeWidget", content.fields.highlighted ? "Highlighted" : "", `CT-${content.sys.contentType.sys.id}`].join(" ")}>
-				{rendered}
-			</div>
-		);
 	}
 }
 

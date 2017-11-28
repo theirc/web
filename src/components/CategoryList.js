@@ -12,7 +12,7 @@ class CategoryList extends Component {
 			return (c.fields.subCategories && c.fields.subCategories.length) || (c.fields.articles && c.fields.articles.length && c.fields.type !== "News" && !c.fields.overview);
 		};
 
-		let showCategory = c => c && !c.fields.hide && c.fields.slug && (c.fields.overview || c.fields.articles);
+		let showCategory = c => c && c.fields && !c.fields.hide && c.fields.slug && (c.fields.overview || c.fields.articles);
 		const overviewOrFirst = c => c.fields.overview || (c.fields.articles.length && c.fields.articles[0]);
 		return (
 			<div className="CategoryList">
