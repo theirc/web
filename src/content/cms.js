@@ -62,7 +62,11 @@ function loadCountry(slug, language = "en") {
 			let { items } = entities;
 
 			if (items.length === 0) {
-				throw Error("No Country Found");
+				if (global.location) {
+					global.document.location = "/";
+				} else {
+					throw Error("No Country Found");
+				}
 			}
 
 			return items[0];

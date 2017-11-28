@@ -4,7 +4,7 @@ const contentful = require("contentful");
 
 function cmsApi(config, languageDictionary) {
 	if (config) {
-		languageDictionary = Object.assign((languageDictionary||{}), config.languageDictionary || {});
+		languageDictionary = Object.assign(languageDictionary || {}, config.languageDictionary || {});
 	}
 
 	let client = contentful.createClient({
@@ -18,7 +18,6 @@ function cmsApi(config, languageDictionary) {
 	}
 
 	function loadCountry(slug, language = "en") {
-
 		return client
 			.getEntries({
 				content_type: "country",
@@ -36,7 +35,11 @@ function cmsApi(config, languageDictionary) {
 				let { items } = entities;
 
 				if (items.length === 0) {
-					throw Error("No Country Found");
+					if (global.location) {
+						global.document.location = "/";
+					} else {
+						throw Error("No Country Found");
+					}
 				}
 
 				return items[0];
