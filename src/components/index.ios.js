@@ -6,6 +6,7 @@ import HeaderBar from "./native/HeaderBar";
 import ArticleFooter from "./native/ArticleFooter";
 import ArticlePage from "./native/ArticlePage";
 import DetectLocationSelector from "./native/DetectLocationSelector";
+import Footer from "./native/Footer";
 
 import React from "react";
 import { View, Text, Button } from "react-native";
@@ -51,7 +52,7 @@ module.exports = {
 	AppHeader,
 	BottomNav: () => <View />,
 	WarningDialog: () => <View />,
-	Footer: () => <View />,
+	Footer,
 	ArticlePage,
 	ArticleFooter,
 	CategoryList,

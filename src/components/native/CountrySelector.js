@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { View, Text, Button } from "react-native";
+import _ from "lodash";
 
 class CountrySelector extends Component {
 	static propTypes = {};
@@ -8,8 +9,9 @@ class CountrySelector extends Component {
 	componentDidMount() {}
 
 	render() {
-		const { countryList, onGoTo, t } = this.props;
-		
+		const { onGoTo, t } = this.props;
+		let countryList = this.props.countryList.map(_.identity);
+
 		if (global.navigator && navigator.geolocation) {
 			countryList.push({
 				id: "detect-me",

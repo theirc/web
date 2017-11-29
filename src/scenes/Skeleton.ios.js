@@ -93,20 +93,23 @@ class Skeleton extends React.Component {
 					style={{
 						backgroundColor: "#fff",
 						height: window.height - 16,
+						paddingBottom: country && language ? 56 : 0,
 					}}
 				>
 					<AppHeader country={country} language={language} onGoHome={onGoHome(country)} onGoToSearch={q => onGoToSearch(country, q)} onChangeCountry={onChangeLocation} logo={logo} />
 					{notifications}
-					<ScrollView>{children}</ScrollView>
-					{showFooter && (
-						<Footer
-							questionLink={cms.siteConfig.questionLink}
-							disableCountrySelector={!!cms.siteConfig.disableCountrySelector}
-							onChangeLocation={onChangeLocation}
-							onChangeLanguage={onChangeLanguage}
-							deviceType={deviceType}
-						/>
-					)}
+					<ScrollView>
+						{children}
+						{showFooter && (
+							<Footer
+								questionLink={cms.siteConfig.questionLink}
+								disableCountrySelector={!!cms.siteConfig.disableCountrySelector}
+								onChangeLocation={onChangeLocation}
+								onChangeLanguage={onChangeLanguage}
+								deviceType={deviceType}
+							/>
+						)}
+					</ScrollView>
 					{country && language && <BottomNavContainer match={match} />}
 				</View>
 			</I18nextProvider>
