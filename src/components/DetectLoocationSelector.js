@@ -6,7 +6,6 @@ import "./DetectLoocationSelector.css";
 import getSessionStorage from "../shared/sessionStorage";
 
 import _ from "lodash";
-import { setTimeout, clearTimeout } from "timers";
 
 class DetectLocationSelector extends Component {
 	static propTypes = {};

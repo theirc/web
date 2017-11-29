@@ -8,7 +8,6 @@ import getSessionStorage from "../shared/sessionStorage";
 import { actions } from "../store";
 import measureDistance from "@turf/distance";
 import _ from "lodash";
-import { setTimeout } from "timers";
 
 class Selectors extends Component {
 	state = {
