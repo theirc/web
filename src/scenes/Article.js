@@ -72,7 +72,6 @@ class Article extends React.Component {
 		}
 
 		const other = articles.filter(a => a.sys.id === article.sys.id);
-		const PH = props => props.children;
 
 		return (
 			<Placeholder>

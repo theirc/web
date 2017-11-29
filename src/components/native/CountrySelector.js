@@ -9,6 +9,16 @@ class CountrySelector extends Component {
 
 	render() {
 		const { countryList, onGoTo, t } = this.props;
+		
+		if (global.navigator && navigator.geolocation) {
+			countryList.push({
+				id: "detect-me",
+				fields: {
+					slug: "detect-me",
+					name: t("Detect My Location"),
+				},
+			});
+		}
 
 		return (
 			<View className="CountrySelector">

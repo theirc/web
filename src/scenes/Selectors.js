@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
-import { CountrySelector, LanguageSelector, DetectLoocationSelector } from "../components";
+import { CountrySelector, LanguageSelector, DetectLocationSelector } from "../components";
 import { Redirect } from "react-router";
 import cms from "../content/cms";
-import getSessionStorage from "../shared/sessionStorage";
 import { actions } from "../store";
 import measureDistance from "@turf/distance";
 import _ from "lodash";
@@ -21,12 +20,12 @@ class Selectors extends Component {
 	componentWillMount() {
 		const { language } = this.props;
 		if (language) {
-			this.selectLanguage(language);
+			this.selectLanguage(language, 0);
 		}
 	}
 
-	selectLanguage(language) {
-		setTimeout(() => {
+	selectLanguage(language, timeout = 200) {
+		const func = () => {
 			const { onSelectLanguage, onMountOrUpdate, country } = this.props;
 
 			onSelectLanguage(language);
@@ -40,9 +39,11 @@ class Selectors extends Component {
 			} else {
 				onMountOrUpdate(language).then(countryList => this.setState({ countryList }));
 			}
-		}, 200);
+		};
+		if (timeout) setTimeout(func, timeout);
+		else func();
 	}
-	selectCountry(country) {
+	selectCountry(country, timeout = 200) {
 		setTimeout(() => {
 			if (country !== "detect-me") {
 				this.setState({
@@ -52,7 +53,7 @@ class Selectors extends Component {
 			} else {
 				this.setState({ currentPage: 3 });
 			}
-		}, 200);
+		}, timeout);
 	}
 
 	lookupCoordinates(l) {
@@ -87,7 +88,7 @@ class Selectors extends Component {
 	}
 
 	render() {
-		const { country, language, currentPage, countryList } = this.state;
+		const {   currentPage, countryList } = this.state;
 		const { languages } = cms.siteConfig;
 
 		switch (currentPage) {
@@ -100,7 +101,6 @@ class Selectors extends Component {
 						}}
 					/>
 				);
-				break;
 			case 2:
 				if (!countryList) return null;
 				return (
@@ -112,7 +112,7 @@ class Selectors extends Component {
 					/>
 				);
 			case 3:
-				return <DetectLoocationSelector onBackToList={() => this.setState({ currentPage: 2 })} onLocationFound={l => this.lookupCoordinates(l)} onLocationError={l => this.logError(l)} />;
+				return <DetectLocationSelector onBackToList={() => this.setState({ currentPage: 2 })} onLocationFound={l => this.lookupCoordinates(l)} onLocationError={l => this.logError(l)} />;
 			case -1:
 				return <Redirect to={this.state.redirect} />;
 			default:

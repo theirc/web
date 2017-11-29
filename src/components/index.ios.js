@@ -5,6 +5,7 @@ import CategoryList from "./native/CategoryList";
 import HeaderBar from "./native/HeaderBar";
 import ArticleFooter from "./native/ArticleFooter";
 import ArticlePage from "./native/ArticlePage";
+import DetectLocationSelector from "./native/DetectLocationSelector";
 
 import React from "react";
 import { View, Text, Button } from "react-native";
@@ -58,7 +59,7 @@ module.exports = {
 	LanguageSelector,
 	HeaderBar,
 	HomeWidget: () => <View />,
-	DetectLoocationSelector: () => <View />,
+	DetectLocationSelector,
 	HomeWidgetCollection: props => (
 		<View>
 			<Text>{props.children.length}</Text>

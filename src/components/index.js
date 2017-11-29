@@ -13,7 +13,7 @@ import SearchPage from "./SearchPage";
 import ServiceMap from "./ServiceMap";
 import ServiceCategoryList from "./ServiceCategoryList";
 import ServiceList from "./ServiceList";
-import DetectLoocationSelector from "./DetectLoocationSelector";
+import DetectLocationSelector from "./DetectLocationSelector";
 import ServiceDetail from "./ServiceDetail";
 
 export {
@@ -33,5 +33,5 @@ export {
 	ServiceCategoryList,
 	ServiceList,
 	ServiceDetail,
-	DetectLoocationSelector,
+	DetectLocationSelector,
 };

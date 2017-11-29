@@ -2,10 +2,7 @@ import React, { Component } from "react";
 //import PropTypes from 'prop-types';
 import { translate } from "react-i18next";
 
-import "./DetectLoocationSelector.css";
-import getSessionStorage from "../shared/sessionStorage";
-
-import _ from "lodash";
+import "./DetectLocationSelector.css";
 
 class DetectLocationSelector extends Component {
 	static propTypes = {};
@@ -18,7 +15,7 @@ class DetectLocationSelector extends Component {
 		const { active } = this.state;
 
 		return (
-			<div className="DetectLoocationSelector">
+			<div className="DetectLocationSelector">
 				<div className="spacer" />
 
 				<div className="text">
