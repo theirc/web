@@ -11,7 +11,7 @@ class App extends Component {
 		const { direction, language } = this.props;
 		const organization = cms.siteConfig.theme;
 
-		return <Router />;
+		return <Router direction={direction} />;
 	}
 }
 

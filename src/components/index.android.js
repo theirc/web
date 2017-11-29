@@ -1,3 +1,3 @@
-import * as original from "index.ios";
+import * as original from "./index.ios";
 
 module.exports = original;

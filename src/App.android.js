@@ -1,3 +1,3 @@
-import * as original from "App.ios";
+import * as original from "./App.ios";
 
 module.exports = original;

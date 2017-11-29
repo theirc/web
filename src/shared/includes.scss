@@ -3,6 +3,7 @@ $accentGreen: #29991f;
 $accentRed: #e60000;
 $accentNRC: #ff7602;
 $accentPG: #59c2ed;
+$accentCuenta: #29991f;
 
 $desktopBreakpoint: 1000px;
 $bigDesktopBreakpoint: 1400px;
@@ -12,8 +13,8 @@ $bigDesktopPaddingWidth: 20vw;
 $titleBackground: #f0f0f0;
 $dividerColor: darken($titleBackground, 30%);
 
-$colorMap: (irc: $accentIRC, nrc: $accentNRC, generic: $accentGreen, mc: $accentRed, pg: $accentPG);
-$colorInverseMap: (irc: #000000, nrc: #ffffff, generic: #ffffff, mc: #ffffff, pg: #ffffff);
+$colorMap: (irc: $accentIRC, nrc: $accentNRC, generic: $accentGreen, mc: $accentRed, pg: $accentPG, cuenta: $accentCuenta);
+$colorInverseMap: (irc: #000000, nrc: #ffffff, generic: #ffffff, mc: #ffffff, pg: #ffffff, cuenta: #ffffff);
 
 @mixin grayscale-brand-colors($prop) {
 	@each $org in map-keys($map: $colorMap) {

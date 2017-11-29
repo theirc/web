@@ -109,7 +109,6 @@ class WebViewAutoHeight extends Component {
 			throw new Error("Cannot find </body> from: " + html);
 		}
 
-		console.log(html);
 
 		return (
 			<WebView

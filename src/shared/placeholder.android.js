@@ -1,3 +1,3 @@
-import * as original from "placeholder.ios";
+import * as original from "./placeholder.ios";
 
 module.exports = original;
