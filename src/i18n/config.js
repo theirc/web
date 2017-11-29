@@ -336,6 +336,13 @@ export default {
 			"Top Categories": "Top Categories",
 			"Local Guide": "Local Guide",
 			"Near me": "Near me",
+			"Detect My Location": "Detect My Location",
+			"In order to detect your location, we need to request permission to do so on your device. If you would like to use GPS to find your information tap OK, if not tap Back to List":
+				"In order to detect your location, we need to request permission to do so on your device. If you would like to use GPS to find your information tap OK, if not tap Back to List",
+			OK: "OK",
+			"Back to List": "Back to List",
+			"Loading location": "Loading location",
+			"We cannot determine your location. Please select a location from the list": "We cannot determine your location. Please select a location from the list",
 		},
 	},
 };

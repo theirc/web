@@ -1,6 +1,5 @@
 @import "../shared/includes.scss";
 
-
 @mixin selectors() {
 	flex: 1;
 	display: flex;
@@ -12,10 +11,10 @@
 	.spacer {
 		flex-grow: 1;
 		max-height: 200px;
-    }
-    .bottom {
-        height: 100px;
-    }
+	}
+	.bottom {
+		height: 100px;
+	}
 
 	.item {
 		margin: 10px;
@@ -29,6 +28,13 @@
 		color: #5e5e5e;
 		letter-spacing: 0;
 		line-height: 20px;
+
+		&:active {
+			background-color: $dividerColor;
+		}
+		&:hover {
+			border: 0;
+		}
 	}
 
 	.text {
@@ -50,8 +56,18 @@
 			letter-spacing: 0;
 			line-height: 20px;
 			font-weight: bold;
-            text-transform: uppercase;
-            margin-bottom: 0;
+			text-transform: uppercase;
+			margin-bottom: 0;
+		}
+
+		h2 {
+			font-size: 14px;
+			color: #000000;
+			letter-spacing: 0;
+			line-height: 20px;
+			text-transform: uppercase;
+			margin-bottom: 0;
+			padding: 5px;
 		}
 	}
 }

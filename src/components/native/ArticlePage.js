@@ -26,9 +26,7 @@ class ArticlePage extends Component {
 		let html = md.render(content || lead);
 		html = html.replace(/(\+[0-9]{9,14})|00[0-9]{9,15}/g, `<a class="tel" href="tel:$1">$1</a>`);
 
-		console.log(this.props);
 		html = `<html><head><link rel="stylesheet" href="https://www.refugee.info/static/css/main.17032a2e.css"/> </head><body class="ltr irc"><div class="ArticlePage"><article >${html}</article></div></body></html>`;
-		console.log(html);
 		return (
 			<View>
 				<HeaderBar subtitle={(category.fields.articles || []).length > 1 && `${category.fields.name}:`} title={title} />

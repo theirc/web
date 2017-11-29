@@ -25,7 +25,7 @@ class Home extends React.Component {
         if(country) {
             return (<Redirect to={`/${country.fields.slug}`} />);
         } else {
-            return (<Redirect to={`/language-selector`} />);
+            return (<Redirect to={`/selectors`} />);
         }
     }
 }

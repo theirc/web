@@ -129,7 +129,7 @@ const mapDispatch = (d, p) => {
 		},
 		onChangeLocation: () => {
 			d(actions.changeCountry(null));
-			d(push(`/country-selector`));
+			d(push(`/selectors`));
 		},
 		onChangeLanguage: redirect => {
 			const sessionStorage = getSessionStorage();
@@ -137,7 +137,7 @@ const mapDispatch = (d, p) => {
 				sessionStorage.redirect = redirect;
 			}
 			d(actions.changeLanguage(null));
-			d(push(`/language-selector`));
+			d(push(`/selectors`));
 		},
 		removeErrorMessage() {
 			d(actions.showErrorMessage(null));

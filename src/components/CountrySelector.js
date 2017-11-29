@@ -5,6 +5,8 @@ import { translate } from "react-i18next";
 import "./CountrySelector.css";
 import getSessionStorage from "../shared/sessionStorage";
 
+import _ from "lodash";
+
 class CountrySelector extends Component {
 	static propTypes = {};
 
@@ -17,7 +19,18 @@ class CountrySelector extends Component {
 	}
 
 	render() {
-		const { countryList, onGoTo, t } = this.props;
+		const { onGoTo, t } = this.props;
+		let countryList = this.props.countryList.map(_.identity);
+
+		if (global.navigator && navigator.geolocation) {
+			countryList.push({
+				id: "detect-me",
+				fields: {
+					slug: "detect-me",
+					name: t("Detect My Location"),
+				},
+			});
+		}
 
 		return (
 			<div className="CountrySelector">

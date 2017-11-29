@@ -4,7 +4,7 @@ import { ServiceMap, ServiceCategoryList, ServiceList, ServiceDetail } from "../
 import { Route, Switch } from "react-router";
 import { Skeleton } from ".";
 import { push } from "react-router-redux";
-import * as measureDistance from "@turf/distance";
+import measureDistance from "@turf/distance";
 
 import _ from "lodash";
 import Promise from "bluebird";

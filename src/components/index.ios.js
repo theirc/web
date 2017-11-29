@@ -58,6 +58,7 @@ module.exports = {
 	LanguageSelector,
 	HeaderBar,
 	HomeWidget: () => <View />,
+	DetectLoocationSelector: () => <View />,
 	HomeWidgetCollection: props => (
 		<View>
 			<Text>{props.children.length}</Text>
