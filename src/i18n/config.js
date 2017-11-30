@@ -115,6 +115,7 @@ export default {
 			"Top Categories": "طبقه‌بندی‌های برتر",
 			"Local Guide": "راهنمای محلی",
 			"Near me": "نزدیک من",
+			"Near Me": "نزدیک من",
 			"Detect My Location": "تشخیص موقعیت من",
 			LOCATION_DISCLAIMER:
 				"به منظور تشخیص موقعیت‌تان، باید اجازه دسترسی به آن را از دستگاه‌تان بگیریم. اگر علاقه‌مندید که از GPS برای یافتن اطلاعات‌تان استفاده کنیم، گزینه تایید را انتخاب نمایید در غیر این‌صورت گزینه‌ی بازگشت به لیست را انتخاب کنید",
@@ -241,6 +242,7 @@ export default {
 			"Top Categories": "أهم الفئات",
 			"Local Guide": "دليل محلي",
 			"Near me": "بقربي",
+			"Near Me": "بقربي",
 			"Detect My Location": "قم بتحديد موقعي",
 
 			LOCATION_DISCLAIMER: 'من أجل تحديد موقعك، نحتاج إلى طلب إذن للقيام بذلك على جهازك. إذا كنت ترغب في استخدام الـ GPS للحصول على معلوماتك، فانقر "حسناً"، وإلا فإضغط على "العودة إلى القائمة"',
@@ -364,6 +366,7 @@ export default {
 			"Top Categories": "ٹاپ اقسام",
 			"Local Guide": "مقامی گائیڈ",
 			"Near me": "میرے قریب",
+			"Near Me": "میرے قریب",
 			"Detect My Location": "میرے مقام کا پتہ لگائیں",
 			LOCATION_DISCLAIMER:
 				"آپ کے مقام کا پتہ لگانے کے لئے، ہمیں آپ کے آلے پر اجازت لینے کی ضرورت ہے. اگر آپ اپنی معلومات کو تلاش کرنے کے لئے GPS کا استعمال کرنا چاہتے ہیں تو ٹھیک ہے کا بٹن دبائیں، اگر نہیں توفہرست میں واپس کا بٹن دبائیں",
@@ -487,6 +490,7 @@ export default {
 			"Top Categories": "Top Categories",
 			"Local Guide": "Local Guide",
 			"Near me": "Near me",
+			"Near Me": "Near me",
 			"Detect My Location": "Detect My Location",
 			LOCATION_DISCLAIMER:
 				"In order to detect your location, we need to request permission to do so on your device. If you would like to use GPS to find your information tap OK, if not tap Back to List",

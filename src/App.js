@@ -25,7 +25,7 @@ class ThemedApp extends Component {
 
 		return (
 			<MuiThemeProvider theme={theme}>
-				<span className={[organization, direction, language].join(" ")}>
+				<span className={[organization, direction, `language-${language}`].join(" ")}>
 					<Helmet>
 						<title>{cms.siteConfig.title}</title>
 						<link rel="shortcut icon" href={cms.siteConfig.favicon} />
