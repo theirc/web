@@ -21,6 +21,7 @@ module.exports = {
 	"new-staging.refugee.info": {
 		theme: "irc",
 		accessToken: "7597f6916d5773b57d016a39d7c06ea5c5cf4b213fe60f79893cd7487c29a215",
+		host: 'preview.contentful.com',
 		space: "ktglofo8nf88",
 		languages: [["en", "English"], ["ar", "العربيـة"], ["fa", "فارسی"], ],
 		//languages: [["en", "English"], ["ar", "العربيـة"]],
@@ -59,14 +60,16 @@ module.exports = {
 	},
 	localhost: {
 		theme: "irc",
-		accessToken: "0cd5c6bfefa4f7f33a98c487012e6f34c2031aee1ff2f6858b11be592ab349d9",
+		accessToken: "7597f6916d5773b57d016a39d7c06ea5c5cf4b213fe60f79893cd7487c29a215",
+		host: 'preview.contentful.com',
 		space: "ktglofo8nf88",
-		languages: [["en", "English"], ["ar", "العربيـة"], ["fa", "فارسی"]],
+		languages: [["en", "English"], ["ar", "العربيـة"], ["fa", "فارسی"], ],
+		//languages: [["en", "English"], ["ar", "العربيـة"]],
 		logo: "/ri-logo-<%= language %>.png",
 		title: "Refugee Info",
 		questionLink: "https://fb.me/refugee.info",
 		favicon: "/favicon.ico",
 		gaTracker: "UA-68574649-6",
-		appId: "154471931830995",
+		appId: "708254579325899",
 	},
 };
