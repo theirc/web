@@ -62,7 +62,7 @@
 			.LocalGuideItem {
 				display: block;
 				flex-basis: calc(50% - 5px);
-				margin-bottom: 10px;
+				margin-bottom: 5px;
 				margin-right: 10px;
 				.rtl & {
 					margin-left: 10px;
@@ -78,15 +78,24 @@
 				}
 				&:nth-child(odd) {
 					color: red;
-				margin-right: 5px;
-				margin-left: 0;
-				
+					margin-right: 5px;
+					margin-left: 0;
+
+					.rtl & {
+						margin-left: 5px;
+						margin-right: 0;
+					}
 				}
 
 				&:nth-child(even) {
 					color: blue;
 					margin-left: 5px;
 					margin-right: 0;
+
+					.rtl & {
+						margin-right: 5px;
+						margin-left: 0;
+					}
 				}
 			}
 			.Overlay:hover,
