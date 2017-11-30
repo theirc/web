@@ -70,7 +70,7 @@ class Selectors extends Component {
 		let first = _.first(
 			_.sortBy(countryList, country => {
 				if (!country.coordinates) {
-					return -1;
+					return 1e10;
 				} else {
 					const { lon, lat } = country.coordinates;
 					const countryGeoJSON = {
@@ -80,7 +80,7 @@ class Selectors extends Component {
 
 					return measureDistance(countryGeoJSON, currentGeoJSON);
 				}
-			}).reverse()
+			})
 		);
 
 		this.selectCountry(first.slug);
@@ -91,7 +91,7 @@ class Selectors extends Component {
 	}
 
 	render() {
-		const {   currentPage, countryList } = this.state;
+		const { currentPage, countryList } = this.state;
 		const { languages } = cms.siteConfig;
 
 		switch (currentPage) {
