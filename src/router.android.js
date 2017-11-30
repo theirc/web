@@ -1,3 +1,3 @@
-import * as original from "router.ios";
+import * as original from "./router.ios";
 
 module.exports = original;

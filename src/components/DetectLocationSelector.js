@@ -21,9 +21,7 @@ class DetectLocationSelector extends Component {
 				<div className="text">
 					<i className="material-icons">my_location</i>
 					<h2>
-						{t(
-							"In order to detect your location, we need to request permission to do so on your device. If you would like to use GPS to find your information tap OK, if not tap Back to List"
-						)}
+						{t("LOCATION_DISCLAIMER")}
 					</h2>
 				</div>
 				<div className="spacer" />
@@ -42,7 +40,7 @@ class DetectLocationSelector extends Component {
 						};
 
 						let errorOut = () => {
-							alert(t("We cannot determine your location. Please select a location from the list"));
+							alert(t("LOCATION_ERROR"));
 							if (onBackToList) onBackToList();
 						};
 

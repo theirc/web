@@ -4,6 +4,7 @@
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: column;
+	width: 100%;
 
 	padding-bottom: 10px;
 
@@ -14,6 +15,7 @@
 
 		align-items: flex-start;
 		margin-top: 16px;
+		min-width: 100%;
 
 		.Image {
 			width: 6rem;
@@ -36,6 +38,9 @@
 		}
 		.Text {
 			flex: 1;
+
+			display: block;
+			min-width: 100%;
 		}
 		.Read-More {
 			padding-top: 10px;
@@ -106,6 +111,7 @@
 		margin-right: 16px;
 		flex: 1;
 		flex-direction: column;
+		width: 100%;
 
 		img {
 			//max-width: 100%;

@@ -1,7 +1,9 @@
 @import "../shared/includes.scss";
 
 .BottomNav {
-	.rtl & span {font-size: 12px;}
+	.rtl & span {
+		font-size: 12px;
+	}
 	.Selected {
 		.rtl & {
 			font-family: "Cairo", sans-serif;
@@ -16,10 +18,20 @@
 		color: black;
 		font-weight: 700;
 	}
+	& > div > button > span > svg {
+		.rtl & {
+			-moz-transform: scaleX(-1);
+			-o-transform: scaleX(-1);
+			-webkit-transform: scaleX(-1);
+			transform: scaleX(-1);
+			filter: FlipH;
+			-ms-filter: "FlipH";
+		}
+	}
 
 	.BottomButton {
 		@media (max-width: 375px) {
-			font-size: 75%!important;
+			font-size: 75% !important;
 		}
 		.rtl & {
 			font-family: "Cairo", "Roboto", sans-serif;

@@ -1,3 +1,3 @@
-import * as original from "store.ios";
+import * as original from "./store.ios";
 
 module.exports = original;

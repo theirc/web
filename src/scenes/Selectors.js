@@ -7,6 +7,7 @@ import cms from "../content/cms";
 import { actions } from "../store";
 import measureDistance from "@turf/distance";
 import _ from "lodash";
+import getSessionStorage from "../shared/sessionStorage";
 
 class Selectors extends Component {
 	state = {
@@ -19,7 +20,9 @@ class Selectors extends Component {
 
 	componentWillMount() {
 		const { language } = this.props;
-		if (language) {
+		const sessionStorage = getSessionStorage();
+
+		if (language && !!sessionStorage.firstRequest) {
 			this.selectLanguage(language, 0);
 		}
 	}
@@ -67,7 +70,7 @@ class Selectors extends Component {
 		let first = _.first(
 			_.sortBy(countryList, country => {
 				if (!country.coordinates) {
-					return -1;
+					return 1e10;
 				} else {
 					const { lon, lat } = country.coordinates;
 					const countryGeoJSON = {
@@ -77,7 +80,7 @@ class Selectors extends Component {
 
 					return measureDistance(countryGeoJSON, currentGeoJSON);
 				}
-			}).reverse()
+			})
 		);
 
 		this.selectCountry(first.slug);
@@ -88,7 +91,7 @@ class Selectors extends Component {
 	}
 
 	render() {
-		const {   currentPage, countryList } = this.state;
+		const { currentPage, countryList } = this.state;
 		const { languages } = cms.siteConfig;
 
 		switch (currentPage) {
