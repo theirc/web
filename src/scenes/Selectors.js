@@ -7,6 +7,7 @@ import cms from "../content/cms";
 import { actions } from "../store";
 import measureDistance from "@turf/distance";
 import _ from "lodash";
+import getSessionStorage from "../shared/sessionStorage";
 
 class Selectors extends Component {
 	state = {
@@ -19,7 +20,9 @@ class Selectors extends Component {
 
 	componentWillMount() {
 		const { language } = this.props;
-		if (language) {
+		const sessionStorage = getSessionStorage();
+
+		if (language && !!sessionStorage.firstRequest) {
 			this.selectLanguage(language, 0);
 		}
 	}

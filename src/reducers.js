@@ -9,11 +9,11 @@ let defaultLanguage = "";
 const sessionStorage = getSessionStorage();
 if (global.window && global.location && global.navigator) {
 	const parsed = queryString.parse(global.location.search);
-	
-	if (sessionStorage.language) {
-		defaultLanguage = sessionStorage.language;
-	} else if (parsed.language) {
+
+	if (parsed.language) {
 		defaultLanguage = parsed.language;
+	} else if (sessionStorage.language) {
+		defaultLanguage = sessionStorage.language;
 	} else if (global.navigator.languages) {
 		defaultLanguage = global.navigator.languages[0].split("-")[0];
 	} else if (global.navigator.language) {
