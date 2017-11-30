@@ -1,30 +1,35 @@
 import React, { Component } from "react";
 import { translate } from "react-i18next";
-import { View, Text, Button } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import styles from './SelectorsStyles';
 
 class LanguageSelector extends Component {
 	static propTypes = {};
 	render() {
 		const { languages, onSelectLanguage, t } = this.props;
 		return (
-			<View>
-				<View className="spacer" style={{ minHeight: 65 }} />
-				<View className="text">{languages.map((c, i) => <Text key={`choose-${c[0]}`}>{t("Choose your language", { lng: c[0] })}</Text>)}</View>
-				<View className="spacer" />
+			<View style={styles.Selectors}>
+				<View style={styles.spacer} style={{ minHeight: 105}} />
+				<Icon style={styles.i} name="translate" size={30} color="#ffda1a" />
+				<View>
+					{languages.map((c, i) => <Text style={styles.text} key={`choose-${c[0]}`}>{t("Choose your language", { lng: c[0] }).toUpperCase()}</Text>)}
+				</View>
+				<View style={styles.spacer} />
 				{languages.map((c, i) => (
-					<Button
-						className="item "
+					<TouchableOpacity
+
 						key={i}
 						onPress={() => {
-                            console.log("selected",c[0])
+              console.log("selected",c[0])
 							onSelectLanguage(c[0]);
-                        }}
-                        title={c[1]}
+            }}
+            title={c[1]}
 					>
-						{c[1]}
-					</Button>
+						<Text style={styles.item}>{c[1]}</Text>
+					</TouchableOpacity>
 				))}
-				<View className="bottom" />
+				<View style={styles.bottom} />
 			</View>
 		);
 

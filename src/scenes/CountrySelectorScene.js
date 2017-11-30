@@ -21,7 +21,7 @@ class CountrySelectorScene extends Component {
 
 		let firstTimeHere = false;
 		const sessionStorage = getSessionStorage();
-		
+
 		if (sessionStorage) {
 			const { firstRequest } = sessionStorage;
 			firstTimeHere = !firstRequest;

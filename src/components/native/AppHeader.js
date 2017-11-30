@@ -1,25 +1,22 @@
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { View, Text, Button, StyleSheet, Image } from "react-native";
+import HdrStyles from "./AppHeaderStyles";
 class AppHeader extends Component {
 	static propTypes = {};
 
 	render() {
 		const { logo } = this.props;
 		return (
-			<View style={styles.header}>
+			<View style={HdrStyles.header}>
 				<View style={{ flex: 1 }}>
 					<Image
+						style={HdrStyles.LogoImg}
 						source={{ uri: `https://beta.refugee.info${logo}` }}
-						style={{
-							height: 40,
-							width: 150,
-							backgroundColor: "#000000",
-						}}
 					/>
 				</View>
 				<View style={{ flex: 1 }}>
-					<Text style={{ color: "#fff" }}>App Header</Text>
+					<Text style={{ color: "#fff" }}></Text>
 				</View>
 			</View>
 		);

@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { translate } from "react-i18next";
-import { View, Text, Button } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import _ from "lodash";
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import Selectorstyles from './SelectorsStyles';
 
 class CountrySelector extends Component {
 	static propTypes = {};
@@ -23,26 +25,26 @@ class CountrySelector extends Component {
 		}
 
 		return (
-			<View className="CountrySelector">
-				<View className="spacer" />
-
-				<View className="text">
-					<Text>{t("Where are you now?")}</Text>
+			<View style={Selectorstyles.Selectors}>
+				<View style={Selectorstyles.spacer} />
+				<Icon style={Selectorstyles.i} name="my-location" size={30} color="#ffda1a" />
+				<View>
+					<Text style={Selectorstyles.text}>{t("Where are you now?").toUpperCase()}</Text>
 				</View>
-				<View className="spacer" />
+				<View style={Selectorstyles.spacer} />
 				{countryList.map((c, i) => (
-					<Button
-						className="item "
+					<TouchableOpacity
+
 						key={c.id}
 						onPress={() => {
 							onGoTo(c.fields.slug);
 						}}
 						title={c.fields.name}
 					>
-						{c.fields.name}
-					</Button>
+						<Text style={Selectorstyles.item}>{c.fields.name}</Text>
+					</TouchableOpacity>
 				))}
-				<View className="bottom" />
+				<View style={Selectorstyles.bottom} />
 			</View>
 		);
 	}
