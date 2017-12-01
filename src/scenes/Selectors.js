@@ -106,14 +106,19 @@ class Selectors extends Component {
 				);
 			case 2:
 				if (!countryList) return null;
-				return (
-					<CountrySelector
-						onGoTo={slug => {
-							this.selectCountry(slug);
-						}}
-						countryList={countryList}
-					/>
-				);
+				if (countryList.length === 1) {
+					this.selectCountry(countryList[0].slug);
+					return null;
+				} else {
+					return (
+						<CountrySelector
+							onGoTo={slug => {
+								this.selectCountry(slug);
+							}}
+							countryList={countryList}
+						/>
+					);
+				}
 			case 3:
 				return <DetectLocationSelector onBackToList={() => this.setState({ currentPage: 2 })} onLocationFound={l => this.lookupCoordinates(l)} onLocationError={l => this.logError(l)} />;
 			case -1:
