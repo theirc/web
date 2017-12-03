@@ -4,6 +4,7 @@ import { View, Text, Button, Dimensions } from "react-native";
 import { BottomNavigation, ThemeProvider } from "react-native-material-ui";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
+import PropTypes from "prop-types";
 
 const window = Dimensions.get("window");
 
@@ -11,6 +12,9 @@ class BottomNavContainer extends Component {
 	static propTypes = {};
 	state = {
 		active: "home",
+	};
+	static contextTypes = {
+		theme: PropTypes.object,
 	};
 
 	changeState(dest) {
@@ -35,7 +39,7 @@ class BottomNavContainer extends Component {
 
 	render() {
 		const { t, match } = this.props;
-		const { country, onGoToCategories, onGoHome, onGoToSearch, showServiceMap, onGoToServices, router } = this.props;
+		const { country, onGoToCategories, onGoHome, onGoToSearch, showServiceMap, onGoToServices, router, direction } = this.props;
 		let selectedIndex = 0;
 		let pathParts = ["", ""]; //router.location.pathname.split("/");
 
@@ -55,10 +59,15 @@ class BottomNavContainer extends Component {
 						bottomNavigationAction: {
 							iconActive: {
 								color: "#ffda1a",
+								fontFamily: direction === "ltr" ? "Roboto" : "Cairo",
 							},
 							labelActive: {
 								color: "#000",
 								fontWeight: "bold",
+								fontFamily: direction === "ltr" ? "Roboto" : "Cairo",
+							},
+							label: {
+								fontFamily: direction === "ltr" ? "Roboto" : "Cairo",
 							},
 						},
 					}}
@@ -82,12 +91,13 @@ class BottomNavContainer extends Component {
 	}
 }
 
-const mapState = ({ category, country, showServiceMap, router }, p) => {
+const mapState = ({ category, country, direction, showServiceMap, router }, p) => {
 	return {
 		category,
 		country,
 		showServiceMap,
 		router,
+		direction,
 	};
 };
 const mapDispatch = (d, p) => {

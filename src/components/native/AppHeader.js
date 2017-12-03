@@ -1,6 +1,7 @@
 import React, { Component } from "react";
+import { View, Button, StyleSheet, Image, TouchableOpacity } from "react-native";
+import Text from "./Text";
 import { translate } from "react-i18next";
-import { View, Text, Button, StyleSheet, Image, TouchableOpacity } from "react-native";
 import HdrStyles from "./AppHeaderStyles";
 import PropTypes from "prop-types";
 import Icon from "react-native-vector-icons/MaterialIcons";

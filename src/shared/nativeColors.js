@@ -29,7 +29,16 @@ function lighten(color, percent = 0) {
 		.lighten(percent)
 		.toHexString();
 }
-const themes = _.fromPairs(Object.keys(brandColors).map(k => [k, { color: brandColors[k], inverse: brancColorReverse[k], name: k }]));
+const themes = _.fromPairs(
+	Object.keys(brandColors).map(k => [
+		k,
+		{
+			color: brandColors[k],
+			inverse: brancColorReverse[k],
+			name: k,
+		},
+	])
+);
 
 const titleBackground = `#f0f0f0`;
 const dividerColor = darken(titleBackground, 30);
@@ -42,5 +51,5 @@ export default {
 	lighten,
 
 	titleBackground,
-	dividerColor
+	dividerColor,
 };

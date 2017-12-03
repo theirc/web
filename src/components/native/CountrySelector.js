@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { translate } from "react-i18next";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View,  TouchableOpacity } from "react-native";
 import _ from "lodash";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import styles from "./SelectorsStyles";
 import window from "../../shared/nativeDimensions";
 import PropTypes from "prop-types";
+import Text from "./Text";
 
 const { width, heightWithoutHeader } = window;
 

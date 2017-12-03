@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { translate } from "react-i18next";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View,  TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import styles from "./SelectorsStyles";
 import PropTypes from "prop-types";
 import window from "../../shared/nativeDimensions";
 
 const { width, heightWithoutHeader } = window;
+import Text from "./Text";
 
 class LanguageSelector extends Component {
 	static propTypes = {};

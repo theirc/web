@@ -46,7 +46,7 @@ class Selectors extends Component {
 			if (country) {
 				const sessionStorage = getSessionStorage();
 				if (sessionStorage && sessionStorage.redirect) {
-					const { redirect } = sessionStorage;
+					let { redirect } = sessionStorage;
 					delete sessionStorage.redirect;
 					if (/^\//.test(redirect)) {
 						redirect = redirect.substr(1);

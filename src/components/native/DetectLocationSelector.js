@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import { translate } from "react-i18next";
 
 import getSessionStorage from "../../shared/sessionStorage";
-import { View, Text, Button, TouchableOpacity } from "react-native";
+import { View,  Button, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import styles from "./SelectorsStyles";
+import Text from "./Text";
 
 import _ from "lodash";
 import window from "../../shared/nativeDimensions";

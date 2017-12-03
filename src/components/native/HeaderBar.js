@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import PropTypes from "prop-types";
-import { View, Text, Button, StyleSheet, Image } from "react-native";
+import { View,  Button, StyleSheet, Image } from "react-native";
 import styles from "./HeaderBarStyles";
+import Text from "./Text";
 
 const generateKey = pre => {
 	return `${pre}_${new Date().getTime()}`;

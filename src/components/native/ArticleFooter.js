@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { translate } from "react-i18next";
-import { View, Text, Button, StyleSheet, Image } from "react-native";
+import { View, Button, StyleSheet, Image } from "react-native";
 import PropTypes from "prop-types";
+import Text from "./Text";
 
 class ArticleFooter extends Component {
 	static propTypes = {};

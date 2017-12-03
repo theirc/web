@@ -19,7 +19,24 @@ export default StyleSheet.create({
 	lightLink: {
 		fontSize: 20,
 		marginTop: 10,
-		textDecorationLine: 'underline',
-		textDecorationStyle: 'solid',
+		textDecorationLine: "underline",
+		textDecorationStyle: "solid",
+	},
+
+	footerButtons: {
+		flex: 1,
+		alignItems: "center",
+		justifyContent: "center",
+		height: 60,
+	},
+
+	footerButtonContainer: {
+		flex: 1,
+		flexDirection: "row",
+		flexWrap: "wrap",
+		paddingVertical: 10,
+		marginHorizontal: 10,
+		borderBottomColor: nativeColors.dividerColor,
+		borderBottomWidth: 1,
 	},
 });

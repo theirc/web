@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { translate } from "react-i18next";
-import { View, Text, Button, StyleSheet, Image, TouchableHighlight } from "react-native";
+import { View, Button, StyleSheet, Image, TouchableOpacity } from "react-native";
 import HeaderBar from "./HeaderBar";
 import PropTypes from "prop-types";
+import Text from "./Text";
 
 class CategoryList extends Component {
 	static propTypes = {};
@@ -10,8 +11,13 @@ class CategoryList extends Component {
 	static contextTypes = {
 		theme: PropTypes.object,
 	};
+
+	state = {
+		open: [],
+	};
 	render() {
 		const { country, categories, onNavigate, t } = this.props;
+		const { open } = this.state;
 		const showToggle = c => {
 			return (c.fields.subCategories && c.fields.subCategories.length) || (c.fields.articles && c.fields.articles.length && c.fields.type !== "News" && !c.fields.overview);
 		};
@@ -31,39 +37,50 @@ class CategoryList extends Component {
 					<View key={c.sys.id}>
 						{i > 0 && <View style={[styles.line]} />}
 						{showToggle(c) && [
-							<View key={c.sys.id}>
+							<TouchableOpacity
+								style={styles.topLevel}
+								key={c.sys.id}
+								onPress={() =>
+									this.setState({
+										open: [c.sys.id, ...open],
+									})
+								}
+							>
 								<Text>{c.fields && c.fields.name}</Text>
-							</View>,
+							</TouchableOpacity>,
 
-							c.fields.categories && (
-								<View key="a-2">
-									{c.fields.categories.map(
-										a =>
-											a.fields && (
-												<TouchableHighlight key={a.sys.id} onPress={() => onNavigate(`/${country.fields.slug}/${a.fields.slug}/${overviewOrFirst(a).fields.slug}`)}>
-													<Text> {a.fields.name}</Text>
-												</TouchableHighlight>
-											)
-									)}
+							c.fields.categories &&
+								open.indexOf(c.sys.id) > -1 && (
+									<View key="a-2">
+										{c.fields.categories.map(
+											a =>
+												a.fields && (
+													<TouchableOpacity key={a.sys.id} onPress={() => onNavigate(`/${country.fields.slug}/${a.fields.slug}/${overviewOrFirst(a).fields.slug}`)}>
+														<Text>{a.fields.name}</Text>
+													</TouchableOpacity>
+												)
+										)}
+									</View>
+								),
+							open.indexOf(c.sys.id) > -1 && (
+								<View key="a-3">
+									{c.fields.articles &&
+										c.fields.articles.map(
+											a =>
+												a.fields && (
+													<TouchableOpacity key={a.sys.id} onPress={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${a.fields.slug}`)}>
+														<Text> {a.fields.title}</Text>
+													</TouchableOpacity>
+												)
+										)}
 								</View>
 							),
-							<View key="a-3">
-								{c.fields.articles &&
-									c.fields.articles.map(
-										a =>
-											a.fields && (
-												<TouchableHighlight key={a.sys.id} onPress={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${a.fields.slug}`)}>
-													<Text> {a.fields.title}</Text>
-												</TouchableHighlight>
-											)
-									)}
-							</View>,
 						]}
 						{!showToggle(c) &&
 							overviewOrFirst(c) && (
-								<View key={c.sys.id}>
-									<Text>{c.fields && c.fields.name}</Text>
-								</View>
+								<TouchableOpacity style={styles.topLevel} key={c.sys.id} onPress={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${overviewOrFirst(c).fields.slug}`)}>
+									<Text> {overviewOrFirst(c).fields.title}</Text>
+								</TouchableOpacity>
 							)}
 					</View>
 				))}
@@ -73,7 +90,11 @@ class CategoryList extends Component {
 }
 
 const styles = StyleSheet.create({
-	line: {},
+	topLevel: {
+		flex: 1,
+		minHeight: 50,
+		justifyContent: "center",
+	},
 });
 
 export default translate()(CategoryList);

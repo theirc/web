@@ -6,7 +6,7 @@ import { AppHeader, Footer, WarningDialog } from "../components";
 import { BottomNavContainer } from "../containers";
 import { push } from "react-router-redux";
 import moment from "moment";
-import { AppRegistry, StyleSheet, Text, StatusBar, View, ScrollView, Dimensions } from "react-native";
+import { AppRegistry, StyleSheet, StatusBar, View, ScrollView, Dimensions } from "react-native";
 import PropTypes from "prop-types";
 
 import { I18nextProvider } from "react-i18next";
@@ -23,6 +23,15 @@ class Skeleton extends React.Component {
 		config: PropTypes.object,
 		api: PropTypes.object,
 	};
+
+	static childContextTypes = {
+		direction: PropTypes.string,
+	};
+
+	getChildContext() {
+		const { direction } = this.props;
+		return { direction };
+	}
 
 	componentDidMount() {
 		const { language, errorMessage } = this.props;
@@ -138,13 +147,14 @@ class Skeleton extends React.Component {
 	}
 }
 
-const mapState = ({ country, language, deviceType, router, errorMessage }, p) => {
+const mapState = ({ country, direction, language, deviceType, router, errorMessage }, p) => {
 	return {
 		country,
 		language,
 		deviceType,
 		router,
 		errorMessage,
+		direction,
 	};
 };
 const mapDispatch = (d, p) => {

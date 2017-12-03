@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { translate } from "react-i18next";
-import { View, WebView, Text, Button, StyleSheet, Dimensions, Image } from "react-native";
+import { View, WebView,  Button, StyleSheet, Dimensions, Image } from "react-native";
 import HeaderBar from "./HeaderBar";
 import WebViewAutoHeight from "./WebViewAutoHeight";
 import PropTypes from "prop-types";
+import Text from "./Text";
 
 const window = Dimensions.get("window");
 
