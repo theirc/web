@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ReactNative, { View } from "react-native";
-import { NativeRouter, Router, Route, Switch, Link } from "react-router-native";
+import { NativeRouter, Router, Route, Switch, Link, StatusBar } from "react-router-native";
 import { ConnectedRouter } from "react-router-redux";
 import { Home, Article, Categories, CountryHome, CategoryHome, CountrySelectorScene, LanguageSelectorScene, Search, Services, Selectors } from "./scenes";
 import { history } from "./store";

@@ -6,18 +6,24 @@ import { AppHeader, Footer, WarningDialog } from "../components";
 import { BottomNavContainer } from "../containers";
 import { push } from "react-router-redux";
 import moment from "moment";
-import cms from "../content/cms";
-import { AppRegistry, StyleSheet, Text, View, ScrollView, Dimensions } from "react-native";
+import { AppRegistry, StyleSheet, Text, StatusBar, View, ScrollView, Dimensions } from "react-native";
+import PropTypes from "prop-types";
 
 import { I18nextProvider } from "react-i18next";
 import i18n from "../i18n"; // initialized i18next instance
 import getSessionStorage from "../shared/sessionStorage";
-const window = Dimensions.get("window");
+import window from "../shared/nativeDimensions";
 
 class Skeleton extends React.Component {
 	state = {
 		errorMessage: null,
 	};
+
+	static contextTypes = {
+		config: PropTypes.object,
+		api: PropTypes.object,
+	};
+
 	componentDidMount() {
 		const { language, errorMessage } = this.props;
 		i18n.changeLanguage(language);
@@ -29,6 +35,7 @@ class Skeleton extends React.Component {
 			}, 20 * 1000);
 		}
 	}
+
 	componentWillUpdate(newProps) {
 		const { language, errorMessage } = this.props;
 		if (language !== newProps.language) {
@@ -42,10 +49,16 @@ class Skeleton extends React.Component {
 			}, 20 * 1000);
 		}
 	}
+
 	render() {
 		const { children, country, language, match, onGoHome, onGoToSearch, onChangeLocation, onChangeLanguage, deviceType, router, hideFooter, removeErrorMessage } = this.props;
 		const { errorMessage } = this.state;
+		const { config } = this.context;
+		const sessionStorage = getSessionStorage();
 		let notifications = [];
+
+		console.log(sessionStorage);
+
 		const notificationType = n => {
 			switch (n.fields.type) {
 				case "Warning":
@@ -57,7 +70,6 @@ class Skeleton extends React.Component {
 			}
 		};
 		if (country && language) {
-			const sessionStorage = getSessionStorage();
 			const dismissed = JSON.parse(sessionStorage.dismissedNotifications || "[]");
 
 			const notificationFilter = n => {
@@ -85,25 +97,34 @@ class Skeleton extends React.Component {
 		}
 
 		let showFooter = !hideFooter && country && language;
-		let logo = _.template(cms.siteConfig.logo)({ language: language || "en" });
+		let logo = _.template(config.logo)({ language: language || "en" });
 
 		return (
 			<I18nextProvider i18n={i18n}>
 				<View
 					style={{
 						backgroundColor: "#fff",
-						height: window.height - 16,
-						paddingBottom: country && language ? 56 : 0,
+						height: "100%",
+						paddingBottom: window.softMenuBar / 2,
+						display: "flex",
 					}}
 				>
+					<StatusBar backgroundColor="#000" barStyle="light-content" />
 					<AppHeader country={country} language={language} onGoHome={onGoHome(country)} onGoToSearch={q => onGoToSearch(country, q)} onChangeCountry={onChangeLocation} logo={logo} />
 					{notifications}
-					<ScrollView>
+					<ScrollView
+						style={{
+							display: "flex",
+							flex: 1,
+							minHeight: !showFooter ? window.usableHeight : 0,
+							backgroundColor: "#000000",
+						}}
+					>
 						{children}
 						{showFooter && (
 							<Footer
-								questionLink={cms.siteConfig.questionLink}
-								disableCountrySelector={!!cms.siteConfig.disableCountrySelector}
+								questionLink={config.questionLink}
+								disableCountrySelector={!!config.disableCountrySelector}
 								onChangeLocation={onChangeLocation}
 								onChangeLanguage={onChangeLanguage}
 								deviceType={deviceType}

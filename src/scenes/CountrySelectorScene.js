@@ -3,16 +3,27 @@ import { connect } from "react-redux";
 import { push } from "react-router-redux";
 import { CountrySelector } from "../components";
 import { Redirect } from "react-router";
-import cms from "../content/cms";
 import getSessionStorage from "../shared/sessionStorage";
+import PropTypes from "prop-types";
 
 class CountrySelectorScene extends Component {
 	state = {
 		countryList: [],
 	};
+
+	static contextTypes = {
+		config: PropTypes.object,
+		api: PropTypes.object,
+	};
+
 	componentWillMount() {
 		const { onMountOrUpdate, language } = this.props;
-		onMountOrUpdate(language).then(countryList => this.setState({ countryList }));
+		const { api } = this.context;
+
+		api
+			.listCountries(language)
+			.then(e => e.items.map(a => ({ id: a.sys.id, ...a.fields, ...a })))
+			.then(countryList => this.setState({ countryList }));
 	}
 
 	render() {
@@ -59,7 +70,7 @@ const mapState = ({ countryList, country, language }, p) => {
 const mapDispatch = (d, p) => {
 	return {
 		onMountOrUpdate: language => {
-			return cms.listCountries(language).then(e => e.items.map(a => ({ id: a.sys.id, ...a.fields, ...a })));
+			return;
 		},
 		onGoTo: slug => {
 			d(push(`/${slug}`));

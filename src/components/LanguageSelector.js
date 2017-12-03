@@ -37,7 +37,8 @@ class LanguageSelector extends Component {
 						{c[1]}
 					</button>
 				))}
-				<div className="bottom" />
+				<div className="spacer" />
+				
 			</div>
 		);
 	}

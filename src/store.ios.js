@@ -16,7 +16,7 @@ import createMemoryHistory from "history/createMemoryHistory";
 const history = createMemoryHistory();
 
 const middleware = [
-	logMiddleware(),
+//	logMiddleware(),
 	reduxThunk, // Thunk middleware for Redux
 	reduxPromiseMiddleware(), // Resolve, reject promises with conditional optimistic updates
 	routerMiddleware(history), // routerMiddleware(browserHistory), // !! IMPORTANT for location.href changes,

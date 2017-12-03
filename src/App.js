@@ -3,7 +3,9 @@ import { connect } from "react-redux";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import { createMuiTheme } from "material-ui/styles";
 import Router from "./router";
+import cmsApi from "./content/cmsApi";
 import cms from "./content/cms";
+import PropTypes from "prop-types";
 
 import { Helmet } from "react-helmet";
 import "./App.css";
@@ -19,6 +21,20 @@ const theme = createMuiTheme({
 });
 
 class ThemedApp extends Component {
+	static childContextTypes = {
+		config: PropTypes.object,
+		api: PropTypes.object,
+	};
+
+	getChildContext() {
+		let config = cms.siteConfig;
+		let api = cmsApi(config, {});
+		return {
+			config,
+			api,
+		};
+	}
+	
 	render() {
 		const { direction, language } = this.props;
 		const organization = cms.siteConfig.theme;

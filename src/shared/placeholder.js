@@ -1,3 +1,6 @@
 import React from "react";
+import { debug } from "util";
 
-module.exports = props => <div {...props}>{props.children}</div>;
+let placeholder =  props => <div {...props}>{props.children}</div>;
+
+export default placeholder;

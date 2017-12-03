@@ -1,4 +1,6 @@
 import React from "react";
 import { View } from "react-native";
 
-module.exports = props => <View {...props}>{props.children}</View>;
+let placeholder = props => <View {...props}>{props.children}</View>;
+
+export default placeholder;

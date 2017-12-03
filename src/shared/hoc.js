@@ -1,19 +1,28 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import _ from "lodash";
-import cms from "../content/cms";
 import { actions } from "../store";
+import PropTypes from "prop-types";
 
 export function withCountry(WrappedComponent) {
 	class CountrySwitcher extends Component {
 		state = {
 			country: null,
 		};
+
+		static contextTypes = {
+			config: PropTypes.object,
+			api: PropTypes.object,
+		};
+
 		componentWillMount() {
 			const { match, onMount, language } = this.props;
+			const { api } = this.context;
 
-			onMount(match.params.country, language).then(c => {
-				this.setState({ country: c, loaded: true });
+			api.loadCountry(match.params.country, language).then(c => {
+				return onMount(c).then(c => {
+					this.setState({ country: c, loaded: true });
+				});
 			});
 		}
 		compomentWillReceiveProps(newProps) {
@@ -42,11 +51,9 @@ export function withCountry(WrappedComponent) {
 		({ language, country }) => ({ language, country }),
 		(d, p) => {
 			return {
-				onMount: (country, language) => {
-					return cms.loadCountry(country, language).then(c => {
-						d(actions.changeCountry(c));
-						return Promise.resolve(c);
-					});
+				onMount: c => {
+					d(actions.changeCountry(c));
+					return Promise.resolve(c);
 				},
 			};
 		}
@@ -60,6 +67,12 @@ export function withCategory(WrappedComponent) {
 		state = {
 			category: null,
 		};
+
+		static contextTypes = {
+			config: PropTypes.object,
+			api: PropTypes.object,
+		};
+
 		componentDidMount() {
 			const { match, country, onRender } = this.props;
 

@@ -3,11 +3,11 @@ import { connect } from "react-redux";
 import { push } from "react-router-redux";
 import { CountrySelector, LanguageSelector, DetectLocationSelector } from "../components";
 import { Redirect } from "react-router";
-import cms from "../content/cms";
 import { actions } from "../store";
 import measureDistance from "@turf/distance";
 import _ from "lodash";
 import getSessionStorage from "../shared/sessionStorage";
+import PropTypes from "prop-types";
 
 class Selectors extends Component {
 	state = {
@@ -16,6 +16,11 @@ class Selectors extends Component {
 		country: null,
 		language: null,
 		redirect: "",
+	};
+
+	static contextTypes = {
+		config: PropTypes.object,
+		api: PropTypes.object,
 	};
 
 	componentWillMount() {
@@ -29,7 +34,8 @@ class Selectors extends Component {
 
 	selectLanguage(language, timeout = 200) {
 		const func = () => {
-			const { onSelectLanguage, onMountOrUpdate, country } = this.props;
+			const { onSelectLanguage, country, onGoTo } = this.props;
+			const { api } = this.context;
 
 			onSelectLanguage(language);
 			this.setState({
@@ -38,9 +44,22 @@ class Selectors extends Component {
 				currentPage: 2,
 			});
 			if (country) {
-				this.selectCountry(country.fields.slug);
+				const sessionStorage = getSessionStorage();
+				if (sessionStorage && sessionStorage.redirect) {
+					const { redirect } = sessionStorage;
+					delete sessionStorage.redirect;
+					if (/^\//.test(redirect)) {
+						redirect = redirect.substr(1);
+					}
+					onGoTo(redirect);
+				} else {
+					this.selectCountry(country.fields.slug);
+				}
 			} else {
-				onMountOrUpdate(language).then(countryList => this.setState({ countryList }));
+				api
+					.listCountries(language)
+					.then(e => e.items.map(a => ({ id: a.sys.id, ...a.fields, ...a })))
+					.then(countryList => this.setState({ countryList }));
 			}
 		};
 		if (timeout) setTimeout(func, timeout);
@@ -92,7 +111,8 @@ class Selectors extends Component {
 
 	render() {
 		const { currentPage, countryList } = this.state;
-		const { languages } = cms.siteConfig;
+		const { config } = this.context;
+		const { languages } = config;
 
 		switch (currentPage) {
 			case 1:
@@ -137,9 +157,7 @@ const mapState = ({ countryList, country, language }, p) => {
 };
 const mapDispatch = (d, p) => {
 	return {
-		onMountOrUpdate: language => {
-			return cms.listCountries(language).then(e => e.items.map(a => ({ id: a.sys.id, ...a.fields, ...a })));
-		},
+		onMountOrUpdate: language => {},
 
 		onSelectLanguage: code => {
 			d(actions.changeLanguage(code));

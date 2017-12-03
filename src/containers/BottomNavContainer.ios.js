@@ -37,7 +37,6 @@ class BottomNavContainer extends Component {
 		const { t, match } = this.props;
 		const { country, onGoToCategories, onGoHome, onGoToSearch, showServiceMap, onGoToServices, router } = this.props;
 		let selectedIndex = 0;
-		console.log(router, match);
 		let pathParts = ["", ""]; //router.location.pathname.split("/");
 
 		let { active } = this.state;
@@ -50,7 +49,7 @@ class BottomNavContainer extends Component {
 		}
 
 		return (
-			<View style={{ position: "absolute", bottom: 0, width: window.width }}>
+			<View style={{ alignSelf: "flex-end", width: window.width }}>
 				<ThemeProvider
 					uiTheme={{
 						bottomNavigationAction: {
@@ -64,7 +63,15 @@ class BottomNavContainer extends Component {
 						},
 					}}
 				>
-					<BottomNavigation active={active} hidden={false}>
+					<BottomNavigation
+						active={active}
+						hidden={false}
+						style={{
+							container: {
+								justifyContent: "center",
+							},
+						}}
+					>
 						<BottomNavigation.Action key="home" icon="home" label={t("Home")} onPress={() => this.changeState("home")} />
 						<BottomNavigation.Action key="categories" icon="assignment" label={t("Categories")} onPress={() => this.changeState("categories")} />
 						{/*<BottomNavigation.Action key="services-list" icon="list" label={t("Service List")} onPress={() => this.setState({ active: "services-list" })} />*/}

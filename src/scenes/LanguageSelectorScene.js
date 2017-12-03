@@ -2,17 +2,22 @@ import React from "react";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
 import { Redirect } from "react-router";
-import cms from "../content/cms";
 
 import { LanguageSelector } from "../components";
 import { actions } from "../store";
 import getSessionStorage from "../shared/sessionStorage";
+import PropTypes from "prop-types";
 
 class LanguageSelectorScene extends React.Component {
 	constructor() {
 		super();
 		this.state = { selected: false };
 	}
+
+	static contextTypes = {
+		config: PropTypes.object,
+		api: PropTypes.object,
+	};
 	componentWillMount() {
 		const { onMountOrUpdate } = this.props;
 		onMountOrUpdate();
@@ -40,6 +45,7 @@ class LanguageSelectorScene extends React.Component {
 	render() {
 		const { country, language } = this.props;
 		const { selected } = this.state;
+		const { config } = this.context;
 		let redirect = null;
 
 		let firstTimeHere = false;
@@ -51,7 +57,7 @@ class LanguageSelectorScene extends React.Component {
 			redirect = sessionStorage.redirect;
 		}
 
-		const languages = cms.siteConfig.languages;
+		const languages = config.languages;
 		console.log("Rendereed Language Selection");
 
 		if (!selected && (firstTimeHere || !language)) {

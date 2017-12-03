@@ -1,23 +1,60 @@
 import React, { Component } from "react";
 import { translate } from "react-i18next";
-import { View, Text, Button, StyleSheet, Image } from "react-native";
+import { View, Text, Button, StyleSheet, Image, TouchableOpacity } from "react-native";
 import HdrStyles from "./AppHeaderStyles";
+import PropTypes from "prop-types";
+import Icon from "react-native-vector-icons/MaterialIcons";
+
 class AppHeader extends Component {
 	static propTypes = {};
+	static contextTypes = {
+		theme: PropTypes.object,
+	};
 
 	render() {
-		const { logo } = this.props;
+		const { logo, country } = this.props;
+		const { theme } = this.context;
 		return (
 			<View style={HdrStyles.header}>
-				<View style={{ flex: 1 }}>
-					<Image
-						style={HdrStyles.LogoImg}
-						source={{ uri: `https://beta.refugee.info${logo}` }}
-					/>
+				<View style={[{ flex: 1, alignItems: "center" }, !country && { flexBasis: "100%" }]}>
+					<Image style={HdrStyles.LogoImg} source={{ uri: `https://beta.refugee.info${logo}` }} />
 				</View>
-				<View style={{ flex: 1 }}>
-					<Text style={{ color: "#fff" }}></Text>
-				</View>
+				{country && (
+					<View style={HdrStyles.countrySwitcherContainer}>
+						<TouchableOpacity
+							style={{
+								flex: 1,
+								flexGrow: 1,
+							}}
+						>
+							<Text
+								style={{
+									color: "#fff",
+									textAlign: "center",
+									fontWeight: "500",
+								}}
+							>
+								{(country.fields.name || "").toUpperCase()}
+							</Text>
+						</TouchableOpacity>
+						<View
+							style={{
+								borderColor: theme.color,
+								borderLeftWidth: 1,
+								height: 30,
+								paddingHorizontal: 5,
+							}}
+						/>
+						<TouchableOpacity
+							style={{
+								width: 45,
+								alignItems: "center",
+							}}
+						>
+							<Icon style={{}} name="search" size={26} color="#ffffff" />
+						</TouchableOpacity>
+					</View>
+				)}
 			</View>
 		);
 	}
@@ -27,9 +64,9 @@ const styles = StyleSheet.create({
 	header: {
 		backgroundColor: "#000000",
 		height: 65,
-        flexDirection: "row",
-        paddingTop: 5,
-        paddingHorizontal: 16,
+		flexDirection: "row",
+		paddingTop: 5,
+		paddingHorizontal: 16,
 	},
 });
 

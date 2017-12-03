@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { translate } from "react-i18next";
 import PropTypes from "prop-types";
 import { View, Text, Button, StyleSheet, Image } from "react-native";
+import styles from "./HeaderBarStyles";
 
 const generateKey = pre => {
 	return `${pre}_${new Date().getTime()}`;
@@ -12,15 +13,19 @@ class HeaderBar extends Component {
 		subtitle: PropTypes.any,
 		title: PropTypes.string.isRequired,
 	};
+	static contextTypes = {
+		theme: PropTypes.object,
+	};
 
 	render() {
 		const { subtitle, title, children } = this.props;
 		const triggerKey = generateKey("trigger");
+
 		return (
-			<View>
-				<View>
-					{subtitle && <Text>{subtitle}</Text>}
-					<Text>{title}</Text>
+			<View style={styles.HeaderBar}>
+				<View style={styles.titleContainer}>
+					{subtitle && <Text style={styles.subtitle}>{subtitle}</Text>}
+					<Text style={styles.title}>{title}</Text>
 				</View>
 				<View>{children}</View>
 			</View>

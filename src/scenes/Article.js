@@ -52,7 +52,7 @@ class Article extends React.Component {
 		const { article, direction } = this.props;
 		const { category, country, onNavigateTo, onNavigate, language } = this.props;
 
-		if (!article || !category) return null;//<div style={{ height: 100 }} />;
+		if (!article || !category) return null; //<div style={{ height: 100 }} />;
 
 		let next = null;
 		let previous = null;
@@ -75,7 +75,7 @@ class Article extends React.Component {
 
 		return (
 			<Placeholder>
-				<ArticlePage key={"Article"} category={category} other={other} article={article} loading={loading} onNavigate={onNavigate} />
+				<ArticlePage key={"Article"} direction={direction} category={category} other={other} article={article} loading={loading} onNavigate={onNavigate} />
 				<ArticleFooter key={"ArticleFooter"} onNavigateTo={onNavigateTo(category, country)} language={language} {...{ direction, previous, next }} />
 			</Placeholder>
 		);

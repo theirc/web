@@ -1,18 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
-import cmsApi from "../content/cmsApi";
 import servicesApi from "../content/servicesApi";
 import c from "../content/cms";
-import config from "../content/config";
 import { SearchPage } from "../components";
 import queryString from "query-string";
 import { push } from "react-router-redux";
+import PropTypes from "prop-types";
 
-const { siteConfig } = c;
 /**
  * Note to future self. refactor this
  */
-const cms = cmsApi(siteConfig, config.languageDictionary);
 class Search extends React.Component {
 	state = {
 		articles: [],
@@ -21,6 +18,12 @@ class Search extends React.Component {
 		searchingServices: true,
 		term: "",
 	};
+
+	static contextTypes = {
+		config: PropTypes.object,
+		api: PropTypes.object,
+	};
+
 	componentDidMount() {
 		if (this.props.location.search) {
 			this.search(this.props);
@@ -39,9 +42,10 @@ class Search extends React.Component {
 		const { location, country, language } = props;
 		const qs = queryString.parse(location.search);
 		this.setState({ articles: [], services: [], searchingArticles: true, searchingServices: true, term: qs.q });
+		const { api, config } = this.context;
 
 		setTimeout(s => {
-			cms.client
+			api.client
 				.getEntries({
 					content_type: "article",
 					"fields.country.sys.id": country.sys.id,
@@ -50,14 +54,12 @@ class Search extends React.Component {
 				})
 				.then(response => this.setState({ articles: response.items, searchingArticles: false }))
 				.catch(e => {
-					console.log(e);
 					this.setState({ articles: [], searchingArticles: false });
 				});
 			servicesApi
 				.fetchAllServices(country.fields.slug, language, null, qs.q, 20)
 				.then(response => this.setState({ services: response.results, searchingServices: false }))
 				.catch(e => {
-					console.log(e);
 					this.setState({ services: [], searchingServices: false });
 				});
 		}, 10);
@@ -65,9 +67,11 @@ class Search extends React.Component {
 	render() {
 		const { searchingArticles, searchingServices, articles, services, term } = this.state;
 		const { onNavigate, country } = this.props;
+		const {  config } = this.context;
+		
 		return (
 			<SearchPage
-				hideServices={siteConfig.hideServiceMap}
+				hideServices={config.hideServiceMap}
 				country={country}
 				searchingArticles={searchingArticles}
 				searchingServices={searchingServices}

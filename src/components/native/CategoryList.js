@@ -2,10 +2,14 @@ import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { View, Text, Button, StyleSheet, Image, TouchableHighlight } from "react-native";
 import HeaderBar from "./HeaderBar";
+import PropTypes from "prop-types";
 
 class CategoryList extends Component {
 	static propTypes = {};
 
+	static contextTypes = {
+		theme: PropTypes.object,
+	};
 	render() {
 		const { country, categories, onNavigate, t } = this.props;
 		const showToggle = c => {
@@ -16,7 +20,11 @@ class CategoryList extends Component {
 		const overviewOrFirst = c => c.fields.overview || (c.fields.articles.length && c.fields.articles[0]);
 
 		return (
-			<View>
+			<View
+				style={{
+					backgroundColor: "#ffffff",
+				}}
+			>
 				<HeaderBar title={t("Categories").toUpperCase()} />
 
 				{(categories || []).filter(showCategory).map((c, i) => (
