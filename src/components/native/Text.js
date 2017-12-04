@@ -5,19 +5,19 @@ import PropTypes from "prop-types";
 export default class FontText extends Component {
 	static contextTypes = {
 		direction: PropTypes.string,
+		textAlign: PropTypes.string,
 	};
 
 	render() {
 		const { style, ...otherProps } = this.props;
-		const { direction } = this.context;
-		console.log(direction);
+		const { direction, flexDirection, textAlign } = this.context;
 
 		return (
 			<Text
 				style={[
 					{
 						fontFamily: direction === "ltr" ? "Roboto" : "Cairo",
-						textAlign: "left",
+						textAlign,
 					},
 					style,
 				]}

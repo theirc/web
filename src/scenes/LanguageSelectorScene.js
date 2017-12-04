@@ -58,7 +58,6 @@ class LanguageSelectorScene extends React.Component {
 		}
 
 		const languages = config.languages;
-		console.log("Rendereed Language Selection");
 
 		if (!selected && (firstTimeHere || !language)) {
 			if (!country) {

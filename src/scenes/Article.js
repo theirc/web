@@ -72,7 +72,7 @@ class Article extends React.Component {
 		}
 
 		const other = articles.filter(a => a.sys.id === article.sys.id);
-
+		
 		return (
 			<Placeholder>
 				<ArticlePage key={"Article"} direction={direction} category={category} other={other} article={article} loading={loading} onNavigate={onNavigate} />
@@ -105,6 +105,7 @@ const mapDispatch = (d, p) => {
 			return Promise.resolve(true);
 		},
 		onNavigateTo: (category, country) => slug => {
+			console.log('Trying to go to', category, country, slug)
 			setTimeout(() => {
 				d(push(`/${country.fields.slug}/${category.fields.slug}/${slug}`));
 			}, 200);

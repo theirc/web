@@ -10,13 +10,16 @@ class AppHeader extends Component {
 	static propTypes = {};
 	static contextTypes = {
 		theme: PropTypes.object,
+		flexDirection: PropTypes.object,
 	};
 
 	render() {
 		const { logo, country } = this.props;
-		const { theme } = this.context;
+		const { theme, flexDirection } = this.context;
+
+		const { enableSearch } = { enableSearch: false };
 		return (
-			<View style={HdrStyles.header}>
+			<View style={[HdrStyles.header, flexDirection.row]}>
 				<View style={[{ flex: 1, alignItems: "center" }, !country && { flexBasis: "100%" }]}>
 					<Image style={HdrStyles.LogoImg} source={{ uri: `https://beta.refugee.info${logo}` }} />
 				</View>
@@ -38,22 +41,26 @@ class AppHeader extends Component {
 								{(country.fields.name || "").toUpperCase()}
 							</Text>
 						</TouchableOpacity>
-						<View
-							style={{
-								borderColor: theme.color,
-								borderLeftWidth: 1,
-								height: 30,
-								paddingHorizontal: 5,
-							}}
-						/>
-						<TouchableOpacity
-							style={{
-								width: 45,
-								alignItems: "center",
-							}}
-						>
-							<Icon style={{}} name="search" size={26} color="#ffffff" />
-						</TouchableOpacity>
+						{enableSearch && (
+							<View
+								style={{
+									borderColor: theme.color,
+									borderLeftWidth: 1,
+									height: 30,
+									paddingHorizontal: 5,
+								}}
+							/>
+						)}
+						{enableSearch && (
+							<TouchableOpacity
+								style={{
+									width: 45,
+									alignItems: "center",
+								}}
+							>
+								<Icon style={{}} name="search" size={26} color="#ffffff" />
+							</TouchableOpacity>
+						)}
 					</View>
 				)}
 			</View>

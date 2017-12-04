@@ -13,7 +13,7 @@ class AppRouter extends Component {
 		const { direction } = this.props;
 		const ServicesWithCountry = withCountry(Services);
 		return (
-			<Router history={history}>
+			<ConnectedRouter history={history}>
 				<Placeholder style={{ direction }}>
 					<Switch>
 						<Route path="/:country/services" component={props => <ServicesWithCountry {...props} />} />
@@ -32,7 +32,7 @@ class AppRouter extends Component {
 						</Skeleton>
 					</Switch>
 				</Placeholder>
-			</Router>
+			</ConnectedRouter>
 		);
 	}
 }

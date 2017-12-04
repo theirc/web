@@ -12,6 +12,7 @@ import App from "./src/App";
 import { Provider } from "react-redux";
 import PropTypes from "prop-types";
 import nativeColors from "./src/shared/nativeColors";
+import nativeDimensions from "./src/shared/nativeDimensions";
 
 const window = Dimensions.get("window");
 const conf = require("./src/content/config");
@@ -59,9 +60,9 @@ export default class Signpost extends Component {
 const styles = StyleSheet.create({
 	container: {
 		backgroundColor: "#000",
-		paddingTop: 16,
+		paddingTop: nativeDimensions.statusBar,
 		width: window.width,
-		height: window.height,
+		height: nativeDimensions.baseHeight,
 	},
 	welcome: {
 		fontSize: 20,

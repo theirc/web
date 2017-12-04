@@ -1,18 +1,23 @@
 import React from "react";
-import { actions } from "../store";
+import { actions, history } from "../store";
 import _ from "lodash";
 import { connect } from "react-redux";
 import { AppHeader, Footer, WarningDialog } from "../components";
 import { BottomNavContainer } from "../containers";
-import { push } from "react-router-redux";
+import { push, goBack } from "react-router-redux";
 import moment from "moment";
-import { AppRegistry, StyleSheet, StatusBar, View, ScrollView, Dimensions } from "react-native";
+import { AppRegistry, StyleSheet, StatusBar, View, ScrollView, Dimensions, BackHandler } from "react-native";
 import PropTypes from "prop-types";
 
 import { I18nextProvider } from "react-i18next";
 import i18n from "../i18n"; // initialized i18next instance
 import getSessionStorage from "../shared/sessionStorage";
 import window from "../shared/nativeDimensions";
+import { Platform } from "react-native";
+import DeviceInfo from "react-native-device-info";
+import getDirection from "../shared/getDirection";
+
+const deviceDirection = getDirection(_.first(DeviceInfo.getDeviceLocale().split("-")));
 
 class Skeleton extends React.Component {
 	state = {
@@ -26,11 +31,51 @@ class Skeleton extends React.Component {
 
 	static childContextTypes = {
 		direction: PropTypes.string,
+		textAlign: PropTypes.string,
+		flexDirection: PropTypes.object,
 	};
 
 	getChildContext() {
 		const { direction } = this.props;
-		return { direction };
+		let flexDirection = {};
+		let textAlign = "";
+		if (Platform.OS === "android") {
+			/**
+			 * Android does not respect the "Direction" style
+			 * This mess down here does the following.
+			 * 1. If device is set to a LTR language, it will reverse the flex and text alignments when users change to an RTL language
+			 * 2. If device is set up to an RTL language, it will reverse the flex and text alignments when users change to an LTR language
+			 */
+			if (direction === "ltr") {
+				flexDirection = {
+					row: { flexDirection: deviceDirection === "rtl" ? "row-reverse" : "row" },
+					column: { flexDirection: deviceDirection === "rtl" ? "column-reverse" : "column" },
+				};
+				textAlign = deviceDirection === "rtl" ? "right" : "left";
+			} else {
+				flexDirection = {
+					row: { flexDirection: deviceDirection === "ltr" ? "row-reverse" : "row" },
+					column: { flexDirection: deviceDirection === "ltr" ? "column-reverse" : "column" },
+				};
+
+				textAlign = deviceDirection === "ltr" ? "right" : "left";
+			}
+		} else if (Platform.OS === "ios") {
+			/**
+			 * Apple just works
+			 */
+			flexDirection = {
+				row: { flexDirection: "row" },
+				column: { flexDirection: "column" },
+			};
+
+			textAlign = "left";
+		}
+		return {
+			direction,
+			flexDirection,
+			textAlign,
+		};
 	}
 
 	componentDidMount() {
@@ -43,7 +88,22 @@ class Skeleton extends React.Component {
 				this.setState({ errorMessage: null });
 			}, 20 * 1000);
 		}
+
+		BackHandler.addEventListener("hardwareBackPress", this.hardwareBackPress);
 	}
+
+	componentWillUnmount() {
+		BackHandler.removeEventListener("hardwareBackPress", this.hardwareBackPress);
+	}
+
+	hardwareBackPress = (() => {
+		const { onGoBack } = this.props;
+		if (onGoBack) {
+			onGoBack();
+		}
+		if (history.index > 0) return true;
+		else return false;
+	}).bind(this);
 
 	componentWillUpdate(newProps) {
 		const { language, errorMessage } = this.props;
@@ -65,8 +125,6 @@ class Skeleton extends React.Component {
 		const { config } = this.context;
 		const sessionStorage = getSessionStorage();
 		let notifications = [];
-
-		console.log(sessionStorage);
 
 		const notificationType = n => {
 			switch (n.fields.type) {
@@ -159,6 +217,9 @@ const mapState = ({ country, direction, language, deviceType, router, errorMessa
 };
 const mapDispatch = (d, p) => {
 	return {
+		onGoBack: () => {
+			d(goBack());
+		},
 		onGoHome: country => () => {
 			if (country) d(push(`/${country.fields.slug || ""}`));
 		},

@@ -19,7 +19,6 @@ class LanguageSelector extends Component {
 		const { languages, onSelectLanguage, t } = this.props;
 		const { config, theme } = this.context;
 
-		console.log(languages);
 		return (
 			<View style={[styles.Selectors, { height: heightWithoutHeader }]}>
 				<View style={styles.spacer} />

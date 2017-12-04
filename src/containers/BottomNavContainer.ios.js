@@ -15,33 +15,33 @@ class BottomNavContainer extends Component {
 	};
 	static contextTypes = {
 		theme: PropTypes.object,
+		flexDirection: PropTypes.object,
 	};
 
 	changeState(dest) {
 		const { active } = this.state;
 		const { onGoToCategories, onGoHome, country } = this.props;
-		if (active !== dest) {
-			this.setState({ active: dest });
+		this.setState({ active: dest });
 
-			switch (dest) {
-				case "home":
-					onGoHome(country.fields.slug);
-					break;
-				case "categories":
-					onGoToCategories(country.fields.slug);
-					break;
-				default:
-					break;
-			}
-		} else {
+		switch (dest) {
+			case "home":
+				onGoHome(country.fields.slug);
+				break;
+			case "categories":
+				onGoToCategories(country.fields.slug);
+				break;
+			default:
+				break;
 		}
 	}
 
 	render() {
 		const { t, match } = this.props;
+		const { flexDirection } = this.context;
 		const { country, onGoToCategories, onGoHome, onGoToSearch, showServiceMap, onGoToServices, router, direction } = this.props;
 		let selectedIndex = 0;
-		let pathParts = ["", ""]; //router.location.pathname.split("/");
+
+		let pathParts = router.location.pathname.split("/");
 
 		let { active } = this.state;
 		if (pathParts.length > 2) {
@@ -78,6 +78,7 @@ class BottomNavContainer extends Component {
 						style={{
 							container: {
 								justifyContent: "center",
+								...flexDirection.row,
 							},
 						}}
 					>
