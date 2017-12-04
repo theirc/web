@@ -89,6 +89,17 @@ class ArticlePage extends Component {
 		return (
 			<View>
 				<HeaderBar subtitle={(category.fields.articles || []).length > 1 && `${category.fields.name}:`} title={title} />
+				{hero &&
+					hero.fields.file && (
+						<Image
+							style={{
+								width: "100%",
+								height: 200,
+								resizeMode: "contain",
+							}}
+							source={{ uri: "https:" + hero.fields.file.url + "?fm=jpg&fl=progressive" }}
+						/>
+					)}
 				<WebViewAutoHeight source={{ html }} style={[styles.webView]} />
 			</View>
 		);

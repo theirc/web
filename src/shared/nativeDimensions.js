@@ -7,14 +7,17 @@ const dim = Dimensions.get("window");
 const HEADER = 64;
 const TOOLBAR = 56;
 
+const STATUS_BAR_HEIGHT = ExtraDimensions.get("STATUS_BAR_HEIGHT") || 0;
+const SOFT_MENU_BAR_HEIGHT = ExtraDimensions.get("SOFT_MENU_BAR_HEIGHT") || 0;
+
 export default {
 	width: dim.width,
-	statusBar: androidNonTranslucentStatusBar ? 0 : ExtraDimensions.get("STATUS_BAR_HEIGHT") || 16,
-	baseHeight: dim.height - (ExtraDimensions.get("STATUS_BAR_HEIGHT") || 0),
-	height: dim.height - (ExtraDimensions.get("SOFT_MENU_BAR_HEIGHT") || 0) - (ExtraDimensions.get("STATUS_BAR_HEIGHT") || 0),
-	heightWithoutHeader: dim.height - (ExtraDimensions.get("SOFT_MENU_BAR_HEIGHT") || 0) - HEADER,
-	usableHeight: dim.height - (ExtraDimensions.get("SOFT_MENU_BAR_HEIGHT") || 0) - HEADER - TOOLBAR,
+	statusBar: androidNonTranslucentStatusBar ? 0 : STATUS_BAR_HEIGHT || 16,
+	baseHeight: dim.height - (STATUS_BAR_HEIGHT || 0),
+	height: dim.height - (SOFT_MENU_BAR_HEIGHT || 0) - (STATUS_BAR_HEIGHT || 0),
+	heightWithoutHeader: dim.height - (SOFT_MENU_BAR_HEIGHT || 0) - HEADER,
+	usableHeight: dim.height - (SOFT_MENU_BAR_HEIGHT || 0) - HEADER - TOOLBAR,
 	header: HEADER,
 	toolbar: TOOLBAR,
-	softMenuBar: ExtraDimensions.get("SOFT_MENU_BAR_HEIGHT") || 0,
+	softMenuBar: SOFT_MENU_BAR_HEIGHT || 0,
 };
