@@ -19,7 +19,7 @@ const md = new Remarkable("full", {
 });
 
 /**
- * 
+ *
  */
 export default class ArticlePage extends Component {
 	static propTypes = {
@@ -47,7 +47,7 @@ export default class ArticlePage extends Component {
 		let anchors = Array.from(this._ref.querySelectorAll("a"));
 		anchors = anchors.filter(a => a.href.indexOf("http") || a.hostname === hostname || a.hostname === "www.refugee.info");
 		// eslint-disable-next-line
-		let isPhoneOrAlreadyProcessed = h => h.indexOf("javascript:void") === -1 && h.indexOf("tel:") === -1;
+		let isPhoneOrAlreadyProcessed = h => h.indexOf("#") === -1 && h.indexOf("tel:") === -1;
 
 		for (let anchor of anchors.filter(a => isPhoneOrAlreadyProcessed(a.href))) {
 			let href = anchor.href + "";
@@ -60,8 +60,11 @@ export default class ArticlePage extends Component {
 						.join("/");
 			}
 			// eslint-disable-next-line
-			anchor.href = "javascript:void(0)";
-			anchor.onclick = () => onNavigate(href);
+			anchor.href = "#";
+			anchor.onclick = () => {
+				onNavigate(href);
+				return false;
+			};
 		}
 	}
 	componentDidUpdate() {

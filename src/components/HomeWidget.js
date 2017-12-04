@@ -51,7 +51,13 @@ class HomeWidget extends Component {
 		return (
 			<div className="LocalGuide">
 				<s>
-					<a href="javascript:void(0)" onClick={() => onNavigate(`/${country.fields.slug}/services`)}>
+					<a
+						href="#"
+						onClick={() => {
+							onNavigate(`/${country.fields.slug}/services`);
+							return false;
+						}}
+					>
 						{t("See More")}
 					</a>
 				</s>
@@ -96,7 +102,13 @@ class HomeWidget extends Component {
 		return (
 			<div className="TopCategories">
 				<s>
-					<a href="javascript:void(0)" onClick={() => onNavigate(`/${country.fields.slug}/categories`)}>
+					<a
+						href="#"
+						onClick={() => {
+							onNavigate(`/${country.fields.slug}/categories`);
+							return false;
+						}}
+					>
 						{t("See More")}
 					</a>
 				</s>
@@ -169,7 +181,13 @@ class HomeWidget extends Component {
 				<p dangerouslySetInnerHTML={{ __html: md.render(content) }} />
 				{!showFullArticle && (
 					<s className="Read-More">
-						<a href="javascript:void(0)" onClick={() => onNavigate(`/${country.fields.slug}/${categorySlug}/${article.fields.slug}`)}>
+						<a
+							href="#"
+							onClick={() => {
+								onNavigate(`/${country.fields.slug}/${categorySlug}/${article.fields.slug}`);
+								return false;
+							}}
+						>
 							{t("Read More")}
 						</a>
 					</s>
@@ -193,7 +211,13 @@ class HomeWidget extends Component {
 				<h3>{c.fields.name}</h3>
 				<p dangerouslySetInnerHTML={{ __html: html }} />
 				<s>
-					<a href="javascript:void(0)" onClick={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${article.fields.slug}`)}>
+					<a
+						href="#"
+						onClick={() => {
+							onNavigate(`/${country.fields.slug}/${c.fields.slug}/${article.fields.slug}`);
+							return false;
+						}}
+					>
 						{t("Read More")}
 					</a>
 				</s>
@@ -225,8 +249,11 @@ class HomeWidget extends Component {
 							.join("/");
 				}
 				// eslint-disable-next-line
-				anchor.href = "javascript:void(0)";
-				anchor.onclick = () => onNavigate(href);
+				anchor.href = "#";
+				anchor.onclick = () => {
+					onNavigate(href);
+					return false;
+				};
 			}
 		}
 	}
