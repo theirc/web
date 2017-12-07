@@ -29,6 +29,26 @@ module.exports = {
 			}
 		});
 	},
+	fetchRegions(language) {
+		return new Promise((resolve, reject) => {
+			const sessionStorage =  getSessionStorage();
+			if (sessionStorage[`${language}-regions`]) {
+				resolve(JSON.parse(sessionStorage[`${language}-regions`]));
+			} else {
+				request
+					.get(RI_URL + "/service-types/")
+					.set("Accept-Language", language)
+					.end((err, res) => {
+						if (err) {
+							reject(err);
+							return;
+						}
+						sessionStorage[`${language}-regions`] = JSON.stringify(res.body);
+						resolve(res.body);
+					});
+			}
+		});
+	},
 	fetchCategoryById(language, categoryId) {
 		return new Promise((resolve, reject) => {
 			const sessionStorage =  getSessionStorage();
@@ -53,7 +73,7 @@ module.exports = {
 	fetchAllServices(country, language, categoryId, searchTerm, pageSize = 1000) {
 		return new Promise((resolve, reject) => {
 			var requestUrl =
-				"/services/search/?filter=relatives&geographic_region=" +
+				"/services/search/?geographic_region=" +
 				country +
 				"&page=1&page_size=" +
 				pageSize +
