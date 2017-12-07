@@ -108,9 +108,10 @@ class Services extends React.Component {
 			});
 	}
 
-	fetchAllServices() {
-		const { country, language, showErrorMessage } = this.props;
+	fetchAllInLocation(location) {
+		const { language, showErrorMessage } = this.props;
 		const { sortingByLocationEnabled, errorWithGeolocation, fetchingLocation, geolocation } = this.state;
+		const country = location;
 
 		if (!errorWithGeolocation) {
 			if (sortingByLocationEnabled && fetchingLocation) {
@@ -134,9 +135,14 @@ class Services extends React.Component {
 
 		const orderByDistance = c => (sortingByLocationEnabled && geolocation ? _.sortBy(c, s => this.measureDistance(geolocation, language, true)(s.location)) : _.identity(c));
 		return servicesApi
-			.fetchAllServices(country.fields.slug, language)
+			.fetchAllServices(country, language)
 			.then(s => orderByDistance(s.results))
 			.then(services => ({ services, category: null }));
+	}
+
+	fetchAllServices() {
+		const { country } = this.props;
+		return this.fetchAllInLocation(country.fields.slug);
 	}
 
 	fetchAllServicesNearby() {
@@ -278,6 +284,23 @@ class Services extends React.Component {
 									measureDistance={this.measureDistance(geolocation, language)}
 									toggleLocation={() => this.setState({ sortingByLocationEnabled: true })}
 									servicesByType={() => this.servicesByType(props)}
+								/>
+							</div>
+						</Skeleton>
+					)}
+				/>
+				<Route
+					path={`${match.url}/by-location/:location/`}
+					component={props => (
+						<Skeleton>
+							<div className="SkeletonContainer">
+								<ServiceList
+									{...props}
+									goToService={goToService}
+									locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
+									measureDistance={this.measureDistance(geolocation, language)}
+									toggleLocation={() => this.setState({ sortingByLocationEnabled: true })}
+									servicesByType={() => this.fetchAllInLocation(props.match.params.location)}
 								/>
 							</div>
 						</Skeleton>
