@@ -5,7 +5,7 @@ import { View, Button, StyleSheet, Image, TouchableOpacity } from "react-native"
 import { translate } from "react-i18next";
 import FacebookPlayer from "react-facebook-player";
 import YouTube from "react-youtube";
-import cms from "../content/cms";
+import cms from "../../content/cms";
 import styles from "./HomeWidgetStyles";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Text from "./Text";
@@ -52,7 +52,6 @@ class HomeWidget extends Component {
 		/*jshint ignore:start*/
 		/*eslint-disable*/
 		return (
-
 			<View style={[styles.LocalGuide]}>
 				<View>
 					<Text href="javascript:void(0)" onClick={() => onNavigate(`/${country.fields.slug}/services`)}>
@@ -64,9 +63,9 @@ class HomeWidget extends Component {
 					{guideItems.map(c => {
 						let image =
 							c.fields.backgroundImage && c.fields.backgroundImage.fields.file ? (
-								<Image alt={c.fields.title} source={require({`${c.fields.backgroundImage.fields.file.url}?fm=jpg&fl=progressive`})} />
+								<Image alt={c.fields.title} source={{ uri: `${c.fields.backgroundImage.fields.file.url}?fm=jpg&fl=progressive` }} />
 							) : (
-								<Image alt={c.fields.title} source={require("https://upload.wikimedia.org/wikipedia/en/4/48/Blank.JPG")} />
+								<Image alt={c.fields.title} source={{ uri: "https://upload.wikimedia.org/wikipedia/en/4/48/Blank.JPG" }} />
 							);
 						let link = c => {
 							if (c.fields.url.indexOf("/") === 0) {
@@ -98,7 +97,7 @@ class HomeWidget extends Component {
 		/*jshint ignore:start*/
 		/*eslint-disable*/
 		return (
-			<View style={[Styles.TopCategories]}>
+			<View style={[styles.TopCategories]}>
 				<View>
 					<Text href="javascript:void(0)" onClick={() => onNavigate(`/${country.fields.slug}/categories`)}>
 						{t("See More")}
@@ -108,8 +107,8 @@ class HomeWidget extends Component {
 				{categories.map(c => {
 					let article = articleFunc(c);
 					return (
-						<View key={c.sys.id} style={[Styles.TopCategories]} onClick={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${article.fields.slug}`)}>
-							<View style={[Styles.icon]}>
+						<View key={c.sys.id} style={[styles.TopCategories]} onClick={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${article.fields.slug}`)}>
+							<View style={[styles.icon]}>
 								<i className={c.fields.iconClass || "material-icons"}>{c.fields.iconText || ((!c.fields.iconClass || c.fields.iconClass === "material-icons") && "add")}</i>
 							</View>
 							{c.fields.name}
@@ -159,20 +158,24 @@ class HomeWidget extends Component {
 		/*jshint ignore:start*/
 		/*eslint-disable*/
 		return (
-			<View style={[Styles.Article]} key={article.sys.id}>
+			<View style={[styles.Article]} key={article.sys.id}>
 				{hero &&
 					hero.fields &&
 					hero.fields.file &&
 					showHero && (
-						<View style={[Styles.Hero]}>
-							<Image source={require({article.fields.hero.fields.file.url + "?fm=jpg&fl=progressive"} alt="")} />
+						<View style={[styles.Hero]}>
+							<Image source={{ uri: article.fields.hero.fields.file.url + "?fm=jpg&fl=progressive" }} alt="" />
 						</View>
 					)}
-				{showFullArticle ? <h3>{article.fields.title}</h3> : <h3 onClick={() => onNavigate(`/${country.fields.slug}/${categorySlug}/${article.fields.slug}`)}>{article.fields.title}</h3>}
+				{
+					/* 
+				showFullArticle ? <h3>{article.fields.title}</h3> : <h3 onClick={() => onNavigate(`/${country.fields.slug}/${categorySlug}/${article.fields.slug}`)}>{article.fields.title}</h3>
+				*/
+				}
 				{contentType.sys.id === "video" && this.renderVideo(article)}
 				<Text dangerouslySetInnerHTML={{ __html: md.render(content) }} />
 				{!showFullArticle && (
-					<View style={[Styles.ReadMore]}>
+					<View style={[styles.ReadMore]}>
 						<Text href="javascript:void(0)" onClick={() => onNavigate(`/${country.fields.slug}/${categorySlug}/${article.fields.slug}`)}>
 							{t("Read More")}
 						</Text>
@@ -193,13 +196,13 @@ class HomeWidget extends Component {
 		/*jshint ignore:start*/
 		/*eslint-disable*/
 		return (
-			<View style={[Styles.Category]}>
+			<View style={[styles.Category]}>
 				<Text>{c.fields.name}</Text>
 				<Text dangerouslySetInnerHTML={{ __html: html }} />
 				<View>
-					<a href="javascript:void(0)" onClick={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${article.fields.slug}`)}>
+					<Text href="javascript:void(0)" onClick={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${article.fields.slug}`)}>
 						{t("Read More")}
-					</a>
+					</Text>
 				</View>
 			</View>
 		);
@@ -213,29 +216,32 @@ class HomeWidget extends Component {
 		if (global.location) {
 			hostname = global.location.hostname;
 		}
-
-		if (this._ref) {
-			let anchors = Array.from(this._ref.querySelectorAll("a"));
-			anchors = anchors.filter(a => a.href.indexOf("http") || a.hostname === hostname);
-
-			for (let anchor of anchors) {
-				let href = anchor.href + "";
-				if (href.indexOf("http") >= 0) {
-					href =
-						"/" +
-						href
-							.split("/")
-							.slice(3)
-							.join("/");
-				}
-				// eslint-disable-next-line
-				anchor.href = "javascript:void(0)";
-				anchor.onclick = () => onNavigate(href);
+		/**
+ * 
+ if (this._ref) {
+	 let anchors = Array.from(this._ref.querySelectorAll("a"));
+	 anchors = anchors.filter(a => a.href.indexOf("http") || a.hostname === hostname);
+	 
+	 for (let anchor of anchors) {
+		 let href = anchor.href + "";
+		 if (href.indexOf("http") >= 0) {
+			 href =
+			 "/" +
+			 href
+			 .split("/")
+			 .slice(3)
+			 .join("/");
 			}
+			// eslint-disable-next-line
+			anchor.href = "javascript:void(0)";
+			anchor.onclick = () => onNavigate(href);
 		}
+	}
+	*/
 	}
 
 	render() {
+		console.log("Home Widget", this.props);
 		const { content } = this.props;
 		if (!content) {
 			return null;
