@@ -84,6 +84,27 @@ class ServiceDetail extends React.Component {
 
 		let point = service.location && _.reverse(_.clone(service.location.coordinates)).join(",");
 
+		const showTimeTable = service => {
+			return weekDays.map((w, i) => {
+				if (!firstOrDefault(service.opening_time[w.toLowerCase()]).open) {
+					return (
+						<tr key={`tr-${i}`}>
+							<td className="week">{t(w)}</td>
+							<td colSpan="2">{t("Closed")}</td>
+						</tr>
+					);
+				}
+
+				return service.opening_time[w.toLowerCase()].map((o, oi) => (
+					<tr key={`tr-${i}-${oi}`}>
+						{oi === 0 && <td rowSpan={service.opening_time[w.toLowerCase()].length} className="week">{t(w)}</td>}
+						<td key={`open-${i}-${oi}`}>{amPmTime(service.opening_time[w.toLowerCase()][oi].open)}</td>
+						<td key={`close-${i}-${oi}`}>{amPmTime(service.opening_time[w.toLowerCase()][oi].close)}</td>
+					</tr>
+				));
+			});
+		};
+
 		return (
 			<div className="ServiceDetail">
 				<Helmet>
@@ -114,28 +135,17 @@ class ServiceDetail extends React.Component {
 							<div className="openingTable">
 								{!service.opening_time["24/7"] && (
 									<table>
-										<tbody>
-											{weekDays.map((w, i) => (
-												<tr key={`tr-${i}`}>
-													<td>{t(w)}</td>
-													{!firstOrDefault(service.opening_time[w.toLowerCase()]).open && <td colSpan="2">{t("Closed")}</td>}
-													{firstOrDefault(service.opening_time[w.toLowerCase()]).open && [
-														<td key="open">{amPmTime(firstOrDefault(service.opening_time[w.toLowerCase()]).open)}</td>,
-														<td key="close">{amPmTime(firstOrDefault(service.opening_time[w.toLowerCase()]).close)}</td>,
-													]}
-												</tr>
-											))}
-										</tbody>
+										<tbody>{showTimeTable(service)}</tbody>
 									</table>
 								)}
 							</div>
 						</span>
 					)}
-					{service.address && <h3>{t("Address")}</h3>}
-					{service.address && <p>{service.address}</p>}
-
 					{service.address_city && <h4>{t("City")}</h4>}
 					{service.address_city && <p>{service.address_city}</p>}
+
+					{service.address && <h3>{t("Address")}</h3>}
+					{service.address && <p>{service.address}</p>}
 
 					{service.address_in_country_language && <h3>{t("Address in Country Language")}</h3>}
 					{service.address_in_country_language && <p>{service.address_in_country_language}</p>}
