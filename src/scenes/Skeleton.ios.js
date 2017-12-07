@@ -2,7 +2,7 @@ import React from "react";
 import { actions, history } from "../store";
 import _ from "lodash";
 import { connect } from "react-redux";
-import { AppHeader, Footer, WarningDialog } from "../components";
+import { AppHeader, Footer, WarningDialog, HomeWidget } from "../components";
 import { BottomNavContainer } from "../containers";
 import { push, goBack } from "react-router-redux";
 import moment from "moment";
@@ -179,6 +179,13 @@ class Skeleton extends React.Component {
 					<StatusBar backgroundColor="#000" barStyle="light-content" />
 					<AppHeader country={country} language={language} onGoHome={onGoHome(country)} onGoToSearch={q => onGoToSearch(country, q)} onChangeCountry={onChangeLocation} logo={logo} />
 					{notifications}
+					<HomeWidget
+						questionLink={config.questionLink}
+						disableCountrySelector={!!config.disableCountrySelector}
+						onChangeLocation={onChangeLocation}
+						onChangeLanguage={onChangeLanguage}
+						deviceType={deviceType}
+					/>
 					<ScrollView
 						style={{
 							display: "flex",
@@ -188,6 +195,7 @@ class Skeleton extends React.Component {
 						}}
 					>
 						{children}
+
 						{showFooter && (
 							<Footer
 								questionLink={config.questionLink}
