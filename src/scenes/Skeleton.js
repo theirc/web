@@ -2,7 +2,7 @@ import React from "react";
 import { actions } from "../store";
 import _ from "lodash";
 import { connect } from "react-redux";
-import { AppHeader, Footer, WarningDialog } from "../components";
+import { AppHeader, Footer, WarningDialog, HomeWidget } from "../components";
 import { BottomNavContainer } from "../containers";
 import { push } from "react-router-redux";
 import { withRouter } from "react-router-dom";
@@ -112,6 +112,7 @@ class Skeleton extends React.Component {
 						/>
 					)}
 					{country && language && <BottomNavContainer match={match} />}
+
 				</div>
 			</I18nextProvider>
 		);
