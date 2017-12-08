@@ -64,9 +64,15 @@ class HomeWidget extends Component {
 					{guideItems.map(c => {
 						let image =
 							c.fields.backgroundImage && c.fields.backgroundImage.fields.file ? (
+<<<<<<< HEAD
 								<Image alt={c.fields.title} source={{uri: `${c.fields.backgroundImage.fields.file.url}?fm=jpg&fl=progressive`}} />
 							) : (
 								<Image alt={c.fields.title} source={{uri: "https://upload.wikimedia.org/wikipedia/en/4/48/Blank.JPG"}} />
+=======
+								<Image alt={c.fields.title} source={{ uri: `${c.fields.backgroundImage.fields.file.url}?fm=jpg&fl=progressive` }} />
+							) : (
+								<Image alt={c.fields.title} source={{ uri: "https://upload.wikimedia.org/wikipedia/en/4/48/Blank.JPG" }} />
+>>>>>>> 480dabc284a711c3a5c20ad5c262070b8c97a663
 							);
 						let link = c => {
 							if (c.fields.url.indexOf("/") === 0) {
@@ -165,6 +171,7 @@ class HomeWidget extends Component {
 					hero.fields.file &&
 					showHero && (
 						<View style={[styles.Hero]}>
+<<<<<<< HEAD
 							<Image style={[width:"100%"]} source={{ uri: article.fields.hero.fields.file.url + "?fm=jpg&fl=progressive" }} alt="" />
 						</View>
 					)}
@@ -172,14 +179,28 @@ class HomeWidget extends Component {
 					/*
 					showFullArticle ? <h3>{article.fields.title}</h3> : <h3 onClick={() => onNavigate(`/${country.fields.slug}/${categorySlug}/${article.fields.slug}`)}>{article.fields.title}</h3>
 					*/
+=======
+							<Image source={{ uri: article.fields.hero.fields.file.url + "?fm=jpg&fl=progressive" }} alt="" />
+						</View>
+					)}
+				{
+					/* 
+				showFullArticle ? <h3>{article.fields.title}</h3> : <h3 onClick={() => onNavigate(`/${country.fields.slug}/${categorySlug}/${article.fields.slug}`)}>{article.fields.title}</h3>
+				*/
+>>>>>>> 480dabc284a711c3a5c20ad5c262070b8c97a663
 				}
 				{contentType.sys.id === "video" && this.renderVideo(article)}
 				<Text dangerouslySetInnerHTML={{ __html: md.render(content) }} />
 				{!showFullArticle && (
 					<View style={[styles.ReadMore]}>
+<<<<<<< HEAD
 						<Icon name="crop-square" size={13} color="#b30000" />
 						<Text style={{fontWeight: '700', fontSize: 12}} href="javascript:void(0)" onClick={() => onNavigate(`/${country.fields.slug}/${categorySlug}/${article.fields.slug}`)}>
 							{t("Read More").toUpperCase()}
+=======
+						<Text href="javascript:void(0)" onClick={() => onNavigate(`/${country.fields.slug}/${categorySlug}/${article.fields.slug}`)}>
+							{t("Read More")}
+>>>>>>> 480dabc284a711c3a5c20ad5c262070b8c97a663
 						</Text>
 					</View>
 				)}
@@ -199,12 +220,20 @@ class HomeWidget extends Component {
 		/*eslint-disable*/
 		return (
 			<View style={[styles.Category]}>
+<<<<<<< HEAD
 				<Text style={[styles.CategHeader]}>{c.fields.name.toUpperCase()}</Text>
 				<Text style={[styles.CategParag]} dangerouslySetInnerHTML={{ __html: html }} />
 				<View style={[styles.ReadMoreIcon]}>
 					<Icon name="crop-square" size={13} color="#b30000" />
 					<Text style={{fontWeight: '700', fontSize: 12}} href="javascript:void(0)" onClick={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${article.fields.slug}`)}>
 						{t("Read More").toUpperCase()}
+=======
+				<Text>{c.fields.name}</Text>
+				<Text dangerouslySetInnerHTML={{ __html: html }} />
+				<View>
+					<Text href="javascript:void(0)" onClick={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${article.fields.slug}`)}>
+						{t("Read More")}
+>>>>>>> 480dabc284a711c3a5c20ad5c262070b8c97a663
 					</Text>
 				</View>
 			</View>
@@ -219,6 +248,7 @@ class HomeWidget extends Component {
 		if (global.location) {
 			hostname = global.location.hostname;
 		}
+<<<<<<< HEAD
 		/*
 		if (this._ref) {
 			let anchors = Array.from(this._ref.querySelectorAll("a"));
@@ -237,9 +267,31 @@ class HomeWidget extends Component {
 				// eslint-disable-next-line
 				anchor.href = "javascript:void(0)";
 				anchor.onclick = () => onNavigate(href);
+=======
+		/**
+ * 
+ if (this._ref) {
+	 let anchors = Array.from(this._ref.querySelectorAll("a"));
+	 anchors = anchors.filter(a => a.href.indexOf("http") || a.hostname === hostname);
+	 
+	 for (let anchor of anchors) {
+		 let href = anchor.href + "";
+		 if (href.indexOf("http") >= 0) {
+			 href =
+			 "/" +
+			 href
+			 .split("/")
+			 .slice(3)
+			 .join("/");
+>>>>>>> 480dabc284a711c3a5c20ad5c262070b8c97a663
 			}
+			// eslint-disable-next-line
+			anchor.href = "javascript:void(0)";
+			anchor.onclick = () => onNavigate(href);
 		}
 		*/
+	}
+	*/
 	}
 
 	render() {
