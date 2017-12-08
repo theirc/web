@@ -45,7 +45,7 @@ class ServiceList extends React.Component {
 		};
 
 		return [
-			<div key={s.id} className="Item" onClick={() => goToService(s.id)}>
+			<li key={s.id} className="Item" onClick={() => goToService(s.id)}>
 				<div className="Icons">
 					{s.types.map((t, idx) => (
 						<div className="Icon" key={`${s.id}-${idx}`}>
@@ -64,7 +64,7 @@ class ServiceList extends React.Component {
 					</h2>
 				</div>
 				<i className="material-icons" />
-			</div>,
+			</li>,
 		];
 	}
 	render() {
@@ -112,7 +112,7 @@ class ServiceList extends React.Component {
 							<em>{t("No services found")}</em>
 						</div>
 					)}
-				{services.length > 0 && <div className="Items">{services.map(this.renderService.bind(this))}</div>}
+				<div className="ServiceListContainer">{services.length > 0 && <ul className="Items">{services.map(this.renderService.bind(this))}</ul>}</div>
 			</div>
 		);
 	}
