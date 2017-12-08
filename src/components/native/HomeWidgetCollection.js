@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-<<<<<<< HEAD
+
  import { View, Button, StyleSheet, Image, TouchableOpacity } from "react-native";
 
  export default class HomeWidgetCollection extends Component {
@@ -14,7 +14,7 @@ import React, { Component } from "react";
  		backgroundColor: 'white',
  	},
  });
-=======
+
 import { View, Button, StyleSheet, Image, TouchableOpacity } from "react-native";
 
 export default class HomeWidgetCollection extends Component {
@@ -29,4 +29,4 @@ const styles = StyleSheet.create({
 		backgroundColor: 'white',
 	},
 });
->>>>>>> 480dabc284a711c3a5c20ad5c262070b8c97a663
+
