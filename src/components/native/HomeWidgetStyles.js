@@ -13,10 +13,6 @@ export default StyleSheet.create({
 	Highlighted: {
 		flexBasis: "100%",
 	},
-	LocalGuide: {
-		flex: 1,
-		height: 400,
-	},
 	container: {
 		justifyContent: "center",
 		minHeight: 60,
@@ -55,8 +51,7 @@ export default StyleSheet.create({
 	Category: {
 		flex: 1,
 	},
-	CategHeader: {
-	},
+	CategHeader: {},
 	Title: {
 		marginTop: 10,
 		marginBottom: 3,
