@@ -11,7 +11,7 @@ var RI_URL = "https://admin.refugee.info/e/production/v2";
 module.exports = {
 	fetchCategories(language) {
 		return new Promise((resolve, reject) => {
-			const sessionStorage =  getSessionStorage();
+			const sessionStorage = getSessionStorage();
 			if (sessionStorage[`${language}-service-categories`]) {
 				resolve(JSON.parse(sessionStorage[`${language}-service-categories`]));
 			} else {
@@ -31,12 +31,12 @@ module.exports = {
 	},
 	fetchRegions(language) {
 		return new Promise((resolve, reject) => {
-			const sessionStorage =  getSessionStorage();
+			const sessionStorage = getSessionStorage();
 			if (sessionStorage[`${language}-regions`]) {
 				resolve(JSON.parse(sessionStorage[`${language}-regions`]));
 			} else {
 				request
-					.get(RI_URL + "/service-types/")
+					.get(RI_URL + "/regions/?exclude_geometry=true")
 					.set("Accept-Language", language)
 					.end((err, res) => {
 						if (err) {
@@ -51,7 +51,7 @@ module.exports = {
 	},
 	fetchCategoryById(language, categoryId) {
 		return new Promise((resolve, reject) => {
-			const sessionStorage =  getSessionStorage();
+			const sessionStorage = getSessionStorage();
 			if (sessionStorage[`${language}-service-categories`]) {
 				let categories = JSON.parse(sessionStorage[`${language}-service-categories`]);
 				resolve(_.first(categories.filter(c => c.id === categoryId)));
@@ -72,14 +72,7 @@ module.exports = {
 	},
 	fetchAllServices(country, language, categoryId, searchTerm, pageSize = 1000) {
 		return new Promise((resolve, reject) => {
-			var requestUrl =
-				"/services/search/?geographic_region=" +
-				country +
-				"&page=1&page_size=" +
-				pageSize +
-				"&type_numbers=" +
-				(categoryId || "") +
-				(searchTerm ? "&search=" + searchTerm : "");
+			var requestUrl = "/services/search/?geographic_region=" + country + "&page=1&page_size=" + pageSize + "&type_numbers=" + (categoryId || "") + (searchTerm ? "&search=" + searchTerm : "");
 			request
 				.get(RI_URL + requestUrl)
 				.set("Accept-Language", language)

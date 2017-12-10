@@ -49,7 +49,7 @@ class CountryHome extends React.Component {
 	}
 
 	render() {
-		const { country, onNavigate } = this.props;
+		const { country, onNavigate, direction } = this.props;
 
 		if (!country || !country.fields.home) {
 			return null;
@@ -57,7 +57,7 @@ class CountryHome extends React.Component {
 
 		return (
 			<HomeWidgetCollection key={"HomeWidgetCollection"}>
-				{country.fields.home.map(e => <HomeWidget onNavigate={onNavigate} country={country} content={e} key={e.sys.id} />)}
+				{country.fields.home.map(e => <HomeWidget direction={direction} onNavigate={onNavigate} country={country} content={e} key={e.sys.id} />)}
 			</HomeWidgetCollection>
 		);
 	}
@@ -67,6 +67,7 @@ const mapState = (s, p) => {
 	return {
 		articles: s.articles,
 		country: s.country,
+		direction: s.direction,
 		currentCoordinates: s.currentCoordinates,
 	};
 };

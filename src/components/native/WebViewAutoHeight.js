@@ -79,6 +79,8 @@ class WebViewAutoHeight extends Component {
 		realContentHeight: 100,
 	};
 
+	_refs = {};
+
 	static propTypes = {
 		source: PropTypes.object.isRequired,
 		injectedJavaScript: PropTypes.string,
@@ -91,14 +93,16 @@ class WebViewAutoHeight extends Component {
 		if (navState.title) {
 			const realContentHeight = parseInt(navState.title, 10) || 0; // turn NaN to 0
 			this.setState({ realContentHeight });
-        }
-		if (typeof this.props.onNavigationStateChange === "function") {
-			this.props.onNavigationStateChange(navState);
 		}
+		if (typeof this.props.onNavigationStateChange === "function") {
+			return this.props.onNavigationStateChange(navState, this._refs.WebView);
+		}
+
+		return true;
 	}
 
 	render() {
-		const { source, style, minHeight, ...otherProps } = this.props;
+		const { source, style, minHeight, ref, ...otherProps } = this.props;
 		const html = source.html;
 
 		if (!html) {
@@ -109,15 +113,15 @@ class WebViewAutoHeight extends Component {
 			throw new Error("Cannot find </body> from: " + html);
 		}
 
-
 		return (
 			<WebView
 				{...otherProps}
+				ref={r => (this._refs.WebView = r)}
 				source={{ html: codeInject(html) }}
 				scrollEnabled={false}
 				style={[style, { height: Math.max(this.state.realContentHeight, minHeight || 0) }]}
 				javaScriptEnabled
-				onNavigationStateChange={this.handleNavigationChange.bind(this)}
+				onNavigationStateChange={s => this.handleNavigationChange(s)}
 			/>
 		);
 	}

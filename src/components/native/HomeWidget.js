@@ -11,6 +11,9 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import Text from "./Text";
 import nativeColors from "../../shared/nativeColors";
 import PropTypes from "prop-types";
+import WebViewAutoHeight from "./WebViewAutoHeight";
+import nativeTools from "../../shared/nativeTools";
+
 const APP_ID = cms.siteConfig.appId;
 const Remarkable = require("remarkable");
 const md = new Remarkable("full", {
@@ -21,6 +24,10 @@ const md = new Remarkable("full", {
 });
 
 class HomeWidget extends Component {
+	static contextTypes = {
+		config: PropTypes.object,
+		theme: PropTypes.object,
+	};
 	// Maybe these can be a Separate Component?
 
 	renderWidget(w) {
@@ -28,7 +35,7 @@ class HomeWidget extends Component {
 			let category = _.first(w.fields.related);
 			if (category) {
 				let article = _.last(_.sortBy(category.fields.articles, a => moment(a.sys.updatedAt).unix()));
-				return this.renderArticle(article, category);
+				return this.renderArticle(article, category, true, w.fields.showFullArticle);
 			}
 		} else if (w.fields.type === "First Article of Category") {
 			let category = _.first(w.fields.related);
@@ -47,6 +54,7 @@ class HomeWidget extends Component {
 	}
 
 	renderLocalGuide(guideItems) {
+		return null;
 		const { country, onNavigate, t } = this.props;
 
 		/*jshint ignore:start*/
@@ -54,8 +62,7 @@ class HomeWidget extends Component {
 		return (
 			<View style={[styles.LocalGuide]}>
 				<View>
-
-					<Text href="javascript:void(0)" onClick={() => onNavigate(`/${country.fields.slug}/services`)}>
+					<Text href="javascript:void(0)" onPress={() => onNavigate(`/${country.fields.slug}/services`)}>
 						{t("See More")}
 					</Text>
 				</View>
@@ -64,15 +71,9 @@ class HomeWidget extends Component {
 					{guideItems.map(c => {
 						let image =
 							c.fields.backgroundImage && c.fields.backgroundImage.fields.file ? (
-
-								<Image alt={c.fields.title} source={{uri: `${c.fields.backgroundImage.fields.file.url}?fm=jpg&fl=progressive`}} />
-							) : (
-								<Image alt={c.fields.title} source={{uri: "https://upload.wikimedia.org/wikipedia/en/4/48/Blank.JPG"}} />
-
 								<Image alt={c.fields.title} source={{ uri: `${c.fields.backgroundImage.fields.file.url}?fm=jpg&fl=progressive` }} />
 							) : (
 								<Image alt={c.fields.title} source={{ uri: "https://upload.wikimedia.org/wikipedia/en/4/48/Blank.JPG" }} />
-
 							);
 						let link = c => {
 							if (c.fields.url.indexOf("/") === 0) {
@@ -84,7 +85,7 @@ class HomeWidget extends Component {
 						return (
 							<View key={c.sys.id} style={[style.LocalGuideItem]}>
 								{image}
-								<View style={[style.Overlay]} onClick={link.bind(null, c)}>
+								<View style={[style.Overlay]} onPress={link.bind(null, c)}>
 									{c.fields.title}
 								</View>
 							</View>
@@ -98,6 +99,8 @@ class HomeWidget extends Component {
 	}
 
 	renderTopCategories(categories) {
+		return null;
+
 		let articleFunc = category => category.fields.overview || _.first(category.fields.articles);
 		const { country, onNavigate, t } = this.props;
 
@@ -106,7 +109,7 @@ class HomeWidget extends Component {
 		return (
 			<View style={[styles.TopCategories]}>
 				<View>
-					<Text href="javascript:void(0)" onClick={() => onNavigate(`/${country.fields.slug}/categories`)}>
+					<Text href="javascript:void(0)" onPress={() => onNavigate(`/${country.fields.slug}/categories`)}>
 						{t("See More")}
 					</Text>
 				</View>
@@ -114,7 +117,7 @@ class HomeWidget extends Component {
 				{categories.map(c => {
 					let article = articleFunc(c);
 					return (
-						<View key={c.sys.id} style={[styles.TopCategories]} onClick={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${article.fields.slug}`)}>
+						<View key={c.sys.id} style={[styles.TopCategories]} onPress={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${article.fields.slug}`)}>
 							<View style={[styles.icon]}>
 								<i className={c.fields.iconClass || "material-icons"}>{c.fields.iconText || ((!c.fields.iconClass || c.fields.iconClass === "material-icons") && "add")}</i>
 							</View>
@@ -135,7 +138,7 @@ class HomeWidget extends Component {
 			let videoId = url.replace(/.*facebook.com\/.*\/videos\/(.*)\/.*/, "$1");
 
 			return <FacebookPlayer className={"Facebook"} videoId={videoId} appId={APP_ID} />;
-		} else if (/youtube.com/) {
+		} else if (/youtube.com/.test(url)) {
 			let videoId = url.replace(/^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/, "$7");
 			return <YouTube videoId={videoId} className={"YouTube"} />;
 		}
@@ -144,6 +147,10 @@ class HomeWidget extends Component {
 
 	renderArticle(article, category, showHero = true, showFullArticle = false) {
 		const { country, onNavigate, t } = this.props;
+
+		const { direction } = this.props;
+		const { config, theme } = this.context;
+
 		if (!article) {
 			// Anti pattern, but saves 1 or more ifs.
 			return null;
@@ -155,6 +162,8 @@ class HomeWidget extends Component {
 		}
 
 		let content = showFullArticle ? article.fields.content : article.fields.lead;
+		content = nativeTools.wrapHTML(direction, theme.name, config.css, md.render(content));
+
 		const { contentType } = article.sys;
 		if (contentType.sys.id === "video") {
 			content = article.fields.lead;
@@ -171,36 +180,27 @@ class HomeWidget extends Component {
 					hero.fields.file &&
 					showHero && (
 						<View style={[styles.Hero]}>
-
-							<Image style={[width:"100%"]} source={{ uri: article.fields.hero.fields.file.url + "?fm=jpg&fl=progressive" }} alt="" />
+							<Image
+								style={[
+									{
+										width: "100%",
+										height: 200,
+										resizeMode: "contain",
+									},
+								]}
+								source={{ uri: "https:" + article.fields.hero.fields.file.url + "?fm=jpg&fl=progressive" }}
+								alt=""
+							/>
 						</View>
 					)}
-				{
-					/*
-					showFullArticle ? <h3>{article.fields.title}</h3> : <h3 onClick={() => onNavigate(`/${country.fields.slug}/${categorySlug}/${article.fields.slug}`)}>{article.fields.title}</h3>
-					*/
-
-							<Image source={{ uri: article.fields.hero.fields.file.url + "?fm=jpg&fl=progressive" }} alt="" />
-						</View>
-					)}
-				{
-					/* 
-				showFullArticle ? <h3>{article.fields.title}</h3> : <h3 onClick={() => onNavigate(`/${country.fields.slug}/${categorySlug}/${article.fields.slug}`)}>{article.fields.title}</h3>
-				*/
-
-				}
+				<Text style={[styles.Title]}>{article.fields.title}</Text>
 				{contentType.sys.id === "video" && this.renderVideo(article)}
-				<Text dangerouslySetInnerHTML={{ __html: md.render(content) }} />
+				<WebViewAutoHeight source={{ html: content }} style={{ backgroundColor: "#ffffff" }} onNavigationStateChange={_.partial(nativeTools.navigationStateChange, onNavigate)} />
 				{!showFullArticle && (
-					<View style={[styles.ReadMore]}>
-
+					<View style={[styles.ReadMoreIcon]}>
 						<Icon name="crop-square" size={13} color="#b30000" />
-						<Text style={{fontWeight: '700', fontSize: 12}} href="javascript:void(0)" onClick={() => onNavigate(`/${country.fields.slug}/${categorySlug}/${article.fields.slug}`)}>
+						<Text style={{ fontWeight: "700", fontSize: 12 }} onPress={() => onNavigate(`/${country.fields.slug}/${categorySlug}/${article.fields.slug}`)}>
 							{t("Read More").toUpperCase()}
-
-						<Text href="javascript:void(0)" onClick={() => onNavigate(`/${country.fields.slug}/${categorySlug}/${article.fields.slug}`)}>
-							{t("Read More")}
-
 						</Text>
 					</View>
 				)}
@@ -220,20 +220,11 @@ class HomeWidget extends Component {
 		/*eslint-disable*/
 		return (
 			<View style={[styles.Category]}>
-
-				<Text style={[styles.CategHeader]}>{c.fields.name.toUpperCase()}</Text>
-				<Text style={[styles.CategParag]} dangerouslySetInnerHTML={{ __html: html }} />
+				<Text style={[styles.CategHeader, styles.Title]}>{c.fields.name.toUpperCase()}</Text>
 				<View style={[styles.ReadMoreIcon]}>
 					<Icon name="crop-square" size={13} color="#b30000" />
-					<Text style={{fontWeight: '700', fontSize: 12}} href="javascript:void(0)" onClick={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${article.fields.slug}`)}>
+					<Text style={{ fontWeight: "700", fontSize: 12 }} href="javascript:void(0)" onPress={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${article.fields.slug}`)}>
 						{t("Read More").toUpperCase()}
-
-				<Text>{c.fields.name}</Text>
-				<Text dangerouslySetInnerHTML={{ __html: html }} />
-				<View>
-					<Text href="javascript:void(0)" onClick={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${article.fields.slug}`)}>
-						{t("Read More")}
-
 					</Text>
 				</View>
 			</View>
@@ -248,54 +239,9 @@ class HomeWidget extends Component {
 		if (global.location) {
 			hostname = global.location.hostname;
 		}
-
-		/*
-		if (this._ref) {
-			let anchors = Array.from(this._ref.querySelectorAll("a"));
-			anchors = anchors.filter(a => a.href.indexOf("http") || a.hostname === hostname);
-
-			for (let anchor of anchors) {
-				let href = anchor.href + "";
-				if (href.indexOf("http") >= 0) {
-					href =
-						"/" +
-						href
-							.split("/")
-							.slice(3)
-							.join("/");
-				}
-				// eslint-disable-next-line
-				anchor.href = "javascript:void(0)";
-				anchor.onclick = () => onNavigate(href);
-
-		/**
- * 
- if (this._ref) {
-	 let anchors = Array.from(this._ref.querySelectorAll("a"));
-	 anchors = anchors.filter(a => a.href.indexOf("http") || a.hostname === hostname);
-	 
-	 for (let anchor of anchors) {
-		 let href = anchor.href + "";
-		 if (href.indexOf("http") >= 0) {
-			 href =
-			 "/" +
-			 href
-			 .split("/")
-			 .slice(3)
-			 .join("/");
-
-			}
-			// eslint-disable-next-line
-			anchor.href = "javascript:void(0)";
-			anchor.onclick = () => onNavigate(href);
-		}
-		*/
-	}
-	*/
 	}
 
 	render() {
-		console.log("Home Widget", this.props);
 		const { content } = this.props;
 		if (!content) {
 			return null;
@@ -316,15 +262,18 @@ class HomeWidget extends Component {
 					rendered = null;
 			}
 
+			if (!rendered) {
+				return null;
+			}
+
 			return (
-				console.log(["HomeWidget", content.fields.highlighted ? "Highlighted" : null, `CT-${content.sys.contentType.sys.id}`].filter(a=>a).map(k=>styles[k])),
-				<View ref={r => (this._ref = r)} style={["HomeWidget", content.fields.highlighted ? "Highlighted" : null, `CT-${content.sys.contentType.sys.id}`].filter(a=>a).map(k=>styles[k])}>
+				<View ref={r => (this._ref = r)} style={["HomeWidget", content.fields.highlighted ? "Highlighted" : null, `CT-${content.sys.contentType.sys.id}`].filter(a => a).map(k => styles[k])}>
 					{rendered}
 				</View>
 			);
 		} catch (e) {
 			console.log("Ignoring", e);
-			return null;
+			throw e;
 		}
 	}
 }
