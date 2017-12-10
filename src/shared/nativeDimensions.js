@@ -8,11 +8,11 @@ const HEADER = 64;
 const TOOLBAR = 56;
 
 const STATUS_BAR_HEIGHT = 0; // ExtraDimensions.get("STATUS_BAR_HEIGHT") || 0;
-const SOFT_MENU_BAR_HEIGHT = 0; // ExtraDimensions.get("SOFT_MENU_BAR_HEIGHT") || 0;
+const SOFT_MENU_BAR_HEIGHT = ExtraDimensions.get("SOFT_MENU_BAR_HEIGHT") || 0;
 
 export default {
 	width: dim.width,
-	statusBar:  Platform.OS === "android"  ? 0 : 16,
+	statusBar: Platform.OS === "android" ? 0 : 16,
 	baseHeight: dim.height - (STATUS_BAR_HEIGHT || 0),
 	height: dim.height - (SOFT_MENU_BAR_HEIGHT || 0) - (STATUS_BAR_HEIGHT || 0),
 	heightWithoutHeader: dim.height - (SOFT_MENU_BAR_HEIGHT || 0) - HEADER,
