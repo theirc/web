@@ -18,15 +18,6 @@ export default StyleSheet.create({
 		minHeight: 60,
 		flexWrap: "wrap",
 	},
-	LocalGuideItem: {
-		flexBasis: 5,
-		marginBottom: 5,
-		marginRight: 10,
-	},
-	Image: {
-		height: 72,
-		width: "100%",
-	},
 	Article: { flex: 1, flexDirection: "column" },
 	Hero: {
 		marginRight: -20,
