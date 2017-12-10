@@ -394,7 +394,6 @@
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				BAA1275C691741BD8CD993E2 /* libRNVectorIcons.a in Frameworks */,
 				B906C1B21C2C402AAB572DE7 /* libRNDeviceInfo.a in Frameworks */,
-				90263EF4B3604EB689D978B3 /* libRNDeviceInfo-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
