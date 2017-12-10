@@ -37,7 +37,7 @@ class BottomNavContainer extends Component {
 
 	render() {
 		const { t, match } = this.props;
-		const { flexDirection } = this.context;
+		const { flexDirection, theme } = this.context;
 		const { country, onGoToCategories, onGoHome, onGoToSearch, showServiceMap, onGoToServices, router, direction } = this.props;
 		let selectedIndex = 0;
 
@@ -58,7 +58,7 @@ class BottomNavContainer extends Component {
 					uiTheme={{
 						bottomNavigationAction: {
 							iconActive: {
-								color: "#ffda1a",
+								color: theme.color,
 								fontFamily: direction === "ltr" ? "Roboto" : "Cairo",
 							},
 							labelActive: {

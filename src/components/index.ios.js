@@ -6,6 +6,8 @@ import HeaderBar from "./native/HeaderBar";
 import ArticleFooter from "./native/ArticleFooter";
 import ArticlePage from "./native/ArticlePage";
 import DetectLocationSelector from "./native/DetectLocationSelector";
+import HomeWidget from "./native/HomeWidget";
+import HomeWidgetCollection from "./native/HomeWidgetCollection";
 import Footer from "./native/Footer";
 
 import React from "react";
@@ -59,13 +61,9 @@ module.exports = {
 	CountrySelector,
 	LanguageSelector,
 	HeaderBar,
-	HomeWidget: () => <View />,
+	HomeWidget,
 	DetectLocationSelector,
-	HomeWidgetCollection: props => (
-		<View>
-			<Text>{props.children.length}</Text>
-		</View>
-	),
+	HomeWidgetCollection,
 	SearchPage: () => <View />,
 	ServiceMap: () => <View />,
 	ServiceCategoryList: () => <View />,
