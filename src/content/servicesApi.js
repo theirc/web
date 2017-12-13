@@ -72,7 +72,7 @@ module.exports = {
 	},
 	fetchAllServices(country, language, categoryId, searchTerm, pageSize = 1000) {
 		return new Promise((resolve, reject) => {
-			var requestUrl = "/services/search/?geographic_region=" + country + "&page=1&page_size=" + pageSize + "&type_numbers=" + (categoryId || "") + (searchTerm ? "&search=" + searchTerm : "");
+			var requestUrl = "/services/search/?filter=relatives&geographic_region=" + country + "&page=1&page_size=" + pageSize + "&type_numbers=" + (categoryId || "") + (searchTerm ? "&search=" + searchTerm : "");
 			request
 				.get(RI_URL + requestUrl)
 				.set("Accept-Language", language)
