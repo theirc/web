@@ -471,7 +471,7 @@ export default {
 			Dark: "Dark",
 			"Service Categories": "Service Categories",
 			Address: "Address",
-			"Address in Country Language": "Address in Country Language",
+			"Address in Country Language": "Address in Local Language",
 			العربيـة: "العربيـة",
 			"Give Feedback": "Give Feedback",
 			Home: "Home",
