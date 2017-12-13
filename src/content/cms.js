@@ -31,7 +31,7 @@ function listCountries(language = "en") {
 
 	return client.getEntries({
 		content_type: "country",
-		locale: languageDictionary[language],
+		locale: languageDictionary[language] || language,
 	});
 }
 
@@ -47,7 +47,7 @@ function loadCountry(slug, language = "en") {
 			content_type: "country",
 			"fields.slug": slug,
 			include: 10,
-			locale: languageDictionary[language],
+			locale: languageDictionary[language] || language,
 			resolveLinks: false,
 		})
 		.then((e, r) => {

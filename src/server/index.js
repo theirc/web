@@ -168,7 +168,7 @@ app.get("/:country/:category/:article", function(req, res, err) {
 				.getEntries({
 					content_type: "article",
 					"fields.slug": article,
-					locale: languageDictionary[selectedLanguage],
+					locale: languageDictionary[selectedLanguage] || selectedLanguage,
 				})
 				.then(c => {
 					let match = _.first(c.items.filter(i => i.fields.country.fields.slug === country && i.fields.category.fields.slug === category));
@@ -177,7 +177,7 @@ app.get("/:country/:category/:article", function(req, res, err) {
 							.getEntries({
 								content_type: "country",
 								"fields.slug": country,
-								locale: languageDictionary[selectedLanguage],
+								locale: languageDictionary[selectedLanguage] || selectedLanguage,
 							})
 							.then(c => {
 								if (c.items.length > 0) {

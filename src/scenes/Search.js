@@ -50,7 +50,7 @@ class Search extends React.Component {
 					content_type: "article",
 					"fields.country.sys.id": country.sys.id,
 					query: qs.q,
-					locale: config.languageDictionary[language],
+					locale: config.languageDictionary[language] || language,
 				})
 				.then(response => this.setState({ articles: response.items, searchingArticles: false }))
 				.catch(e => {
