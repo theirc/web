@@ -120,6 +120,22 @@ module.exports = {
 				});
 		});
 	},
+	fetchServicePreviewById(language, serviceId) {
+		return new Promise((resolve, reject) => {
+			request
+				.get(RI_URL + "/services/preview/?id=" + serviceId)
+				.set("Accept-Language", language)
+				.end((err, res) => {
+					if (err) {
+						reject(err);
+						return;
+					}
+					let services = _.first(res.body);
+
+					resolve(services);
+				});
+		});
+	},
 	fetchServicesInSameLocation(language, serviceId) {
 		// get_same_coordinates_services
 		return new Promise((resolve, reject) => {

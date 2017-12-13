@@ -190,6 +190,13 @@ class Services extends React.Component {
 
 		return servicesApi.fetchServiceById(language, serviceId);
 	}
+	fetchServicePreview(props) {
+		const { language } = this.props;
+		const { match } = props;
+		const serviceId = match.params.serviceId;
+
+		return servicesApi.fetchServicePreviewById(language, serviceId);
+	}
 
 	fetchServicesInSameLocation(props) {
 		const { language } = this.props;
@@ -249,6 +256,23 @@ class Services extends React.Component {
 										toggleLocation={() => _.identity()}
 										servicesByType={() => this.fetchAllServicesNearby()}
 										nearby={true}
+									/>
+								</div>
+							</Skeleton>
+						)}
+					/>
+					<Route
+						path={`${match.url}/preview/:serviceId/`}
+						exact
+						component={props => (
+							<Skeleton>
+								<div className="SkeletonContainer">
+									<ServiceDetail
+										{...props}
+										language={language}
+										goToService={goToService}
+										fetchService={() => this.fetchServicePreview(props)}
+										fetchServicesInSameLocation={() => this.fetchServicesInSameLocation(props)}
 									/>
 								</div>
 							</Skeleton>
