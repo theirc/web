@@ -51,7 +51,7 @@ class Router extends Component {
 						<Skeleton>
 							<div className="SkeletonContainer">
 								<Switch>
-									<Route exact path="/home" component={Home} />
+									<Route exact path="/" component={Home} />
 									<Route exact path="/selectors" component={Selectors} />
 									<Route exact path="/country-selector" component={CountrySelectorScene} />
 									<Route exact path="/language-selector" component={LanguageSelectorScene} />
