@@ -21,6 +21,7 @@ export default function getSessionStorage() {
 				},
 				set: function(target, name, value) {
 					target[name] = _.isObjectLike(value) ? JSON.stringify(value) : _.toString(value);
+					return target[name];
 				},
 			};
 

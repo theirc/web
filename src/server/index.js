@@ -115,24 +115,66 @@ const markdownOptions = {
 	],
 };
 
+const getFirsLevel = (slug, selectedLanguage) => {
+	return servicesApi
+		.fetchRegions(selectedLanguage)
+		.then(rs => {
+			let selected = _.first(rs.filter(r => r.slug == slug));
+			if (selected.level !== 1) {
+				const parents = _.fromPairs(rs.map(r => [r.id, r]));
+
+				while (selected.level !== 1) {
+					if (!selected.parent || !parents[selected.parent]) break;
+
+					selected = parents[selected.parent];
+				}
+			}
+			return selected.slug;
+		})
+		.catch(() => slug);
+};
+
 // Host the public folder
 app.get("/", mainRequest({}));
 app.use("/", feathers.static("build"));
+app.get("/preview/:serviceId/", function(req, res, err) {
+	const selectedLanguage = parseLanguage(req);
+	const { serviceId } = req.params;
+
+	try {
+		servicesApi
+			.fetchServicePreviewById(selectedLanguage, serviceId)
+			.then(s => {
+				return getFirsLevel(s.region.slug, selectedLanguage).then(c => {
+					res.redirect(`/${c}/services/preview/${serviceId}/`);
+				});
+			})
+			.catch(e => res.redirect("/"));
+	} catch (e) {
+		res.redirect("/");
+	}
+});
 app.get("/:country/services/:serviceId/", function(req, res, err) {
 	const selectedLanguage = parseLanguage(req);
 	const { country, serviceId } = req.params;
 
 	try {
-		servicesApi
-			.fetchServiceById(selectedLanguage, serviceId)
-			.then(s => {
-				return mainRequest({
-					title: s.name,
-					description: toMarkdown(s.description, markdownOptions).replace(/&nbsp;/gi, " "),
-					image: s.image,
-				})(req, res, err);
-			})
-			.catch(e => mainRequest({})(req, res, err));
+		getFirsLevel(country, selectedLanguage).then(c => {
+			if (c !== country) {
+				res.redirect(`/${c}/services/${serviceId}`);
+				return;
+			}
+			servicesApi
+				.fetchServiceById(selectedLanguage, serviceId)
+				.then(s => {
+					return mainRequest({
+						title: s.name,
+						description: toMarkdown(s.description, markdownOptions).replace(/&nbsp;/gi, " "),
+						image: s.image,
+					})(req, res, err);
+				})
+				.catch(e => mainRequest({})(req, res, err));
+		});
 	} catch (e) {
 		console.log(e);
 		mainRequest({})(req, res, err);
@@ -142,12 +184,20 @@ app.get("/:country/services/", function(req, res, err) {
 	const selectedLanguage = parseLanguage(req);
 	const { country, serviceId } = req.params;
 
-	if (req.query.type) {
-		res.redirect(`/${country}/services/by-category/${req.query.type}/`);
-	} else {
-		mainRequest({})(req, res, err);
-	}
+	getFirsLevel(country, selectedLanguage).then(c => {
+		if (c !== country) {
+			res.redirect(`/${c}/services/`);
+			return;
+		}
+
+		if (req.query.type) {
+			res.redirect(`/${country}/services/by-category/${req.query.type}/`);
+		} else {
+			mainRequest({})(req, res, err);
+		}
+	});
 });
+
 app.get("/:country/:category/:article", function(req, res, err) {
 	const selectedLanguage = parseLanguage(req);
 	let configKey = _.first(
@@ -159,42 +209,53 @@ app.get("/:country/:category/:article", function(req, res, err) {
 	const { country, category, article } = req.params;
 	try {
 		if (configKey) {
-			const { accessToken, space } = conf[configKey];
-			languageDictionary = Object.assign(languageDictionary, conf[configKey]);
+			getFirsLevel(country, selectedLanguage).then(c => {
+				if (c !== country) {
+					res.redirect(
+						`/${c}/${category}/${article}?${_.toPairs(req.query)
+							.map(x => x.join("="))
+							.join("&")}`
+					);
+					return;
+				}
 
-			let cms = cmsApi(conf[configKey], languageDictionary);
+				const { accessToken, space } = conf[configKey];
+				languageDictionary = Object.assign(languageDictionary, conf[configKey]);
 
-			cms.client
-				.getEntries({
-					content_type: "article",
-					"fields.slug": article,
-					locale: languageDictionary[selectedLanguage] || selectedLanguage,
-				})
-				.then(c => {
-					let match = _.first(c.items.filter(i => i.fields.country.fields.slug === country && i.fields.category.fields.slug === category));
-					if (!match) {
-						cms.client
-							.getEntries({
-								content_type: "country",
-								"fields.slug": country,
-								locale: languageDictionary[selectedLanguage] || selectedLanguage,
-							})
-							.then(c => {
-								if (c.items.length > 0) {
-									res.redirect("/" + country);
-								} else {
-									res.redirect("/");
-								}
-							});
-					} else {
-						return mainRequest({
-							title: match.fields.title,
-							description: match.fields.lead.replace(/&nbsp;/gi, " "),
-							image: (match.fields.hero && match.fields.herp.fields.file && "https:" + match.fields.hero.fields.file.url) || "",
-						})(req, res, err);
-					}
-				})
-				.catch(e => mainRequest({})(req, res, err));
+				let cms = cmsApi(conf[configKey], languageDictionary);
+
+				cms.client
+					.getEntries({
+						content_type: "article",
+						"fields.slug": article,
+						locale: languageDictionary[selectedLanguage] || selectedLanguage,
+					})
+					.then(c => {
+						let match = _.first(c.items.filter(i => i.fields.country.fields.slug === country && i.fields.category.fields.slug === category));
+						if (!match) {
+							cms.client
+								.getEntries({
+									content_type: "country",
+									"fields.slug": country,
+									locale: languageDictionary[selectedLanguage] || selectedLanguage,
+								})
+								.then(c => {
+									if (c.items.length > 0) {
+										res.redirect("/" + country);
+									} else {
+										res.redirect("/");
+									}
+								});
+						} else {
+							return mainRequest({
+								title: match.fields.title,
+								description: match.fields.lead.replace(/&nbsp;/gi, " "),
+								image: (match.fields.hero && match.fields.herp.fields.file && "https:" + match.fields.hero.fields.file.url) || "",
+							})(req, res, err);
+						}
+					})
+					.catch(e => mainRequest({})(req, res, err));
+			});
 		}
 	} catch (e) {
 		console.log(e);
