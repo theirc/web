@@ -186,7 +186,11 @@ app.get("/:country/services/", function(req, res, err) {
 
 	getFirsLevel(country, selectedLanguage).then(c => {
 		if (c !== country) {
-			res.redirect(`/${c}/services/`);
+			if (req.query.type) {
+				res.redirect(`/${c}/services/by-category/${req.query.type}/`);
+			} else {
+				res.redirect(`/${c}/services/`);
+			}
 			return;
 		}
 

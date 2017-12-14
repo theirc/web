@@ -2,7 +2,6 @@ import React from "react";
 import "./ServiceHome.css";
 import { translate } from "react-i18next";
 import _ from "lodash";
-import moment from "moment";
 import { Share } from "material-ui-icons";
 import { Helmet } from "react-helmet";
 import HeaderBar from "./HeaderBar";
@@ -11,6 +10,7 @@ import HeaderBar from "./HeaderBar";
 var tinycolor = require("tinycolor2");
 const GMAPS_API_KEY = "AIzaSyA7eG6jYi03E6AjJ8lhedMuaLS9mVoJjJ8";
 const hotlinkTels = input => input; //input.replace(/\s(\+[1-9]{1}[0-9]{5,14})|00[0-9]{5,15}/g, `<a class="tel" href="tel:$1">$1</a>`);
+const moment = global.moment;
 
 class ServiceDetail extends React.Component {
 	state = {
@@ -66,6 +66,13 @@ class ServiceDetail extends React.Component {
 			return o["24/7"] || weekDays.map(w => o[w.toLowerCase()].map(h => !!(h.open || h.close)).indexOf(true) > -1).indexOf(true) > -1;
 		};
 
+		const mLocale = d => {
+			let a = moment(d)
+				.locale(language)
+				.format("LLL");
+			console.log(d, language, a);
+			return a;
+		};
 		const amPmTime = time => {
 			const m = moment(moment(`2001-01-01 ${time}`).toJSON())
 				.locale(false)
@@ -90,15 +97,20 @@ class ServiceDetail extends React.Component {
 					return (
 						<tr key={`tr-${i}`}>
 							<td className="week">{t(w)}</td>
-							<td colSpan="2">{t("Closed")}</td>
+							<td colSpan="3">{t("Closed")}</td>
 						</tr>
 					);
 				}
 
 				return service.opening_time[w.toLowerCase()].map((o, oi) => (
 					<tr key={`tr-${i}-${oi}`}>
-						{oi === 0 && <td rowSpan={service.opening_time[w.toLowerCase()].length} className="week">{t(w)}</td>}
+						{oi === 0 && (
+							<td rowSpan={service.opening_time[w.toLowerCase()].length} className="week">
+								{t(w)}
+							</td>
+						)}
 						<td key={`open-${i}-${oi}`}>{amPmTime(service.opening_time[w.toLowerCase()][oi].open)}</td>
+						<td>-</td>
 						<td key={`close-${i}-${oi}`}>{amPmTime(service.opening_time[w.toLowerCase()][oi].close)}</td>
 					</tr>
 				));
@@ -120,6 +132,8 @@ class ServiceDetail extends React.Component {
 				</div>
 
 				<article>
+					<em>{t("LAST_UPDATED") + " " + mLocale(service.updated_at)}</em>
+					<h2>{service.name}</h2>
 					<p dangerouslySetInnerHTML={{ __html: hotlinkTels(service.description) }} />
 
 					{service.additional_info && <h3>{t("Additional Information")}</h3>}
@@ -147,7 +161,7 @@ class ServiceDetail extends React.Component {
 					{service.address && <h3>{t("Address")}</h3>}
 					{service.address && <p>{service.address}</p>}
 
-					{service.address_in_country_language && <h3>{t("Address in Country Language")}</h3>}
+					{service.address_in_country_language && <h3>{t("Address in Local Language")}</h3>}
 					{service.address_in_country_language && <p>{service.address_in_country_language}</p>}
 
 					{point && (

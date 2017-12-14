@@ -1,4 +1,4 @@
 /* global window */
-import React, { Component, PureComponent } from "react";
+import React from "react";
 
-export default class App extends Component {}
+export default class App extends React.Component {}

@@ -2,7 +2,6 @@ import services from "./backend";
 import actions from "./actions";
 import isMobile from "./shared/isMobile";
 import cms from "./content/cms";
-import queryString from "query-string";
 import getSessionStorage from "./shared/sessionStorage";
 import defaultLanguage from "./shared/defaultLanguage";
 import getDirection from "./shared/getDirection";
