@@ -70,7 +70,6 @@ class ServiceDetail extends React.Component {
 			let a = moment(d)
 				.locale(language)
 				.format("LLL");
-			console.log(d, language, a);
 			return a;
 		};
 		const amPmTime = time => {
@@ -174,12 +173,14 @@ class ServiceDetail extends React.Component {
 						</p>
 					)}
 
-					{relatedServices.length > 0 && <h3>{t("Other services at this location")}:</h3>}
+					{relatedServices.length > 0 && <h3>{t("OTHER_SERVICES")}:</h3>}
 					{relatedServices && (
 						<ul className="RelatedServices">
 							{relatedServices.map(r => (
 								<li key={r.id} onClick={() => goToService(r.id)}>
-									<btn-muted>{r.name}</btn-muted>
+									<btn className="muted">
+										<a href="javascript:void(0)">{r.name}</a>
+									</btn>
 								</li>
 							))}
 						</ul>

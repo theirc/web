@@ -105,7 +105,6 @@ const mapDispatch = (d, p) => {
 			return Promise.resolve(true);
 		},
 		onNavigateTo: (category, country) => slug => {
-			console.log('Trying to go to', category, country, slug)
 			setTimeout(() => {
 				d(push(`/${country.fields.slug}/${category.fields.slug}/${slug}`));
 			}, 200);

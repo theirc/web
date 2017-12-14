@@ -125,6 +125,7 @@ export default {
 			"Back to List": "بازگشت به لیست",
 			"Loading location": "بارگذاری موقعیت مکانی",
 			LOCATION_ERROR: "ما نمی‌توانیم موقعیت شما را تشخیص دهیم. لطفن یک مکان را از لیست انتخاب کنید",
+			OTHER_SERVICES: "Other services at this location",
 		},
 	},
 	ar: {
@@ -254,6 +255,7 @@ export default {
 			"Back to List": "العودة إلى القائمة",
 			"Loading location": "تحميل الموقع",
 			LOCATION_ERROR: "عذراً، لا يمكن العثور على موقعك. الرجاء اختيار الموقع من القائمة",
+			OTHER_SERVICES: "Other services at this location",
 		},
 	},
 	ur: {
@@ -380,6 +382,7 @@ export default {
 			"Back to List": "فہرست میں واپس",
 			"Loading location": "مقام/لوکیشن لوڈ ہو رہی ہے",
 			LOCATION_ERROR: "ہم آپ کے مقام کا تعین نہیں کر سکتے ہیں. برائے مہربانی فہرست سے مقام منتخب کریں",
+			OTHER_SERVICES: "Other services at this location",
 		},
 	},
 	en: {
@@ -506,6 +509,7 @@ export default {
 			"Back to List": "Back to List",
 			"Loading location": "Loading location",
 			LOCATION_ERROR: "We cannot determine your location. Please select a location from the list",
+			OTHER_SERVICES: "Other services at this location",
 		},
 	},
 };
