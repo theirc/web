@@ -43,14 +43,14 @@ class Search extends React.Component {
 		const qs = queryString.parse(location.search);
 		this.setState({ articles: [], services: [], searchingArticles: true, searchingServices: true, term: qs.q });
 		const { api, config } = this.context;
-
+		const languageDictionary = config.languageDictionary || {};
 		setTimeout(s => {
 			api.client
 				.getEntries({
 					content_type: "article",
 					"fields.country.sys.id": country.sys.id,
 					query: qs.q,
-					locale: config.languageDictionary[language] || language,
+					locale: languageDictionary[language] || language,
 				})
 				.then(response => this.setState({ articles: response.items, searchingArticles: false }))
 				.catch(e => {
@@ -67,8 +67,8 @@ class Search extends React.Component {
 	render() {
 		const { searchingArticles, searchingServices, articles, services, term } = this.state;
 		const { onNavigate, country } = this.props;
-		const {  config } = this.context;
-		
+		const { config } = this.context;
+
 		return (
 			<SearchPage
 				hideServices={config.hideServiceMap}
