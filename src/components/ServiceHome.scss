@@ -431,9 +431,14 @@
 		a {
 			color: white;
 		}
+		.HeroImageContainer {
+			padding: 0;
+			margin: auto;
+			margin-bottom: -3px;
+		}
 	}
 
-	.hero > img {
+	.hero .HeroImageContainer > img {
 		max-width: 100%;
 	}
 

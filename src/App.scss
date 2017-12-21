@@ -83,12 +83,14 @@ i.material-icons,
 i.icon,
 i.fa {
 	.rtl & {
+		/*
 		-moz-transform: scaleX(-1);
 		-o-transform: scaleX(-1);
 		-webkit-transform: scaleX(-1);
 		transform: scaleX(-1);
 		filter: FlipH;
 		-ms-filter: "FlipH";
+		*/
 	}
 }
 

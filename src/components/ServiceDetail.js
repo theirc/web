@@ -127,7 +127,7 @@ class ServiceDetail extends React.Component {
 						<small>{t("Service Provider")}:</small>
 						{serviceProviderElement(service)}
 					</h2>
-					{service.image && <img src={service.image} alt={service.provider.name} />}
+					{service.image && <div class="HeroImageContainer"><img src={service.image} alt={service.provider.name} /></div>}
 				</div>
 
 				<article>
