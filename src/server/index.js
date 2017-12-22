@@ -100,7 +100,7 @@ const parseLanguage = function(req) {
 			selectedLanguage = favoriteLanguage;
 		}
 	}
-	
+
 	return selectedLanguage;
 };
 
