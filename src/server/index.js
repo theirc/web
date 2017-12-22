@@ -86,7 +86,10 @@ var mainRequest = function(context) {
 };
 const parseLanguage = function(req) {
 	let selectedLanguage = "en";
-	if ("accept-language" in req.headers) {
+
+	if ("language" in req.query) {
+		selectedLanguage = req.query.language;
+	} else if ("accept-language" in req.headers) {
 		let languages = req.headers["accept-language"]
 			.split(",")
 			.map(l => _.first(l.split("-")))
@@ -97,9 +100,7 @@ const parseLanguage = function(req) {
 			selectedLanguage = favoriteLanguage;
 		}
 	}
-	if ("language" in req.query) {
-		selectedLanguage = req.query.language;
-	}
+	
 	return selectedLanguage;
 };
 
