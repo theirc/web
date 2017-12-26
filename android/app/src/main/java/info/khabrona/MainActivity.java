@@ -1,4 +1,4 @@
-package com.signpost;
+package info.khabrona;
 
 import com.facebook.react.ReactActivity;
 
