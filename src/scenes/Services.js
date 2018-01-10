@@ -207,9 +207,9 @@ class Services extends React.Component {
 	}
 
 	serviceTypes() {
-		const { language } = this.props;
+		const { language, country } = this.props;
 
-		return servicesApi.fetchCategories(language);
+		return servicesApi.fetchCategories(language, country.fields.slug);
 	}
 
 	render() {

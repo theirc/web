@@ -9,21 +9,21 @@ var RI_URL = "https://admin.refugee.info/e/production/v2";
 //var RI_URL = "http://localhost:8000/e/production/v2";
 
 module.exports = {
-	fetchCategories(language) {
+	fetchCategories(language, region) {
 		return new Promise((resolve, reject) => {
 			const sessionStorage = getSessionStorage();
-			if (sessionStorage[`${language}-service-categories`]) {
-				resolve(JSON.parse(sessionStorage[`${language}-service-categories`]));
+			if (sessionStorage[`${language}-${region}-service-categories`]) {
+				resolve(JSON.parse(sessionStorage[`${language}-${region}-service-categories`]));
 			} else {
 				request
-					.get(RI_URL + "/service-types/")
+					.get(RI_URL + "/service-types/" + (region ? `?region=${region}` : ""))
 					.set("Accept-Language", language)
 					.end((err, res) => {
 						if (err) {
 							reject(err);
 							return;
 						}
-						sessionStorage[`${language}-service-categories`] = JSON.stringify(res.body);
+						sessionStorage[`${language}-${region}-service-categories`] = JSON.stringify(res.body);
 						resolve(res.body);
 					});
 			}
@@ -72,7 +72,14 @@ module.exports = {
 	},
 	fetchAllServices(country, language, categoryId, searchTerm, pageSize = 1000) {
 		return new Promise((resolve, reject) => {
-			var requestUrl = "/services/search/?filter=relatives&geographic_region=" + country + "&page=1&page_size=" + pageSize + "&type_numbers=" + (categoryId || "") + (searchTerm ? "&search=" + searchTerm : "");
+			var requestUrl =
+				"/services/search/?filter=relatives&geographic_region=" +
+				country +
+				"&page=1&page_size=" +
+				pageSize +
+				"&type_numbers=" +
+				(categoryId || "") +
+				(searchTerm ? "&search=" + searchTerm : "");
 			request
 				.get(RI_URL + requestUrl)
 				.set("Accept-Language", language)
