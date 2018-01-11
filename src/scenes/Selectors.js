@@ -34,7 +34,7 @@ class Selectors extends Component {
 			language = languages[0][0];
 		}
 
-		if (language && !!sessionStorage.firstRequest) {
+		if (language && (!!sessionStorage.firstRequest || languages.length === 1)) {
 			this.selectLanguage(language, 0);
 		}
 	}
