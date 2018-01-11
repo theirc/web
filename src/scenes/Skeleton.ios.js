@@ -200,6 +200,7 @@ class Skeleton extends React.Component {
 							<Footer
 								questionLink={config.questionLink}
 								disableCountrySelector={!!config.disableCountrySelector}
+								disableLanguageSelector={!!config.disableLanguageSelector}
 								onChangeLocation={onChangeLocation}
 								onChangeLanguage={onChangeLanguage}
 								deviceType={deviceType}

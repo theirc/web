@@ -6,7 +6,7 @@ import { translate } from "react-i18next";
 
 class Footer extends Component {
 	render() {
-		const { onChangeLocation, onChangeLanguage, disableCountrySelector, questionLink, deviceType, t } = this.props;
+		const { onChangeLocation, onChangeLanguage, disableCountrySelector, disableLanguageSelector, questionLink, deviceType, t } = this.props;
 		const year = moment().year();
 
 		return (
@@ -18,22 +18,26 @@ class Footer extends Component {
 					</a>
 				</div>
 				<div className="dark">
-					<div className="button-container">
-						{!disableCountrySelector && (
-							<div className="button left" onClick={onChangeLocation}>
-								<div className="icon-container">
-									<MyLocation />
+					{(!disableCountrySelector || !disableLanguageSelector) && (
+						<div className="button-container">
+							{!disableCountrySelector && (
+								<div className="button left" onClick={onChangeLocation}>
+									<div className="icon-container">
+										<MyLocation />
+									</div>
+									<span>{t("Change Location")}</span>
 								</div>
-								<span>{t("Change Location")}</span>
-							</div>
-						)}
-						<div className="button" onClick={onChangeLanguage}>
-							<div className="icon-container">
-								<i className="material-icons">translate</i>
-							</div>
-							<span>{t("Change Language")}</span>
+							)}
+							{!disableLanguageSelector && (
+								<div className="button" onClick={onChangeLanguage}>
+									<div className="icon-container">
+										<i className="material-icons">translate</i>
+									</div>
+									<span>{t("Change Language")}</span>
+								</div>
+							)}
 						</div>
-					</div>
+					)}
 					{/*
 					<span>Mission statement.</span>
 					{deviceType === "Android" && <img src={`/google-play-badge.png`} className="app-store-logo" alt="Get it on Google Play" />}

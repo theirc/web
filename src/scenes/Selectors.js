@@ -24,8 +24,15 @@ class Selectors extends Component {
 	};
 
 	componentWillMount() {
-		const { language } = this.props;
+		let { language } = this.props;
 		const sessionStorage = getSessionStorage();
+
+		const { config } = this.context;
+		const { languages } = config;
+
+		if (languages.length === 1) {
+			language = languages[0][0];
+		}
 
 		if (language && !!sessionStorage.firstRequest) {
 			this.selectLanguage(language, 0);

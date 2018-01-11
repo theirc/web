@@ -7,7 +7,6 @@ function cmsApi(config) {
 		en: "en-US",
 		ar: "ar-001",
 		fa: "fa-AF",
-		es: "es-491",
 	};
 
 	let client = contentful.createClient({
