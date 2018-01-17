@@ -180,16 +180,14 @@ btnmuted {
 		background-color: #f2f2f2;
 		color: lighten(black, 20%);
 
+		font-size: 100%;
+		text-decoration: none;
+		border: 0;
+
 		&:active {
 			background-color: $dividerColor;
 		}
 		&:hover {
-			border: 0;
-		}
-
-		a {
-			font-size: 100%;
-			text-decoration: none;
 			border: 0;
 		}
 	}
@@ -197,4 +195,13 @@ btnmuted {
 
 #root {
 	background-color: darken(gray, 30%);
+}
+
+.rtl a {
+	text-decoration: none;
+	border-bottom: 2px black solid;
+	line-height: 100%;
+}
+li {
+	margin-bottom: 0.5em;
 }

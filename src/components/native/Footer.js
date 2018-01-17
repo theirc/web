@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { translate } from "react-i18next";
-import { View, TouchableOpacity, StyleSheet, Image } from "react-native";
+import { View, TouchableOpacity, StyleSheet, Image, Linking } from "react-native";
 import moment from "moment";
 import PropTypes from "prop-types";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -18,12 +18,17 @@ class Footer extends Component {
 		const { onChangeLocation, onChangeLanguage, disableCountrySelector, disableLanguageSelector, questionLink, deviceType, t } = this.props;
 		const year = moment().year();
 		const { theme } = this.context;
+		const openAskUs = () => {
+			Linking.openURL(questionLink);
+		};
 
 		return (
 			<View>
 				<View style={[styles.light, { backgroundColor: theme.color }]}>
 					<Text style={[styles.lightText, { color: theme.inverse }]}>{t("Can't find specific information?")}</Text>
-					<Text style={[styles.lightLink, { color: theme.inverse }]}>{t("Ask us a question")}</Text>
+					<TouchableOpacity onPress={() => openAskUs()}>
+						<Text style={[styles.lightLink, { color: theme.inverse }]}>{t("Ask us a question")}</Text>
+					</TouchableOpacity>
 				</View>
 				<View style={styles.footerButtonContainer}>
 					{!disableLanguageSelector && (

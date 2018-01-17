@@ -39,7 +39,7 @@ module.exports = {
 		logo: "/ki-logo.png",
 		title: "Khabrona.Info",
 		disableCountrySelector: true,
-		questionLink: "mailto:tellus@khabrona.info",
+		questionLink: "mailto:jo-khabrona-info@mercycorps.org",
 		hideServiceMap: true,
 		favicon: "/ki-favicon.png",
 		gaTracker: "UA-68574649-7",
