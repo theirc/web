@@ -97,8 +97,9 @@ android {
         applicationId "info.khabrona"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 1
-        versionName "1.0"
+        versionCode System.env.VERSION_CODE ? System.env.VERSION_CODE.toInteger() : "1".toInteger()
+        versionName System.env.VERSION_NAME ?: "1.0"
+        manifestPlaceholders = [versionCode: System.env.VERSION_CODE ?: "1", versionName: System.env.VERSION_NAME ?: "1.0"]
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }

@@ -259,7 +259,9 @@ app.get("/:country/:category/:article", function(req, res, err) {
 							})(req, res, err);
 						}
 					})
-					.catch(e => mainRequest({})(req, res, err));
+					.catch(e => {
+						res.redirect(`/${country}/`);
+					});
 			});
 		}
 	} catch (e) {
