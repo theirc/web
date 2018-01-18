@@ -54,7 +54,7 @@ class ServiceDetail extends React.Component {
 		const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 		if (!service) {
 			return (
-				<div className="ServiceDetail">
+				<div className="ServiceList">
 					<HeaderBar title={t("Service Detail")} />
 					<div className="loader" />
 				</div>

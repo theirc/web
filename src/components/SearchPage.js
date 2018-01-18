@@ -42,7 +42,7 @@ class SearchPage extends React.Component {
 								onClick={() => onNavigate(`/${article.fields.country.fields.slug}/${article.fields.category.fields.slug}/${article.fields.slug}`)}
 							>
 								{article.fields.hero && <div className="Image" style={{ backgroundImage: `url('${article.fields.hero.fields.file.url}')` }} />}
-								<div className="Text">
+								<div className={`Text ${article.fields.hero ? 'TextWithImage' : ''}`}>
 									<h2> {article.fields.title}</h2>
 									<p dangerouslySetInnerHTML={{ __html: md.render(article.fields.lead) }} />
 								</div>
@@ -72,7 +72,7 @@ class SearchPage extends React.Component {
 							i > 0 && <hr className="line" key={`hr-${s.id}`} />,
 							<div key={s.id} className="Service" onClick={() => onNavigate(`/${country.fields.slug}/services/${s.id}/`)}>
 								{s.image && <div className="Image" style={{ backgroundImage: `url('${s.image}')` }} />}
-								<div className="Text">
+								<div className={`Text ${s.image ? 'TextWithImage' : ''}`}>
 									<h2>{s.name}</h2>
 
 									<h3>
