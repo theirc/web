@@ -254,12 +254,13 @@ app.get("/:country/:category/:article", function(req, res, err) {
 						} else {
 							return mainRequest({
 								title: match.fields.title,
-								description: match.fields.lead.replace(/&nbsp;/gi, " "),
+								description: (match.fields.lead || "").replace(/&nbsp;/gi, " "),
 								image: (match.fields.hero && match.fields.hero.fields.file && "https:" + match.fields.hero.fields.file.url) || "",
 							})(req, res, err);
 						}
 					})
 					.catch(e => {
+						console.log(e);
 						res.redirect(`/${country}/`);
 					});
 			});
