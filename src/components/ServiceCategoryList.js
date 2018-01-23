@@ -65,7 +65,7 @@ class ServiceCategoryList extends React.Component {
 	}
 	render() {
 		const { categories } = this.state;
-		const { t, locationEnabled, toggleLocation, listAllServices, goToNearby } = this.props;
+		const { t, locationEnabled, toggleLocation, listAllServices, goToNearby, goToMap } = this.props;
 		if ((categories || []).length === 0) {
 			return (
 				<div className="ServiceCategoryList">
@@ -97,6 +97,12 @@ class ServiceCategoryList extends React.Component {
 						<div className="container" onClick={() => goToNearby()}>
 							<i className="fa fa-compass" />
 							<strong>Near Me</strong>
+						</div>
+					</li>
+					<li>
+						<div className="container" onClick={() => goToMap()}>
+							<i className="fa fa-compass" />
+							<strong>Service Map</strong>
 						</div>
 					</li>
 					{sortedCategories.map(c => this.renderCategory(c))}
