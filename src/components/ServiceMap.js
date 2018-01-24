@@ -2,8 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./ServiceHome.css";
 import { translate } from "react-i18next";
-import _ from "lodash";
-import HeaderBar from "./HeaderBar";
 
 var tinycolor = require("tinycolor2");
 
@@ -95,8 +93,7 @@ class ServiceMap extends React.Component {
 	}
 
 	render() {
-		const { services, category, loaded, errorMessage } = this.state;
-		const { t, locationEnabled, toggleLocation, nearby } = this.props;
+		const { loaded, errorMessage } = this.state;
 
 		return (
 			<div className="ServiceMap">
