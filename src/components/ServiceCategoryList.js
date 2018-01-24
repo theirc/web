@@ -101,7 +101,7 @@ class ServiceCategoryList extends React.Component {
 					</li>
 					<li>
 						<div className="container" onClick={() => goToMap()}>
-							<i className="fa fa-compass" />
+							<i className="fa fa-map" />
 							<strong>Service Map</strong>
 						</div>
 					</li>

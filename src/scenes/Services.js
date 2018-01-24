@@ -243,6 +243,25 @@ class Services extends React.Component {
 						)}
 					/>{" "}
 					<Route
+						path={`${match.url}/map/`}
+						exact
+						component={props => (
+							<Skeleton>
+								<div className="SkeletonContainer">
+									<ServiceMap
+										{...props}
+										goToService={goToService}
+										locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
+										measureDistance={this.measureDistance(geolocation, language)}
+										toggleLocation={() => _.identity()}
+										servicesByType={() => this.fetchAllServicesNearby()}
+										nearby={true}
+									/>
+								</div>
+							</Skeleton>
+						)}
+					/>
+					<Route
 						path={`${match.url}/nearby/`}
 						exact
 						component={props => (
@@ -346,14 +365,6 @@ class Services extends React.Component {
 									goToMap={() => goToMap()}
 								/>
 							</div>
-						</Skeleton>
-					)}
-				/>
-				<Route
-					path={`${match.url}/map/`}
-					component={() => (
-						<Skeleton hideFooter={true}>
-							<ServiceMap services={[]} />
 						</Skeleton>
 					)}
 				/>
