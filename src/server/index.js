@@ -62,7 +62,6 @@ app.get("/config", (rq, res) => {
 
 var mainRequest = function(context) {
 	return function(request, response, next) {
-		console.log("context",context);
 		let configKey = _.first(
 			Object.keys(conf).filter(k => {
 				return request.headers.host.indexOf(k) > -1;
@@ -72,7 +71,7 @@ var mainRequest = function(context) {
 		if (configKey) {
 			const { appId } = conf[configKey];
 			context = Object.assign(context || {}, { appId: appId });
-			context.title = context.title || conf[configKey].title;			
+			context.title = context.title || conf[configKey].title;
 		}
 
 		fs.readFile(path.join(path.dirname(path.dirname(__dirname)), "build", "index.html"), (err, data) => {
@@ -160,11 +159,7 @@ app.get("/preview/:serviceId/", function(req, res, err) {
 app.get("/:country/services/:serviceId/", function(req, res, err) {
 	const selectedLanguage = parseLanguage(req);
 	const { country, serviceId } = req.params;
-	let configKey = _.first(
-		Object.keys(conf).filter(k => {
-			return req.headers.host.indexOf(k) > -1;
-		})
-	);
+
 	try {
 		getFirsLevel(country, selectedLanguage).then(c => {
 			if (c !== country) {
@@ -175,7 +170,7 @@ app.get("/:country/services/:serviceId/", function(req, res, err) {
 				.fetchServiceById(selectedLanguage, serviceId)
 				.then(s => {
 					return mainRequest({
-						title: s.name || conf[configKey].title,
+						title: s.name,
 						description: toMarkdown(s.description, markdownOptions).replace(/&nbsp;/gi, " "),
 						image: s.image,
 					})(req, res, err);
@@ -183,8 +178,7 @@ app.get("/:country/services/:serviceId/", function(req, res, err) {
 				.catch(e => mainRequest({})(req, res, err));
 		});
 	} catch (e) {
-		console.log("*####ERROR****",e);
-		mainRequest({title: "error", description: "", image: ""})(req, res, err);
+		mainRequest({ description: e.toString(), image: "" })(req, res, err);
 	}
 });
 app.get("/:country/services/", function(req, res, err) {
@@ -204,7 +198,9 @@ app.get("/:country/services/", function(req, res, err) {
 		if (req.query.type) {
 			res.redirect(`/${country}/services/by-category/${req.query.type}/`);
 		} else {
-			mainRequest({title: "error type"})(req, res, err);
+			// There is no ?type= x in the query string
+			// https://www.refugee.info/greece/services/?type=x is the format old site
+			mainRequest({})(req, res, err);
 		}
 	});
 });
@@ -233,7 +229,7 @@ app.get("/:country/:category/:article", function(req, res, err) {
 				const { accessToken, space } = conf[configKey];
 				languageDictionary = Object.assign(languageDictionary, conf[configKey]);
 
-				let cms = cmsApi(conf[configKey], languageDictionary);				
+				let cms = cmsApi(conf[configKey], languageDictionary);
 				cms.client
 					.getEntries({
 						content_type: "article",
@@ -242,7 +238,7 @@ app.get("/:country/:category/:article", function(req, res, err) {
 					})
 					.then(c => {
 						let match = _.first(c.items.filter(i => i.fields.country.fields.slug === country && i.fields.category.fields.slug === category));
-						console.log("match"+match);
+						console.log("match" + match);
 						if (!match) {
 							cms.client
 								.getEntries({
@@ -258,9 +254,9 @@ app.get("/:country/:category/:article", function(req, res, err) {
 									}
 								});
 						} else {
-							console.log("fields:"+match.fields);
+							console.log("fields:" + match.fields);
 							return mainRequest({
-								title: match.fields.title || conf[configKey].title,
+								title: match.fields.title,
 								description: (match.fields.lead || "").replace(/&nbsp;/gi, " "),
 								image: (match.fields.hero && match.fields.hero.fields.file && "https:" + match.fields.hero.fields.file.url) || "",
 							})(req, res, err);
@@ -273,8 +269,7 @@ app.get("/:country/:category/:article", function(req, res, err) {
 			});
 		}
 	} catch (e) {
-		console.log(e);
-		mainRequest({title: "error", description: "", image: ""})(req, res, err);
+		mainRequest({ description: e.toString(), image: "" })(req, res, err);
 	}
 });
 
