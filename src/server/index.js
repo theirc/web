@@ -72,6 +72,7 @@ var mainRequest = function(context) {
 			const { appId } = conf[configKey];
 			context = Object.assign(context || {}, { appId: appId });
 			context.title = context.title || conf[configKey].title;
+			context.image = context.image || conf[configKey]["thumbnail"];
 		}
 
 		fs.readFile(path.join(path.dirname(path.dirname(__dirname)), "build", "index.html"), (err, data) => {
