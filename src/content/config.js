@@ -31,7 +31,7 @@ module.exports = {
 		favicon: "/favicon.ico",
 		gaTracker: "UA-68574649-6",
 		appId: "708254579325899",
-		"thumbnail": "/images/logos/Page-thumbnails-logos-wbg_B.png",
+		"thumbnail": "/images/logos/ri-thumbnail.png",
 	},
 	"khabrona.info": {
 		theme: "mc",
@@ -46,7 +46,7 @@ module.exports = {
 		favicon: "/ki-favicon.png",
 		gaTracker: "UA-68574649-7",
 		appId: "154471931830995",
-		"thumbnail": "/images/logos/KHB-logo.png",
+		"thumbnail": "/images/logos/ki-thumbnail.png",
 	},
 	"cuentanos.org": {
 		theme: "generic",
@@ -61,7 +61,7 @@ module.exports = {
 		favicon: "/cn-favicon.png",
 		gaTracker: "UA-68574649-8",
 		appId: "708254579325899",
-		"thumbnail": "/images/logos/CN-logo-WBG.jpg",
+		"thumbnail": "/images/logos/cn-thumnbnail.jpg",
 	},
 	localhost: {
 		theme: "irc",
@@ -76,6 +76,6 @@ module.exports = {
 		favicon: "/favicon.ico",
 		gaTracker: "UA-68574649-6",
 		appId: "708254579325899",
-		"thumbnail": "/images/logos/Page-thumbnails-logos-wbg_B.png",
+		"thumbnail": "/images/logos/ri-thumbnail.png",
 	},
 };
