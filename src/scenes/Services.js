@@ -213,7 +213,7 @@ class Services extends React.Component {
 	}
 
 	render() {
-		const { match, listServicesInCategory, goToNearby, goToService, language, listAllServices } = this.props;
+		const { match, listServicesInCategory, goToMap, goToNearby, goToService, language, listAllServices } = this.props;
 
 		const { sortingByLocationEnabled, geolocation, errorWithGeolocation } = this.state;
 
@@ -242,6 +242,25 @@ class Services extends React.Component {
 							</Skeleton>
 						)}
 					/>{" "}
+					<Route
+						path={`${match.url}/map/`}
+						exact
+						component={props => (
+							<Skeleton>
+								<div className="SkeletonContainer">
+									<ServiceMap
+										{...props}
+										goToService={goToService}
+										locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
+										measureDistance={this.measureDistance(geolocation, language)}
+										toggleLocation={() => _.identity()}
+										servicesByType={() => this.fetchAllServicesNearby()}
+										nearby={true}
+									/>
+								</div>
+							</Skeleton>
+						)}
+					/>
 					<Route
 						path={`${match.url}/nearby/`}
 						exact
@@ -343,16 +362,9 @@ class Services extends React.Component {
 									onSelectCategory={onSelectCategory}
 									listAllServices={listAllServices}
 									goToNearby={() => goToNearby()}
+									goToMap={() => goToMap()}
 								/>
 							</div>
-						</Skeleton>
-					)}
-				/>
-				<Route
-					path={`${match.url}/map/`}
-					component={() => (
-						<Skeleton hideFooter={true}>
-							<ServiceMap services={[]} />
 						</Skeleton>
 					)}
 				/>
@@ -378,6 +390,9 @@ const mapDispatch = (d, p) => {
 		},
 		goToNearby() {
 			return d(push(`/${p.country.fields.slug}/services/nearby/`));
+		},
+		goToMap() {
+			return d(push(`/${p.country.fields.slug}/services/map/`));
 		},
 		showErrorMessage(error) {
 			d(actions.showErrorMessage(error));

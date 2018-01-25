@@ -208,7 +208,7 @@
 	}
 }
 
-.ServiceList {
+.ServiceList, .ServiceMap {
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: column;
@@ -348,6 +348,16 @@
 	.Error {
 		padding: 16px 16px;
 	}
+}
+
+.ServiceMap {
+  .Item {
+    border-bottom: 0;
+  }
+  .leaflet-popup-tip-container {
+    display: block;
+    margin-top: -1px;
+  }
 }
 
 .ServiceDetail {
