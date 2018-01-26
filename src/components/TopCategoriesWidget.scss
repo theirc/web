@@ -1,0 +1,15 @@
+.TopCategories {
+    h3 {
+        text-transform: uppercase;
+    }
+    .ltr & {
+        s {
+            float: right;
+        }
+    }
+    .rtl & {
+        s {
+            float: left;
+        }
+    }
+}
