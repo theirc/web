@@ -1,4 +1,3 @@
-import cms from "../content/cms";
 import queryString from "query-string";
 import getSessionStorage from "./sessionStorage";
 import appConfig from "../../config.app.json";

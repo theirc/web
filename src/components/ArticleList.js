@@ -6,7 +6,7 @@ class ArticleList extends React.Component {
     
 
     render() {
-        const { country, category, onNavigate, t , md} =this.props;
+        const { category, onNavigate,  md} =this.props;
         return (
             <div className="ArticleListPage">
                 <div className="Title">
@@ -16,7 +16,7 @@ class ArticleList extends React.Component {
                 </div>
                 <div className="list">
                     {category.fields.articles && category.fields.articles.map((article, i) => {
-                        let hero = article.fields.hero;
+                        // let hero = article.fields.hero;
 
                         return [
                             i > 0 && <hr className="line" key={`hr-${article.sys.id}`} />,

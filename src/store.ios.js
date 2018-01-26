@@ -2,7 +2,6 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 
 import reducers from "./reducers"; // Or wherever you keep your reducers
 import actions from "./actions";
-import c from "./content/cms";
 
 import { routerMiddleware } from "react-router-redux";
 import { routerReducer } from "react-router-redux";

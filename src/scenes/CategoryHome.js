@@ -1,10 +1,7 @@
 import React from 'react';
-import services from '../backend';
 import { connect } from 'react-redux'
 import {ArticleList} from '../components'
 import { push } from "react-router-redux";
-import { translate } from "react-i18next";
-import PropTypes from "prop-types";
 
 const Remarkable = require("remarkable");
 
