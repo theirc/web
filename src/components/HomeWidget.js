@@ -81,7 +81,7 @@ class HomeWidget extends Component {
 
 	renderArticle(article, category, showHero = true, showFullArticle = false) {
 		const { country, onNavigate, t } = this.props;		
-
+		
 		/*jshint ignore:start*/
 		/*eslint-disable*/
 		return (
@@ -91,7 +91,7 @@ class HomeWidget extends Component {
 				t = {t}
 				article = {article}
 				category = {category}
-				showhero = {showHero}
+				showHero = {showHero}
 				showFullArticle = {showFullArticle}
 			/>
 		);
