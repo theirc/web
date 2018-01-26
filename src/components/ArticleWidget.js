@@ -1,12 +1,10 @@
 import React, { Component } from "react";
-import _ from "lodash";
 import { translate } from "react-i18next";
 import FacebookPlayer from "react-facebook-player";
 import YouTube from "react-youtube";
-import cms from "../content/cms";
 import "./ArticleWidget.css";
+import PropTypes from 'prop-types';
 
-const APP_ID = cms.siteConfig.appId;
 const Remarkable = require("remarkable");
 const md = new Remarkable("full", {
 	html: true,
@@ -16,8 +14,13 @@ const md = new Remarkable("full", {
 });
 
 class ArticleWidget extends Component {
-    renderVideo(article) {
+	static contextTypes = {
+		config: PropTypes.object,
+	};
+
+	renderVideo(article) {
 		const { url } = article.fields;
+		const APP_ID = this.context.config.appId;
 
 		if (/facebook.com/.test(url)) {
 			let videoId = url.replace(/.*facebook.com\/.*\/videos\/(.*)\/.*/, "$1");
@@ -28,11 +31,10 @@ class ArticleWidget extends Component {
 			return <YouTube videoId={videoId} className={"YouTube"} />;
 		}
 		return null;
-    }
-    
-    render(){        
+	}
 
-        const { country, onNavigate, t, article, category, showHero, showFullArticle } = this.props;
+	render() {
+		const { country, onNavigate, t, article, category, showHero, showFullArticle } = this.props;
 		if (!article) {
 			// Anti pattern, but saves 1 or more ifs.
 			return null;
@@ -43,17 +45,17 @@ class ArticleWidget extends Component {
 			categorySlug = category.fields.slug;
 		}
 
-        let content = showFullArticle ? article.fields.content : article.fields.lead;
-        let showFullArt = showFullArticle;
+		let content = showFullArticle ? article.fields.content : article.fields.lead;
+		let showFullArt = showFullArticle;
 		const { contentType } = article.sys;
 		if (contentType.sys.id === "video") {
 			content = article.fields.lead;
 			showFullArt = true;
 		}
-        let hero = article.fields.hero;
-        
-        return (
-            <div className="Article" key={article.sys.id}>
+		let hero = article.fields.hero;
+
+		return (
+			<div className="Article" key={article.sys.id}>
 				{hero &&
 					hero.fields &&
 					hero.fields.file &&
@@ -79,8 +81,8 @@ class ArticleWidget extends Component {
 					</s>
 				)}
 			</div>
-        );
-    }
+		);
+	}
 }
 
 export default translate()(ArticleWidget);

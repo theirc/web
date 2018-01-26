@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import servicesApi from "../content/servicesApi";
-import c from "../content/cms";
 import { SearchPage } from "../components";
 import queryString from "query-string";
 import { push } from "react-router-redux";

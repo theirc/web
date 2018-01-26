@@ -3,25 +3,13 @@ import moment from "moment";
 import _ from "lodash";
 
 import { translate } from "react-i18next";
-import YouTube from "react-youtube";
-import cms from "../content/cms";
 import "./HomeWidget.css";
-import {TopCategoriesWidget} from "./";
-import {LocalGuideWidget} from "./";
-import {ArticleWidget} from "./";
-import {CategoryWidget} from "./";
+import { TopCategoriesWidget } from "./";
+import { LocalGuideWidget } from "./";
+import { ArticleWidget } from "./";
+import { CategoryWidget } from "./";
 
-const APP_ID = cms.siteConfig.appId;
-const Remarkable = require("remarkable");
-const md = new Remarkable("full", {
-	html: true,
-	linkify: true,
-	typographer: true,
-	breaks: true,
-});
-
-class HomeWidget extends Component {	
-
+class HomeWidget extends Component {
 	renderWidget(w) {
 		if (w.fields.type === "Latest Article of Category") {
 			let category = _.first(w.fields.related);
@@ -46,72 +34,41 @@ class HomeWidget extends Component {
 	}
 
 	renderLocalGuide(guideItems) {
-		const { country, onNavigate, t } = this.props;
+		const { country, onNavigate } = this.props;
 
 		/*jshint ignore:start*/
 		/*eslint-disable*/
-		return (
-			<LocalGuideWidget
-				country = {country}
-				onNavigate = {onNavigate}
-				t = {t}	
-				guideItems = {guideItems}				
-			/>
-		);
+		return <LocalGuideWidget country={country} onNavigate={onNavigate} t={t} guideItems={guideItems} />;
 		/*eslint-enable*/
 		/*jshint ignore:end*/
 	}
 
 	renderTopCategories(categories) {
-		let articleFunc = category => category.fields.overview || _.first(category.fields.articles);
-		const { country, onNavigate, t } = this.props;
+		const { country, onNavigate } = this.props;
 
 		/*jshint ignore:start*/
 		/*eslint-disable*/
-		return (			
-			<TopCategoriesWidget
-				country = {country}
-				onNavigate = {onNavigate}	
-				categories = {categories}			
-			/>
-		);
+		return <TopCategoriesWidget country={country} onNavigate={onNavigate} categories={categories} />;
 		/*eslint-enable*/
 		/*jshint ignore:end*/
-	}	
+	}
 
 	renderArticle(article, category, showHero = true, showFullArticle = false) {
-		const { country, onNavigate, t } = this.props;		
-		
+		const { country, onNavigate } = this.props;
+
 		/*jshint ignore:start*/
 		/*eslint-disable*/
-		return (
-			<ArticleWidget
-				country = {country}
-				onNavigate = {onNavigate}
-				t = {t}
-				article = {article}
-				category = {category}
-				showHero = {showHero}
-				showFullArticle = {showFullArticle}
-			/>
-		);
+		return <ArticleWidget country={country} onNavigate={onNavigate} t={t} article={article} category={category} showHero={showHero} showFullArticle={showFullArticle} />;
 		/*eslint-enable*/
 		/*jshint ignore:end*/
 	}
 
 	renderCategory(c) {
-		const { country, onNavigate, t } = this.props;	
+		const { country, onNavigate } = this.props;
 
 		/*jshint ignore:start*/
 		/*eslint-disable*/
-		return (
-			<CategoryWidget
-				country = {country}
-				onNavigate = {onNavigate}
-				t = {t}	
-				c = {c}		
-			/>						
-		);
+		return <CategoryWidget country={country} onNavigate={onNavigate} t={t} c={c} />;
 		/*eslint-enable*/
 		/*jshint ignore:end*/
 	}

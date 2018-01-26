@@ -1,16 +1,15 @@
 import React, { Component } from "react";
-import _ from "lodash";
 import { translate } from "react-i18next";
 import "./LocalGuideWidget.css";
 
 class LocalGuideWidget extends Component {
-    render(){
-        const { country, onNavigate, t, guideItems} = this.props;
+	render() {
+		const { country, onNavigate, t, guideItems } = this.props;
 
-        /*jshint ignore:start*/
-        /*eslint-disable*/
-        return (
-            <div className="LocalGuide">
+		/*jshint ignore:start*/
+		/*eslint-disable*/
+		return (
+			<div className="LocalGuide">
 				<s>
 					<a
 						href="#"
@@ -49,8 +48,8 @@ class LocalGuideWidget extends Component {
 					})}
 				</div>
 			</div>
-        );
-    }
+		);
+	}
 }
 
 export default translate()(LocalGuideWidget);

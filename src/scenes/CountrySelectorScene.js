@@ -17,7 +17,7 @@ class CountrySelectorScene extends Component {
 	};
 
 	componentWillMount() {
-		const { onMountOrUpdate, language } = this.props;
+		const { language } = this.props;
 		const { api } = this.context;
 
 		api
