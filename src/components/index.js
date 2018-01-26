@@ -16,6 +16,10 @@ import ServiceCategoryList from "./ServiceCategoryList";
 import ServiceList from "./ServiceList";
 import DetectLocationSelector from "./DetectLocationSelector";
 import ServiceDetail from "./ServiceDetail";
+import TopCategoriesWidget from "./TopCategoriesWidget";
+import LocalGuideWidget from "./LocalGuideWidget";
+import ArticleWidget from "./ArticleWidget";
+import CategoryWidget from "./CategoryWidget";
 
 export {
 	AppHeader,
@@ -36,4 +40,8 @@ export {
 	ServiceList,
 	ServiceDetail,
 	DetectLocationSelector,
+	TopCategoriesWidget,
+	LocalGuideWidget,
+	ArticleWidget,
+	CategoryWidget
 };
