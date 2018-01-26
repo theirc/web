@@ -3,6 +3,7 @@ import services from '../backend';
 import { connect } from 'react-redux'
 import { ArticleList } from '../components'
 import { push } from "react-router-redux";
+import { translate } from "react-i18next";
 
 const Remarkable = require("remarkable");
 
@@ -24,7 +25,7 @@ class CategoryHome extends React.Component {
     }
 
     render() {
-        const { country, category, onNavigate } =this.props;
+        const { country, category, onNavigate, t } =this.props;
 
         if(!country || !category) {
             return null;
@@ -34,7 +35,7 @@ class CategoryHome extends React.Component {
             <div className="SearchPage">
                 <div className="Title">
                     <h1>
-                        {category.fields.name}"
+                        {category.fields.name}
                     </h1>
                 </div>
                 <div className="results">
