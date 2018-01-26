@@ -38,7 +38,7 @@ class HomeWidget extends Component {
 
 		/*jshint ignore:start*/
 		/*eslint-disable*/
-		return <LocalGuideWidget country={country} onNavigate={onNavigate} t={t} guideItems={guideItems} />;
+		return <LocalGuideWidget country={country} onNavigate={onNavigate} guideItems={guideItems} />;
 		/*eslint-enable*/
 		/*jshint ignore:end*/
 	}
@@ -58,7 +58,7 @@ class HomeWidget extends Component {
 
 		/*jshint ignore:start*/
 		/*eslint-disable*/
-		return <ArticleWidget country={country} onNavigate={onNavigate} t={t} article={article} category={category} showHero={showHero} showFullArticle={showFullArticle} />;
+		return <ArticleWidget country={country} onNavigate={onNavigate} article={article} category={category} showHero={showHero} showFullArticle={showFullArticle} />;
 		/*eslint-enable*/
 		/*jshint ignore:end*/
 	}
@@ -68,7 +68,7 @@ class HomeWidget extends Component {
 
 		/*jshint ignore:start*/
 		/*eslint-disable*/
-		return <CategoryWidget country={country} onNavigate={onNavigate} t={t} c={c} />;
+		return <CategoryWidget country={country} onNavigate={onNavigate} c={c} />;
 		/*eslint-enable*/
 		/*jshint ignore:end*/
 	}
