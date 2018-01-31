@@ -358,6 +358,28 @@
     display: block;
     margin-top: -1px;
   }
+  .leaflet-control-attribution a {
+    font-size: 1em;
+  }
+
+  .leaflet-div-icon {
+    background: white;
+    border: none;
+    border-radius: 40px;
+    box-shadow: 0 0 0 5px rgba(0,40,80,0.15);
+    height: 40px !important;
+    width: 40px !important;
+
+    .Icon {
+      font-size: 22px;
+      text-align: center;
+
+      i {
+        position: relative;
+          top: 5px;
+      }
+    }
+  }
 }
 
 .ServiceDetail {
