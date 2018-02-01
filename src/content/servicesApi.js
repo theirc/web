@@ -111,6 +111,23 @@ module.exports = {
 				});
 		});
 	},
+	fetchAllServicesInBBox(country, language, bounds = [], pageSize = 200) {
+		return new Promise((resolve, reject) => {
+			var requestUrl = `/services/search/?filter=relatives&geographic_region=${country}&page=1&page_size=${pageSize}&bounds=${bounds.join(", ")}`;
+			request
+				.get(RI_URL + requestUrl)
+				.set("Accept-Language", language)
+				.end((err, res) => {
+					if (err) {
+						reject(err);
+						return;
+					}
+					let services = res.body;
+
+					resolve(services);
+				});
+		});
+	},
 	fetchServiceById(language, serviceId) {
 		return new Promise((resolve, reject) => {
 			request
