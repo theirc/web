@@ -120,7 +120,10 @@ class ServiceMap extends React.Component {
 			zoomControl: true,
 		});
 
-		let clusters = L.markerClusterGroup();
+		let clusters = L.markerClusterGroup({
+      maxClusterRadius: 20, // in pixels. Decreasing this will create more, smaller clusters.
+      spiderfyOnMaxZoom: true
+    });
     map.addLayer(clusters);
 		map.on("dragend", a => {
 			if (findServicesInLocation) {
