@@ -1,28 +1,39 @@
 import React from 'react';
-import services from '../backend';
 import { connect } from 'react-redux'
-import {
-} from '../components';
+import {ArticleList} from '../components'
+import { push } from "react-router-redux";
 
-class CategoryHome extends React.Component {
-    constructor() {
-        super();
+const Remarkable = require("remarkable");
 
-        this.state = {};
-    }
+const md = new Remarkable("full", {
+	html: true,
+	linkify: true,
+	typographer: true,
+	breaks: true,
+});
 
-    componentWillMount() {
+class CategoryHome extends React.Component {  
+    state = {};   
+
+    componentWillMount() {        
     }
 
     render() {
-        const { country, category } =this.props;
+        const { country, category, onNavigate, t } =this.props;
 
         if(!country || !category) {
             return null;
         }
 
-        return (<div>
-        </div>);
+        return (
+            <ArticleList
+                country= {country}
+                category = {category}
+                onNavigate = {onNavigate}
+                md = {md}
+                t = {t}
+            />
+        );
     }
 }
 
@@ -34,9 +45,9 @@ const mapState = (s, p) => {
 };
 const mapDispatch = (d, p) => {
     return {
-        onMount: () => {
-            d(services.articles.get('the-title-of-this-article-style-title'));
-        }
+        onNavigate(url) {
+			d(push(url));
+		}
     };
 };
 

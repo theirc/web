@@ -6,9 +6,6 @@ import FacebookPlayer from "react-facebook-player";
 import YouTube from "react-youtube";
 import HeaderBar from "./HeaderBar";
 
-import cms from "../content/cms";
-const APP_ID = cms.siteConfig.appId;
-
 const Remarkable = require("remarkable");
 
 const md = new Remarkable("full", {
@@ -34,6 +31,10 @@ export default class ArticlePage extends Component {
 			translations: PropTypes.array,
 		}),
 		onNavigate: PropTypes.func,
+	};
+
+	static contextTypes = {
+		config: PropTypes.object,
 	};
 
 	replaceLinks() {
@@ -77,6 +78,7 @@ export default class ArticlePage extends Component {
 	renderVideo() {
 		const { article } = this.props;
 		const { url } = article.fields;
+		const APP_ID = this.context.config.appId;
 
 		if (/facebook.com/.test(url)) {
 			let videoId = url.replace(/.*facebook.com\/.*\/videos\/(.*)\/.*/, "$1");

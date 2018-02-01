@@ -5,7 +5,6 @@ import { View, Button, StyleSheet, Image, TouchableOpacity } from "react-native"
 import { translate } from "react-i18next";
 import FacebookPlayer from "react-facebook-player";
 import YouTube from "react-youtube";
-import cms from "../../content/cms";
 import styles from "./HomeWidgetStyles";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Text from "./Text";
@@ -14,7 +13,6 @@ import PropTypes from "prop-types";
 import WebViewAutoHeight from "./WebViewAutoHeight";
 import nativeTools from "../../shared/nativeTools";
 
-const APP_ID = cms.siteConfig.appId;
 const Remarkable = require("remarkable");
 const md = new Remarkable("full", {
 	html: true,
@@ -133,6 +131,7 @@ class HomeWidget extends Component {
 
 	renderVideo(article) {
 		const { url } = article.fields;
+		const APP_ID = this.context.config.appId;
 
 		if (/facebook.com/.test(url)) {
 			let videoId = url.replace(/.*facebook.com\/.*\/videos\/(.*)\/.*/, "$1");

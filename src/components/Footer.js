@@ -6,7 +6,8 @@ import { translate } from "react-i18next";
 
 class Footer extends Component {
 	render() {
-		const { onChangeLocation, onChangeLanguage, disableCountrySelector, disableLanguageSelector, questionLink, deviceType, t } = this.props;
+		const { onChangeLocation, onChangeLanguage, disableCountrySelector, disableLanguageSelector, questionLink, t } = this.props;
+		// const {deviceType,} = this.props;
 		const year = moment().year();
 
 		return (
