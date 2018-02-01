@@ -48,9 +48,9 @@ class ServiceItem	extends React.Component {
     const distance = measureDistance && s.location && measureDistance(s.location);
 
     return (
-      <div key={s.id} className="Item" onClick={() => goToService(s.id)}>
+      <div key={ s.id+this.props.idx } className="Item" onClick={() => goToService(s.id)}>
         <div className="Icons">
-          { s.types.map((t, idx) => <ServiceIcon idx={ idx } service={ s } />) }
+          { s.types.map((t, idx) => <ServiceIcon key={ "icon"+idx } idx={ idx } service={ s } />) }
         </div>
         <div className="Info">
           <h1>{s.name}</h1>
@@ -96,11 +96,13 @@ class ServiceMap extends React.Component {
       });
 
       if (this.state.services.length) {
-        let clusters = L.markerClusterGroup();
+        let clusters = L.markerClusterGroup({
+          maxClusterRadius: 20, // in pixels. Decreasing this will create more, smaller clusters.
+          spiderfyOnMaxZoom: true
+        });
         this.state.services.forEach((s, index) => {
           let ll = s.location.coordinates.slice().reverse();
           let markerDiv = ReactDOMServer.renderToString(<ServiceIcon idx={ index } service={ s } />)
-          console.log(markerDiv);
           let icon = L.divIcon({
             html: markerDiv,
             iconAnchor: [20, 20],
@@ -110,7 +112,7 @@ class ServiceMap extends React.Component {
           clusters.addLayer(marker);
           let popupEl = document.createElement('div');
           ReactDOM.render(
-            <ServiceItem service={ s }  { ...this.props } />,
+            <ServiceItem service={ s } idx={ index }  { ...this.props } />,
             popupEl
           );
           let popup = L.popup({ closeButton: false }).setContent(popupEl);
