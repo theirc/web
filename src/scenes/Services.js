@@ -144,8 +144,7 @@ class Services extends React.Component {
 		const { country } = this.props;
 		return this.fetchAllInLocation(country.fields.slug);
 	}
-
-	fetchAllServicesNearby() {
+fetchAllServicesNearby() {
 		const { country, language } = this.props;
 		const { fetchingLocation, errorWithGeolocation, geolocation } = this.state;
 
@@ -183,6 +182,16 @@ class Services extends React.Component {
 			.then(services => ({ services, category: null }));
 	}
 
+
+	fetchServicesWithin(bbox) {
+		const { country, language } = this.props;
+
+		return servicesApi
+			.fetchAllServicesInBBox(country.fields.slug, language, bbox)
+			.then(s => s.results)
+			.then(services => ({ services, category: null }));
+	}
+
 	fetchService(props) {
 		const { language } = this.props;
 		const { match } = props;
@@ -213,9 +222,17 @@ class Services extends React.Component {
 	}
 
 	render() {
-		const { match, listServicesInCategory, goToMap, goToNearby, goToService, language, listAllServices } = this.props;
+		const { match, country, listServicesInCategory, goToMap, goToNearby, goToService, language, listAllServices } = this.props;
 
 		const { sortingByLocationEnabled, geolocation, errorWithGeolocation } = this.state;
+		const { coordinates } = country.fields;
+		let defaultLocation = {};
+		if (coordinates) {
+			defaultLocation = {
+				latitude: coordinates.lat,
+				longitude: coordinates.lon,
+			};
+		}
 
 		const onSelectCategory = c => {
 			listServicesInCategory(c);
@@ -254,8 +271,9 @@ class Services extends React.Component {
 										locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
 										measureDistance={this.measureDistance(geolocation, language)}
 										toggleLocation={() => _.identity()}
-										servicesByType={() => this.fetchAllServicesNearby()}
+										findServicesInLocation={bbox => this.fetchServicesWithin(bbox)}
 										nearby={true}
+										defaultLocation={defaultLocation}
 									/>
 								</div>
 							</Skeleton>
