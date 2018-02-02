@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Route, Switch, withRouter } from "react-router";
 import { ConnectedRouter } from "react-router-redux";
-import { Home, Article, Categories, CountryHome, CategoryHome, CountrySelectorScene, LanguageSelectorScene, Search, Services, Selectors } from "./scenes";
+import { Article, Categories, CountryHome, CategoryHome, CountrySelectorScene, LanguageSelectorScene, Search, Services, Selectors } from "./scenes";
 import { history } from "./store";
 import { Skeleton } from "./scenes";
 import { withCountry, withCategory } from "./shared/hoc";

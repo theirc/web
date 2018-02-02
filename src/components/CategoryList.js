@@ -7,7 +7,7 @@ class CategoryList extends Component {
 	static propTypes = {};
 
 	render() {
-		const { country, categories, onNavigate, t } = this.props;
+		const { categories, onNavigate, t } = this.props;
 		const showToggle = c => {
 			return (c.fields.subCategories && c.fields.subCategories.length) || (c.fields.articles && c.fields.articles.length && c.fields.type !== "News" && !c.fields.overview);
 		};

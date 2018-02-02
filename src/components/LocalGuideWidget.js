@@ -4,7 +4,7 @@ import "./LocalGuideWidget.css";
 
 class LocalGuideWidget extends Component {
 	render() {
-		const { country, onNavigate, t, guideItems } = this.props;
+		const { onNavigate, t, guideItems } = this.props;
 
 		/*jshint ignore:start*/
 		/*eslint-disable*/
