@@ -16,11 +16,11 @@ export function withCountry(WrappedComponent) {
 		};
 
 		componentWillMount() {
-			const { match, onMount, language } = this.props;
+			const { onMount, language } = this.props;
 			
 			const host = window.location.hostname.split('.')[0];
 			const country = host === "www" || host === "refugee" || host === "localhost" ? "" : host;			
-			const { api } = this.context;			
+			const { api } = this.context;				
 			
 			api.loadCountry(country, language).then(c => {
 				return onMount(c).then(c => {

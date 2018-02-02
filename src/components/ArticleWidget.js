@@ -34,7 +34,7 @@ class ArticleWidget extends Component {
 	}
 
 	render() {
-		const { country, onNavigate, t, article, category, showHero, showFullArticle } = this.props;
+		const { onNavigate, t, article, category, showHero, showFullArticle } = this.props;
 		if (!article) {
 			// Anti pattern, but saves 1 or more ifs.
 			return null;

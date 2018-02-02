@@ -13,7 +13,7 @@ const md = new Remarkable("full", {
 
 class SearchPage extends React.Component {
 	render() {
-		const { hideServices, searchingArticles, searchingServices, articles, services, term, t, onNavigate, country } = this.props;
+		const { hideServices, searchingArticles, searchingServices, articles, services, term, t, onNavigate } = this.props;
 		/*jshint ignore:start*/
 		/*eslint-disable*/
 		return (

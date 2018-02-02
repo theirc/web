@@ -6,7 +6,7 @@ import "./TopCategoriesWidget.css";
 class TopCategoriesWidget extends Component {
     render(){
         let articleFunc = category => category.fields.overview || _.first(category.fields.articles);
-        const { country, onNavigate, t, categories} = this.props;
+        const { onNavigate, t, categories} = this.props;
 
         /*jshint ignore:start*/
         /*eslint-disable*/
