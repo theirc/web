@@ -11,8 +11,7 @@ const Promise = require("bluebird");
 class Article extends React.Component {
 	static propTypes = {
 		match: PropTypes.shape({
-			params: PropTypes.shape({
-				country: PropTypes.string.isRequired,
+			params: PropTypes.shape({				
 				category: PropTypes.string.isRequired,
 				article: PropTypes.string.isRequired,
 			}).isRequired,
@@ -106,7 +105,7 @@ const mapDispatch = (d, p) => {
 		},
 		onNavigateTo: (category, country) => slug => {
 			setTimeout(() => {
-				d(push(`/${country.fields.slug}/${category.fields.slug}/${slug}`));
+				d(push(`/${category.fields.slug}/${slug}`));
 			}, 200);
 		},
 

@@ -230,10 +230,10 @@ const mapDispatch = (d, p) => {
 			d(goBack());
 		},
 		onGoHome: country => () => {
-			if (country) d(push(`/${country.fields.slug || ""}`));
+			if (country) d(push(`/ || ""}`));
 		},
 		onGoToSearch: (country, query) => {
-			if (country) d(push(`/${country.fields.slug}/search?q=${query}`));
+			if (country) d(push(`/search?q=${query}`));
 		},
 		onChangeLocation: () => {
 			d(actions.changeCountry(null));

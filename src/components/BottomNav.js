@@ -46,7 +46,7 @@ class BottomNav extends Component {
 	}
 
 	render() {
-		const { showServiceMap, t } = this.props;
+		const { showServiceMap, t } = this.props;		
 		return (
 			<Paper
 				style={{

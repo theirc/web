@@ -54,7 +54,7 @@ class CountrySelectorScene extends Component {
 			if (!language) {
 				return <Redirect to={`/language-selector`} />;
 			} else {
-				return <Redirect to={`/${country.fields.slug}`} />;
+				return <Redirect to={`/`} />;
 			}
 		}
 	}
