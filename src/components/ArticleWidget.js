@@ -64,7 +64,7 @@ class ArticleWidget extends Component {
 							<img src={article.fields.hero.fields.file.url + "?fm=jpg&fl=progressive"} alt="" />
 						</div>
 					)}
-				{showFullArt ? <h3>{article.fields.title}</h3> : <h3 onClick={() => onNavigate(`/${country.fields.slug}/${categorySlug}/${article.fields.slug}`)}>{article.fields.title}</h3>}
+				{showFullArt ? <h3>{article.fields.title}</h3> : <h3 onClick={() => onNavigate(`/${categorySlug}/${article.fields.slug}`)}>{article.fields.title}</h3>}
 				{contentType.sys.id === "video" && this.renderVideo(article)}
 				<p dangerouslySetInnerHTML={{ __html: md.render(content) }} />
 				{!showFullArt && (
@@ -72,7 +72,7 @@ class ArticleWidget extends Component {
 						<a
 							href="#"
 							onClick={() => {
-								onNavigate(`/${country.fields.slug}/${categorySlug}/${article.fields.slug}`);
+								onNavigate(`/${categorySlug}/${article.fields.slug}`);
 								return false;
 							}}
 						>

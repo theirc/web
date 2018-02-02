@@ -14,7 +14,7 @@ class LocalGuideWidget extends Component {
 					<a
 						href="#"
 						onClick={() => {
-							onNavigate(`/${country.fields.slug}/services`);
+							onNavigate(`/services`);
 							return false;
 						}}
 					>

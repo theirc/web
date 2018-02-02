@@ -17,17 +17,20 @@ export function withCountry(WrappedComponent) {
 
 		componentWillMount() {
 			const { match, onMount, language } = this.props;
-			const { api } = this.context;
-
-			api.loadCountry(match.params.country, language).then(c => {
+			
+			const host = window.location.hostname.split('.')[0];
+			const country = host === "www" || host === "refugee" || host === "localhost" ? "" : host;			
+			const { api } = this.context;			
+			
+			api.loadCountry(country, language).then(c => {
 				return onMount(c).then(c => {
 					this.setState({ country: c, loaded: true });
 				});
 			});
+				
 		}
 		compomentWillReceiveProps(newProps) {
 			const { match, onMount, language } = this.props;
-
 			if (newProps.language !== language) {
 				onMount(match.params.country, newProps.language).then(c => {
 					this.setState({ country: c, loaded: true });

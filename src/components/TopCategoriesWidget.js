@@ -16,7 +16,7 @@ class TopCategoriesWidget extends Component {
                     <a
                         href="#"
                         onClick={() => {
-                            onNavigate(`/${country.fields.slug}/categories`);
+                            onNavigate(`/categories`);
                             return false;
                         }}
                     >
@@ -27,7 +27,7 @@ class TopCategoriesWidget extends Component {
                 {categories.map(c => {
                     let article = articleFunc(c);
                     return (
-                        <div key={c.sys.id} className="TopCategory" onClick={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${article.fields.slug}`)}>
+                        <div key={c.sys.id} className="TopCategory" onClick={() => onNavigate(`/${c.fields.slug}/${article.fields.slug}`)}>
                             <div className="icon">
                                 <i className={c.fields.iconClass || "material-icons"}>{c.fields.iconText || ((!c.fields.iconClass || c.fields.iconClass === "material-icons") && "add")}</i>
                             </div>

@@ -8,15 +8,13 @@ import { history } from "../store";
 class Categories extends React.Component {
 	static propTypes = {
 		match: PropTypes.shape({
-			params: PropTypes.shape({
-				country: PropTypes.string.isRequired,
-			}).isRequired,
+			params: PropTypes.shape({}).isRequired,
 		}).isRequired,
 		onMount: PropTypes.func.isRequired,
 	};
 
 	componentWillMount() {
-		this.props.onMount(this.props.match.params.country);
+		this.props.onMount(this.props.country.fields.slug);
 	}
 
 	render() {

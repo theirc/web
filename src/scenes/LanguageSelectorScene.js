@@ -70,7 +70,7 @@ class LanguageSelectorScene extends React.Component {
 				if (!country) {
 					return <Redirect to={`/country-selector`} />;
 				} else {
-					return <Redirect to={`/${country.fields.slug}`} />;
+					return <Redirect to={`/`} />;
 				}
 			} else {
 				return null;

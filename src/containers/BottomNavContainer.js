@@ -38,7 +38,7 @@ class BottomNavContainer extends React.Component {
 				selectedIndex = 1;
 			}
 		}
-
+		
 		return (
 			<BottomNav
 				showServiceMap={showServiceMap}
@@ -64,16 +64,16 @@ const mapState = ({ category, country, showServiceMap, router }, p) => {
 const mapDispatch = (d, p) => {
 	return {
 		onGoToCategories: country => {
-			d(push(`/${country}/categories`));
+			d(push(`/categories`));
 		},
 		onGoHome: country => {
-			d(push(`/${country}`));
+			d(push(`/`));
 		},
 		onGoToSearch: country => {
-			d(push(`/${country}/search`));
+			d(push(`/search`));
 		},
 		onGoToServices: country => {
-			d(push(`/${country}/services`));
+			d(push(`/services`));
 		},
 	};
 };

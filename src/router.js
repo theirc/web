@@ -8,7 +8,7 @@ import { withCountry, withCategory } from "./shared/hoc";
 import Placeholder from "./shared/placeholder";
 
 class ScrollToTop extends Component {
-	componentDidUpdate(prevProps) {
+	componentDidUpdate(prevProps) {		
 		if (this.props.location !== prevProps.location) {
 			window.scrollTo(0, 0);
 		}
@@ -22,6 +22,7 @@ class ScrollToTop extends Component {
 ScrollToTop = withRouter(ScrollToTop);
 
 class Router extends Component {
+	
 	componentDidMount() {
 		if (global.window) {
 			if (global.window && global.window.document) {
@@ -38,27 +39,29 @@ class Router extends Component {
 				}, 500);
 			}
 		}
+		
 	}
 
 	render() {
 		const ServicesWithCountry = withCountry(Services);
+		
 		return (
 			<ConnectedRouter history={history}>
 				<Placeholder>
 					<ScrollToTop />
 					<Switch>
-						<Route path="/:country/services" component={props => <ServicesWithCountry {...props} />} />
+						<Route path="/services" component={props => <ServicesWithCountry {...props} />} />
 						<Skeleton>
 							<div className="SkeletonContainer">
 								<Switch>
-									<Route exact path="/" component={Home} />
+									<Route exact path="/" component={withCountry(CountryHome)} />
 									<Route exact path="/selectors" component={Selectors} />
 									<Route exact path="/country-selector" component={CountrySelectorScene} />
 									<Route exact path="/language-selector" component={LanguageSelectorScene} />
-									<Route exact path="/:country/search" component={withCountry(Search)} />
-									<Route exact path="/:country/categories" component={withCountry(Categories)} />
-									<Route path="/:country/:category/:article" component={withCountry(withCategory(Article))} />
-									<Route path="/:country/:category" component={withCountry(withCategory(CategoryHome))} />
+									<Route exact path="/search" component={withCountry(Search)} />
+									<Route exact path="/categories" component={withCountry(Categories)} />
+									<Route path="/:category/:article" component={withCountry(withCategory(Article))} />
+									<Route path="/:category" component={withCountry(withCategory(CategoryHome))} />
 									<Route path="/:country" component={withCountry(CountryHome)} />
 								</Switch>
 							</div>
@@ -66,7 +69,7 @@ class Router extends Component {
 					</Switch>
 				</Placeholder>
 			</ConnectedRouter>
-		);
+		);		
 	}
 }
 
