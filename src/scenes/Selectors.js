@@ -77,8 +77,8 @@ class Selectors extends Component {
 			if (country !== "detect-me") {
 				this.setState({
 					currentPage: -1,
-					redirect: `/${country}`,
 				});
+				this.props.onGoTo(country);
 			} else {
 				this.setState({ currentPage: 3 });
 			}
@@ -171,7 +171,11 @@ const mapDispatch = (d, p) => {
 		},
 
 		onGoTo: slug => {
-			d(push(`/${slug}`));
+			const location = global.location;
+			const hostparts = location.hostname.split(".");
+			hostparts[0] = slug;
+			let port = [443, 80].indexOf(location.port) === -1 ? `:${location.port}` : "";
+			document.location = `${location.protocol}//${hostparts.join(".")}${port}/`;
 		},
 	};
 };

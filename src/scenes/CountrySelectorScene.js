@@ -73,7 +73,11 @@ const mapDispatch = (d, p) => {
 			return;
 		},
 		onGoTo: slug => {
-			d(push(`/${slug}`));
+			const location = global.location;
+			const hostparts = location.hostname.split(".");
+			hostparts[0] = slug;
+			let port = [443, 80].indexOf(location.port) === -1 ? `:${location.port}` : "";
+			document.location = `${location.protocol}//${hostparts.join(".")}${port}/`;
 		},
 	};
 };
