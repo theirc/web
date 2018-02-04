@@ -131,7 +131,7 @@ const mapState = ({ country, language, deviceType, router, errorMessage }, p) =>
 const mapDispatch = (d, p) => {
 	return {
 		onGoHome: country => () => {
-			if (country) d(push(`/ || ""}`));
+			if (country) d(push(`/`));
 		},
 		onGoToSearch: (country, query) => {
 			if (country) d(push(`/search?q=${query}`));
