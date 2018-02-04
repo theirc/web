@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Switch, withRouter } from "react-router";
+import { Route, Switch, withRouter, Redirect } from "react-router";
 import { ConnectedRouter } from "react-router-redux";
 import { Article, Categories, CountryHome, CategoryHome, CountrySelectorScene, LanguageSelectorScene, Search, Services, Selectors } from "./scenes";
 import { history } from "./store";
@@ -62,7 +62,6 @@ class Router extends Component {
 									<Route exact path="/categories" component={withCountry(Categories)} />
 									<Route path="/:category/:article" component={withCountry(withCategory(Article))} />
 									<Route path="/:category" component={withCountry(withCategory(CategoryHome))} />
-									<Route path="/:country" component={withCountry(CountryHome)} />
 								</Switch>
 							</div>
 						</Skeleton>

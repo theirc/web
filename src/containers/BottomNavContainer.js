@@ -28,11 +28,11 @@ class BottomNavContainer extends React.Component {
 		let pathParts = router.location.pathname.split("/");
 		let selectedIndex = 0;
 		if (pathParts.length > 2) {
-			if (pathParts[2] === "article") {
+			if (pathParts[1] === "article") {
 				selectedIndex = -1;
-			} else if (pathParts[2] === "search") {
+			} else if (pathParts[1] === "search") {
 				selectedIndex = 2;
-			} else if (pathParts[2] === "services") {
+			} else if (pathParts[1] === "services") {
 				selectedIndex = 3;
 			} else {
 				selectedIndex = 1;
