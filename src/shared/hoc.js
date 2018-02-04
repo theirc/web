@@ -20,7 +20,7 @@ export function withCountry(WrappedComponent) {
 			const { api, config } = this.context;
 
 			const host = window.location.hostname.split(".")[0];
-			const possibleRoots = ["www", (config["key"] || "").split(".")[0], "localhost"];
+			const possibleRoots = ["www", "staging", "new-staging", "localhost"];
 			const country = possibleRoots.indexOf(host) === -1 ? host : "";
 
 			if (country) {
