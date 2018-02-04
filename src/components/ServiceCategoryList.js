@@ -106,7 +106,7 @@ class ServiceCategoryList extends React.Component {
 							<i className="fa fa-map" />
 							<strong>Service Map</strong>
 						</div>
-					</li>}
+					</li>
 					{sortedCategories.map(c => this.renderCategory(c))}
 				</ul>
 			</div>,
