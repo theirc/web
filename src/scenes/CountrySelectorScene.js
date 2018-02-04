@@ -43,7 +43,7 @@ class CountrySelectorScene extends Component {
 		}
 
 		if (countryList.length === 1) {
-			onGoTo(countryList[0].fields.slug);
+			onGoTo(countryList[0].fields.slug, language);
 
 			return null;
 		}
@@ -72,12 +72,12 @@ const mapDispatch = (d, p) => {
 		onMountOrUpdate: language => {
 			return;
 		},
-		onGoTo: slug => {
+		onGoTo: (slug, language) => {
 			const location = global.location;
 			const hostparts = location.hostname.split(".");
 			hostparts[0] = slug;
 			let port = [443, 80].indexOf(location.port) === -1 ? `:${location.port}` : "";
-			document.location = `${location.protocol}//${hostparts.join(".")}${port}/`;
+			document.location = `${location.protocol}//${hostparts.join(".")}${port}/?language=${language}`;
 		},
 	};
 };

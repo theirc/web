@@ -58,7 +58,7 @@ class Selectors extends Component {
 					if (/^\//.test(redirect)) {
 						redirect = redirect.substr(1);
 					}
-					onGoTo(redirect);
+					onGoTo(redirect, language);
 				} else {
 					this.selectCountry(country.fields.slug);
 				}
@@ -73,12 +73,13 @@ class Selectors extends Component {
 		else func();
 	}
 	selectCountry(country, timeout = 200) {
+		const { language } = this.state;
 		setTimeout(() => {
 			if (country !== "detect-me") {
 				this.setState({
 					currentPage: -1,
 				});
-				this.props.onGoTo(country);
+				this.props.onGoTo(country, language);
 			} else {
 				this.setState({ currentPage: 3 });
 			}
@@ -170,12 +171,12 @@ const mapDispatch = (d, p) => {
 			d(actions.changeLanguage(code));
 		},
 
-		onGoTo: slug => {
+		onGoTo: (slug, language) => {
 			const location = global.location;
 			const hostparts = location.hostname.split(".");
 			hostparts[0] = slug;
 			let port = [443, 80].indexOf(location.port) === -1 ? `:${location.port}` : "";
-			document.location = `${location.protocol}//${hostparts.join(".")}${port}/`;
+			document.location = `${location.protocol}//${hostparts.join(".")}${port}/?language=${language}`;
 		},
 	};
 };
