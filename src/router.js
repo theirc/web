@@ -50,7 +50,7 @@ class Router extends Component {
 		const { config } = this.context;
 
 		const host = window.location.hostname.split(".")[0];
-		const possibleRoots = ["www", "staging", "new-staging", "localhost"];
+		const possibleRoots = ["www", "sandbox", "staging", "new-staging", "localhost"];
 		const isRoot = possibleRoots.indexOf(host) > -1;
 
 		return (
