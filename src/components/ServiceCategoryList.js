@@ -94,14 +94,6 @@ class ServiceCategoryList extends React.Component {
 			<div key={"List"} className="ServiceCategoryList">
 				<ul>
 					<li>
-						<div className="container" onClick={() => goToNearby()}>
-							<i className="fa fa-compass" />
-							<strong>Near Me</strong>
-						</div>
-					</li>
-				<hr className="line" />
-					
-					 <li>
 						<div className="container" onClick={() => goToMap()}>
 							<i className="fa fa-map" />
 							<strong>Service Map</strong>
