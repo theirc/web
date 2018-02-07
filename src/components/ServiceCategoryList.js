@@ -85,14 +85,16 @@ class ServiceCategoryList extends React.Component {
 					<h1>{t("Order results by distance to me")}</h1>
 					{!locationEnabled && <i className="MenuIcon material-icons">radio_button_unchecked</i>}
 					{locationEnabled && <i className="MenuIcon material-icons">radio_button_checked</i>}
-				</li>
-				<li onClick={listAllServices}>
-					<h1>{t("All Services")}</h1>
-					<i className="MenuIcon fa fa-list" aria-hidden="true" />
-				</li>
+				</li>				
 			</HeaderBar>,
 			<div key={"List"} className="ServiceCategoryList">
 				<ul>
+					<li>
+						<div className="container" onClick={listAllServices}>
+							<i className="fa fa-list" />
+							<strong>{t("All Services")}</strong>
+						</div>
+					</li>
 					<li>
 						<div className="container" onClick={() => goToMap()}>
 							<i className="fa fa-map" />
