@@ -115,7 +115,7 @@ class ServiceDetail extends React.Component {
 				));
 			});
 		};
-
+		let fullAddress = [service.address_floor, service.address].filter(val => val).join(', ');
 		return (
 			<div className="ServiceDetail">
 				<Helmet>
@@ -143,7 +143,7 @@ class ServiceDetail extends React.Component {
 
 					{hasHours(service.opening_time) && (
 						<span>
-							<h3>{t("Opening hours")}</h3>
+							<h3>{t("Visiting hours")}</h3>
 							<div>{service.opening_time["24/7"] && t("Open 24/7")}</div>
 							<div className="openingTable">
 								{!service.opening_time["24/7"] && (
@@ -156,9 +156,9 @@ class ServiceDetail extends React.Component {
 					)}
 					{service.address_city && <h4>{t("City")}</h4>}
 					{service.address_city && <p>{service.address_city}</p>}
-
+					
 					{service.address && <h3>{t("Address")}</h3>}
-					{service.address && <p>{service.address}</p>}
+					{fullAddress && <p>{fullAddress}</p>}
 
 					{service.address_in_country_language && <h3>{t("Address in Local Language")}</h3>}
 					{service.address_in_country_language && <p>{service.address_in_country_language}</p>}
