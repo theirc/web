@@ -10,6 +10,7 @@ if (global.window && global.location && global.navigator) {
 	
 	if (parsed.language) {
 		defaultLanguage = parsed.language;
+		localStorage.language = defaultLanguage;
 	} else if (localStorage.language) {
 		defaultLanguage = localStorage.language;
 	} else if (global.navigator.languages) {
