@@ -3,10 +3,12 @@ import actions from "./actions";
 import isMobile from "./shared/isMobile";
 import cms from "./content/cms";
 import getSessionStorage from "./shared/sessionStorage";
+import getLocalStorage from "./shared/localStorage";
 import defaultLanguage from "./shared/defaultLanguage";
 import getDirection from "./shared/getDirection";
 
 const sessionStorage = getSessionStorage();
+const localStorage = getLocalStorage();
 
 const device = global.window ? (isMobile.Android() ? "Android" : isMobile.iOS ? "iPhone" : "") : "";
 
@@ -95,7 +97,8 @@ function changeLanguage(state = defaultLanguage, action) {
 	switch (action.type) {
 		case actions.actionTypes.changeLanguage:
 			if (sessionStorage) {
-				sessionStorage.language = action.payload;
+				localStorage.language = action.payload;
+				console.log("LS",localStorage.language);
 				delete sessionStorage.country;
 			}
 
