@@ -1,0 +1,10 @@
+@font-face {
+	font-family: 'NastaleeqNuma';
+	src:url('../fonts/NastaleeqNuma.eot');
+	src:url('../fonts/NastaleeqNuma.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/NastaleeqNuma.ttf') format('truetype'),
+		url('../fonts/NastaleeqNuma.woff') format('woff'),
+		url('../fonts/NastaleeqNuma.svg#NastaleeqNuma') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
