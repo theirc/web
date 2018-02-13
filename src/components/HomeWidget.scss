@@ -23,18 +23,19 @@
 			//@include brand-colors("background-color");
 		}
 	}
-
+s > a:hover{opacity: 0.86}
 	s.Read-More {
-		display: flex;
+		line-height: 100%;
 		flex-direction: row;
-	}	
+	}
+
 
 	.TopCategory {
 		display: flex;
 		flex-direction: row;
-		//	justify-content: center;
+		max-width: max-content;
 		align-items: center;
-
+		cursor: pointer;
 		-webkit-touch-callout: none;
 		-webkit-user-select: none;
 		-khtml-user-select: none;
@@ -61,5 +62,5 @@
 				padding-left: 10px;
 			}
 		}
-	}	
+	}
 }

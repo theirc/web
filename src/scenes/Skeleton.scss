@@ -47,7 +47,7 @@ body {
 s,
 square {
 	text-decoration: none;
-	transform: translate(0px, -14px);
+	.ltr & {transform: translate(0px, -14px);}
 
 	& > a {
 		text-decoration: none;
@@ -69,7 +69,7 @@ square {
 			only screen and (min--moz-device-pixel-ratio: 2) and (max-width: $desktopBreakpoint),
 			only screen and (-o-min-device-pixel-ratio: 2/1) and (max-width: $desktopBreakpoint),
 			only screen and (min-device-pixel-ratio: 2) and (max-width: $desktopBreakpoint) {
-			font-size: 20px;
+			font-size: 30px;
 		}
 	}
 	.ltr & > a:before {
@@ -85,9 +85,10 @@ em,
 li,
 p {
 	color: #404040;
-	font-size: 1rem;
-
+	font-size: 0.875rem;
 }
+
+
 
 .Skeleton {
 	.rtl & {
