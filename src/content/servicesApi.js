@@ -8,7 +8,7 @@ var RI_URL = "https://admin.refugee.info/e/production/v2";
 
 //var RI_URL = "http://localhost:8000/e/production/v2";
 
-export default class {
+module.exports = {
 	fetchCategories(language, region) {
 		return new Promise((resolve, reject) => {
 			const sessionStorage = getSessionStorage();
@@ -28,7 +28,7 @@ export default class {
 					});
 			}
 		});
-	}
+	},
 	fetchRegions(language) {
 		return new Promise((resolve, reject) => {
 			const sessionStorage = getSessionStorage();
@@ -48,7 +48,7 @@ export default class {
 					});
 			}
 		});
-	}
+	},
 	fetchCategoryById(language, categoryId) {
 		return new Promise((resolve, reject) => {
 			const sessionStorage = getSessionStorage();
@@ -69,7 +69,7 @@ export default class {
 					});
 			}
 		});
-	}
+	},
 	fetchAllServices(country, language, categoryId, searchTerm, pageSize = 1000) {
 		return new Promise((resolve, reject) => {
 			var requestUrl =
@@ -93,7 +93,7 @@ export default class {
 					resolve(services);
 				});
 		});
-	}
+	},
 	fetchAllServicesNearby(country, language, position = [], distance = 5, pageSize = 50) {
 		return new Promise((resolve, reject) => {
 			var requestUrl = `/services/search/?filter=relatives&geographic_region=${country}&page=1&page_size=${pageSize}&near=${position.join(", ")}&near_km=${distance}`;
@@ -110,7 +110,7 @@ export default class {
 					resolve(services);
 				});
 		});
-	}
+	},
 	fetchAllServicesInBBox(country, language, bounds = [], pageSize = 200) {
 		return new Promise((resolve, reject) => {
 			var requestUrl = `/services/search/?filter=relatives&geographic_region=${country}&page=1&page_size=${pageSize}&bounds=${bounds.join(", ")}`;
@@ -127,7 +127,7 @@ export default class {
 					resolve(services);
 				});
 		});
-	}
+	},
 	fetchServiceById(language, serviceId) {
 		return new Promise((resolve, reject) => {
 			request
@@ -143,7 +143,7 @@ export default class {
 					resolve(services);
 				});
 		});
-	}
+	},
 	fetchServicePreviewById(language, serviceId) {
 		return new Promise((resolve, reject) => {
 			request
@@ -159,7 +159,7 @@ export default class {
 					resolve(services);
 				});
 		});
-	}
+	},
 	fetchServicesInSameLocation(language, serviceId) {
 		// get_same_coordinates_services
 		return new Promise((resolve, reject) => {
@@ -176,5 +176,5 @@ export default class {
 					resolve(services);
 				});
 		});
-	}
+	},
 };
