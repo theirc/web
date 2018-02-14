@@ -199,9 +199,11 @@ btnmuted {
 
 .rtl a {
 	text-decoration: none;
-	border-bottom: 2px black solid;
+	border-bottom: 1px #212121 solid;
 	line-height: 100%;
+
 }
+.rtl s > a {border-bottom: none;}
 li {
 }
 .language-ur{

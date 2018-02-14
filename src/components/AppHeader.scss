@@ -8,7 +8,7 @@ Less me
 	@include flex-direction(row);
 	@include align-items(center);
 	@include justify-content(flex-start);
-	
+
 	position: fixed;
 	width: 100%;
 	top: 0;
@@ -18,12 +18,12 @@ Less me
 }
 
 .app-bar-container {
-	
+
     display: -webkit-box;
     display: -webkit-flex;
 	display: -ms-flexbox;
 	display: flex;
-	
+
 
 	color: white;
 	flex: 1;
@@ -80,6 +80,7 @@ Less me
 
 .app-bar-logo {
 	height: 40px;
+	cursor: pointer;
 }
 
 .headroom {

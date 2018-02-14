@@ -6,7 +6,7 @@
 	flex-direction: column;
 
 	min-height: unquote("calc(100vh)");
-	margin-top: -64px;
+	
 
 	.spacer {
 		flex-grow: 1;
@@ -17,13 +17,12 @@
 	}
 
 	.item {
-		margin: 10px;
+		margin: 10px 15px 0px 15px;
 		border: 0;
 		padding: 5px;
 		background-color: $titleBackground;
 		outline: none;
-		height: 52px;
-
+		height: 70px;
 		font-size: 16px;
 		color: #5e5e5e;
 		letter-spacing: 0;
@@ -44,9 +43,10 @@
 		align-items: center;
 		align-content: center;
 		justify-content: center;
+		position: relative;
 		i {
 			display: block;
-			font-size: 40px;
+			font-size: 48px;
 			@include brand-colors("color");
 		}
 
