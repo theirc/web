@@ -16,17 +16,17 @@
 		border-radius: 1px;
 		height: 0;
 		width: 95%;
+		opacity: 0.6;
 	}
 
 	.divider {
 		border-top-color: black;
 		border-top-color: darken($dividerColor, 20%);
 
-		width: 100%;
+		width: 90%;
 	}
 	.icon {
-		padding-right: 10px;
-		padding-left: 10px;
+		margin: 10px 20px 10px 10px;
 
 	}
 
@@ -42,13 +42,29 @@
 	}
 
 	.selector > h1 {
-		font-size: 18px;
+		font-size: 16px;
 		display: block;
 		width: 100%;
 		margin: 0;
-		padding: 10px;
+		padding: 10px 10px 10px 20px;
 		flex: 1;
+
 	}
+
+	.sharePage {
+		padding: 10px 10px 10px 20px;
+	}
+	.sharePage > h1{
+
+		padding: 10px 10px 0px 0px;
+
+	}
+
+	.sharePage .icon{
+		margin: 10px 5px 0px 5px;
+	}
+
+
 
 	.selector > h1 > small {
 		font-size: 12px;
