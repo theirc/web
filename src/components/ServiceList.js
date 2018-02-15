@@ -43,7 +43,7 @@ class ServiceList extends React.Component {
 				borderColor: tinycolor(color).darken(10),
 			};
 		};
-		let fullAddress = [s.address_floor, s.address, s.address_city].filter(val => val).join(', ')
+		let fullAddress = [s.address, s.address_city].filter(val => val).join(', ')
 		return [
 			<li key={s.id} className="Item" onClick={() => goToService(s.id)}>
 				<div className="Icons">
