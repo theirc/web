@@ -22,11 +22,10 @@
 	.divider {
 		border-top-color: black;
 		border-top-color: darken($dividerColor, 20%);
-
-		width: 90%;
+		width: 95%;
 	}
 	.icon {
-		margin: 10px 20px 10px 10px;
+		margin: 0px 20px 10px 10px;
 
 	}
 
@@ -39,6 +38,7 @@
 		flex-direction: row;
 		align-items: center;
 		cursor: pointer;
+		&:active{background-color: #fff}
 	}
 
 	.selector > h1 {
@@ -52,19 +52,19 @@
 	}
 
 	.sharePage {
-		padding: 10px 10px 10px 20px;
+		padding: 0px 10px 0px 20px;
 	}
 	.sharePage > h1{
 
-		padding: 10px 10px 0px 0px;
-
+		padding: 0px 10px 0px 0px;
+		&:first-child {
+			flex: 2;
+		}
 	}
 
 	.sharePage .icon{
-		margin: 10px 5px 0px 5px;
+		margin: 0px 5px 0px 5px;
 	}
-
-
 
 	.selector > h1 > small {
 		font-size: 12px;

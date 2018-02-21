@@ -31,7 +31,7 @@ class ArticleFooter extends Component {
 		  const { language } = this.props;
 			let { href } = window.location;
 			let copySlug = href += (window.location.toString().indexOf("?") > -1 ? "&" : "?") + "language=" + language;
-			this.state = {value: copySlug, copied: false, shareIN: true};
+			this.state = {value: copySlug, copied: true, shareIN: true};
 			this.sharePage = this.sharePage.bind(this);
 			this.Copiedlnk = this.Copiedlnk.bind(this);
 	};
@@ -43,7 +43,12 @@ class ArticleFooter extends Component {
 
 	Copiedlnk() {
   		this.setState(prevState => ({copied: !prevState.copied}));
-			setTimeout(() =>  {this.setState({shareIN: true})}, 3000);
+			setTimeout( () => {
+  			this.setState({shareIN: true})
+  		setTimeout( () => {
+    	this.setState(prevState => ({copied: !prevState.copied}))
+		}, 2);
+		}, 3000);
 
   };
 
@@ -110,9 +115,9 @@ class ArticleFooter extends Component {
 					{this.state.shareIN ? <h1>{t("Share this page")}</h1> :
 
 					<div className="selector sharePage">
-						<h1 onClick={() => this.share()}>{t("Share on Facebook")}</h1>
+						<h1 onClick={()=>{ this.Copiedlnk(); this.share() }}>{t("Share on Facebook")}</h1>
 						<Link className="icon" />
-						{this.state.copied ? <h1>{t("Copied")}</h1> : <h1 onClick={() => this.Copiedlnk()}>{t("Copy Link")}</h1>}
+						{this.state.copied ? <h1 onClick={() => this.Copiedlnk()}>{t("Copy Link")}</h1> : <h1>{t("Copied")}</h1>}
 					</div>
 					}
 
