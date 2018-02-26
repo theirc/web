@@ -126,7 +126,7 @@ export default {
 			"Loading location": "بارگذاری موقعیت مکانی",
 			LOCATION_ERROR: "ما نمی‌توانیم موقعیت شما را تشخیص دهیم. لطفا یک مکان را از لیست انتخاب کنید",
 			OTHER_SERVICES: "سایر خدمات در این محل",
-		},
+		"Service Map": "خدمات بر روی نقشه",},
 	},
 	ar: {
 		translation: {
@@ -255,7 +255,7 @@ export default {
 			"Loading location": "تحميل الموقع",
 			LOCATION_ERROR: "عذراً، لا يمكن العثور على موقعك. الرجاء اختيار الموقع من القائمة",
 			OTHER_SERVICES: "خدمات أخرى متوفرة في هذا الموقع",
-		},
+			"Service Map": "خريطة الخدمة",},
 	},
 	ur: {
 		translation: {
@@ -636,6 +636,10 @@ export default {
 			"Loading location": "Loading location",
 			LOCATION_ERROR: "We cannot determine your location. Please select a location from the list",
 			OTHER_SERVICES: "Other services at this location",
+			"Service Map": "Service Map",
+			"Copy Link":"Copy Link",
+			"Share on Facebook": "Share on Facebook",
+			"Copied": "Copied",
 		},
 	},
 };
