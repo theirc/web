@@ -1,7 +1,7 @@
 @font-face {
 	font-family: 'MehrNastaliqWeb';
 	src:url('../fonts/MehrNastaliqWeb.eot');
-	src:url('../fonts/MehrNastaliqWeb') format('embedded-opentype'),
+	src:url('../fonts/MehrNastaliqWeb.eot?#iefix') format('embedded-opentype'),
 		url('../fonts/MehrNastaliqWeb.ttf') format('truetype'),
 		url('../fonts/MehrNastaliqWeb.woff') format('woff'),
 		url('../fonts/MehrNastaliqWeb.svg#MehrNastaliqWeb') format('svg');
