@@ -5,6 +5,7 @@ import "./ServiceHome.css";
 import { translate } from "react-i18next";
 import circle from "@turf/circle";
 import bbox from "@turf/bbox";
+import getSessionStorage from "../shared/sessionStorage";
 
 var tinycolor = require("tinycolor2");
 let iconWithPrefix = vector_icon => vector_icon.split("-")[0] + " " + vector_icon;
@@ -107,7 +108,7 @@ class ServiceMap extends React.Component {
 		const L = window.Leaflet;
 		const { servicesByType } = this.props;
 		const { defaultLocation, findServicesInLocation } = this.props;
-		const { sessionStorage } = global;
+		const sessionStorage = getSessionStorage();
 
 		/*
     RR:
