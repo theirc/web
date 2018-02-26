@@ -23,8 +23,6 @@ Less me
     display: -webkit-flex;
 	display: -ms-flexbox;
 	display: flex;
-
-
 	color: white;
 	flex: 1;
 	flex-direction: row;
@@ -63,7 +61,11 @@ Less me
 	align-items: center;
 	justify-content: flex-end;
 	flex-direction: row;
-	span {
+	.app-bar-selectors {
+	padding: 16px 11px;
+	text-transform: uppercase;
+	font-size: 14px;
+
 		.rtl & {
 			font-family: "Cairo", sans-serif;
 		}

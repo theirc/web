@@ -26,6 +26,16 @@
 		a {
 			@include brand-colors("color");
 			opacity: 1;
+<<<<<<< HEAD
+			.rtl & {
+				flex: 1;
+			}
+		}
+
+		.rtl & {
+			direction: rtl!important;
+			flex-direction: row-reverse;
+=======
 			border-bottom: none;
 		}
 
@@ -34,6 +44,7 @@
 			direction: rtl!important;
 
 
+>>>>>>> 9aaa6e5be7ed268003f8dc8925ca756383139509
 		}
 		span{
 			padding:0 3px 0 3px;
@@ -61,8 +72,11 @@
 			@include brand-colors( "background-color");
 			@include brand-colors-inverse( "color");
 
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> 9aaa6e5be7ed268003f8dc8925ca756383139509
 		}
 	}
 
@@ -111,7 +125,6 @@
 
 	.button {
 		flex-grow: 3;
-
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
