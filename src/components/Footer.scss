@@ -26,11 +26,13 @@
 		a {
 			@include brand-colors("color");
 			opacity: 1;
+			border-bottom: none;
 		}
 
 		.rtl & {
 			display: flex;
-			flex-direction: row-reverse;
+			direction: rtl!important;
+
 
 		}
 		span{
@@ -47,9 +49,7 @@
 		padding: 5px;
 		h3 {
 			margin:10px;
-			.rtl & {
-				line-height: 3px;
-			}
+
 		}
 		p {
 			margin-bottom: 0;
@@ -60,6 +60,7 @@
 		a {
 			@include brand-colors( "background-color");
 			@include brand-colors-inverse( "color");
+
 
 
 		}
