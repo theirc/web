@@ -69,7 +69,6 @@ export default {
 			"Facebook Page": "صفحه‌ فيس‌بوک‌",
 			"Suggest changes to this page": "پیشنهاد تغییرات در این صفحه",
 			pm: "بعدازظهر",
-			"Services Map": "خدمات نقشه",
 			Search: "جستجو",
 			"Closest location": "نزدیک‌ترین مکان",
 			Wednesday: "چهارشنبه",
@@ -127,7 +126,8 @@ export default {
 			"Loading location": "بارگذاری موقعیت مکانی",
 			LOCATION_ERROR: "ما نمی‌توانیم موقعیت شما را تشخیص دهیم. لطفا یک مکان را از لیست انتخاب کنید",
 			OTHER_SERVICES: "سایر خدمات در این محل",
-		"Service Map": "خدمات بر روی نقشه",},
+			"Service Map": "خدمات بر روی نقشه",
+		},
 	},
 	ar: {
 		translation: {
@@ -170,7 +170,7 @@ export default {
 			"Share this page": "شارك هذه الصفحة",
 			"Copy Link": "نسخ الرابط",
 			"Share on Facebook": "انشر على الفيسبوك",
-			"Copied": "تم نسخ الرابط",
+			Copied: "تم نسخ الرابط",
 			List: "قائمة",
 			"Languages spoken": "اللغات المستخدمة",
 			"View info for": "عرض المعلومـات الخاصة بـ",
@@ -241,7 +241,6 @@ export default {
 			"You have selected <strong>{$ location $}</strong> as your location. All the information on this page is specific to <strong>{$ location $}</strong>.":
 				"لقد اخترت <strong>{$ location $}</strong> كمنطقة تواجدك حالياً. كافة المعلومات هذه مخصصة للاجئين المتواجدين في <strong>{$ location $}</strong>.",
 			Accept: "قبول",
-			"Services Map": "خدمات خريطة",
 			"Email:": "البريد الإلكتروني:",
 			"Additional Information": "معلومة اضافية",
 			Saturday: "يوم السبت",
@@ -257,7 +256,8 @@ export default {
 			"Loading location": "تحميل الموقع",
 			LOCATION_ERROR: "عذراً، لا يمكن العثور على موقعك. الرجاء اختيار الموقع من القائمة",
 			OTHER_SERVICES: "خدمات أخرى متوفرة في هذا الموقع",
-			"Service Map": "خريطة الخدمة",},
+			"Service Map": "خريطة الخدمة",
+		},
 	},
 	ur: {
 		translation: {
@@ -639,9 +639,9 @@ export default {
 			LOCATION_ERROR: "We cannot determine your location. Please select a location from the list",
 			OTHER_SERVICES: "Other services at this location",
 			"Service Map": "Service Map",
-			"Copy Link":"Copy Link",
+			"Copy Link": "Copy Link",
 			"Share on Facebook": "Share on Facebook",
-			"Copied": "Copied",
+			Copied: "Copied",
 		},
 	},
 };

@@ -57,6 +57,7 @@ class AppHeader extends Component {
 		const noop = () => {
 			console.log("noop");
 		};
+
 		return (
 			<div className="AppHeader">
 				<Headroom tolerance={5} offset={200}>
@@ -64,23 +65,24 @@ class AppHeader extends Component {
 						<div className={["app-bar-container logo", !(country && language) ? "logo-centered" : ""].join(" ")} onClick={onGoHome || noop}>
 							<img onClick={onGoHome} src={this.props.logo || "/logo.svg"} className="app-bar-logo" alt=" " />
 						</div>
-						{(country &&
-							language) && (
+						{country &&
+							language && (
 								<div className="app-bar-container buttons">
 									<div className="app-bar-buttons">
+										{!disableCountrySelector && (
+											<span className="app-bar-selectors" color="contrast" onClick={onChangeCountry || noop}>
+												{(country && country.fields.name) || " "}
+											</span>
+										)}
+										{!disableLanguageSelector && !disableCountrySelector && <div className="app-bar-separator" />}
+										{!disableLanguageSelector && (
+											<span className="app-bar-selectors" color="contrast" onClick={onChangeLanguage}>
+												{language || " "}
+											</span>
+										)}
 
-										<span className="app-bar-selectors" color="contrast" onClick={onChangeCountry || noop}>
-											{(country && country.fields.name) || " "}
-										</span>
 										<div className="app-bar-separator" />
-
-										<span className="app-bar-selectors" color="contrast" onClick={onChangeLanguage}>
-											{language || " "}
-										</span>
-
-										<div className="app-bar-separator" />
-										<IconButton className={`search-close ${[this.state.search && "active"].join(" ")}`} color="contrast" onClick={this.toggleSearch.bind(this)}>
-										</IconButton>
+										<IconButton className={`search-close ${[this.state.search && "active"].join(" ")}`} color="contrast" onClick={this.toggleSearch.bind(this)} />
 									</div>
 								</div>
 							)}
