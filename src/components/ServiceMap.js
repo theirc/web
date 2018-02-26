@@ -107,6 +107,7 @@ class ServiceMap extends React.Component {
 		const L = window.Leaflet;
 		const { servicesByType } = this.props;
 		const { defaultLocation, findServicesInLocation } = this.props;
+		const { sessionStorage } = global;
 
 		/*
     RR:
@@ -121,10 +122,10 @@ class ServiceMap extends React.Component {
 		});
 
 		let clusters = L.markerClusterGroup({
-      maxClusterRadius: 20, // in pixels. Decreasing this will create more, smaller clusters.
-      spiderfyOnMaxZoom: true
-    });
-    map.addLayer(clusters);
+			maxClusterRadius: 20, // in pixels. Decreasing this will create more, smaller clusters.
+			spiderfyOnMaxZoom: true,
+		});
+		map.addLayer(clusters);
 		map.on("dragend", a => {
 			if (findServicesInLocation) {
 				/*
@@ -143,20 +144,31 @@ class ServiceMap extends React.Component {
 			}
 		});
 
+		map.on("moveend", function(e) {
+			var bounds = map.getBounds();
+			sessionStorage.serviceMapBounds = bounds.toBBoxString();
+		});
+
 		/*
     We try to get the user's position first, if that doesn't work, we use the key coordinate for the country
     Then we make a circle of 100k radius around that point, get the box around it and call it the bounds for the screen.
 
     */
-		this.findUsersPosition(defaultLocation).then(l => {
-			var center = [l.longitude, l.latitude];
-			var radius = 100;
-			var options = { units: "kilometers" };
-			var c = circle(center, radius, null, null, options);
-			var b = bbox(c);
+		if (sessionStorage.serviceMapBounds) {
+			const b = sessionStorage.serviceMapBounds.split(",").map(c => parseFloat(c));
 			map.fitBounds([[b[1], b[0]], [b[3], b[2]]]);
 			map.fire("dragend");
-		});
+		} else {
+			this.findUsersPosition(defaultLocation).then(l => {
+				var center = [l.longitude, l.latitude];
+				var radius = 100;
+				var options = { units: "kilometers" };
+				var c = circle(center, radius, null, null, options);
+				var b = bbox(c);
+				map.fitBounds([[b[1], b[0]], [b[3], b[2]]]);
+				map.fire("dragend");
+			});
+		}
 
 		this.clusters = clusters;
 		this.map = map;
@@ -194,7 +206,7 @@ class ServiceMap extends React.Component {
 	}
 
 	componentWillUnmount() {
-    // Cleaning up.
+		// Cleaning up.
 		this.map.remove();
 	}
 
