@@ -26,12 +26,14 @@
 		a {
 			@include brand-colors("color");
 			opacity: 1;
+			.rtl & {
+				flex: 1;
+			}
 		}
 
 		.rtl & {
-			display: flex;
+			direction: rtl!important;
 			flex-direction: row-reverse;
-
 		}
 		span{
 			padding:0 3px 0 3px;
@@ -60,7 +62,6 @@
 		a {
 			@include brand-colors( "background-color");
 			@include brand-colors-inverse( "color");
-
 
 		}
 	}
@@ -110,7 +111,6 @@
 
 	.button {
 		flex-grow: 3;
-
 		display: flex;
 		flex-direction: column;
 		justify-content: center;

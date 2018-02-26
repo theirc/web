@@ -69,6 +69,7 @@ export default {
 			"Facebook Page": "صفحه‌ فيس‌بوک‌",
 			"Suggest changes to this page": "پیشنهاد تغییرات در این صفحه",
 			pm: "بعدازظهر",
+			"Services Map": "خدمات نقشه",
 			Search: "جستجو",
 			"Closest location": "نزدیک‌ترین مکان",
 			Wednesday: "چهارشنبه",
@@ -237,6 +238,7 @@ export default {
 			"You have selected <strong>{$ location $}</strong> as your location. All the information on this page is specific to <strong>{$ location $}</strong>.":
 				"لقد اخترت <strong>{$ location $}</strong> كمنطقة تواجدك حالياً. كافة المعلومات هذه مخصصة للاجئين المتواجدين في <strong>{$ location $}</strong>.",
 			Accept: "قبول",
+			"Services Map": "خدمات خريطة",
 			"Email:": "البريد الإلكتروني:",
 			"Additional Information": "معلومة اضافية",
 			Saturday: "يوم السبت",
