@@ -32,6 +32,12 @@
 		width: 2px;
 		display: block;
 		height: 40px;
+		.ltr & {
+			margin-right: 20px;
+		}
+		.rtl & {
+			margin-left: 20px;
+		}
 	}
 
 	.selector {
@@ -58,17 +64,30 @@
 	}
 
 	.sharePage {
-		padding: 0px 10px 0px 20px;
+		padding: 0px;
 	}
 	.sharePage > h1 {
-		padding: 0px 10px 0px 0px;
+		padding: 0;
 		&:first-child {
 			flex: 1;
+			.ltr & {
+				padding-left: 20px;
+			}
+			.rtl & {
+				padding-right: 20px;
+			}
 		}
 	}
 
 	.sharePage .icon {
 		margin: 0px 5px 0px 5px;
+
+		.ltr & {
+			margin-right: 20px;
+		}
+		.rtl & {
+			margin-left: 20px;
+		}
 	}
 
 	.selector > h1 > small {

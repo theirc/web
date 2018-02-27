@@ -124,10 +124,10 @@ class ArticleFooter extends Component {
 						<Share className="icon" />
 
 						<div className="verticalHR" />
-						<Link className="icon" />
 						<CopyToClipboard sharePage={this.sharePage} text={this.state.value}>
 							{this.state.copied ? <h1 onClick={() => this.Copiedlnk()}>{t("Copy Link")}</h1> : <h1>{t("Copied")}</h1>}
 						</CopyToClipboard>
+						<Link className="icon" />
 					</div>
 				)}
 
