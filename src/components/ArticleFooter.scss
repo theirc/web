@@ -26,7 +26,12 @@
 	}
 	.icon {
 		margin: 0px 20px 10px 10px;
-
+	}
+	.verticalHR {
+		border-left: 1px black solid;
+		width: 2px;
+		display: block;
+		height: 40px;
 	}
 
 	.selector {
@@ -38,7 +43,9 @@
 		flex-direction: row;
 		align-items: center;
 		cursor: pointer;
-		&:active{background-color: darken($titleBackground, 5%)}
+		&:active {
+			background-color: darken($titleBackground, 5%);
+		}
 	}
 
 	.selector > h1 {
@@ -48,21 +55,19 @@
 		margin: 0;
 		padding: 10px 10px 10px 20px;
 		flex: 1;
-
 	}
 
 	.sharePage {
 		padding: 0px 10px 0px 20px;
 	}
-	.sharePage > h1{
-
+	.sharePage > h1 {
 		padding: 0px 10px 0px 0px;
 		&:first-child {
-			flex: 2;
+			flex: 1;
 		}
 	}
 
-	.sharePage .icon{
+	.sharePage .icon {
 		margin: 0px 5px 0px 5px;
 	}
 
@@ -76,7 +81,6 @@
 	.up {
 		display: none;
 	}
-
 
 	input {
 		display: none;
