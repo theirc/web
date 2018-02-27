@@ -144,7 +144,7 @@ class Services extends React.Component {
 		const { country } = this.props;
 		return this.fetchAllInLocation(country.fields.slug);
 	}
-fetchAllServicesNearby() {
+	fetchAllServicesNearby() {
 		const { country, language } = this.props;
 		const { fetchingLocation, errorWithGeolocation, geolocation } = this.state;
 
@@ -182,12 +182,11 @@ fetchAllServicesNearby() {
 			.then(services => ({ services, category: null }));
 	}
 
-
-	fetchServicesWithin(bbox) {
+	fetchServicesWithin(bbox, category = null) {
 		const { country, language } = this.props;
 
 		return servicesApi
-			.fetchAllServicesInBBox(country.fields.slug, language, bbox)
+			.fetchAllServicesInBBox(country.fields.slug, language, bbox, 500, category)
 			.then(s => s.results)
 			.then(services => ({ services, category: null }));
 	}
@@ -222,7 +221,7 @@ fetchAllServicesNearby() {
 	}
 
 	render() {
-		const { match, country, listServicesInCategory, goToMap, goToNearby, goToService, language, listAllServices } = this.props;
+		const { match, goToCategoryMap, country, listServicesInCategory, goToMap, goToNearby, goToService, language, listAllServices } = this.props;
 
 		const { sortingByLocationEnabled, geolocation, errorWithGeolocation } = this.state;
 		const { coordinates } = country.fields;
@@ -334,6 +333,27 @@ fetchAllServicesNearby() {
 					/>
 				</Switch>
 				<Route
+					exact
+					path={`${match.url}/by-category/:categoryId/map/`}
+					component={props => (
+						<Skeleton>
+							<div className="SkeletonContainer">
+								<ServiceMap
+									{...props}
+									goToService={goToService}
+									locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
+									measureDistance={this.measureDistance(geolocation, language)}
+									toggleLocation={() => _.identity()}
+									findServicesInLocation={bbox => this.fetchServicesWithin(bbox, props.match.params.categoryId)}
+									nearby={true}
+									defaultLocation={defaultLocation}
+								/>
+							</div>
+						</Skeleton>
+					)}
+				/>
+				<Route
+					exact
 					path={`${match.url}/by-category/:categoryId/`}
 					component={props => (
 						<Skeleton>
@@ -345,6 +365,7 @@ fetchAllServicesNearby() {
 									measureDistance={this.measureDistance(geolocation, language)}
 									toggleLocation={() => this.setState({ sortingByLocationEnabled: true })}
 									servicesByType={() => this.servicesByType(props)}
+									showMap={() => goToCategoryMap(props.match.params.categoryId)}
 								/>
 							</div>
 						</Skeleton>
@@ -411,6 +432,9 @@ const mapDispatch = (d, p) => {
 		},
 		goToMap() {
 			return d(push(`/${p.country.fields.slug}/services/map/`));
+		},
+		goToCategoryMap(category) {
+			return d(push(`/${p.country.fields.slug}/services/by-category/${category}/map/`));
 		},
 		showErrorMessage(error) {
 			d(actions.showErrorMessage(error));
