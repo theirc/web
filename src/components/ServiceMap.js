@@ -127,6 +127,9 @@ class ServiceMap extends React.Component {
 			spiderfyOnMaxZoom: true,
 		});
 		map.addLayer(clusters);
+		var locate = L.control.locate();
+		locate.addTo(map);
+
 		map.on("dragend", a => {
 			if (findServicesInLocation) {
 				/*
