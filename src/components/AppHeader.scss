@@ -63,9 +63,18 @@ Less me
 	.app-bar-selectors {
 		padding: 16px 5px;
 		text-transform: uppercase;
+		cursor: pointer;
 		font-size: 14px;
 		@media (max-width: 320px) {
 			font-size: 10px;
+		}
+		@media (min-width: 321px) {
+			font-size: 12px;
+			padding: 16px 8px;
+		}
+		@media (min-width: 960px) {
+			font-size: 14px;
+			padding: 16px 11px;
 		}
 
 		.rtl & {
