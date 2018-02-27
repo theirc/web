@@ -11,18 +11,12 @@
 		border-radius: 1px;
 		height: 0;
 		width: 95%;
+		opacity: 0.6;
 	}
 	.MenuIcon {
-		padding-right: 10px;
-		padding-left: 10px;
 
 		font-size: 20px;
-		width: 24px;
-		height: 24px;
-		text-align: center;
 	}
-
-
 
 	.Spacer {
 		height: 30vh;
@@ -35,6 +29,14 @@
 		justify-content: center;
 	}
 
+	.footer {
+		background-color: $titleBackground;
+
+		& .MenuIcon {
+			margin: 0px 20px 10px 10px;
+		}
+	}
+
 	.Selector {
 		width: 100%;
 		display: flex;
@@ -44,15 +46,17 @@
 		flex-direction: row;
 		align-items: center;
 		cursor: pointer;
+		&:active {
+			background-color: darken($titleBackground, 5%);
+		}
 	}
 
 	.Selector > h1 {
-		font-size: 18px;
+		font-size: 16px;
 		display: block;
 		width: 100%;
 		margin: 0;
-		padding: 10px;
-		line-height: 20px;
+		padding: 10px 10px 10px 20px;
 		flex: 1;
 		a {
 			line-height: 20px;
@@ -197,7 +201,8 @@
 	}
 }
 
-.ServiceList, .ServiceMap {
+.ServiceList,
+.ServiceMap {
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: column;
@@ -340,35 +345,35 @@
 }
 
 .ServiceMap {
-  .Item {
-    border-bottom: 0;
-  }
-  .leaflet-popup-tip-container {
-    display: block;
-    margin-top: -1px;
-  }
-  .leaflet-control-attribution a {
-    font-size: 1em;
-  }
+	.Item {
+		border-bottom: 0;
+	}
+	.leaflet-popup-tip-container {
+		display: block;
+		margin-top: -1px;
+	}
+	.leaflet-control-attribution a {
+		font-size: 1em;
+	}
 
-  .leaflet-div-icon {
-    background: white;
-    border: none;
-    border-radius: 40px;
-    box-shadow: 0 0 0 5px rgba(0,40,80,0.15);
-    height: 40px !important;
-    width: 40px !important;
+	.leaflet-div-icon {
+		background: white;
+		border: none;
+		border-radius: 40px;
+		box-shadow: 0 0 0 5px rgba(0, 40, 80, 0.15);
+		height: 40px !important;
+		width: 40px !important;
 
-    .Icon {
-      font-size: 22px;
-      text-align: center;
+		.Icon {
+			font-size: 22px;
+			text-align: center;
 
-      i {
-        position: relative;
-          top: 5px;
-      }
-    }
-  }
+			i {
+				position: relative;
+				top: 5px;
+			}
+		}
+	}
 }
 
 .ServiceDetail {
