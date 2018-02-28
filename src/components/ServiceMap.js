@@ -186,7 +186,7 @@ class ServiceMap extends React.Component {
 					return marker;
 				});
 				clusters.clearLayers();
-				markers.forEach(m => clusters.addLayer(m));
+				clusters.addLayers(markers);
 			} else {
 				console.warn("no services returned");
 			}
