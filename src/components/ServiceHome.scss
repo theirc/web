@@ -361,6 +361,22 @@
   .leaflet-control-attribution a {
     font-size: 1em;
   }
+  .leaflet-popup-content {
+    margin: 5px 0;
+
+    .Info h2 {
+      color: #777;
+      font-weight: bold;
+      margin: 5px 0;
+    }
+    .fullAddress {
+      font-style: normal;
+    }
+    .regionTitle {
+      font-style: normal;
+      margin-top: 5px;
+    }
+  }
 
   .leaflet-div-icon {
     background: white;
@@ -394,10 +410,13 @@
     line-height: 38px;
     margin-left: 6px;
     margin-top: 6px;
+    text-shadow: 0 0 1px rgba(255,255,255,1),
+                 0 0 1px rgba(255,255,255,1),
+                 0 0 1px rgba(255,255,255,1);
     width: 38px;
   }
   .marker-cluster-small, .marker-cluster-small div {
-    background-color: rgba(255, 100, 120, 0.6);
+    background-color: rgba(250, 120, 150, 0.6);
   }
 }
 

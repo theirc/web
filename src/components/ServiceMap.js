@@ -54,14 +54,14 @@ class ServiceItem extends React.Component {
 			<div key={s.id} className="Item" onClick={() => goToService(s.id)}>
 				<div className="Icons">{s.types.map((t, idx) => t && <ServiceIcon key={`si-${idx}`} idx={idx} service={s} />)}</div>
 				<div className="Info">
-					<h1>{s.name}</h1>
-					<h2>
-						{s.provider.name}{" "}
-						<small>
-							{s.region.title}
-							{distance && ` - ${distance}`}
-						</small>
-					</h2>
+					<h1>{ s.name }</h1>
+					<h2>{ s.provider.name }{" "}</h2>
+          <address className="fullAddress">
+            { s.address }
+          </address>
+          <address className="regionTitle">
+            { s.region.title }
+          </address>
 				</div>
 				<i className="material-icons" />
 			</div>
@@ -122,6 +122,7 @@ class ServiceMap extends React.Component {
 
 		let clusters = L.markerClusterGroup({
       maxClusterRadius: 20, // in pixels. Decreasing this will create more, smaller clusters.
+			spiderfyDistanceMultiplier: 1.5,
       spiderfyOnMaxZoom: true
     });
     map.addLayer(clusters);
