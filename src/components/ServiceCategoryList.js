@@ -99,7 +99,7 @@ class ServiceCategoryList extends React.Component {
 					<li>
 						<div className="container" onClick={() => goToMap()}>
 							<i className="fa fa-map" />
-							<strong>{t("Services Map")}</strong>
+							<strong>{t("Service Map")}</strong>
 						</div>
 					</li>
 					{sortedCategories.map(c => this.renderCategory(c))}
