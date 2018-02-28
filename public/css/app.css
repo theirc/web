@@ -28,7 +28,7 @@ body .rtl.language-ur {
 }
 html .ltr,
 body .ltr {
-	font-family: "Roboto", sans-serif;
+	font-family: "Roboto", "EthiopicHiwua", sans-serif;
 	padding: 0;
 }
 
