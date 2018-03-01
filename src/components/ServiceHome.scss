@@ -345,35 +345,73 @@
 }
 
 .ServiceMap {
-	.Item {
-		border-bottom: 0;
-	}
-	.leaflet-popup-tip-container {
-		display: block;
-		margin-top: -1px;
-	}
-	.leaflet-control-attribution a {
-		font-size: 1em;
-	}
+  .Item {
+    border-bottom: 0;
+  }
+  .leaflet-popup-tip-container {
+    display: block;
+    margin-top: -1px;
+  }
+  .leaflet-control-attribution a {
+    font-size: 1em;
+  }
+  .leaflet-popup-content {
+    margin: 5px 0;
 
-	.leaflet-div-icon {
-		background: white;
-		border: none;
-		border-radius: 40px;
-		box-shadow: 0 0 0 5px rgba(0, 40, 80, 0.15);
-		height: 40px !important;
-		width: 40px !important;
+    .Info h2 {
+      color: #777;
+      font-weight: bold;
+      margin: 5px 0;
+    }
+    .fullAddress {
+      font-style: normal;
+    }
+    .regionTitle {
+      font-style: normal;
+      margin-top: 5px;
+    }
+  }
 
-		.Icon {
-			font-size: 22px;
-			text-align: center;
+  .leaflet-div-icon {
+    background: white;
+    border: none;
+    border-radius: 40px;
+    box-shadow: 0 0 0 5px rgba(0,40,80,0.15);
+    height: 40px !important;
+    width: 40px !important;
 
-			i {
-				position: relative;
-				top: 5px;
-			}
-		}
-	}
+    .Icon {
+      font-size: 22px;
+      text-align: center;
+
+      i {
+        position: relative;
+          top: 5px;
+      }
+    }
+  }
+  .marker-cluster {
+    border-radius: 50px !important;
+    height: 50px !important;
+    margin-left: -25px !important;
+    margin-top: -25px !important;
+    width: 50px !important;
+  }
+  .marker-cluster div {
+    border-radius: 50px !important;
+    font-size: 14px;
+    height: 38px;
+    line-height: 38px;
+    margin-left: 6px;
+    margin-top: 6px;
+    text-shadow: 0 0 1px rgba(255,255,255,1),
+                 0 0 1px rgba(255,255,255,1),
+                 0 0 1px rgba(255,255,255,1);
+    width: 38px;
+  }
+  .marker-cluster-small, .marker-cluster-small div {
+    background-color: rgba(250, 120, 150, 0.6);
+  }
 }
 
 .ServiceDetail {
