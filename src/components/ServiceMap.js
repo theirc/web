@@ -5,6 +5,7 @@ import "./ServiceHome.css";
 import { translate } from "react-i18next";
 import circle from "@turf/circle";
 import bbox from "@turf/bbox";
+import getSessionStorage from "../shared/sessionStorage";
 
 var tinycolor = require("tinycolor2");
 let iconWithPrefix = vector_icon => vector_icon.split("-")[0] + " " + vector_icon;
@@ -107,6 +108,7 @@ class ServiceMap extends React.Component {
 		const L = window.Leaflet;
 		const { servicesByType } = this.props;
 		const { defaultLocation, findServicesInLocation } = this.props;
+		const sessionStorage = getSessionStorage();
 
 		/*
     RR:
@@ -125,7 +127,10 @@ class ServiceMap extends React.Component {
 			spiderfyDistanceMultiplier: 1.5,
       spiderfyOnMaxZoom: true
     });
-    map.addLayer(clusters);
+		map.addLayer(clusters);
+		var locate = L.control.locate();
+		locate.addTo(map);
+
 		map.on("dragend", a => {
 			if (findServicesInLocation) {
 				/*
@@ -144,20 +149,31 @@ class ServiceMap extends React.Component {
 			}
 		});
 
+		map.on("moveend", function(e) {
+			var bounds = map.getBounds();
+			sessionStorage.serviceMapBounds = bounds.toBBoxString();
+		});
+
 		/*
     We try to get the user's position first, if that doesn't work, we use the key coordinate for the country
     Then we make a circle of 100k radius around that point, get the box around it and call it the bounds for the screen.
 
     */
-		this.findUsersPosition(defaultLocation).then(l => {
-			var center = [l.longitude, l.latitude];
-			var radius = 100;
-			var options = { units: "kilometers" };
-			var c = circle(center, radius, null, null, options);
-			var b = bbox(c);
+		if (sessionStorage.serviceMapBounds) {
+			const b = sessionStorage.serviceMapBounds.split(",").map(c => parseFloat(c));
 			map.fitBounds([[b[1], b[0]], [b[3], b[2]]]);
 			map.fire("dragend");
-		});
+		} else {
+			this.findUsersPosition(defaultLocation).then(l => {
+				var center = [l.longitude, l.latitude];
+				var radius = 100;
+				var options = { units: "kilometers" };
+				var c = circle(center, radius, null, null, options);
+				var b = bbox(c);
+				map.fitBounds([[b[1], b[0]], [b[3], b[2]]]);
+				map.fire("dragend");
+			});
+		}
 
 		this.clusters = clusters;
 		this.map = map;
@@ -195,7 +211,7 @@ class ServiceMap extends React.Component {
 	}
 
 	componentWillUnmount() {
-    // Cleaning up.
+		// Cleaning up.
 		this.map.remove();
 	}
 

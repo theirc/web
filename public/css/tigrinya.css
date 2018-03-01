@@ -1,0 +1,10 @@
+@font-face {
+	font-family: 'EthiopicHiwua';
+	src:url('../fonts/EthiopicHiwua.eot');
+	src:url('../fonts/EthiopicHiwua.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/EthiopicHiwua.ttf') format('truetype'),
+		url('../fonts/EthiopicHiwua.woff') format('woff'),
+		url('../fonts/EthiopicHiwua.svg#EthiopicHiwua') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}

@@ -85,7 +85,7 @@ class ServiceCategoryList extends React.Component {
 					<h1>{t("Order results by distance to me")}</h1>
 					{!locationEnabled && <i className="MenuIcon material-icons">radio_button_unchecked</i>}
 					{locationEnabled && <i className="MenuIcon material-icons">radio_button_checked</i>}
-				</li>				
+				</li>
 			</HeaderBar>,
 			<div key={"List"} className="ServiceCategoryList">
 				<ul>
@@ -95,10 +95,11 @@ class ServiceCategoryList extends React.Component {
 							<strong>{t("All Services")}</strong>
 						</div>
 					</li>
+					<hr className="line" />
 					<li>
 						<div className="container" onClick={() => goToMap()}>
 							<i className="fa fa-map" />
-							<strong>Service Map</strong>
+							<strong>{t("Service Map")}</strong>
 						</div>
 					</li>
 					{sortedCategories.map(c => this.renderCategory(c))}
