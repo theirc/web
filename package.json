@@ -132,7 +132,7 @@
 		"build-css": "./node_modules/.bin/node-sass-chokidar src/ -o src/",
 		"watch-css": "npm run build-css && ./node_modules/.bin/node-sass-chokidar src/ -o src/ --watch --recursive",
 		"start": "node scripts/start",
-		"build": "node scripts/build.js",
+		"build": "node scripts/build",
 		"test": "node scripts/test.js --env=jsdom",
 		"build-server": "babel src -s -D -d webserver --plugins remove-nonjs --presets es2015,stage-0,react",
 		"run-server": "node server"
