@@ -28,8 +28,13 @@ body .rtl.language-ur {
 }
 html .ltr,
 body .ltr {
-	font-family: "Roboto", "EthiopicHiwua", sans-serif;
+	font-family: "Roboto", sans-serif;
 	padding: 0;
+}
+
+html .ltr.language-ti,
+body .ltr.language-ti {
+	font-family: "EthiopicHiwua", sans-serif;
 }
 
 #root {
