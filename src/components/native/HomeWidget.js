@@ -60,7 +60,7 @@ class HomeWidget extends Component {
 		return (
 			<View style={[styles.LocalGuide]}>
 				<View>
-					<Text href="javascript:void(0)" onPress={() => onNavigate(`/${country.fields.slug}/services`)}>
+					<Text href="javascript:void(0)" onPress={() => onNavigate(`/services`)}>
 						{t("See More")}
 					</Text>
 				</View>
@@ -107,7 +107,7 @@ class HomeWidget extends Component {
 		return (
 			<View style={[styles.TopCategories]}>
 				<View>
-					<Text href="javascript:void(0)" onPress={() => onNavigate(`/${country.fields.slug}/categories`)}>
+					<Text href="javascript:void(0)" onPress={() => onNavigate(`/categories`)}>
 						{t("See More")}
 					</Text>
 				</View>
@@ -115,7 +115,7 @@ class HomeWidget extends Component {
 				{categories.map(c => {
 					let article = articleFunc(c);
 					return (
-						<View key={c.sys.id} style={[styles.TopCategories]} onPress={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${article.fields.slug}`)}>
+						<View key={c.sys.id} style={[styles.TopCategories]} onPress={() => onNavigate(`/${c.fields.slug}/${article.fields.slug}`)}>
 							<View style={[styles.icon]}>
 								<i className={c.fields.iconClass || "material-icons"}>{c.fields.iconText || ((!c.fields.iconClass || c.fields.iconClass === "material-icons") && "add")}</i>
 							</View>
@@ -198,7 +198,7 @@ class HomeWidget extends Component {
 				{!showFullArticle && (
 					<View style={[styles.ReadMoreIcon]}>
 						<Icon name="crop-square" size={13} color="#b30000" />
-						<Text style={{ fontWeight: "700", fontSize: 12 }} onPress={() => onNavigate(`/${country.fields.slug}/${categorySlug}/${article.fields.slug}`)}>
+						<Text style={{ fontWeight: "700", fontSize: 12 }} onPress={() => onNavigate(`/${categorySlug}/${article.fields.slug}`)}>
 							{t("Read More").toUpperCase()}
 						</Text>
 					</View>
@@ -222,7 +222,7 @@ class HomeWidget extends Component {
 				<Text style={[styles.CategHeader, styles.Title]}>{c.fields.name.toUpperCase()}</Text>
 				<View style={[styles.ReadMoreIcon]}>
 					<Icon name="crop-square" size={13} color="#b30000" />
-					<Text style={{ fontWeight: "700", fontSize: 12 }} href="javascript:void(0)" onPress={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${article.fields.slug}`)}>
+					<Text style={{ fontWeight: "700", fontSize: 12 }} href="javascript:void(0)" onPress={() => onNavigate(`/${c.fields.slug}/${article.fields.slug}`)}>
 						{t("Read More").toUpperCase()}
 					</Text>
 				</View>

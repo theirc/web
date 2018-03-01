@@ -87,7 +87,7 @@ class CategoryList extends Component {
 													<TouchableOpacity
 														style={[styles.item, styles.article]}
 														key={a.sys.id}
-														onPress={() => onNavigate(`/${country.fields.slug}/${a.fields.slug}/${overviewOrFirst(a).fields.slug}`)}
+														onPress={() => onNavigate(`/${a.fields.slug}/${overviewOrFirst(a).fields.slug}`)}
 													>
 														<Text style={styles.articleTitle}>{a.fields.name}</Text>
 													</TouchableOpacity>
@@ -104,7 +104,7 @@ class CategoryList extends Component {
 													<TouchableOpacity
 														style={[styles.item, styles.article]}
 														key={a.sys.id}
-														onPress={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${a.fields.slug}`)}
+														onPress={() => onNavigate(`/${c.fields.slug}/${a.fields.slug}`)}
 													>
 														<Text style={styles.articleTitle}>{a.fields.title}</Text>
 													</TouchableOpacity>
@@ -118,7 +118,7 @@ class CategoryList extends Component {
 								<TouchableOpacity
 									style={[styles.item, flexDirection.row]}
 									key={c.sys.id}
-									onPress={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${overviewOrFirst(c).fields.slug}`)}
+									onPress={() => onNavigate(`/${c.fields.slug}/${overviewOrFirst(c).fields.slug}`)}
 								>
 									{renderIcon(c)}
 									<Text style={styles.title}>{overviewOrFirst(c).fields.title}</Text>

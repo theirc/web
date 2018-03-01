@@ -13,7 +13,7 @@ const md = new Remarkable("full", {
 
 class SearchPage extends React.Component {
 	render() {
-		const { hideServices, searchingArticles, searchingServices, articles, services, term, t, onNavigate, country } = this.props;
+		const { hideServices, searchingArticles, searchingServices, articles, services, term, t, onNavigate } = this.props;
 		/*jshint ignore:start*/
 		/*eslint-disable*/
 		return (
@@ -39,7 +39,7 @@ class SearchPage extends React.Component {
 							<div
 								key={article.sys.id}
 								className="Article"
-								onClick={() => onNavigate(`/${article.fields.country.fields.slug}/${article.fields.category.fields.slug}/${article.fields.slug}`)}
+								onClick={() => onNavigate(`/${article.fields.category.fields.slug}/${article.fields.slug}`)}
 							>
 								{article.fields.hero && <div className="Image" style={{ backgroundImage: `url('${article.fields.hero.fields.file.url}')` }} />}
 								<div className={`Text ${article.fields.hero ? 'TextWithImage' : ''}`}>
@@ -70,7 +70,7 @@ class SearchPage extends React.Component {
 						{searchingServices && <div className="loader" />}
 						{services.map((s, i) => [
 							i > 0 && <hr className="line" key={`hr-${s.id}`} />,
-							<div key={s.id} className="Service" onClick={() => onNavigate(`/${country.fields.slug}/services/${s.id}/`)}>
+							<div key={s.id} className="Service" onClick={() => onNavigate(`/services/${s.id}/`)}>
 								{s.image && <div className="Image" style={{ backgroundImage: `url('${s.image}')` }} />}
 								<div className={`Text ${s.image ? 'TextWithImage' : ''}`}>
 									<h2>{s.name}</h2>

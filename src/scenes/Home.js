@@ -22,7 +22,7 @@ class Home extends React.Component {
     render() {
         const {country} = this.props;
         if(country) {
-            return (<Redirect to={`/${country.fields.slug}`} />);
+            return (<Redirect to={`/`} />);
         } else {
             return (<Redirect to={`/selectors`} />);
         }

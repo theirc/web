@@ -16,18 +16,23 @@ export function withCountry(WrappedComponent) {
 		};
 
 		componentWillMount() {
-			const { match, onMount, language } = this.props;
-			const { api } = this.context;
+			const { onMount, language } = this.props;
+			const { api, config } = this.context;
 
-			api.loadCountry(match.params.country, language).then(c => {
-				return onMount(c).then(c => {
-					this.setState({ country: c, loaded: true });
+			const host = window.location.hostname.split(".")[0];
+			const possibleRoots = ["www", "sandbox", "staging", "new-staging", "localhost"];
+			const country = possibleRoots.indexOf(host) === -1 ? host : "";
+
+			if (country) {
+				api.loadCountry(country, language).then(c => {
+					return onMount(c).then(c => {
+						this.setState({ country: c, loaded: true });
+					});
 				});
-			});
+			}
 		}
 		compomentWillReceiveProps(newProps) {
 			const { match, onMount, language } = this.props;
-
 			if (newProps.language !== language) {
 				onMount(match.params.country, newProps.language).then(c => {
 					this.setState({ country: c, loaded: true });
@@ -40,7 +45,8 @@ export function withCountry(WrappedComponent) {
 		}
 
 		render() {
-			let country = this.state.country || this.props.country;
+			let country = this.state.country;
+			console.log(country);
 			if (!country) return null;
 
 			return <WrappedComponent {...{ country, ...this.props }} />;
@@ -48,7 +54,7 @@ export function withCountry(WrappedComponent) {
 	}
 
 	CountrySwitcher = connect(
-		({ language, country }) => ({ language, country }),
+		({ language }) => ({ language }),
 		(d, p) => {
 			return {
 				onMount: c => {

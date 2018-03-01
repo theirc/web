@@ -418,20 +418,20 @@ const mapState = ({ country, language }, p) => {
 const mapDispatch = (d, p) => {
 	return {
 		listServicesInCategory(category) {
-			return d(push(`/${p.country.fields.slug}/services/by-category/${category.id}/`));
+			return d(push(`/services/by-category/${category.id}/`));
 		},
 		goToService(id) {
-			return d(push(`/${p.country.fields.slug}/services/${id}/`));
+			return d(push(`/services/${id}/`));
 		},
 
 		listAllServices() {
-			return d(push(`/${p.country.fields.slug}/services/all/`));
+			return d(push(`/services/all/`));
 		},
 		goToNearby() {
-			return d(push(`/${p.country.fields.slug}/services/nearby/`));
+			return d(push(`/services/nearby/`));
 		},
 		goToMap() {
-			return d(push(`/${p.country.fields.slug}/services/map/`));
+			return d(push(`/services/map/`));
 		},
 		goToCategoryMap(category) {
 			return d(push(`/${p.country.fields.slug}/services/by-category/${category}/map/`));

@@ -17,6 +17,7 @@ module.exports = {
 		gaTracker: "UA-68574649-6",
 		appId: "708254579325899",
 		thumbnail: "/images/logos/Page-thumbnails-logos-wbg_B.png",
+		countries: ["greece", "serbia", "bulgaria"],
 	},
 	"new-staging.refugee.info": {
 		theme: "irc",
@@ -32,6 +33,7 @@ module.exports = {
 		gaTracker: "UA-68574649-6",
 		appId: "708254579325899",
 		thumbnail: "/images/logos/ri-thumbnail.png",
+		countries: ["greece", "serbia", "bulgaria"],
 	},
 	"khabrona.info": {
 		theme: "mc",
@@ -47,6 +49,7 @@ module.exports = {
 		gaTracker: "UA-68574649-7",
 		appId: "154471931830995",
 		thumbnail: "/images/logos/ki-thumbnail.png",
+		countries: [],
 	},
 	"cuentanos.org": {
 		theme: "generic",
@@ -62,6 +65,7 @@ module.exports = {
 		gaTracker: "UA-68574649-8",
 		appId: "708254579325899",
 		thumbnail: "/images/logos/cn-thumnbnail.png",
+		countries: [],
 	},
 	localhost: {
 		theme: "irc",
@@ -77,5 +81,6 @@ module.exports = {
 		gaTracker: "UA-68574649-6",
 		appId: "708254579325899",
 		thumbnail: "/images/logos/ri-thumbnail.png",
+		countries: ["greece", "serbia", "bulgaria"],
 	},
 };

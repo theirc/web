@@ -4,7 +4,7 @@ import "./LocalGuideWidget.css";
 
 class LocalGuideWidget extends Component {
 	render() {
-		const { country, onNavigate, t, guideItems } = this.props;
+		const { onNavigate, t, guideItems } = this.props;
 
 		/*jshint ignore:start*/
 		/*eslint-disable*/
@@ -14,7 +14,7 @@ class LocalGuideWidget extends Component {
 					<a
 						href="#"
 						onClick={() => {
-							onNavigate(`/${country.fields.slug}/services`);
+							onNavigate(`/services`);
 							return false;
 						}}
 					>

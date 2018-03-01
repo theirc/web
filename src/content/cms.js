@@ -11,6 +11,7 @@ for (let key of Object.keys(config)) {
 			siteConfig = config[key];
 			siteConfig.languageDictionary = Object.assign(config.languageDictionary, siteConfig.languageDictionary);
 			client = contentful.createClient({
+				key,
 				...siteConfig,
 			});
 		}
@@ -20,6 +21,7 @@ for (let key of Object.keys(config)) {
 if (!client) {
 	siteConfig = config["refugee.info"];
 	client = contentful.createClient({
+		key: 'refugee.info',
 		...siteConfig,
 	});
 }

@@ -13,7 +13,7 @@ const md = new Remarkable("full", {
 
 class CategoryWidget extends Component {
     render(){
-        const { country, onNavigate, t, c } = this.props;	
+        const { onNavigate, t, c } = this.props;	
         let html = md.render(c.fields.description);
         let article = c.fields.overview || _.first(c.fields.articles);
         
@@ -25,7 +25,7 @@ class CategoryWidget extends Component {
 					<a
 						href="#"
 						onClick={() => {
-							onNavigate(`/${country.fields.slug}/${c.fields.slug}/${article.fields.slug}`);
+							onNavigate(`/${c.fields.slug}/${article.fields.slug}`);
 							return false;
 						}}
 					>

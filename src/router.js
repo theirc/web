@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { Route, Switch, withRouter } from "react-router";
 import { ConnectedRouter } from "react-router-redux";
-import { Home, Article, Categories, CountryHome, CategoryHome, CountrySelectorScene, LanguageSelectorScene, Search, Services, Selectors } from "./scenes";
+import { Article, Categories, CountryHome, CategoryHome, CountrySelectorScene, LanguageSelectorScene, Search, Services, Selectors } from "./scenes";
 import { history } from "./store";
 import { Skeleton } from "./scenes";
 import { withCountry, withCategory } from "./shared/hoc";
 import Placeholder from "./shared/placeholder";
+import PropTypes from "prop-types";
 
 class ScrollToTop extends Component {
 	componentDidUpdate(prevProps) {
@@ -22,6 +23,10 @@ class ScrollToTop extends Component {
 ScrollToTop = withRouter(ScrollToTop);
 
 class Router extends Component {
+	static contextTypes = {
+		config: PropTypes.object,
+	};
+
 	componentDidMount() {
 		if (global.window) {
 			if (global.window && global.window.document) {
@@ -42,24 +47,29 @@ class Router extends Component {
 
 	render() {
 		const ServicesWithCountry = withCountry(Services);
+		const { config } = this.context;
+
+		const host = window.location.hostname.split(".")[0];
+		const possibleRoots = ["www", "sandbox", "staging", "new-staging", "localhost"];
+		const isRoot = possibleRoots.indexOf(host) > -1;
+
 		return (
 			<ConnectedRouter history={history}>
 				<Placeholder>
 					<ScrollToTop />
 					<Switch>
-						<Route path="/:country/services" component={props => <ServicesWithCountry {...props} />} />
+						<Route path="/services" component={props => <ServicesWithCountry {...props} />} />
 						<Skeleton>
 							<div className="SkeletonContainer">
 								<Switch>
-									<Route exact path="/" component={Home} />
+									<Route exact path="/" component={isRoot ? Selectors : withCountry(CountryHome)} />
 									<Route exact path="/selectors" component={Selectors} />
 									<Route exact path="/country-selector" component={CountrySelectorScene} />
 									<Route exact path="/language-selector" component={LanguageSelectorScene} />
-									<Route exact path="/:country/search" component={withCountry(Search)} />
-									<Route exact path="/:country/categories" component={withCountry(Categories)} />
-									<Route path="/:country/:category/:article" component={withCountry(withCategory(Article))} />
-									<Route path="/:country/:category" component={withCountry(withCategory(CategoryHome))} />
-									<Route path="/:country" component={withCountry(CountryHome)} />
+									<Route exact path="/search" component={withCountry(Search)} />
+									<Route exact path="/categories" component={withCountry(Categories)} />
+									<Route path="/:category/:article" component={withCountry(withCategory(Article))} />
+									<Route path="/:category" component={withCountry(withCategory(CategoryHome))} />
 								</Switch>
 							</div>
 						</Skeleton>
