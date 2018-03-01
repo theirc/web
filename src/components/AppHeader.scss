@@ -18,13 +18,10 @@ Less me
 }
 
 .app-bar-container {
-
-    display: -webkit-box;
-    display: -webkit-flex;
+	display: -webkit-box;
+	display: -webkit-flex;
 	display: -ms-flexbox;
 	display: flex;
-
-
 	color: white;
 	flex: 1;
 	flex-direction: row;
@@ -63,7 +60,23 @@ Less me
 	align-items: center;
 	justify-content: flex-end;
 	flex-direction: row;
-	span {
+	.app-bar-selectors {
+		padding: 16px 5px;
+		text-transform: uppercase;
+		cursor: pointer;
+		font-size: 14px;
+		@media (max-width: 320px) {
+			font-size: 10px;
+		}
+		@media (min-width: 321px) {
+			font-size: 12px;
+			padding: 16px 8px;
+		}
+		@media (min-width: 960px) {
+			font-size: 14px;
+			padding: 16px 11px;
+		}
+
 		.rtl & {
 			font-family: "Cairo", sans-serif;
 		}

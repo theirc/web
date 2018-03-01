@@ -97,6 +97,7 @@ module.exports = {
 	fetchAllServicesNearby(country, language, position = [], distance = 5, pageSize = 50) {
 		return new Promise((resolve, reject) => {
 			var requestUrl = `/services/search/?filter=relatives&geographic_region=${country}&page=1&page_size=${pageSize}&near=${position.join(", ")}&near_km=${distance}`;
+
 			request
 				.get(RI_URL + requestUrl)
 				.set("Accept-Language", language)
@@ -111,9 +112,12 @@ module.exports = {
 				});
 		});
 	},
-	fetchAllServicesInBBox(country, language, bounds = [], pageSize = 200) {
+	fetchAllServicesInBBox(country, language, bounds = [], pageSize = 200, category = null) {
 		return new Promise((resolve, reject) => {
 			var requestUrl = `/services/search/?filter=relatives&geographic_region=${country}&page=1&page_size=${pageSize}&bounds=${bounds.join(", ")}`;
+			if (category) {
+				requestUrl += "&type_numbers=" + (category || "");
+			}
 			request
 				.get(RI_URL + requestUrl)
 				.set("Accept-Language", language)
