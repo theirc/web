@@ -134,7 +134,7 @@ class ServiceList extends React.Component {
 										alignSelf: "center",
 									}}
 								>
-									<h1>{t("View Map")}</h1>
+									<h1>{t("Service Map")}</h1>
 								</div>
 								<i className="material-icons" />
 							</li>
