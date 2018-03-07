@@ -17,12 +17,6 @@ class ServiceDetail extends React.Component {
 		service: null,
 		relatedServices: [],
 	};
-	whatsappCount = 0;
-	viberCount = 0;
-	messengerCount = 0;
-	phoneCount = 0;
-	emailCount = 0;
-	skypeCount = 0;
 
 	share() {
 		const { language } = this.props;
@@ -64,33 +58,32 @@ class ServiceDetail extends React.Component {
 			case "whatsapp" :
 				typography = "MenuIcon fa fa-whatsapp";
 				action = "whatsapp://send?text=text";
-				typeText = this.whatsappCount >1 ? "Whatsapp: " + text : "Whatsapp";
+				typeText = "Whatsapp: ";
 			break;
 			case "skype" : 
 				typography = "MenuIcon fa fa-skype";
 				action = "${toUrl(text)";
-				typeText = "Skype";
-				typeText = this.skypeCount >1 ? "Skype: "+ this.skypeCount : "Skype";
+				typeText = "Skype: ";
 			break;
 			case "facebook_messenger" :
 				typography = "MenuIcon fa fa-facebook";
 				action = "${toUrl(text)";
-				typeText = this.messengerCount >1 ? "Facebook Messenger: "+text : "Facebook essenger";
+				typeText = "Facebook Messenger: ";
 			break;
 			case "viber" : 
 				typography = "MenuIcon fa fa-phone";
 				action = "viber://add?number=${text}";
-				typeText = this.viberCount >1 ? "Viber: "+text : "Viber";
+				typeText = "Viber: ";
 			break; 
 			case "phone" : 
 				typography = "MenuIcon fa fa-phone";
 				action = "tel:${text}";
-				typeText = this.phoneCount >1 ? "Call: "+text : "Call";
+				typeText = "Call: ";
 			break;
 			case "email" : 
 				typography = "MenuIcon fa fa-envelope-o";
 				action = "mailto:${text}";
-				typeText = this.emailCount >1 ? "Email: "+text : "Email";
+				typeText = "Email: ";
 			break;
 		}
 	
@@ -98,7 +91,7 @@ class ServiceDetail extends React.Component {
 				<div>
 					<hr />
 					<div className="Selector" onClick={() => window.open(action)}>  
-						<h1>{typeText}</h1>
+						<h1>{typeText}{text} </h1>
 						<i className= {typography} aria-hidden="true" />
 					</div>	
 				</div>
@@ -177,35 +170,6 @@ class ServiceDetail extends React.Component {
 		let sortedContactInformations = _.sortBy(service.contact_informations || [], ci => {
 			return ci.index;
 		});		
-		
-		this.whatsappCount = 0;
-		this.viberCount = 0;
-		this.messengerCount = 0;
-		this.phoneCount = 0;
-		this.emailCount = 0;
-		this.skypeCount = 0;
-		for (let i=0;i<service.contact_informations.length;i++){
-			switch(service.contact_informations[i].type){
-				case "whatsapp":
-					this.whatsappCount++;					
-					break;
-				case "viber":
-					this.viberCount++;
-					break;
-				case "facebook_messenger":
-					this.messengerCount++;
-					break;
-				case "phone":
-					this.phoneCount++;
-					break;
-				case "email":
-					this.emailCount++;
-					break;
-				case "skype":
-					this.skypeCount++;
-					break;
-			}
-		}
 
 		return (
 			<div className="ServiceDetail">
