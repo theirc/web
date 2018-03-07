@@ -17,6 +17,12 @@ class ServiceDetail extends React.Component {
 		service: null,
 		relatedServices: [],
 	};
+	whatsappCount = 0;
+	viberCount = 0;
+	messengerCount = 0;
+	phoneCount = 0;
+	emailCount = 0;
+	skypeCount = 0;
 
 	share() {
 		const { language } = this.props;
@@ -48,6 +54,57 @@ class ServiceDetail extends React.Component {
 			fetchServicesInSameLocation().then(relatedServices => this.setState({ relatedServices }));
 		}
 	}
+	renderContactInformation(ci) {
+		let {text,type} = ci;
+		let typography;
+		let action;
+		let typeText;
+
+		switch(type){
+			case "whatsapp" :
+				typography = "MenuIcon fa fa-whatsapp";
+				action = "whatsapp://send?text=text";
+				typeText = this.whatsappCount >1 ? "Whatsapp: " + text : "Whatsapp";
+			break;
+			case "skype" : 
+				typography = "MenuIcon fa fa-skype";
+				action = "${toUrl(text)";
+				typeText = "Skype";
+				typeText = this.skypeCount >1 ? "Skype: "+ this.skypeCount : "Skype";
+			break;
+			case "facebook_messenger" :
+				typography = "MenuIcon fa fa-facebook";
+				action = "${toUrl(text)";
+				typeText = this.messengerCount >1 ? "Facebook Messenger: "+text : "Facebook essenger";
+			break;
+			case "viber" : 
+				typography = "MenuIcon fa fa-phone";
+				action = "viber://add?number=${text}";
+				typeText = this.viberCount >1 ? "Viber: "+text : "Viber";
+			break; 
+			case "phone" : 
+				typography = "MenuIcon fa fa-phone";
+				action = "tel:${text}";
+				typeText = this.phoneCount >1 ? "Call: "+text : "Call";
+			break;
+			case "email" : 
+				typography = "MenuIcon fa fa-envelope-o";
+				action = "mailto:${text}";
+				typeText = this.emailCount >1 ? "Email: "+text : "Email";
+			break;
+		}
+	
+			return(
+				<div>
+					<hr />
+					<div className="Selector" onClick={() => window.open(action)}>  
+						<h1>{typeText}</h1>
+						<i className= {typography} aria-hidden="true" />
+					</div>	
+				</div>
+			)
+	}
+
 	render() {
 		const { service, relatedServices } = this.state;
 		const { t, language, goToService } = this.props;
@@ -116,6 +173,40 @@ class ServiceDetail extends React.Component {
 			});
 		};
 		let fullAddress = [service.address, service.address_floor].filter(val => val).join(', ');
+
+		let sortedContactInformations = _.sortBy(service.contact_informations || [], ci => {
+			return ci.index;
+		});		
+		
+		this.whatsappCount = 0;
+		this.viberCount = 0;
+		this.messengerCount = 0;
+		this.phoneCount = 0;
+		this.emailCount = 0;
+		this.skypeCount = 0;
+		for (let i=0;i<service.contact_informations.length;i++){
+			switch(service.contact_informations[i].type){
+				case "whatsapp":
+					this.whatsappCount++;					
+					break;
+				case "viber":
+					this.viberCount++;
+					break;
+				case "facebook_messenger":
+					this.messengerCount++;
+					break;
+				case "phone":
+					this.phoneCount++;
+					break;
+				case "email":
+					this.emailCount++;
+					break;
+				case "skype":
+					this.skypeCount++;
+					break;
+			}
+		}
+
 		return (
 			<div className="ServiceDetail">
 				<Helmet>
@@ -236,6 +327,8 @@ class ServiceDetail extends React.Component {
 							<i className="MenuIcon fa fa-facebook-f" aria-hidden="true" />
 						</div>
 					)}
+					
+					{service.contact_informations && sortedContactInformations.map(ci => this.renderContactInformation(ci))}
 				</div>
 			</div>
 		);
