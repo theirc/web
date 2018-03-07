@@ -12,9 +12,11 @@
     p {
         margin-top: 0;
         font-weight: 300;
+        opacity: 1;
         u {
             text-decoration: none;
         }
+    p:hover{opacity: 0.85;}
     }
 
     .hero {

@@ -115,7 +115,7 @@ class ServiceDetail extends React.Component {
 				));
 			});
 		};
-		let fullAddress = [service.address_floor, service.address].filter(val => val).join(', ');
+		let fullAddress = [service.address, service.address_floor].filter(val => val).join(', ');
 		return (
 			<div className="ServiceDetail">
 				<Helmet>

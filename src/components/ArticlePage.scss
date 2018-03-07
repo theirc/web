@@ -46,7 +46,7 @@
 		li {
 			&::before {
 				content: "\f00c ";
-				color: green;
+				color: #29991F;
 			}
 		}
 	}
@@ -54,7 +54,7 @@
 		li {
 			&::before {
 				content: "\f00d ";
-				color: red;
+				color: #E60000;
 			}
 		}
 	}
@@ -81,7 +81,7 @@
 	}
 
 	hr {
-		width: 20%;
+		width: 10%;
 		border-width: 1px;
 		border-style: solid;
 		border-radius: 2px;

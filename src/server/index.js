@@ -87,6 +87,17 @@ var mainRequest = function(context) {
 	};
 };
 const parseLanguage = function(req) {
+	let configKey = _.first(
+		Object.keys(conf).filter(k => {
+			return req.headers.host.indexOf(k) > -1;
+		})
+	);
+	let possibleLanguages = ["en"];
+
+	if (configKey) {
+		const { languages } = conf[configKey];
+		possibleLanguages = languages.map(l => l[0]);
+	}
 	let selectedLanguage = "en";
 
 	if ("language" in req.query) {
@@ -103,7 +114,7 @@ const parseLanguage = function(req) {
 		}
 	}
 
-	return selectedLanguage;
+	return possibleLanguages.indexOf(selectedLanguage)  > -1 ? selectedLanguage : 'en';
 };
 
 const markdownOptions = {

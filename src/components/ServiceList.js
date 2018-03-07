@@ -43,7 +43,7 @@ class ServiceList extends React.Component {
 				borderColor: tinycolor(color).darken(10),
 			};
 		};
-		let fullAddress = [s.address_floor, s.address, s.address_city].filter(val => val).join(', ')
+		let fullAddress = [s.address, s.address_city].filter(val => val).join(", ");
 		return [
 			<li key={s.id} className="Item" onClick={() => goToService(s.id)}>
 				<div className="Icons">
@@ -58,7 +58,7 @@ class ServiceList extends React.Component {
 					<h2>
 						{s.provider.name}{" "}
 						<small>
-							{fullAddress}							
+							{fullAddress}
 							{distance && ` - ${distance}`}
 						</small>
 					</h2>
@@ -69,7 +69,7 @@ class ServiceList extends React.Component {
 	}
 	render() {
 		const { services, category, loaded, errorMessage } = this.state;
-		const { t, locationEnabled, toggleLocation, nearby } = this.props;
+		const { t, locationEnabled, toggleLocation, nearby, showMap } = this.props;
 
 		if (!loaded) {
 			return (
@@ -112,7 +112,36 @@ class ServiceList extends React.Component {
 							<em>{t("No services found")}</em>
 						</div>
 					)}
-				<div className="ServiceListContainer">{services.length > 0 && <ul className="Items">{services.map(this.renderService.bind(this))}</ul>}</div>
+
+				{services.length > 0 && (
+					<div className="ServiceListContainer">
+						<ul className="Items">
+							<li
+								className="Item"
+								onClick={showMap}
+								style={{
+									flexBasis: "100%",
+								}}
+							>
+								<div className="Icons">
+									<div className="Icon">
+										<i className="fa fa-map" />
+									</div>
+								</div>
+								<div
+									className="Info"
+									style={{
+										alignSelf: "center",
+									}}
+								>
+									<h1>{t("Service Map")}</h1>
+								</div>
+								<i className="material-icons" />
+							</li>
+							{services.map(this.renderService.bind(this))}
+						</ul>
+					</div>
+				)}
 			</div>
 		);
 	}

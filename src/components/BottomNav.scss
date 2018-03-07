@@ -1,44 +1,60 @@
 @import "../shared/includes.scss";
 
 .BottomNav {
-	.rtl & span {
-		font-size: 12px;
-	}
-	.Selected {
-		.rtl & {
-			font-family: "Cairo", sans-serif;
-		}
-		@include darken-brand-colors( "color", 5%);
-	}
+  box-shadow: 0 -5px 31px -5px rgba(0, 0, 0, 0.1)!important;
 
-	.Selected > span > span {
-		.rtl & {
-			font-family: "Cairo", sans-serif;
-		}
-		color: black;
-		font-weight: 700;
-	}
-	& > div > button > span > svg {
-		.rtl & {
-			-moz-transform: scaleX(-1);
-			-o-transform: scaleX(-1);
-			-webkit-transform: scaleX(-1);
-			transform: scaleX(-1);
-			filter: FlipH;
-			-ms-filter: "FlipH";
-		}
-	}
+  .rtl & span {
+    font-size: 12px;
+  }
 
-	.BottomButton {
-		@media (max-width: 375px) {
-			font-size: 75% !important;
-		}
-		.rtl & {
-			font-family: "Cairo", "Roboto", sans-serif;
-		}
-		.ltr & {
-			font-family: "Roboto", sans-serif;
-			padding: 0;
-		}
-	}
+  .Selected {
+    .rtl & {
+      font-family: "Cairo", sans-serif;
+    }
+    @include darken-brand-colors( "color", 5%);
+  }
+
+  .Selected > span > span {
+    .rtl & {
+      font-family: "Cairo", sans-serif;
+    }
+    color: black;
+    font-weight: 700;
+  }
+
+  & > div > button > span > svg {
+    .rtl & {
+      -moz-transform: scaleX(-1);
+      -o-transform: scaleX(-1);
+      -webkit-transform: scaleX(-1);
+      transform: scaleX(-1);
+      filter: FlipH;
+      -ms-filter:  "FlipH";
+    }
+  }
+
+  .BottomButton {
+    @media (max-width: 375px) {
+      font-size: 85% !important;
+    }
+
+    .rtl & {
+      font-family: "Cairo", "Roboto", sans-serif;
+    }
+
+    .language-ur & {
+      font-family: "NastaleeqNuma", "Cairo", "Roboto", sans-serif;
+    }
+
+    .language-ti & {
+
+      font-family: "EthiopicHiwua", sans-serif;
+    }
+
+    .ltr & {
+      font-family: "Roboto", sans-serif;
+      padding: 0;
+    }
+  }
+
 }

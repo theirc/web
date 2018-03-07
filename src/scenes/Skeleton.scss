@@ -47,7 +47,8 @@ body {
 s,
 square {
 	text-decoration: none;
-	transform: translate(0px, -14px);
+	align-items: baseline;
+	.ltr & {margin-bottom:auto; vertical-align: top;}
 
 	& > a {
 		text-decoration: none;
@@ -63,13 +64,13 @@ square {
 		content: "□";
 		vertical-align: sub;
 		margin-top: -4px;
-		font-size: 30px;
+		font-size: 20px;
 
 		@media only screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: $desktopBreakpoint),
 			only screen and (min--moz-device-pixel-ratio: 2) and (max-width: $desktopBreakpoint),
 			only screen and (-o-min-device-pixel-ratio: 2/1) and (max-width: $desktopBreakpoint),
 			only screen and (min-device-pixel-ratio: 2) and (max-width: $desktopBreakpoint) {
-			font-size: 20px;
+			font-size: 18px;
 		}
 	}
 	.ltr & > a:before {
@@ -80,14 +81,9 @@ square {
 	}
 }
 
-a,
-em,
-li,
-p {
-	color: #404040;
-	font-size: 1rem;
+a,em,li{color: black;}
 
-}
+
 
 .Skeleton {
 	.rtl & {

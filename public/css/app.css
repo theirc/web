@@ -22,10 +22,19 @@ html .rtl,
 body .rtl {
 	font-family: "Cairo", "Roboto", sans-serif;
 }
+html .rtl.language-ur,
+body .rtl.language-ur {
+	font-family: "NastaleeqNuma", "Cairo", sans-serif;
+}
 html .ltr,
 body .ltr {
 	font-family: "Roboto", sans-serif;
 	padding: 0;
+}
+
+html .ltr.language-ti,
+body .ltr.language-ti {
+	font-family: "EthiopicHiwua", sans-serif;
 }
 
 #root {
