@@ -279,7 +279,7 @@ class ServiceDetail extends React.Component {
 					{service.website && <hr />}
 					{service.website && (
 						<div className="Selector" onClick={() => window.open(`${toUrl(service.website)}`)}>
-							<h1>{service.website}</h1>
+							<h1>{t('Website')}: {service.website}</h1>
 							<i className="MenuIcon fa fa-external-link" aria-hidden="true" />
 						</div>
 					)}
