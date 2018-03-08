@@ -58,11 +58,14 @@
 	.Selector > h1 {
 		font-size: 18px;
 		display: block;
-		width: 100%;
+		width: 85%;
 		margin: 0;
 		padding: 10px;
 		line-height: 20px;
 		flex: 1;
+		overflow:hidden;
+		white-space:nowrap;
+		text-overflow: ellipsis;
 		a {
 			line-height: 20px;
 			margin-left: 5px;

@@ -279,15 +279,15 @@ class ServiceDetail extends React.Component {
 					{service.website && <hr />}
 					{service.website && (
 						<div className="Selector" onClick={() => window.open(`${toUrl(service.website)}`)}>
-							<h1>{t("Web Site")}</h1>
+							<h1>{service.website}</h1>
 							<i className="MenuIcon fa fa-external-link" aria-hidden="true" />
 						</div>
 					)}
 
 					{service.facebook_page && <hr />}
 					{service.facebook_page && (
-						<div className="Selector" onClick={() => window.open(`${toUrl(service.facebook_page)}`)}>
-							<h1>{t("Facebook Page")}</h1>
+						<div className="Selector" onClick={() => window.open(`${toUrl(service.facebook_page)}`)}>							
+							<h1>{service.facebook_page}</h1>
 							<i className="MenuIcon fa fa-facebook-f" aria-hidden="true" />
 						</div>
 					)}
