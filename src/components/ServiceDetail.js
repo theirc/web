@@ -271,7 +271,7 @@ class ServiceDetail extends React.Component {
 					{service.email && <hr />}
 					{service.email && (
 						<div className="Selector" onClick={() => window.open(`mailto:${service.email}`)}>
-							<h1>{t("Email")}</h1>
+							<h1>{t('Emal')}: {service.email}</h1>
 							<i className="MenuIcon fa fa-envelope-o" aria-hidden="true" />
 						</div>
 					)}
@@ -287,7 +287,7 @@ class ServiceDetail extends React.Component {
 					{service.facebook_page && <hr />}
 					{service.facebook_page && (
 						<div className="Selector" onClick={() => window.open(`${toUrl(service.facebook_page)}`)}>							
-							<h1>{service.facebook_page}</h1>
+							<h1>{t('Facebook')}: {service.facebook_page}</h1>
 							<i className="MenuIcon fa fa-facebook-f" aria-hidden="true" />
 						</div>
 					)}
