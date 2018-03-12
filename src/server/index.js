@@ -289,7 +289,8 @@ app.get("/:country/:category/:article", function (req, res, err) {
 								include: 10,
 							})
 							.then(cc => {
-								let match = _.first(c.items.filter(i => i.fields.country && i.fields.category).filter(i => i.fields.country.fields.slug === country && i.fields.category.fields.slug === category));
+								let match = _.first(c.items.filter(i => i.fields.country && i.fields.category && i.fields.country.fields && i.fields.categories.fields)
+									.filter(i => i.fields.country.fields.slug === country && i.fields.category.fields.slug === category));
 								if (!match) {
 									let _cnt = _.first(cc.items);
 									let _cat = _.first(_cnt.fields.categories.filter(x => x.fields.slug === category));
