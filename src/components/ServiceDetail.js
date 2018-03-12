@@ -174,7 +174,7 @@ class ServiceDetail extends React.Component {
 		};
 		let fullAddress = [service.address, service.address_floor].filter(val => val).join(', ');
 
-		let sortedContactInformations = _.sortBy(service.contact_informations || [], ci => {
+		let sortedContactInformation = _.sortBy(service.contact_information || [], ci => {
 			return ci.index;
 		});		
 		
@@ -184,8 +184,8 @@ class ServiceDetail extends React.Component {
 		this.phoneCount = 0;
 		this.emailCount = 0;
 		this.skypeCount = 0;
-		for (let i=0;i<service.contact_informations.length;i++){
-			switch(service.contact_informations[i].type){
+		for (let i=0;i<service.contact_information.length;i++){
+			switch(service.contact_information[i].type){
 				case "whatsapp":
 					this.whatsappCount++;					
 					break;
@@ -328,7 +328,7 @@ class ServiceDetail extends React.Component {
 						</div>
 					)}
 					
-					{service.contact_informations && sortedContactInformations.map(ci => this.renderContactInformation(ci))}
+					{service.contact_information && sortedContactInformation.map(ci => this.renderContactInformation(ci))}
 				</div>
 			</div>
 		);
