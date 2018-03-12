@@ -292,6 +292,7 @@ class Services extends React.Component {
 										toggleLocation={() => _.identity()}
 										servicesByType={() => this.fetchAllServicesNearby()}
 										nearby={true}
+									  showMap={() => goToMap()}
 									/>
 								</div>
 							</Skeleton>
@@ -384,6 +385,7 @@ class Services extends React.Component {
 									measureDistance={this.measureDistance(geolocation, language)}
 									toggleLocation={() => this.setState({ sortingByLocationEnabled: true })}
 									servicesByType={() => this.fetchAllInLocation(props.match.params.location)}
+									showMap={() => goToMap()}
 								/>
 							</div>
 						</Skeleton>
