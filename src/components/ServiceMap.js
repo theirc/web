@@ -120,6 +120,8 @@ class ServiceMap extends React.Component {
 		const map = L.citymaps.map("MapCanvas", null, {
 			scrollWheelZoom: true,
 			zoomControl: true,
+			// Citymaps will automatically select "global" if language is not supported or undefined.
+			language: this.props.i18n.language
 		});
 
 		let clusters = L.markerClusterGroup({

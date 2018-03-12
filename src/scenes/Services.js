@@ -341,6 +341,7 @@ class Services extends React.Component {
 								<ServiceMap
 									{...props}
 									goToService={goToService}
+									language={language}
 									locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
 									measureDistance={this.measureDistance(geolocation, language)}
 									toggleLocation={() => _.identity()}
