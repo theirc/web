@@ -25,11 +25,16 @@ const ReactApp = require("../App").default;
 
 const React = require("react");
 const renderToString = require("react-dom/server").renderToString;
-const { store, history } = require("../store");
+const {
+	store,
+	history
+} = require("../store");
 const Provider = require("react-redux").Provider;
 const _ = require("lodash");
 const toMarkdown = require("to-markdown");
-let { languageDictionary } = conf;
+let {
+	languageDictionary
+} = conf;
 
 const app = feathers();
 app.configure(configuration());
@@ -38,7 +43,9 @@ app.use(cors());
 app.use(helmet());
 app.use(compress());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+	extended: true
+}));
 
 // Set up Plugins and providers
 app.configure(hooks());
@@ -60,8 +67,8 @@ app.get("/config", (rq, res) => {
 	res.send(responseText);
 });
 
-var mainRequest = function(context) {
-	return function(request, response, next) {
+var mainRequest = function (context) {
+	return function (request, response, next) {
 		let configKey = _.first(
 			Object.keys(conf).filter(k => {
 				return request.headers.host.indexOf(k) > -1;
@@ -69,8 +76,12 @@ var mainRequest = function(context) {
 		);
 
 		if (configKey) {
-			const { appId } = conf[configKey];
-			context = Object.assign(context || {}, { appId: appId });
+			const {
+				appId
+			} = conf[configKey];
+			context = Object.assign(context || {}, {
+				appId: appId
+			});
 			context.title = context.title || conf[configKey].title;
 			context.image = context.image || conf[configKey]["thumbnail"];
 		}
@@ -80,13 +91,16 @@ var mainRequest = function(context) {
 
 			var fullUrl = request.protocol + "://" + request.headers.host + request.originalUrl;
 			let hostname = request.headers.host;
-			nunjucks.renderString(data.toString(), Object.assign(context, { hostname: hostname, url: fullUrl }), function(err, compiled) {
+			nunjucks.renderString(data.toString(), Object.assign(context, {
+				hostname: hostname,
+				url: fullUrl
+			}), function (err, compiled) {
 				response.send(compiled);
 			});
 		});
 	};
 };
-const parseLanguage = function(req) {
+const parseLanguage = function (req) {
 	let configKey = _.first(
 		Object.keys(conf).filter(k => {
 			return req.headers.host.indexOf(k) > -1;
@@ -95,7 +109,9 @@ const parseLanguage = function(req) {
 	let possibleLanguages = ["en"];
 
 	if (configKey) {
-		const { languages } = conf[configKey];
+		const {
+			languages
+		} = conf[configKey];
 		possibleLanguages = languages.map(l => l[0]);
 	}
 	let selectedLanguage = "en";
@@ -114,19 +130,17 @@ const parseLanguage = function(req) {
 		}
 	}
 
-	return possibleLanguages.indexOf(selectedLanguage)  > -1 ? selectedLanguage : 'en';
+	return possibleLanguages.indexOf(selectedLanguage) > -1 ? selectedLanguage : 'en';
 };
 
 const markdownOptions = {
-	converters: [
-		{
-			filter: ["span"],
+	converters: [{
+		filter: ["span"],
 
-			replacement: function(innerHTML, node) {
-				return innerHTML;
-			},
+		replacement: function (innerHTML, node) {
+			return innerHTML;
 		},
-	],
+	}, ],
 };
 
 const getFirsLevel = (slug, selectedLanguage) => {
@@ -151,9 +165,11 @@ const getFirsLevel = (slug, selectedLanguage) => {
 // Host the public folder
 app.get("/", mainRequest({}));
 app.use("/", feathers.static("build"));
-app.get("/preview/:serviceId/", function(req, res, err) {
+app.get("/preview/:serviceId/", function (req, res, err) {
 	const selectedLanguage = parseLanguage(req);
-	const { serviceId } = req.params;
+	const {
+		serviceId
+	} = req.params;
 
 	try {
 		servicesApi
@@ -168,9 +184,12 @@ app.get("/preview/:serviceId/", function(req, res, err) {
 		res.redirect("/");
 	}
 });
-app.get("/:country/services/:serviceId/", function(req, res, err) {
+app.get("/:country/services/:serviceId/", function (req, res, err) {
 	const selectedLanguage = parseLanguage(req);
-	const { country, serviceId } = req.params;
+	const {
+		country,
+		serviceId
+	} = req.params;
 
 	try {
 		getFirsLevel(country, selectedLanguage).then(c => {
@@ -190,12 +209,18 @@ app.get("/:country/services/:serviceId/", function(req, res, err) {
 				.catch(e => mainRequest({})(req, res, err));
 		});
 	} catch (e) {
-		mainRequest({ description: e.toString(), image: "" })(req, res, err);
+		mainRequest({
+			description: e.toString(),
+			image: ""
+		})(req, res, err);
 	}
 });
-app.get("/:country/services/", function(req, res, err) {
+app.get("/:country/services/", function (req, res, err) {
 	const selectedLanguage = parseLanguage(req);
-	const { country, serviceId } = req.params;
+	const {
+		country,
+		serviceId
+	} = req.params;
 
 	getFirsLevel(country, selectedLanguage).then(c => {
 		if (c !== country) {
@@ -217,7 +242,7 @@ app.get("/:country/services/", function(req, res, err) {
 	});
 });
 
-app.get("/:country/:category/:article", function(req, res, err) {
+app.get("/:country/:category/:article", function (req, res, err) {
 	const selectedLanguage = parseLanguage(req);
 	let configKey = _.first(
 		Object.keys(conf).filter(k => {
@@ -225,7 +250,11 @@ app.get("/:country/:category/:article", function(req, res, err) {
 		})
 	);
 	let context = {};
-	const { country, category, article } = req.params;
+	const {
+		country,
+		category,
+		article
+	} = req.params;
 	try {
 		if (configKey) {
 			getFirsLevel(country, selectedLanguage).then(c => {
@@ -238,7 +267,10 @@ app.get("/:country/:category/:article", function(req, res, err) {
 					return;
 				}
 
-				const { accessToken, space } = conf[configKey];
+				const {
+					accessToken,
+					space
+				} = conf[configKey];
 				languageDictionary = Object.assign(languageDictionary, conf[configKey]);
 
 				let cms = cmsApi(conf[configKey], languageDictionary);
@@ -249,30 +281,48 @@ app.get("/:country/:category/:article", function(req, res, err) {
 						locale: languageDictionary[selectedLanguage] || selectedLanguage,
 					})
 					.then(c => {
-						let match = _.first(c.items.filter(i => i.fields.country.fields.slug === country && i.fields.category.fields.slug === category));
-						console.log("match" + match);
-						if (!match) {
-							cms.client
-								.getEntries({
-									content_type: "country",
-									"fields.slug": country,
-									locale: languageDictionary[selectedLanguage] || selectedLanguage,
-								})
-								.then(c => {
-									if (c.items.length > 0) {
-										res.redirect("/" + country);
-									} else {
-										res.redirect("/");
+						return cms.client
+							.getEntries({
+								content_type: "country",
+								"fields.slug": country,
+								locale: languageDictionary[selectedLanguage] || selectedLanguage,
+								include: 10,
+							})
+							.then(cc => {
+								let match = _.first(c.items.filter(i => i.fields.country && i.fields.category).filter(i => i.fields.country.fields.slug === country && i.fields.category.fields.slug === category));
+								if (!match) {
+									let _cnt = _.first(cc.items);
+									let _cat = _.first(_cnt.fields.categories.filter(x => x.fields.slug === category));
+									if (_cat) {
+										match = _.first(_cat.fields.articles.filter(x => x.fields.slug === article));
 									}
-								});
-						} else {
-							console.log("fields:" + match.fields);
-							return mainRequest({
-								title: match.fields.title,
-								description: (match.fields.lead || "").replace(/&nbsp;/gi, " "),
-								image: (match.fields.hero && match.fields.hero.fields.file && "https:" + match.fields.hero.fields.file.url) || "",
-							})(req, res, err);
-						}
+								}
+
+								console.log("match" + match);
+								if (!match) {
+									return cms.client
+										.getEntries({
+											content_type: "country",
+											"fields.slug": country,
+											locale: languageDictionary[selectedLanguage] || selectedLanguage,
+										})
+										.then(c => {
+											if (c.items.length > 0) {
+												res.redirect("/" + country);
+											} else {
+												res.redirect("/");
+											}
+										});
+								} else {
+									console.log("fields:" + match.fields);
+									return mainRequest({
+										title: match.fields.title,
+										description: (match.fields.lead || "").replace(/&nbsp;/gi, " "),
+										image: (match.fields.hero && match.fields.hero.fields.file && "https:" + match.fields.hero.fields.file.url) || "",
+									})(req, res, err);
+								}
+							});
+
 					})
 					.catch(e => {
 						console.log(e);
@@ -281,7 +331,10 @@ app.get("/:country/:category/:article", function(req, res, err) {
 			});
 		}
 	} catch (e) {
-		mainRequest({ description: e.toString(), image: "" })(req, res, err);
+		mainRequest({
+			description: e.toString(),
+			image: ""
+		})(req, res, err);
 	}
 });
 
