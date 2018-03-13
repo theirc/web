@@ -260,9 +260,7 @@ class ServiceDetail extends React.Component {
 						<div className="Selector" onClick={() => window.open(`tel:${service.phone_number}`)}>
 							<h1>
 								{t("Call")}:
-								<ltr>
-									<a href={`tel:${service.phone_number}`}>{service.phone_number}</a>
-								</ltr>
+								<a href={`tel:${service.phone_number}`}>{service.phone_number}</a>
 							</h1>
 							<i className="MenuIcon fa fa-phone" aria-hidden="true" />
 						</div>
@@ -271,7 +269,7 @@ class ServiceDetail extends React.Component {
 					{service.email && <hr />}
 					{service.email && (
 						<div className="Selector" onClick={() => window.open(`mailto:${service.email}`)}>
-							<h1>{t('Emal')}: {service.email}</h1>
+							<h1>{t('Email')}: {service.email}</h1>
 							<i className="MenuIcon fa fa-envelope-o" aria-hidden="true" />
 						</div>
 					)}
