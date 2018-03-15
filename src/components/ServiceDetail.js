@@ -91,7 +91,9 @@ class ServiceDetail extends React.Component {
 				<div>
 					<hr />
 					<div className="Selector" onClick={() => window.open(action)}>  
-						<h1>{typeText}{text} </h1>
+					<h1><div style={{ display: 'inline-block', direction: 'ltr',width: '100%',
+    					overflow: 'hidden', whiteSpace:'nowrap', textOverflow: 'ellipsis' }}>
+						{typeText}{text} </div></h1>
 						<i className= {typography} aria-hidden="true" />
 					</div>	
 				</div>
@@ -269,7 +271,9 @@ class ServiceDetail extends React.Component {
 					{service.email && <hr />}
 					{service.email && (
 						<div className="Selector" onClick={() => window.open(`mailto:${service.email}`)}>
-							<h1>{t('Email')}: {service.email}</h1>
+							<h1><span style={{display: 'inline-block',overflow: 'hidden'}}>{t('Email')}: </span><div style={{ display: 'inline-block', direction: 'ltr',maxWidth: '85%',
+    							overflow: 'hidden', whiteSpace:'nowrap', textOverflow: 'ellipsis' }}>
+							 {service.email}</div></h1>
 							<i className="MenuIcon fa fa-envelope-o" aria-hidden="true" />
 						</div>
 					)}
@@ -277,7 +281,9 @@ class ServiceDetail extends React.Component {
 					{service.website && <hr />}
 					{service.website && (
 						<div className="Selector" onClick={() => window.open(`${toUrl(service.website)}`)}>
-							<h1>{t('Website')}: {service.website}</h1>
+							<h1><div style={{ display: 'inline-block', direction: 'ltr',maxWidth: '85%',
+    							overflow: 'hidden', whiteSpace:'nowrap', textOverflow: 'ellipsis' }}>
+							{t('Website')}: {service.website}</div></h1>
 							<i className="MenuIcon fa fa-external-link" aria-hidden="true" />
 						</div>
 					)}
@@ -285,7 +291,9 @@ class ServiceDetail extends React.Component {
 					{service.facebook_page && <hr />}
 					{service.facebook_page && (
 						<div className="Selector" onClick={() => window.open(`${toUrl(service.facebook_page)}`)}>							
-							<h1>{t('Facebook')}: {service.facebook_page}</h1>
+							<h1><div style={{ display: 'inline-block', direction: 'ltr',maxWidth: '85%',
+    							overflow: 'hidden', whiteSpace:'nowrap', textOverflow: 'ellipsis' }}>
+							{t('Facebook')}: {service.facebook_page}</div></h1> 
 							<i className="MenuIcon fa fa-facebook-f" aria-hidden="true" />
 						</div>
 					)}
