@@ -271,7 +271,7 @@ class ServiceDetail extends React.Component {
 					{service.email && <hr />}
 					{service.email && (
 						<div className="Selector" onClick={() => window.open(`mailto:${service.email}`)}>
-							<h1><span style={{display: 'inline-block',overflow: 'hidden'}}>{t('Email')}: </span><div style={{ display: 'inline-block', direction: 'ltr',maxWidth: '85%',
+							<h1><span style={{display: 'inline-block',overflow: 'hidden'}}>{t('Email')}: </span><div style={{ display: 'inline-block', direction: 'ltr',maxWidth: '60%',
     							overflow: 'hidden', whiteSpace:'nowrap', textOverflow: 'ellipsis' }}>
 							 {service.email}</div></h1>
 							<i className="MenuIcon fa fa-envelope-o" aria-hidden="true" />
