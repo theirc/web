@@ -16,7 +16,7 @@ module.exports = {
 		favicon: "/favicon.ico",
 		gaTracker: "UA-68574649-6",
 		appId: "708254579325899",
-		thumbnail: "/images/logos/Page-thumbnails-logos-wbg_B.png",
+		thumbnail: "/images/logos/ri-thumbnail.png",
 	},
 	"new-staging.refugee.info": {
 		theme: "irc",
