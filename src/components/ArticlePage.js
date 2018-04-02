@@ -94,19 +94,19 @@ export default class ArticlePage extends Component {
 		return null;
 	}
 	componentDidMount() {
-	/* */
-	const APP_ID = this.context.config.appId;
-	
-	document.querySelectorAll('.yt').forEach(e=> {
-		var videoId = e.innerHTML.replace(/<YouTube.*videoId=["']{(.*)}["'].*><\/YouTube>/gmi, '$1');
-		e.removeChild(e.firstChild);
-		ReactDOM.render(<YouTube videoId={videoId} className={"YouTube"} />, e);
-	});		
-	document.querySelectorAll('.fb').forEach(e=> {
-		var videoId = e.innerHTML.replace(/<FacebookPlayer.*videoId=["']{(.*)}["'].*><\/FacebookPlayer>/gmi, '$1');
-		e.removeChild(e.firstChild);
-		ReactDOM.render( <FacebookPlayer className={"Facebook"} videoId={videoId} appId={APP_ID} />, e);
-	});
+		/* */
+		const APP_ID = this.context.config.appId;
+		
+		Array.from(document.querySelectorAll('.yt') || []).forEach(e=> {
+			var videoId = e.innerHTML.replace(/<YouTube.*videoId=["']{(.*)}["'].*><\/YouTube>/gmi, '$1');
+			e.removeChild(e.firstChild);
+			ReactDOM.render(<YouTube videoId={videoId} className={"YouTube"} />, e);
+		});		
+		Array.from(document.querySelectorAll('.fb') || []).forEach(e=> {
+			var videoId = e.innerHTML.replace(/<FacebookPlayer.*videoId=["']{(.*)}["'].*><\/FacebookPlayer>/gmi, '$1');
+			e.removeChild(e.firstChild);
+			ReactDOM.render( <FacebookPlayer className={"Facebook"} videoId={videoId} appId={APP_ID} />, e);
+		});
 	}
 
 	render() {
