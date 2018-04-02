@@ -26,8 +26,8 @@ class CountrySelector extends Component {
         const {
             onGoTo,
             t,
-			language,
-			backToLanguage
+            language,
+            backToLanguage
         } = this.props;
         let countryList = this.props.countryList.map(_.identity);
         let regionList = this.props.regionList.filter(r => r.languages_available.split(',').map(a => a.trim()).indexOf(language) > -1).map(r => r.slug);
@@ -61,9 +61,11 @@ class CountrySelector extends Component {
 						{c.fields.name}
 					</button>
 				))}{" "}
-				<div className="other">
-					<h1>{t("Countries with information in other languages")}</h1>
+				{unavailableCountryList.length > 0 && (
+					<div className="other">
+						<h1>{t("Countries with information in other languages")}</h1>
 					</div>
+					)}
 					{unavailableCountryList.map((c, i) => (
 					<button
 						disabled={true}
@@ -76,13 +78,13 @@ class CountrySelector extends Component {
 						{c.fields.name}
 					</button>
 				))}{" "}
-					<button
+					{unavailableCountryList.length > 0 && (<button
 						className="item "
 						onClick={() => {
 							backToLanguage();
 						}}
 					>{t("Choose your language")}
-					</button>
+					</button>)}
 				<div className="spacer" />
 			</div>
         );
