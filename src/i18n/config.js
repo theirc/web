@@ -519,6 +519,9 @@ export default {
             "Location": "Ubicación",
             "Articles": "Artículos",
             "Services": "Servicios",
+
+            "No articles found with the keywords used.":"No se encontraron artículos con las palabras clave utilizadas.",
+            "No services found with the keywords used.": "No se encontraron servicios con las palabras clave utilizadas.",
         }
     },
     fr: {
@@ -649,9 +652,6 @@ export default {
             "Service Map": "Carte de service",
             "Locations": "Emplacements",
             "Location": "Emplacement",
-
-            "No articles found with the keywords used.":"No se encontraron artículos con las palabras clave utilizadas.",
-            "No services found with the keywords used.": "No se encontraron servicios con las palabras clave utilizadas.",
         },
     },
     ti: {
