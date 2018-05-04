@@ -66,7 +66,7 @@ class Selectors extends Component {
             const {
                 onSelectLanguage,
                 country,
-                onGoTo
+                onGoTo,
             } = this.props;
             const {
                 api
@@ -94,6 +94,7 @@ class Selectors extends Component {
                 }
             } else {
                 servicesApi.fetchRegions(language).then((regionList) => {
+                    
                     api
                         .listCountries(language)
                         .then(e => e.items.map(a => ({
@@ -248,7 +249,7 @@ const mapDispatch = (d, p) => {
 
         onGoTo: slug => {
             d(push(`/${slug}`));
-        },
+        }
     };
 };
 

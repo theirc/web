@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { ServiceMap, ServiceCategoryList, ServiceList, ServiceDetail } from "../components";
+import { ServiceMap, ServiceCategoryList, ServiceLocationList, ServiceList, ServiceDetail } from "../components";
 import { Route, Switch } from "react-router";
 import { Skeleton } from ".";
 import { push } from "react-router-redux";
@@ -190,6 +190,14 @@ class Services extends React.Component {
 			.then(s => s.results)
 			.then(services => ({ services, category: null }));
 	}
+	fetchServicesWithinLocation(bbox, location = null) {
+		const { country, language } = this.props;
+
+		return servicesApi
+			.fetchAllServicesInBBox(location || country.fields.slug, language, bbox, 500, null)
+			.then(s => s.results)
+			.then(services => ({ services, category: null }));
+	}
 
 	fetchService(props) {
 		const { language } = this.props;
@@ -221,7 +229,18 @@ class Services extends React.Component {
 	}
 
 	render() {
-		const { match, goToCategoryMap, country, listServicesInCategory, goToMap, goToNearby, goToService, language, listAllServices } = this.props;
+		const { match, goToCategoryMap, country, listServicesInCategory, goToMap, goToNearby, goToService, language, listAllServices,regions, goToLocationMap,goToLocation, goToLocationList } = this.props;
+
+		let regionDictionary = _.fromPairs(regions.map(r=> [r.id, r]));
+		let regionsWithCountry = regions.map(r=> {
+			let parent = r.parent ? regionDictionary[r.parent] : null;
+			let country = r.parent ? (parent.parent ? regionDictionary[parent.parent] : parent) : r;
+			return {
+				country, 
+				...r
+			};
+		});
+		let countryRegions = regionsWithCountry.filter(c=> c.country.slug === country.fields.slug && [1,3].indexOf(c.level) > - 1 && !c.hidden);
 
 		const { sortingByLocationEnabled, geolocation, errorWithGeolocation } = this.state;
 		const { coordinates } = country.fields;
@@ -253,6 +272,7 @@ class Services extends React.Component {
 										measureDistance={this.measureDistance(geolocation, language)}
 										toggleLocation={() => this.setState({ sortingByLocationEnabled: true })}
 										servicesByType={() => this.fetchAllServices()}
+										showMap={() => goToMap()}
 									/>
 								</div>
 							</Skeleton>
@@ -293,6 +313,27 @@ class Services extends React.Component {
 										servicesByType={() => this.fetchAllServicesNearby()}
 										nearby={true}
 									  showMap={() => goToMap()}
+									/>
+								</div>
+							</Skeleton>
+						)}
+					/>
+					<Route
+						path={`${match.url}/locations/`}
+						exact
+						component={props => (
+							<Skeleton>
+								<div className="SkeletonContainer">
+									<ServiceLocationList
+										{...props}
+										goToService={goToService}
+										locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
+										measureDistance={this.measureDistance(geolocation, language)}
+										toggleLocation={() => _.identity()}
+										nearby={true}
+										openLocation={(location) => goToLocation(location)}
+										allRegions={countryRegions}
+										goToMap={() => goToMap()}
 									/>
 								</div>
 							</Skeleton>
@@ -374,6 +415,7 @@ class Services extends React.Component {
 					)}
 				/>
 				<Route
+				exact
 					path={`${match.url}/by-location/:location/`}
 					component={props => (
 						<Skeleton>
@@ -385,7 +427,29 @@ class Services extends React.Component {
 									measureDistance={this.measureDistance(geolocation, language)}
 									toggleLocation={() => this.setState({ sortingByLocationEnabled: true })}
 									servicesByType={() => this.fetchAllInLocation(props.match.params.location)}
-									showMap={() => goToMap()}
+									showMap={() => goToLocationMap(props.match.params.location)}
+								/>
+							</div>
+						</Skeleton>
+					)}
+				/>
+
+				<Route
+					exact
+					path={`${match.url}/by-location/:location/map/`}
+					component={props => (
+						<Skeleton>
+							<div className="SkeletonContainer">
+								<ServiceMap
+									{...props}
+									goToService={goToService}
+									language={language}
+									locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
+									measureDistance={this.measureDistance(geolocation, language)}
+									toggleLocation={() => _.identity()}
+									findServicesInLocation={bbox => this.fetchServicesWithinLocation(bbox, props.match.params.location)}
+									nearby={true}
+									defaultLocation={defaultLocation}
 								/>
 							</div>
 						</Skeleton>
@@ -405,6 +469,8 @@ class Services extends React.Component {
 									listAllServices={listAllServices}
 									goToNearby={() => goToNearby()}
 									goToMap={() => goToMap()}
+									goToLocationList={() => goToLocationList()}
+									showLocations={true}
 								/>
 							</div>
 						</Skeleton>
@@ -415,8 +481,8 @@ class Services extends React.Component {
 	}
 }
 
-const mapState = ({ country, language }, p) => {
-	return { country, language };
+const mapState = ({ country, language, regions }, p) => {
+	return { country, language, regions };
 };
 const mapDispatch = (d, p) => {
 	return {
@@ -438,6 +504,15 @@ const mapDispatch = (d, p) => {
 		},
 		goToCategoryMap(category) {
 			return d(push(`/${p.country.fields.slug}/services/by-category/${category}/map/`));
+		},
+		goToLocationMap(location) {
+			return d(push(`/${p.country.fields.slug}/services/by-location/${location}/map/`));
+		},
+		goToLocation(location) {
+			return d(push(`/${p.country.fields.slug}/services/by-location/${location}/`));
+		},
+		goToLocationList() {
+			return d(push(`/${p.country.fields.slug}/services/locations/`));
 		},
 		showErrorMessage(error) {
 			d(actions.showErrorMessage(error));

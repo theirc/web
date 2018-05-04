@@ -60,7 +60,7 @@ class CountrySelector extends Component {
 					>
 						{c.fields.name}
 					</button>
-				))}{" "}
+				))}
 				{unavailableCountryList.length > 0 && (
 					<div className="other">
 						<h1>{t("Countries with information in other languages")}</h1>
@@ -77,7 +77,7 @@ class CountrySelector extends Component {
 					>
 						{c.fields.name}
 					</button>
-				))}{" "}
+				))}
 					{unavailableCountryList.length > 0 && (<button
 						className="item "
 						onClick={() => {

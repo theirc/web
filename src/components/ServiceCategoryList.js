@@ -65,7 +65,7 @@ class ServiceCategoryList extends React.Component {
 	}
 	render() {
 		const { categories } = this.state;
-		const { t, locationEnabled, toggleLocation, listAllServices, goToNearby, goToMap } = this.props;
+		const { t, locationEnabled, toggleLocation, listAllServices, goToNearby, goToMap, goToLocationList, showLocations } = this.props;
 		if ((categories || []).length === 0) {
 			return (
 				<div className="ServiceCategoryList">
@@ -102,6 +102,13 @@ class ServiceCategoryList extends React.Component {
 							<strong>{t("Service Map")}</strong>
 						</div>
 					</li>
+					{showLocations && <hr className="line" />}
+					{showLocations && <li>
+						<div className="container" onClick={() => goToLocationList()}>
+							<i className="fa fa-globe" />
+							<strong>{t("Locations")}</strong>
+						</div>
+					</li>}
 					{sortedCategories.map(c => this.renderCategory(c))}
 				</ul>
 			</div>,
