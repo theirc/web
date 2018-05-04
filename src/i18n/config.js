@@ -648,7 +648,10 @@ export default {
             Copied: "Copié",
             "Service Map": "Carte de service",
             "Locations": "Emplacements",
-            "Location": "Emplacement"
+            "Location": "Emplacement",
+
+            "No articles found with the keywords used.":"No se encontraron artículos con las palabras clave utilizadas.",
+            "No services found with the keywords used.": "No se encontraron servicios con las palabras clave utilizadas.",
         },
     },
     ti: {
@@ -911,6 +914,8 @@ export default {
             "Location": "Location",
             "Articles": "Articles",
             "Services": "Services",
+            "No articles found with the keywords used.":"No articles found with the keywords used.",
+            "No services found with the keywords used.": "No services found with the keywords used.",
         },
     }
 
