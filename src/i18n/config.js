@@ -516,7 +516,9 @@ export default {
             "Share on Facebook": "Compartir en el Facebook",
             "Copied": "Copiado",
             "Locations": "Ubicaciones",
-            "Location": "Ubicación"
+            "Location": "Ubicación",
+            "Articles": "Artículos",
+            "Services": "Servicios",
         }
     },
     fr: {
@@ -907,6 +909,8 @@ export default {
             Copied: "Copied",
             "Locations": "Locations",
             "Location": "Location",
+            "Articles": "Articles",
+            "Services": "Services",
         },
     }
 
