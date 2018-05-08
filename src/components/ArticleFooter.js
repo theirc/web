@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { NavigateBefore, NavigateNext, Share, Link } from "material-ui-icons";
 import { translate } from "react-i18next";
-import {CopyToClipboard} from 'react-copy-to-clipboard';
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import "./ArticleFooter.css";
 
 /**
@@ -26,51 +26,52 @@ class ArticleFooter extends Component {
 		}),
 	};
 
-	constructor (props){
-  super(props);
-		  const { language } = this.props;
-			let { href } = window.location;
-			let copySlug = href += (window.location.toString().indexOf("?") > -1 ? "&" : "?") + "language=" + language;
-			this.state = {value: copySlug, copied: false, shareIN: true};
-			this.sharePage = this.sharePage.bind(this);
-			this.Copiedlnk = this.Copiedlnk.bind(this);
-	};
+	constructor(props) {
+		super(props);
+		const { language } = this.props;
+		let { href } = window.location;
+		let copySlug = (href += (window.location.toString().indexOf("?") > -1 ? "&" : "?") + "language=" + language);
+		this.state = { value: copySlug, copied: true, shareIN: true };
+		this.sharePage = this.sharePage.bind(this);
+		this.Copiedlnk = this.Copiedlnk.bind(this);
+	}
 
 	sharePage() {
-  		this.setState(prevState => ({shareIN: false}));
-
-  };
+		this.setState(prevState => ({ shareIN: false }));
+	}
 
 	Copiedlnk() {
-  		this.setState(prevState => ({copied: !prevState.copied}));
-			setTimeout(() =>  {this.setState({shareIN: true})}, 3000);
-
-  };
-
-
+		this.setState(prevState => ({ copied: !prevState.copied }));
+		setTimeout(() => {
+			this.setState({ shareIN: true });
+			setTimeout(() => {
+				this.setState(prevState => ({ copied: !prevState.copied }));
+			}, 2);
+		}, 3000);
+	}
 
 	share() {
-			const { language } = this.props;
+		const { language } = this.props;
 
-			if (global.window) {
-				const { FB } = global.window;
-				let { href } = window.location;
-				href += (href.indexOf("?") > -1 ? "&" : "?") + "language=" + language;
+		if (global.window) {
+			const { FB } = global.window;
+			let { href } = window.location;
+			href += (href.indexOf("?") > -1 ? "&" : "?") + "language=" + language;
 
-				if (FB) {
-					FB.ui(
-						{
-							method: "share",
-							href,
-						},
-						function(response) {}
-					);
-				}
+			if (FB) {
+				FB.ui(
+					{
+						method: "share",
+						href,
+					},
+					function(response) {}
+				);
 			}
 		}
+	}
 
 	render() {
-		const { previous, next, onNavigateTo, direction,  t } = this.props;
+		const { previous, next, onNavigateTo, direction, t } = this.props;
 		const rtl = direction === "rtl";
 
 		return (
@@ -105,21 +106,30 @@ class ArticleFooter extends Component {
 					</div>
 				)}
 				{previous && <hr className="divider" />}
-				<CopyToClipboard sharePage={this.sharePage} text={this.state.value}>
-				<div className="selector" onClick={() => this.sharePage()}>
-					{this.state.shareIN ? <h1>{t("Share this page")}</h1> :
-
-					<div className="selector sharePage">
-						<h1 onClick={() => this.share()}>{t("Share on Facebook")}</h1>
-						<Link className="icon" />
-						{this.state.copied ? <h1>{t("Copied")}</h1> : <h1 onClick={() => this.Copiedlnk()}>{t("Copy Link")}</h1>}
+				{this.state.shareIN ? (
+					<div className="selector" onClick={() => this.sharePage()}>
+						<h1>{t("Share this page")}</h1>
+						<Share className="icon" />
 					</div>
-					}
+				) : (
+					<div className="selector sharePage">
+						<h1
+							onClick={() => {
+								this.Copiedlnk();
+								this.share();
+							}}
+						>
+							{t("Share on Facebook")}
+						</h1>
+						<Share className="icon" />
 
-					<Share className="icon" />
-
-				</div>
-				</CopyToClipboard>
+						<div className="verticalHR" />
+						<CopyToClipboard sharePage={this.sharePage} text={this.state.value}>
+							{this.state.copied ? <h1 onClick={() => this.Copiedlnk()}>{t("Copy Link")}</h1> : <h1>{t("Copied")}</h1>}
+						</CopyToClipboard>
+						<Link className="icon" />
+					</div>
+				)}
 
 				{/*
 				<hr />

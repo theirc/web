@@ -179,7 +179,6 @@ btnmuted {
 	& > a {
 		background-color: #f2f2f2;
 		color: lighten(black, 20%);
-
 		font-size: 100%;
 		text-decoration: none;
 		border: 0;
@@ -197,6 +196,13 @@ btnmuted {
 	background-color: darken(gray, 30%);
 }
 
+
+
+.tel {
+	direction: ltr;
+	display: inline-block;
+}
+
 .rtl a {
 	text-decoration: none;
 	border-bottom: 1px #212121 solid;
@@ -207,5 +213,4 @@ btnmuted {
 li {
 }
 .language-ur{
-	font-family: 'NastaleeqNuma' !important;
 }

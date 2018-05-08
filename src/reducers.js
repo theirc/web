@@ -12,6 +12,16 @@ const localStorage = getLocalStorage();
 
 const device = global.window ? (isMobile.Android() ? "Android" : isMobile.iOS ? "iPhone" : "") : "";
 
+
+function storeRegions(state = [], action) {
+	switch (action.type) {
+		case actions.actionTypes.storeRegions:
+			return action.payload;
+		default:
+			return state;
+	}
+}
+
 function changeDeviceType(state = device, action) {
 	switch (action.type) {
 		case actions.actionTypes.changeDeviceType:
@@ -189,6 +199,7 @@ export default {
 	organization: changeOrganization,
 
 	serviceGeolocation: toggleServiceGeolocation,
+	regions: storeRegions,
 
 	articles: services.articles.reducer,
 	countries: services.countries.reducer,

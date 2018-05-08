@@ -11,26 +11,11 @@
 		border-radius: 1px;
 		height: 0;
 		width: 95%;
+		opacity: 0.6;
 	}
 	.MenuIcon {
-		padding-right: 10px;
-		padding-left: 10px;
 
 		font-size: 20px;
-		width: 24px;
-		height: 24px;
-		text-align: center;
-	}
-
-	.footer {
-		flex: 1;
-		flex-basis: 100%;
-		background-color: $titleBackground;
-		border-top: 1px black solid;
-
-		hr:last-child {
-			display: none;
-		}
 	}
 
 	.Spacer {
@@ -44,6 +29,14 @@
 		justify-content: center;
 	}
 
+	.footer {
+		background-color: $titleBackground;
+
+		& .MenuIcon {
+			margin: 0px 20px 10px 10px;
+		}
+	}
+
 	.Selector {
 		width: 100%;
 		display: flex;
@@ -53,16 +46,21 @@
 		flex-direction: row;
 		align-items: center;
 		cursor: pointer;
+		&:active {
+			background-color: darken($titleBackground, 5%);
+		}
 	}
 
 	.Selector > h1 {
-		font-size: 18px;
+		font-size: 16px;
 		display: block;
-		width: 100%;
+		width: 85%;
 		margin: 0;
-		padding: 10px;
-		line-height: 20px;
+		padding: 10px 10px 10px 20px;
 		flex: 1;
+		overflow:hidden;
+		white-space:nowrap;
+		text-overflow: ellipsis;
 		a {
 			line-height: 20px;
 			margin-left: 5px;
@@ -82,9 +80,7 @@
 .ServiceListContainer {
 	display: flex;
 	flex-wrap: wrap;
-
 	@include service-common();
-
 	ul {
 		list-style: none;
 		margin: 0;
@@ -97,13 +93,13 @@
 		flex-direction: row;
 		justify-content: flex-start;
 		align-items: center;
-
 		-webkit-touch-callout: none;
 		-webkit-user-select: none;
 		-khtml-user-select: none;
 		-moz-user-select: none;
 		-ms-user-select: none;
 		user-select: none;
+		cursor: pointer;
 
 		&:active {
 			background-color: #f6f6f6;
@@ -208,7 +204,8 @@
 	}
 }
 
-.ServiceList, .ServiceMap {
+.ServiceList,
+.ServiceMap {
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: column;
@@ -361,6 +358,22 @@
   .leaflet-control-attribution a {
     font-size: 1em;
   }
+  .leaflet-popup-content {
+    margin: 5px 0;
+
+    .Info h2 {
+      color: #777;
+      font-weight: bold;
+      margin: 5px 0;
+    }
+    .fullAddress {
+      font-style: normal;
+    }
+    .regionTitle {
+      font-style: normal;
+      margin-top: 5px;
+    }
+  }
 
   .leaflet-div-icon {
     background: white;
@@ -379,6 +392,28 @@
           top: 5px;
       }
     }
+  }
+  .marker-cluster {
+    border-radius: 50px !important;
+    height: 50px !important;
+    margin-left: -25px !important;
+    margin-top: -25px !important;
+    width: 50px !important;
+  }
+  .marker-cluster div {
+    border-radius: 50px !important;
+    font-size: 14px;
+    height: 38px;
+    line-height: 38px;
+    margin-left: 6px;
+    margin-top: 6px;
+    text-shadow: 0 0 1px rgba(255,255,255,1),
+                 0 0 1px rgba(255,255,255,1),
+                 0 0 1px rgba(255,255,255,1);
+    width: 38px;
+  }
+  .marker-cluster-small, .marker-cluster-small div {
+    background-color: rgba(250, 120, 150, 0.6);
   }
 }
 

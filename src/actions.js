@@ -16,6 +16,7 @@ const actionTypes = {
 	loadingGeolocation: "LOADING_GEOLOCATION",
 	errorGeolocation: "ERROR_GEOLOCATION",
 	showErrorMessage: "SHOW_ERROR_MESSAGE",
+	storeRegions: "STORE_REGIONS",
 };
 
 export default {
@@ -34,4 +35,5 @@ export default {
 	recordCoordinates: createAction(actionTypes.recordCoordinates),
 	selectCountryList: createAction(actionTypes.selectCountryList),
 	toggleServiceGeolocation: createAction(actionTypes.toggleServiceGeolocation),
+	storeRegions: createAction(actionTypes.storeRegions),
 };

@@ -65,7 +65,7 @@ class ServiceCategoryList extends React.Component {
 	}
 	render() {
 		const { categories } = this.state;
-		const { t, locationEnabled, toggleLocation, listAllServices, goToNearby, goToMap } = this.props;
+		const { t, locationEnabled, toggleLocation, listAllServices, goToNearby, goToMap, goToLocationList, showLocations } = this.props;
 		if ((categories || []).length === 0) {
 			return (
 				<div className="ServiceCategoryList">
@@ -85,7 +85,7 @@ class ServiceCategoryList extends React.Component {
 					<h1>{t("Order results by distance to me")}</h1>
 					{!locationEnabled && <i className="MenuIcon material-icons">radio_button_unchecked</i>}
 					{locationEnabled && <i className="MenuIcon material-icons">radio_button_checked</i>}
-				</li>				
+				</li>
 			</HeaderBar>,
 			<div key={"List"} className="ServiceCategoryList">
 				<ul>
@@ -99,9 +99,16 @@ class ServiceCategoryList extends React.Component {
 					<li>
 						<div className="container" onClick={() => goToMap()}>
 							<i className="fa fa-map" />
-							<strong>Service Map</strong>
+							<strong>{t("Service Map")}</strong>
 						</div>
 					</li>
+					{showLocations && <hr className="line" />}
+					{showLocations && <li>
+						<div className="container" onClick={() => goToLocationList()}>
+							<i className="fa fa-globe" />
+							<strong>{t("Locations")}</strong>
+						</div>
+					</li>}
 					{sortedCategories.map(c => this.renderCategory(c))}
 				</ul>
 			</div>,

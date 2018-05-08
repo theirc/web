@@ -3,7 +3,7 @@ import queryString from "query-string";
 import getLocalStorage from "./localStorage";
 
 const localStorage = getLocalStorage();
-let defaultLanguage = "en";
+let defaultLanguage = cms.siteConfig.languages[0][0];
 
 if (global.window && global.location && global.navigator) {
 	const parsed = queryString.parse(global.location.search);
@@ -20,7 +20,7 @@ if (global.window && global.location && global.navigator) {
 	}
 
 	if (cms.siteConfig.languages.map(l => l[0]).indexOf(defaultLanguage) === -1) {
-		defaultLanguage = "en";
+		defaultLanguage = cms.siteConfig.languages[0][0];
 	}
 }
 
