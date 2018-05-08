@@ -169,7 +169,7 @@ class ServiceDetail extends React.Component {
 		};
 		let fullAddress = [service.address, service.address_floor].filter(val => val).join(', ');
 
-		let sortedContactInformations = _.sortBy(service.contact_informations || [], ci => {
+		let sortedContactInformation = _.sortBy(service.contact_information || [], ci => {
 			return ci.index;
 		});		
 
@@ -298,7 +298,7 @@ class ServiceDetail extends React.Component {
 						</div>
 					)}
 					
-					{service.contact_informations && sortedContactInformations.map(ci => this.renderContactInformation(ci))}
+					{service.contact_information && sortedContactInformation.map(ci => this.renderContactInformation(ci))}
 				</div>
 			</div>
 		);
