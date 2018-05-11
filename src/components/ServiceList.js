@@ -74,6 +74,9 @@ class ServiceList extends React.Component {
 		const { services, category, loaded, errorMessage } = this.state;
 		const { t, locationEnabled, toggleLocation, nearby, showMap } = this.props;
 
+		const availableServices = services.filter(s => s.provider.vacancy);
+		const unavailableServices = services.filter(s => !s.provider.vacancy);
+
 		if (!loaded) {
 			return (
 				<div className="ServiceList">
@@ -116,7 +119,7 @@ class ServiceList extends React.Component {
 						</div>
 					)}
 
-				{services.length > 0 && (
+				{availableServices.length > 0 && (
 					<div className="ServiceListContainer">
 
 						<ul className="Items">
@@ -140,13 +143,13 @@ class ServiceList extends React.Component {
 								</div>
 								<i className="material-icons" />
 							</li>
-							{services.filter(s => s.types.length > 1).map(this.renderService.bind(this))}
+							{availableServices.map(this.renderService.bind(this))}
 						</ul>
 					</div>
 				)}
 
 
-				{services.length > 0 && (
+				{unavailableServices.length > 0 && (
 					<div className="ServiceListContainer Unavailable">
 						<ul className="Items">
 							<li
@@ -156,7 +159,7 @@ class ServiceList extends React.Component {
 							>
 							<h1>Currently unavailable:</h1>
 							</li>
-							{services.filter(s => s.types.length === 1).map(this.renderService.bind(this))}
+							{unavailableServices.map(this.renderService.bind(this))}
 						</ul>
 					</div>
 				)}

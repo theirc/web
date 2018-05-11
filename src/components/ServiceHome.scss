@@ -250,7 +250,7 @@
 	.Item {
 		flex: 1;
 		flex-basis: 100%;
-		padding-top: 1em;
+		padding-top: 0.6em;
 		padding-bottom: 0.6em;
 		border-bottom: 1px $titleBackground solid;
 		min-height: 42px;
@@ -288,7 +288,7 @@
 		}
 
 		> .Icon {
-			padding-top: 3px;
+			padding-top: 10px;
 			text-align: center;
 			width: 56px;
 		}
@@ -296,36 +296,9 @@
 
 	.Icons {
 		display: flex;
-		padding-top: 10px;
+		margin: 10px 0 0;
 		.Icon {
-			padding-right: 13px;
-/*		flex-wrap: wrap;
-		flex-direction: column;
-		width: 75px;
-
-		align-items: stretch;
-		align-content: stretch;
-
-		justify-content: center;
-
-			display: flex;
-			flex: 1;
-			flex-grow: 1;
-			flex-basis: 50%;
-			align-items: center;
-			justify-content: center;
-			align-content: center;
-
-			i {
-				width: 100%;
-				height: 100%;
-				font-size: 18px;
-				text-align: center;
-				align-items: center;
-				display: flex;
-				justify-content: center;
-			}
-*/
+			padding-right: 15px;
 		}
 	}
 	.Info {
@@ -334,8 +307,6 @@
 		flex-direction: column;
 
 		h1 {
-			padding: 0 0 6px;
-			margin: 0;
 			font-size: 100%;
 			font-weight: bold;
 		}
@@ -347,6 +318,7 @@
 
 			small {
 				display: block;
+				padding-top: 6px;
 				text-decoration: underline;
 			}
 		}
@@ -359,6 +331,7 @@
 		}
 		.Item {
 			opacity: 0.38;
+			pointer-events: none;
 			.Icon {
 				i::before {
 					color: black;
