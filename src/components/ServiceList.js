@@ -46,12 +46,8 @@ class ServiceList extends React.Component {
 		let fullAddress = [s.address, s.address_city].filter(val => val).join(", ");
 		return [
 			<li key={s.id} className="Item" onClick={() => goToService(s.id)}>
-				<div className="Icons">
-					{s.types.map((t, idx) => (
-						<div className="Icon" key={`${s.id}-${idx}`}>
-							<i className={iconWithPrefix(t.vector_icon)} style={categoryStyle(t.color)} />
-						</div>
-					))}
+				<div className="Icon" key={`${s.id}-0`}>
+					<i className={iconWithPrefix(s.types[0].vector_icon)} style={categoryStyle(s.types[0].color)} />
 				</div>
 				<div className="Info">
 					<h1>{s.name}</h1>
@@ -61,6 +57,13 @@ class ServiceList extends React.Component {
 							{fullAddress}
 							{distance && ` - ${distance}`}
 						</small>
+						<div className="Icons">
+							{s.types.filter((ty, id) => id > 0).map((t, idx) => (
+								<div className="Icon" key={`${s.id}-${idx}`}>
+									<i className={iconWithPrefix(t.vector_icon)} style={categoryStyle(t.color)} />
+								</div>
+							))}
+						</div>
 					</h2>
 				</div>
 				<i className="material-icons" />
@@ -70,6 +73,9 @@ class ServiceList extends React.Component {
 	render() {
 		const { services, category, loaded, errorMessage } = this.state;
 		const { t, locationEnabled, toggleLocation, nearby, showMap } = this.props;
+
+		const availableServices = services.filter(s => s.provider.vacancy);
+		const unavailableServices = services.filter(s => !s.provider.vacancy);
 
 		if (!loaded) {
 			return (
@@ -113,8 +119,9 @@ class ServiceList extends React.Component {
 						</div>
 					)}
 
-				{services.length > 0 && (
+				{availableServices.length > 0 && (
 					<div className="ServiceListContainer">
+
 						<ul className="Items">
 							<li
 								className="Item"
@@ -123,10 +130,8 @@ class ServiceList extends React.Component {
 									flexBasis: "100%",
 								}}
 							>
-								<div className="Icons">
-									<div className="Icon">
-										<i className="fa fa-map" />
-									</div>
+								<div className="Icon">
+									<i className="fa fa-map" />
 								</div>
 								<div
 									className="Info"
@@ -138,7 +143,23 @@ class ServiceList extends React.Component {
 								</div>
 								<i className="material-icons" />
 							</li>
-							{services.map(this.renderService.bind(this))}
+							{availableServices.map(this.renderService.bind(this))}
+						</ul>
+					</div>
+				)}
+
+
+				{unavailableServices.length > 0 && (
+					<div className="ServiceListContainer Unavailable">
+						<ul className="Items">
+							<li
+								style={{
+									flexBasis: "100%",
+								}}
+							>
+							<h1>Currently unavailable:</h1>
+							</li>
+							{unavailableServices.map(this.renderService.bind(this))}
 						</ul>
 					</div>
 				)}
