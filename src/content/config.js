@@ -62,7 +62,7 @@ module.exports = {
 		favicon: "/cn-favicon.png",
 		gaTracker: "UA-68574649-8",
 		appId: "209295296327422",
-		thumbnail: "/images/logos/cn-thumnbnail.png",
+		thumbnail: "/images/logos/cn-thumbnail.png",
 		backendUrl: 'https://admin-staging.cuentanos.org/e/production/v2',
 	},
 	"cuentanos.org": {
@@ -78,7 +78,7 @@ module.exports = {
 		favicon: "/cn-favicon.png",
 		gaTracker: "UA-68574649-8",
 		appId: "209295296327422",
-		thumbnail: "/images/logos/cn-thumnbnail.png",
+		thumbnail: "/images/logos/cn-thumbnail.png",
 		backendUrl: 'https://admin-staging.cuentanos.org/e/production/v2',
 		
 	},
@@ -96,7 +96,7 @@ module.exports = {
 		favicon: "/cn-favicon.png",
 		gaTracker: "UA-68574649-8",
 		appId: "209295296327422",
-		thumbnail: "/images/logos/cn-thumnbnail.png",
+		thumbnail: "/images/logos/cn-thumbnail.png",
 		backendUrl: 'https://admin-staging.cuentanos.org/e/production/v2',
 	},
 };
