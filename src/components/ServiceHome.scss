@@ -250,10 +250,10 @@
 	.Item {
 		flex: 1;
 		flex-basis: 100%;
-		padding-top: 0.25em;
-		padding-bottom: 0.25em;
+		padding-top: 0.6em;
+		padding-bottom: 0.6em;
 		border-bottom: 1px $titleBackground solid;
-		min-height: 60px;
+		min-height: 42px;
 
 		display: flex;
 
@@ -286,60 +286,58 @@
 		&:active {
 			background-color: #f6f6f6;
 		}
+
+		> .Icon {
+			padding-top: 10px;
+			text-align: center;
+			width: 56px;
+		}
 	}
 
 	.Icons {
 		display: flex;
-		flex-wrap: wrap;
-		flex-direction: column;
-		width: 75px;
-
-		align-items: stretch;
-		align-content: stretch;
-
-		justify-content: center;
-
+		margin: 10px 0 0;
 		.Icon {
-			display: flex;
-			flex: 1;
-			flex-grow: 1;
-			flex-basis: 50%;
-			align-items: center;
-			justify-content: center;
-			align-content: center;
-
-			i {
-				width: 100%;
-				height: 100%;
-				font-size: 18px;
-				text-align: center;
-				align-items: center;
-				display: flex;
-				justify-content: center;
-			}
+			padding-right: 15px;
 		}
 	}
-
 	.Info {
 		display: flex;
 		flex: 1;
 		flex-direction: column;
 
 		h1 {
-			padding: 0;
-			margin: 0;
-			font-size: 120%;
+			font-size: 100%;
+			font-weight: bold;
 		}
 		h2 {
 			padding: 0;
 			margin: 0;
-			font-size: 100%;
+			font-size: 90%;
 			font-weight: normal;
 
 			small {
 				display: block;
+				padding-top: 6px;
+				text-decoration: underline;
 			}
 		}
+	}
+	.Unavailable {
+		li > h1 {
+			font-size: 90%;
+			margin-top: 30px;
+			text-align: center;
+		}
+		.Item {
+			opacity: 0.38;
+			pointer-events: none;
+			.Icon {
+				i::before {
+					color: black;
+				}
+			}
+		}		
 	}
 
 	.Error {
