@@ -70,7 +70,7 @@ class ServiceList extends React.Component {
 	render() {
 		const { services, category, loaded, errorMessage } = this.state;
 		const { t, locationEnabled, toggleLocation, nearby, showMap, title } = this.props;
-		let titleName = title ? title : "Servicios";
+		let titleName = title ? title : t("Services");
 		if (!loaded) {
 			return (
 				<div className="ServiceList">
