@@ -18,6 +18,7 @@ class Services extends React.Component {
 		fetchingLocation: false,
 		errorWithGeolocation: false,
 		geolocation: null,
+		categoryName : null,
 	};
 
 	measureDistance(a, language, sort) {
@@ -252,8 +253,10 @@ class Services extends React.Component {
 			};
 		}
 
-		const onSelectCategory = c => {
+		const onSelectCategory = (c,cname) => {			
+			this.setState({categoryName : cname});
 			listServicesInCategory(c);
+			
 		};
 
 		return (
@@ -408,7 +411,8 @@ class Services extends React.Component {
 									measureDistance={this.measureDistance(geolocation, language)}
 									toggleLocation={() => this.setState({ sortingByLocationEnabled: true })}
 									servicesByType={() => this.servicesByType(props)}
-									showMap={() => goToCategoryMap(props.match.params.categoryId)}
+									showMap={() => goToCategoryMap(props.match.params.categoryId)}									
+									title = {this.state.categoryName}
 								/>
 							</div>
 						</Skeleton>

@@ -69,12 +69,12 @@ class ServiceList extends React.Component {
 	}
 	render() {
 		const { services, category, loaded, errorMessage } = this.state;
-		const { t, locationEnabled, toggleLocation, nearby, showMap } = this.props;
-
+		const { t, locationEnabled, toggleLocation, nearby, showMap, title } = this.props;
+		let titleName = title ? title : "Servicios";
 		if (!loaded) {
 			return (
 				<div className="ServiceList">
-					<HeaderBar title={nearby ? t("Nearby Services") : t("Services")}>
+					<HeaderBar title={nearby ? t("Nearby Services") : titleName}>
 						{!nearby &&
 							navigator.geolocation && (
 								<li onClick={toggleLocation || _.identity}>
@@ -91,7 +91,7 @@ class ServiceList extends React.Component {
 
 		return (
 			<div className="ServiceList">
-				<HeaderBar subtitle={category && `${category.name}:`} title={nearby ? t("Nearby Services") : t("Services")}>
+				<HeaderBar title={nearby ? t("Nearby Services") : category.name}>
 					{!nearby &&
 						navigator.geolocation && (
 							<li onClick={toggleLocation || _.identity}>
