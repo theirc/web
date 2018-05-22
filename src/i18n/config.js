@@ -435,7 +435,7 @@ export default {
             "Light": "Light",
             "Get directions": "Obtener las direcciones",
             "Click here to find services in the location selected": "Haga clic aquí para encontrar más servicios en la ubicación seleccionada",
-            "Categories": "Categorías",
+            "Categories": "Informativos",
             "Share this page": "Compartir esta página",
             "List": "Lista",
             "Languages spoken": "Idiomas hablados",
