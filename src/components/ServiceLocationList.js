@@ -32,7 +32,7 @@ class ServiceCategoryList extends React.Component {
         return (
             <li key={id}>
 				<hr className="line" />
-				<div className="container" onClick={() => setTimeout(() => openLocation(c.slug), 300)}>
+				<div className="container" onClick={() => setTimeout(() => openLocation(c.slug, name), 300)}>
 				<i className={`fa fa-${level > 1 ? 'building': 'globe'}`} />
 					<strong>{name}</strong>
 				</div>

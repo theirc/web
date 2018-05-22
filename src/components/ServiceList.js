@@ -91,7 +91,7 @@ class ServiceList extends React.Component {
 
 		return (
 			<div className="ServiceList">
-				<HeaderBar title={nearby ? t("Nearby Services") : category.name}>
+				<HeaderBar title={nearby ? t("Nearby Services") : (category ? category.name : titleName)}>
 					{!nearby &&
 						navigator.geolocation && (
 							<li onClick={toggleLocation || _.identity}>
