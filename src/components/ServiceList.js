@@ -71,6 +71,11 @@ class ServiceList extends React.Component {
 		const { services, category, loaded, errorMessage } = this.state;
 		const { t, locationEnabled, toggleLocation, nearby, showMap } = this.props;
 
+		// vacancy === false --> available
+		// vacancy === true  --> unavailable
+		const availableServices = services.filter(s => !s.provider.vacancy);
+		const unavailableServices = services.filter(s => s.provider.vacancy);
+
 		if (!loaded) {
 			return (
 				<div className="ServiceList">
