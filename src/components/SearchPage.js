@@ -20,7 +20,7 @@ class SearchPage extends React.Component {
 			<div className="SearchPage">
 				<div className="Title">
 					<h1>
-						{t("Search Results")}: "{term}"
+						{t("Search")}: "{term}"
 					</h1>
 				</div>
 				<div className="results">

@@ -46,8 +46,12 @@ class ServiceList extends React.Component {
 		let fullAddress = [s.address, s.address_city].filter(val => val).join(", ");
 		return [
 			<li key={s.id} className="Item" onClick={() => goToService(s.id)}>
-				<div className="Icon" key={`${s.id}-0`}>
-					<i className={iconWithPrefix(s.types[0].vector_icon)} style={categoryStyle(s.types[0].color)} />
+				<div className="Icons">
+					{s.types.map((t, idx) => (
+						<div className="Icon" key={`${s.id}-${idx}`}>
+							<i className={iconWithPrefix(t.vector_icon)} style={categoryStyle(t.color)} />
+						</div>
+					))}
 				</div>
 				<div className="Info">
 					<h1>{s.name}</h1>
@@ -57,13 +61,6 @@ class ServiceList extends React.Component {
 							{fullAddress}
 							{distance && ` - ${distance}`}
 						</small>
-						<div className="Icons">
-							{s.types.filter((ty, id) => id > 0).map((t, idx) => (
-								<div className="Icon" key={`${s.id}-${idx}`}>
-									<i className={iconWithPrefix(t.vector_icon)} style={categoryStyle(t.color)} />
-								</div>
-							))}
-						</div>
 					</h2>
 				</div>
 				<i className="material-icons" />
@@ -121,9 +118,8 @@ class ServiceList extends React.Component {
 						</div>
 					)}
 
-				{availableServices.length > 0 && (
+				{services.length > 0 && (
 					<div className="ServiceListContainer">
-
 						<ul className="Items">
 							<li
 								className="Item"
@@ -132,8 +128,10 @@ class ServiceList extends React.Component {
 									flexBasis: "100%",
 								}}
 							>
-								<div className="Icon">
-									<i className="fa fa-map" />
+								<div className="Icons">
+									<div className="Icon">
+										<i className="fa fa-map" />
+									</div>
 								</div>
 								<div
 									className="Info"
@@ -145,23 +143,7 @@ class ServiceList extends React.Component {
 								</div>
 								<i className="material-icons" />
 							</li>
-							{availableServices.map(this.renderService.bind(this))}
-						</ul>
-					</div>
-				)}
-
-
-				{unavailableServices.length > 0 && (
-					<div className="ServiceListContainer Unavailable">
-						<ul className="Items">
-							<li
-								style={{
-									flexBasis: "100%",
-								}}
-							>
-							<h1>Currently unavailable:</h1>
-							</li>
-							{unavailableServices.map(this.renderService.bind(this))}
+							{services.map(this.renderService.bind(this))}
 						</ul>
 					</div>
 				)}

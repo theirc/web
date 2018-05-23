@@ -454,7 +454,7 @@ export default {
             "Nearest services to your location": "Servicios más cercanos a su ubicación",
             "Where are you now?": "¿Donde esta usted ahora?",
             "City": "Ciudad",
-            "Can't find specific information?": "¿No puedes encontrar información específica?",
+            "Can't find specific information?": "¿No encuentras lo que buscas?",
             "Copyleft": "Copyleft",
             "Web Site": "Sitio Web",
             "The service is open 24/7": "El servicio está abierto todos los días de la semana",

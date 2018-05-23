@@ -69,9 +69,12 @@ app.get("/config", (rq, res) => {
 
 var mainRequest = function(context) {
     return function(request, response, next) {
+        let hostname = request.hostname || request.headers.host;
+        let protocol = request.protocol;
+        let originalUrl = request.originalUrl;
         let configKey = _.first(
             Object.keys(conf).filter(k => {
-                return request.headers.host.indexOf(k) > -1;
+                return hostname.indexOf(k) > -1;
             })
         );
 
@@ -84,13 +87,13 @@ var mainRequest = function(context) {
             });
             context.title = context.title || conf[configKey].title;
             context.image = context.image || conf[configKey]["thumbnail"];
+            // console.log(context, conf[configKey], configKey);
         }
 
         fs.readFile(path.join(path.dirname(path.dirname(__dirname)), "build", "index.html"), (err, data) => {
             if (err) throw err;
 
-            var fullUrl = request.protocol + "://" + request.headers.host + request.originalUrl;
-            let hostname = request.headers.host;
+            var fullUrl = protocol + "://" + hostname + originalUrl;
             nunjucks.renderString(data.toString(), Object.assign(context, {
                 hostname: hostname,
                 url: fullUrl
@@ -101,9 +104,10 @@ var mainRequest = function(context) {
     };
 };
 const parseLanguage = function(req) {
+    let hostname = req.hostname || req.headers.host;
     let configKey = _.first(
         Object.keys(conf).filter(k => {
-            return req.headers.host.indexOf(k) > -1;
+            return hostname.indexOf(k) > -1;
         })
     );
     let possibleLanguages = ["en"];
@@ -163,8 +167,10 @@ const getFirsLevel = (slug, selectedLanguage) => {
 };
 
 // Host the public folder
-app.get("/", mainRequest({}));
+app.get("/", (req, res, err) => mainRequest({})(req, res, err));
 app.use("/", feathers.static("build"));
+app.use("/images", feathers.static("build/images"));
+
 app.get("/preview/:serviceId/", function(req, res, err) {
     const selectedLanguage = parseLanguage(req);
     const {
@@ -302,7 +308,7 @@ app.get("/:country/:category/:article", function(req, res, err) {
                                     }
                                 }
 
-                                console.log("match" + match);
+                                // console.log("match" + match);
                                 if (!match) {
                                     return cms.client
                                         .getEntries({
@@ -318,7 +324,7 @@ app.get("/:country/:category/:article", function(req, res, err) {
                                             }
                                         });
                                 } else {
-                                    console.log("fields:" + match.fields);
+                                    // console.log("fields:" + match.fields);
                                     return mainRequest({
                                         title: match.fields.title,
                                         description: (match.fields.lead || "").replace(/&nbsp;/gi, " "),
@@ -342,7 +348,7 @@ app.get("/:country/:category/:article", function(req, res, err) {
     }
 });
 
-app.get("*", mainRequest({}));
+app.get("*", (req, res, err) => mainRequest({})(req, res, err));
 
 app.use(notFound());
 app.use(handler());
