@@ -436,26 +436,17 @@ class Services extends React.Component {
 					component={props => (
 						<Skeleton>
 							<div className="SkeletonContainer">
-								{/* <ServiceList
+								<ServiceLocationList
 									{...props}
 									goToService={goToService}
 									locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
 									measureDistance={this.measureDistance(geolocation, language)}
-									toggleLocation={() => this.setState({ sortingByLocationEnabled: true })}
-									servicesByType={() => this.servicesByType(props)}
-									showMap={() => goToCategoryMap(props.match.params.categoryId)}
-								/> */}
-									<ServiceLocationList
-										{...props}
-										goToService={goToService}
-										locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
-										measureDistance={this.measureDistance(geolocation, language)}
-										toggleLocation={() => _.identity()}
-										nearby={true}
-										openLocation={(location) => goToLocationByCategory(props.match.params.categoryId, location)}
-										allRegions={countryRegions}
-										goToMap={() => goToMap()}
-									/>
+									toggleLocation={() => _.identity()}
+									nearby={true}
+									openLocation={(location) => goToLocationByCategory(props.match.params.categoryId, location)}
+									allRegions={countryRegions}
+									goToMap={() => goToMap()}
+								/>
 							</div>
 						</Skeleton>
 					)}
