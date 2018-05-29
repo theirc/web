@@ -46,7 +46,7 @@ class ServiceCategoryList extends React.Component {
 		return (
 			<li key={id}>
 				<hr className="line" />
-				<div className="container" onClick={() => setTimeout(() => onSelectCategory(c), 300)}>
+				<div className="container" onClick={() => {setTimeout(() => onSelectCategory(c,name), 300) }}> 
 					<i className={`${iconPrefix} ${vector_icon}`} style={style} />
 					<strong>{name}</strong>
 				</div>
