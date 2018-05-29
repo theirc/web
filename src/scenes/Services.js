@@ -108,7 +108,7 @@ class Services extends React.Component {
 			});
 	}
 
-	fetchAllInLocation(location) {
+	fetchAllInLocation(location, categoryId = null) {
 		const { language, showErrorMessage } = this.props;
 		const { sortingByLocationEnabled, errorWithGeolocation, fetchingLocation, geolocation } = this.state;
 		const country = location;
@@ -135,7 +135,7 @@ class Services extends React.Component {
 
 		const orderByDistance = c => (sortingByLocationEnabled && geolocation ? _.sortBy(c, s => this.measureDistance(geolocation, language, true)(s.location)) : _.identity(c));
 		return servicesApi
-			.fetchAllServices(country, language)
+			.fetchAllServices(country, language, categoryId)
 			.then(s => orderByDistance(s.results))
 			.then(services => ({ services, category: null }));
 	}
@@ -229,7 +229,23 @@ class Services extends React.Component {
 	}
 
 	render() {
-		const { match, goToCategoryMap, country, listServicesInCategory, goToMap, goToNearby, goToService, language, listAllServices,regions, goToLocationMap,goToLocation, goToLocationList } = this.props;
+		const {
+			country,
+			goToCategoryMap,
+			goToLocation,
+			goToLocationByCategory,
+			goToLocationList,
+			goToLocationMap,
+			goToMap,
+			goToNearby,
+			goToService,
+			language,
+			listAllServices,
+			listLocationsFilter,
+			listServicesInCategory,
+			match,
+			regions,
+		} = this.props;
 
 		let regionDictionary = _.fromPairs(regions.map(r=> [r.id, r]));
 		let regionsWithCountry = regions.map(r=> {
@@ -253,7 +269,7 @@ class Services extends React.Component {
 		}
 
 		const onSelectCategory = c => {
-			listServicesInCategory(c);
+			listLocationsFilter(c);
 		};
 
 		return (
@@ -415,6 +431,46 @@ class Services extends React.Component {
 					)}
 				/>
 				<Route
+					exact
+					path={`${match.url}/by-category/:categoryId/locations`}
+					component={props => (
+						<Skeleton>
+							<div className="SkeletonContainer">
+								<ServiceLocationList
+									{...props}
+									goToService={goToService}
+									locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
+									measureDistance={this.measureDistance(geolocation, language)}
+									toggleLocation={() => _.identity()}
+									nearby={true}
+									openLocation={(location) => goToLocationByCategory(props.match.params.categoryId, location)}
+									allRegions={countryRegions}
+									goToMap={() => goToMap()}
+								/>
+							</div>
+						</Skeleton>
+					)}
+				/>
+				<Route
+					exact
+					path={`${match.url}/by-category/:categoryId/locations/:location/`}
+					component={props => (
+						<Skeleton>
+							<div className="SkeletonContainer">
+								<ServiceList
+									{...props}
+									goToService={goToService}
+									locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
+									measureDistance={this.measureDistance(geolocation, language)}
+									toggleLocation={() => this.setState({ sortingByLocationEnabled: true })}
+									servicesByType={() => this.fetchAllInLocation(props.match.params.location, props.match.params.categoryId)}
+									showMap={() => goToLocationMap(props.match.params.location)}
+								/>
+							</div>
+						</Skeleton>
+					)}
+				/>
+				<Route
 				exact
 					path={`${match.url}/by-location/:location/`}
 					component={props => (
@@ -486,41 +542,46 @@ const mapState = ({ country, language, regions }, p) => {
 };
 const mapDispatch = (d, p) => {
 	return {
-		listServicesInCategory(category) {
-			return d(push(`/${p.country.fields.slug}/services/by-category/${category.id}/`));
-		},
-		goToService(id) {
-			return d(push(`/${p.country.fields.slug}/services/${id}/`));
-		},
-
-		listAllServices() {
-			return d(push(`/${p.country.fields.slug}/services/all/`));
-		},
-		goToNearby() {
-			return d(push(`/${p.country.fields.slug}/services/nearby/`));
-		},
-		goToMap() {
-			return d(push(`/${p.country.fields.slug}/services/map/`));
-		},
 		goToCategoryMap(category) {
 			return d(push(`/${p.country.fields.slug}/services/by-category/${category}/map/`));
-		},
-		goToLocationMap(location) {
-			return d(push(`/${p.country.fields.slug}/services/by-location/${location}/map/`));
 		},
 		goToLocation(location) {
 			return d(push(`/${p.country.fields.slug}/services/by-location/${location}/`));
 		},
+		goToLocationByCategory(category, location) {
+			return d(push(`/${p.country.fields.slug}/services/by-category/${category}/locations/${location}`));
+		},
 		goToLocationList() {
 			return d(push(`/${p.country.fields.slug}/services/locations/`));
+		},
+		goToLocationMap(location) {
+			return d(push(`/${p.country.fields.slug}/services/by-location/${location}/map/`));
+		},
+		goToMap() {
+			return d(push(`/${p.country.fields.slug}/services/map/`));
+		},
+		goToNearby() {
+			return d(push(`/${p.country.fields.slug}/services/nearby/`));
+		},
+		goToService(id) {
+			return d(push(`/${p.country.fields.slug}/services/${id}/`));
+		},
+		listAllServices() {
+			return d(push(`/${p.country.fields.slug}/services/all/`));
+		},
+		listLocationsFilter(category) {
+			return d(push(`/${p.country.fields.slug}/services/by-category/${category.id}/locations/`));
+		},
+		listServicesInCategory(category) {
+			return d(push(`/${p.country.fields.slug}/services/by-category/${category.id}/`));
+		},
+		loadGeolocation() {
+			console.log("NOOP");
 		},
 		showErrorMessage(error) {
 			d(actions.showErrorMessage(error));
 		},
 		toggleServiceGeolocation(value) {
-			console.log("NOOP");
-		},
-		loadGeolocation() {
 			console.log("NOOP");
 		},
 	};
