@@ -4,7 +4,7 @@ import BottomNavigation, { BottomNavigationButton } from "material-ui/BottomNavi
 import PropTypes from "prop-types";
 import { translate } from "react-i18next";
 
-import { Home, List, Assignment } from "material-ui-icons";
+import { Home, List, Assignment, Map } from "material-ui-icons";
 import "./BottomNav.css";
 class BottomNav extends Component {
 	static propTypes = {
@@ -46,7 +46,7 @@ class BottomNav extends Component {
 	}
 
 	render() {
-		const { showServiceMap, t } = this.props;
+		const { showServiceMap, t, showMapButton } = this.props;
 		return (
 			<Paper
 				style={{
@@ -58,7 +58,13 @@ class BottomNav extends Component {
 			>
 				<BottomNavigation showLabels={true} value={this.props.index} onChange={(e, i) => this.select(i)}>
 					<BottomNavigationButton className={this.props.index === 0 ? "Selected" : ""} icon={<Home />} label={<span className="BottomButton">{t("Home")}</span>} value={0} />
-					<BottomNavigationButton className={this.props.index === 1 ? "Selected" : ""} icon={<Assignment />} label={<span className="BottomButton">{t("Categories")}</span>} value={1} />
+					{showMapButton ? (
+						<BottomNavigationButton className={this.props.index === 1 ? "Selected" : ""} icon={<Map />} label={<span className="BottomButton">{t("Map")}</span>} value={1} />
+					): (
+						<BottomNavigationButton className={this.props.index === 1 ? "Selected" : ""} icon={<Assignment />} label={<span className="BottomButton">{t("Categories")}</span>} value={1} />
+					)}
+					
+					
 					{showServiceMap ? (
 						<BottomNavigationButton className={this.props.index === 3 ? "Selected" : ""} icon={<List />} label={<span className="BottomButton">{t("Service List")}</span>} value={3} />
 					) : (

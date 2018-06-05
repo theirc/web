@@ -50,7 +50,7 @@ class Skeleton extends React.Component {
 		}
 	}
 	render() {
-		const { children, country, language, match, onGoHome, onGoToSearch, onChangeLocation, onChangeLanguage, deviceType, router, hideFooter, removeErrorMessage } = this.props;
+		const { children, country, language, match, onGoHome, onGoToSearch, onChangeLocation, onChangeLanguage, deviceType, router, hideFooter, removeErrorMessage, showMapButton } = this.props;
 		const { errorMessage } = this.state;
 		const { config } = this.context;
 
@@ -122,7 +122,7 @@ class Skeleton extends React.Component {
 							deviceType={deviceType}
 						/>
 					)}
-					{country && language && <BottomNavContainer match={match} />}
+					{country && language && <BottomNavContainer match={match} showMapButton={showMapButton} />}
 				</div>
 			</I18nextProvider>
 		);

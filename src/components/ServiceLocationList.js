@@ -69,13 +69,7 @@ class ServiceCategoryList extends React.Component {
 			
 			</HeaderBar>,
             <div key={"List"} className="ServiceCategoryList">
-				<ul>
-					<li>
-						<div className="container" onClick={() => goToMap()}>
-							<i className="fa fa-map" />
-							<strong>{t("Service Map")}</strong>
-						</div>
-					</li>
+				<ul>					
 					{sortedRegions.map(c => this.renderCategory(c))}
 				</ul>
 			</div>,
@@ -84,3 +78,4 @@ class ServiceCategoryList extends React.Component {
 }
 
 export default translate()(ServiceCategoryList);
+
