@@ -17,7 +17,7 @@ class ServiceCategoryList extends React.Component {
 
     }
 
-    renderCategory(c) {
+    renderRegion(c) {
         let {
 			openLocation
         } = this.props;
@@ -70,7 +70,7 @@ class ServiceCategoryList extends React.Component {
 			</HeaderBar>,
             <div key={"List"} className="ServiceCategoryList">
 				<ul>					
-					{sortedRegions.map(c => this.renderCategory(c))}
+					{sortedRegions.map(c => this.renderRegion(c))}
 				</ul>
 			</div>,
         ];
