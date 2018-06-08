@@ -71,7 +71,7 @@ class ServiceCategoryList extends React.Component {
 			return c.number;
 		});
 		return [
-			<HeaderBar key={"Header"} title={t("Service Categories").toUpperCase()+location}>
+			<HeaderBar key={"Header"} title={t("Service Categories").toUpperCase()}>
 				<li onClick={toggleLocation || _.identity}>
 					<h1>{t("Order results by distance to me")}</h1>
 					{!locationEnabled && <i className="MenuIcon material-icons">radio_button_unchecked</i>}

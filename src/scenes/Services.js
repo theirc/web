@@ -273,7 +273,7 @@ class Services extends React.Component {
 
 		const onSelectCategory = (c,cname, location) => {			
 			this.setState({categoryName : cname});
-			listServicesInCategory(c, this.state.locationName);
+			listServicesInCategory(c, this.state.location);
 		};
 
 		const onOpenLocation = (name, location) => {
@@ -403,7 +403,7 @@ class Services extends React.Component {
 				</Switch>
 				<Route
 					exact
-					path={`${match.url}/by-category/:categoryId/map/`}
+					path={`${match.url}/by-location/:location/by-category/:categoryId/map`}
 					component={props => (
 						<Skeleton>
 							<div className="SkeletonContainer">
@@ -512,6 +512,27 @@ class Services extends React.Component {
 				/>
 				<Route
 					exact
+					path={`${match.url}/by-location/:location/by-category/:categoryId/map/`}
+					component={props => (
+						<Skeleton>
+							<div className="SkeletonContainer">
+								<ServiceMap
+									{...props}
+									goToService={goToService}
+									language={language}
+									locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
+									measureDistance={this.measureDistance(geolocation, language)}
+									toggleLocation={() => _.identity()}
+									findServicesInLocation={bbox => this.fetchServicesWithinLocation(bbox, props.match.params.location)}
+									nearby={true}
+									defaultLocation={defaultLocation}
+								/>
+							</div>
+						</Skeleton>
+					)}
+				/>
+				<Route
+					exact
 					path={`${match.url}`}
 					component={() => (
 						<Skeleton>
@@ -566,7 +587,6 @@ const mapDispatch = (d, p) => {
 			return d(push(`/${p.country.fields.slug}/services/${id}/`));
 		},
 		listAllServices(location) {
-			console.log("Location",location);
 			return d(push(`/${p.country.fields.slug}/services/by-location/${location}/all/`));
 		},
 		listLocationsFilter(category) {
