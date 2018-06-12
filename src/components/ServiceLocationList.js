@@ -17,7 +17,7 @@ class ServiceCategoryList extends React.Component {
 
     }
 
-    renderCategory(c) {
+    renderRegion(c) {
         let {
 			openLocation
         } = this.props;
@@ -69,14 +69,8 @@ class ServiceCategoryList extends React.Component {
 			
 			</HeaderBar>,
             <div key={"List"} className="ServiceCategoryList">
-				<ul>
-					<li>
-						<div className="container" onClick={() => goToMap()}>
-							<i className="fa fa-map" />
-							<strong>{t("Service Map")}</strong>
-						</div>
-					</li>
-					{sortedRegions.map(c => this.renderCategory(c))}
+				<ul>					
+					{sortedRegions.map(c => this.renderRegion(c))}
 				</ul>
 			</div>,
         ];
@@ -84,3 +78,4 @@ class ServiceCategoryList extends React.Component {
 }
 
 export default translate()(ServiceCategoryList);
+

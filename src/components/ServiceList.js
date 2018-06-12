@@ -14,12 +14,18 @@ class ServiceList extends React.Component {
 		errorMessage: null,
 	};
 	componentDidMount() {
-		const { servicesByType } = this.props;
+		const { servicesByType, listAllServices } = this.props;
 		if (servicesByType) {
 			servicesByType()
 				.then(({ services, category }) => this.setState({ services, category, loaded: true }))
 				.catch(c => this.setState({ errorMessage: c.message, category: null, loaded: true }));
 		}
+		if (listAllServices) {
+			listAllServices()
+				.then(({ services, category }) => this.setState({ services, category, loaded: true }))
+				.catch(c => this.setState({ errorMessage: c.message, category: null, loaded: true }));
+		}
+
 	}
 	renderService(s) {
 		const { goToService, measureDistance } = this.props;
