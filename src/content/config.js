@@ -80,9 +80,9 @@ module.exports = {
 		appId: "209295296327422",
 		thumbnail: "/images/logos/cn-thumbnail.png",
 		backendUrl: 'https://admin-staging.cuentanos.org/e/production/v2',
-		
+
 	},
-	localhost: {
+	"Refugee.info": {
 		theme: "generic",
 		accessToken: "2a64ff636dd4e5b44bd21afcb7f8d77c5c238e3ebe387ec6047a0b9d5c6a704d",
 		host: "preview.contentful.com",

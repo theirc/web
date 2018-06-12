@@ -3,7 +3,7 @@ import { Button, IconButton } from "material-ui";
 import Headroom from "react-headrooms";
 import PropTypes from "prop-types";
 import { translate } from "react-i18next";
-
+import { Close } from "material-ui-icons";
 import "./AppHeader.css";
 
 class AppHeader extends Component {
@@ -17,6 +17,7 @@ class AppHeader extends Component {
 
 	state = {
 		search: false,
+		prvalert: false,
 		searchText: "",
 		active: false,
 	};
@@ -30,6 +31,14 @@ class AppHeader extends Component {
 			window.scrollTo(0, 0);
 		}
 		this.setState({ search: !search });
+	}
+
+	toggleAlert() {
+		const { prvalert } = this.state;
+		if (!prvalert) {
+			this.setState({ prvalert: true })
+		}
+		this.setState({ prvalert: !prvalert });
 	}
 	handleInputChange(event) {
 		const target = event.target;
@@ -60,6 +69,7 @@ class AppHeader extends Component {
 
 		return (
 			<div className="AppHeader">
+
 				<Headroom tolerance={5} offset={200}>
 					<div className="app-bar">
 						<div className={["app-bar-container logo", !(country && language) ? "logo-centered" : ""].join(" ")} onClick={onGoHome || noop}>
@@ -108,7 +118,22 @@ class AppHeader extends Component {
 						<i className="fa fa-search" onClick={this.handleSubmit.bind(this)} />
 					</form>
 				)}
+				<div className={this.state.prvalert ? 'hidden' : 'privacy-banner'}>
+					<span>
+						We use cookies to deliver our services.
+						<br/>By continuing to using
+						this site you accept such use and acknowledge that you have
+						read and understand our <a href="https://www.refugee.info/greece/privacy/cookies" target="_blank">Cookie Policy</a> and  <a href="https://www.refugee.info/greece/privacy/privacy-policy" target="_blank">Privacy Policy</a>.
+					</span>
+					<Close
+						className="close-alert"
+						color="contrast"
+						size={36}
+						onClick={this.toggleAlert.bind(this)}
+					/>
+				</div>
 			</div>
+
 		);
 	}
 }
