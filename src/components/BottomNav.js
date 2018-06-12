@@ -22,10 +22,9 @@ class BottomNav extends Component {
 	}
 
 	select(selectedIndex = 0) {
-		const { onGoHome, onGoToCategories, onGoToSearch, onGoToServices, onGoToMap } = this.props;
+		const { onGoHome, onGoToCategories, onGoToSearch, onGoToServices, goToMap } = this.props;
 
 		this.setState({ selectedIndex });
-
 		if (selectedIndex === 0) {
 			if (onGoHome) {
 				return onGoHome();
@@ -43,8 +42,8 @@ class BottomNav extends Component {
 				return onGoToServices();
 			}
 		} else if (selectedIndex === 4) {
-			if (onGoToMap) {
-				return onGoToMap();
+			if (goToMap) {
+				return goToMap();
 			} 
 		}
 	}

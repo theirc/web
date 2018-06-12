@@ -19,6 +19,7 @@ class Services extends React.Component {
 		errorWithGeolocation: false,
 		geolocation: null,
 		categoryName: null,
+		category: null,
 		locationName: null,
 		location: null,
 	};
@@ -246,6 +247,7 @@ class Services extends React.Component {
 			listAllServices,
 			listLocationsFilter,
 			listServicesInCategory,
+			servicesInCategoryMap,
 			match,
 			regions,
 		} = this.props;
@@ -271,8 +273,8 @@ class Services extends React.Component {
 			};
 		}
 
-		const onSelectCategory = (c,cname, location) => {			
-			this.setState({categoryName : cname});
+		const onSelectCategory = (c,cname, location) => {	
+			this.setState({categoryName : cname, category: c.id});
 			listServicesInCategory(c, this.state.location);
 		};
 
@@ -301,27 +303,7 @@ class Services extends React.Component {
 								</div>
 							</Skeleton>
 						)}
-					/>{" "}
-					<Route
-						path={`${match.url}/map/`}
-						exact
-						component={props => (
-							<Skeleton>
-								<div className="SkeletonContainer">
-									<ServiceMap
-										{...props}
-										goToService={goToService}
-										locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
-										measureDistance={this.measureDistance(geolocation, language)}
-										toggleLocation={() => _.identity()}
-										findServicesInLocation={bbox => this.fetchServicesWithin(bbox)}
-										nearby={true}
-										defaultLocation={defaultLocation}
-									/>
-								</div>
-							</Skeleton>
-						)}
-					/>
+					/>{" "}					
 					<Route
 						path={`${match.url}/nearby/`}
 						exact
@@ -427,16 +409,17 @@ class Services extends React.Component {
 					exact
 					path={`${match.url}/by-location/:location/by-category/:categoryId/`}
 					component={props => (
-						<Skeleton showMapButton={true}>
+						<Skeleton showMapButton={true} goToMap={() => servicesInCategoryMap(this.state.category, this.state.location) }>
 							<div className="SkeletonContainer">
 								<ServiceList
 									{...props}
+									goToMap={() => goToMap()}
 									goToService={goToService}
 									locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
 									measureDistance={this.measureDistance(geolocation, language)}
 									toggleLocation={() => this.setState({ sortingByLocationEnabled: true })}
 									servicesByType={() => this.fetchAllInLocation(props.match.params.location, props.match.params.categoryId)}
-									showMap={() => goToLocationMap(props.match.params.location)}
+									showMap={() => goToLocationMap(props.match.params.location,)}
 								/>
 							</div>
 						</Skeleton>
@@ -470,7 +453,7 @@ class Services extends React.Component {
 					exact
 					path={`${match.url}/by-location/:location/all`}
 					component={props => (
-						<Skeleton showMapButton={true}>
+						<Skeleton showMapButton={true} goToMap={() => servicesInCategoryMap(this.state.category, this.state.location) }>
 							<div className="SkeletonContainer">
 								<ServiceList
 									{...props}
@@ -509,28 +492,7 @@ class Services extends React.Component {
 							</div>
 						</Skeleton>
 					)}
-				/>
-				<Route
-					exact
-					path={`${match.url}/by-location/:location/by-category/:categoryId/map/`}
-					component={props => (
-						<Skeleton>
-							<div className="SkeletonContainer">
-								<ServiceMap
-									{...props}
-									goToService={goToService}
-									language={language}
-									locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
-									measureDistance={this.measureDistance(geolocation, language)}
-									toggleLocation={() => _.identity()}
-									findServicesInLocation={bbox => this.fetchServicesWithinLocation(bbox, props.match.params.location)}
-									nearby={true}
-									defaultLocation={defaultLocation}
-								/>
-							</div>
-						</Skeleton>
-					)}
-				/>
+				/>				
 				<Route
 					exact
 					path={`${match.url}`}
@@ -594,6 +556,9 @@ const mapDispatch = (d, p) => {
 		},
 		listServicesInCategory(category, location) {
 			return d(push(`/${p.country.fields.slug}/services/by-location/${location}/by-category/${category.id}/`));
+		},
+		servicesInCategoryMap(category, location) {
+			return d(push(`/${p.country.fields.slug}/services/by-location/${location}/by-category/${category}/map`));
 		},
 		loadGeolocation() {
 			console.log("NOOP");
