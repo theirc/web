@@ -346,9 +346,6 @@
 }
 
 .ServiceMap {
-  .Item {
-    border-bottom: 0;
-  }
   .leaflet-popup-tip-container {
     display: block;
     margin-top: -1px;
@@ -358,19 +355,58 @@
   }
   .leaflet-popup-content {
     margin: 5px 0;
-
-    .Info h2 {
-      color: #777;
-      font-weight: bold;
-      margin: 5px 0;
-    }
-    .fullAddress {
-      font-style: normal;
-    }
-    .regionTitle {
-      font-style: normal;
-      margin-top: 5px;
-    }
+    .Item {
+      border-bottom: 0;
+      .Icons {
+        display: flex;
+        margin: 0;
+        flex-wrap: wrap;
+        flex-direction: column;
+        width: 75px;
+        align-items: stretch;
+        align-content: stretch;
+        justify-content: center;
+        .Icon {
+          padding: 0;
+          display: flex;
+          flex: 1 1 0%;
+          flex-grow: 1;
+          flex-basis: 50%;
+          align-items: center;
+          justify-content: center;
+          align-content: center;
+          i {
+            width: 100%;
+            height: 100%;
+            font-size: 18px;
+            text-align: center;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+          }
+        }
+      }
+      .Info {
+        h1 {
+          font-size: 120%;
+          margin: 0;
+          padding: 0;
+        }
+        h2 {
+          color: #777;
+          font-size: 100%;
+          font-weight: bold;
+          margin: 5px 0;
+        }
+        .fullAddress {
+          font-style: normal;
+        }
+        .regionTitle {
+          font-style: normal;
+          margin-top: 5px;
+        }
+      }
+    }  
   }
 
   .leaflet-div-icon {

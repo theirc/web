@@ -58,19 +58,21 @@ class ServiceItem extends React.Component {
 
         return (
             <div key={s.id} className="Item" onClick={() => goToService(s.id)}>
-				<div className="Icons">{s.types.map((t, idx) => t && <ServiceIcon key={`si-${idx}`} idx={idx} service={s} />)}</div>
-				<div className="Info">
-					<h1>{ s.name }</h1>
-					<h2>{ s.provider.name }{" "}</h2>
-          <address className="fullAddress">
-            { s.address }
-          </address>
-          <address className="regionTitle">
-            { s.region.title }
-          </address>
-				</div>
-				<i className="material-icons" />
-			</div>
+                <div className="Icons">{s.types.map((t, idx) => t && <ServiceIcon key={`si-${idx}`} idx={idx} service={s} />)}</div>
+                <div className="Info">
+                    <h1>{ s.name }</h1>
+                    <h2>{ s.provider.name }{" "}</h2>
+                    <address className="fullAddress">
+                        { s.address }
+                    </address>
+                    {s.region.level > 1 &&
+                        <address className="regionTitle">
+                            { s.region.name }
+                        </address>
+                    }
+                </div>
+                <i className="material-icons" />
+        </div>
         );
     }
 }
