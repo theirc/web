@@ -82,7 +82,7 @@ module.exports = {
 		backendUrl: 'https://admin-staging.cuentanos.org/e/production/v2',
 
 	},
-	"Refugee.info": {
+	localhost: {
 		theme: "generic",
 		accessToken: "2a64ff636dd4e5b44bd21afcb7f8d77c5c238e3ebe387ec6047a0b9d5c6a704d",
 		host: "preview.contentful.com",
