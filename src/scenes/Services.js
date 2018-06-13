@@ -235,9 +235,7 @@ class Services extends React.Component {
 	render() {
 		const {
 			country,
-			goToCategoryMap,
 			goToLocation,
-			goToLocationByCategory,
 			goToLocationList,
 			goToLocationMap,
 			goToMap,
@@ -245,9 +243,9 @@ class Services extends React.Component {
 			goToService,
 			language,
 			listAllServices,
-			listLocationsFilter,
 			listServicesInCategory,
 			servicesInCategoryMap,
+			servicesInLocationMap,
 			match,
 			regions,
 		} = this.props;
@@ -409,7 +407,7 @@ class Services extends React.Component {
 					exact
 					path={`${match.url}/by-location/:location/by-category/:categoryId/`}
 					component={props => (
-						<Skeleton showMapButton={true} goToMap={() => servicesInCategoryMap(this.state.category, this.state.location) }>
+						<Skeleton showMapButton={true} goToMap={() => servicesInCategoryMap(this.state.category, this.state.location)} >
 							<div className="SkeletonContainer">
 								<ServiceList
 									{...props}
@@ -420,6 +418,7 @@ class Services extends React.Component {
 									toggleLocation={() => this.setState({ sortingByLocationEnabled: true })}
 									servicesByType={() => this.fetchAllInLocation(props.match.params.location, props.match.params.categoryId)}
 									showMap={() => goToLocationMap(props.match.params.location,)}
+									title={this.state.categoryName} 
 								/>
 							</div>
 						</Skeleton>
@@ -453,7 +452,7 @@ class Services extends React.Component {
 					exact
 					path={`${match.url}/by-location/:location/all`}
 					component={props => (
-						<Skeleton showMapButton={true} goToMap={() => servicesInCategoryMap(this.state.category, this.state.location) }>
+						<Skeleton showMapButton={true} goToMap={() => servicesInLocationMap(this.state.location) }>
 							<div className="SkeletonContainer">
 								<ServiceList
 									{...props}
@@ -559,6 +558,9 @@ const mapDispatch = (d, p) => {
 		},
 		servicesInCategoryMap(category, location) {
 			return d(push(`/${p.country.fields.slug}/services/by-location/${location}/by-category/${category}/map`));
+		},
+		servicesInLocationMap(location) {
+			return d(push(`/${p.country.fields.slug}/services/by-location/${location}/map`));
 		},
 		loadGeolocation() {
 			console.log("NOOP");
