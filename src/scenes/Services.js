@@ -271,6 +271,7 @@ class Services extends React.Component {
 			};
 		}
 
+
 		const onSelectCategory = (c,cname, location) => {	
 			this.setState({categoryName : cname, category: c.id});
 			listServicesInCategory(c, this.state.location);
