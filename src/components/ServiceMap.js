@@ -296,8 +296,8 @@ class ServiceMap extends React.Component {
                     {loaded && 
                         <div id="filter" className="ServiceMapFilter">
                             <span style={{float: "left"}}>{categoryName}</span>
-                            <a style={{float: "right"}} onClick={() => changeCategory()}> Change</a>
-                            <div style={{float: "right"}} className="app-bar-separator"></div>
+                            <a className="category-name" onClick={() => changeCategory()}> Change</a>
+                            <div className="app-bar-separator"></div>
                             
                         </div>
                     }
