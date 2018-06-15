@@ -278,7 +278,7 @@ class ServiceMap extends React.Component {
             loaded,
             errorMessage
         } = this.state;
-
+        const {categoryName, changeCategory} = this.props;
         /*
       Very small tweak on the render. toggling the visibility so we can run the L.map on didMount
     */
@@ -292,7 +292,15 @@ class ServiceMap extends React.Component {
 				)}
 				<div className="ServiceMapContainer">
 					<div id="MapCanvas" style={{ width: "100%", position: "absolute", top: 64, bottom: 56, right: 0, visibility: loaded ? "visible" : "hidden" }} />
-					{!loaded && <div className="loader" />}
+                    {!loaded && <div className="loader" />}
+                    {loaded && 
+                        <div id="filter" className="ServiceMapFilter">
+                            <span style={{float: "left"}}>{categoryName}</span>
+                            <a style={{float: "right"}} onClick={() => changeCategory()}> Change</a>
+                            <div style={{float: "right"}} className="app-bar-separator"></div>
+                            
+                        </div>
+                    }
 				</div>
 			</div>
         );
