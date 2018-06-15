@@ -398,6 +398,8 @@ class Services extends React.Component {
 									findServicesInLocation={bbox => this.fetchServicesWithin(bbox, props.match.params.categoryId)}
 									nearby={true}
 									defaultLocation={defaultLocation}
+									categoryName={this.state.categoryName}
+									changeCategory={() => {goToLocation(this.state.location)}}
 								/>
 							</div>
 						</Skeleton>
@@ -488,6 +490,8 @@ class Services extends React.Component {
 									findServicesInLocation={bbox => this.fetchServicesWithinLocation(bbox, props.match.params.location)}
 									nearby={true}
 									defaultLocation={defaultLocation}
+									categoryName="All Services"
+									changeCategory={() => {goToLocation(this.state.location)}}
 								/>
 							</div>
 						</Skeleton>
