@@ -13,7 +13,7 @@ console.log(RI_URL,);
 
 //var RI_URL = "http://localhost:8000/e/production/v2";
 
-export default {
+module.exports = {
     fetchCategories(language, region) {
         return new Promise((resolve, reject) => {
             const sessionStorage = getSessionStorage();
