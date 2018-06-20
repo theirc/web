@@ -62,7 +62,7 @@ class ServiceCategoryList extends React.Component {
             );
         }
         let sortedRegions = _.sortBy(allRegions || [], c => {
-            return c.id;
+            return c.name;
         });
         return [
             <HeaderBar key={"Header"} title={t("Locations").toUpperCase()}>
