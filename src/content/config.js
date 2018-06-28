@@ -17,6 +17,7 @@ module.exports = {
 		gaTracker: "UA-68574649-6",
 		appId: "708254579325899",
 		thumbnail: "/images/logos/ri-thumbnail.png",
+		cookieBanner: true,
 	},
 	"new-staging.refugee.info": {
 		theme: "irc",
@@ -32,6 +33,7 @@ module.exports = {
 		gaTracker: "UA-68574649-6",
 		appId: "708254579325899",
 		thumbnail: "/images/logos/ri-thumbnail.png",
+		cookieBanner: true,
 	},
 	"khabrona.info": {
 		theme: "mc",
@@ -47,6 +49,7 @@ module.exports = {
 		gaTracker: "UA-68574649-7",
 		appId: "154471931830995",
 		thumbnail: "/images/logos/ki-thumbnail.png",
+		cookieBanner: false,
 	},
 	"staging.cuentanos.org": {
 		theme: "generic",
@@ -63,6 +66,7 @@ module.exports = {
 		gaTracker: "UA-68574649-8",
 		appId: "209295296327422",
 		thumbnail: "/images/logos/cn-thumbnail.png",
+		cookieBanner: false,
 		backendUrl: 'https://admin-staging.cuentanos.org/e/production/v2',
 	},
 	"cuentanos.org": {
@@ -79,6 +83,7 @@ module.exports = {
 		gaTracker: "UA-68574649-8",
 		appId: "209295296327422",
 		thumbnail: "/images/logos/cn-thumbnail.png",
+		cookieBanner: false,
 		backendUrl: 'https://admin-staging.cuentanos.org/e/production/v2',
 
 	},
@@ -97,6 +102,7 @@ module.exports = {
 		gaTracker: "UA-68574649-8",
 		appId: "209295296327422",
 		thumbnail: "/images/logos/cn-thumbnail.png",
+		cookieBanner: false,
 		backendUrl: 'https://admin-staging.cuentanos.org/e/production/v2',
 	},
 };

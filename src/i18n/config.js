@@ -129,7 +129,8 @@ export default {
             "Location": "محل",
             "Articles": "مقاله‌ها",
             "No articles found with the keywords used.": "هیچ مقاله‌ای با کلمات کلیدیِ استفاده‌شده پیدا نشد.",
-            "No services found with the keywords used.": "هیچ خدماتی با کلمات کلیدیِ استفاده‌شده پیدا نشد."
+            "No services found with the keywords used.": "هیچ خدماتی با کلمات کلیدیِ استفاده‌شده پیدا نشد.",
+            "COOKIES_BANNER": "ما برای ارائه‌ی خدمات‌مان از کوکی‌ها (cookies) استفاده می‌کنیم. با ادامه‌ی استفاده از این سایت، شما این استفاده را می‌پذیرید و اذعان می‌دارید که سیاست‌های استفاده از کوکی و حریم خصوصی‌مان را به دقت خوانده‌اید و متوجه شده‌اید.",
         },
     },
     ar: {
@@ -262,7 +263,8 @@ export default {
             "Location": "موقع",
             "Articles": "المقالات ",
             "No articles found with the keywords used.": "لم يتم العثور على المقالات الّتي تم البحث عنها بواسطة الكلمات المفتاحية المستخدمة.",
-            "No services found with the keywords used.": "لم يتم العثور على الخدمات الّتي تم البحث عنها بواسطة الكلمات المفتاحية المستخدمة."
+            "No services found with the keywords used.": "لم يتم العثور على الخدمات الّتي تم البحث عنها بواسطة الكلمات المفتاحية المستخدمة.",
+            "COOKIES_BANNER": "يستخدم موقع دليل اللاجئ ملفات تعريف الإرتباط (Cookies) كطريقة لإيصال خدماتنا. عند استمرارك في تصفّح الموقع فذلك يعني أنك توافق على استخدام ملفات تعريف الإرتباط، وتُقر بقراءتك وفهمك لسياستنا في استخدام ملفات تعريف الارتباط وكذلك سياسة الخصوصية.",
         },
     },
     ur: {
@@ -395,7 +397,8 @@ export default {
             "Location": "مقامات",
             "Articles": "Articles",
             "No articles found with the keywords used.": "No articles found with the keywords used.",
-            "No services found with the keywords used.": "No services found with the keywords used."
+            "No services found with the keywords used.": "No services found with the keywords used.",
+            "COOKIES_BANNER": "ہم اپنی خدمات آپ تک پہنچانے کے لیے کوکیز(cookies) کا استعمال کرتے ہیں۔ اس سائٹ کا لگاتار استعمال کرتے ہوئے، آپ اس کے استعمال کو قبول کرتے ہیں کہ آپ نے ہماری کوکی پالیسی  ({{cookiePolicy}}) اور پرائیویسی پالیسی({{privacyPolicy}}) کو اچھی طرح پرھا اور سمجھا ہے۔ ",
         },
     },
     es: {
@@ -532,6 +535,7 @@ export default {
 
             "No articles found with the keywords used.": "No se encontraron artículos con las palabras clave utilizadas.",
             "No services found with the keywords used.": "No se encontraron servicios con las palabras clave utilizadas.",
+            "COOKIES_BANNER": "Utilizamos cookies para ofrecer nuestros servicios. Al continuar utilizando este sitio, acepta dicho uso y reconoce que ha leído y entendido nuestra política de cookies ({{cookiePolicy}}) y política de privacidad ({{privacyPolicy}}).",
         }
     },
     fr: {
@@ -664,7 +668,8 @@ export default {
             "Location": "Position",
             "Articles": "Articles",
             "No articles found with the keywords used.": "Aucun article trouvé avec les mots-clés utilisés.",
-            "No services found with the keywords used.": "Aucun service trouvé avec les mots-clés utilisés."
+            "No services found with the keywords used.": "Aucun service trouvé avec les mots-clés utilisés.",
+            "COOKIES_BANNER": "Nous utilisons des cookies pour fournir nos services. En continuant à utiliser ce site, vous acceptez cette utilisation et reconnaissez que vous avez lu et compris notre Politique en matière de Cookies ({{cookiePolicy}}) et notre Politique de Confidentialité ({{privacyPolicy}}).",
         }
     },
     ti: {
@@ -797,7 +802,8 @@ export default {
             "Location": "Location",
             "Articles": "Articles",
             "No articles found with the keywords used.": "No articles found with the keywords used.",
-            "No services found with the keywords used.": "No services found with the keywords used."
+            "No services found with the keywords used.": "No services found with the keywords used.",
+            "COOKIES_BANNER": "ኣገልግሎትና ንምሃብ ኩኪስ(Cookies) ንጥቀም ኢና። ነዚ መርበብ’ዚ ንኽትጥቀመሉ ብምቕጻልካ ድማ፣ ነዚ ኣጠቓቕማ’ዚ ተቐቢልካዮን ንናይ ኩኪ ፖሊሲን ({{cookiePolicy}})  ፖሊሲ ምስጢራውነትን ኣንቢብካ ከም ዝተረዳእካዮ ኣፍልጦ ትህብ ኣለኻ ማለት እዩ።",
         }
     },
     en: {
@@ -932,6 +938,7 @@ export default {
             "Services": "Services",
             "No articles found with the keywords used.": "No articles found with the keywords used.",
             "No services found with the keywords used.": "No services found with the keywords used.",
+            COOKIES_BANNER: "We use cookies to deliver our services. By continuing to use this site, you accept such use and acknowledge that you have read and understood our {{cookiePolicy}} and {{privacyPolicy}}.",
         },
     }
 
