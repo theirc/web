@@ -50,7 +50,7 @@ class Skeleton extends React.Component {
 		}
 	}
 	render() {
-		const { children, country, language, match, onGoHome, onGoToSearch, onChangeLocation, onChangeLanguage, deviceType, router, hideFooter, removeErrorMessage } = this.props;
+	const { children, country, language, match, onGoHome, onGoToSearch, onChangeLocation, onChangeLanguage, deviceType, router, hideFooter, removeErrorMessage, showMapButton, goToMap } = this.props;
 		const { errorMessage } = this.state;
 		const { config } = this.context;
 
@@ -102,6 +102,7 @@ class Skeleton extends React.Component {
 					<AppHeader
 						disableCountrySelector={!!config.disableCountrySelector}
 						disableLanguageSelector={!!config.disableLanguageSelector}
+						cookieBanner={config.cookieBanner}
 						country={country}
 						language={language}
 						onGoHome={onGoHome(country)}
@@ -122,7 +123,7 @@ class Skeleton extends React.Component {
 							deviceType={deviceType}
 						/>
 					)}
-					{country && language && <BottomNavContainer match={match} />}
+					{country && language && <BottomNavContainer match={match} showMapButton={showMapButton} goToMap={goToMap} />}
 				</div>
 			</I18nextProvider>
 		);

@@ -186,11 +186,32 @@ Less me
 			color: white;
 			width: 25px;
 			font-size: 20px;
-
 			position: absolute;
 		}
 	}
+
+	.privacy-banner {
+		padding-bottom: 1em;
+		padding: 16px;
+		background-color: black;
+		color: white;
+		display: flex;
+		position: relative;
+		flex: 1;
+		font-weight: 300;
+		position: relative;
+		height: auto;
+		flex-direction: row;
+		justify-content: center;
+  		align-items: center;
+		font-size: 14px;
+		opacity: 0.85;
+		a {color: white; text-decoration: underline;}
+		span {padding: 4px;}
+	}
 }
+
+.hidden{display: none;}
 
 $icon-width: 22px;
 $icon-height: 22px;

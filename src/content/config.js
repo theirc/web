@@ -17,6 +17,7 @@ module.exports = {
 		gaTracker: "UA-68574649-6",
 		appId: "708254579325899",
 		thumbnail: "/images/logos/ri-thumbnail.png",
+		cookieBanner: true,
 	},
 	"new-staging.refugee.info": {
 		theme: "irc",
@@ -32,6 +33,7 @@ module.exports = {
 		gaTracker: "UA-68574649-6",
 		appId: "708254579325899",
 		thumbnail: "/images/logos/ri-thumbnail.png",
+		cookieBanner: true,
 	},
 	"khabrona.info": {
 		theme: "mc",
@@ -47,6 +49,7 @@ module.exports = {
 		gaTracker: "UA-68574649-7",
 		appId: "154471931830995",
 		thumbnail: "/images/logos/ki-thumbnail.png",
+		cookieBanner: false,
 	},
 	"staging.cuentanos.org": {
 		theme: "generic",
@@ -55,7 +58,7 @@ module.exports = {
 		space: "e17qk44d7f2w",
 		languages: [["es", "Español"]],
 		logo: "/images/cn.tb.png",
-		title: "CuentaNos",
+		title: "Bienvenidos a CuentaNos",
 		disableCountrySelector: true,
 		disableLanguageSelector: true,
 		questionLink: "mailto: cuentanos.sv@rescue.org",
@@ -63,6 +66,7 @@ module.exports = {
 		gaTracker: "UA-68574649-8",
 		appId: "209295296327422",
 		thumbnail: "/images/logos/cn-thumbnail.png",
+		cookieBanner: false,
 		backendUrl: 'https://admin-staging.cuentanos.org/e/production/v2',
 	},
 	"cuentanos.org": {
@@ -71,7 +75,7 @@ module.exports = {
 		space: "e17qk44d7f2w",
 		languages: [["es", "Español"]],
 		logo: "/images/cn.tb.png",
-		title: "CuentaNos",
+		title: "Bienvenidos a CuentaNos",
 		disableCountrySelector: true,
 		disableLanguageSelector: true,
 		questionLink: "mailto: cuentanos.sv@rescue.org",
@@ -79,17 +83,18 @@ module.exports = {
 		gaTracker: "UA-68574649-8",
 		appId: "209295296327422",
 		thumbnail: "/images/logos/cn-thumbnail.png",
+		cookieBanner: false,
 		backendUrl: 'https://admin-staging.cuentanos.org/e/production/v2',
-		
+
 	},
-	localhost: {
+	"localhost": {
 		theme: "generic",
 		accessToken: "2a64ff636dd4e5b44bd21afcb7f8d77c5c238e3ebe387ec6047a0b9d5c6a704d",
 		host: "preview.contentful.com",
 		space: "e17qk44d7f2w",
 		languages: [["es", "Español"]],
 		logo: "/images/cn.tb.png",
-		title: "CuentaNos",
+		title: "Bienvenidos a CuentaNos",
 		disableCountrySelector: true,
 		disableLanguageSelector: true,
 		questionLink: "mailto: cuentanos.sv@rescue.org",
@@ -97,6 +102,8 @@ module.exports = {
 		gaTracker: "UA-68574649-8",
 		appId: "209295296327422",
 		thumbnail: "/images/logos/cn-thumbnail.png",
+		cookieBanner: false,
 		backendUrl: 'https://admin-staging.cuentanos.org/e/production/v2',
+		//backendUrl: 'http:/localhost:8000/v2',
 	},
 };

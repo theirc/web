@@ -55,21 +55,11 @@ class ServiceCategoryList extends React.Component {
 				</div>
 			</li>
 		);
-		/*
-		return (
-			<div key={id} className="CategoryContainer">
-				<button className="Category" onClick={() => setTimeout(() => onSelectCategory(c), 300)}>
-					<i className={`${iconPrefix} ${vector_icon}`} />
-					<span>{name}</span>
-				</button>
-			</div>
-		);
-		*/
+		
 	}
 	render() {
 		const { categories, loaded } = this.state;
-		const { t, locationEnabled, toggleLocation, listAllServices, goToNearby, goToMap, goToLocationList, showLocations } = this.props;
-		
+		const { t, locationEnabled, toggleLocation, listAllServices, goToNearby, goToMap, goToLocationList, showLocations } = this.props;	
 		if (!loaded) {
 			return (
 				<div className="ServiceCategoryList">
@@ -111,20 +101,8 @@ class ServiceCategoryList extends React.Component {
 							<strong>{t("All Services")}</strong>
 						</div>
 					</li>
-					<hr className="line" />
-					<li>
-						<div className="container" onClick={() => goToMap()}>
-							<i className="fa fa-map" />
-							<strong>{t("Service Map")}</strong>
-						</div>
-					</li>
-					{showLocations && <hr className="line" />}
-					{showLocations && <li>
-						<div className="container" onClick={() => goToLocationList()}>
-							<i className="fa fa-globe" />
-							<strong>{t("Locations")}</strong>
-						</div>
-					</li>}
+					<hr className="line" />			
+					
 					{sortedCategories.map(c => this.renderCategory(c))}
 				</ul>
 			</div>,

@@ -4,7 +4,7 @@ import BottomNavigation, { BottomNavigationButton } from "material-ui/BottomNavi
 import PropTypes from "prop-types";
 import { translate } from "react-i18next";
 
-import { Home, List, Assignment } from "material-ui-icons";
+import { Home, List, Assignment, Map } from "material-ui-icons";
 import "./BottomNav.css";
 class BottomNav extends Component {
 	static propTypes = {
@@ -22,10 +22,9 @@ class BottomNav extends Component {
 	}
 
 	select(selectedIndex = 0) {
-		const { onGoHome, onGoToCategories, onGoToSearch, onGoToServices } = this.props;
+		const { onGoHome, onGoToCategories, onGoToSearch, onGoToServices, goToMap } = this.props;
 
 		this.setState({ selectedIndex });
-
 		if (selectedIndex === 0) {
 			if (onGoHome) {
 				return onGoHome();
@@ -42,11 +41,15 @@ class BottomNav extends Component {
 			if (onGoToServices) {
 				return onGoToServices();
 			}
+		} else if (selectedIndex === 4) {
+			if (goToMap) {
+				return goToMap();
+			} 
 		}
 	}
 
 	render() {
-		const { showServiceMap, t } = this.props;
+		const { showServiceMap, t, showMapButton } = this.props;
 		return (
 			<Paper
 				style={{
@@ -58,7 +61,13 @@ class BottomNav extends Component {
 			>
 				<BottomNavigation showLabels={true} value={this.props.index} onChange={(e, i) => this.select(i)}>
 					<BottomNavigationButton className={this.props.index === 0 ? "Selected" : ""} icon={<Home />} label={<span className="BottomButton">{t("Home")}</span>} value={0} />
-					<BottomNavigationButton className={this.props.index === 1 ? "Selected" : ""} icon={<Assignment />} label={<span className="BottomButton">{t("Categories")}</span>} value={1} />
+					{showMapButton ? (
+						<BottomNavigationButton className={this.props.index === 1 ? "Selected" : ""} icon={<Map />} label={<span className="BottomButton">{t("Map")}</span>} value={4} />
+					): (
+						<BottomNavigationButton className={this.props.index === 1 ? "Selected" : ""} icon={<Assignment />} label={<span className="BottomButton">{t("Categories")}</span>} value={1} />
+					)}
+					
+					
 					{showServiceMap ? (
 						<BottomNavigationButton className={this.props.index === 3 ? "Selected" : ""} icon={<List />} label={<span className="BottomButton">{t("Service List")}</span>} value={3} />
 					) : (
