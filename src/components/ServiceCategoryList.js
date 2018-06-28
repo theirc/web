@@ -10,11 +10,14 @@ import tinycolor from "tinycolor2";
 class ServiceCategoryList extends React.Component {
 	state = {
 		categories: [],
+		loaded: false,
 	};
 	componentDidMount() {
 		const { fetchCategories } = this.props;
 		if (fetchCategories) {
-			fetchCategories().then(categories => this.setState({ categories }));
+			fetchCategories().then(categories => {
+				this.setState({ categories, loaded: true  });
+			});
 		}
 	}
 
@@ -55,15 +58,27 @@ class ServiceCategoryList extends React.Component {
 		
 	}
 	render() {
-		const { categories } = this.state;
-		const { t, locationEnabled, toggleLocation, listAllServices, goToNearby, goToMap, goToLocationList, location } = this.props;
-		if ((categories || []).length === 0) {
+		const { categories, loaded } = this.state;
+		const { t, locationEnabled, toggleLocation, listAllServices, goToNearby, goToMap, goToLocationList, showLocations } = this.props;	
+		if (!loaded) {
 			return (
 				<div className="ServiceCategoryList">
 					<div className="Title">
 						<h1>{t("Service Categories")}</h1>
 					</div>
 					<div className="loader" />
+				</div>
+			);
+		}
+		if ((categories || []).length === 0 && loaded) {
+			return (
+				<div className="ServiceCategoryList">
+					<div className="Title">
+						<h1>{t("Service Categories")}</h1>
+					</div>
+					<div className="NoServices">
+						<h2>{t("No services found")}</h2>
+					</div>
 				</div>
 			);
 		}

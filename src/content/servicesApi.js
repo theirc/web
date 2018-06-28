@@ -17,7 +17,7 @@ module.exports = {
     fetchCategories(language, region) {
         return new Promise((resolve, reject) => {
             const sessionStorage = getSessionStorage();
-            if (sessionStorage[`${language}-${region}-service-categories`]) {
+            if (sessionStorage[`${language}-${region}-service-categories`] && sessionStorage[`${language}-${region}-service-categories`] != "[]") {
                 resolve(JSON.parse(sessionStorage[`${language}-${region}-service-categories`]));
             } else {
                 request
