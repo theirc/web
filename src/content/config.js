@@ -58,7 +58,7 @@ module.exports = {
 		space: "e17qk44d7f2w",
 		languages: [["es", "Español"]],
 		logo: "/images/cn.tb.png",
-		title: "CuentaNos",
+		title: "Bienvenidos a CuentaNos",
 		disableCountrySelector: true,
 		disableLanguageSelector: true,
 		questionLink: "mailto: cuentanos.sv@rescue.org",
@@ -75,7 +75,7 @@ module.exports = {
 		space: "e17qk44d7f2w",
 		languages: [["es", "Español"]],
 		logo: "/images/cn.tb.png",
-		title: "CuentaNos",
+		title: "Bienvenidos a CuentaNos",
 		disableCountrySelector: true,
 		disableLanguageSelector: true,
 		questionLink: "mailto: cuentanos.sv@rescue.org",
@@ -87,14 +87,14 @@ module.exports = {
 		backendUrl: 'https://admin-staging.cuentanos.org/e/production/v2',
 
 	},
-	localhost: {
+	"localhost": {
 		theme: "generic",
 		accessToken: "2a64ff636dd4e5b44bd21afcb7f8d77c5c238e3ebe387ec6047a0b9d5c6a704d",
 		host: "preview.contentful.com",
 		space: "e17qk44d7f2w",
 		languages: [["es", "Español"]],
 		logo: "/images/cn.tb.png",
-		title: "CuentaNos",
+		title: "Bienvenidos a CuentaNos",
 		disableCountrySelector: true,
 		disableLanguageSelector: true,
 		questionLink: "mailto: cuentanos.sv@rescue.org",
@@ -104,5 +104,6 @@ module.exports = {
 		thumbnail: "/images/logos/cn-thumbnail.png",
 		cookieBanner: false,
 		backendUrl: 'https://admin-staging.cuentanos.org/e/production/v2',
+		//backendUrl: 'http:/localhost:8000/v2',
 	},
 };

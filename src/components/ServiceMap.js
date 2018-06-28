@@ -58,19 +58,21 @@ class ServiceItem extends React.Component {
 
         return (
             <div key={s.id} className="Item" onClick={() => goToService(s.id)}>
-				<div className="Icons">{s.types.map((t, idx) => t && <ServiceIcon key={`si-${idx}`} idx={idx} service={s} />)}</div>
-				<div className="Info">
-					<h1>{ s.name }</h1>
-					<h2>{ s.provider.name }{" "}</h2>
-          <address className="fullAddress">
-            { s.address }
-          </address>
-          <address className="regionTitle">
-            { s.region.title }
-          </address>
-				</div>
-				<i className="material-icons" />
-			</div>
+                <div className="Icons">{s.types.map((t, idx) => t && <ServiceIcon key={`si-${idx}`} idx={idx} service={s} />)}</div>
+                <div className="Info">
+                    <h1>{ s.name }</h1>
+                    <h2>{ s.provider.name }{" "}</h2>
+                    <address className="fullAddress">
+                        { s.address }
+                    </address>
+                    {s.region.level > 1 &&
+                        <address className="regionTitle">
+                            { s.region.name }
+                        </address>
+                    }
+                </div>
+                <i className="material-icons" />
+        </div>
         );
     }
 }
@@ -276,7 +278,7 @@ class ServiceMap extends React.Component {
             loaded,
             errorMessage
         } = this.state;
-
+        const {categoryName, changeCategory} = this.props;
         /*
       Very small tweak on the render. toggling the visibility so we can run the L.map on didMount
     */
@@ -290,7 +292,15 @@ class ServiceMap extends React.Component {
 				)}
 				<div className="ServiceMapContainer">
 					<div id="MapCanvas" style={{ width: "100%", position: "absolute", top: 64, bottom: 56, right: 0, visibility: loaded ? "visible" : "hidden" }} />
-					{!loaded && <div className="loader" />}
+                    {!loaded && <div className="loader" />}
+                    {loaded && 
+                        <div id="filter" className="ServiceMapFilter">
+                            <span style={{float: "left"}}>{categoryName}</span>
+                            <a className="category-name" onClick={() => changeCategory()}> Change</a>
+                            <div className="app-bar-separator"></div>
+                            
+                        </div>
+                    }
 				</div>
 			</div>
         );
