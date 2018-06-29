@@ -262,7 +262,7 @@ class ServiceDetail extends React.Component {
 						<div className="Selector" onClick={() => window.open(`tel:${service.phone_number}`)}>
 							<h1>
 								{t("Call")}:
-								<a href={`tel:${service.phone_number}`} style={{display: 'inline-block', direction: 'ltr'}}>{service.phone_number}</a>
+								<a className="phoneFormat" href={`tel:${service.phone_number}`} >{service.phone_number}</a>
 							</h1>
 							<i className="MenuIcon fa fa-phone" aria-hidden="true" />
 						</div>
