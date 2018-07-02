@@ -208,6 +208,13 @@ Less me
 		opacity: 0.85;
 		a {color: white; text-decoration: underline;}
 		span {padding: 4px;}
+		.privacy-banner-separator {
+			border-left-width: 1px;
+			border-left-color: #ffda1a;
+			border-left-style: solid;
+			height: 50px;
+			margin-left: 7px;
+		}
 	}
 }
 
