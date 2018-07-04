@@ -132,6 +132,14 @@
 		height: 0;
 		width: 95%;
 	}
+	.right {
+		display: flex;
+		flex-grow: 1;
+		align-self: flex-end;
+
+		align-items: flex-end;
+		flex-direction: column;
+	}
 }
 .ServiceCategoryList {
 	.CategoryContainer {

@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { ServiceMap, ServiceCategoryList, ServiceLocationList, ServiceList, ServiceDetail } from "../components";
+import { ServiceMap, ServiceCategoryList, ServiceLocationList, ServiceList, ServiceDetail, ServiceDepartmentList } from "../components";
 import { Route, Switch } from "react-router";
 import { Skeleton } from ".";
 import { push } from "react-router-redux";
@@ -22,6 +22,8 @@ class Services extends React.Component {
 		category: null,
 		locationName: null,
 		location: null,
+		departmentName: null,
+		department: null,
 	};
 
 	measureDistance(a, language, sort) {
@@ -260,6 +262,7 @@ class Services extends React.Component {
 			};
 		});
 		let countryRegions = regionsWithCountry.filter(c=> c.country.slug === country.fields.slug && [1,3].indexOf(c.level) > - 1 && !c.hidden);
+		let countryDepartments = regionsWithCountry.filter(c=> c.country.slug === country.fields.slug && c.level == 2 && !c.hidden);
 
 		const { sortingByLocationEnabled, geolocation, errorWithGeolocation } = this.state;
 		const { coordinates } = country.fields;
@@ -271,7 +274,6 @@ class Services extends React.Component {
 			};
 		}
 
-
 		const onSelectCategory = (c,cname, location) => {	
 			this.setState({categoryName : cname, category: c.id});
 			listServicesInCategory(c, this.state.location);
@@ -279,6 +281,10 @@ class Services extends React.Component {
 
 		const onOpenLocation = (name, location) => {
 			this.setState({locationName: name, location: location});
+		}
+
+		const onOpenDepartment = (name, department) => {
+			this.setState({departmentName: name, department: department});
 		}
 
 		return (
@@ -340,7 +346,32 @@ class Services extends React.Component {
 											onOpenLocation(name, location);
 											goToLocation(location);											
 										}}
+										department={this.state.department}
 										allRegions={countryRegions}
+										goToMap={() => goToMap()}
+									/>
+								</div>
+							</Skeleton>
+						)}
+					/>
+					<Route
+						path={`${match.url}/departments/`}
+						exact
+						component={props => (
+							<Skeleton>
+								<div className="SkeletonContainer">
+									<ServiceDepartmentList
+										{...props}
+										goToService={goToService}
+										locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
+										measureDistance={this.measureDistance(geolocation, language)}
+										toggleLocation={() => _.identity()}
+										nearby={true}
+										onOpenDepartment={(department, name) => {
+											onOpenDepartment(name, department);
+											goToLocationList();											
+										}}
+										allRegions={countryDepartments}
 										goToMap={() => goToMap()}
 									/>
 								</div>

@@ -7,9 +7,7 @@ import {
 import HeaderBar from "./HeaderBar";
 import _ from "lodash";
 
-import tinycolor from "tinycolor2";
-
-class ServiceCategoryList extends React.Component {
+class ServiceDepartmentList extends React.Component {
     state = {
         regions: [],
     };
@@ -19,22 +17,24 @@ class ServiceCategoryList extends React.Component {
 
     renderRegion(c) {
         let {
-			openLocation
+			onOpenDepartment
         } = this.props;
-        openLocation = openLocation || (() => console.log("noop"));
 
         const {
             id,
 			name,
 			level
         } = c;
-
+        
         return (
             <li key={id}>
 				<hr className="line" />
-				<div className="container" onClick={() => setTimeout(() => openLocation(c.slug, name), 300)}>
-				<i className={`fa fa-${level > 1 ? 'building': 'globe'}`} />
+				<div className="container" onClick={() => setTimeout(() => onOpenDepartment(c.id, name), 300)}>				
 					<strong>{name}</strong>
+                    <div className="right">
+                        <i className="material-icons">keyboard_arrow_right</i>
+                    </div>
+                    
 				</div>
 			</li>
         );
@@ -45,7 +45,11 @@ class ServiceCategoryList extends React.Component {
         } = this.props;
         const {
             t,
-            department,
+            locationEnabled,
+            toggleLocation,
+            listAllServices,
+            goToNearby,
+			goToMap,
         } = this.props;
         if ((allRegions || []).length === 0) {
             return (
@@ -57,16 +61,10 @@ class ServiceCategoryList extends React.Component {
 				</div>
             );
         }
-        let sortedRegions =[]; 
-        if (department){
-            console.log({allRegions},{department});
-            sortedRegions = _.filter(allRegions, ['parent', department]);
-        }else{
-            sortedRegions = _.sortBy(allRegions || [], c => {
-                return c.name;
-            });
-        }
-        
+        let sortedRegions = _.sortBy(allRegions || [], c => {
+            return c.name;
+        });
+        //let filterRegions = _.filter(allRegions, ['level', 1])
         return [
             <HeaderBar key={"Header"} title={t("Locations").toUpperCase()}>
 			
@@ -80,5 +78,5 @@ class ServiceCategoryList extends React.Component {
     }
 }
 
-export default translate()(ServiceCategoryList);
+export default translate()(ServiceDepartmentList);
 
