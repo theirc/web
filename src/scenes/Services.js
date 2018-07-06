@@ -347,6 +347,7 @@ class Services extends React.Component {
 											goToLocation(location);											
 										}}
 										department={this.state.department}
+										departmentName={this.state.departmentName}
 										allRegions={countryRegions}
 										goToMap={() => goToMap()}
 									/>

@@ -3,7 +3,7 @@ import "./ServiceHome.css";
 import {
     translate
 } from "react-i18next";
-
+import { BrowserHistory } from 'react-router';
 import HeaderBar from "./HeaderBar";
 import _ from "lodash";
 
@@ -41,12 +41,9 @@ class ServiceCategoryList extends React.Component {
     }
     render() {
         const {
-            allRegions
+            allRegions, t, department, departmentName
         } = this.props;
-        const {
-            t,
-            department,
-        } = this.props;
+        
         if ((allRegions || []).length === 0) {
             return (
                 <div className="ServiceCategoryList">
@@ -66,13 +63,14 @@ class ServiceCategoryList extends React.Component {
                 return c.name;
             });
         }
+        let title = department ? t("Locations in") + " " +departmentName : t("Locations");
         
         return [
-            <HeaderBar key={"Header"} title={t("Locations").toUpperCase()}>
+            <HeaderBar key={"Header"} title={title.toUpperCase()}>
 			
 			</HeaderBar>,
             <div key={"List"} className="ServiceCategoryList">
-				<ul>					
+				<ul>	                    			
 					{sortedRegions.map(c => this.renderRegion(c))}
 				</ul>
 			</div>,
