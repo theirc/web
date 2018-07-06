@@ -14,7 +14,7 @@ class ServiceList extends React.Component {
 		errorMessage: null,
 	};
 	componentDidMount() {
-		const { servicesByType, listAllServices, title } = this.props;
+		const { servicesByType, listAllServices } = this.props;
 		if (servicesByType) {
 			servicesByType()
 				.then(({ services, category }) => this.setState({ services, category, loaded: true }))

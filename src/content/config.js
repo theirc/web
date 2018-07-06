@@ -18,6 +18,7 @@ module.exports = {
 		appId: "708254579325899",
 		thumbnail: "/images/logos/ri-thumbnail.png",
 		cookieBanner: true,
+		showDepartments: false,
 	},
 	"new-staging.refugee.info": {
 		theme: "irc",
@@ -34,6 +35,7 @@ module.exports = {
 		appId: "708254579325899",
 		thumbnail: "/images/logos/ri-thumbnail.png",
 		cookieBanner: true,
+		showDepartments: false,
 	},
 	"khabrona.info": {
 		theme: "mc",
@@ -50,6 +52,7 @@ module.exports = {
 		appId: "154471931830995",
 		thumbnail: "/images/logos/ki-thumbnail.png",
 		cookieBanner: false,
+		showDepartments: false,
 	},
 	"staging.cuentanos.org": {
 		theme: "generic",
@@ -68,6 +71,7 @@ module.exports = {
 		thumbnail: "/images/logos/cn-thumbnail.png",
 		cookieBanner: false,
 		backendUrl: 'https://admin-staging.cuentanos.org/e/production/v2',
+		showDepartments: true,
 	},
 	"cuentanos.org": {
 		theme: "generic",
@@ -85,6 +89,7 @@ module.exports = {
 		thumbnail: "/images/logos/cn-thumbnail.png",
 		cookieBanner: false,
 		backendUrl: 'https://admin-staging.cuentanos.org/e/production/v2',
+		showDepartments: true,
 
 	},
 	"localhost": {
@@ -104,6 +109,7 @@ module.exports = {
 		thumbnail: "/images/logos/cn-thumbnail.png",
 		cookieBanner: false,
 		backendUrl: 'https://admin-staging.cuentanos.org/e/production/v2',
+		showDepartments: true,
 		//backendUrl: 'http:/localhost:8000/v2',
 	},
 };

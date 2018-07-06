@@ -14,6 +14,7 @@ import SearchPage from "./SearchPage";
 import ServiceMap from "./ServiceMap";
 import ServiceCategoryList from "./ServiceCategoryList";
 import ServiceLocationList from "./ServiceLocationList";
+import ServiceDepartmentList from "./ServiceDepartmentList";
 import ServiceList from "./ServiceList";
 import DetectLocationSelector from "./DetectLocationSelector";
 import ServiceDetail from "./ServiceDetail";
@@ -39,6 +40,7 @@ export {
 	ServiceMap,
 	ServiceCategoryList,
 	ServiceLocationList,
+	ServiceDepartmentList,
 	ServiceList,
 	ServiceDetail,
 	DetectLocationSelector,
