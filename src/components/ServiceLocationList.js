@@ -1,7 +1,7 @@
 import React from "react";
 import "./ServiceHome.css";
 import {
-    translate
+	translate
 } from "react-i18next";
 import { BrowserHistory } from 'react-router';
 import HeaderBar from "./HeaderBar";
@@ -10,72 +10,70 @@ import _ from "lodash";
 import tinycolor from "tinycolor2";
 
 class ServiceCategoryList extends React.Component {
-    state = {
-        regions: [],
-    };
-    componentDidMount() {
+	state = {
+		regions: [],
+	};
+	componentDidMount() {
 
-    }
+	}
 
-    renderRegion(c) {
-        let {
+	renderRegion(c) {
+		let {
 			openLocation
-        } = this.props;
-        openLocation = openLocation || (() => console.log("noop"));
+		} = this.props;
+		openLocation = openLocation || (() => console.log("noop"));
 
-        const {
-            id,
+		const {
+			id,
 			name,
 			level
-        } = c;
+		} = c;
 
-        return (
-            <li key={id}>
+		return (
+			<li key={id}>
 				<hr className="line" />
 				<div className="container" onClick={() => setTimeout(() => openLocation(c.slug, name), 300)}>
-				<i className={`fa fa-${level > 1 ? 'building': 'globe'}`} />
+					<i className={`fa fa-${level > 1 ? 'building' : 'globe'}`} />
 					<strong>{name}</strong>
 				</div>
 			</li>
-        );
-    }
-    render() {
-        const {
-            allRegions, t, department, departmentName
-        } = this.props;
-        
-        if ((allRegions || []).length === 0) {
-            return (
-                <div className="ServiceCategoryList">
+		);
+	}
+	render() {
+		const {
+			allRegions, t, department, departmentName
+		} = this.props;
+
+		if ((allRegions || []).length === 0) {
+			return (
+				<div className="ServiceCategoryList">
 					<div className="Title">
 						<h1>{t("Service Categories")}</h1>
 					</div>
 					<div className="loader" />
 				</div>
-            );
-        }
-        let sortedRegions =[]; 
-        if (department){
-            console.log({allRegions},{department});
-            sortedRegions = _.filter(allRegions, ['parent', department]);
-        }else{
-            sortedRegions = _.sortBy(allRegions || [], c => {
-                return c.name;
-            });
-        }
-        let title = department ? t("Locations in") + " " +departmentName : t("Locations");
-        
-        return [
-            <HeaderBar key={"Header"} title={title.toUpperCase()}>
-			
+			);
+		}
+		let sortedRegions = [];
+		if (department) {
+			sortedRegions = _.filter(allRegions, ['parent', department]);
+		} else {
+			sortedRegions = _.sortBy(allRegions || [], c => {
+				return c.name;
+			});
+		}
+		let title = department ? t("Locations in") + " " + departmentName : t("Locations");
+
+		return [
+			<HeaderBar key={"Header"} title={title.toUpperCase()}>
 			</HeaderBar>,
-            <div key={"List"} className="ServiceCategoryList">
-				<ul>	                    			
+			<div key={"List"} className="ServiceCategoryList">
+				<ul>
 					{sortedRegions.map(c => this.renderRegion(c))}
 				</ul>
 			</div>,
-        ];
-    }
+		];
+	}
 }
 
 export default translate()(ServiceCategoryList);
