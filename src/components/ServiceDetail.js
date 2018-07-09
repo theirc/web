@@ -57,51 +57,55 @@ class ServiceDetail extends React.Component {
 		switch(type) {
 			case "whatsapp":
 				typography = "MenuIcon fa fa-whatsapp";
-				action = "whatsapp://send?text=text";
+				action = `whatsapp://send?phone=${text}`;
 				typeText = "Whatsapp: ";
 				break;
 			case "skype":
 				typography = "MenuIcon fa fa-skype";
-				action = "${toUrl(text)";
+				action = `skype:${text}?chat`;
 				typeText = "Skype: ";
 				break;
 			case "facebook_messenger":
 				typography = "MenuIcon fa fa-facebook";
-				action = "${toUrl(text)";
+				action = `http://m.me/${text}`;
 				typeText = "Facebook Messenger: ";
 				break;
 			case "viber":
 				typography = "MenuIcon fa fa-phone";
-				action = "viber://add?number=${text}";
+				action = `viber://add?number=${text}`;
 				typeText = "Viber: ";
 				break;
 			case "phone":
 				typography = "MenuIcon fa fa-phone";
-				action = "tel:${text}";
+				action = `tel:${text}`;
 				typeText = "Call: ";
 				break;
 			case "email":
 				typography = "MenuIcon fa fa-envelope-o";
-				action = "mailto:${text}";
+				action = `mailto:${text}`;
 				typeText = "Email: ";
 				break;
+			default:
+				break;
 		}
-
 		return (
 			<div>
 				<hr />
 				<div className="Selector" onClick={() => window.open(action)}>
-					<h1><div style={{
-						display: 'inline-block', direction: 'ltr', width: '100%',
-						overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
-					}}>
-						{typeText}{text} </div></h1>
+					<h1>
+						<div style={{
+							display: 'inline-block', direction: 'ltr', width: '100%',
+							overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
+						}}>
+							{typeText}{text}
+						</div>
+					</h1>
 					<i className={typography} aria-hidden="true" />
 				</div>
 			</div>
 		)
 	}
-
+	
 	render() {
 		const { service, relatedServices } = this.state;
 		const { t, language, goToService } = this.props;

@@ -108,7 +108,6 @@ function changeLanguage(state = defaultLanguage, action) {
 		case actions.actionTypes.changeLanguage:
 			if (sessionStorage) {
 				localStorage.language = action.payload;
-				console.log("LS",localStorage.language);
 				delete sessionStorage.country;
 			}
 
