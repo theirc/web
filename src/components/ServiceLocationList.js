@@ -3,11 +3,9 @@ import "./ServiceHome.css";
 import {
 	translate
 } from "react-i18next";
-import { BrowserHistory } from 'react-router';
 import HeaderBar from "./HeaderBar";
 import _ from "lodash";
 
-import tinycolor from "tinycolor2";
 
 class ServiceCategoryList extends React.Component {
 	state = {

@@ -63,8 +63,8 @@ class AppHeader extends Component {
 		const noop = () => {
 			console.log("noop");
 		};
-		const cookiePolicyLink = <a href="/greece/privacy/cookies" target="_blank">Cookie Policy</a>;
-		const privacyPolicyLink = <a href="/greece/privacy/privacy-policy" target="_blank">Privacy Policy</a>;
+		const cookiePolicyLink = <a href="/greece/privacy/cookies" target="_blank" rel="noopener noreferrer">Cookie Policy</a>;
+		const privacyPolicyLink = <a href="/greece/privacy/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>;
 
 		return (
 			<div className="AppHeader">

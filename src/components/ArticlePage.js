@@ -5,10 +5,8 @@ import { Helmet } from "react-helmet";
 import FacebookPlayer from "react-facebook-player";
 import YouTube from "react-youtube";
 import HeaderBar from "./HeaderBar";
-import ReactDOMServer from "react-dom/server"
 import ReactDOM from "react-dom"
 
-import JsxParser from 'react-jsx-parser'
 const Remarkable = require("remarkable");
 
 const md = new Remarkable("full", {
@@ -75,17 +73,14 @@ export default class ArticlePage extends Component {
 		this.replaceLinks();
 	}
 
-	componentDidMount() {
-		this.replaceLinks();
-	}
 	renderVideo() {
 		const { article } = this.props;
 		const { url } = article.fields;
 		const APP_ID = this.context.config.appId;
-
+		
 		if (/facebook.com/.test(url)) {
 			let videoId = url.replace(/.*facebook.com\/.*\/videos\/(.*)\/.*/, "$1");
-
+			
 			return <FacebookPlayer className={"Facebook"} videoId={videoId} appId={APP_ID} />;
 		} else if (/youtube.com/) {
 			let videoId = url.replace(/^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/, "$7");
@@ -107,6 +102,7 @@ export default class ArticlePage extends Component {
 			e.removeChild(e.firstChild);
 			ReactDOM.render( <FacebookPlayer className={"Facebook"} videoId={videoId} appId={APP_ID} />, e);
 		});
+		this.replaceLinks();
 	}
 
 	render() {

@@ -59,7 +59,7 @@ class ServiceCategoryList extends React.Component {
 	}
 	render() {
 		const { categories, loaded } = this.state;
-		const { t, locationEnabled, toggleLocation, listAllServices, goToNearby, goToMap, goToLocationList, showLocations } = this.props;	
+		const { t, locationEnabled, toggleLocation, listAllServices } = this.props;	
 		if (!loaded) {
 			return (
 				<div className="ServiceCategoryList">
