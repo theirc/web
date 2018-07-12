@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Cairo:300,400,600,700|Roboto:400,400i,500i,700,700i,900i&subset=arabic,cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese");
+@import url("https://fonts.googleapis.com/css?family=Cairo:300,400,600,700|Roboto:300,400,400i,500i,700,700i,900i&subset=arabic,cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese");
 @import url("hi-font-icons.css");
 
 html,
@@ -22,10 +22,19 @@ html .rtl,
 body .rtl {
 	font-family: "Cairo", "Roboto", sans-serif;
 }
+html .rtl.language-ur,
+body .rtl.language-ur {
+	font-family: "NastaleeqNuma", "Cairo", sans-serif;
+}
 html .ltr,
 body .ltr {
 	font-family: "Roboto", sans-serif;
 	padding: 0;
+}
+
+html .ltr.language-ti,
+body .ltr.language-ti {
+	font-family: "EthiopicHiwua", sans-serif;
 }
 
 #root {

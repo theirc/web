@@ -25,13 +25,15 @@
 	.Signpost {
 		a {
 			@include brand-colors("color");
-		}
-		.rtl & {
-			display: flex;
-			flex-direction: row-reverse;
-			a{
-				margin: 0 3px 0 3px;
+			opacity: 1;
+			.rtl & {
+				flex: 1;
 			}
+		}
+
+		.rtl & {
+			direction: rtl!important;
+			flex-direction: row-reverse;
 		}
 		span{
 			padding:0 3px 0 3px;
@@ -46,17 +48,19 @@
 		min-height: 100px;
 		padding: 5px;
 		h3 {
-			.rtl & {
-				line-height: 3px;
-			}
+			margin:10px;
+
 		}
 		p {
 			margin-bottom: 0;
+			color: black;
+
 		}
 		&,
 		a {
 			@include brand-colors( "background-color");
 			@include brand-colors-inverse( "color");
+
 		}
 	}
 
@@ -79,7 +83,10 @@
 		span {
 			text-align: center;
 			font-size: 12px;
+			letter-spacing: inherit;
 			align-items: baseline;
+			margin:0.4rem;
+			color: #F5F5F5;
 
 			&.padded {
 				padding: 3em;
@@ -90,10 +97,9 @@
 	.button-container {
 		display: flex;
 		flex-direction: row;
-		width: 100%;
-		padding-top: 1em;
-		padding-bottom: 1em;
-		margin-bottom: 1em;
+		width: 90%;
+		padding-top: 1.6em;
+		padding-bottom: 1.2em;
 		border-bottom: 1px $dividerColor solid;
 
 		.rtl & {
@@ -103,7 +109,6 @@
 
 	.button {
 		flex-grow: 3;
-
 		display: flex;
 		flex-direction: column;
 		justify-content: center;

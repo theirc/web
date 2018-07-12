@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { Button, IconButton } from "material-ui";
+import { IconButton } from "material-ui";
 import Headroom from "react-headrooms";
 import PropTypes from "prop-types";
-import { translate } from "react-i18next";
-
+import { translate, Interpolate } from "react-i18next";
+import { Close } from "material-ui-icons";
 import "./AppHeader.css";
 
 class AppHeader extends Component {
@@ -17,6 +17,7 @@ class AppHeader extends Component {
 
 	state = {
 		search: false,
+		prvalert: localStorage.getItem("privacy-policy"),
 		searchText: "",
 		active: false,
 	};
@@ -30,6 +31,11 @@ class AppHeader extends Component {
 			window.scrollTo(0, 0);
 		}
 		this.setState({ search: !search });
+	}
+
+	closeAlert() {
+		this.setState({ prvalert: true });
+		localStorage.setItem("privacy-policy", true);
 	}
 	handleInputChange(event) {
 		const target = event.target;
@@ -52,13 +58,17 @@ class AppHeader extends Component {
 	}
 
 	render() {
-		const { onChangeCountry, onGoHome, country, language, t } = this.props;
+		const { onChangeCountry, onChangeLanguage, disableLanguageSelector, disableCountrySelector, onGoHome, country, language, t } = this.props;
 		const { search, searchText } = this.state;
 		const noop = () => {
 			console.log("noop");
 		};
+		const cookiePolicyLink = <a href="/greece/privacy/cookies" target="_blank" rel="noopener noreferrer">Cookie Policy</a>;
+		const privacyPolicyLink = <a href="/greece/privacy/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>;
+
 		return (
 			<div className="AppHeader">
+
 				<Headroom tolerance={5} offset={200}>
 					<div className="app-bar">
 						<div className={["app-bar-container logo", !(country && language) ? "logo-centered" : ""].join(" ")} onClick={onGoHome || noop}>
@@ -68,12 +78,25 @@ class AppHeader extends Component {
 							language && (
 								<div className="app-bar-container buttons">
 									<div className="app-bar-buttons">
-										<Button color="contrast" onClick={onChangeCountry || noop}>
-											{(country && country.fields.name) || " "}
-										</Button>
+										{!disableCountrySelector && (
+											<span className="app-bar-selectors" color="contrast" onClick={onChangeCountry || noop}>
+												{(country && country.fields.name) || " "}
+											</span>
+										)}
+										{!disableLanguageSelector && !disableCountrySelector && <div className="app-bar-separator" />}
+										{!disableLanguageSelector && (
+											<span className="app-bar-selectors" color="contrast" onClick={onChangeLanguage}>
+												{language || " "}
+											</span>
+										)}
+
 										<div className="app-bar-separator" />
-										<IconButton className={`search-close ${[this.state.search && "active"].join(" ")}`} color="contrast" onClick={this.toggleSearch.bind(this)}>
-										</IconButton>
+										<IconButton
+											className={`search-close ${[this.state.search && "active"].join(" ")}`}
+											color="contrast"
+											onClick={this.toggleSearch.bind(this)}
+											style={{ width: 36 }}
+										/>
 									</div>
 								</div>
 							)}
@@ -94,7 +117,20 @@ class AppHeader extends Component {
 						<i className="fa fa-search" onClick={this.handleSubmit.bind(this)} />
 					</form>
 				)}
+				{!this.state.prvalert && this.props.cookieBanner && (
+					<div className={this.state.prvalert ? 'hidden' : 'privacy-banner'}>
+						<span className="privacy-banner-separator"></span>
+						<Interpolate i18nKey="COOKIES_BANNER" cookiePolicy={cookiePolicyLink} privacyPolicy={privacyPolicyLink}/>
+						<Close
+							className="close-alert"
+							color="contrast"
+							size={36}
+							onClick={this.closeAlert.bind(this)}
+						/>
+					</div>
+				)}
 			</div>
+
 		);
 	}
 }

@@ -6,7 +6,7 @@ class ArticleList extends React.Component {
     
 
     render() {
-        const { category, onNavigate,  md} =this.props;
+        const { country, category, onNavigate,  md} =this.props;
         return (
             <div className="ArticleListPage">
                 <div className="Title">
@@ -23,7 +23,7 @@ class ArticleList extends React.Component {
                             <div
                                 key={article.sys.id}
                                 className="Article"
-                                onClick={() => onNavigate(`/${article.fields.country.fields.slug}/${article.fields.category.fields.slug}/${article.fields.slug}`)}
+                                onClick={() => onNavigate(`/${country.fields.slug}/${category.fields.slug}/${article.fields.slug}`)}
                             >
                                 {article.fields.hero && <div className="Image" style={{ backgroundImage: `url('${article.fields.hero.fields.file.url}')` }} />}
                                 <div className={`Text ${article.fields.hero ? 'TextWithImage' : ''}`}>

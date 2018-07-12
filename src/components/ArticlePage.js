@@ -5,15 +5,16 @@ import { Helmet } from "react-helmet";
 import FacebookPlayer from "react-facebook-player";
 import YouTube from "react-youtube";
 import HeaderBar from "./HeaderBar";
+import ReactDOM from "react-dom"
 
 const Remarkable = require("remarkable");
 
 const md = new Remarkable("full", {
 	html: true,
 	linkify: true,
-	typographer: true,
 	breaks: true,
 });
+
 
 /**
  *
@@ -72,23 +73,36 @@ export default class ArticlePage extends Component {
 		this.replaceLinks();
 	}
 
-	componentDidMount() {
-		this.replaceLinks();
-	}
 	renderVideo() {
 		const { article } = this.props;
 		const { url } = article.fields;
 		const APP_ID = this.context.config.appId;
-
+		
 		if (/facebook.com/.test(url)) {
 			let videoId = url.replace(/.*facebook.com\/.*\/videos\/(.*)\/.*/, "$1");
-
+			
 			return <FacebookPlayer className={"Facebook"} videoId={videoId} appId={APP_ID} />;
 		} else if (/youtube.com/) {
 			let videoId = url.replace(/^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/, "$7");
 			return <YouTube videoId={videoId} className={"YouTube"} />;
 		}
 		return null;
+	}
+	componentDidMount() {
+		/* */
+		const APP_ID = this.context.config.appId;
+		
+		Array.from(document.querySelectorAll('.yt') || []).forEach(e=> {
+			var videoId = e.innerHTML.replace(/<YouTube.*videoId=["']{(.*)}["'].*><\/YouTube>/gmi, '$1');
+			e.removeChild(e.firstChild);
+			ReactDOM.render(<YouTube videoId={videoId} className={"YouTube"} />, e);
+		});		
+		Array.from(document.querySelectorAll('.fb') || []).forEach(e=> {
+			var videoId = e.innerHTML.replace(/<FacebookPlayer.*videoId=["']{(.*)}["'].*><\/FacebookPlayer>/gmi, '$1');
+			e.removeChild(e.firstChild);
+			ReactDOM.render( <FacebookPlayer className={"Facebook"} videoId={videoId} appId={APP_ID} />, e);
+		});
+		this.replaceLinks();
 	}
 
 	render() {
@@ -97,7 +111,13 @@ export default class ArticlePage extends Component {
 		const { contentType } = article.sys;
 
 		let html = md.render(content || lead);
-		html = html.replace(/(\+[0-9]{9,14})|00[0-9]{9,15}/g, `<a class="tel" href="tel:$1">$1</a>`);
+		html = html.replace(/(\+[0-9]{9,14}|00[0-9]{9,15})/g, `<a class="tel" href="tel:$1">$1</a>`);
+		html = html.replace(/(<YouTube.*\/>)/gmi, (a)=> {
+			return `<div class="yt">${a}</div>`;
+		});
+		html = html.replace(/(<FacebookPlayer.*\/>)/gmi, (a)=> {
+			return `<div class="fb">${a}</div>`;
+		});
 
 		return (
 			<div ref={r => (this._ref = r)} className={["ArticlePage", loading ? "loading" : "loaded"].join(" ")}>

@@ -13,6 +13,8 @@ import HomeWidgetCollection from "./HomeWidgetCollection";
 import SearchPage from "./SearchPage";
 import ServiceMap from "./ServiceMap";
 import ServiceCategoryList from "./ServiceCategoryList";
+import ServiceLocationList from "./ServiceLocationList";
+import ServiceDepartmentList from "./ServiceDepartmentList";
 import ServiceList from "./ServiceList";
 import DetectLocationSelector from "./DetectLocationSelector";
 import ServiceDetail from "./ServiceDetail";
@@ -37,11 +39,14 @@ export {
 	SearchPage,
 	ServiceMap,
 	ServiceCategoryList,
+	ServiceLocationList,
+	ServiceDepartmentList,
 	ServiceList,
 	ServiceDetail,
 	DetectLocationSelector,
 	TopCategoriesWidget,
 	LocalGuideWidget,
 	ArticleWidget,
-	CategoryWidget
+	CategoryWidget,
+	
 };

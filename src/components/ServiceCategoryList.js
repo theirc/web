@@ -10,11 +10,14 @@ import tinycolor from "tinycolor2";
 class ServiceCategoryList extends React.Component {
 	state = {
 		categories: [],
+		loaded: false,
 	};
 	componentDidMount() {
 		const { fetchCategories } = this.props;
 		if (fetchCategories) {
-			fetchCategories().then(categories => this.setState({ categories }));
+			fetchCategories().then(categories => {
+				this.setState({ categories, loaded: true  });
+			});
 		}
 	}
 
@@ -46,33 +49,36 @@ class ServiceCategoryList extends React.Component {
 		return (
 			<li key={id}>
 				<hr className="line" />
-				<div className="container" onClick={() => setTimeout(() => onSelectCategory(c), 300)}>
+				<div className="container" onClick={() => {setTimeout(() => onSelectCategory(c,name), 300) }}> 
 					<i className={`${iconPrefix} ${vector_icon}`} style={style} />
 					<strong>{name}</strong>
 				</div>
 			</li>
 		);
-		/*
-		return (
-			<div key={id} className="CategoryContainer">
-				<button className="Category" onClick={() => setTimeout(() => onSelectCategory(c), 300)}>
-					<i className={`${iconPrefix} ${vector_icon}`} />
-					<span>{name}</span>
-				</button>
-			</div>
-		);
-		*/
+		
 	}
 	render() {
-		const { categories } = this.state;
-		const { t, locationEnabled, toggleLocation, listAllServices, goToNearby, goToMap } = this.props;
-		if ((categories || []).length === 0) {
+		const { categories, loaded } = this.state;
+		const { t, locationEnabled, toggleLocation, listAllServices } = this.props;	
+		if (!loaded) {
 			return (
 				<div className="ServiceCategoryList">
 					<div className="Title">
 						<h1>{t("Service Categories")}</h1>
 					</div>
 					<div className="loader" />
+				</div>
+			);
+		}
+		if ((categories || []).length === 0 && loaded) {
+			return (
+				<div className="ServiceCategoryList">
+					<div className="Title">
+						<h1>{t("Service Categories")}</h1>
+					</div>
+					<div className="NoServices">
+						<h2>{t("No services found")}</h2>
+					</div>
 				</div>
 			);
 		}
@@ -85,7 +91,7 @@ class ServiceCategoryList extends React.Component {
 					<h1>{t("Order results by distance to me")}</h1>
 					{!locationEnabled && <i className="MenuIcon material-icons">radio_button_unchecked</i>}
 					{locationEnabled && <i className="MenuIcon material-icons">radio_button_checked</i>}
-				</li>				
+				</li>
 			</HeaderBar>,
 			<div key={"List"} className="ServiceCategoryList">
 				<ul>
@@ -95,12 +101,8 @@ class ServiceCategoryList extends React.Component {
 							<strong>{t("All Services")}</strong>
 						</div>
 					</li>
-					<li>
-						<div className="container" onClick={() => goToMap()}>
-							<i className="fa fa-map" />
-							<strong>Service Map</strong>
-						</div>
-					</li>
+					<hr className="line" />			
+					
 					{sortedCategories.map(c => this.renderCategory(c))}
 				</ul>
 			</div>,

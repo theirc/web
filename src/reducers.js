@@ -3,12 +3,24 @@ import actions from "./actions";
 import isMobile from "./shared/isMobile";
 import cms from "./content/cms";
 import getSessionStorage from "./shared/sessionStorage";
+import getLocalStorage from "./shared/localStorage";
 import defaultLanguage from "./shared/defaultLanguage";
 import getDirection from "./shared/getDirection";
 
 const sessionStorage = getSessionStorage();
+const localStorage = getLocalStorage();
 
 const device = global.window ? (isMobile.Android() ? "Android" : isMobile.iOS ? "iPhone" : "") : "";
+
+
+function storeRegions(state = [], action) {
+	switch (action.type) {
+		case actions.actionTypes.storeRegions:
+			return action.payload;
+		default:
+			return state;
+	}
+}
 
 function changeDeviceType(state = device, action) {
 	switch (action.type) {
@@ -95,7 +107,7 @@ function changeLanguage(state = defaultLanguage, action) {
 	switch (action.type) {
 		case actions.actionTypes.changeLanguage:
 			if (sessionStorage) {
-				sessionStorage.language = action.payload;
+				localStorage.language = action.payload;
 				delete sessionStorage.country;
 			}
 
@@ -186,6 +198,7 @@ export default {
 	organization: changeOrganization,
 
 	serviceGeolocation: toggleServiceGeolocation,
+	regions: storeRegions,
 
 	articles: services.articles.reducer,
 	countries: services.countries.reducer,

@@ -50,7 +50,7 @@ class Skeleton extends React.Component {
 		}
 	}
 	render() {
-		const { children, country, language, match, onGoHome, onGoToSearch, onChangeLocation, onChangeLanguage, deviceType, router, hideFooter, removeErrorMessage } = this.props;
+	const { children, country, language, match, onGoHome, onGoToSearch, onChangeLocation, onChangeLanguage, deviceType, router, hideFooter, removeErrorMessage, showMapButton, goToMap } = this.props;
 		const { errorMessage } = this.state;
 		const { config } = this.context;
 
@@ -99,7 +99,18 @@ class Skeleton extends React.Component {
 		return (
 			<I18nextProvider i18n={i18n}>
 				<div className="Skeleton">
-					<AppHeader country={country} language={language} onGoHome={onGoHome(country)} onGoToSearch={q => onGoToSearch(country, q)} onChangeCountry={onChangeLocation} logo={logo} />
+					<AppHeader
+						disableCountrySelector={!!config.disableCountrySelector}
+						disableLanguageSelector={!!config.disableLanguageSelector}
+						cookieBanner={config.cookieBanner}
+						country={country}
+						language={language}
+						onGoHome={onGoHome(country)}
+						onGoToSearch={q => onGoToSearch(country, q)}
+						onChangeCountry={onChangeLocation}
+						onChangeLanguage={onChangeLanguage.bind(this, router.location.pathname)}
+						logo={logo}
+					/>
 					{notifications}
 					{children}
 					{showFooter && (
@@ -112,7 +123,7 @@ class Skeleton extends React.Component {
 							deviceType={deviceType}
 						/>
 					)}
-					{country && language && <BottomNavContainer match={match} />}
+					{country && language && <BottomNavContainer match={match} showMapButton={showMapButton} goToMap={goToMap} showDepartments={config.showDepartments}/>}
 				</div>
 			</I18nextProvider>
 		);

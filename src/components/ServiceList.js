@@ -14,12 +14,18 @@ class ServiceList extends React.Component {
 		errorMessage: null,
 	};
 	componentDidMount() {
-		const { servicesByType } = this.props;
+		const { servicesByType, listAllServices } = this.props;
 		if (servicesByType) {
 			servicesByType()
 				.then(({ services, category }) => this.setState({ services, category, loaded: true }))
 				.catch(c => this.setState({ errorMessage: c.message, category: null, loaded: true }));
 		}
+		if (listAllServices) {
+			listAllServices()
+				.then(({ services, category }) => this.setState({ services, category, loaded: true }))
+				.catch(c => this.setState({ errorMessage: c.message, category: null, loaded: true }));
+		}
+
 	}
 	renderService(s) {
 		const { goToService, measureDistance } = this.props;
@@ -43,24 +49,27 @@ class ServiceList extends React.Component {
 				borderColor: tinycolor(color).darken(10),
 			};
 		};
-		let fullAddress = [s.address_floor, s.address, s.address_city].filter(val => val).join(', ')
+		let fullAddress = [s.address, s.address_city].filter(val => val).join(", ");
 		return [
 			<li key={s.id} className="Item" onClick={() => goToService(s.id)}>
-				<div className="Icons">
-					{s.types.map((t, idx) => (
-						<div className="Icon" key={`${s.id}-${idx}`}>
-							<i className={iconWithPrefix(t.vector_icon)} style={categoryStyle(t.color)} />
-						</div>
-					))}
+				<div className="Icon" key={`${s.id}-0`}>
+					<i className={iconWithPrefix(s.types[0].vector_icon)} style={categoryStyle(s.types[0].color)} />
 				</div>
 				<div className="Info">
 					<h1>{s.name}</h1>
 					<h2>
 						{s.provider.name}{" "}
 						<small>
-							{fullAddress}							
+							{fullAddress}
 							{distance && ` - ${distance}`}
 						</small>
+						<div className="Icons">
+							{s.types.filter((ty, id) => id > 0).map((t, idx) => (
+								<div className="Icon" key={`${s.id}-${idx}`}>
+									<i className={iconWithPrefix(t.vector_icon)} style={categoryStyle(t.color)} />
+								</div>
+							))}
+						</div>
 					</h2>
 				</div>
 				<i className="material-icons" />
@@ -69,12 +78,17 @@ class ServiceList extends React.Component {
 	}
 	render() {
 		const { services, category, loaded, errorMessage } = this.state;
-		const { t, locationEnabled, toggleLocation, nearby } = this.props;
+		const { t, locationEnabled, toggleLocation, nearby, showMap, title  } = this.props;
+		let titleName = title ? title : t("Services");
 
+		// vacancy === false --> available
+		// vacancy === true  --> unavailable
+		const availableServices = services.filter(s => !s.provider.vacancy);
+		const unavailableServices = services.filter(s => s.provider.vacancy);
 		if (!loaded) {
 			return (
 				<div className="ServiceList">
-					<HeaderBar title={nearby ? t("Nearby Services") : t("Services")}>
+					<HeaderBar title={nearby ? t("Nearby Services") : titleName}>
 						{!nearby &&
 							navigator.geolocation && (
 								<li onClick={toggleLocation || _.identity}>
@@ -91,7 +105,7 @@ class ServiceList extends React.Component {
 
 		return (
 			<div className="ServiceList">
-				<HeaderBar subtitle={category && `${category.name}:`} title={nearby ? t("Nearby Services") : t("Services")}>
+				<HeaderBar title={nearby ? t("Nearby Services") : (category ? category.name : titleName)}>
 					{!nearby &&
 						navigator.geolocation && (
 							<li onClick={toggleLocation || _.identity}>
@@ -112,7 +126,51 @@ class ServiceList extends React.Component {
 							<em>{t("No services found")}</em>
 						</div>
 					)}
-				<div className="ServiceListContainer">{services.length > 0 && <ul className="Items">{services.map(this.renderService.bind(this))}</ul>}</div>
+
+				{availableServices.length > 0 && (
+					<div className="ServiceListContainer">
+
+						<ul className="Items">
+							<li
+								className="Item"
+								onClick={showMap}
+								style={{
+									flexBasis: "100%",
+								}}
+							>
+								<div className="Icon">
+									<i className="fa fa-map" />
+								</div>
+								<div
+									className="Info"
+									style={{
+										alignSelf: "center",
+									}}
+								>
+									<h1>{t("Service Map")}</h1>
+								</div>
+								<i className="material-icons" />
+							</li>
+							{availableServices.map(this.renderService.bind(this))}
+						</ul>
+					</div>
+				)}
+
+
+				{unavailableServices.length > 0 && (
+					<div className="ServiceListContainer Unavailable">
+						<ul className="Items">
+							<li
+								style={{
+									flexBasis: "100%",
+								}}
+							>
+							<h1>Currently unavailable:</h1>
+							</li>
+							{unavailableServices.map(this.renderService.bind(this))}
+						</ul>
+					</div>
+				)}
 			</div>
 		);
 	}

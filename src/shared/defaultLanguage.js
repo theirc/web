@@ -1,17 +1,18 @@
 import cms from "../content/cms";
 import queryString from "query-string";
-import getSessionStorage from "./sessionStorage";
+import getLocalStorage from "./localStorage";
 
-const sessionStorage = getSessionStorage();
-let defaultLanguage = "en";
+const localStorage = getLocalStorage();
+let defaultLanguage = cms.siteConfig.languages[0][0];
 
 if (global.window && global.location && global.navigator) {
 	const parsed = queryString.parse(global.location.search);
-
+	
 	if (parsed.language) {
 		defaultLanguage = parsed.language;
-	} else if (sessionStorage.language) {
-		defaultLanguage = sessionStorage.language;
+		localStorage.language = defaultLanguage;
+	} else if (localStorage.language) {
+		defaultLanguage = localStorage.language;
 	} else if (global.navigator.languages) {
 		defaultLanguage = global.navigator.languages[0] && global.navigator.languages[0].split("-")[0];
 	} else if (global.navigator.language) {
@@ -19,7 +20,7 @@ if (global.window && global.location && global.navigator) {
 	}
 
 	if (cms.siteConfig.languages.map(l => l[0]).indexOf(defaultLanguage) === -1) {
-		defaultLanguage = "en";
+		defaultLanguage = cms.siteConfig.languages[0][0];
 	}
 }
 

@@ -1,10 +1,15 @@
 import getSessionStorage from "../shared/sessionStorage";
+import cms from "./cms";
 
 var request = require("superagent");
 var Promise = require("bluebird");
 var _ = require("lodash");
-
+var { siteConfig } = cms;
 var RI_URL = "https://admin.refugee.info/e/production/v2";
+if (siteConfig && siteConfig.backendUrl) {
+	RI_URL = siteConfig.backendUrl;
+	/staging/.test(RI_URL) && console.log('Backend URL:', RI_URL);
+}
 
 //var RI_URL = "http://localhost:8000/e/production/v2";
 
@@ -12,7 +17,7 @@ module.exports = {
 	fetchCategories(language, region) {
 		return new Promise((resolve, reject) => {
 			const sessionStorage = getSessionStorage();
-			if (sessionStorage[`${language}-${region}-service-categories`]) {
+			if (sessionStorage[`${language}-${region}-service-categories`] && sessionStorage[`${language}-${region}-service-categories`] !== "[]") {
 				resolve(JSON.parse(sessionStorage[`${language}-${region}-service-categories`]));
 			} else {
 				request
@@ -97,6 +102,7 @@ module.exports = {
 	fetchAllServicesNearby(country, language, position = [], distance = 5, pageSize = 50) {
 		return new Promise((resolve, reject) => {
 			var requestUrl = `/services/search/?filter=relatives&geographic_region=${country}&page=1&page_size=${pageSize}&near=${position.join(", ")}&near_km=${distance}`;
+
 			request
 				.get(RI_URL + requestUrl)
 				.set("Accept-Language", language)
@@ -111,9 +117,12 @@ module.exports = {
 				});
 		});
 	},
-	fetchAllServicesInBBox(country, language, bounds = [], pageSize = 200) {
+	fetchAllServicesInBBox(country, language, bounds = [], pageSize = 200, category = null) {
 		return new Promise((resolve, reject) => {
 			var requestUrl = `/services/search/?filter=relatives&geographic_region=${country}&page=1&page_size=${pageSize}&bounds=${bounds.join(", ")}`;
+			if (category) {
+				requestUrl += "&type_numbers=" + (category || "");
+			}
 			request
 				.get(RI_URL + requestUrl)
 				.set("Accept-Language", language)

@@ -8,7 +8,7 @@ Less me
 	@include flex-direction(row);
 	@include align-items(center);
 	@include justify-content(flex-start);
-	
+
 	position: fixed;
 	width: 100%;
 	top: 0;
@@ -18,13 +18,10 @@ Less me
 }
 
 .app-bar-container {
-	
-    display: -webkit-box;
-    display: -webkit-flex;
+	display: -webkit-box;
+	display: -webkit-flex;
 	display: -ms-flexbox;
 	display: flex;
-	
-
 	color: white;
 	flex: 1;
 	flex-direction: row;
@@ -63,7 +60,23 @@ Less me
 	align-items: center;
 	justify-content: flex-end;
 	flex-direction: row;
-	span {
+	.app-bar-selectors {
+		padding: 16px 5px;
+		text-transform: uppercase;
+		cursor: pointer;
+		font-size: 14px;
+		@media (max-width: 320px) {
+			font-size: 10px;
+		}
+		@media (min-width: 321px) {
+			font-size: 12px;
+			padding: 16px 8px;
+		}
+		@media (min-width: 960px) {
+			font-size: 14px;
+			padding: 16px 11px;
+		}
+
 		.rtl & {
 			font-family: "Cairo", sans-serif;
 		}
@@ -80,6 +93,7 @@ Less me
 
 .app-bar-logo {
 	height: 40px;
+	cursor: pointer;
 }
 
 .headroom {
@@ -172,11 +186,39 @@ Less me
 			color: white;
 			width: 25px;
 			font-size: 20px;
-
 			position: absolute;
 		}
 	}
+
+	.privacy-banner {
+		padding-bottom: 1em;
+		padding: 16px;
+		background-color: black;
+		color: white;
+		display: flex;
+		position: relative;
+		flex: 1;
+		font-weight: 300;
+		position: relative;
+		height: auto;
+		flex-direction: row;
+		justify-content: center;
+  		align-items: center;
+		font-size: 14px;
+		opacity: 0.85;
+		a {color: white; text-decoration: underline;}
+		span {padding: 4px;}
+		.privacy-banner-separator {
+			border-left-width: 1px;
+			border-left-color: #ffda1a;
+			border-left-style: solid;
+			height: 50px;
+			margin-left: 7px;
+		}
+	}
 }
+
+.hidden{display: none;}
 
 $icon-width: 22px;
 $icon-height: 22px;

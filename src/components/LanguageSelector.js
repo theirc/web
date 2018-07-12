@@ -10,7 +10,7 @@ class LanguageSelector extends Component {
 	componentDidMount() {
 		if (global.window) {
 			const sessionStorage = getSessionStorage();
-			
+
 			delete sessionStorage.country;
 			delete sessionStorage.dismissedNotifications;
 		}
@@ -20,10 +20,11 @@ class LanguageSelector extends Component {
 		const { languages, onSelectLanguage, t } = this.props;
 		return (
 			<div className="LanguageSelector">
-				<div className="spacer" style={{ minHeight: 65 }} />
+				<div className="icon" />
 				<div className="text">
 					<i className="material-icons">translate</i>
 					{languages.map((c, i) => <h1 key={`choose-${c[0]}`}>{t("Choose your language", { lng: c[0] })}</h1>)}
+					<div className="p-t-20" />
 				</div>
 				<div className="spacer" />
 				{languages.map((c, i) => (
@@ -38,7 +39,7 @@ class LanguageSelector extends Component {
 					</button>
 				))}
 				<div className="spacer" />
-				
+
 			</div>
 		);
 	}

@@ -11,26 +11,11 @@
 		border-radius: 1px;
 		height: 0;
 		width: 95%;
+		opacity: 0.6;
 	}
 	.MenuIcon {
-		padding-right: 10px;
-		padding-left: 10px;
 
 		font-size: 20px;
-		width: 24px;
-		height: 24px;
-		text-align: center;
-	}
-
-	.footer {
-		flex: 1;
-		flex-basis: 100%;
-		background-color: $titleBackground;
-		border-top: 1px black solid;
-
-		hr:last-child {
-			display: none;
-		}
 	}
 
 	.Spacer {
@@ -44,6 +29,14 @@
 		justify-content: center;
 	}
 
+	.footer {
+		background-color: $titleBackground;
+
+		& .MenuIcon {
+			margin: 0px 20px 10px 10px;
+		}
+	}
+
 	.Selector {
 		width: 100%;
 		display: flex;
@@ -53,20 +46,29 @@
 		flex-direction: row;
 		align-items: center;
 		cursor: pointer;
+		&:active {
+			background-color: darken($titleBackground, 5%);
+		}
 	}
 
 	.Selector > h1 {
-		font-size: 18px;
+		font-size: 16px;
 		display: block;
-		width: 100%;
+		width: 85%;
 		margin: 0;
-		padding: 10px;
-		line-height: 20px;
+		padding: 10px 10px 10px 20px;
 		flex: 1;
+		overflow:hidden;
+		white-space:nowrap;
+		text-overflow: ellipsis;
 		a {
 			line-height: 20px;
 			margin-left: 5px;
 			margin-right: 5px;
+		}
+		.phoneFormat{
+			display: inline-block;
+			direction: ltr;
 		}
 	}
 
@@ -82,9 +84,7 @@
 .ServiceListContainer {
 	display: flex;
 	flex-wrap: wrap;
-
 	@include service-common();
-
 	ul {
 		list-style: none;
 		margin: 0;
@@ -97,13 +97,13 @@
 		flex-direction: row;
 		justify-content: flex-start;
 		align-items: center;
-
 		-webkit-touch-callout: none;
 		-webkit-user-select: none;
 		-khtml-user-select: none;
 		-moz-user-select: none;
 		-ms-user-select: none;
 		user-select: none;
+		cursor: pointer;
 
 		&:active {
 			background-color: #f6f6f6;
@@ -131,6 +131,14 @@
 		border-radius: 1px;
 		height: 0;
 		width: 95%;
+	}
+	.right {
+		display: flex;
+		flex-grow: 1;
+		align-self: flex-end;
+
+		align-items: flex-end;
+		flex-direction: column;
 	}
 }
 .ServiceCategoryList {
@@ -206,9 +214,14 @@
 		width: 100%;
 		color: lighten(black, 50%);
 	}
+	.NoServices > h2{
+		padding: 20px;
+		font-style: italic;
+	}
 }
 
-.ServiceList, .ServiceMap {
+.ServiceList,
+.ServiceMap {
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: column;
@@ -253,10 +266,10 @@
 	.Item {
 		flex: 1;
 		flex-basis: 100%;
-		padding-top: 0.25em;
-		padding-bottom: 0.25em;
+		padding-top: 0.6em;
+		padding-bottom: 0.6em;
 		border-bottom: 1px $titleBackground solid;
-		min-height: 60px;
+		min-height: 42px;
 
 		display: flex;
 
@@ -289,60 +302,58 @@
 		&:active {
 			background-color: #f6f6f6;
 		}
+
+		> .Icon {
+			padding-top: 10px;
+			text-align: center;
+			width: 56px;
+		}
 	}
 
 	.Icons {
 		display: flex;
-		flex-wrap: wrap;
-		flex-direction: column;
-		width: 75px;
-
-		align-items: stretch;
-		align-content: stretch;
-
-		justify-content: center;
-
+		margin: 10px 0 0;
 		.Icon {
-			display: flex;
-			flex: 1;
-			flex-grow: 1;
-			flex-basis: 50%;
-			align-items: center;
-			justify-content: center;
-			align-content: center;
-
-			i {
-				width: 100%;
-				height: 100%;
-				font-size: 18px;
-				text-align: center;
-				align-items: center;
-				display: flex;
-				justify-content: center;
-			}
+			padding-right: 15px;
 		}
 	}
-
 	.Info {
 		display: flex;
 		flex: 1;
 		flex-direction: column;
 
 		h1 {
-			padding: 0;
-			margin: 0;
-			font-size: 120%;
+			font-size: 100%;
+			font-weight: bold;
 		}
 		h2 {
 			padding: 0;
 			margin: 0;
-			font-size: 100%;
+			font-size: 90%;
 			font-weight: normal;
 
 			small {
 				display: block;
+				padding-top: 6px;
+				text-decoration: underline;
 			}
 		}
+	}
+	.Unavailable {
+		li > h1 {
+			font-size: 90%;
+			margin-top: 30px;
+			text-align: center;
+		}
+		.Item {
+			opacity: 0.38;
+			pointer-events: none;
+			.Icon {
+				i::before {
+					color: black;
+				}
+			}
+		}		
 	}
 
 	.Error {
@@ -351,15 +362,67 @@
 }
 
 .ServiceMap {
-  .Item {
-    border-bottom: 0;
-  }
   .leaflet-popup-tip-container {
     display: block;
     margin-top: -1px;
   }
   .leaflet-control-attribution a {
     font-size: 1em;
+  }
+  .leaflet-popup-content {
+    margin: 5px 0;
+    .Item {
+      border-bottom: 0;
+      .Icons {
+        display: flex;
+        margin: 0;
+        flex-wrap: wrap;
+        flex-direction: column;
+        width: 75px;
+        align-items: stretch;
+        align-content: stretch;
+        justify-content: center;
+        .Icon {
+          padding: 0;
+          display: flex;
+          flex: 1 1 0%;
+          flex-grow: 1;
+          flex-basis: 50%;
+          align-items: center;
+          justify-content: center;
+          align-content: center;
+          i {
+            width: 100%;
+            height: 100%;
+            font-size: 18px;
+            text-align: center;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+          }
+        }
+      }
+      .Info {
+        h1 {
+          font-size: 120%;
+          margin: 0;
+          padding: 0;
+        }
+        h2 {
+          color: #777;
+          font-size: 100%;
+          font-weight: bold;
+          margin: 5px 0;
+        }
+        .fullAddress {
+          font-style: normal;
+        }
+        .regionTitle {
+          font-style: normal;
+          margin-top: 5px;
+        }
+      }
+    }  
   }
 
   .leaflet-div-icon {
@@ -379,6 +442,28 @@
           top: 5px;
       }
     }
+  }
+  .marker-cluster {
+    border-radius: 50px !important;
+    height: 50px !important;
+    margin-left: -25px !important;
+    margin-top: -25px !important;
+    width: 50px !important;
+  }
+  .marker-cluster div {
+    border-radius: 50px !important;
+    font-size: 14px;
+    height: 38px;
+    line-height: 38px;
+    margin-left: 6px;
+    margin-top: 6px;
+    text-shadow: 0 0 1px rgba(255,255,255,1),
+                 0 0 1px rgba(255,255,255,1),
+                 0 0 1px rgba(255,255,255,1);
+    width: 38px;
+  }
+  .marker-cluster-small, .marker-cluster-small div {
+    background-color: rgba(250, 120, 150, 0.6);
   }
 }
 
@@ -530,5 +615,29 @@
 				padding-bottom: 5px;
 			}
 		}
+	}
+}
+
+.ServiceMapFilter{
+	height: 20px;
+    z-index: 400;
+    background-color: white;
+    position: absolute;
+    right: 16px;
+	top: 74px;
+	width: 200px;
+	font-size: 12px;
+	text-align: center;
+	line-height: 20px;
+	padding: 10px 5px 10px 5px;
+	box-shadow: 0px 0px 4px 0px #7f7f7f;
+	
+	.app-bar-separator{
+		float:right;
+		margin-right: 5px;
+		margin-top: -2px;
+	}
+	.category-name{
+		float:right;
 	}
 }

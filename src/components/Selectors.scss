@@ -6,24 +6,24 @@
 	flex-direction: column;
 
 	min-height: unquote("calc(100vh)");
-	margin-top: -64px;
+	
 
 	.spacer {
 		flex-grow: 1;
 		max-height: 200px;
+		min-height: 15px;
 	}
 	.bottom {
 		height: 100px;
 	}
 
 	.item {
-		margin: 10px;
+		margin: 10px 15px 0px 15px;
 		border: 0;
 		padding: 5px;
 		background-color: $titleBackground;
 		outline: none;
-		height: 52px;
-
+		height: 70px;
 		font-size: 16px;
 		color: #5e5e5e;
 		letter-spacing: 0;
@@ -35,6 +35,11 @@
 		&:hover {
 			border: 0;
 		}
+		&[disabled] {
+			background-color: #fefefe;
+			color: darken($titleBackground, 30%);
+			border: 1px solid darken($titleBackground, 40%);
+		}
 	}
 
 	.text {
@@ -44,9 +49,10 @@
 		align-items: center;
 		align-content: center;
 		justify-content: center;
+		position: relative;
 		i {
 			display: block;
-			font-size: 40px;
+			font-size: 48px;
 			@include brand-colors("color");
 		}
 
@@ -69,5 +75,32 @@
 			margin-bottom: 0;
 			padding: 5px;
 		}
+	}
+
+	.other {
+		height: 80px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		align-content: center;
+		justify-content: center;
+		position: relative;
+		i {
+			display: block;
+			font-size: 48px;
+			@include brand-colors("color");
+		}
+
+		h1 {
+			font-size: 18px;
+			color: #000000;
+			letter-spacing: 0;
+			line-height: 20px;
+			font-weight: bold;
+			text-transform: uppercase;
+			margin-bottom: 0;
+		}
+
+		
 	}
 }

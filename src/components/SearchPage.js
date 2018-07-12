@@ -20,13 +20,13 @@ class SearchPage extends React.Component {
 			<div className="SearchPage">
 				<div className="Title">
 					<h1>
-						{t("Search Results")}: "{term}"
+						{t("Search")}: "{term}"
 					</h1>
 				</div>
 				<div className="results">
 					<h1>
 						<i className="fa fa-book" aria-hidden="true" />
-						Articles
+						{t("Articles")}
 					</h1>
 					<hr />
 
@@ -63,7 +63,8 @@ class SearchPage extends React.Component {
 					<div key="services" className="results">
 						<h1>
 							<i className="fa fa-map-marker" aria-hidden="true" />
-							Services
+						{t("Services")}
+							
 						</h1>
 						<hr key="divider" />
 
