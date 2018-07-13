@@ -58,8 +58,9 @@ class ServiceCategoryList extends React.Component {
 		} else {
 			sortedRegions = _.sortBy(allRegions || [], c => {
                 if(c.level === 1){
-				    return c.name;
-			}});
+					return c.name;
+				}
+			});
 		}
 		let title = department ? t("Locations in") + " " + departmentName : t("Locations");
 
