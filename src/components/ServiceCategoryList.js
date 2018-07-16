@@ -31,7 +31,7 @@ class ServiceCategoryList extends React.Component {
 	}
 
 	renderCategory(c) {
-		let { onSelectCategory } = this.props;
+		let { onSelectCategory, location } = this.props;
 		onSelectCategory = onSelectCategory || (() => console.log("noop"));
 
 		let { id, name, vector_icon } = c;
@@ -49,7 +49,7 @@ class ServiceCategoryList extends React.Component {
 		return (
 			<li key={id}>
 				<hr className="line" />
-				<div className="container" onClick={() => {setTimeout(() => onSelectCategory(c,name), 300) }}> 
+				<div className="container" onClick={() => {setTimeout(() => onSelectCategory(c,name,location), 300) }}> 
 					<i className={`${iconPrefix} ${vector_icon}`} style={style} />
 					<strong>{name}</strong>
 				</div>
