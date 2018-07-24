@@ -92,7 +92,7 @@ class AppHeader extends Component {
 
 										<div className="app-bar-separator" />
 										<IconButton
-											className={`search-close ${[this.state.search && "active"].join(" ")}`}
+											className={`search-close ${[this.state.search && "active"].join(" ")} search-button `}
 											color="contrast"
 											onClick={this.toggleSearch.bind(this)}
 											style={{ width: 36 }}

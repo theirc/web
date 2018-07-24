@@ -81,6 +81,10 @@ Less me
 			font-family: "Cairo", sans-serif;
 		}
 	}
+	@-moz-document url-prefix(){
+	.search-button{
+		padding-bottom:40px !important;
+	}}
 }
 
 .app-bar-separator {
