@@ -270,7 +270,7 @@ class ServiceDetail extends React.Component {
 					{service.location && <hr />}
 					{service.location && (
 						<div className="Selector" onClick={() => window.open(`https://www.google.com/maps/search/?api=1&query=${point}`)}>
-							<h1>{t("Get Directions")}</h1>
+							<h1>{t("Get directions")}</h1>
 							<i className="MenuIcon fa fa-map" aria-hidden="true" />
 						</div>
 					)}
