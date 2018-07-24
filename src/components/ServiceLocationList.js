@@ -71,7 +71,7 @@ class ServiceCategoryList extends React.Component {
 				<ul>
 					{sortedRegions.map(c => this.renderRegion(c))}
 				</ul>
-			</div>,
+			</div>
 		];
 	}
 }
