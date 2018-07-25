@@ -241,6 +241,7 @@ class ServiceDetail extends React.Component {
 					{point && (
 						<p>
 							<img
+								className="MapCursor"
 								alt={serviceT.name}
 								onClick={() => window.open(`https://www.google.com/maps/search/?api=1&query=${point}`)}
 								src={`https://maps.googleapis.com/maps/api/staticmap?center=${point}&zoom=16&size=600x300&maptype=roadmap&markers=${point}&key=${GMAPS_API_KEY}`}
