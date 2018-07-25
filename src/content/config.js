@@ -4,6 +4,7 @@ module.exports = {
 		ar: "ar-001",
 		fa: "fa-AF",
 	},
+	
 	"refugee.info": {
 		theme: "irc",
 		accessToken: "0cd5c6bfefa4f7f33a98c487012e6f34c2031aee1ff2f6858b11be592ab349d9",

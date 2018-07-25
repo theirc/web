@@ -275,8 +275,8 @@ class Services extends React.Component {
 		}
 
 		const onSelectCategory = (c, cname, location) => {
-			this.setState({ categoryName: cname, category: c.id });
-			listServicesInCategory(c, this.state.location);
+			this.setState({ categoryName: cname, category: c.id, location: location });
+			listServicesInCategory(c, location);
 		};
 
 		const onOpenLocation = (name, location) => {
@@ -470,12 +470,12 @@ class Services extends React.Component {
 									locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
 									toggleLocation={() => this.setState({ sortingByLocationEnabled: true })}
 									onSelectCategory={onSelectCategory}
-									listAllServices={() => listAllServices(this.state.location)}
+									listAllServices={() => listAllServices(props.match.params.location)}
 									goToNearby={() => goToNearby()}
 									goToMap={() => goToMap()}
 									goToLocationList={() => goToLocationList()}
 									showLocations={true}
-									location={this.state.location}
+									location={props.match.params.location}
 								/>
 
 

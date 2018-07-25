@@ -57,7 +57,9 @@ class ServiceCategoryList extends React.Component {
 			sortedRegions = _.filter(allRegions, ['parent', department]);
 		} else {
 			sortedRegions = _.sortBy(allRegions || [], c => {
-				return c.name;
+                if(c.level === 1){
+					return c.name;
+				}
 			});
 		}
 		let title = department ? t("Locations in") + " " + departmentName : t("Locations");
@@ -69,7 +71,7 @@ class ServiceCategoryList extends React.Component {
 				<ul>
 					{sortedRegions.map(c => this.renderRegion(c))}
 				</ul>
-			</div>,
+			</div>
 		];
 	}
 }
