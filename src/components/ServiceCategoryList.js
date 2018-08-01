@@ -49,7 +49,7 @@ class ServiceCategoryList extends React.Component {
 		return (
 			<li key={id}>
 				<hr className="line" />
-				<div className="container" onClick={() => {setTimeout(() => onSelectCategory(c,name,location), 300) }}> 
+				<div className="container" onClick={() => {setTimeout(() => onSelectCategory(c), 300) }}> 
 					<i className={`${iconPrefix} ${vector_icon}`} style={style} />
 					<strong>{name}</strong>
 				</div>
@@ -59,7 +59,7 @@ class ServiceCategoryList extends React.Component {
 	}
 	render() {
 		const { categories, loaded } = this.state;
-		const { t, locationEnabled, toggleLocation, listAllServices } = this.props;	
+		const { t, locationEnabled, toggleLocation, listAllServices, goToLocationList, goToMap, locationName } = this.props;	
 		if (!loaded) {
 			return (
 				<div className="ServiceCategoryList">
@@ -85,28 +85,54 @@ class ServiceCategoryList extends React.Component {
 		let sortedCategories = _.sortBy(categories || [], c => {
 			return c.number;
 		});
-		return [
+		console.log({locationName});
+		return <div>
 			<HeaderBar key={"Header"} title={t("Service Categories").toUpperCase()}>
 				<li onClick={toggleLocation || _.identity}>
 					<h1>{t("Order results by distance to me")}</h1>
 					{!locationEnabled && <i className="MenuIcon material-icons">radio_button_unchecked</i>}
 					{locationEnabled && <i className="MenuIcon material-icons">radio_button_checked</i>}
 				</li>
-			</HeaderBar>,
+			</HeaderBar>
 			<div key={"List"} className="ServiceCategoryList">
 				<ul>
-					<li>
+					{locationName  && 
+					<div>
+						<li>
+							<div className="container">
+								
+								<strong>{t("Services in") + ": " + locationName }</strong>
+							</div>
+						</li>
+						<hr className="line" />	
+					</div>
+					}
+					<li key="00">
 						<div className="container" onClick={listAllServices}>
 							<i className="fa fa-list" />
 							<strong>{t("All Services")}</strong>
 						</div>
 					</li>
 					<hr className="line" />			
+					<li key="000">
+						<div className="container" onClick={goToLocationList}>
+							<i className="fa fa-globe" />
+							<strong>{t("Locations")}</strong>
+						</div>
+					</li>
+					<hr className="line" />			
+					<li>
+						<div className="container" onClick={goToMap}>
+							<i className="fa fa-map" />
+							<strong>{t("Map")}</strong>
+						</div>
+					</li>
+					<hr className="line" />			
 					
 					{sortedCategories.map(c => this.renderCategory(c))}
 				</ul>
-			</div>,
-		];
+			</div>
+		</div>
 	}
 }
 
