@@ -115,7 +115,6 @@ class ArticleFooter extends Component {
 					<div className="selector sharePage">
 						<h1
 							onClick={() => {
-								
 								this.share();
 							}}
 						>
