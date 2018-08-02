@@ -50,7 +50,7 @@ class Skeleton extends React.Component {
 		}
 	}
 	render() {
-	const { children, country, language, match, onGoHome, onGoToSearch, onChangeLocation, onChangeLanguage, deviceType, router, hideFooter, removeErrorMessage, showMapButton, goToMap } = this.props;
+		const { children, country, language, match, onGoHome, onGoToSearch, onChangeLocation, onChangeLanguage, deviceType, router, hideFooter, removeErrorMessage, showMapButton, goToMap } = this.props;
 		const { errorMessage } = this.state;
 		const { config } = this.context;
 

@@ -7,8 +7,7 @@ var _ = require("lodash");
 var { siteConfig } = cms;
 var RI_URL = "https://admin.refugee.info/e/production/v2";
 if (siteConfig && siteConfig.backendUrl) {
-	RI_URL = siteConfig.backendUrl;
-	/staging/.test(RI_URL) && console.log('Backend URL:', RI_URL);
+	RI_URL = siteConfig.backendUrl;	
 }
 
 //var RI_URL = "http://localhost:8000/e/production/v2";
