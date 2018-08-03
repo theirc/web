@@ -108,6 +108,11 @@
 		&:active {
 			background-color: #f6f6f6;
 		}
+		
+	}
+	ul li .disabled{
+		color: grey;
+		cursor: default;
 	}
 	& > ul li .container > i {
 		padding-right: 10px;
@@ -120,6 +125,7 @@
 		min-height: 24px;
 		line-height: 24px;
 	}
+	
 
 	hr {
 		padding: 0;
