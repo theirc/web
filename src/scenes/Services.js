@@ -654,8 +654,6 @@ class Services extends React.Component {
 									goToMap={() => onGoToMap()}
 									goToLocationList={goToLocations}
 									showLocations={true}
-									locationName={this.state.locationName}
-									location = {this.state.location}
 								/>
 							</div>
 						</Skeleton>
