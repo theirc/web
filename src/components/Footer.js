@@ -55,6 +55,11 @@ class Footer extends Component {
 							&copy; {year} .
 						</span>
 					</span>
+					<span>
+						<a href="http://admin.cuentanos.org" target="blank" className="administration-button">
+							Administración
+						</a>
+					</span>
 					<div style={{ display: "none" }} onClick={onChangeLanguage}>
 						<span>{t("Change Language")}</span>
 					</div>
