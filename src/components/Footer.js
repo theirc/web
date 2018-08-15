@@ -6,7 +6,7 @@ import { translate } from "react-i18next";
 
 class Footer extends Component {
 	render() {
-		const { onChangeLocation, onChangeLanguage, disableCountrySelector, disableLanguageSelector, questionLink, t } = this.props;
+		const { onChangeLocation, onChangeLanguage, disableCountrySelector, disableLanguageSelector, questionLink, t, showLinkToAdministration } = this.props;
 		// const {deviceType,} = this.props;
 		const year = moment().year();
 
@@ -55,6 +55,13 @@ class Footer extends Component {
 							&copy; {year} .
 						</span>
 					</span>
+					{showLinkToAdministration && (
+						<span>
+							<a href="http://admin.cuentanos.org" target="blank" className="administration-button">
+								Administración
+							</a>
+						</span>
+					)}
 					<div style={{ display: "none" }} onClick={onChangeLanguage}>
 						<span>{t("Change Language")}</span>
 					</div>

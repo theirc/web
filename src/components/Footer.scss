@@ -91,6 +91,20 @@
 			&.padded {
 				padding: 3em;
 			}
+			.administration-button{
+				width: 328px;
+				height: 11px;
+				font-family: Helvetica;
+				font-size: 9px;
+				font-weight: normal;
+				font-style: normal;
+				font-stretch: normal;
+				line-height: normal;
+				letter-spacing: normal;
+				text-align: center;
+				color: #ffffff;
+				color: var(--white);
+			}
 		}
 	}
 
