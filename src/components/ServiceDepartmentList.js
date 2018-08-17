@@ -28,7 +28,7 @@ class ServiceDepartmentList extends React.Component {
 		return (
 			<li key={id}>
 				<hr className="line" />
-				<div className="container" onClick={() => setTimeout(() => onOpenDepartment(c.id, name), 300)}>
+				<div className="container" onClick={() => setTimeout(() => onOpenDepartment(c.id, c.slug, name), 300)}>
 					<strong>{name}</strong>
 					<div className="right">
 						<i className="material-icons">keyboard_arrow_right</i>
