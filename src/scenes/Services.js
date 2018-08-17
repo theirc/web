@@ -26,6 +26,7 @@ class Services extends React.Component {
 		location: null,
 		departmentName: null,
 		department: null,
+		departmentId: null
 	};
 
 	static contextTypes = {
@@ -301,10 +302,7 @@ class Services extends React.Component {
 
 		let lang = queryString.parse(this.props.location.search).language;
 
-		console.log(lang);
-
 		const { config } = this.context;
-		console.log(config.languages);
 		const onSelectCategory = (c) => {
 			this.setState({ categoryName: c.name, category: c.id });
 			listServicesInCategory(c);
@@ -317,8 +315,8 @@ class Services extends React.Component {
 			this.setState({ locationName: name, location: location });
 		}
 
-		const onOpenDepartment = (name, department) => {
-			this.setState({ departmentName: name, department: department });
+		const onOpenDepartment = (id, department, name) => {
+			this.setState({ departmentId: id, departmentName: name, department: department });
 		}
 
 		const goToLocations = () => {
@@ -420,6 +418,7 @@ class Services extends React.Component {
 											onOpenLocation(location, name);
 											goToLocation(location);
 										}}
+										departmentId={this.state.departmentId}
 										department={this.state.department}
 										departmentName={this.state.departmentName}
 										allRegions={countryRegions}
@@ -443,8 +442,8 @@ class Services extends React.Component {
 										measureDistance={this.measureDistance(geolocation, language)}
 										toggleLocation={() => _.identity()}
 										nearby={true}
-										onOpenDepartment={(department, name) => {
-											onOpenDepartment(name, department);
+										onOpenDepartment={(id, department, name) => {
+											onOpenDepartment(id, department, name);
 											goToLocationList();
 										}}
 										allRegions={countryDepartments}
