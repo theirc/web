@@ -39,7 +39,7 @@ class ServiceCategoryList extends React.Component {
 	}
 	render() {
 		const {
-			allRegions, t, department, departmentName
+			allRegions, t, department, departmentName, openLocation
 		} = this.props;
 
 		if ((allRegions || []).length === 0) {
@@ -69,6 +69,13 @@ class ServiceCategoryList extends React.Component {
 			</HeaderBar>,
 			<div key={"List"} className="ServiceCategoryList">
 				<ul>
+					{department && 
+					<li key={0}>
+						<hr className="line" />
+						<div className="container" onClick={() => setTimeout(() => openLocation(department, departmentName), 300)}>
+							<strong>{t("All")}</strong>
+						</div>
+					</li>}
 					{sortedRegions.map(c => this.renderRegion(c))}
 				</ul>
 			</div>

@@ -6,6 +6,7 @@ import { Skeleton } from ".";
 import { push } from "react-router-redux";
 import measureDistance from "@turf/distance";
 import PropTypes from 'prop-types';
+import queryString from "query-string";
 
 import _ from "lodash";
 import Promise from "bluebird";
@@ -248,6 +249,11 @@ class Services extends React.Component {
 		return servicesApi.fetchCategories(language, country.fields.slug);
 	}
 
+	getLocation(){
+		const { country } = this.props;
+		return this.state.location ? this.state.location : country.fields.slug;
+	}
+
 	render() {
 		const {
 			country,
@@ -293,7 +299,12 @@ class Services extends React.Component {
 			};
 		}
 
+		let lang = queryString.parse(this.props.location.search).language;
+
+		console.log(lang);
+
 		const { config } = this.context;
+		console.log(config.languages);
 		const onSelectCategory = (c) => {
 			this.setState({ categoryName: c.name, category: c.id });
 			listServicesInCategory(c);
@@ -413,6 +424,7 @@ class Services extends React.Component {
 										departmentName={this.state.departmentName}
 										allRegions={countryRegions}
 										goToMap={() => goToMap()}
+										country={country}
 									/>
 								</div>
 							</Skeleton>
@@ -514,7 +526,7 @@ class Services extends React.Component {
 									locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
 									measureDistance={this.measureDistance(geolocation, language)}
 									toggleLocation={() => this.setState({ sortingByLocationEnabled: true })}
-									servicesByType={() => this.fetchAllInLocation(props.match.params.location, props.match.params.categoryId)}
+									servicesByType={() => this.fetchAllInLocation(this.getLocation(), props.match.params.categoryId)}
 									showMap={() => goToCategoryMap(props.match.params.categoryId)}
 									title={this.state.categoryName}
 								/>

@@ -394,6 +394,7 @@ export default {
     },
     es: {
         translation: {
+			"All": "Todos",
             "About us": "Sobre nosotros",
             "Sunday": "Domingo",
             "Detect Location": "Detectar ubicación",
