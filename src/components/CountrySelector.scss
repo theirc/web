@@ -2,4 +2,7 @@
 
 .CountrySelector {
 	@include selectors();
+	.item {
+		cursor:pointer;
+	}
 }

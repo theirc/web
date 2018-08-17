@@ -455,7 +455,7 @@ export default {
             "Closed": "Cerrado",
             "Change Location": "Cambiar Ubicación",
             "Welcome to {$ siteName $}.": "Bienvenido a {$ siteName $}.",
-            "Service Provider": "Proveedor de Servicios",
+            "Service Provider": "Organización",
             "Monday": "Lunes",
             "Address in Greek": "Dirección en griego",
             "Facebook Page": "Página Facebook",
