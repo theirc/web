@@ -8,6 +8,7 @@ import {
 import "./CountrySelector.css";
 
 import getSessionStorage from "../shared/sessionStorage";
+import PropTypes from "prop-types";
 
 import _ from "lodash";
 
@@ -20,7 +21,11 @@ class CountrySelector extends Component {
             delete sessionStorage.country;
             delete sessionStorage.dismissedNotifications;
         }
-    }
+	}
+
+	static contextTypes = {
+		config: PropTypes.object,
+	};
 
     render() {
         const {
@@ -28,10 +33,11 @@ class CountrySelector extends Component {
             t,
             language,
             backToLanguage
-        } = this.props;
+		} = this.props;
+		const { config } = this.context;
         let countryList = this.props.countryList.map(_.identity);
         let regionList = this.props.regionList.filter(r => r.languages_available.split(',').map(a => a.trim()).indexOf(language) > -1).map(r => r.slug);
-        let availableCountryList = countryList.filter(c => regionList.indexOf(c.fields.slug) > -1);
+        let availableCountryList = countryList.filter(c => regionList.indexOf(c.fields.slug) > -1 &&  config.hideCountries.indexOf(c.fields.slug) === -1);
         let unavailableCountryList = countryList.filter(c => regionList.indexOf(c.fields.slug) === -1);
 
         if (global.navigator && navigator.geolocation) {
