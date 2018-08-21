@@ -293,14 +293,7 @@ class ServiceMap extends React.Component {
 				<div className="ServiceMapContainer">
 					<div id="MapCanvas" style={{ width: "100%", position: "absolute", top: 64, bottom: 56, right: 0, visibility: loaded ? "visible" : "hidden" }} />
 					{!loaded && <div className="loader" />}
-					{loaded &&
-						<div id="filter" className="ServiceMapFilter">
-							<span style={{ float: "left" }}>{categoryName}</span>
-							<a className="category-name" onClick={() => changeCategory()}> Change</a>
-							<div className="app-bar-separator"></div>
-
-						</div>
-					}
+					
 				</div>
 			</div>
 		);

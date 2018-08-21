@@ -312,28 +312,32 @@ class Services extends React.Component {
 		};
 
 		const onOpenLocation = (location,name ) => {
-			this.setState({ locationName: name, location: location });
+			this.setState({ locationName: name, location: location, department: null, departmentName: null});
 		}
 
 		const onOpenDepartment = (id, department, name) => {
-			this.setState({ departmentId: id, departmentName: name, department: department });
+			this.setState({ departmentId: id, departmentName: name, department: department, location: department });
 		}
 
 		const goToLocations = () => {
-			if (config.showDepartments){
+			if (config.showDepartments && !this.state.department){
 				goToDepartmentList();
 			}else{
 				goToLocationList();
 			}
 		}
 
-		const onGoToMap = () => {
+		const onGoToMap = () => {			
 			if (this.state.location){
 				goToLocationMap(this.state.location);
 			}else{
 				goToMap();
 			}
 		}	
+
+		const onGoToLocationMap = (location) => {
+			goToLocationMap(location);
+		}
 
 
 		return (
@@ -444,7 +448,8 @@ class Services extends React.Component {
 										nearby={true}
 										onOpenDepartment={(id, department, name) => {
 											onOpenDepartment(id, department, name);
-											goToLocationList();
+											goToLocation(department);
+											//goToLocationList();
 										}}
 										allRegions={countryDepartments}
 										goToMap={() => goToMap()}
@@ -546,14 +551,13 @@ class Services extends React.Component {
 									onSelectCategory={onSelectCategory}
 									listAllServices={() => listAllServicesinLocation(props.match.params.location)}
 									goToNearby={() => goToNearby()}
-									goToMap={() => onGoToMap()}
+									goToMap={() => onGoToLocationMap(props.match.params.location)}
 									goToLocationList={goToLocations}
 									showLocations={true}
 									location={props.match.params.location}
 									locationName={this.state.locationName}
+									departmentSelected = {this.state.department}
 								/>
-
-
 							</div>
 						</Skeleton>
 					)}
@@ -566,7 +570,7 @@ class Services extends React.Component {
 							<div className="SkeletonContainer">
 								<ServiceList
 									{...props}
-									goToMap={() => goToMap()}
+									goToMap={() => goToLocationCategoryMap(props.match.params.location,props.match.params.categoryId )}
 									goToService={goToService}
 									locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
 									measureDistance={this.measureDistance(geolocation, language)}
