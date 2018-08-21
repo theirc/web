@@ -59,7 +59,7 @@ class ServiceCategoryList extends React.Component {
 	}
 	render() {
 		const { categories, loaded } = this.state;
-		const { t, locationEnabled, toggleLocation, listAllServices, goToLocationList, goToMap, locationName } = this.props;	
+		const { t, locationEnabled, toggleLocation, listAllServices, goToLocationList, goToMap, locationName, departmentSelected } = this.props;	
 		if (!loaded) {
 			return (
 				<div className="ServiceCategoryList">
@@ -112,12 +112,22 @@ class ServiceCategoryList extends React.Component {
 						</div>
 					</li>
 					<hr className="line" />			
+					{ !departmentSelected &&
 					<li key="000">
 						<div className="container" onClick={goToLocationList}>
 							<i className="fa fa-globe" />
 							<strong>{t("Locations")}</strong>
 						</div>
 					</li>
+					}
+					{ departmentSelected &&
+					<li key="000">
+						<div className="container" onClick={goToLocationList}>
+							<i className="fa fa-globe" />
+							<strong>{t("Municipalidades")}</strong>
+						</div>
+					</li>
+					}
 					<hr className="line" />			
 					<li>
 						<div className="container" onClick={goToMap}>

@@ -67,14 +67,7 @@ class ServiceCategoryList extends React.Component {
 			<HeaderBar key={"Header"} title={title.toUpperCase()}>
 			</HeaderBar>,
 			<div key={"List"} className="ServiceCategoryList">
-				<ul>
-					{department && 
-					<li key={0}>
-						<hr className="line" />
-						<div className="container" onClick={() => setTimeout(() => openLocation(department, departmentName), 300)}>
-							<strong>{t("All")}</strong>
-						</div>
-					</li>}
+				<ul>					
 					{sortedRegions.map(c => this.renderRegion(c))}
 				</ul>
 			</div>
