@@ -39,7 +39,7 @@ class ServiceCategoryList extends React.Component {
 	}
 	render() {
 		const {
-			allRegions, t, department, departmentName
+			allRegions, t, departmentId, department, departmentName, openLocation
 		} = this.props;
 
 		if ((allRegions || []).length === 0) {
@@ -54,7 +54,7 @@ class ServiceCategoryList extends React.Component {
 		}
 		let sortedRegions = [];
 		if (department) {
-			sortedRegions = _.filter(allRegions, ['parent', department]);
+			sortedRegions = _.filter(allRegions, ['parent', departmentId]);
 		} else {
 			sortedRegions = _.sortBy(allRegions || [], c => {
                 if(c.level === 1){
@@ -63,12 +63,11 @@ class ServiceCategoryList extends React.Component {
 			});
 		}
 		let title = department ? t("Locations in") + " " + departmentName : t("Locations");
-
 		return [
 			<HeaderBar key={"Header"} title={title.toUpperCase()}>
 			</HeaderBar>,
 			<div key={"List"} className="ServiceCategoryList">
-				<ul>
+				<ul>					
 					{sortedRegions.map(c => this.renderRegion(c))}
 				</ul>
 			</div>

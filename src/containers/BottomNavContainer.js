@@ -83,10 +83,10 @@ const mapDispatch = (d, p) => {
 			d(push(`/${country}/search`));
 		},
 		onGoToServices: country => {
-			d(push(`/${country}/services/locations`));
+			d(push(`/${country}/services/`));
 		},
 		onGoToDepartments: country => {
-			d(push(`/${country}/services/departments`));
+			d(push(`/${country}/services/`));
 		},
 	};
 };

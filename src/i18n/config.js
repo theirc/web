@@ -394,6 +394,7 @@ export default {
     },
     es: {
         translation: {
+			"All": "Todos",
             "About us": "Sobre nosotros",
             "Sunday": "Domingo",
             "Detect Location": "Detectar ubicación",
@@ -521,7 +522,8 @@ export default {
             "Articles": "Artículos",
             "No articles found with the keywords used.": "No se encontraron artículos con las palabras clave utilizadas.",
             "No services found with the keywords used.": "No se encontraron servicios con las palabras clave utilizadas.",
-            "COOKIES_BANNER": "Utilizamos cookies para ofrecer nuestros servicios. Al continuar utilizando este sitio, acepta dicho uso y reconoce que ha leído y entendido nuestra política de cookies ({{cookiePolicy}}) y política de privacidad ({{privacyPolicy}}).",
+			"COOKIES_BANNER": "Utilizamos cookies para ofrecer nuestros servicios. Al continuar utilizando este sitio, acepta dicho uso y reconoce que ha leído y entendido nuestra política de cookies ({{cookiePolicy}}) y política de privacidad ({{privacyPolicy}}).",
+			"Services in": "Servicios en",
         }
     },
     fr: {
