@@ -122,6 +122,8 @@ class Skeleton extends React.Component {
 							onChangeLanguage={onChangeLanguage.bind(this, router.location.pathname)}
 							deviceType={deviceType}
 							showLinkToAdministration={!!config.showLinkToAdministration}
+							country={country}
+							customQuestionLink={config.customQuestionLink}
 						/>
 					)}
 					{country && language && <BottomNavContainer match={match} showMapButton={showMapButton} goToMap={goToMap} showDepartments={config.showDepartments}/>}

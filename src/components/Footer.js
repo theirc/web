@@ -4,17 +4,25 @@ import "./Footer.css";
 import { MyLocation, Translate } from "material-ui-icons";
 import { translate } from "react-i18next";
 
+
+
 class Footer extends Component {
 	render() {
-		const { onChangeLocation, onChangeLanguage, disableCountrySelector, disableLanguageSelector, questionLink, t, showLinkToAdministration } = this.props;
+		const { onChangeLocation, onChangeLanguage, disableCountrySelector, disableLanguageSelector, questionLink, t, showLinkToAdministration, country, customQuestionLink } = this.props;
 		// const {deviceType,} = this.props;
 		const year = moment().year();
+		let link = questionLink;
+		
+		let result = customQuestionLink.filter(c  => c[0] === country.fields.slug);
+		if(result[0]){
+			link = result[0][1];
+		}
 
 		return (
 			<footer className="Footer">
 				<div className="light">
 					<p>{t("Can't find specific information?")}</p>
-					<a href={questionLink}>
+					<a href={link}>
 						<h3>{t("Ask us a question")}</h3>
 					</a>
 				</div>
