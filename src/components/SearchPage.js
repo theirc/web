@@ -55,7 +55,7 @@ class SearchPage extends React.Component {
 					{!searchingArticles &&
 						articles.length === 0 && (
 							<div>
-								<em>{t("No articles found with the keywords used.")}</em>
+								<em>{t("No articles found with the keywords used")}</em>
 							</div>
 						)}
 				</div>
