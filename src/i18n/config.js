@@ -780,7 +780,7 @@ export default {
             "Copy Link": "ጠገግ ቅዳሕ",
             "Share on Facebook": "ኣብ ፈይስቡክ ተኻፈል/ሊ",
             "Copied": "ዚተቐድሐ",
-            "Locations": "Locations",
+            "Locations": "ቦታታት",
             "Location": "Location",
             "Articles": "Articles",
             "No articles found with the keywords used": "No articles found with the keywords used.",
