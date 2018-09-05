@@ -99,6 +99,7 @@ module.exports = {
 		thumbnail: "/images/logos/cn-thumbnail.png",
 		cookieBanner: false,
 		backendUrl: 'https://admin-staging.cuentanos.org/e/production/v2',
+		customQuestionLink:[["italy","https://www.facebook.com/Refugee.Info.Italy/"]],
 		showDepartments: true,
 		showLinkToAdministration: true,
 	},
