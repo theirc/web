@@ -88,7 +88,7 @@ class Selectors extends Component {
                     if (/^\//.test(redirect)) {
                         redirect = redirect.substr(1);
                     }
-                    onGoTo(redirect);
+                    onGoTo(redirect+"?language="+language);
                 } else {
                     this.selectCountry(country.fields.slug);
                 }

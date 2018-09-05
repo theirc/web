@@ -7,7 +7,7 @@ class CategoryList extends Component {
 	static propTypes = {};
 
 	render() {
-		const { country, categories, onNavigate, t } = this.props;
+		const { country, categories, onNavigate, t, language } = this.props;
 		const showToggle = c => {
 			return (c.fields.subCategories && c.fields.subCategories.length) || (c.fields.articles && c.fields.articles.length && c.fields.type !== "News" && !c.fields.overview);
 		};
@@ -52,7 +52,7 @@ class CategoryList extends Component {
 										c.fields.articles.map(
 											a =>
 												a.fields && (
-													<li key={a.sys.id} onClick={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${a.fields.slug}`)}>
+													<li key={a.sys.id} onClick={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${a.fields.slug}?language=`+language)}>
 														<div className="inner-container article-title">
 															<div> {a.fields.title}</div>
 														</div>
@@ -67,7 +67,7 @@ class CategoryList extends Component {
 										key={c.sys.id}
 										htmlFor={`tab-${i}`}
 										className="container"
-										onClick={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${c.fields.overview.fields.slug}`)}
+										onClick={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${c.fields.overview.fields.slug}?language=`+language)}
 									>
 										<i className={c.fields.iconClass || "material-icons"}>{c.fields.iconText || ((!c.fields.iconClass || c.fields.iconClass === "material-icons") && "book")}</i>
 										<strong className="category-name">{c.fields && c.fields.name}</strong>
