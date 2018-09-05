@@ -64,25 +64,6 @@ module.exports = {
 		showLinkToAdministration: false,
 	},
 	"staging.cuentanos.org": {
-		/*
-		theme: "generic",
-		accessToken: "2a64ff636dd4e5b44bd21afcb7f8d77c5c238e3ebe387ec6047a0b9d5c6a704d",
-		host: "preview.contentful.com",
-		space: "e17qk44d7f2w",
-		languages: [["es", "Español"]],
-		logo: "/images/cn.tb.png",
-		title: "Bienvenidos a CuentaNos",
-		disableCountrySelector: true,
-		disableLanguageSelector: true,
-		questionLink: "mailto: cuentanos.sv@rescue.org",
-		favicon: "/cn-favicon-blk.png",
-		gaTracker: "UA-68574649-8",
-		appId: "209295296327422",
-		thumbnail: "/images/logos/cn-thumbnail.png",
-		cookieBanner: false,
-		backendUrl: 'https://admin-staging.cuentanos.org/e/production/v2',
-		showDepartments: true,
-		*/
 		theme: "generic",
 		accessToken: "98cd6321d5578bab8cb4c9bafe022f2bd73db5ffce296420d934008f9800fb80",
 		space: "e17qk44d7f2w",
@@ -100,6 +81,7 @@ module.exports = {
 		backendUrl: 'https://admin-staging.cuentanos.org/e/production/v2',
 		showDepartments: true,
 		showLinkToAdministration: true,
+		customQuestionLink:[["italy","https://www.facebook.com/Refugee.Info.Italy/"]],
 	},
 	"cuentanos.org": {
 		theme: "generic",
