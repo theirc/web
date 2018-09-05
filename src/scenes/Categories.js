@@ -20,13 +20,13 @@ class Categories extends React.Component {
 	}
 
 	render() {
-		const { country, onNavigate } = this.props;
+		const { country, onNavigate, language } = this.props;
 
 		if (!country) {
 			return null;
 		}
 
-		return <CategoryList categories={country.fields.categories} country={country} onNavigate={onNavigate} />;
+		return <CategoryList categories={country.fields.categories} country={country} onNavigate={onNavigate} language={language} />;
 	}
 }
 
