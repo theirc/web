@@ -46,16 +46,13 @@ class SearchPage extends React.Component {
 									<h2> {article.fields.title}</h2>
 									<p dangerouslySetInnerHTML={{ __html: md.render(article.fields.lead) }} />
 								</div>
-								<s className="Read-More">
-									<a href="#">{t("Read More")}</a>
-								</s>
 							</div>,
 						];
 					})}
 					{!searchingArticles &&
 						articles.length === 0 && (
 							<div>
-								<em>{t("No articles found with the keywords used.")}</em>
+								<em>{t("No articles found with the keywords used")}</em>
 							</div>
 						)}
 				</div>
@@ -80,9 +77,6 @@ class SearchPage extends React.Component {
 										{s.provider.name} <small>{s.region.title}</small>
 									</h3>
 								</div>
-								<s className="Read-More">
-									<a href="#">{t("Read More")}</a>
-								</s>
 							</div>,
 						])}
 						{!searchingServices &&

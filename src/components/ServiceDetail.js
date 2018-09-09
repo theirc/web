@@ -2,9 +2,11 @@ import React from "react";
 import "./ServiceHome.css";
 import { translate } from "react-i18next";
 import _ from "lodash";
-import { Share } from "material-ui-icons";
+import { Share, Link  } from "material-ui-icons";
 import { Helmet } from "react-helmet";
 import HeaderBar from "./HeaderBar";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import PropTypes from "prop-types";
 
 // eslint-disable-next-line
 var tinycolor = require("tinycolor2");
@@ -20,6 +22,34 @@ class ServiceDetail extends React.Component {
 		service: null,
 		relatedServices: [],
 	};
+
+	static propTypes = {
+			slug: PropTypes.string,
+			title: PropTypes.string,
+		};
+	constructor(props){
+		super(props);
+		const { language } = this.props;
+		let { href } = window.location;
+		let copySlug = (href += (window.location.toString().indexOf("?") > -1 ? "&" : "?") + "language=" + language);
+		this.state = { value: copySlug, copied: true, shareIN: true };
+		this.sharePage = this.sharePage.bind(this);
+		this.Copiedlnk = this.Copiedlnk.bind(this);
+	}
+
+	sharePage() {
+		this.setState(prevState => ({ shareIN: false }));
+	}
+
+	Copiedlnk() {
+		this.setState(prevState => ({ copied: !prevState.copied }));
+		setTimeout(() => {
+			this.setState({ shareIN: true });
+			setTimeout(() => {
+				this.setState(prevState => ({ copied: !prevState.copied }));
+			}, 2);
+		}, 3000);
+	}
 
 	share() {
 		const { language } = this.props;
@@ -266,10 +296,30 @@ class ServiceDetail extends React.Component {
 					)}
 				</article>
 				<div className="footer">
-					<div className="Selector" onClick={() => this.share()}>
-						<h1>{t("Share this page")}</h1>
-						<Share className="MenuIcon" />
-					</div>
+
+					{<hr className="divider" />}
+					{this.state.shareIN ? (
+						<div className="selector" onClick={() => this.sharePage()}>
+							<h1>{t("Share this page")}</h1>
+							<Share className="icon" />
+						</div>
+					) : (
+						<div className="selector sharePage">
+							<h1
+								onClick={() => {
+									this.share();
+								}}
+							>
+								{t("Share on Facebook")}
+							</h1>
+							<Share className="icon" />
+							<div className="verticalHR" />
+							<CopyToClipboard sharePage={this.sharePage} text={this.state.value}>
+								{this.state.copied ? <h1 onClick={() => this.Copiedlnk()}>{t("Copy Link")}</h1> : <h1>{t("Copied")}</h1>}
+							</CopyToClipboard>
+							<Link className="icon" />
+						</div>
+					)}
 
 					{service.location && <hr />}
 					{service.location && (
