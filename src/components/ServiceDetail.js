@@ -282,7 +282,7 @@ class ServiceDetail extends React.Component {
 						</p>
 					)}
 
-					{relatedServices.length > 0 && <h3>{t("OTHER_SERVICES")}:</h3>}
+					{(relatedServices || []).length > 0 && <h3>{t("OTHER_SERVICES")}:</h3>}
 					{relatedServices && (
 						<ul className="RelatedServices">
 							{relatedServices.map(r => (
