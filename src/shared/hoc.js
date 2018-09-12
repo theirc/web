@@ -189,3 +189,7 @@ export function withCategory(WrappedComponent) {
 
     return CategorySwitcher;
 }
+
+export function withArticle(WrappedComponent){
+
+}
