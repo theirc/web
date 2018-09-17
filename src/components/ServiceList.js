@@ -84,6 +84,12 @@ class ServiceList extends React.Component {
 		// vacancy === false --> available
 		// vacancy === true  --> unavailable
 		const availableServices = services.filter(s => !s.provider.vacancy);
+		let sortedAvailableServices =[]
+		if (availableServices){
+			sortedAvailableServices = _.sortBy(availableServices || [], s => {
+				return s.number;
+			});
+		}
 		const unavailableServices = services.filter(s => s.provider.vacancy);
 		if (!loaded) {
 			return (
@@ -127,7 +133,7 @@ class ServiceList extends React.Component {
 						</div>
 					)}
 
-				{availableServices.length > 0 && (
+				{sortedAvailableServices.length > 0 && (
 					<div className="ServiceListContainer">
 
 						<ul className="Items">
