@@ -252,6 +252,14 @@ class Services extends React.Component {
 		return servicesApi.fetchCategories(language, country.fields.slug);
 	}
 
+	serviceTypesByLocation(location) {
+		const { language, country } = this.props;
+		if (location){
+			return servicesApi.fetchCategories(language, location);
+		}
+		return servicesApi.fetchCategories(language, country.fields.slug);
+	}
+
 	getLocation(){
 		const { country } = this.props;
 		return this.state.location ? this.state.location : country.fields.slug;
@@ -547,7 +555,7 @@ class Services extends React.Component {
 						<Skeleton>
 							<div className="SkeletonContainer">
 								<ServiceCategoryList
-									fetchCategories={() => this.serviceTypes()}
+									fetchCategories={() => this.serviceTypesByLocation(props.match.params.location)}
 									locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
 									toggleLocation={() => this.setState({ sortingByLocationEnabled: true })}
 									onSelectCategory={onSelectCategory}
