@@ -35,3 +35,11 @@ To compile css:
 To run the react project:
 
 `node scripts/start`
+
+To compile server code:
+
+`npm run build-server`
+
+To run the addp using Feathers server locally:
+
+`node server`
