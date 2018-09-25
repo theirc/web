@@ -101,7 +101,7 @@ module.exports = {
 		cookieBanner: false,		
 		backendUrl: 'https://admin.cuentanos.org/e/production/v2',
 		showDepartments: true,
-		showLinkToAdministration: true,
+		showLinkToAdministration: false,
 		customQuestionLink:[["italy","https://www.facebook.com/Refugee.Info.Italy/"]],
 	},
 	"cuentanos.org": {
