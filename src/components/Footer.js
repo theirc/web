@@ -11,7 +11,7 @@ class Footer extends Component {
 		const year = moment().year();
 		let link = questionLink;
 
-		let result = customQuestionLink.filter(c  => c[0] === country.fields.slug);
+		let result = (customQuestionLink || []).filter(c  => c[0] === country.fields.slug);
 		if(result[0]){
 			link = result[0][1];
 		}
