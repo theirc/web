@@ -11,7 +11,7 @@ if (siteConfig && siteConfig.backendUrl) {
 }
 
 //var RI_URL = "http://localhost:8000/e/production/v2";
-
+console.log(RI_URL.split('/')[2]);
 module.exports = {
 	fetchCategories(language, region) {
 		return new Promise((resolve, reject) => {
