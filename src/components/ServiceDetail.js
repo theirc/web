@@ -32,9 +32,19 @@ class ServiceDetail extends React.Component {
 		const { language } = this.props;
 		let { href } = window.location;
 		let copySlug = (href += (window.location.toString().indexOf("?") > -1 ? "&" : "?") + "language=" + language);
-		this.state = { value: copySlug, copied: true, shareIN: true };
+		this.state = { value: copySlug, copied: true, shareIN: true, showOtherServices: true };
 		this.sharePage = this.sharePage.bind(this);
+		this.showServices = this.showServices.bind(this);
+		this.dontShowServices = this.showServices.bind(this);
 		this.Copiedlnk = this.Copiedlnk.bind(this);
+	}
+
+	showServices(){
+		this.setState(prevState => ({ showOtherServices: false }));
+	}
+
+	dontShowServices(){
+		this.setState(prevState => ({ showOtherServices: true }));
 	}
 
 	sharePage() {
@@ -295,6 +305,7 @@ class ServiceDetail extends React.Component {
 						</ul>
 					)}
 				</article>
+				{this.state.showOtherServices ? (
 				<div className="footer">
 
 					{<hr className="divider" />}
@@ -376,8 +387,32 @@ class ServiceDetail extends React.Component {
 						</div>
 					)}
 
+					{<hr className="divider" />}
+					{relatedServices && (
+					<div className="selector" onClick={() => this.showServices()}>
+						<h1>{t("Other services at this location")}</h1>
+						<i className="MenuIcon fa fa-angle-right" aria-hidden="true" />
+					</div>)}
 					{service.contact_information && sortedContactInformation.map(ci => this.renderContactInformation(ci))}
-				</div>
+				</div>)
+				:(
+					<div>
+					<ul className="RelatedServices">
+						<h3>{t("OTHER_SERVICES")}:</h3>
+							{relatedServices.map(r => (
+								<li key={r.id} onClick={() => goToService(r.id)}>
+									<button className="muted">
+										<a href="javascript:void(0)">{r.name}</a>
+									</button>
+								</li>
+							))}
+					</ul>	
+					<div className="selector" onClick={() => this.dontShowServices()}>
+						<h1>{t("Back")}</h1>
+						<i className="MenuIcon fa fa-angle-left" aria-hidden="true" />
+					</div>
+					</div>
+				)}
 			</div>
 		);
 	}
