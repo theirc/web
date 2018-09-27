@@ -35,16 +35,11 @@ class ServiceDetail extends React.Component {
 		this.state = { value: copySlug, copied: true, shareIN: true, showOtherServices: true };
 		this.sharePage = this.sharePage.bind(this);
 		this.showServices = this.showServices.bind(this);
-		this.dontShowServices = this.showServices.bind(this);
 		this.Copiedlnk = this.Copiedlnk.bind(this);
 	}
 
 	showServices(){
-		this.setState(prevState => ({ showOtherServices: false }));
-	}
-
-	dontShowServices(){
-		this.setState(prevState => ({ showOtherServices: true }));
+		this.setState({ showOtherServices: !this.state.showOtherServices });
 	}
 
 	sharePage() {
@@ -292,18 +287,6 @@ class ServiceDetail extends React.Component {
 						</p>
 					)}
 
-					{(relatedServices || []).length > 0 && <h3>{t("OTHER_SERVICES")}:</h3>}
-					{relatedServices && (
-						<ul className="RelatedServices">
-							{relatedServices.map(r => (
-								<li key={r.id} onClick={() => goToService(r.id)}>
-									<button className="muted">
-										<a href="javascript:void(0)">{r.name}</a>
-									</button>
-								</li>
-							))}
-						</ul>
-					)}
 				</article>
 				{this.state.showOtherServices ? (
 				<div className="footer">
@@ -397,17 +380,23 @@ class ServiceDetail extends React.Component {
 				</div>)
 				:(
 					<div>
-					<ul className="RelatedServices">
+					<div className="RelatedServices">
 						<h3>{t("OTHER_SERVICES")}:</h3>
+						<hr/>
 							{relatedServices.map(r => (
-								<li key={r.id} onClick={() => goToService(r.id)}>
-									<button className="muted">
-										<a href="javascript:void(0)">{r.name}</a>
-									</button>
-								</li>
+								<div key={r.id} onClick={() => goToService(r.id)}>
+									<div className="selector">
+										<h1 href="javascript:void(0)" ><div style={{
+											display: 'inline-block', direction: 'ltr', maxWidth: '60%',
+											overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
+										}}>{r.name}</div></h1>
+										<i className="MenuIcon fa fa-angle-right" aria-hidden="true" />
+									</div>
+									<hr/>
+								</div>
 							))}
-					</ul>	
-					<div className="selector" onClick={() => this.dontShowServices()}>
+					</div>
+					<div className="selector" onClick={() => this.showServices()}>
 						<h1>{t("Back")}</h1>
 						<i className="MenuIcon fa fa-angle-left" aria-hidden="true" />
 					</div>
