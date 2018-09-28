@@ -118,7 +118,7 @@ module.exports = {
 	},
 	fetchAllServicesInBBox(country, language, bounds = [], pageSize = 200, category = null) {
 		return new Promise((resolve, reject) => {
-			var requestUrl = `/services/search/?filter=relatives&geographic_region=${country}&page=1&page_size=${pageSize}&bounds=${bounds.join(", ")}`;
+			var requestUrl = `/services/searchlist/?filter=relatives&geographic_region=${country}&page=1&page_size=${pageSize}&bounds=${bounds.join(", ")}`;
 			if (category) {
 				requestUrl += "&type_numbers=" + (category || "");
 			}
