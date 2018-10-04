@@ -13,14 +13,17 @@ class ServiceCategoryList extends React.Component {
 		loaded: false,
 	};
 	componentDidMount() {
+		console.log("1");
 		const { fetchCategories } = this.props;
-		if (fetchCategories) {
+		const { categories} = this.state;
+		if (fetchCategories && categories.length == 0) {
 			fetchCategories().then(categories => {
 				this.setState({ categories, loaded: true  });
+				console.log("2");
 			});
 		}
 	}
-
+	
 	fixColor(color) {
 		if (!color) {
 			color = "#FFF";
@@ -30,7 +33,7 @@ class ServiceCategoryList extends React.Component {
 		return color;
 	}
 
-	renderCategory(c) {
+	renderCategory(c) {		
 		let { onSelectCategory, location } = this.props;
 		onSelectCategory = onSelectCategory || (() => console.log("noop"));
 
@@ -58,8 +61,10 @@ class ServiceCategoryList extends React.Component {
 		
 	}
 	render() {
+		console.log("3");
 		const { categories, loaded } = this.state;
 		const { t, locationEnabled, toggleLocation, listAllServices, goToLocationList, goToMap, locationName, departmentSelected } = this.props;	
+		console.log("4");
 		if (!loaded) {
 			return (
 				<div className="ServiceCategoryList">
@@ -70,6 +75,7 @@ class ServiceCategoryList extends React.Component {
 				</div>
 			);
 		}
+		console.log("5");
 		if ((categories || []).length === 0 && loaded) {
 			return (
 				<div className="ServiceCategoryList">
@@ -85,6 +91,7 @@ class ServiceCategoryList extends React.Component {
 		let sortedCategories = _.sortBy(categories || [], c => {
 			return c.number;
 		});
+		console.log("6");
 		return <div>
 			<HeaderBar key={"Header"} title={t("Service Categories").toUpperCase()}>
 				<li onClick={toggleLocation || _.identity}>
