@@ -77,7 +77,7 @@ module.exports = {
 	fetchAllServices(country, language, categoryId, searchTerm, pageSize = 1000) {
 		return new Promise((resolve, reject) => {
 			var requestUrl =
-				"/services/searchlist/?filter=with-parents&geographic_region=" +
+				"/services/searchlist/?filter=relatives&geographic_region=" +
 				country +
 				"&page=1&page_size=" +
 				pageSize +
