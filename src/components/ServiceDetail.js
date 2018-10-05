@@ -395,10 +395,10 @@ class ServiceDetail extends React.Component {
 									<hr/>
 								</div>
 							))}
-					</div>
 					<div className="selector" onClick={() => this.showServices()}>
 						<h1>{t("Back")}</h1>
 						<i className="MenuIcon fa fa-angle-left" aria-hidden="true" />
+					</div>
 					</div>
 					</div>
 				)}

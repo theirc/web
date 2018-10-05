@@ -511,6 +511,12 @@
 			padding-right: 5px;
 		}
 	}
+	.RelatedServices {
+		background-color: $titleBackground;
+		& .MenuIcon {
+			margin: 0px 20px 10px 10px;
+		}
+	}
 
 	.icon {
 		margin: 0px 20px 10px 10px;
@@ -661,32 +667,6 @@
 
 		ul li {
 			list-style-type: square;
-		}
-
-		.RelatedServices {
-			padding: 0;
-			margin: 0;
-			padding-bottom: 10px;
-
-			small {
-				display: block;
-			}
-
-			h3 {
-				font-size: 100%;
-				padding: 0;
-				margin: 0;
-			}
-
-			p {
-				padding: 0;
-				margin: 0;
-			}
-
-			& > li {
-				list-style: none;
-				padding-bottom: 5px;
-			}
 		}
 	}
 }
