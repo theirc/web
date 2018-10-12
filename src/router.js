@@ -20,6 +20,7 @@ class ScrollToTop extends Component {
 }
 
 ScrollToTop = withRouter(ScrollToTop);
+const ServicesWithCountry = withCountry(Services);
 
 class Router extends Component {
 	componentDidMount() {
@@ -41,7 +42,7 @@ class Router extends Component {
 	}
 
 	render() {
-		const ServicesWithCountry = withCountry(Services);
+		//const ServicesWithCountry = withCountry(Services);
 		return (
 			<ConnectedRouter history={history}>
 				<Placeholder>
