@@ -11,7 +11,6 @@ if (siteConfig && siteConfig.backendUrl) {
 }
 
 //var RI_URL = "http://localhost:8000/e/production/v2";
-console.log(RI_URL.split('/')[2]);
 module.exports = {
 	fetchCategories(language, region) {
 		return new Promise((resolve, reject) => {
@@ -48,6 +47,26 @@ module.exports = {
 							return;
 						}
 						sessionStorage[`${language}-regions`] = JSON.stringify(res.body);
+						resolve(res.body);
+					});
+			}
+		});
+	},
+	fetchCountries(language) {
+		return new Promise((resolve, reject) => {
+			const sessionStorage = getSessionStorage();
+			if (sessionStorage[`${language}-countries`]) {
+				resolve(JSON.parse(sessionStorage[`${language}-countries`]));
+			} else {
+				request
+					.get(RI_URL + "/regions/?countries=true")
+					.set("Accept-Language", language)
+					.end((err, res) => {
+						if (err) {
+							reject(err);
+							return;
+						}
+						sessionStorage[`${language}-countries`] = JSON.stringify(res.body);
 						resolve(res.body);
 					});
 			}

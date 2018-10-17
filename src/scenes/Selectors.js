@@ -77,7 +77,7 @@ class Selectors extends Component {
                 language,
                 countryList: null,
                 currentPage: 2,
-            });
+			});
             if (country) {
                 const sessionStorage = getSessionStorage();
                 if (sessionStorage && sessionStorage.redirect) {
@@ -92,9 +92,8 @@ class Selectors extends Component {
                 } else {
                     this.selectCountry(country.fields.slug);
                 }
-            } else {
-                servicesApi.fetchRegions(language).then((regionList) => {
-                    
+            } else {					
+				servicesApi.fetchCountries(language).then((regionList) => {                    
                     api
                         .listCountries(language)
                         .then(e => e.items.map(a => ({
@@ -106,8 +105,7 @@ class Selectors extends Component {
                             countryList,
                             regionList
                         }));
-                })
-
+				})
             }
         };
         if (timeout) setTimeout(func, timeout);
