@@ -228,13 +228,13 @@ class ServiceDetail extends React.Component {
 		let sortedContactInformation = _.sortBy(service.contact_information || [], ci => {
 			return ci.index;
 		});
-
+		let subtitle = service.type ? service.type.name : _.first(service.types).name;
 		return (
 			<div className="ServiceDetail">
 				<Helmet>
 					<title>{serviceT.name}</title>
 				</Helmet>
-				<HeaderBar subtitle={`${_.first(service.types).name}:`} title={serviceT.name} />
+				<HeaderBar subtitle={`${subtitle}:`} title={serviceT.name} />
 				<div className="hero">
 					<h2>
 						<small>{t("Service Provider")}:</small>

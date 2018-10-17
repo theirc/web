@@ -36,7 +36,7 @@ class ServiceIcon extends React.Component {
 	render() {
 		let s = this.props.service;
 		let idx = this.props.idx;
-		let firstType = s.types[idx];
+		let firstType = s.type ? s.type : s.types[idx];
 		return firstType ? (
 			<div className="Icon" key={`${s.id}-${idx}`}>
 				<i className={iconWithPrefix(firstType.vector_icon)} style={categoryStyle(firstType.color)} />
@@ -278,7 +278,7 @@ class ServiceMap extends React.Component {
 			loaded,
 			errorMessage
 		} = this.state;
-		const { categoryName, changeCategory } = this.props;
+		
         /*
       Very small tweak on the render. toggling the visibility so we can run the L.map on didMount
     */

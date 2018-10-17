@@ -6,7 +6,6 @@ import { Skeleton } from ".";
 import { push } from "react-router-redux";
 import measureDistance from "@turf/distance";
 import PropTypes from 'prop-types';
-import queryString from "query-string";
 
 import _ from "lodash";
 import Promise from "bluebird";
@@ -308,9 +307,7 @@ class Services extends React.Component {
 				latitude: coordinates.lat,
 				longitude: coordinates.lon,
 			};
-		}
-
-		let lang = queryString.parse(this.props.location.search).language;
+		}		
 
 		const { config } = this.context;
 		const onSelectCategory = (c) => {

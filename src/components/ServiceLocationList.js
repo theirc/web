@@ -39,7 +39,7 @@ class ServiceCategoryList extends React.Component {
 	}
 	render() {
 		const {
-			allRegions, t, departmentId, department, departmentName, openLocation
+			allRegions, t, departmentId, department, departmentName
 		} = this.props;
 
 		if ((allRegions || []).length === 0) {

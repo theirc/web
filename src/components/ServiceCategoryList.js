@@ -16,7 +16,7 @@ class ServiceCategoryList extends React.Component {
 		console.log("1");
 		const { fetchCategories } = this.props;
 		const { categories} = this.state;
-		if (fetchCategories && categories.length == 0) {
+		if (fetchCategories && categories.length === 0) {
 			fetchCategories().then(categories => {
 				this.setState({ categories, loaded: true  });
 				console.log("2");
@@ -34,7 +34,7 @@ class ServiceCategoryList extends React.Component {
 	}
 
 	renderCategory(c) {		
-		let { onSelectCategory, location } = this.props;
+		let { onSelectCategory } = this.props;
 		onSelectCategory = onSelectCategory || (() => console.log("noop"));
 
 		let { id, name, vector_icon } = c;

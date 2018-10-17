@@ -50,10 +50,11 @@ class ServiceList extends React.Component {
 			};
 		};
 		let fullAddress = [s.address, s.address_city].filter(val => val).join(", ");
+		let vector_icon = s.type ? s.type.vector_icon : s.types[0].vector_icon;
 		return [
 			<li key={s.id} className="Item" onClick={() => goToService(s.id)}>
 				<div className="Icon" key={`${s.id}-0`}>
-					<i className={iconWithPrefix(s.types[0].vector_icon)} style={categoryStyle(s.types[0].color)} />
+					<i className={iconWithPrefix(vector_icon)} style={categoryStyle(s.types[0].color)} />
 				</div>
 				<div className="Info">
 					<h1>{s.name}</h1>
