@@ -370,13 +370,13 @@ class ServiceDetail extends React.Component {
 						</div>
 					)}
 
+					{service.contact_information && sortedContactInformation.map(ci => this.renderContactInformation(ci))}
 					{<hr className="divider" />}
 					{(relatedServices || []).length > 0 && (
 					<div className="selector" onClick={() => this.showServices()}>
 						<h1>{t("Other services at this location")}</h1>
 						<i className="MenuIcon fa fa-angle-right" aria-hidden="true" />
 					</div>)}
-					{service.contact_information && sortedContactInformation.map(ci => this.renderContactInformation(ci))}
 				</div>)
 				:(
 					<div>
