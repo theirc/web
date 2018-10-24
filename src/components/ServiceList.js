@@ -50,11 +50,14 @@ class ServiceList extends React.Component {
 			};
 		};
 		let fullAddress = [s.address, s.address_city].filter(val => val).join(", ");
-		let vector_icon = s.type ? s.type.vector_icon : s.types[0].vector_icon;
+		let mainType = s.type ? s.type : s.types[0];
+		let subTypes = s.types.filter((ty, id) => id > 0);
+		//let vector_icon = s.type ? s.type.vector_icon : s.types[0].vector_icon;
+		//let color = s.type ? s.type.color : s.
 		return [
 			<li key={s.id} className="Item" onClick={() => goToService(s.id)}>
 				<div className="Icon" key={`${s.id}-0`}>
-					<i className={iconWithPrefix(vector_icon)} style={categoryStyle(s.types[0].color)} />
+					<i className={iconWithPrefix(mainType.vector_icon)} style={categoryStyle(mainType.color)} />
 				</div>
 				<div className="Info">
 					<h1>{s.name}</h1>
@@ -65,7 +68,7 @@ class ServiceList extends React.Component {
 							{distance && ` - ${distance}`}
 						</small>
 						<div className="Icons">
-							{s.types.filter((ty, id) => id > 0).map((t, idx) => (
+							{subTypes.map((t, idx) => (
 								<div className="Icon" key={`${s.id}-${idx}`}>
 									<i className={iconWithPrefix(t.vector_icon)} style={categoryStyle(t.color)} />
 								</div>
