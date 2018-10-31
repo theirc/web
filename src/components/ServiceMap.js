@@ -36,10 +36,11 @@ class ServiceIcon extends React.Component {
 	render() {
 		let s = this.props.service;
 		let idx = this.props.idx;
-		let firstType = s.type ? s.type : s.types[idx];
-		return firstType ? (
+		let isMainType = this.props.isMainType;
+		let type = isMainType ? s.type : s.types[idx];
+		return type ? (
 			<div className="Icon" key={`${s.id}-${idx}`}>
-				<i className={iconWithPrefix(firstType.vector_icon)} style={categoryStyle(firstType.color)} />
+				<i className={iconWithPrefix(type.vector_icon)} style={categoryStyle(type.color)} />
 			</div>
 		) : (
 				<div />
@@ -58,7 +59,12 @@ class ServiceItem extends React.Component {
 
 		return (
 			<div key={s.id} className="Item" onClick={() => goToService(s.id)}>
-				<div className="Icons">{s.types.map((t, idx) => t && <ServiceIcon key={`si-${idx}`} idx={idx} service={s} />)}</div>
+			<div className="Icons">
+				{s.type &&
+						<ServiceIcon key={`si-${s.type.idx}`} idx={s.type.idx} isMainType={1} service={s} />
+				}
+				{s.types.map((t, idx) => t && <ServiceIcon key={`si-${idx}`} idx={idx} isMainType={0} service={s} />)}
+			</div>
 				<div className="Info">
 					<h1>{s.name}</h1>
 					<h2>{s.provider.name}{" "}</h2>
