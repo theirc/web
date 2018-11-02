@@ -374,7 +374,7 @@ class ServiceDetail extends React.Component {
 					{<hr className="divider" />}
 					{(relatedServices || []).length > 0 && (
 					<div className="selector" onClick={() => this.showServices()}>
-						<h1>{t("Other services at this location")}</h1>
+						<h1>{t("OTHER_SERVICES")}</h1>
 						<i className="MenuIcon fa fa-angle-right" aria-hidden="true" />
 					</div>)}
 				</div>)
