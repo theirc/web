@@ -94,9 +94,17 @@ module.exports = {
 		});
 	},
 	fetchAllServices(country, language, categoryId, searchTerm, pageSize = 1000) {
+		//If the region is a country, search for all the services in any location from that country
+		//If the region is a city, search for all the services in the city AND country wide services
+		let filter = "with-parents";
+		if (sessionStorage[`${language}-regions`]){
+			let regions = JSON.parse(sessionStorage[`${language}-regions`]);			
+			let region = _.first(regions.filter(c => c.slug == country));
+			filter = region.level == 1 ? "relatives" : "with-parents";
+		}
 		return new Promise((resolve, reject) => {
 			var requestUrl =
-				"/services/searchlist/?filter=relatives&geographic_region=" +
+				"/services/searchlist/?filter="+ filter +"&geographic_region=" +
 				country +
 				"&page=1&page_size=" +
 				pageSize +
