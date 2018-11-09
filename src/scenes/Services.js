@@ -198,7 +198,7 @@ class Services extends React.Component {
 		const { country, language } = this.props;
 
 		return servicesApi
-			.fetchAllServicesInBBox(country.fields.slug, language, bbox, 500, category)
+			.fetchAllServicesInBBox(country.fields.slug, language, bbox, 1000, category)
 			.then(s => s.results)
 			.then(services => ({ services, category: null }));
 	}
@@ -207,7 +207,7 @@ class Services extends React.Component {
 		const { country, language } = this.props;
 
 		return servicesApi
-			.fetchAllServicesInBBox(location || country.fields.slug, language, bbox, 500, category)
+			.fetchAllServicesInBBox(location || country.fields.slug, language, bbox, 1000, category)
 			.then(s => s.results)
 			.then(services => ({ services, category: null }));
 	}
@@ -215,7 +215,7 @@ class Services extends React.Component {
 		const { country, language } = this.props;
 
 		return servicesApi
-			.fetchAllServicesInBBox(location || country.fields.slug, language, bbox, 500, null)
+			.fetchAllServicesInBBox(location || country.fields.slug, language, bbox, 1000, null)
 			.then(s => s.results)
 			.then(services => ({ services, category: null }));
 	}
