@@ -142,6 +142,7 @@ module.exports = {
 		showDepartments: false,
 		showLinkToAdministration: false,
 		hideCountries: ["bosnia"],
+		backendUrl: 'http://localhost:8000/v2',
 	},
 	"https://theirc-refugee-info-frontend-staging.azurewebsites.net/": {
 		theme: "irc",

@@ -64,8 +64,12 @@
     }(document, 'script', 'facebook-jssdk'));
   </script>
 </head>
-
-<body>
+<script>
+  function firstTimeIntro(){
+    localStorage.setItem("firstTimeInApp",1)
+  }
+</script>
+<body onLoad="firstTimeIntro()">
   <noscript>
     You need to enable JavaScript to run this app.
   </noscript>
@@ -143,7 +147,16 @@
         }
       }
     </style>
-    <div class="intro">
+    <script>
+        if(localStorage.getItem('firstTimeInApp')){
+          getElementById("introduction").display='none';
+        }
+        else
+        {
+          getElementById("introduction").display="flex";
+        }
+    </script>
+    <div class="intro" id="introduction">
       <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 1492.59 559">
         <defs>
         </defs>
