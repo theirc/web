@@ -6,10 +6,19 @@
 	.icon {
 		flex-grow: 1;
 		max-height: 200px;
-		min-height: 15px;
+
 		padding: 20px; }
 	.item {
 		cursor:pointer;
+		font-weight: 500;
+	}
+
+	.text {
+		margin-top: 10px;
+		height: auto;
+		i {
+			margin: 20px;
+		}
 	}
 }
 
