@@ -9,7 +9,7 @@ module.exports = {
 		theme: "irc",
 		accessToken: "0cd5c6bfefa4f7f33a98c487012e6f34c2031aee1ff2f6858b11be592ab349d9",
 		space: "ktglofo8nf88",
-		languages: [["en", "English"], ["ar", "العربيـة"], ["ur", "اردو"], ["fa", "فارسی"], ["fr", "français"],['ti', 'ትግርኛ']],
+		languages: [["en", "English"], ["ar", "العربيـة"], ["ur", "اردو"], ["fa", "فارسی"], ["fr", "Français"],['ti', 'ትግርኛ']],
 		//languages: [["en", "English"], ["ar", "العربيـة"]],
 		logo: "/ri-logo-<%= language %>.png",
 		title: "Refugee Info",
@@ -142,7 +142,7 @@ module.exports = {
 		showDepartments: false,
 		showLinkToAdministration: false,
 		hideCountries: ["bosnia"],
-		backendUrl: 'http://localhost:8000/v2',
+		//backendUrl: 'http://localhost:8000/v2',
 	},
 	"https://theirc-refugee-info-frontend-staging.azurewebsites.net/": {
 		theme: "irc",
