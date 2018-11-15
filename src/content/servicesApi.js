@@ -11,7 +11,6 @@ if (siteConfig && siteConfig.backendUrl) {
 }
 
 //var RI_URL = "http://localhost:8000/e/production/v2";
-
 module.exports = {
 	fetchCategories(language, region) {
 		return new Promise((resolve, reject) => {
@@ -53,6 +52,26 @@ module.exports = {
 			}
 		});
 	},
+	fetchCountries(language) {
+		return new Promise((resolve, reject) => {
+			const sessionStorage = getSessionStorage();
+			if (sessionStorage[`${language}-countries`]) {
+				resolve(JSON.parse(sessionStorage[`${language}-countries`]));
+			} else {
+				request
+					.get(RI_URL + "/regions/?countries=true")
+					.set("Accept-Language", language)
+					.end((err, res) => {
+						if (err) {
+							reject(err);
+							return;
+						}
+						sessionStorage[`${language}-countries`] = JSON.stringify(res.body);
+						resolve(res.body);
+					});
+			}
+		});
+	},
 	fetchCategoryById(language, categoryId) {
 		return new Promise((resolve, reject) => {
 			const sessionStorage = getSessionStorage();
@@ -75,9 +94,17 @@ module.exports = {
 		});
 	},
 	fetchAllServices(country, language, categoryId, searchTerm, pageSize = 1000) {
+		//If the region is a country, search for all the services in any location from that country
+		//If the region is a city, search for all the services in the city AND country wide services
+		let filter = "with-parents";
+		if (sessionStorage[`${language}-regions`]){
+			let regions = JSON.parse(sessionStorage[`${language}-regions`]);			
+			let region = _.first(regions.filter(c => c.slug == country));
+			filter = region.level == 1 ? "relatives" : "with-parents";
+		}
 		return new Promise((resolve, reject) => {
 			var requestUrl =
-				"/services/search/?filter=relatives&geographic_region=" +
+				"/services/searchlist/?filter="+ filter +"&geographic_region=" +
 				country +
 				"&page=1&page_size=" +
 				pageSize +
@@ -118,7 +145,7 @@ module.exports = {
 	},
 	fetchAllServicesInBBox(country, language, bounds = [], pageSize = 200, category = null) {
 		return new Promise((resolve, reject) => {
-			var requestUrl = `/services/search/?filter=relatives&geographic_region=${country}&page=1&page_size=${pageSize}&bounds=${bounds.join(", ")}`;
+			var requestUrl = `/services/searchlist/?filter=relatives&geographic_region=${country}&page=1&page_size=${pageSize}&bounds=${bounds.join(", ")}`;
 			if (category) {
 				requestUrl += "&type_numbers=" + (category || "");
 			}

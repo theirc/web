@@ -4,7 +4,6 @@ import { translate } from "react-i18next";
 
 import HeaderBar from "./HeaderBar";
 import _ from "lodash";
-
 import tinycolor from "tinycolor2";
 
 class ServiceCategoryList extends React.Component {
@@ -12,15 +11,17 @@ class ServiceCategoryList extends React.Component {
 		categories: [],
 		loaded: false,
 	};
+
 	componentDidMount() {
-		const { fetchCategories } = this.props;
-		if (fetchCategories) {
+		const { fetchCategories} = this.props;
+		const { categories} = this.state;
+		if (fetchCategories && categories.length === 0) {
 			fetchCategories().then(categories => {
-				this.setState({ categories, loaded: true  });
-			});
+				this.setState({ categories, loaded: true });
+			});				
 		}
 	}
-
+	
 	fixColor(color) {
 		if (!color) {
 			color = "#FFF";
@@ -30,8 +31,8 @@ class ServiceCategoryList extends React.Component {
 		return color;
 	}
 
-	renderCategory(c) {
-		let { onSelectCategory, location } = this.props;
+	renderCategory(c) {		
+		let { onSelectCategory } = this.props;
 		onSelectCategory = onSelectCategory || (() => console.log("noop"));
 
 		let { id, name, vector_icon } = c;
@@ -45,7 +46,7 @@ class ServiceCategoryList extends React.Component {
 		let style = {
 			color: color === "#ffffff" ? "black" : color,
 		};
-
+		
 		return (
 			<li key={id}>
 				<hr className="line" />
@@ -60,6 +61,7 @@ class ServiceCategoryList extends React.Component {
 	render() {
 		const { categories, loaded } = this.state;
 		const { t, locationEnabled, toggleLocation, listAllServices, goToLocationList, goToMap, locationName, departmentSelected } = this.props;	
+		
 		if (!loaded) {
 			return (
 				<div className="ServiceCategoryList">
@@ -85,6 +87,7 @@ class ServiceCategoryList extends React.Component {
 		let sortedCategories = _.sortBy(categories || [], c => {
 			return c.number;
 		});
+		
 		return <div>
 			<HeaderBar key={"Header"} title={t("Service Categories").toUpperCase()}>
 				<li onClick={toggleLocation || _.identity}>
@@ -97,7 +100,7 @@ class ServiceCategoryList extends React.Component {
 				<ul>
 					{locationName  && 
 					<div>
-						<li>
+						<li key="title1">
 							<div className="container disabled">								
 								<strong>{t("Services in") + " " + locationName }</strong>
 							</div>
@@ -105,7 +108,7 @@ class ServiceCategoryList extends React.Component {
 						<hr className="line" />	
 					</div>
 					}
-					<li key="00">
+					<li key="all-services">
 						<div className="container" onClick={listAllServices}>
 							<i className="fa fa-list" />
 							<strong>{t("All Services")}</strong>
@@ -113,7 +116,7 @@ class ServiceCategoryList extends React.Component {
 					</li>
 					<hr className="line" />			
 					{ !departmentSelected &&
-					<li key="000">
+					<li key="locations">
 						<div className="container" onClick={goToLocationList}>
 							<i className="fa fa-globe" />
 							<strong>{t("Locations")}</strong>
@@ -121,7 +124,7 @@ class ServiceCategoryList extends React.Component {
 					</li>
 					}
 					{ departmentSelected &&
-					<li key="000">
+					<li key="municipalidades">
 						<div className="container" onClick={goToLocationList}>
 							<i className="fa fa-globe" />
 							<strong>{t("Municipalidades")}</strong>
@@ -129,7 +132,7 @@ class ServiceCategoryList extends React.Component {
 					</li>
 					}
 					<hr className="line" />			
-					<li>
+					<li key="map">
 						<div className="container" onClick={goToMap}>
 							<i className="fa fa-map" />
 							<strong>{t("Map")}</strong>

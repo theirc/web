@@ -4,11 +4,12 @@ import "./ArticlePage.css";
 import { Helmet } from "react-helmet";
 import FacebookPlayer from "react-facebook-player";
 import YouTube from "react-youtube";
+import InstagramEmbed from 'react-instagram-embed';
 import HeaderBar from "./HeaderBar";
 import ReactDOM from "react-dom"
 
 const Remarkable = require("remarkable");
-
+const IG_URL = "https://instagr.am/p/";
 const md = new Remarkable("full", {
 	html: true,
 	linkify: true,
@@ -70,6 +71,7 @@ export default class ArticlePage extends Component {
 		}
 	}
 	componentDidUpdate() {
+		this.injectVideoPlaceholders();
 		this.replaceLinks();
 	}
 
@@ -88,20 +90,26 @@ export default class ArticlePage extends Component {
 		}
 		return null;
 	}
-	componentDidMount() {
-		/* */
+
+	injectVideoPlaceholders() {
 		const APP_ID = this.context.config.appId;
 		
-		Array.from(document.querySelectorAll('.yt') || []).forEach(e=> {
-			var videoId = e.innerHTML.replace(/<YouTube.*videoId=["']{(.*)}["'].*><\/YouTube>/gmi, '$1');
-			e.removeChild(e.firstChild);
+		Array.from(document.getElementsByTagName('YouTube') || []).forEach(e=> {
+			var videoId = e.getAttribute('videoId');
 			ReactDOM.render(<YouTube videoId={videoId} className={"YouTube"} />, e);
 		});		
-		Array.from(document.querySelectorAll('.fb') || []).forEach(e=> {
-			var videoId = e.innerHTML.replace(/<FacebookPlayer.*videoId=["']{(.*)}["'].*><\/FacebookPlayer>/gmi, '$1');
-			e.removeChild(e.firstChild);
+		Array.from(document.getElementsByTagName('Facebook') || []).forEach(e=> {
+			var videoId = e.getAttribute('videoId');
 			ReactDOM.render( <FacebookPlayer className={"Facebook"} videoId={videoId} appId={APP_ID} />, e);
 		});
+		Array.from(document.getElementsByTagName('Instagram') || []).forEach(e=> {
+			var videoId = e.getAttribute('videoId');
+			ReactDOM.render( <InstagramEmbed className={"Instagram"} url={`${IG_URL}${videoId}`} />, e);
+		});
+	}
+
+	componentDidMount() {
+		this.injectVideoPlaceholders();
 		this.replaceLinks();
 	}
 
@@ -112,13 +120,7 @@ export default class ArticlePage extends Component {
 
 		let html = md.render(content || lead);
 		html = html.replace(/(\+[0-9]{9,14}|00[0-9]{9,15})/g, `<a class="tel" href="tel:$1">$1</a>`);
-		html = html.replace(/(<YouTube.*\/>)/gmi, (a)=> {
-			return `<div class="yt">${a}</div>`;
-		});
-		html = html.replace(/(<FacebookPlayer.*\/>)/gmi, (a)=> {
-			return `<div class="fb">${a}</div>`;
-		});
-
+		
 		return (
 			<div ref={r => (this._ref = r)} className={["ArticlePage", loading ? "loading" : "loaded"].join(" ")}>
 				<Helmet>

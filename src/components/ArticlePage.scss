@@ -67,6 +67,12 @@
 		width: 100%;
 	}
 
+	.Instagram {
+		iframe {
+			max-width: 100% !important;
+		}
+	}
+
 	blockquote {
 		border-left-width: 3px;
 		border-left-style: solid;

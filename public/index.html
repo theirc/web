@@ -62,9 +62,9 @@
       js.src = "https://connect.facebook.net/en_US/sdk.js";
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
+    
   </script>
 </head>
-
 <body>
   <noscript>
     You need to enable JavaScript to run this app.
@@ -77,9 +77,9 @@
         height: 100vh;
         position: absolute;
         top: 0;
-        left: 0;
+        left: 0;		
         background-color: white;
-        display: flex;
+		display: flex;
         justify-content: center;
         align-items: center;
       }
@@ -143,7 +143,12 @@
         }
       }
     </style>
-    <div class="intro">
+    <script>
+      function firstTimeIntro(){
+        localStorage.setItem("notFirstTimeInApp",true)
+      }
+    </script>
+    <div class="intro" onLoad="firstTimeIntro()" id="introduction">
       <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 1492.59 559">
         <defs>
         </defs>
@@ -213,7 +218,7 @@
         top: 0;
         left: 0;
         background-color: white;
-        display: flex;
+		display: flex;
         justify-content: center;
         align-items: center;
       }
@@ -280,7 +285,7 @@
         display: none;
       }
     </style>
-    <div class="intro">
+    <div class="intro" onLoad="firstTimeIntro()">
 
 
       <svg xmlns="http://www.w3.org/2000/svg" width="825.12" height="84" viewBox="0 0 825.12 84">
@@ -329,7 +334,7 @@
         top: 0;
         left: 0;
         background-color: white;
-        display: flex;
+		display: flex;
         justify-content: center;
         align-items: center;
       }
@@ -399,7 +404,7 @@
         display: none;
       }
     </style>
-    <div class="intro">
+    <div class="intro" onLoad="firstTimeIntro()">
 
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540.32 144.08">
         <defs>
@@ -464,7 +469,16 @@
       </svg>
     </div>
     {% endif %}
-    <% } %>
+	<% } %>
+	<script>
+	if(localStorage.getItem('notFirstTimeInApp')){
+      document.getElementById("introduction").style.display='none';
+    }
+    else
+    {
+      document.getElementById("introduction").style.display="flex";
+	}
+	</script>
       <div id="root" class="hide"></div>
       <!--
       This HTML file is a template.

@@ -4,7 +4,7 @@ import BottomNavigation, { BottomNavigationButton } from "material-ui/BottomNavi
 import PropTypes from "prop-types";
 import { translate } from "react-i18next";
 
-import { Home, List, Assignment, Map } from "material-ui-icons";
+import { Home, List, Assignment } from "material-ui-icons";
 import "./BottomNav.css";
 class BottomNav extends Component {
 	static propTypes = {
@@ -49,7 +49,7 @@ class BottomNav extends Component {
 	}
 
 	render() {
-		const { showServiceMap, t, showMapButton } = this.props;
+		const { showServiceMap, t } = this.props;
 		return (
 			<Paper
 				style={{

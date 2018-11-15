@@ -6,7 +6,6 @@ import { Skeleton } from ".";
 import { push } from "react-router-redux";
 import measureDistance from "@turf/distance";
 import PropTypes from 'prop-types';
-import queryString from "query-string";
 
 import _ from "lodash";
 import Promise from "bluebird";
@@ -199,7 +198,7 @@ class Services extends React.Component {
 		const { country, language } = this.props;
 
 		return servicesApi
-			.fetchAllServicesInBBox(country.fields.slug, language, bbox, 500, category)
+			.fetchAllServicesInBBox(country.fields.slug, language, bbox, 1000, category)
 			.then(s => s.results)
 			.then(services => ({ services, category: null }));
 	}
@@ -208,7 +207,7 @@ class Services extends React.Component {
 		const { country, language } = this.props;
 
 		return servicesApi
-			.fetchAllServicesInBBox(location || country.fields.slug, language, bbox, 500, category)
+			.fetchAllServicesInBBox(location || country.fields.slug, language, bbox, 1000, category)
 			.then(s => s.results)
 			.then(services => ({ services, category: null }));
 	}
@@ -216,7 +215,7 @@ class Services extends React.Component {
 		const { country, language } = this.props;
 
 		return servicesApi
-			.fetchAllServicesInBBox(location || country.fields.slug, language, bbox, 500, null)
+			.fetchAllServicesInBBox(location || country.fields.slug, language, bbox, 1000, null)
 			.then(s => s.results)
 			.then(services => ({ services, category: null }));
 	}
@@ -246,7 +245,17 @@ class Services extends React.Component {
 
 	serviceTypes() {
 		const { language, country } = this.props;
+		if (this.state.location){
+			return servicesApi.fetchCategories(language, this.state.location);
+		}
+		return servicesApi.fetchCategories(language, country.fields.slug);
+	}
 
+	serviceTypesByLocation(location) {
+		const { language, country } = this.props;
+		if (location){
+			return servicesApi.fetchCategories(language, location);
+		}
 		return servicesApi.fetchCategories(language, country.fields.slug);
 	}
 
@@ -298,9 +307,7 @@ class Services extends React.Component {
 				latitude: coordinates.lat,
 				longitude: coordinates.lon,
 			};
-		}
-
-		let lang = queryString.parse(this.props.location.search).language;
+		}		
 
 		const { config } = this.context;
 		const onSelectCategory = (c) => {
@@ -545,7 +552,7 @@ class Services extends React.Component {
 						<Skeleton>
 							<div className="SkeletonContainer">
 								<ServiceCategoryList
-									fetchCategories={() => this.serviceTypes()}
+									fetchCategories={() => this.serviceTypesByLocation(props.match.params.location)}
 									locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
 									toggleLocation={() => this.setState({ sortingByLocationEnabled: true })}
 									onSelectCategory={onSelectCategory}

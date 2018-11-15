@@ -32,9 +32,14 @@ class ServiceDetail extends React.Component {
 		const { language } = this.props;
 		let { href } = window.location;
 		let copySlug = (href += (window.location.toString().indexOf("?") > -1 ? "&" : "?") + "language=" + language);
-		this.state = { value: copySlug, copied: true, shareIN: true };
+		this.state = { value: copySlug, copied: true, shareIN: true, showOtherServices: true };
 		this.sharePage = this.sharePage.bind(this);
+		this.showServices = this.showServices.bind(this);
 		this.Copiedlnk = this.Copiedlnk.bind(this);
+	}
+
+	showServices(){
+		this.setState({ showOtherServices: !this.state.showOtherServices });
 	}
 
 	sharePage() {
@@ -223,13 +228,13 @@ class ServiceDetail extends React.Component {
 		let sortedContactInformation = _.sortBy(service.contact_information || [], ci => {
 			return ci.index;
 		});
-
+		let subtitle = service.type ? service.type.name : _.first(service.types).name;
 		return (
 			<div className="ServiceDetail">
 				<Helmet>
 					<title>{serviceT.name}</title>
 				</Helmet>
-				<HeaderBar subtitle={`${_.first(service.types).name}:`} title={serviceT.name} />
+				<HeaderBar subtitle={`${subtitle}:`} title={serviceT.name} />
 				<div className="hero">
 					<h2>
 						<small>{t("Service Provider")}:</small>
@@ -282,19 +287,8 @@ class ServiceDetail extends React.Component {
 						</p>
 					)}
 
-					{relatedServices.length > 0 && <h3>{t("OTHER_SERVICES")}:</h3>}
-					{relatedServices && (
-						<ul className="RelatedServices">
-							{relatedServices.map(r => (
-								<li key={r.id} onClick={() => goToService(r.id)}>
-									<button className="muted">
-										<a href="javascript:void(0)">{r.name}</a>
-									</button>
-								</li>
-							))}
-						</ul>
-					)}
 				</article>
+				{this.state.showOtherServices ? (
 				<div className="footer">
 
 					{<hr className="divider" />}
@@ -377,7 +371,37 @@ class ServiceDetail extends React.Component {
 					)}
 
 					{service.contact_information && sortedContactInformation.map(ci => this.renderContactInformation(ci))}
-				</div>
+					{<hr className="divider" />}
+					{(relatedServices || []).length > 0 && (
+					<div className="selector" onClick={() => this.showServices()}>
+						<h1>{t("OTHER_SERVICES")}</h1>
+						<i className="MenuIcon fa fa-angle-right" aria-hidden="true" />
+					</div>)}
+				</div>)
+				:(
+					<div>
+					<div className="RelatedServices">
+						<h3>{t("OTHER_SERVICES")}:</h3>
+						<hr/>
+							{relatedServices.map(r => (
+								<div key={r.id} onClick={() => goToService(r.id)}>
+									<div className="selector">
+										<h1 href="javascript:void(0)" ><div style={{
+											display: 'inline-block', direction: 'ltr', maxWidth: '60%',
+											overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
+										}}>{r.name}</div></h1>
+										<i className="MenuIcon fa fa-angle-right" aria-hidden="true" />
+									</div>
+									<hr/>
+								</div>
+							))}
+					<div className="selector" onClick={() => this.showServices()}>
+						<h1>{t("Back")}</h1>
+						<i className="MenuIcon fa fa-angle-left" aria-hidden="true" />
+					</div>
+					</div>
+					</div>
+				)}
 			</div>
 		);
 	}

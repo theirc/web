@@ -50,10 +50,12 @@ class ServiceList extends React.Component {
 			};
 		};
 		let fullAddress = [s.address, s.address_city].filter(val => val).join(", ");
+		let mainType = s.type ? s.type : s.types[0];
+		let subTypes = s.types.filter((ty, id) => id > 0);
 		return [
 			<li key={s.id} className="Item" onClick={() => goToService(s.id)}>
 				<div className="Icon" key={`${s.id}-0`}>
-					<i className={iconWithPrefix(s.types[0].vector_icon)} style={categoryStyle(s.types[0].color)} />
+					<i className={iconWithPrefix(mainType.vector_icon)} style={categoryStyle(mainType.color)} />
 				</div>
 				<div className="Info">
 					<h1>{s.name}</h1>
@@ -64,7 +66,7 @@ class ServiceList extends React.Component {
 							{distance && ` - ${distance}`}
 						</small>
 						<div className="Icons">
-							{s.types.filter((ty, id) => id > 0).map((t, idx) => (
+							{subTypes.map((t, idx) => (
 								<div className="Icon" key={`${s.id}-${idx}`}>
 									<i className={iconWithPrefix(t.vector_icon)} style={categoryStyle(t.color)} />
 								</div>
@@ -84,6 +86,10 @@ class ServiceList extends React.Component {
 		// vacancy === false --> available
 		// vacancy === true  --> unavailable
 		const availableServices = services.filter(s => !s.provider.vacancy);
+		let sortedAvailableServices =[]
+		if (availableServices){
+			sortedAvailableServices = _.orderBy(availableServices, ["region.level", "name"], ["desc",  "asc"]);
+		}
 		const unavailableServices = services.filter(s => s.provider.vacancy);
 		if (!loaded) {
 			return (
@@ -127,7 +133,7 @@ class ServiceList extends React.Component {
 						</div>
 					)}
 
-				{availableServices.length > 0 && (
+				{sortedAvailableServices.length > 0 && (
 					<div className="ServiceListContainer">
 
 						<ul className="Items">
@@ -151,7 +157,7 @@ class ServiceList extends React.Component {
 								</div>
 								<i className="material-icons" />
 							</li>
-							{availableServices.map(this.renderService.bind(this))}
+							{sortedAvailableServices.map(this.renderService.bind(this))}
 						</ul>
 					</div>
 				)}
