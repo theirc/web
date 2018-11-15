@@ -62,13 +62,6 @@
       js.src = "https://connect.facebook.net/en_US/sdk.js";
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
-    if(localStorage.getItem('notFirstTimeInApp')){
-      getElementById("introduction").display='none';
-    }
-    else
-    {
-      getElementById("introduction").display="flex";
-    }
   </script>
 </head>
 <body>
@@ -153,7 +146,7 @@
         localStorage.setItem("notFirstTimeInApp",true)
       }
     </script>
-    <div class="intro" onLoad="firstTimeIntro()">
+    <div class="intro" onLoad="firstTimeIntro()" id="introduction">
       <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 1492.59 559">
         <defs>
         </defs>
@@ -289,7 +282,7 @@
         display: none;
       }
     </style>
-    <div class="intro" onLoad="firstTimeIntro()">
+    <div class="intro" onLoad="firstTimeIntro()" id="introduction">
 
 
       <svg xmlns="http://www.w3.org/2000/svg" width="825.12" height="84" viewBox="0 0 825.12 84">
@@ -407,7 +400,7 @@
         display: none;
       }
     </style>
-    <div class="intro" onLoad="firstTimeIntro()">
+    <div class="intro" onLoad="firstTimeIntro()" id="introduction">
 
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540.32 144.08">
         <defs>
@@ -502,5 +495,14 @@
       <script src="%PUBLIC_URL%/css/L.Control.Locate.min.js"></script>
       <div id="fb-root"></div>
 </body>
+<script>
+  if(localStorage.getItem('notFirstTimeInApp')){
+      document.getElementById("introduction").style.display='none';
+    }
+    else
+    {
+      document.getElementById("introduction").style.display='flex';
+    }
+</script>
 
 </html>
