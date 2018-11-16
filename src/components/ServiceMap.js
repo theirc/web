@@ -36,11 +36,8 @@ class ServiceIcon extends React.Component {
 	render() {
 		let s = this.props.service;
 		let idx = this.props.idx;
-		let isMainType = this.props.isMainType;
-		let type = s.type;
-		if (isMainType == 0){
-			type = s.types[idx].id != s.type.id ? s.types[idx] : null;
-		}
+		let type = this.props.type ? this.props.type : s.type ? s.type : s.types[idx];
+			
 		return type ? (
 			<div className="Icon" key={`${s.id}-${idx}`}>
 				<i className={iconWithPrefix(type.vector_icon)} style={categoryStyle(type.color)} />
@@ -59,14 +56,15 @@ class ServiceItem extends React.Component {
 			// measureDistance
 		} = this.props;
 		// const distance = measureDistance && s.location && measureDistance(s.location);
-		const types = (s.types || []).filter(t => t.id !== s.type.id);
+		const mainType = s.type ? s.type : s.types[0];
+		const types = (s.types || []).filter(t => t.id !== mainType.id);
 		return (
 			<div key={s.id} className="Item" onClick={() => goToService(s.id)}>
 			<div className="Icons">
-				{s.type &&
-						<ServiceIcon key={`si-${s.type.idx}`} idx={s.type.idx} isMainType={1} service={s} />
+				{mainType &&
+						<ServiceIcon key={`si-${mainType.idx}`} idx={0} isMainType={1} service={s} type={mainType} />
 				}
-				{types.map((t, idx) => t && <ServiceIcon key={`si-${idx}`} idx={idx} isMainType={0} service={s} />)}
+				{types.map((t, idx) => t && <ServiceIcon key={`si-${idx}`} idx={idx} isMainType={0} service={s} type={t} />)}
 			</div>
 				<div className="Info">
 					<h1>{s.name}</h1>
