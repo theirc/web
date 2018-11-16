@@ -51,7 +51,8 @@ class ServiceList extends React.Component {
 		};
 		let fullAddress = [s.address, s.address_city].filter(val => val).join(", ");
 		let mainType = s.type ? s.type : s.types[0];
-		let subTypes = s.types.filter(t => t.id > 0 && (!s.type || t.id !== s.type.id));
+		console.log(s.type);
+		let subTypes = s.types.filter(t => t.id > 0 && t.id !== mainType.id);
 		return [
 			<li key={s.id} className="Item" onClick={() => goToService(s.id)}>
 				<div className="Icon" key={`${s.id}-0`}>
