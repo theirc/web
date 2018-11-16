@@ -60,7 +60,6 @@ class ServiceItem extends React.Component {
 		} = this.props;
 		// const distance = measureDistance && s.location && measureDistance(s.location);
 		const types = (s.types || []).filter(t => t.id !== s.type.id);
-		console.log(s.name, s.type.id, types);
 		return (
 			<div key={s.id} className="Item" onClick={() => goToService(s.id)}>
 			<div className="Icons">
