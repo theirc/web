@@ -62,14 +62,14 @@
       js.src = "https://connect.facebook.net/en_US/sdk.js";
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
+    if(localStorage.getItem("notFirstTimeInApp")==null)
+      localStorage.setItem("notFirstTimeInApp",false);
   </script>
 </head>
 <body>
   <noscript>
     You need to enable JavaScript to run this app.
   </noscript>
-  <% if(compilation.options.devtool !==  "cheap-module-source-map") { %>
-    {% if "khabrona.info" in hostname %}
     <style>
       .intro {
         width: 100vw;
@@ -78,6 +78,7 @@
         top: 0;
         left: 0;
         background-color: white;
+		display: none;
         justify-content: center;
         align-items: center;
       }
@@ -141,12 +142,7 @@
         }
       }
     </style>
-    <script>
-      function firstTimeIntro(){
-        localStorage.setItem("notFirstTimeInApp",true)
-      }
-    </script>
-    <div class="intro" onLoad="firstTimeIntro()" id="introduction">
+    <div class="intro" onLoad="firstTimeIntro()" id="khabrona">
       <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 1492.59 559">
         <defs>
         </defs>
@@ -206,8 +202,6 @@
         </g>
       </svg>
     </div>
-    {% elif "cuentanos.org" in hostname %}
-
     <style>
       .intro {
         width: 100vw;
@@ -216,6 +210,7 @@
         top: 0;
         left: 0;
         background-color: white;
+		display: none;
         justify-content: center;
         align-items: center;
       }
@@ -282,7 +277,7 @@
         display: none;
       }
     </style>
-    <div class="intro" onLoad="firstTimeIntro()" id="introduction">
+    <div class="intro" onLoad="firstTimeIntro()" id="cuentanos">
 
 
       <svg xmlns="http://www.w3.org/2000/svg" width="825.12" height="84" viewBox="0 0 825.12 84">
@@ -320,9 +315,7 @@
         </g>
       </svg>
 
-
     </div>
-    {% else %}
     <style>
       .intro {
         width: 100vw;
@@ -331,6 +324,7 @@
         top: 0;
         left: 0;
         background-color: white;
+		display: none;
         justify-content: center;
         align-items: center;
       }
@@ -400,7 +394,7 @@
         display: none;
       }
     </style>
-    <div class="intro" onLoad="firstTimeIntro()" id="introduction">
+    <div class="intro" onLoad="firstTimeIntro()" id="refugee">
 
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540.32 144.08">
         <defs>
@@ -464,8 +458,34 @@
         </g>
       </svg>
     </div>
+    {% if "khabrona.info" in hostname %}
+      <script>
+        if(localStorage.getItem("notFirstTimeInApp")!='true'){
+          document.getElementById("khabrona").style.display='flex';
+          localStorage.setItem("notFirstTimeInApp",true);
+        }
+        else
+          document.getElementById("khabrona").style.display='none';
+      </script>
+    {% elif "cuentanos.org" in hostname %}
+      <script>
+        if(localStorage.getItem("notFirstTimeInApp")!='true'){
+          document.getElementById("cuentanos").style.display='flex';
+          localStorage.setItem("notFirstTimeInApp",true);
+        }
+        else
+          document.getElementById("cuentanos").style.display='none';
+      </script>
+    {% else %}
+      <script>
+        if(localStorage.getItem("notFirstTimeInApp")!='true'){
+          document.getElementById("refugee").style.display='flex';
+          localStorage.setItem("notFirstTimeInApp",true);
+        }
+        else
+          document.getElementById("refugee").style.display='none';
+      </script>
     {% endif %}
-    <% } %>
       <div id="root" class="hide"></div>
       <!--
       This HTML file is a template.
