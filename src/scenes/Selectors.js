@@ -31,7 +31,8 @@ class Selectors extends Component {
         country: null,
         language: null,
         redirect: "",
-        regionList: null,
+		regionList: null,
+		loaded: false
     };
 
     static contextTypes = {
@@ -103,7 +104,8 @@ class Selectors extends Component {
                         })))
                         .then(countryList => this.setState({
                             countryList,
-                            regionList
+							regionList,
+							loaded: true
                         }));
 				})
             }
@@ -177,7 +179,8 @@ class Selectors extends Component {
         const {
             currentPage,
             countryList,
-            regionList
+			regionList,
+			loaded
         } = this.state;
         const {
             config
@@ -205,6 +208,11 @@ class Selectors extends Component {
                     this.selectCountry(countryList[0].slug);
                     return null;
                 } else {
+					if (!loaded) {
+						return (							
+							<div className="loader" />							
+						);
+					}
                     return (
                         <CountrySelector
 							onGoTo={slug => {
