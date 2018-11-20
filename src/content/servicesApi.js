@@ -1,4 +1,5 @@
 import getSessionStorage from "../shared/sessionStorage";
+import getLocalStorage from "../shared/localStorage";
 import cms from "./cms";
 
 var request = require("superagent");
@@ -55,8 +56,9 @@ module.exports = {
 	fetchCountries(language) {
 		return new Promise((resolve, reject) => {
 			const sessionStorage = getSessionStorage();
-			if (sessionStorage[`${language}-countries`]) {
-				resolve(JSON.parse(sessionStorage[`${language}-countries`]));
+			const localStorage = getLocalStorage();
+			if (localStorage[`${language}-countries`]) {
+				resolve(JSON.parse(localStorage[`${language}-countries`]));
 			} else {
 				request
 					.get(RI_URL + "/regions/?countries=true")
@@ -66,7 +68,7 @@ module.exports = {
 							reject(err);
 							return;
 						}
-						sessionStorage[`${language}-countries`] = JSON.stringify(res.body);
+						localStorage[`${language}-countries`] = JSON.stringify(res.body);
 						resolve(res.body);
 					});
 			}
@@ -94,9 +96,17 @@ module.exports = {
 		});
 	},
 	fetchAllServices(country, language, categoryId, searchTerm, pageSize = 1000) {
+		//If the region is a country, search for all the services in any location from that country
+		//If the region is a city, search for all the services in the city AND country wide services
+		let filter = "with-parents";
+		if (sessionStorage[`${language}-regions`]){
+			let regions = JSON.parse(sessionStorage[`${language}-regions`]);			
+			let region = _.first(regions.filter(c => c.slug === country));
+			filter = region.level === 1 ? "relatives" : "with-parents";
+		}
 		return new Promise((resolve, reject) => {
 			var requestUrl =
-				"/services/searchlist/?filter=relatives&geographic_region=" +
+				"/services/searchlist/?filter="+ filter +"&geographic_region=" +
 				country +
 				"&page=1&page_size=" +
 				pageSize +

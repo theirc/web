@@ -51,9 +51,7 @@ class ServiceList extends React.Component {
 		};
 		let fullAddress = [s.address, s.address_city].filter(val => val).join(", ");
 		let mainType = s.type ? s.type : s.types[0];
-		let subTypes = s.types.filter((ty, id) => id > 0);
-		//let vector_icon = s.type ? s.type.vector_icon : s.types[0].vector_icon;
-		//let color = s.type ? s.type.color : s.
+		let subTypes = s.types.filter(t => t.id > 0 && t.id !== mainType.id);
 		return [
 			<li key={s.id} className="Item" onClick={() => goToService(s.id)}>
 				<div className="Icon" key={`${s.id}-0`}>
@@ -90,9 +88,7 @@ class ServiceList extends React.Component {
 		const availableServices = services.filter(s => !s.provider.vacancy);
 		let sortedAvailableServices =[]
 		if (availableServices){
-			sortedAvailableServices = _.sortBy(availableServices || [], s => {
-				return s.number;
-			});
+			sortedAvailableServices = _.orderBy(availableServices, ["region.level", "name"], ["desc",  "asc"]);
 		}
 		const unavailableServices = services.filter(s => s.provider.vacancy);
 		if (!loaded) {
@@ -161,7 +157,7 @@ class ServiceList extends React.Component {
 								</div>
 								<i className="material-icons" />
 							</li>
-							{availableServices.map(this.renderService.bind(this))}
+							{sortedAvailableServices.map(this.renderService.bind(this))}
 						</ul>
 					</div>
 				)}

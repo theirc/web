@@ -84,12 +84,10 @@ class ServiceCategoryList extends React.Component {
 				</div>
 			);
 		}
-		console.log("sort cateogry");	
-		let sortedCategories = _.sortBy(categories || [], c => {
-			return c.number;
-		});
+		// let sortedCategories = _.sortBy(categories || [], c => {
+		// 	return c.number;
+		// });
 		
-		console.log("loaded before return");
 		return <div>
 			<HeaderBar key={"Header"} title={t("Service Categories").toUpperCase()}>
 				<li onClick={toggleLocation || _.identity}>
@@ -142,7 +140,7 @@ class ServiceCategoryList extends React.Component {
 					</li>
 					<hr className="line" />			
 					
-					{sortedCategories.map(c => this.renderCategory(c))}
+					{categories.map(c => this.renderCategory(c))}
 				</ul>
 			</div>
 		</div>
