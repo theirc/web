@@ -277,6 +277,7 @@ class ServiceMap extends React.Component {
 
 	componentWillUnmount() {
 		// Cleaning up.
+		this.map.off();
 		this.map.remove();
 	}
 
