@@ -27,7 +27,6 @@ class ServiceCategoryList extends React.Component {
 			level,
 			title
 		} = c;
-		console.log(c);
 		return (
 			<li key={id}>
 				<hr className="line" />
