@@ -26,7 +26,6 @@
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
       Only files inside the `public` folder can be referenced from the HTML.
-
       Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
@@ -38,67 +37,39 @@
   <meta property="og:description" content="{{ description }}" />
   <meta property="og:image" content="{{ image}}" />
   <meta property="fb:app_id" content="{{ appId }}" />
-  <script src="https://cdn.ravenjs.com/3.20.1/raven.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
-  <script type="text/javascript" src="https://ta-media.citymaps.io/lib/v1.0.63/citymaps.min.js"></script>
-  <script>
-    window.fbAsyncInit = function () {
-      FB.init({
-        appId: '{{ appId }}',
-        autoLogAppEvents: true,
-        xfbml: true,
-        version: 'v2.10'
-      });
-      FB.AppEvents.logPageView();
-    };
-    (function (d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) {
-        return;
-      }
-      js = d.createElement(s);
-      js.id = id;
-      js.src = "https://connect.facebook.net/en_US/sdk.js";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-    if(localStorage.getItem("notFirstTimeInApp")==null)
-      localStorage.setItem("notFirstTimeInApp",false);
-  </script>
 </head>
+
 <body>
   <noscript>
     You need to enable JavaScript to run this app.
   </noscript>
+  <% if(compilation.options.devtool !==  "cheap-module-source-map") { %>
+    {% if "khabrona.info" in hostname %}
     <style>
       .intro {
         width: 100vw;
         height: 100vh;
         position: absolute;
         top: 0;
-        left: 0;		
+        left: 0;
         background-color: white;
-		display: none;
+        display: flex;
         justify-content: center;
         align-items: center;
       }
-
       .intro svg {
         width: 80vw;
       }
-
       @media (min-width: 800px) {
         .intro svg {
           width: 60vw;
         }
       }
-
       @media (min-width: 1000px) {
         .intro svg {
           width: 40vw;
         }
       }
-
       #INFO,
       #AR,
       #KB {
@@ -110,16 +81,13 @@
         stroke-dashoffset: 8000;
         animation: dash 3s linear infinite;
       }
-
       #REC {
         fill: #EA1C24;
       }
-
       #REC>rect {
         width: 483.17;
         animation: ani 1s ease-out;
       }
-
       @keyframes dash {
         from {
           stroke-dashoffset: 900;
@@ -132,7 +100,6 @@
           fill: rgba(41, 38, 51, 1);
         }
       }
-
       @keyframes ani {
         from {
           width: 0;
@@ -142,7 +109,7 @@
         }
       }
     </style>
-    <div class="intro" onLoad="firstTimeIntro()" id="khabrona">
+    <div class="intro" id="intro">
       <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 1492.59 559">
         <defs>
         </defs>
@@ -202,6 +169,8 @@
         </g>
       </svg>
     </div>
+    {% elif "cuentanos.org" in hostname %}
+
     <style>
       .intro {
         width: 100vw;
@@ -210,27 +179,23 @@
         top: 0;
         left: 0;
         background-color: white;
-		display: none;
+        display: flex;
         justify-content: center;
         align-items: center;
       }
-
       .intro svg {
         width: 80vw;
       }
-
       @media (min-width: 800px) {
         .intro svg {
           width: 60vw;
         }
       }
-
       @media (min-width: 1000px) {
         .intro svg {
           width: 40vw;
         }
       }
-
       #org,
       #cuentanos {
         stroke: #231F20;
@@ -241,16 +206,13 @@
         stroke-dashoffset: 1000;
         animation: dash 5s linear infinite;
       }
-
       #REC-R {
         fill: #2A9947;
       }
-
       #REC-R>rect {
         width: 144.87;
         animation: ani 2s ease-in;
       }
-
       @keyframes dash {
         from {
           stroke-dashoffset: 1000;
@@ -263,7 +225,6 @@
           fill: rgba(41, 38, 51, 1);
         }
       }
-
       @keyframes ani {
         from {
           width: 0;
@@ -272,12 +233,11 @@
           width: 144.87;
         }
       }
-
       .hide {
         display: none;
       }
     </style>
-    <div class="intro" onLoad="firstTimeIntro()" id="cuentanos">
+    <div class="intro"  id="intro">
 
 
       <svg xmlns="http://www.w3.org/2000/svg" width="825.12" height="84" viewBox="0 0 825.12 84">
@@ -315,7 +275,9 @@
         </g>
       </svg>
 
+
     </div>
+    {% else %}
     <style>
       .intro {
         width: 100vw;
@@ -324,27 +286,23 @@
         top: 0;
         left: 0;
         background-color: white;
-		display: none;
+        display: flex;
         justify-content: center;
         align-items: center;
       }
-
       .intro svg {
         width: 80vw;
       }
-
       @media (min-width: 800px) {
         .intro svg {
           width: 60vw;
         }
       }
-
       @media (min-width: 1000px) {
         .intro svg {
           width: 40vw;
         }
       }
-
       #info,
       #REFUGEE,
       #TAGLINE-AR {
@@ -356,18 +314,15 @@
         stroke-dashoffset: 1000;
         animation: dash 3s linear infinite;
       }
-
       #REC-L,
       #REC-R {
         fill: #fcd735;
       }
-
       #REC-L>rect,
       #REC-R>rect {
         width: 145;
         animation: ani 1s ease-in;
       }
-
       @keyframes dash {
         from {
           stroke-dashoffset: 800;
@@ -380,7 +335,6 @@
           fill: rgba(41, 38, 51, 1);
         }
       }
-
       @keyframes ani {
         from {
           width: 0;
@@ -389,12 +343,11 @@
           width: 145;
         }
       }
-
       .hide {
         display: none;
       }
     </style>
-    <div class="intro" onLoad="firstTimeIntro()" id="refugee">
+    <div class="intro"  id="intro">
 
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540.32 144.08">
         <defs>
@@ -458,48 +411,51 @@
         </g>
       </svg>
     </div>
-    {% if "khabrona.info" in hostname %}
-      <script>
-        if(localStorage.getItem("notFirstTimeInApp")!='true'){
-          document.getElementById("khabrona").style.display='flex';
-          localStorage.setItem("notFirstTimeInApp",true);
-        }
-        else
-          document.getElementById("khabrona").style.display='none';
-      </script>
-    {% elif "cuentanos.org" in hostname %}
-      <script>
-        if(localStorage.getItem("notFirstTimeInApp")!='true'){
-          document.getElementById("cuentanos").style.display='flex';
-          localStorage.setItem("notFirstTimeInApp",true);
-        }
-        else
-          document.getElementById("cuentanos").style.display='none';
-      </script>
-    {% else %}
-      <script>
-        if(localStorage.getItem("notFirstTimeInApp")!='true'){
-          document.getElementById("refugee").style.display='flex';
-          localStorage.setItem("notFirstTimeInApp",true);
-        }
-        else
-          document.getElementById("refugee").style.display='none';
-      </script>
     {% endif %}
+	<% } %>
+	
       <div id="root" class="hide"></div>
       <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
-
       You can add webfonts, meta tags, or analytics to this file.
       The build step will place the bundled scripts into the <body> tag.
-
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
       <script>
-        Raven.config('https://d164a46efa424a4d998a12ead73395fb@sentry.io/251183').install()
-      </script>
+		if (localStorage.getItem("notFirstTime")){
+			document.getElementById("intro").style.display="none";
+		}
+		localStorage.setItem("notFirstTime", true);
+		
+	  </script>
+	  <script src="https://cdn.ravenjs.com/3.20.1/raven.min.js" crossorigin="anonymous"></script>
+	  <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
+	  <script type="text/javascript" src="https://ta-media.citymaps.io/lib/v1.0.63/citymaps.min.js"></script>
+	  <script>
+		window.fbAsyncInit = function () {
+		  FB.init({
+			appId: '{{ appId }}',
+			autoLogAppEvents: true,
+			xfbml: true,
+			version: 'v2.10'
+		  });
+		  FB.AppEvents.logPageView();
+		};
+		(function (d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) {
+			return;
+		  }
+		  js = d.createElement(s);
+		  js.id = id;
+		  js.src = "https://connect.facebook.net/en_US/sdk.js";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+		
+	  </script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.3/es6-shim.js"></script>
       <script src="https://use.fontawesome.com/fac4bfa814.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
@@ -512,7 +468,10 @@
       <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.5.1/bluebird.min.js"></script>
 
-      <script src="%PUBLIC_URL%/css/L.Control.Locate.min.js"></script>
+	  <script src="%PUBLIC_URL%/css/L.Control.Locate.min.js"></script>
+	  <script>
+	  	Raven.config('https://d164a46efa424a4d998a12ead73395fb@sentry.io/251183').install()
+	  </script>
       <div id="fb-root"></div>
 </body>
 
