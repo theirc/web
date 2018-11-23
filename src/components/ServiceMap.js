@@ -277,8 +277,15 @@ class ServiceMap extends React.Component {
 
 					return marker;
 				});
-				const group = new L.featureGroup(markers);
-				this.map.fitBounds(group.getBounds());
+				let b = this.map.getBounds();
+				let ne = b._northEast;
+				let sw = b._southWest;
+				if (ne.lat - sw.lat == 0 || sw.lng - ne.lng == 0){
+					const group = new L.featureGroup(markers);
+					this.map.fitBounds(group.getBounds());
+					console.log("fit bounds");
+				}
+				
 				clusters.clearLayers();
 				clusters.addLayers(markers);
 			} else {
