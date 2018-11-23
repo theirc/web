@@ -154,7 +154,8 @@ class ServiceMap extends React.Component {
 			scrollWheelZoom: true,
 			zoomControl: true,
 			// Citymaps will automatically select "global" if language is not supported or undefined.
-			language: this.props.i18n.language
+			language: this.props.i18n.language,
+			worldCopyJump: true
 		});
 
 		let clusters = L.markerClusterGroup({
@@ -193,6 +194,9 @@ class ServiceMap extends React.Component {
 						category: null,
 						loaded: true
 					}));
+				if (this.map) {
+					this.map.fitBounds(bounds);
+				}
 			}
 		});
 
@@ -211,6 +215,7 @@ class ServiceMap extends React.Component {
 		if (sessionStorage.serviceMapBounds) {
 			const b = sessionStorage.serviceMapBounds.split(",").map(c => parseFloat(c));
 			const zoom = sessionStorage.serviceMapZoom;
+			
 			map.fitBounds([
 				[b[1], b[0]],
 				[b[3], b[2]]
@@ -219,7 +224,6 @@ class ServiceMap extends React.Component {
 			map.fire("dragend");
 		} else {
 			this.findUsersPosition(defaultLocation).then(l => {
-				console.log("user position");
 				var center = [l.longitude, l.latitude];
 				var radius = 100;
 				var options = {
