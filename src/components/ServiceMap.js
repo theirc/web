@@ -198,19 +198,22 @@ class ServiceMap extends React.Component {
 		map.on("moveend", function (e) {
 			var bounds = map.getBounds();
 			sessionStorage.serviceMapBounds = bounds.toBBoxString();
+			sessionStorage.serviceMapZoom = map.getZoom();;
 		});
 
-        /*
-    We try to get the user's position first, if that doesn't work, we use the key coordinate for the country
-    Then we make a circle of 100k radius around that point, get the box around it and call it the bounds for the screen.
+			/*
+		We try to get the user's position first, if that doesn't work, we use the key coordinate for the country
+		Then we make a circle of 100k radius around that point, get the box around it and call it the bounds for the screen.
 
-    */
+		*/
 		if (sessionStorage.serviceMapBounds) {
 			const b = sessionStorage.serviceMapBounds.split(",").map(c => parseFloat(c));
+			const zoom = sessionStorage.serviceMapZoom;
 			map.fitBounds([
 				[b[1], b[0]],
 				[b[3], b[2]]
 			]);
+			map.setZoom(zoom);
 			map.fire("dragend");
 		} else {
 			this.findUsersPosition(defaultLocation).then(l => {
