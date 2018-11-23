@@ -167,6 +167,7 @@ class ServiceMap extends React.Component {
 		locate.addTo(map);
 
 		map.on("dragend", a => {
+			console.log("dragend");
 			if (findServicesInLocation) {
                 /*
         This is the buggest change in the code: I changed the near to a bbox of the map.
@@ -174,7 +175,6 @@ class ServiceMap extends React.Component {
         Whenever the user moves the map, it will reload the data in the backend
         */
 				const bounds = a.target.getBounds();
-				console.log(bounds);
 				const sw = bounds.getSouthWest();
 				const ne = bounds.getNorthEast();
 				findServicesInLocation([sw.lng, sw.lat, ne.lng, ne.lat])
@@ -198,6 +198,7 @@ class ServiceMap extends React.Component {
 
 		map.on("moveend", function (e) {
 			var bounds = map.getBounds();
+			console.log("move end");
 			sessionStorage.serviceMapBounds = bounds.toBBoxString();
 			sessionStorage.serviceMapZoom = map.getZoom();;
 		});
@@ -272,6 +273,8 @@ class ServiceMap extends React.Component {
 
 					return marker;
 				});
+				const group = new L.featureGroup(markers);
+				this.map.fitBounds(group.getBounds());
 				clusters.clearLayers();
 				clusters.addLayers(markers);
 			} else {
