@@ -174,6 +174,7 @@ class ServiceMap extends React.Component {
         Whenever the user moves the map, it will reload the data in the backend
         */
 				const bounds = a.target.getBounds();
+				console.log(bounds);
 				const sw = bounds.getSouthWest();
 				const ne = bounds.getNorthEast();
 				findServicesInLocation([sw.lng, sw.lat, ne.lng, ne.lat])
