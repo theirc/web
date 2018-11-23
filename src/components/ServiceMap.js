@@ -193,6 +193,9 @@ class ServiceMap extends React.Component {
 						category: null,
 						loaded: true
 					}));
+				if (this.map) {
+					this.map.fitBounds(bounds);
+				}
 			}
 		});
 
@@ -210,6 +213,7 @@ class ServiceMap extends React.Component {
 		if (sessionStorage.serviceMapBounds) {
 			const b = sessionStorage.serviceMapBounds.split(",").map(c => parseFloat(c));
 			const zoom = sessionStorage.serviceMapZoom;
+			
 			map.fitBounds([
 				[b[1], b[0]],
 				[b[3], b[2]]
