@@ -167,6 +167,17 @@ class ServiceMap extends React.Component {
 		var locate = L.control.locate();
 		locate.addTo(map);
 
+		if (sessionStorage.serviceMapBounds) {
+			const b = sessionStorage.serviceMapBounds.split(",").map(c => parseFloat(c));
+			const zoom = sessionStorage.serviceMapZoom;
+			
+			map.fitBounds([
+				[b[1], b[0]],
+				[b[3], b[2]]
+			]);
+			map.setZoom(zoom);
+		}
+		
 		map.on("dragend", a => {
 			console.log("dragend");
 			if (findServicesInLocation) {
@@ -197,14 +208,15 @@ class ServiceMap extends React.Component {
 				if (this.map) {
 					this.map.fitBounds(bounds);
 				}
-				//var bounds = map.getBounds();
-				console.log("move end");
-				sessionStorage.serviceMapBounds = bounds.toBBoxString();
+				
 				
 			}
 		});
 
 		map.on("moveend", function (e) {
+			var bounds = map.getBounds();
+			console.log("move end");
+			sessionStorage.serviceMapBounds = bounds.toBBoxString();
 			sessionStorage.serviceMapZoom = map.getZoom();
 		});
 
