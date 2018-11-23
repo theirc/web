@@ -217,6 +217,7 @@ class ServiceMap extends React.Component {
 			map.fire("dragend");
 		} else {
 			this.findUsersPosition(defaultLocation).then(l => {
+				console.log("user position");
 				var center = [l.longitude, l.latitude];
 				var radius = 100;
 				var options = {
