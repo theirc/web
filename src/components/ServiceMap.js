@@ -197,14 +197,15 @@ class ServiceMap extends React.Component {
 				if (this.map) {
 					this.map.fitBounds(bounds);
 				}
+				//var bounds = map.getBounds();
+				console.log("move end");
+				sessionStorage.serviceMapBounds = bounds.toBBoxString();
+				
 			}
 		});
 
 		map.on("moveend", function (e) {
-			var bounds = map.getBounds();
-			console.log("move end");
-			sessionStorage.serviceMapBounds = bounds.toBBoxString();
-			sessionStorage.serviceMapZoom = map.getZoom();;
+			sessionStorage.serviceMapZoom = map.getZoom();
 		});
 
 			/*
@@ -280,11 +281,6 @@ class ServiceMap extends React.Component {
 				let b = this.map.getBounds();
 				let ne = b._northEast;
 				let sw = b._southWest;
-				if (ne.lat - sw.lat == 0 || sw.lng - ne.lng == 0){
-					const group = new L.featureGroup(markers);
-					this.map.fitBounds(group.getBounds());
-					console.log("fit bounds");
-				}
 				
 				clusters.clearLayers();
 				clusters.addLayers(markers);
