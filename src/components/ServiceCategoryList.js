@@ -108,13 +108,6 @@ class ServiceCategoryList extends React.Component {
 						<hr className="line" />	
 					</div>
 					}
-					<li key="all-services">
-						<div className="container" onClick={listAllServices}>
-							<i className="fa fa-list" />
-							<strong>{t("All Services")}</strong>
-						</div>
-					</li>
-					<hr className="line" />			
 					{ !departmentSelected &&
 					<li key="locations">
 						<div className="container" onClick={goToLocationList}>
@@ -139,7 +132,13 @@ class ServiceCategoryList extends React.Component {
 						</div>
 					</li>
 					<hr className="line" />			
-					
+					<li key="all-services">
+						<div className="container" onClick={listAllServices}>
+							<i className="fa fa-list" />
+							<strong>{t("All Services")}</strong>
+						</div>
+					</li>
+					<hr className="line" />
 					{categories.map(c => this.renderCategory(c))}
 				</ul>
 			</div>
