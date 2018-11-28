@@ -94,6 +94,7 @@ class ServiceMap extends React.Component {
 
 	map = null;
 	clusters = null;
+	bounds = null;
 
 	findUsersPosition(def) {
 		/// Copied it over from the services Component because web apis are fair game in html component
@@ -164,8 +165,8 @@ class ServiceMap extends React.Component {
 			spiderfyOnMaxZoom: true
 		});
 		map.addLayer(clusters);
-		var locate = L.control.locate();
-		locate.addTo(map);
+		// var locate = L.control.locate();
+		// locate.addTo(map);
 
 		if (sessionStorage.serviceMapBounds) {
 			const b = sessionStorage.serviceMapBounds.split(",").map(c => parseFloat(c));
@@ -176,19 +177,30 @@ class ServiceMap extends React.Component {
 				[b[3], b[2]]
 			]);
 			map.setZoom(zoom);
+			
+			setTimeout(() => {
+				map.invalidateSize();
+			  }, 0);
 		}
 		
-		map.on("dragend", a => {
-			console.log("dragend");
+		map.on("dragend", a => {			
 			if (findServicesInLocation) {
                 /*
         This is the buggest change in the code: I changed the near to a bbox of the map.
 
         Whenever the user moves the map, it will reload the data in the backend
         */
-				const bounds = a.target.getBounds();
-				const sw = bounds.getSouthWest();
-				const ne = bounds.getNorthEast();
+				let bounds = a.target.getBounds();
+				let sw = bounds.getSouthWest();
+				let ne = bounds.getNorthEast();
+				if (sw.lat - ne.lat === 0 || sw.lng - ne.lng === 0){
+					const b = sessionStorage.serviceMapBounds.split(",").map(c => parseFloat(c));
+					let p1 = L.latLng(b[1], b[0]);
+					let p2 = L.latLng(b[3], b[2]);
+					bounds = L.latLngBounds(p1, p2);
+					sw = bounds.getSouthWest();
+				 	ne = bounds.getNorthEast();
+				}
 				findServicesInLocation([sw.lng, sw.lat, ne.lng, ne.lat])
 					.then(({
 						services,
@@ -199,6 +211,7 @@ class ServiceMap extends React.Component {
 							category,
 							loaded: true
 						});
+						map.invalidateSize();
 					})
 					.catch(c => this.setState({
 						errorMessage: c.message,
@@ -215,9 +228,13 @@ class ServiceMap extends React.Component {
 
 		map.on("moveend", function (e) {
 			var bounds = map.getBounds();
-			console.log("move end");
-			sessionStorage.serviceMapBounds = bounds.toBBoxString();
-			sessionStorage.serviceMapZoom = map.getZoom();
+			const sw = bounds.getSouthWest();
+			const ne = bounds.getNorthEast();
+			if (sw.lat - ne.lat !== 0 && sw.lng - ne.lng !== 0){
+				sessionStorage.serviceMapBounds = bounds.toBBoxString();
+				sessionStorage.serviceMapZoom = map.getZoom();
+			}
+			
 		});
 
 			/*
@@ -251,7 +268,6 @@ class ServiceMap extends React.Component {
 				map.fire("dragend");
 			});
 		}
-
 		this.clusters = clusters;
 		this.map = map;
 	}
@@ -289,16 +305,10 @@ class ServiceMap extends React.Component {
 					marker.bindPopup(popup);
 
 					return marker;
-				});
-				let b = this.map.getBounds();
-				let ne = b._northEast;
-				let sw = b._southWest;
-				
+				});				
 				clusters.clearLayers();
 				clusters.addLayers(markers);
-			} else {
-				console.warn("no services returned");
-			}
+			} 
 		}
 	}
 
