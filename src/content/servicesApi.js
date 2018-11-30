@@ -102,7 +102,7 @@ module.exports = {
 		if (sessionStorage[`${language}-regions`]){
 			let regions = JSON.parse(sessionStorage[`${language}-regions`]);			
 			let region = _.first(regions.filter(c => c.slug === country));
-			filter = region.level === 1 ? "relatives" : "with-parents";
+			filter = region.level === 3 ? "with-parents" : "relatives" ;
 		}
 		return new Promise((resolve, reject) => {
 			var requestUrl =
