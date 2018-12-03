@@ -321,7 +321,8 @@
 		margin: 10px 0 0;
 		.Icon {
 			padding-right: 15px;
-		}
+		};
+		flex-wrap: wrap;
 	}
 	.Info {
 		display: flex;

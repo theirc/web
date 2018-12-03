@@ -271,7 +271,8 @@ class ServiceDetail extends React.Component {
 					{serviceT.address_city && <p>{serviceT.address_city}</p>}
 
 					{serviceT.address && <h3>{t("Address")}</h3>}
-					{fullAddress && <p>{fullAddress}</p>}
+					{serviceT.address_floor && <p>{serviceT.address_floor}</p>}
+					{serviceT.address && <p>{serviceT.address}</p>}
 
 					{service.address_in_country_language && <h3>{t("Address in Local Language")}</h3>}
 					{service.address_in_country_language && <p>{service.address_in_country_language}</p>}

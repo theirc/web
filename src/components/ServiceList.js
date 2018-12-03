@@ -51,7 +51,7 @@ class ServiceList extends React.Component {
 		};
 		let fullAddress = [s.address, s.address_city].filter(val => val).join(", ");
 		let mainType = s.type ? s.type : s.types[0];
-		let subTypes = s.types.filter(t => t.id > 0 && t.id !== s.type.id);
+		let subTypes = s.types.filter(t => t.id > 0 && t.id !== mainType.id);
 		return [
 			<li key={s.id} className="Item" onClick={() => goToService(s.id)}>
 				<div className="Icon" key={`${s.id}-0`}>
@@ -88,7 +88,7 @@ class ServiceList extends React.Component {
 		const availableServices = services.filter(s => !s.provider.vacancy);
 		let sortedAvailableServices =[]
 		if (availableServices){
-			sortedAvailableServices = _.orderBy(availableServices, ["region.level", "name"], ["desc",  "asc"]);
+			sortedAvailableServices = _.orderBy(availableServices, ["region.level", "region.name", "name"], ["desc", "asc", "asc"]);
 		}
 		const unavailableServices = services.filter(s => s.provider.vacancy);
 		if (!loaded) {

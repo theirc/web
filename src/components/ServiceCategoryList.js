@@ -84,9 +84,9 @@ class ServiceCategoryList extends React.Component {
 				</div>
 			);
 		}
-		let sortedCategories = _.sortBy(categories || [], c => {
-			return c.number;
-		});
+		// let sortedCategories = _.sortBy(categories || [], c => {
+		// 	return c.number;
+		// });
 		
 		return <div>
 			<HeaderBar key={"Header"} title={t("Service Categories").toUpperCase()}>
@@ -108,13 +108,6 @@ class ServiceCategoryList extends React.Component {
 						<hr className="line" />	
 					</div>
 					}
-					<li key="all-services">
-						<div className="container" onClick={listAllServices}>
-							<i className="fa fa-list" />
-							<strong>{t("All Services")}</strong>
-						</div>
-					</li>
-					<hr className="line" />			
 					{ !departmentSelected &&
 					<li key="locations">
 						<div className="container" onClick={goToLocationList}>
@@ -139,8 +132,14 @@ class ServiceCategoryList extends React.Component {
 						</div>
 					</li>
 					<hr className="line" />			
-					
-					{sortedCategories.map(c => this.renderCategory(c))}
+					<li key="all-services">
+						<div className="container" onClick={listAllServices}>
+							<i className="fa fa-list" />
+							<strong>{t("All Services")}</strong>
+						</div>
+					</li>
+					<hr className="line" />
+					{categories.map(c => this.renderCategory(c))}
 				</ul>
 			</div>
 		</div>
