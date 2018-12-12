@@ -267,7 +267,7 @@ class ServiceDetail extends React.Component {
 							</div>
 						</span>
 					)}
-					{serviceT.address_city && <h4>{t("City")}</h4>}
+					{serviceT.address_city && <h4>{t("Location")}</h4>}
 					{serviceT.address_city && <p>{serviceT.address_city}</p>}
 
 					{serviceT.address && <h3>{t("Address")}</h3>}
