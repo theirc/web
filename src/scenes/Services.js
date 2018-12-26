@@ -25,7 +25,8 @@ class Services extends React.Component {
 		location: null,
 		departmentName: null,
 		department: null,
-		departmentId: null
+		departmentId: null,
+		keepPreviousZoom: true
 	};
 
 	static contextTypes = {
@@ -213,11 +214,14 @@ class Services extends React.Component {
 	}
 	fetchServicesWithinLocation(bbox, location = null) {
 		const { country, language } = this.props;
-
+		
+		
 		return servicesApi
-			.fetchAllServicesInBBox(location || country.fields.slug, language, bbox, 1000, null)
+			.fetchAllServices(location || country.fields.slug, language, null, null)
 			.then(s => s.results)
 			.then(services => ({ services, category: null }));
+		
+		
 	}
 
 	fetchService(props) {
@@ -334,7 +338,8 @@ class Services extends React.Component {
 			}
 		}
 
-		const onGoToMap = () => {			
+		const onGoToMap = () => {	
+			this.setState({keepPreviousZoom: false});		
 			if (this.state.location){
 				goToLocationMap(this.state.location);
 			}else{
@@ -343,6 +348,7 @@ class Services extends React.Component {
 		}	
 
 		const onGoToLocationMap = (location) => {
+			this.setState({keepPreviousZoom: false});
 			goToLocationMap(location);
 		}
 
@@ -366,6 +372,7 @@ class Services extends React.Component {
 										nearby={true}
 										defaultLocation={defaultLocation}
 										categoryName="All Services"
+										keepPreviousZoom = {this.state.keepPreviousZoom}
 										changeCategory={() => { goToLocation(this.state.location) }}
 									/>
 								</div>
@@ -516,7 +523,9 @@ class Services extends React.Component {
 									nearby={true}
 									defaultLocation={defaultLocation}
 									categoryName={this.state.categoryName}
+									directMap = {this.state.directMap}
 									changeCategory={() => { goToLocation(this.state.location) }}
+									
 								/>
 							</div>
 						</Skeleton>
@@ -607,6 +616,7 @@ class Services extends React.Component {
 									nearby={true}
 									defaultLocation={defaultLocation}
 									categoryName="All Services"
+									keepPreviousZoom = {this.state.keepPreviousZoom}
 									changeCategory={() => { goToLocation(this.state.location) }}
 								/>								
 							</div>
@@ -653,6 +663,7 @@ class Services extends React.Component {
 									nearby={true}
 									defaultLocation={defaultLocation}
 									categoryName="All Services"
+									keepPreviousZoom = {this.state.keepPreviousZoom}
 									changeCategory={() => { goToLocation(this.state.location) }}
 								/>
 							</div>
