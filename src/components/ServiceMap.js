@@ -37,7 +37,7 @@ class ServiceIcon extends React.Component {
 		let s = this.props.service;
 		let idx = this.props.idx;
 		let isMainType = this.props.isMainType;
-		let type = s.type;
+		let type = s.type;		
 		if (isMainType == 0){
 			type = s.types[idx].id != s.type.id ? s.types[idx] : null;
 		}
@@ -139,6 +139,7 @@ class ServiceMap extends React.Component {
 		// const {
 		// 	servicesByType
 		// } = this.props;
+		let keepPreviousZoom = this.props.keepPreviousZoom;
 		const {
 			defaultLocation,
 			findServicesInLocation
@@ -146,11 +147,11 @@ class ServiceMap extends React.Component {
 		const sessionStorage = getSessionStorage();
 
         /*
-    RR:
-    Moved the map and cluster group variables to the DidMount event.
+		RR:
+		Moved the map and cluster group variables to the DidMount event.
 
-    This way we can run updates on the content of the map
-    */
+		This way we can run updates on the content of the map
+		*/
 
 		const map = L.citymaps.map("MapCanvas", null, {
 			scrollWheelZoom: true,
@@ -245,7 +246,7 @@ class ServiceMap extends React.Component {
 		// 	defaultLocation,
 		// 	findServicesInLocation
 		// } = this.props;
-
+		let keepPreviousZoom = this.props.keepPreviousZoom;
 		if (this.state.loaded) {
 			if (this.state.services.length) {
 				const markers = this.state.services.map((s, index) => {
@@ -271,6 +272,11 @@ class ServiceMap extends React.Component {
 				});
 				clusters.clearLayers();
 				clusters.addLayers(markers);
+				if (!keepPreviousZoom){
+					let group = new L.featureGroup(markers);
+					this.map.fitBounds(group.getBounds());
+				}
+				
 			} else {
 				console.warn("no services returned");
 			}
