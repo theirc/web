@@ -330,8 +330,8 @@ class Services extends React.Component {
 			this.setState({ departmentId: id, departmentName: name, department: department, location: department });
 		}
 
-		const goToLocations = () => {
-			if (config.showDepartments && !this.state.department){
+		const goToLocations = (iscountrylist) => {		
+			if (config.showDepartments && (!this.state.department || iscountrylist)){
 				goToDepartmentList();
 			}else{
 				goToLocationList();
@@ -567,7 +567,7 @@ class Services extends React.Component {
 									listAllServices={() => listAllServicesinLocation(props.match.params.location)}
 									goToNearby={() => goToNearby()}
 									goToMap={() => onGoToLocationMap(props.match.params.location)}
-									goToLocationList={goToLocations}
+									goToLocationList={()=> {goToLocations(false)}}
 									showLocations={true}
 									location={props.match.params.location}
 									locationName={this.state.locationName}
@@ -684,7 +684,7 @@ class Services extends React.Component {
 									listAllServices={listAllServices}
 									goToNearby={() => goToNearby()}
 									goToMap={() => onGoToMap()}
-									goToLocationList={goToLocations}
+									goToLocationList={()=> {goToLocations(true)}}
 									showLocations={true}
 								/>
 							</div>

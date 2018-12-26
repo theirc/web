@@ -59,14 +59,15 @@ class ServiceItem extends React.Component {
 			// measureDistance
 		} = this.props;
 		// const distance = measureDistance && s.location && measureDistance(s.location);
-		const types = (s.types || []).filter(t => t.id !== s.type.id);
+		const mainType = s.type ? s.type : s.types[0];
+		const types = (s.types || []).filter(t => t.id !== mainType.id);
 		return (
 			<div key={s.id} className="Item" onClick={() => goToService(s.id)}>
 			<div className="Icons">
-				{s.type &&
-						<ServiceIcon key={`si-${s.type.idx}`} idx={s.type.idx} isMainType={1} service={s} />
+				{mainType &&
+						<ServiceIcon key={`si-${mainType.idx}`} idx={0} isMainType={1} service={s} type={mainType} />
 				}
-				{types.map((t, idx) => t && <ServiceIcon key={`si-${idx}`} idx={idx} isMainType={0} service={s} />)}
+				{types.map((t, idx) => t && <ServiceIcon key={`si-${idx}`} idx={idx} isMainType={0} service={s} type={t} />)}
 			</div>
 				<div className="Info">
 					<h1>{s.name}</h1>
@@ -96,6 +97,7 @@ class ServiceMap extends React.Component {
 
 	map = null;
 	clusters = null;
+	bounds = null;
 
 	findUsersPosition(def) {
 		/// Copied it over from the services Component because web apis are fair game in html component
@@ -157,7 +159,8 @@ class ServiceMap extends React.Component {
 			scrollWheelZoom: true,
 			zoomControl: true,
 			// Citymaps will automatically select "global" if language is not supported or undefined.
-			language: this.props.i18n.language
+			language: this.props.i18n.language,
+			worldCopyJump: true
 		});
 
 		let clusters = L.markerClusterGroup({
@@ -166,19 +169,42 @@ class ServiceMap extends React.Component {
 			spiderfyOnMaxZoom: true
 		});
 		map.addLayer(clusters);
-		var locate = L.control.locate();
-		locate.addTo(map);
+		// var locate = L.control.locate();
+		// locate.addTo(map);
 
-		map.on("dragend", a => {
+		if (sessionStorage.serviceMapBounds) {
+			const b = sessionStorage.serviceMapBounds.split(",").map(c => parseFloat(c));
+			const zoom = sessionStorage.serviceMapZoom;
+			
+			map.fitBounds([
+				[b[1], b[0]],
+				[b[3], b[2]]
+			]);
+			map.setZoom(zoom);
+			
+			setTimeout(() => {
+				map.invalidateSize();
+			  }, 0);
+		}
+		
+		map.on("dragend", a => {			
 			if (findServicesInLocation) {
                 /*
         This is the buggest change in the code: I changed the near to a bbox of the map.
 
         Whenever the user moves the map, it will reload the data in the backend
         */
-				const bounds = a.target.getBounds();
-				const sw = bounds.getSouthWest();
-				const ne = bounds.getNorthEast();
+				let bounds = a.target.getBounds();
+				let sw = bounds.getSouthWest();
+				let ne = bounds.getNorthEast();
+				if (sw.lat - ne.lat === 0 || sw.lng - ne.lng === 0){
+					const b = sessionStorage.serviceMapBounds.split(",").map(c => parseFloat(c));
+					let p1 = L.latLng(b[1], b[0]);
+					let p2 = L.latLng(b[3], b[2]);
+					bounds = L.latLngBounds(p1, p2);
+					sw = bounds.getSouthWest();
+				 	ne = bounds.getNorthEast();
+				}
 				findServicesInLocation([sw.lng, sw.lat, ne.lng, ne.lat])
 					.then(({
 						services,
@@ -189,31 +215,46 @@ class ServiceMap extends React.Component {
 							category,
 							loaded: true
 						});
+						map.invalidateSize();
 					})
 					.catch(c => this.setState({
 						errorMessage: c.message,
 						category: null,
 						loaded: true
 					}));
+				if (this.map) {
+					this.map.fitBounds(bounds);
+				}
+				
+				
 			}
 		});
 
 		map.on("moveend", function (e) {
 			var bounds = map.getBounds();
-			sessionStorage.serviceMapBounds = bounds.toBBoxString();
+			const sw = bounds.getSouthWest();
+			const ne = bounds.getNorthEast();
+			if (sw.lat - ne.lat !== 0 && sw.lng - ne.lng !== 0){
+				sessionStorage.serviceMapBounds = bounds.toBBoxString();
+				sessionStorage.serviceMapZoom = map.getZoom();
+			}
+			
 		});
 
-        /*
-    We try to get the user's position first, if that doesn't work, we use the key coordinate for the country
-    Then we make a circle of 100k radius around that point, get the box around it and call it the bounds for the screen.
+			/*
+		We try to get the user's position first, if that doesn't work, we use the key coordinate for the country
+		Then we make a circle of 100k radius around that point, get the box around it and call it the bounds for the screen.
 
-    */
+		*/
 		if (sessionStorage.serviceMapBounds) {
 			const b = sessionStorage.serviceMapBounds.split(",").map(c => parseFloat(c));
+			const zoom = sessionStorage.serviceMapZoom;
+			
 			map.fitBounds([
 				[b[1], b[0]],
 				[b[3], b[2]]
 			]);
+			map.setZoom(zoom);
 			map.fire("dragend");
 		} else {
 			this.findUsersPosition(defaultLocation).then(l => {
@@ -231,7 +272,6 @@ class ServiceMap extends React.Component {
 				map.fire("dragend");
 			});
 		}
-
 		this.clusters = clusters;
 		this.map = map;
 	}
@@ -269,7 +309,7 @@ class ServiceMap extends React.Component {
 					marker.bindPopup(popup);
 
 					return marker;
-				});
+				});				
 				clusters.clearLayers();
 				clusters.addLayers(markers);
 				if (!keepPreviousZoom){
@@ -285,6 +325,7 @@ class ServiceMap extends React.Component {
 
 	componentWillUnmount() {
 		// Cleaning up.
+		this.map.off();
 		this.map.remove();
 	}
 
