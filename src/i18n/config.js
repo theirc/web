@@ -785,7 +785,7 @@ export default {
             "Share on Facebook": "ኣብ ፈይስቡክ ተኻፈል/ሊ",
             "Copied": "ዚተቐድሐ",
             "Locations": "ቦታታት",
-            "Location": "Location",
+            "Location": "ቦታ",
             "Articles": "Articles",
             "No articles found with the keywords used": "No articles found with the keywords used.",
             "No services found with the keywords used.": "No services found with the keywords used.",
