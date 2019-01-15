@@ -176,7 +176,7 @@ class ServiceDetail extends React.Component {
 		};
 		const serviceProviderElement = s => {
 			return s.provider.website ? (
-				<a href={toUrl(s.provider.website)} rel="noopener noreferrer" target="_blank" style={{ color: 'black'}}>
+				<a href={toUrl(s.provider.website)} className="providerName" rel="noopener noreferrer" target="_blank">
 					{s.provider.name}
 				</a>
 			) : (
@@ -369,7 +369,6 @@ class ServiceDetail extends React.Component {
 							<i className="MenuIcon fa fa-facebook-f" aria-hidden="true" />
 						</div>
 					)}
-
 					{service.contact_information && sortedContactInformation.map(ci => this.renderContactInformation(ci,callAux))}
 					{<hr className="divider" />}
 					{(relatedServices || []).length > 0 && (
