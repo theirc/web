@@ -352,7 +352,10 @@ class Services extends React.Component {
 			goToLocationMap(location);
 		}
 
-		return (
+		if(!regions.length)
+			return <div></div>;
+		else
+			return (
 			<div>
 				<Switch>
 					<Route
