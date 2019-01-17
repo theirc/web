@@ -54,7 +54,7 @@ class Footer extends Component {
 					<span className="padded Signpost" style={{ direction: "ltr" }}>
 						<span>
 							{t("Part of the ")}{" "}
-							<a href="http://signpost.ngo" target="_blank" rel="noopener noreferrer">
+							<a href="http://www.signpost.ngo" target="_blank" rel="noopener noreferrer">
 								{" "}
 								Signpost Project
 							</a>{" "}
