@@ -96,7 +96,6 @@ export default class ArticlePage extends Component {
 		
 		Array.from(document.getElementsByClassName('YouTubePlayer') || []).forEach(e=> {
 			var videoId = e.getAttribute('videoId');
-			console.log('YouTubePlayer', videoId);
 			ReactDOM.render(<YouTube videoId={videoId} className={"YouTube"} />, e);
 		});		
 		Array.from(document.getElementsByClassName('FacebookPlayer') || []).forEach(e=> {
