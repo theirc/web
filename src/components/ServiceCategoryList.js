@@ -84,9 +84,6 @@ class ServiceCategoryList extends React.Component {
 				</div>
 			);
 		}
-		// let sortedCategories = _.sortBy(categories || [], c => {
-		// 	return c.number;
-		// });
 		
 		return <div>
 			<HeaderBar key={"Header"} title={t("Service Categories").toUpperCase()}>

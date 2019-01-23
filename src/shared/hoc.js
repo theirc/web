@@ -79,8 +79,8 @@ export function withCountry(WrappedComponent) {
 
         render() {
             let country = this.state.country || this.props.country;
-            if (!country) return null;
-
+            if (!country || !this.state.loaded) return null;
+            
             return <WrappedComponent {...{ country, ...this.props }} />;
         }
     }
