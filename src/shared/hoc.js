@@ -79,7 +79,7 @@ export function withCountry(WrappedComponent) {
 
         render() {
             let country = this.state.country || this.props.country;
-            if (!country || !this.state.loaded) return null;
+            if (!country || !this.state.loaded) return <div className="LoaderContainer"><div className="loader" /></div>;
             
             return <WrappedComponent {...{ country, ...this.props }} />;
         }
