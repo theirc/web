@@ -22,6 +22,11 @@
 	color: yellow;
 }
 
+.LoaderContainer {
+	display: flex;
+	min-height: unquote("calc(100vh)");
+}
+
 .loader {
 	font-size: 10px;
 	margin: 50px auto;
