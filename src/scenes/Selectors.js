@@ -203,16 +203,18 @@ class Selectors extends Component {
 					/>
                 );
             case 2:
-                if (!countryList) return null;
+                if(!countryList) {
+                    return <div className="LoaderContainer"><div className="loader" /></div>;
+                }
+
                 if (countryList.length === 1) {
                     this.selectCountry(countryList[0].slug);
                     return null;
                 } else {
-					if (!loaded) {
-						return (							
-							<div className="loader" />							
-						);
-					}
+                    if(!loaded) {
+                        return <div className="LoaderContainer"><div className="loader" /></div>;
+                    }
+                    
                     return (
                         <CountrySelector
 							onGoTo={slug => {
