@@ -94,15 +94,15 @@ export default class ArticlePage extends Component {
 	injectVideoPlaceholders() {
 		const APP_ID = this.context.config.appId;
 		
-		Array.from(document.getElementsByTagName('YouTube') || []).forEach(e=> {
+		Array.from(document.getElementsByClassName('YouTubePlayer') || []).forEach(e=> {
 			var videoId = e.getAttribute('videoId');
 			ReactDOM.render(<YouTube videoId={videoId} className={"YouTube"} />, e);
 		});		
-		Array.from(document.getElementsByTagName('Facebook') || []).forEach(e=> {
+		Array.from(document.getElementsByClassName('FacebookPlayer') || []).forEach(e=> {
 			var videoId = e.getAttribute('videoId');
 			ReactDOM.render( <FacebookPlayer className={"Facebook"} videoId={videoId} appId={APP_ID} />, e);
 		});
-		Array.from(document.getElementsByTagName('Instagram') || []).forEach(e=> {
+		Array.from(document.getElementsByClassName('InstagramPlayer') || []).forEach(e=> {
 			var videoId = e.getAttribute('videoId');
 			ReactDOM.render( <InstagramEmbed className={"Instagram"} url={`${IG_URL}${videoId}`} />, e);
 		});

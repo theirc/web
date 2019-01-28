@@ -67,23 +67,6 @@ class CountrySelector extends Component {
 						{c.fields.name}
 					</button>
 				))}
-				{unavailableCountryList.length > 0 && (
-					<div className="other">
-						<h1>{t("Countries with information in other languages")}</h1>
-					</div>
-					)}
-					{unavailableCountryList.map((c, i) => (
-					<button
-						disabled={true}
-						className="item "
-						key={c.id}
-						onClick={() => {
-							onGoTo(c.fields.slug);
-						}}
-					>
-						{c.fields.name}
-					</button>
-				))}
 					{unavailableCountryList.length > 0 && (<button
 						className="item "
 						onClick={() => {

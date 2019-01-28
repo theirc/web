@@ -86,7 +86,7 @@ class ServiceDetail extends React.Component {
 			fetchServicesInSameLocation().then(relatedServices => this.setState({ relatedServices }));
 		}
 	}
-	renderContactInformation(ci) {
+	renderContactInformation(ci,callAux) {
 		let { text, type } = ci;
 		let typography;
 		let action;
@@ -116,7 +116,7 @@ class ServiceDetail extends React.Component {
 			case "phone":
 				typography = "MenuIcon fa fa-phone";
 				action = `tel:${text}`;
-				typeText = "Call: ";
+				typeText = callAux + ":";
 				break;
 			case "email":
 				typography = "MenuIcon fa fa-envelope-o";
@@ -132,7 +132,7 @@ class ServiceDetail extends React.Component {
 				<div className="Selector" onClick={() => window.open(action)}>
 					<h1>
 						<div style={{
-							display: 'inline-block', direction: 'ltr', width: '100%',
+							display: 'inline-block', direction: 'ltr', width: '20%',
 							overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
 						}}>
 							{typeText}{text}
@@ -161,7 +161,7 @@ class ServiceDetail extends React.Component {
 		const hasHours = o => {
 			return o["24/7"] || weekDays.map(w => o[w.toLowerCase()].map(h => !!(h.open || h.close)).indexOf(true) > -1).indexOf(true) > -1;
 		};
-
+		const callAux = t("Call");
 		const mLocale = d => {
 			let a = moment(d)
 				.locale(language)
@@ -176,7 +176,7 @@ class ServiceDetail extends React.Component {
 		};
 		const serviceProviderElement = s => {
 			return s.provider.website ? (
-				<a href={toUrl(s.provider.website)} rel="noopener noreferrer" target="_blank">
+				<a href={toUrl(s.provider.website)} className="providerName" rel="noopener noreferrer" target="_blank">
 					{s.provider.name}
 				</a>
 			) : (
@@ -222,7 +222,6 @@ class ServiceDetail extends React.Component {
 			languages_spoken: service[`languages_spoken_${language}`],
 			name: service[`name_${language}`],
 		};
-
 		let fullAddress = [serviceT.address, serviceT.address_floor].filter(val => val).join(', ');
 
 		let sortedContactInformation = _.sortBy(service.contact_information || [], ci => {
@@ -267,7 +266,7 @@ class ServiceDetail extends React.Component {
 							</div>
 						</span>
 					)}
-					{serviceT.address_city && <h4>{t("City")}</h4>}
+					{serviceT.address_city && <h4>{t("Location")}</h4>}
 					{serviceT.address_city && <p>{serviceT.address_city}</p>}
 
 					{serviceT.address && <h3>{t("Address")}</h3>}
@@ -370,8 +369,7 @@ class ServiceDetail extends React.Component {
 							<i className="MenuIcon fa fa-facebook-f" aria-hidden="true" />
 						</div>
 					)}
-
-					{service.contact_information && sortedContactInformation.map(ci => this.renderContactInformation(ci))}
+					{service.contact_information && sortedContactInformation.map(ci => this.renderContactInformation(ci,callAux))}
 					{<hr className="divider" />}
 					{(relatedServices || []).length > 0 && (
 					<div className="selector" onClick={() => this.showServices()}>
