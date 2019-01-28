@@ -289,7 +289,8 @@ class ServiceMap extends React.Component {
 		let keepPreviousZoom = this.props.keepPreviousZoom;
 		if (this.state.loaded) {
 			if (this.state.services.length) {
-				const markers = this.state.services.map((s, index) => {
+				let locationServices = this.state.services.filter(s => s.location != null);
+				const markers = locationServices.map((s, index) => {					
 					let ll = s.location.coordinates.slice().reverse();
 					let markerDiv = ReactDOMServer.renderToString(<ServiceIcon idx={0} service={s} />);
 					let icon = L.divIcon({
@@ -308,7 +309,7 @@ class ServiceMap extends React.Component {
 					}).setContent(popupEl);
 					marker.bindPopup(popup);
 
-					return marker;
+					return marker;										
 				});				
 				clusters.clearLayers();
 				clusters.addLayers(markers);
