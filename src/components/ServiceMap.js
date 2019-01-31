@@ -187,8 +187,8 @@ class ServiceMap extends React.Component {
 			  }, 0);
 		}
 		
-		map.on("dragend", a => {			
-			if (findServicesInLocation) {
+		map.on("dragend", a => {		
+			if (findServicesInLocation && this.state.services.length === 0) {
                 /*
         This is the buggest change in the code: I changed the near to a bbox of the map.
 
