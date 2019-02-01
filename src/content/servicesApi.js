@@ -114,8 +114,9 @@ module.exports = {
 				(categoryId || "") +
 				(searchTerm ? "&search=" + searchTerm : "");
 				
-				let sl = JSON.parse(sessionStorage[`serviceList`]);				
-				if (sl !== undefined && sl.country === country && sl.language === language && sl.categoryId === categoryId && (sl.searchTerm === null || sl.searchTerm === undefined)){
+				let sl = sessionStorage[`serviceList`] !==  undefined ? JSON.parse(sessionStorage[`serviceList`]) : null;		
+				
+				if (sl && sl.country === country && sl.language === language && sl.categoryId === categoryId && (sl.searchTerm === null || sl.searchTerm === undefined)){
 					resolve(sl.services);
 					
 				}else{
