@@ -197,19 +197,6 @@ class Services extends React.Component {
 
 	fetchServicesWithin(bbox, category = null) {
 		const { country, language } = this.props;
-		if (sessionStorage[`serviceList`]){
-			let co = country.fields.slug;
-			// let sl = JSON.parse(sessionStorage[`serviceList`]);
-			// console.log(sl, co, category, language);
-			// console.log("country", sl.country === co);
-			// console.log("language", sl.language === language);
-			// console.log("categoryId", sl.categoryId === category);
-			// console.log("searchTerm", sl.searchTerm === null);
-			// if (sl.country === co && sl.language === language && sl.categoryId === category && sl.searchTerm === null){
-			// 	console.log("TRUE!");
-			// 	return sl.services;
-			// }
-		}
 		return servicesApi
 			.fetchAllServices(country.fields.slug, language, category, null)
 			.then(s => s.results)
@@ -220,9 +207,14 @@ class Services extends React.Component {
 		const { country, language } = this.props;
 
 		return servicesApi
-			.fetchAllServicesInBBox(location || country.fields.slug, language, bbox, 1000, category)
+			.fetchAllServices(location || country.fields.slug, language, category, null)
 			.then(s => s.results)
 			.then(services => ({ services, category: null }));
+
+		// return servicesApi
+		// 	.fetchAllServicesInBBox(location || country.fields.slug, language, bbox, 1000, category)
+		// 	.then(s => s.results)
+		// 	.then(services => ({ services, category: null }));
 	}
 	fetchServicesWithinLocation(bbox, location = null) {
 		const { country, language } = this.props;
