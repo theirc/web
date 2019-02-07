@@ -146,7 +146,11 @@ class ServiceDetail extends React.Component {
 	
 	render() {
 		const { service, relatedServices } = this.state;
-		const { t, language, goToService } = this.props;
+		const { t, language, goToService, ss } = this.props;
+		const url = window.location.href.indexOf("italy");
+		if(url != -1 && (language == "ti" || language == "fr")){
+			return null;
+		}
 		const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 		if (!service) {
 			return (

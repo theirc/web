@@ -186,11 +186,13 @@ class Selectors extends Component {
             config
         } = this.context;
         const {
-            languages
-        } = config;
-        const {
             language
         } = this.props
+        let currentCountry = sessionStorage.getItem('countryy');
+        let languages = config.languages;
+        if(currentCountry == 'Italy'){
+            languages = config.languages.filter(a => a[0] != 'fr' && a[0] != 'ti')
+		}
 
         switch (currentPage) {
             case 1:
@@ -199,7 +201,7 @@ class Selectors extends Component {
 						languages={languages}
 						onSelectLanguage={l => {
 							this.selectLanguage(l);
-						}}
+                        }}
 					/>
                 );
             case 2:

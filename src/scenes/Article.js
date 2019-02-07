@@ -72,6 +72,10 @@ class Article extends React.Component {
 		}
 
 		const other = articles.filter(a => a.sys.id === article.sys.id);
+		const url = window.location.href.indexOf("italy");
+		if(url != -1 && (language == "ti" || language == "fr")){
+			return null;
+		}
 		
 		return (
 			<Placeholder>

@@ -39,6 +39,9 @@ class CountrySelector extends Component {
         let regionList = this.props.regionList.filter(r => r.languages_available.split(',').map(a => a.trim()).indexOf(language) > -1).map(r => r.slug);
         let availableCountryList = countryList.filter(c => regionList.indexOf(c.fields.slug) > -1 &&  config.hideCountries.indexOf(c.fields.slug) === -1);
         let unavailableCountryList = countryList.filter(c => regionList.indexOf(c.fields.slug) === -1);
+        if(language == "ti" || language == "fr"){
+        availableCountryList = availableCountryList.filter(c => c.name.indexOf("Ital")!=0);
+        }
 
         if (global.navigator && navigator.geolocation) {
             countryList.push({
@@ -49,7 +52,9 @@ class CountrySelector extends Component {
                 },
             });
         }
-
+        function clickk(name){
+            sessionStorage.setItem('countryy',name);
+        }
         return (
             <div className="CountrySelector">
 				<div className="text">
@@ -61,10 +66,17 @@ class CountrySelector extends Component {
 						className="item "
 						key={c.id}
 						onClick={() => {
+                            clickk(c.fields.name);
 							onGoTo(c.fields.slug);
+<<<<<<< Updated upstream
 						}}
 					>
 						{c.fields.name}
+=======
+                        }}
+					>
+                        {c.fields.name}
+>>>>>>> Stashed changes
 					</button>
 				))}
 				{unavailableCountryList.length > 0 && (
