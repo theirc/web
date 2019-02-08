@@ -54,6 +54,11 @@ class Article extends React.Component {
 
 		if (!article || !category) return null; //<div style={{ height: 100 }} />;
 
+		// SP-354 disable tigrinya and french from italy
+		let isItaly = window.location.href.indexOf("italy") >= 0;
+		if(isItaly  && ['ti', 'fr'].indexOf(language) >= 0) return null;
+		
+
 		let next = null;
 		let previous = null;
 
@@ -72,11 +77,7 @@ class Article extends React.Component {
 		}
 
 		const other = articles.filter(a => a.sys.id === article.sys.id);
-		const url = window.location.href.indexOf("italy");
-		if(url != -1 && (language == "ti" || language == "fr")){
-			return null;
-		}
-		
+				
 		return (
 			<Placeholder>
 				<ArticlePage key={"Article"} direction={direction} category={category} other={other} article={article} loading={loading} onNavigate={onNavigate} />

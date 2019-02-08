@@ -38,9 +38,11 @@ class CountrySelector extends Component {
         let countryList = this.props.countryList.map(_.identity);
         let regionList = this.props.regionList.filter(r => r.languages_available.split(',').map(a => a.trim()).indexOf(language) > -1).map(r => r.slug);
         let availableCountryList = countryList.filter(c => regionList.indexOf(c.fields.slug) > -1 &&  config.hideCountries.indexOf(c.fields.slug) === -1);
-        let unavailableCountryList = countryList.filter(c => regionList.indexOf(c.fields.slug) === -1);
-        if(language == "ti" || language == "fr"){
-        availableCountryList = availableCountryList.filter(c => c.name.indexOf("Ital")!=0);
+		let unavailableCountryList = countryList.filter(c => regionList.indexOf(c.fields.slug) === -1);
+		
+		// SP-354 disable tigrinya and french from italy
+        if(['ti', 'fr'].indexOf(language) >= 0) {
+        	availableCountryList = availableCountryList.filter(c => c.name.indexOf("Ital")!=0);
         }
 
         if (global.navigator && navigator.geolocation) {
@@ -51,10 +53,8 @@ class CountrySelector extends Component {
                     name: t("Detect My Location"),
                 },
             });
-        }
-        function clickk(name){
-            sessionStorage.setItem('countryy',name);
-        }
+		}
+		
         return (
             <div className="CountrySelector">
 				<div className="text">
@@ -66,17 +66,11 @@ class CountrySelector extends Component {
 						className="item "
 						key={c.id}
 						onClick={() => {
-                            clickk(c.fields.name);
+                            sessionStorage.setItem('current-country', c.fields.name);
 							onGoTo(c.fields.slug);
-<<<<<<< Updated upstream
 						}}
 					>
 						{c.fields.name}
-=======
-                        }}
-					>
-                        {c.fields.name}
->>>>>>> Stashed changes
 					</button>
 				))}
 				{unavailableCountryList.length > 0 && (
