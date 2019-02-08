@@ -191,7 +191,7 @@ class Selectors extends Component {
         
         // SP-354 disable tigrinya and french from italy
         let currentCountry = sessionStorage.getItem('current-country');
-        let languages = currentCountry !== 'Italy' ? config.languages.filter(a => a[0] != 'fr' && a[0] != 'ti') : config.languages;
+        let languages = currentCountry === 'Italy' ? config.languages.filter(a => a[0] != 'fr' && a[0] != 'ti') : config.languages;
 
         switch (currentPage) {
             case 1:
