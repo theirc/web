@@ -133,7 +133,7 @@ class ServiceDetail extends React.Component {
 					<h1>
 						<div style={{
 							display: 'inline-block', direction: 'ltr', width: '20%',
-							overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
+							overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis', width:'650px'
 						}}>
 							{typeText}{text}
 						</div>
