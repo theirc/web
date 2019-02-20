@@ -55,7 +55,6 @@ module.exports = {
 	},
 	fetchCountries(language) {
 		return new Promise((resolve, reject) => {
-			const sessionStorage = getSessionStorage();
 			const localStorage = getLocalStorage();
 			if (localStorage[`${language}-countries`]) {
 				resolve(JSON.parse(localStorage[`${language}-countries`]));
@@ -104,6 +103,7 @@ module.exports = {
 			let region = _.first(regions.filter(c => c.slug === country));
 			filter = region.level === 3 ? "with-parents" : "relatives" ;
 		}
+		
 		return new Promise((resolve, reject) => {
 			var requestUrl =
 				"/services/searchlist/?filter="+ filter +"&geographic_region=" +
@@ -113,18 +113,36 @@ module.exports = {
 				"&type_numbers=" +
 				(categoryId || "") +
 				(searchTerm ? "&search=" + searchTerm : "");
-			request
-				.get(RI_URL + requestUrl)
-				.set("Accept-Language", language)
-				.end((err, res) => {
-					if (err) {
-						reject(err);
-						return;
-					}
-					let services = res.body;
+				
+				let sl = sessionStorage[`serviceList`] !==  undefined ? JSON.parse(sessionStorage[`serviceList`]) : null;		
+				
+				if (sl && sl.country === country && sl.language === language && sl.categoryId === categoryId && (sl.searchTerm === null || sl.searchTerm === undefined)){
+					resolve(sl.services);
+					
+				}else{
+					request
+					.get(RI_URL + requestUrl)
+					.set("Accept-Language", language)
+					.end((err, res) => {
+						if (err) {
+							reject(err);
+							return;
+						}
+						let servicesList = {
+							country: country,
+							language: language,
+							categoryId: categoryId,
+							searchTerm: searchTerm,
+							services: res.body
+						};
+						sessionStorage[`serviceList`] = JSON.stringify(servicesList);
+						let services = res.body;
 
-					resolve(services);
-				});
+						resolve(services);
+					});
+
+				}
+			
 		});
 	},
 	fetchAllServicesNearby(country, language, position = [], distance = 5, pageSize = 50) {
