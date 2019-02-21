@@ -186,7 +186,7 @@ class ServiceMap extends React.Component {
 			
 			setTimeout(() => {
 				map.invalidateSize();
-			  }, 0);
+			  }, 500);
 		}
 		
 		map.on("dragend", a => {		

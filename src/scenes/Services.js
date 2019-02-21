@@ -331,7 +331,7 @@ class Services extends React.Component {
 		}
 
 		const onOpenDepartment = (id, department, name) => {
-			this.setState({ departmentId: id, departmentName: name, department: department, location: department });
+			this.setState({ departmentId: id, departmentName: name, department: department, location: department, locationName: null });
 		}
 
 		const goToLocations = (iscountrylist) => {		
