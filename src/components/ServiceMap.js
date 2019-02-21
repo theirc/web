@@ -83,7 +83,7 @@ class ServiceItem extends React.Component {
 						</address>
 					}
 				</div>
-				<i className="material-icons" />
+				<i className="material-icons" id="goToServiceIcon"/>
 			</div>
 		);
 	}
