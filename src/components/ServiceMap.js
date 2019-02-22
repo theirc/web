@@ -77,9 +77,9 @@ class ServiceItem extends React.Component {
 					<address className="fullAddress">
 						{s.address}
 					</address>
-					{s.region.level > 1 &&
+					{s.address_city &&
 						<address className="regionTitle">
-							{s.region.name}
+							{s.address_city}
 						</address>
 					}
 				</div>
