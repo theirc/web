@@ -186,7 +186,7 @@ class ServiceMap extends React.Component {
 			
 			setTimeout(() => {
 				map.invalidateSize();
-			  }, 0);
+			  }, 500);
 		}
 		
 		map.on("dragend", a => {		
@@ -294,9 +294,6 @@ class ServiceMap extends React.Component {
 				let locationServices = this.state.services.filter(s => s.location != null);
 				const markers = locationServices.map((s, index) => {					
 					let ll = s.location.coordinates.slice().reverse();
-					if (ll[1] > 0){
-						console.log(s.id, ll);
-					}
 					const mainType = s.type ? s.type : s.types[0];
 					let markerDiv = ReactDOMServer.renderToString(<ServiceIcon idx={0} service={s} type={mainType} />);
 					let icon = L.divIcon({
