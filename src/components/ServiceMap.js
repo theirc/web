@@ -305,6 +305,7 @@ class ServiceMap extends React.Component {
 						title: s.name,
 						icon: icon
 					});
+					marker.on('click', () => { console.log(s.id)});
 					let popupEl = document.createElement("div");
 					ReactDOM.render(<ServiceItem service={s} {...this.props} />, popupEl);
 					let popup = L.popup({
