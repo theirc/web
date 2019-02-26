@@ -342,9 +342,9 @@ class Services extends React.Component {
 			}
 		}
 
-		const onGoToMap = () => {	
+		const onGoToMap = (isCountryWide = null) => {	
 			this.setState({keepPreviousZoom: false});		
-			if (this.state.location){
+			if (!isCountryWide && this.state.location){
 				goToLocationMap(this.state.location);
 			}else{
 				goToMap();
@@ -687,7 +687,7 @@ class Services extends React.Component {
 									onSelectCategory={onSelectCategory}
 									listAllServices={listAllServices}
 									goToNearby={() => goToNearby()}
-									goToMap={() => onGoToMap()}
+									goToMap={() => onGoToMap(true)}
 									goToLocationList={()=> {goToLocations(true)}}
 									showLocations={true}
 								/>
