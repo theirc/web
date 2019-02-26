@@ -37,10 +37,10 @@ class ServiceIcon extends React.Component {
 		let s = this.props.service;
 		let idx = this.props.idx;
 		let isMainType = this.props.isMainType;
-		let type = s.type;		
-		if (isMainType == 0){
-			type = s.types[idx].id != s.type.id ? s.types[idx] : null;
-		}
+		let type = this.props.type;	
+		// if (isMainType === 0 && s.type){
+		// 	type = s.types[idx].id !== s.type.id ? s.types[idx] : null;
+		// }
 		return type ? (
 			<div className="Icon" key={`${s.id}-${idx}`}>
 				<i className={iconWithPrefix(type.vector_icon)} style={categoryStyle(type.color)} />
@@ -60,7 +60,9 @@ class ServiceItem extends React.Component {
 		} = this.props;
 		// const distance = measureDistance && s.location && measureDistance(s.location);
 		const mainType = s.type ? s.type : s.types[0];
+		
 		const types = (s.types || []).filter(t => t.id !== mainType.id);
+		
 		return (
 			<div key={s.id} className="Item" onClick={() => goToService(s.id)}>
 			<div className="Icons">
@@ -184,11 +186,11 @@ class ServiceMap extends React.Component {
 			
 			setTimeout(() => {
 				map.invalidateSize();
-			  }, 0);
+			  }, 500);
 		}
 		
-		map.on("dragend", a => {			
-			if (findServicesInLocation) {
+		map.on("dragend", a => {		
+			if (findServicesInLocation && this.state.services.length === 0) {
                 /*
         This is the buggest change in the code: I changed the near to a bbox of the map.
 
@@ -289,9 +291,11 @@ class ServiceMap extends React.Component {
 		let keepPreviousZoom = this.props.keepPreviousZoom;
 		if (this.state.loaded) {
 			if (this.state.services.length) {
-				const markers = this.state.services.map((s, index) => {
+				let locationServices = this.state.services.filter(s => s.location != null);
+				const markers = locationServices.map((s, index) => {					
 					let ll = s.location.coordinates.slice().reverse();
-					let markerDiv = ReactDOMServer.renderToString(<ServiceIcon idx={0} service={s} />);
+					const mainType = s.type ? s.type : s.types[0];
+					let markerDiv = ReactDOMServer.renderToString(<ServiceIcon idx={0} service={s} type={mainType} />);
 					let icon = L.divIcon({
 						html: markerDiv,
 						iconAnchor: [20, 20],
@@ -301,6 +305,7 @@ class ServiceMap extends React.Component {
 						title: s.name,
 						icon: icon
 					});
+					marker.on('click', () => { console.log(s.id)});
 					let popupEl = document.createElement("div");
 					ReactDOM.render(<ServiceItem service={s} {...this.props} />, popupEl);
 					let popup = L.popup({
@@ -308,7 +313,7 @@ class ServiceMap extends React.Component {
 					}).setContent(popupEl);
 					marker.bindPopup(popup);
 
-					return marker;
+					return marker;										
 				});				
 				clusters.clearLayers();
 				clusters.addLayers(markers);

@@ -133,7 +133,7 @@ class ServiceDetail extends React.Component {
 					<h1>
 						<div style={{
 							display: 'inline-block', direction: 'ltr', width: '20%',
-							overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
+							overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis', width:'650px'
 						}}>
 							{typeText}{text}
 						</div>
@@ -147,6 +147,11 @@ class ServiceDetail extends React.Component {
 	render() {
 		const { service, relatedServices } = this.state;
 		const { t, language, goToService } = this.props;
+		
+		// SP-354 disable tigrinya and french from italy
+		const isItaly = window.location.href.indexOf("/italy/") >= 0;
+		if(isItaly  && ['ti', 'fr'].indexOf(language) >= 0) return null;
+
 		const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 		if (!service) {
 			return (

@@ -38,7 +38,12 @@ class CountrySelector extends Component {
         let countryList = this.props.countryList.map(_.identity);
         let regionList = this.props.regionList.filter(r => r.languages_available.split(',').map(a => a.trim()).indexOf(language) > -1).map(r => r.slug);
         let availableCountryList = countryList.filter(c => regionList.indexOf(c.fields.slug) > -1 &&  config.hideCountries.indexOf(c.fields.slug) === -1);
-        let unavailableCountryList = countryList.filter(c => regionList.indexOf(c.fields.slug) === -1);
+		let unavailableCountryList = countryList.filter(c => regionList.indexOf(c.fields.slug) === -1);
+		
+		// SP-354 disable tigrinya and french from italy
+        if(['ti', 'fr'].indexOf(language) >= 0) {
+        	availableCountryList = availableCountryList.filter(c => c.name.indexOf("Ital")!=0);
+        }
 
         if (global.navigator && navigator.geolocation) {
             countryList.push({
@@ -48,8 +53,8 @@ class CountrySelector extends Component {
                     name: t("Detect My Location"),
                 },
             });
-        }
-
+		}
+		
         return (
             <div className="CountrySelector">
 				<div className="text">
@@ -61,6 +66,7 @@ class CountrySelector extends Component {
 						className="item "
 						key={c.id}
 						onClick={() => {
+                            sessionStorage.setItem('current-country', c.fields.name);
 							onGoTo(c.fields.slug);
 						}}
 					>

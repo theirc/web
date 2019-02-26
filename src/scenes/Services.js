@@ -197,20 +197,24 @@ class Services extends React.Component {
 
 	fetchServicesWithin(bbox, category = null) {
 		const { country, language } = this.props;
-
 		return servicesApi
-			.fetchAllServicesInBBox(country.fields.slug, language, bbox, 1000, category)
+			.fetchAllServices(country.fields.slug, language, category, null)
 			.then(s => s.results)
-			.then(services => ({ services, category: null }));
+			.then(services => ({ services, category: category }));
 	}
 
 	fetchServicesWithinCategoryLocation(bbox, location = null, category = null) {
 		const { country, language } = this.props;
 
 		return servicesApi
-			.fetchAllServicesInBBox(location || country.fields.slug, language, bbox, 1000, category)
+			.fetchAllServices(location || country.fields.slug, language, category, null)
 			.then(s => s.results)
 			.then(services => ({ services, category: null }));
+
+		// return servicesApi
+		// 	.fetchAllServicesInBBox(location || country.fields.slug, language, bbox, 1000, category)
+		// 	.then(s => s.results)
+		// 	.then(services => ({ services, category: null }));
 	}
 	fetchServicesWithinLocation(bbox, location = null) {
 		const { country, language } = this.props;
@@ -327,7 +331,7 @@ class Services extends React.Component {
 		}
 
 		const onOpenDepartment = (id, department, name) => {
-			this.setState({ departmentId: id, departmentName: name, department: department, location: department });
+			this.setState({ departmentId: id, departmentName: name, department: department, location: department, locationName: null });
 		}
 
 		const goToLocations = (iscountrylist) => {		
@@ -338,9 +342,9 @@ class Services extends React.Component {
 			}
 		}
 
-		const onGoToMap = () => {	
+		const onGoToMap = (isCountryWide = null) => {	
 			this.setState({keepPreviousZoom: false});		
-			if (this.state.location){
+			if (!isCountryWide && this.state.location){
 				goToLocationMap(this.state.location);
 			}else{
 				goToMap();
@@ -683,7 +687,7 @@ class Services extends React.Component {
 									onSelectCategory={onSelectCategory}
 									listAllServices={listAllServices}
 									goToNearby={() => goToNearby()}
-									goToMap={() => onGoToMap()}
+									goToMap={() => onGoToMap(true)}
 									goToLocationList={()=> {goToLocations(true)}}
 									showLocations={true}
 								/>
