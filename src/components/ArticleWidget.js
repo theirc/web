@@ -34,7 +34,7 @@ class ArticleWidget extends Component {
 	}
 
 	render() {
-		const { country, onNavigate, t, article, category, showHero, showFullArticle } = this.props;
+		const { country, onNavigate, t, article, category, showHero, showFullArticle, language } = this.props;
 		if (!article) {
 			// Anti pattern, but saves 1 or more ifs.
 			return null;
@@ -72,7 +72,7 @@ class ArticleWidget extends Component {
 						<a
 							href="#"
 							onClick={() => {
-								onNavigate(`/${country.fields.slug}/${categorySlug}/${article.fields.slug}`);
+								onNavigate(`/${country.fields.slug}/${categorySlug}/${article.fields.slug}/language=${language}`);
 								return false;
 							}}
 						>

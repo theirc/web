@@ -34,11 +34,11 @@ class HomeWidget extends Component {
 	}
 
 	renderLocalGuide(guideItems) {
-		const { country, onNavigate } = this.props;
+		const { country, onNavigate, language } = this.props;
 
 		/*jshint ignore:start*/
 		/*eslint-disable*/
-		return <LocalGuideWidget country={country} onNavigate={onNavigate} guideItems={guideItems} />;
+		return <LocalGuideWidget country={country} onNavigate={onNavigate} language={language} guideItems={guideItems} />;
 		/*eslint-enable*/
 		/*jshint ignore:end*/
 	}
@@ -48,7 +48,7 @@ class HomeWidget extends Component {
 
 		/*jshint ignore:start*/
 		/*eslint-disable*/
-		return <TopCategoriesWidget country={country} onNavigate={onNavigate} categories={categories} />;
+		return <TopCategoriesWidget country={country} onNavigate={onNavigate} language={language} categories={categories} />;
 		/*eslint-enable*/
 		/*jshint ignore:end*/
 	}
@@ -58,7 +58,7 @@ class HomeWidget extends Component {
 
 		/*jshint ignore:start*/
 		/*eslint-disable*/
-		return <ArticleWidget country={country} onNavigate={onNavigate} article={article} category={category} showHero={showHero} showFullArticle={showFullArticle} />;
+		return <ArticleWidget country={country} onNavigate={onNavigate} article={article} language={language} category={category} showHero={showHero} showFullArticle={showFullArticle} />;
 		/*eslint-enable*/
 		/*jshint ignore:end*/
 	}
@@ -68,7 +68,7 @@ class HomeWidget extends Component {
 
 		/*jshint ignore:start*/
 		/*eslint-disable*/
-		return <CategoryWidget country={country} onNavigate={onNavigate} c={c} />;
+		return <CategoryWidget country={country} onNavigate={onNavigate} language={language} c={c} />;
 		/*eslint-enable*/
 		/*jshint ignore:end*/
 	}
@@ -95,7 +95,7 @@ class HomeWidget extends Component {
 							.join("/");
 				}
 				// eslint-disable-next-line
-				anchor.href = "#";
+				anchor.href = "#/";
 				anchor.onclick = () => {
 					onNavigate(href);
 					return false;
@@ -127,7 +127,7 @@ class HomeWidget extends Component {
 
 			return (
 				<div ref={r => (this._ref = r)} className={["HomeWidget", content.fields.highlighted ? "Highlighted" : "", `CT-${content.sys.contentType.sys.id}`].join(" ")}>
-					{rendered}
+					{rendered} 
 				</div>
 			);
 		} catch (e) {
