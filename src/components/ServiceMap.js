@@ -77,13 +77,13 @@ class ServiceItem extends React.Component {
 					<address className="fullAddress">
 						{s.address}
 					</address>
-					{s.region.level > 1 &&
+					{s.address_city &&
 						<address className="regionTitle">
-							{s.region.name}
+							{s.address_city}
 						</address>
 					}
 				</div>
-				<i className="material-icons" />
+				<i className="material-icons" id="goToServiceIcon"/>
 			</div>
 		);
 	}
@@ -305,6 +305,7 @@ class ServiceMap extends React.Component {
 						title: s.name,
 						icon: icon
 					});
+					marker.on('click', () => { console.log(s.id)});
 					let popupEl = document.createElement("div");
 					ReactDOM.render(<ServiceItem service={s} {...this.props} />, popupEl);
 					let popup = L.popup({

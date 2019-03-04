@@ -54,7 +54,6 @@ class CountryHome extends React.Component {
 		if (!country || !country.fields.home) {
 			return null;
 		}
-
 		return (
 			<HomeWidgetCollection key={"HomeWidgetCollection"}>
 				{country.fields.home.map(e => <HomeWidget direction={direction} onNavigate={onNavigate} language={language} country={country} content={e} key={e.sys.id} />)}
