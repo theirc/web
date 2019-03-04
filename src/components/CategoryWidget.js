@@ -23,7 +23,7 @@ class CategoryWidget extends Component {
 				<p dangerouslySetInnerHTML={{ __html: html }} />
 				<s>
 					<a
-						href="#"
+						href="#/"
 						onClick={() => {
 							onNavigate(`/${country.fields.slug}/${c.fields.slug}/${article.fields.slug}`);
 							return false;

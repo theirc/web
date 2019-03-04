@@ -42,7 +42,7 @@ class CountrySelector extends Component {
 		
 		// SP-354 disable tigrinya and french from italy
         if(['ti', 'fr'].indexOf(language) >= 0) {
-        	availableCountryList = availableCountryList.filter(c => c.name.indexOf("Ital")!=0);
+        	availableCountryList = availableCountryList.filter(c => c.name.indexOf("Ital")!== 0);
         }
 
         if (global.navigator && navigator.geolocation) {

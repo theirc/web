@@ -44,7 +44,7 @@ class HomeWidget extends Component {
 	}
 
 	renderTopCategories(categories) {
-		const { country, onNavigate } = this.props;
+		const { country, onNavigate, language  } = this.props;
 
 		/*jshint ignore:start*/
 		/*eslint-disable*/
@@ -54,7 +54,7 @@ class HomeWidget extends Component {
 	}
 
 	renderArticle(article, category, showHero = true, showFullArticle = false) {
-		const { country, onNavigate } = this.props;
+		const { country, onNavigate, language  } = this.props;
 
 		/*jshint ignore:start*/
 		/*eslint-disable*/
@@ -64,7 +64,7 @@ class HomeWidget extends Component {
 	}
 
 	renderCategory(c) {
-		const { country, onNavigate } = this.props;
+		const { country, onNavigate, language  } = this.props;
 
 		/*jshint ignore:start*/
 		/*eslint-disable*/

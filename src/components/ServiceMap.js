@@ -36,11 +36,7 @@ class ServiceIcon extends React.Component {
 	render() {
 		let s = this.props.service;
 		let idx = this.props.idx;
-		let isMainType = this.props.isMainType;
 		let type = this.props.type;	
-		// if (isMainType === 0 && s.type){
-		// 	type = s.types[idx].id !== s.type.id ? s.types[idx] : null;
-		// }
 		return type ? (
 			<div className="Icon" key={`${s.id}-${idx}`}>
 				<i className={iconWithPrefix(type.vector_icon)} style={categoryStyle(type.color)} />
@@ -140,10 +136,6 @@ class ServiceMap extends React.Component {
 
 	componentDidMount() {
 		const L = window.Leaflet;
-		// const {
-		// 	servicesByType
-		// } = this.props;
-		let keepPreviousZoom = this.props.keepPreviousZoom;
 		const {
 			defaultLocation,
 			findServicesInLocation

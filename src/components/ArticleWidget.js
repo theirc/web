@@ -70,7 +70,7 @@ class ArticleWidget extends Component {
 				{!showFullArt && (
 					<s className="Read-More">
 						<a
-							href="#"
+							href="#/"
 							onClick={() => {
 								onNavigate(`/${country.fields.slug}/${categorySlug}/${article.fields.slug}/language=${language}`);
 								return false;
