@@ -132,7 +132,7 @@ class ServiceDetail extends React.Component {
 				<div className="Selector" onClick={() => window.open(action)}>
 					<h1>
 						<div style={{
-							display: 'inline-block', direction: 'ltr', 
+							display: 'inline-block', direction: 'ltr'
 							overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis', width:'650px'
 						}}>
 							{typeText}{text}
