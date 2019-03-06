@@ -392,7 +392,7 @@ class ServiceDetail extends React.Component {
 									<div className="selector">
 										<h1 href="#/" ><div style={{
 											display: 'inline-block', direction: 'ltr', maxWidth: '60%',
-											overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
+											overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis', width:'650px'
 										}}>{r.name}</div></h1>
 										<i className="MenuIcon fa fa-angle-right" aria-hidden="true" />
 									</div>
