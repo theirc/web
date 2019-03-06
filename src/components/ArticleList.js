@@ -31,7 +31,7 @@ class ArticleList extends React.Component {
                                     <p dangerouslySetInnerHTML={{ __html: md.render(article.fields.lead)}} />
                                 </div>
                                 <s className="Read-More">
-                                    <a href="#">Read More</a>
+                                    <a href="#/">Read More</a>
                                 </s>
                             </div>,
                         ];

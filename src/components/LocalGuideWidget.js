@@ -12,7 +12,7 @@ class LocalGuideWidget extends Component {
 			<div className="LocalGuide">
 				<s>
 					<a
-						href="#"
+						href="#/"
 						onClick={() => {
 							onNavigate(`/${country.fields.slug}/services`);
 							return false;

@@ -132,7 +132,7 @@ class ServiceDetail extends React.Component {
 				<div className="Selector" onClick={() => window.open(action)}>
 					<h1>
 						<div style={{
-							display: 'inline-block', direction: 'ltr', width: '20%',
+							display: 'inline-block', direction: 'ltr'
 							overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis', width:'650px'
 						}}>
 							{typeText}{text}
@@ -227,7 +227,7 @@ class ServiceDetail extends React.Component {
 			languages_spoken: service[`languages_spoken_${language}`],
 			name: service[`name_${language}`],
 		};
-		let fullAddress = [serviceT.address, serviceT.address_floor].filter(val => val).join(', ');
+		//let fullAddress = [serviceT.address, serviceT.address_floor].filter(val => val).join(', ');
 
 		let sortedContactInformation = _.sortBy(service.contact_information || [], ci => {
 			return ci.index;
@@ -390,7 +390,7 @@ class ServiceDetail extends React.Component {
 							{relatedServices.map(r => (
 								<div key={r.id} onClick={() => goToService(r.id)}>
 									<div className="selector">
-										<h1 href="javascript:void(0)" ><div style={{
+										<h1 href="#/" ><div style={{
 											display: 'inline-block', direction: 'ltr', maxWidth: '60%',
 											overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
 										}}>{r.name}</div></h1>

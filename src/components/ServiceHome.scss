@@ -379,16 +379,18 @@
   .leaflet-popup-content {
     margin: 5px 0;
     .Item {
-      border-bottom: 0;
+	  border-bottom: 0;
+	  display:block !important;
       .Icons {
-        display: flex;
-        margin: 0;
-        flex-wrap: wrap;
-        flex-direction: column;
-        width: 75px;
+				display:flex;
+				width:100%;
+        flex-wrap: nowrap;
+        flex-direction: row;
         align-items: stretch;
         align-content: stretch;
-        justify-content: center;
+				justify-content: center;
+				margin-top:1px;
+				margin-bottom: 5%;
         .Icon {
           padding: 0;
           display: flex;
@@ -408,8 +410,16 @@
             justify-content: center;
           }
         }
-      }
+			}
+			#goToServiceIcon{
+				position:absolute;
+				right:0;
+				bottom: 35%;
+				//padding-bottom: 10%;
+			}
       .Info {
+				width:50%;
+				margin-left: 5%;
         h1 {
           font-size: 120%;
           margin: 0;
