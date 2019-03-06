@@ -1,6 +1,6 @@
 {
 	"name": "front.refugee.info",
-	"version": "0.1.0",
+	"version": "1.0.1-2019-3-6",
 	"private": true,
 	"dependencies": {
 		"@turf/turf": "^4.7.3",
@@ -134,8 +134,8 @@
 		"build-css": "./node_modules/.bin/node-sass-chokidar src/ -o src/",
 		"watch-css": "npm run build-css && ./node_modules/.bin/node-sass-chokidar src/ -o src/ --watch --recursive",
 		"start": "node server",
-		"start-dev": "node scripts/start",
-		"build": "node scripts/build",
+		"start-dev": "REACT_APP_VERSION=$npm_package_version node scripts/start",
+		"build": "REACT_APP_VERSION=$npm_package_version node scripts/build",
 		"test": "node scripts/test.js --env=jsdom",
 		"build-server": "babel src -s -D -d webserver --plugins remove-nonjs --presets es2015,stage-0,react",
 		"run-server": "node server"

@@ -3,11 +3,9 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import { store } from "./store";
 import { Provider } from "react-redux";
-//import injectTapEventPlugin from 'react-tap-event-plugin';
 
-// Needed for onClick
-// http://stackoverflow.com/a/34015469/988941
-//injectTapEventPlugin();
+console.log(process.env.REACT_APP_VERSION);
+
 const document = global.window && global.window.document;
 ReactDOM.render(
 	<Provider store={store}>
