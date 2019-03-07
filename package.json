@@ -27,6 +27,7 @@
 		"cheerio": "^1.0.0-rc.2",
 		"contentful": "^4.6.2",
 		"cors": "^2.8.3",
+		"cross-env": "^5.2.0",
 		"css-loader": "0.28.1",
 		"dotenv": "4.0.0",
 		"eslint": "3.19.0",
