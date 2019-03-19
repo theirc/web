@@ -385,7 +385,9 @@ class ServiceDetail extends React.Component {
 				:(
 					<div>
 					<div className="RelatedServices">
-						<h3>{t("OTHER_SERVICES")}:</h3>
+						<div className="selector">
+							<h3 className="RelatedServicesTitle">{t("OTHER_SERVICES")}:</h3>
+						</div>
 						<hr/>
 							{relatedServices.map(r => (
 								<div key={r.id} onClick={() => goToService(r.id)}>
