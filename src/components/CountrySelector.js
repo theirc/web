@@ -41,8 +41,8 @@ class CountrySelector extends Component {
 		let unavailableCountryList = countryList.filter(c => regionList.indexOf(c.fields.slug) === -1);
 		
 		// SP-354 disable tigrinya and french from italy
-        if(['ti', 'fr'].indexOf(language) >= 0) {
-        	availableCountryList = availableCountryList.filter(c => c.name.indexOf("Ital")!== 0);
+        if(language === 'fr') {
+        	availableCountryList = availableCountryList.filter(c => c.slug !== 'italy');
         }
 
         if (global.navigator && navigator.geolocation) {
@@ -66,7 +66,6 @@ class CountrySelector extends Component {
 						className="item "
 						key={c.id}
 						onClick={() => {
-                            sessionStorage.setItem('current-country', c.fields.name);
 							onGoTo(c.fields.slug);
 						}}
 					>
