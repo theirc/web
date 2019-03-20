@@ -190,8 +190,8 @@ class Selectors extends Component {
         } = this.props
         
         // SP-354 disable tigrinya and french from italy
-        let currentCountry = sessionStorage.getItem('current-country');
-        let languages = currentCountry === 'Italy' ? config.languages.filter(a => a[0] !== 'fr' && a[0] !== 'ti') : config.languages.filter(a => a[0] !== 'ti');
+        let currentCountry = sessionStorage.getItem('redirect');
+        let languages = currentCountry && currentCountry.indexOf('/italy') === 0 ? config.languages.filter(a => a[0] !== 'fr') : config.languages;
 
         switch (currentPage) {
             case 1:

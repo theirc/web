@@ -148,10 +148,6 @@ class ServiceDetail extends React.Component {
 		const { service, relatedServices } = this.state;
 		const { t, language, goToService } = this.props;
 		
-		// SP-354 disable tigrinya and french from italy
-		const isItaly = window.location.href.indexOf("/italy/") >= 0;
-		if(isItaly  && ['ti', 'fr'].indexOf(language) >= 0) return null;
-
 		const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 		if (!service) {
 			return (
