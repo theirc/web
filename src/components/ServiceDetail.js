@@ -126,7 +126,7 @@ class ServiceDetail extends React.Component {
 			case "instagram":
 				typography = "MenuIcon fa fa-envelope-o";
 				action = `https://www.instagram.com/${text}`;
-				typeText = "Email: ";
+				typeText = "Instagram: ";
 				break;
 			default:
 				break;
