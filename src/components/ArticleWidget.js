@@ -72,7 +72,7 @@ class ArticleWidget extends Component {
 						<a
 							href="#/"
 							onClick={() => {
-								onNavigate(`/${country.fields.slug}/${categorySlug}/${article.fields.slug}/language=${language}`);
+								onNavigate(`/${country.fields.slug}/${categorySlug}/${article.fields.slug}?language=${language}`);
 								return false;
 							}}
 						>
