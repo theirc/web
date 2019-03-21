@@ -123,6 +123,11 @@ class ServiceDetail extends React.Component {
 				action = `mailto:${text}`;
 				typeText = "Email: ";
 				break;
+			case "instagram":
+				typography = "MenuIcon fa fa-envelope-o";
+				action = `https://www.instagram.com/${text}`;
+				typeText = "Email: ";
+				break;
 			default:
 				break;
 		}
