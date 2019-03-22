@@ -30,8 +30,12 @@ class ServiceDetail extends React.Component {
 	constructor(props){
 		super(props);
 		const { language } = this.props;
-		let { href } = window.location;
-		let copySlug = (href += (window.location.toString().indexOf("?") > -1 ? "&" : "?") + "language=" + language);
+		let copySlug = "";
+		if (window.location.toString().indexOf("language=") > -1){
+			copySlug = window.location;
+		}else{
+			copySlug = (window.location += (window.location.toString().indexOf("?") > -1 ? "&" : "?") + "language=" + language);
+		}
 		this.state = { value: copySlug, copied: true, shareIN: true, showOtherServices: true };
 		this.sharePage = this.sharePage.bind(this);
 		this.showServices = this.showServices.bind(this);
