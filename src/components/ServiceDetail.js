@@ -30,8 +30,12 @@ class ServiceDetail extends React.Component {
 	constructor(props){
 		super(props);
 		const { language } = this.props;
-		let { href } = window.location;
-		let copySlug = (href += (window.location.toString().indexOf("?") > -1 ? "&" : "?") + "language=" + language);
+		let copySlug = "";
+		if (window.location.toString().indexOf("language=") > -1){
+			copySlug = window.location;
+		}else{
+			copySlug = (window.location += (window.location.toString().indexOf("?") > -1 ? "&" : "?") + "language=" + language);
+		}
 		this.state = { value: copySlug, copied: true, shareIN: true, showOtherServices: true };
 		this.sharePage = this.sharePage.bind(this);
 		this.showServices = this.showServices.bind(this);
@@ -123,6 +127,11 @@ class ServiceDetail extends React.Component {
 				action = `mailto:${text}`;
 				typeText = "Email: ";
 				break;
+			case "instagram":
+				typography = "MenuIcon fa fa-envelope-o";
+				action = `https://www.instagram.com/${text}`;
+				typeText = "Instagram: ";
+				break;
 			default:
 				break;
 		}
@@ -148,10 +157,6 @@ class ServiceDetail extends React.Component {
 		const { service, relatedServices } = this.state;
 		const { t, language, goToService } = this.props;
 		
-		// SP-354 disable tigrinya and french from italy
-		const isItaly = window.location.href.indexOf("/italy/") >= 0;
-		if(isItaly  && ['ti', 'fr'].indexOf(language) >= 0) return null;
-
 		const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 		if (!service) {
 			return (
@@ -385,7 +390,9 @@ class ServiceDetail extends React.Component {
 				:(
 					<div>
 					<div className="RelatedServices">
-						<h3>{t("OTHER_SERVICES")}:</h3>
+						<div className="selector">
+							<h3 className="RelatedServicesTitle">{t("OTHER_SERVICES")}:</h3>
+						</div>
 						<hr/>
 							{relatedServices.map(r => (
 								<div key={r.id} onClick={() => goToService(r.id)}>

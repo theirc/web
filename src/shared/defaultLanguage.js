@@ -6,7 +6,12 @@ const localStorage = getLocalStorage();
 let defaultLanguage = cms.siteConfig.languages[0][0];
 
 if (global.window && global.location && global.navigator) {
-	const parsed = queryString.parse(global.location.search);
+	let parsed = queryString.parse(global.location.search);
+
+	// SP-354 disable tigrinya and french from italy
+	if((parsed.language === 'fr' || localStorage.language === 'fr') && global.location.href.indexOf('/italy') > 0) {
+		parsed.language = 'en';
+	}
 	
 	if (parsed.language) {
 		defaultLanguage = parsed.language;
