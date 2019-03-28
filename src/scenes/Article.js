@@ -52,12 +52,7 @@ class Article extends React.Component {
 		const { article, direction } = this.props;
 		const { category, country, onNavigateTo, onNavigate, language } = this.props;
 
-		if (!article || !category) return null; //<div style={{ height: 100 }} />;
-
-		// SP-354 disable tigrinya and french from italy
-		let isItaly = window.location.href.indexOf("/italy/") >= 0;
-		if(isItaly  && ['ti', 'fr'].indexOf(language) >= 0) return null;
-		
+		if (!article || !category) return null;
 
 		let next = null;
 		let previous = null;

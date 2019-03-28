@@ -111,6 +111,9 @@ class HomeWidget extends Component {
 		}
 		try {
 			let rendered = null;
+			
+			if(!content.sys.contentType) return null;
+
 			switch (content.sys.contentType.sys.id) {
 				case "article":
 					rendered = this.renderArticle(content, content.fields.category, true, true);
