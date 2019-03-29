@@ -733,7 +733,7 @@ const mapDispatch = (d, p) => {
 			return d(push(`/${p.country.fields.slug}/services/nearby/`));
 		},
 		goToService(id) {
-			return d(push(`/${p.country.fields.slug}/services/${id}/`));
+			return d(push(`/${p.country.fields.slug}/services/${id}?language=${p.language}`));
 		},
 		listAllServices() {
 			return d(push(`/${p.country.fields.slug}/services/all/`));
