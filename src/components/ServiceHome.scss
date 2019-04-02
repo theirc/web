@@ -584,6 +584,14 @@
 			}
 		}
 	}
+	.ContactInformation {
+		display: 'inline-block';
+		overflow: 'hidden';
+		white-space: 'nowrap';
+		text-overflow: 'ellipsis';
+		width:'650px';
+		direction:'ltr';
+	}
 
 	.sharePage .icon {
 		margin: 0px 5px 0px 5px;
