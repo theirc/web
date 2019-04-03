@@ -61,25 +61,27 @@ class ServiceItem extends React.Component {
 		
 		return (
 			<div key={s.id} className="Item" onClick={() => goToService(s.id)}>
-			<div className="Icons">
-				{mainType &&
-						<ServiceIcon key={`si-${mainType.idx}`} idx={0} isMainType={1} service={s} type={mainType} />
-				}
-				{types.map((t, idx) => t && <ServiceIcon key={`si-${idx}`} idx={idx} isMainType={0} service={s} type={t} />)}
-			</div>
 				<div className="Info">
-					<h1>{s.name}</h1>
-					<h2>{s.provider.name}{" "}</h2>
-					<address className="fullAddress">
+					<div className="Item-content title">
+						<h1>{s.name}</h1>
+						<i className="material-icons" id="goToServiceIcon"/>
+					</div>
+					<h2 className="Item-content">{s.provider.name}{" "}</h2>
+					<address className="fullAddress Item-content">
 						{s.address}
 					</address>
 					{s.address_city &&
-						<address className="regionTitle">
+						<address className="regionTitle Item-content">
 							{s.address_city}
 						</address>
 					}
 				</div>
-				<i className="material-icons" id="goToServiceIcon"/>
+				<div className="Icons Item-content">
+					{mainType &&
+							<ServiceIcon key={`si-${mainType.idx}`} idx={0} isMainType={1} service={s} type={mainType} />
+					}
+					{types.map((t, idx) => t && <ServiceIcon key={`si-${idx}`} idx={idx} isMainType={0} service={s} type={t} />)}
+				</div>
 			</div>
 		);
 	}
@@ -297,7 +299,7 @@ class ServiceMap extends React.Component {
 						title: s.name,
 						icon: icon
 					});
-					marker.on('click', () => { console.log(s.id)});
+					
 					let popupEl = document.createElement("div");
 					ReactDOM.render(<ServiceItem service={s} {...this.props} />, popupEl);
 					let popup = L.popup({
