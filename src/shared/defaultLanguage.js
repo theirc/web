@@ -9,8 +9,12 @@ if (global.window && global.location && global.navigator) {
 	let parsed = queryString.parse(global.location.search);
 
 	// SP-354 disable tigrinya and french from italy
-	if((parsed.language === 'fr' || localStorage.language === 'fr') && global.location.href.indexOf('/italy') > 0) {
-		parsed.language = 'en';
+	for(let i = 0; i < cms.siteConfig.hideLangsPerCountry.length; i++) {
+		if(global.location.href.indexOf(`/${cms.siteConfig.hideLangsPerCountry[i].country}`) > 0 &&
+			(cms.siteConfig.hideLangsPerCountry[i].langs.indexOf(parsed.language) >= 0 ||
+			cms.siteConfig.hideLangsPerCountry[i].langs.indexOf(localStorage.language) >= 0)) {
+			parsed.language = 'en';
+		}
 	}
 	
 	if (parsed.language) {
