@@ -34,7 +34,7 @@ class ServiceDetail extends React.Component {
 		if (window.location.toString().indexOf("language=") > -1){
 			copySlug = window.location;
 		}else{
-			copySlug = (window.location += (window.location.toString().indexOf("?") > -1 ? "&" : "?") + "language=" + language);
+			copySlug = (window.location + (window.location.toString().indexOf("?") > -1 ? "&" : "?") + "language=" + language);
 		}
 		this.state = { value: copySlug, copied: true, shareIN: true, showOtherServices: true };
 		this.sharePage = this.sharePage.bind(this);
@@ -140,10 +140,7 @@ class ServiceDetail extends React.Component {
 				<hr />
 				<div className="Selector" onClick={() => window.open(action)}>
 					<h1>
-						<div style={{
-							display: 'inline-block', direction: 'ltr',
-							overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis', width:'650px'
-						}}>
+						<div className="ContactInformation">
 							{typeText}{text}
 						</div>
 					</h1>
