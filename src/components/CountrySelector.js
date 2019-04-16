@@ -27,6 +27,15 @@ class CountrySelector extends Component {
 		config: PropTypes.object,
 	};
 
+	filterCountry(config, countryList, currentLang) {
+		for(let i = 0; i < config.hideLangsPerCountry.length; i++) {
+			if(config.hideLangsPerCountry[i].langs.indexOf(currentLang) >= 0) {
+				return countryList.filter(l => l.slug !== config.hideLangsPerCountry[i].country);
+			}
+		}
+		return countryList;
+	}
+
     render() {
         const {
             onGoTo,
@@ -41,9 +50,7 @@ class CountrySelector extends Component {
 		let unavailableCountryList = countryList.filter(c => regionList.indexOf(c.fields.slug) === -1);
 		
 		// SP-354 disable tigrinya and french from italy
-        if(language === 'fr') {
-        	availableCountryList = availableCountryList.filter(c => c.slug !== 'italy');
-        }
+        availableCountryList = this.filterCountry(config, availableCountryList, language);
 
         if (global.navigator && navigator.geolocation) {
             countryList.push({

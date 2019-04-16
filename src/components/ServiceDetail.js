@@ -30,8 +30,12 @@ class ServiceDetail extends React.Component {
 	constructor(props){
 		super(props);
 		const { language } = this.props;
-		let { href } = window.location;
-		let copySlug = (href += (window.location.toString().indexOf("?") > -1 ? "&" : "?") + "language=" + language);
+		let copySlug = "";
+		if (window.location.toString().indexOf("language=") > -1){
+			copySlug = window.location;
+		}else{
+			copySlug = (window.location + (window.location.toString().indexOf("?") > -1 ? "&" : "?") + "language=" + language);
+		}
 		this.state = { value: copySlug, copied: true, shareIN: true, showOtherServices: true };
 		this.sharePage = this.sharePage.bind(this);
 		this.showServices = this.showServices.bind(this);
@@ -123,6 +127,11 @@ class ServiceDetail extends React.Component {
 				action = `mailto:${text}`;
 				typeText = "Email: ";
 				break;
+			case "instagram":
+				typography = "MenuIcon fa fa-envelope-o";
+				action = `https://www.instagram.com/${text}`;
+				typeText = "Instagram: ";
+				break;
 			default:
 				break;
 		}
@@ -131,10 +140,7 @@ class ServiceDetail extends React.Component {
 				<hr />
 				<div className="Selector" onClick={() => window.open(action)}>
 					<h1>
-						<div style={{
-							display: 'inline-block', direction: 'ltr',
-							overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis', width:'650px'
-						}}>
+						<div className="ContactInformation">
 							{typeText}{text}
 						</div>
 					</h1>
@@ -299,20 +305,20 @@ class ServiceDetail extends React.Component {
 							<Share className="icon" />
 						</div>
 					) : (
-						<div className="selector sharePage">
-							<h1
-								onClick={() => {
-									this.share();
-								}}
-							>
-								{t("Share on Facebook")}
-							</h1>
-							<Share className="icon" />
-							<div className="verticalHR" />
-							<CopyToClipboard sharePage={this.sharePage} text={this.state.value}>
-								{this.state.copied ? <h1 onClick={() => this.Copiedlnk()}>{t("Copy Link")}</h1> : <h1>{t("Copied")}</h1>}
-							</CopyToClipboard>
-							<Link className="icon" />
+						<div>
+							<div className="selector sharePage" onClick={() => {this.share();}}>
+								<h1>
+									{t("Share on Facebook")}
+								</h1>
+								<Share className="icon" />
+								</div>
+								<div className="verticalHR"/>
+							<div className="selector sharePage" onClick={() => this.Copiedlnk()}>
+								<CopyToClipboard sharePage={this.sharePage} text={this.state.value}>
+									{this.state.copied ? <h1>{t("Copy Link")}</h1> : <h1>{t("Copied")}</h1>}
+								</CopyToClipboard>
+								<Link className="icon" />
+							</div>
 						</div>
 					)}
 
@@ -389,8 +395,8 @@ class ServiceDetail extends React.Component {
 								<div key={r.id} onClick={() => goToService(r.id)}>
 									<div className="selector">
 										<h1 href="#/" ><div style={{
-											display: 'inline-block', direction: 'ltr', maxWidth: '60%',
-											overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
+											display: 'inline-block', direction: 'ltr', overflow: 'hidden', 
+											whiteSpace: 'nowrap', textOverflow: 'ellipsis', width:'650px'
 										}}>{r.name}</div></h1>
 										<i className="MenuIcon fa fa-angle-right" aria-hidden="true" />
 									</div>
