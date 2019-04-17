@@ -356,6 +356,15 @@ class Services extends React.Component {
 			goToLocationMap(location);
 		}
 
+		const getLocatioName = (slug) =>{
+			const { regions} = this.props;
+			if (!this.state.locationName){
+				var loc = regions.filter(x => x.slug === slug);				
+				return loc.length > 0 ? loc[0].name : "";
+			}
+			return this.state.locationName;
+		}
+
 		return (
 			<div>
 				<Switch>
@@ -574,7 +583,7 @@ class Services extends React.Component {
 									goToLocationList={()=> {goToLocations(false)}}
 									showLocations={true}
 									location={props.match.params.location}
-									locationName={this.state.locationName}
+									locationName={getLocatioName(props.match.params.location)}
 									departmentSelected = {this.state.department}
 								/>
 							</div>
