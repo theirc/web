@@ -22,6 +22,16 @@ module.exports = {
 		showDepartments: false,
 		showLinkToAdministration: false,
 		hideCountries: ["bosnia"],
+		hideLangsPerCountry: [{
+			country: 'italy',
+			langs: ['ar', 'ur', 'fa', 'fr'],
+		}, {
+			country: 'bulgaria',
+			langs: ['fr'],
+		}, {
+			country: 'serbia',
+			langs: ['fr'],
+		}],
 	},
 	"staging.refugee.info": {
 		theme: "irc",
@@ -42,6 +52,16 @@ module.exports = {
 		showDepartments: false,
 		showLinkToAdministration: false,
 		hideCountries: ["bosnia"],
+		hideLangsPerCountry: [{
+			country: 'italy',
+			langs: ['ar', 'ur', 'fa', 'fr'],
+		}, {
+			country: 'bulgaria',
+			langs: ['fr'],
+		}, {
+			country: 'serbia',
+			langs: ['fr'],
+		}],
 	},
 	"qa.refugee.info": {
 		theme: "irc",
@@ -62,6 +82,16 @@ module.exports = {
 		showDepartments: false,
 		showLinkToAdministration: false,
 		hideCountries: ["bosnia"],
+		hideLangsPerCountry: [{
+			country: 'italy',
+			langs: ['ar', 'ur', 'fa', 'fr'],
+		}, {
+			country: 'bulgaria',
+			langs: ['fr'],
+		}, {
+			country: 'serbia',
+			langs: ['fr'],
+		}],
 	},
 	"khabrona.info": {
 		theme: "mc",
@@ -80,6 +110,7 @@ module.exports = {
 		cookieBanner: false,
 		showDepartments: false,
 		showLinkToAdministration: false,
+		hideLangsPerCountry: [],
 	},	
 	"qa.khabrona.info": {
 		theme: "mc",
@@ -99,6 +130,7 @@ module.exports = {
 		showDepartments: false,
 		backendUrl: 'https://admin-qa.refugee.info/e/production/v2',
 		showLinkToAdministration: false,
+		hideLangsPerCountry: [],
 	},	
 	"staging.khabrona.info": {
 		theme: "mc",
@@ -118,6 +150,7 @@ module.exports = {
 		showDepartments: false,
 		backendUrl: 'https://admin-staging.refugee.info/e/production/v2',
 		showLinkToAdministration: false,
+		hideLangsPerCountry: [],
 	},	
 	"cuentanos.org": {
 		theme: "generic",
@@ -138,6 +171,7 @@ module.exports = {
 		customQuestionLink:[["italy","https://www.facebook.com/Refugee.Info.Italy/"]],
 		showDepartments: true,
 		showLinkToAdministration: true,
+		hideLangsPerCountry: [],
 	},
 	"staging.cuentanos.org": {
 		theme: "generic",
@@ -158,6 +192,7 @@ module.exports = {
 		showDepartments: true,
 		showLinkToAdministration: false,
 		customQuestionLink:[["italy","https://www.facebook.com/Refugee.Info.Italy/"]],
+		hideLangsPerCountry: [],
 	},
 	"qa.cuentanos.org": {
 		theme: "generic",
@@ -178,6 +213,7 @@ module.exports = {
 		showDepartments: true,
 		showLinkToAdministration: false,
 		customQuestionLink:[["italy","https://www.facebook.com/Refugee.Info.Italy/"]],
+		hideLangsPerCountry: [],
 	},
 	"localhost": {
 		theme: "generic",
@@ -198,5 +234,6 @@ module.exports = {
 		customQuestionLink:[["italy","https://www.facebook.com/Refugee.Info.Italy/"]],
 		showDepartments: true,
 		showLinkToAdministration: true,
+		hideLangsPerCountry: [],
 	},
 };
