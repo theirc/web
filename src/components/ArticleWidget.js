@@ -4,8 +4,6 @@ import FacebookPlayer from "react-facebook-player";
 import YouTube from "react-youtube";
 import "./ArticleWidget.css";
 import PropTypes from 'prop-types';
-import replaceEntities from "remarkable/lib/common/utils";
-import escapeHtml from "remarkable/lib/common/utils";
 
 const Remarkable = require("remarkable");
 const md = new Remarkable("full", {
@@ -57,9 +55,10 @@ class ArticleWidget extends Component {
 		let hero = article.fields.hero;
 		
 		md.renderer.rules.link_open = (tokens, idx /*, options, env */) => { 
-			var title = tokens[idx].title ? (' title="' + escapeHtml(replaceEntities(tokens[idx].title)) + '"') : 'juanchila'; 
-			return `<a href="${tokens[idx].href}?language=${language}" ${title}>`; 
+			var title = tokens[idx].title;
+			return `<a href="${tokens[idx].href}?language=${language}" ${tokens[idx].title}>`; 
 		}
+		// console.log(content);
 
 		return (
 			<div className="Article" key={article.sys.id}>
