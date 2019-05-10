@@ -1,6 +1,6 @@
 {
 	"name": "front.refugee.info",
-	"version": "1.0.6-2019-5-3",
+	"version": "1.0.7-2019-5-10",
 	"private": true,
 	"dependencies": {
 		"@turf/turf": "^4.7.3",
