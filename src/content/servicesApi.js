@@ -1,5 +1,6 @@
 import getSessionStorage from "../shared/sessionStorage";
 import getLocalStorage from "../shared/localStorage";
+import localcache from "../content/localcache";
 import cms from "./cms";
 
 var request = require("superagent");
@@ -97,6 +98,7 @@ module.exports = {
 	fetchAllServices(country, language, categoryId, searchTerm, pageSize = 1000) {
 		//If the region is a country, search for all the services in any location from that country
 		//If the region is a city, search for all the services in the city AND country wide services
+		console.log('fecth all services');
 		let filter = "with-parents";
 		if (sessionStorage[`${language}-regions`]){
 			let regions = JSON.parse(sessionStorage[`${language}-regions`]);			
@@ -115,11 +117,15 @@ module.exports = {
 				(searchTerm ? "&search=" + searchTerm : "");
 				
 				let sl = sessionStorage[`serviceList`] !==  undefined ? JSON.parse(sessionStorage[`serviceList`]) : null;		
-				
+				console.log("Fetch:", RI_URL + requestUrl);
 				if (sl && sl.country === country && sl.language === language && sl.categoryId === categoryId && (sl.searchTerm === null || sl.searchTerm === undefined)){
 					resolve(sl.services);
 					
 				}else{
+					fetch(RI_URL + requestUrl)
+						.then(res => {
+							console.log("res:",res);
+						});
 					request
 					.get(RI_URL + requestUrl)
 					.set("Accept-Language", language)
