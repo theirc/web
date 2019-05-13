@@ -175,6 +175,16 @@ class Selectors extends Component {
         console.log(l);
     }
 
+    filterLangs(config) {
+        let currentCountry = sessionStorage.getItem('redirect');
+        for(let i = 0; i < config.hideLangsPerCountry.length; i++) {
+            if(currentCountry && currentCountry.indexOf(`/${config.hideLangsPerCountry[i].country}`) === 0) {
+                return config.languages.filter(l => config.hideLangsPerCountry[i].langs.indexOf(l[0]) < 0);
+            }
+        }
+        return null;
+    }
+
     render() {
         const {
             currentPage,
@@ -190,8 +200,8 @@ class Selectors extends Component {
         } = this.props
         
         // SP-354 disable tigrinya and french from italy
-        let currentCountry = sessionStorage.getItem('redirect');
-        let languages = currentCountry && currentCountry.indexOf('/italy') === 0 ? config.languages.filter(a => a[0] !== 'fr') : config.languages;
+        let languages = this.filterLangs(config);
+        !languages && (languages = config.languages);
 
         switch (currentPage) {
             case 1:

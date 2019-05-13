@@ -27,8 +27,8 @@ class HomeWidget extends Component {
 			let categories = Array.from(w.fields.related || []).filter(r => r.sys.contentType.sys.id === "category");
 			return this.renderTopCategories(categories);
 		} else if (w.fields.type === "Local Guide") {
-			let guideItems = Array.from(w.fields.related || []).filter(r => r.sys.contentType.sys.id === "localGuideItem");
-			return this.renderLocalGuide(guideItems);
+			let guideItems = Array.from(w.fields.related || []).filter(r => r.sys.contentType && r.sys.contentType.sys.id === "localGuideItem");
+			return guideItems.length ? this.renderLocalGuide(guideItems) : null;
 		}
 		return null;
 	}

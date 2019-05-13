@@ -25,7 +25,7 @@ class CategoryWidget extends Component {
 					<a
 						href="#/"
 						onClick={() => {
-							onNavigate(`/${country.fields.slug}/${c.fields.slug}/${article.fields.slug}`);
+							onNavigate(`/${country.fields.slug}/${c.fields.slug}/${article.fields.slug}?language=en`);
 							return false;
 						}}
 					>

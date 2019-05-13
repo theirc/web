@@ -51,7 +51,11 @@ function cmsApi(config) {
 							}
 						}
 
-						sessionStorage[`${language}-${slug}`] = toStore;
+						try {
+							sessionStorage[`${language}-${slug}`] = toStore;
+						} catch (e) {
+							console.log('Session storage is full. Request not cached.');
+						}
 						resolve(items[0]);
 					});
 			}
