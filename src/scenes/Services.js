@@ -12,6 +12,7 @@ import Promise from "bluebird";
 
 import actions from "../actions";
 import servicesApi from "../content/servicesApi";
+import getSessionStorage from "../shared/sessionStorage";
 
 class Services extends React.Component {
 	state = {
@@ -21,7 +22,6 @@ class Services extends React.Component {
 		geolocation: null,
 		categoryName: null,
 		category: null,
-		locationName: null,
 		location: null,
 		departmentName: null,
 		department: null,
@@ -32,6 +32,8 @@ class Services extends React.Component {
 	static contextTypes = {
 		config: PropTypes.object,
 	};
+
+	sessionStorage = getSessionStorage();
 
 	measureDistance(a, language, sort) {
 		return b => {
@@ -326,12 +328,23 @@ class Services extends React.Component {
 			}
 		};
 
-		const onOpenLocation = (location,name ) => {
-			this.setState({ locationName: name, location: location, department: null, departmentName: null});
+		const getLocationName = (slug) => {
+			if(this.sessionStorage.location) {
+				let l = JSON.parse(this.sessionStorage.location);
+				if(l.slug === slug) {
+					return l[`title_${language}`] ? l[`title_${language}`] : l.name;
+				}
+			}
+			return null;
 		}
 
-		const onOpenDepartment = (id, department, name) => {
-			this.setState({ departmentId: id, departmentName: name, department: department, location: department, locationName: null });
+		const onOpenLocation = (location,name ) => {
+			this.sessionStorage.location = JSON.stringify(location);
+			this.setState({ location: location.slug, department: null, departmentName: null});
+		}
+
+		const onOpenDepartment = (id, department, name, location) => {
+			this.setState({ departmentId: id, departmentName: name, department: department, location: department });
 		}
 
 		const goToLocations = (iscountrylist) => {		
@@ -354,6 +367,15 @@ class Services extends React.Component {
 		const onGoToLocationMap = (location) => {
 			this.setState({keepPreviousZoom: false});
 			goToLocationMap(location);
+		}
+
+		const getLocatioName = (slug) =>{
+			const { regions} = this.props;
+			if (!this.state.locationName){
+				var loc = regions.filter(x => x.slug === slug);				
+				return loc.length > 0 ? loc[0].name : "";
+			}
+			return this.state.locationName;
 		}
 
 		return (
@@ -437,7 +459,7 @@ class Services extends React.Component {
 										nearby={true}
 										openLocation={(location, name) => {
 											onOpenLocation(location, name);
-											goToLocation(location);
+											goToLocation(location.slug);
 										}}
 										departmentId={this.state.departmentId}
 										department={this.state.department}
@@ -574,7 +596,7 @@ class Services extends React.Component {
 									goToLocationList={()=> {goToLocations(false)}}
 									showLocations={true}
 									location={props.match.params.location}
-									locationName={this.state.locationName}
+									locationName={getLocationName(props.match.params.location)}
 									departmentSelected = {this.state.department}
 								/>
 							</div>
@@ -694,7 +716,7 @@ class Services extends React.Component {
 							</div>
 						</Skeleton>
 					)}
-				/>				
+				/>
 			</div>
 		);
 	}

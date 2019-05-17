@@ -95,6 +95,7 @@ class ServiceDetail extends React.Component {
 		let typography;
 		let action;
 		let typeText;
+		let textClass = 'noPhoneFormat';
 
 		switch(type) {
 			case "whatsapp":
@@ -121,6 +122,7 @@ class ServiceDetail extends React.Component {
 				typography = "MenuIcon fa fa-phone";
 				action = `tel:${text}`;
 				typeText = callAux + ":";
+				textClass = 'phoneFormat';
 				break;
 			case "email":
 				typography = "MenuIcon fa fa-envelope-o";
@@ -141,7 +143,7 @@ class ServiceDetail extends React.Component {
 				<div className="Selector" onClick={() => window.open(action)}>
 					<h1>
 						<div className="ContactInformation">
-							{typeText}{text}
+							{typeText}<div className={textClass}>{text}</div>
 						</div>
 					</h1>
 					<i className={typography} aria-hidden="true" />
