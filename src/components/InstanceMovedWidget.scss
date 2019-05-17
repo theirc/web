@@ -1,0 +1,25 @@
+@import "../shared/includes.scss";
+
+.InstanceMovedWidget {
+	text-align: center;
+	width: 100%;
+	span {
+		background-image: url("/instance-moved.png");
+		background-size: contain;
+		display: block;
+		margin: 60px auto;
+		width: 100px;
+		height: 100px;
+	}
+	a {
+		background-color: $accentIRC;
+		display: block;
+		font-weight: bold;
+		height: 70px;
+		line-height: 70px;
+		margin: 10px 15px 50px 15px;
+		outline: none;
+		padding: 5px;
+		text-decoration: none;
+	}
+}
