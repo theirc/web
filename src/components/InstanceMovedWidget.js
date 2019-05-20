@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import "./InstanceMovedWidget.css";
 import { translate } from "react-i18next";
+import "./InstanceMovedWidget.css";
 
 class InstanceMovedWidget extends Component {
 
@@ -8,11 +8,11 @@ class InstanceMovedWidget extends Component {
 		return (
 			<div className="InstanceMovedWidget">
 				<span></span>
-				<h1>REFUGEE.INFO NO LONGER<br />HOSTS CONTENT ON<br />BULGARIA.</h1>
+				<h1>Refugee.info no longer<br />hosts content on<br />{this.props.country}.</h1>
 				<br /><br />
 				<h3>Please visit our partner for this information</h3>
 				<br />
-				<a href="http://refugeelife.bg/">Go to refugeelife.bg</a>
+				<a href={this.props.link}>{this.props.label}</a>
 			</div>
 		)
 	}
