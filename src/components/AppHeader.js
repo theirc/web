@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import { translate, Interpolate } from "react-i18next";
 import { Close } from "material-ui-icons";
 import "./AppHeader.css";
+import { lang } from "moment";
 
 class AppHeader extends Component {
 	static propTypes = {
@@ -58,14 +59,14 @@ class AppHeader extends Component {
 	}
 
 	render() {
-		const { onChangeCountry, onChangeLanguage, disableLanguageSelector, disableCountrySelector, onGoHome, country, language, t } = this.props;
+		const { onChangeCountry, onChangeLanguage, onGoToCategories, onGoToServices, disableLanguageSelector, disableCountrySelector, onGoHome, country, language, t } = this.props;
 		const { search, searchText } = this.state;
 		const noop = () => {
 			console.log("noop");
 		};
 		const cookiePolicyLink = <a href="/greece/privacy/cookies" target="_blank" rel="noopener noreferrer">Cookie Policy</a>;
 		const privacyPolicyLink = <a href="/greece/privacy/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>;
-
+		const showHeaderBackground = !country || !language;
 		return (
 			<div className="AppHeader">
 
@@ -78,6 +79,15 @@ class AppHeader extends Component {
 							language && (
 								<div className="app-bar-container buttons">
 									<div className="app-bar-buttons">
+									<span className="app-bar-selectors top-menu" color="contrast" onClick={onGoToCategories || noop}>
+											{t("Home")}
+										</span>
+										<span className="app-bar-selectors top-menu" color="contrast" onClick={onGoToCategories || noop}>
+											{t("Blog")}
+										</span>
+										<span className="app-bar-selectors top-menu" color="contrast" onClick={onGoToServices || noop}>
+											{t("Services")}	
+										</span>
 										{!disableCountrySelector && (
 											<span className="app-bar-selectors" color="contrast" onClick={onChangeCountry || noop}>
 												{(country && country.fields.name) || " "}
@@ -90,7 +100,7 @@ class AppHeader extends Component {
 											</span>
 										)}
 
-										<div className="app-bar-separator" />
+										<div className="app-bar-separator separator-searchIcon" />
 										<IconButton
 											className={`search-close ${[this.state.search && "active"].join(" ")} search-button `}
 											color="contrast"
@@ -102,14 +112,15 @@ class AppHeader extends Component {
 							)}
 					</div>
 				</Headroom>
-				<div
+				{showHeaderBackground &&  <div
 					style={{
 						backgroundColor: "#000000",
 						display: "block",
 						width: "100%",
 						height: 64,
 					}}
-				/>
+				/>}
+				{!showHeaderBackground &&  <div className='headerBackground' ></div>}
 				{search && (
 					<form onSubmit={this.handleSubmit.bind(this)} className="SearchBar">
 						<input autoComplete="off" autoFocus name="searchText" placeholder={t("Search")} type="text" value={searchText} onChange={this.handleInputChange.bind(this)} />

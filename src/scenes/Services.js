@@ -328,7 +328,7 @@ class Services extends React.Component {
 			}
 		};
 
-		const getLocationName = (slug) => {
+		const getLocatioName = (slug) => {
 			if(this.sessionStorage.location) {
 				let l = JSON.parse(this.sessionStorage.location);
 				if(l.slug === slug) {
@@ -369,7 +369,7 @@ class Services extends React.Component {
 			goToLocationMap(location);
 		}
 
-		const getLocatioName = (slug) =>{
+		const getLocationName = (slug) =>{
 			const { regions} = this.props;
 			if (!this.state.locationName){
 				var loc = regions.filter(x => x.slug === slug);				

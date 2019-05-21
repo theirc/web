@@ -13,8 +13,11 @@ Less me
 	width: 100%;
 	top: 0;
 	height: 64px;
-	box-shadow: 0 1px 1px 0;
-	background-color: #000000;
+	@media (max-width: $desktopBreakpoint) {
+		box-shadow: 0 1px 1px 0;
+		background-color: #000000;
+	}
+	
 }
 
 .app-bar-container {
@@ -46,6 +49,19 @@ Less me
 				padding-left: 18px;
 			}
 		}
+		
+	}
+	
+}
+
+
+.headerBackground{	
+	display: block;
+	background-color: #000000;
+	width: 100%;
+	height: 64px;
+	@media (min-width: $desktopBreakpoint) {
+		display: none,		
 	}
 }
 
@@ -74,7 +90,8 @@ Less me
 		}
 		@media (min-width: 960px) {
 			font-size: 14px;
-			padding: 16px 11px;
+			font-weight: 600;
+			padding: 16px 30px 16px 30px;
 		}
 
 		.rtl & {
@@ -86,13 +103,25 @@ Less me
 		padding-bottom:40px !important;
 	}}
 }
+.top-menu{
+	@media (max-width: $desktopBreakpoint) {
+		display: none;
+	}
 
+}
 .app-bar-separator {
 	border-left-width: 1px;
 	border-left-color: #ffffff;
 	border-left-style: solid;
 	height: 25px;
 	@include brand-colors( "border-left-color");
+
+	
+}
+.separator-searchIcon{
+	@media (min-width: 960px) {		
+		padding-right: 17px;
+	}
 }
 
 .app-bar-logo {
@@ -137,6 +166,9 @@ Less me
 	-moz-transform: translateY(0%);
 	-webkit-transform: translateY(0%);
 	transform: translateY(0%);
+}
+.headroom--not-top{
+	background-color: #000000;
 }
 
 .AppHeader {

@@ -50,14 +50,19 @@ class CountryHome extends React.Component {
 
 	render() {
 		const { country, onNavigate, direction, language } = this.props;
-
+		console.log("Home", country.fields.home);
 		if (!country || !country.fields.home) {
 			return null;
 		}
 		return (
+			
 			<HomeWidgetCollection key={"HomeWidgetCollection"}>
-				{country.fields.home.map(e => <HomeWidget direction={direction} onNavigate={onNavigate} language={language} country={country} content={e} key={e.sys.id} />)}
+				{country.fields.home.map((e, index) => {
+				return <HomeWidget index={index} isHome={true} direction={direction} onNavigate={onNavigate} language={language} country={country} content={e} key={e.sys.id} />
+			
+				})}
 			</HomeWidgetCollection>
+			
 		);
 	}
 }
