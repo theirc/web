@@ -2,12 +2,10 @@ import React, { Component } from "react";
 import { Route, Switch, withRouter } from "react-router";
 import { ConnectedRouter } from "react-router-redux";
 import { Home, Article, Categories, CountryHome, CategoryHome, CountrySelectorScene, LanguageSelectorScene, Search, Services, Selectors } from "./scenes";
-import { InstanceMovedWidget } from "./components";
 import { history } from "./store";
 import { Skeleton } from "./scenes";
 import { withCountry, withCategory } from "./shared/hoc";
 import Placeholder from "./shared/placeholder";
-
 class ScrollToTop extends Component {
 	componentDidUpdate(prevProps) {
 		if (this.props.location !== prevProps.location) {
@@ -43,13 +41,11 @@ class Router extends Component {
 	}
 
 	render() {
-		//const ServicesWithCountry = withCountry(Services);
 		return (
 			<ConnectedRouter history={history}>
 				<Placeholder>
 					<ScrollToTop />
 					<Switch>
-						<Route path="/bulgaria/*" component={() => <InstanceMovedWidget country="Bulgaria" link="http://refugeelife.bg/" label="Go to refugeelife.bg"/>} />
 						<Route path="/:country/services" component={props => <ServicesWithCountry {...props} />} />
 						<Skeleton>
 							<div className="SkeletonContainer">

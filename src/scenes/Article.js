@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { ArticlePage, ArticleFooter } from "../components";
+import { ArticlePage, ArticleFooter, InstanceMovedWidget } from "../components";
 import PropTypes from "prop-types";
 import { actions } from "../store";
 import { push } from "react-router-redux";
@@ -51,6 +51,7 @@ class Article extends React.Component {
 		const { loading } = this.state;
 		const { article, direction } = this.props;
 		const { category, country, onNavigateTo, onNavigate, language } = this.props;
+		const instanceMoved = country.fields.slug === 'bulgaria';
 
 		if (!article || !category) return null;
 
@@ -74,10 +75,17 @@ class Article extends React.Component {
 		const other = articles.filter(a => a.sys.id === article.sys.id);
 				
 		return (
-			<Placeholder>
-				<ArticlePage key={"Article"} direction={direction} category={category} other={other} article={article} loading={loading} onNavigate={onNavigate} />
-				<ArticleFooter key={"ArticleFooter"} onNavigateTo={onNavigateTo(category, country)} language={language} {...{ direction, previous, next }} />
-			</Placeholder>
+			<div>
+				{ !instanceMoved &&
+					<Placeholder>
+						<ArticlePage key={"Article"} direction={direction} category={category} other={other} article={article} loading={loading} onNavigate={onNavigate} />
+						<ArticleFooter key={"ArticleFooter"} onNavigateTo={onNavigateTo(category, country)} language={language} {...{ direction, previous, next }} />
+					</Placeholder>
+				}
+				{ instanceMoved &&
+					<InstanceMovedWidget country="Bulgaria" link="http://refugeelife.bg/" label="Go to refugeelife.bg" />
+				}
+			</div>
 		);
 	}
 }

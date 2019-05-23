@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import {ArticleList} from '../components'
+import {ArticleList, InstanceMovedWidget} from '../components'
 import { push } from "react-router-redux";
 
 const Remarkable = require("remarkable");
@@ -20,19 +20,28 @@ class CategoryHome extends React.Component {
 
     render() {
         const { country, category, onNavigate, t } =this.props;
+		const instanceMoved = country.fields.slug === 'bulgaria';
 
         if(!country || !category) {
             return null;
         }
 
+        console.log('categoryhome');
         return (
-            <ArticleList
-                country= {country}
-                category = {category}
-                onNavigate = {onNavigate}
-                md = {md}
-                t = {t}
-            />
+            <div>
+                { !instanceMoved &&
+                    <ArticleList
+                        country= {country}
+                        category = {category}
+                        onNavigate = {onNavigate}
+                        md = {md}
+                        t = {t}
+                    />
+                }
+                { instanceMoved &&
+					<InstanceMovedWidget country="Bulgaria" link="http://refugeelife.bg/" label="Go to refugeelife.bg" />
+                }
+            </div>
         );
     }
 }
