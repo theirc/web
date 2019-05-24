@@ -1,13 +1,14 @@
 @import "../shared/includes.scss";
 
 .InstanceMovedWidget {
+	padding: 50px 0;
 	text-align: center;
 	width: 100%;
 	span {
 		background-image: url("/instance-moved.png");
 		background-size: contain;
 		display: block;
-		margin: 60px auto;
+		margin: 0 auto 50px;
 		width: 100px;
 		height: 100px;
 	}
@@ -23,6 +24,7 @@
 		text-decoration: none;
 	}
 	h1 {
+		padding: 0 50px;
 		text-transform: uppercase;
 	}
 }

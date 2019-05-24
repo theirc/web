@@ -369,19 +369,21 @@ class Services extends React.Component {
 			goToLocationMap(location);
 		}
 
+		const instanceMoved = country.fields.slug === 'bulgaria';
+
 		return (
 			<div>
-				{ match.params.country === 'bulgaria' &&
+				{ instanceMoved &&
 					<Route path={`${match.url}*`} component={props => (
 						<Skeleton>
 							<div className="SkeletonContainer">
-								<InstanceMovedWidget country="Bulgaria" link="http://refugeelife.bg/" label="Go to refugeelife.bg" />
+								<InstanceMovedWidget link="http://refugeelife.bg/" />
 							</div>
 						</Skeleton>
 					)} />
 				}
 
-				{ match.params.country !== 'bulgaria' &&
+				{ !instanceMoved &&
 					<div>
 						<Switch>
 							<Route

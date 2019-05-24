@@ -33,7 +33,7 @@ class Categories extends React.Component {
 					<CategoryList categories={country.fields.categories} country={country} onNavigate={onNavigate} language={language} />
 				}
 				{ instanceMoved &&
-					<InstanceMovedWidget country="Bulgaria" link="http://refugeelife.bg/" label="Go to refugeelife.bg" />
+					<InstanceMovedWidget link="http://refugeelife.bg/" />
 				}
 			</div>
 		);

@@ -146,7 +146,10 @@ export default {
             "Palermo":"پالرمو",
             "Rome":"رم",
             "Turin":"تورین",
-            "Ventimiglia":"فينتيميليا"
+            "Ventimiglia":"فينتيميليا",
+            "Instance moved Bulgaria banner": "Refugee.info no longer hosts content on Bulgaria.ar",
+            "Instance moved Bulgaria small": "Please visit our partner for this informationar",
+            "Instance moved Bulgaria label": "Go to refugeelife.bgar",
         },
     },
     ar: {
@@ -1014,6 +1017,9 @@ export default {
             "Rome":"Rome",
             "Turin":"Turin",
             "Ventimiglia":"Ventimiglia",
+            "Instance moved Bulgaria banner": "Refugee.info no longer hosts content on Bulgaria.",
+            "Instance moved Bulgaria small": "Please visit our partner for this information",
+            "Instance moved Bulgaria label": "Go to refugeelife.bg",
         },
     }
 

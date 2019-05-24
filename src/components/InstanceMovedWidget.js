@@ -5,14 +5,15 @@ import "./InstanceMovedWidget.css";
 class InstanceMovedWidget extends Component {
 
 	render() {
+		const { t, link } = this.props;
 		return (
 			<div className="InstanceMovedWidget">
 				<span></span>
-				<h1>Refugee.info no longer<br />hosts content on<br />{this.props.country}.</h1>
+				<h1>{t("Instance moved Bulgaria banner")}</h1>
 				<br /><br />
-				<h3>Please visit our partner for this information</h3>
+				<h3>{t("Instance moved Bulgaria small")}</h3>
 				<br />
-				<a href={this.props.link}>{this.props.label}</a>
+				<a href={link}>{t("Instance moved Bulgaria label")}</a>
 			</div>
 		)
 	}

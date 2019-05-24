@@ -55,7 +55,7 @@ class CountryHome extends React.Component {
 		if (!country || !country.fields.home) {
 			return null;
 		}
-		// console.log(country);
+		
 		return (
 			<div>
 				{ !instanceMoved &&
@@ -64,7 +64,7 @@ class CountryHome extends React.Component {
 					</HomeWidgetCollection>
 				}
 				{ instanceMoved &&
-					<InstanceMovedWidget country="Bulgaria" link="http://refugeelife.bg/" label="Go to refugeelife.bg" />
+					<InstanceMovedWidget link="http://refugeelife.bg/" />
 				}
 			</div>
 		);
