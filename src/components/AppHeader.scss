@@ -20,6 +20,24 @@ Less me
 	
 }
 
+.app-bar-light {
+	@include flexbox();
+	@include flex-direction(row);
+	@include align-items(center);
+	@include justify-content(flex-start);
+
+	position: fixed;
+	width: 100%;
+	top: 0;
+	height: 64px;
+	@media (max-width: $desktopBreakpoint) {
+		box-shadow: 0 1px 1px 0;
+		background-color: #ffffff;
+	}
+	
+}
+
+
 .app-bar-container {
 	display: -webkit-box;
 	display: -webkit-flex;
@@ -64,6 +82,16 @@ Less me
 		display: none,		
 	}
 }
+.headerBackgroundLight{	
+	display: block;
+	background-color: #ffffff;
+	width: 100%;
+	height: 64px;
+	@media (min-width: $desktopBreakpoint) {
+		display: none,		
+	}
+}
+
 
 .logo-centered {
 	align-items: center;
@@ -166,6 +194,12 @@ Less me
 	-moz-transform: translateY(0%);
 	-webkit-transform: translateY(0%);
 	transform: translateY(0%);
+}
+
+.AppHeaderLight{
+	.headroom--not-top{
+		background-color: #ffffff;
+	}
 }
 .headroom--not-top{
 	background-color: #000000;

@@ -59,8 +59,10 @@ class AppHeader extends Component {
 	}
 
 	render() {
-		const { onChangeCountry, onChangeLanguage, onGoToCategories, onGoToServices, disableLanguageSelector, disableCountrySelector, onGoHome, country, language, t } = this.props;
+		const { onChangeCountry, onChangeLanguage, onGoToCategories, onGoToServices, disableLanguageSelector, disableCountrySelector, onGoHome, country, language, t, headerColor } = this.props;
 		const { search, searchText } = this.state;
+		const backgroundDark = headerColor == 'dark' ? true : false;
+		console.log("bg", backgroundDark);
 		const noop = () => {
 			console.log("noop");
 		};
@@ -68,10 +70,10 @@ class AppHeader extends Component {
 		const privacyPolicyLink = <a href="/greece/privacy/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>;
 		const showHeaderBackground = !country || !language;
 		return (
-			<div className="AppHeader">
+			<div className="AppHeaderLight">
 
-				<Headroom tolerance={5} offset={200}>
-					<div className="app-bar">
+				<Headroom tolerance={5} offset={200}>					
+					<div className="app-bar-light">
 						<div className={["app-bar-container logo", !(country && language) ? "logo-centered" : ""].join(" ")} onClick={onGoHome || noop}>
 							<img onClick={onGoHome} src={this.props.logo || "/logo.svg"} className="app-bar-logo" alt=" " />
 						</div>
@@ -111,7 +113,7 @@ class AppHeader extends Component {
 								</div>
 							)}
 					</div>
-				</Headroom>
+				</Headroom>				
 				{showHeaderBackground &&  <div
 					style={{
 						backgroundColor: "#000000",
@@ -120,7 +122,7 @@ class AppHeader extends Component {
 						height: 64,
 					}}
 				/>}
-				{!showHeaderBackground &&  <div className='headerBackground' ></div>}
+				{!showHeaderBackground &&  <div className={backgroundDark ? 'headerBackground': 'headerBackgroundLight'}></div>}
 				{search && (
 					<form onSubmit={this.handleSubmit.bind(this)} className="SearchBar">
 						<input autoComplete="off" autoFocus name="searchText" placeholder={t("Search")} type="text" value={searchText} onChange={this.handleInputChange.bind(this)} />

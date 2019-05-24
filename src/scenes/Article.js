@@ -6,6 +6,7 @@ import { actions } from "../store";
 import { push } from "react-router-redux";
 import Placeholder from "../shared/placeholder";
 import _ from "lodash";
+import { Skeleton } from ".";
 const Promise = require("bluebird");
 
 class Article extends React.Component {
@@ -74,10 +75,15 @@ class Article extends React.Component {
 		const other = articles.filter(a => a.sys.id === article.sys.id);
 				
 		return (
-			<Placeholder>
-				<ArticlePage key={"Article"} direction={direction} category={category} other={other} article={article} loading={loading} onNavigate={onNavigate} />
-				<ArticleFooter key={"ArticleFooter"} onNavigateTo={onNavigateTo(category, country)} language={language} {...{ direction, previous, next }} />
-			</Placeholder>
+			<Skeleton headerColor='light'>
+					<div className="SkeletonContainer">
+						<Placeholder>
+							<ArticlePage key={"Article"} direction={direction} category={category} other={other} article={article} loading={loading} onNavigate={onNavigate} />
+							<ArticleFooter key={"ArticleFooter"} onNavigateTo={onNavigateTo(category, country)} language={language} {...{ direction, previous, next }} />
+						</Placeholder>
+					</div>
+				</Skeleton>
+			
 		);
 	}
 }

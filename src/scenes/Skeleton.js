@@ -50,9 +50,11 @@ class Skeleton extends React.Component {
 		}
 	}
 	render() {
-		const { children, country, language, match, onGoHome, onGoToSearch, onChangeLocation, onChangeLanguage, deviceType, router, hideFooter, removeErrorMessage, showMapButton, goToMap } = this.props;
+		const { children, country, language, match, onGoHome, onGoToSearch, onChangeLocation, onChangeLanguage, deviceType, router, hideFooter, removeErrorMessage, showMapButton, goToMap, headerColor } = this.props;
 		const { errorMessage } = this.state;
 		const { config } = this.context;
+
+		console.log("Props", this.props);
 
 		let notifications = [];
 		const notificationType = n => {
@@ -109,6 +111,7 @@ class Skeleton extends React.Component {
 						onGoToSearch={q => onGoToSearch(country, q)}
 						onChangeCountry={onChangeLocation}
 						onChangeLanguage={onChangeLanguage.bind(this, router.location.pathname)}
+						headerColor = {headerColor}
 						logo={logo}
 					/>
 					{notifications}

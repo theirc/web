@@ -4,6 +4,7 @@ import {} from "../components";
 import PropTypes from "prop-types";
 import { CategoryList } from "../components";
 import { history } from "../store";
+import { Skeleton } from ".";
 
 class Categories extends React.Component {
 	static propTypes = {
@@ -26,7 +27,11 @@ class Categories extends React.Component {
 			return null;
 		}
 
-		return <CategoryList categories={country.fields.categories} country={country} onNavigate={onNavigate} language={language} />;
+		return <Skeleton headerColor='light'>
+					<div className="SkeletonContainer">
+						<CategoryList categories={country.fields.categories} country={country} onNavigate={onNavigate} language={language} />;
+					</div>
+				</Skeleton>
 	}
 }
 
