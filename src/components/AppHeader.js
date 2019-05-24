@@ -61,7 +61,7 @@ class AppHeader extends Component {
 	render() {
 		const { onChangeCountry, onChangeLanguage, onGoToCategories, onGoToServices, disableLanguageSelector, disableCountrySelector, onGoHome, country, language, t, headerColor } = this.props;
 		const { search, searchText } = this.state;
-		const backgroundDark = headerColor == 'dark' ? true : false;
+		const backgroundDark = headerColor == 'light' ? false : true;
 		console.log("bg", backgroundDark);
 		const noop = () => {
 			console.log("noop");
@@ -70,10 +70,10 @@ class AppHeader extends Component {
 		const privacyPolicyLink = <a href="/greece/privacy/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>;
 		const showHeaderBackground = !country || !language;
 		return (
-			<div className="AppHeaderLight">
+			<div className={backgroundDark ? 'AppHeader' : 'AppHeaderLight'}>
 
 				<Headroom tolerance={5} offset={200}>					
-					<div className="app-bar-light">
+					<div className={backgroundDark ? 'app-bar' : 'app-bar-light'}>
 						<div className={["app-bar-container logo", !(country && language) ? "logo-centered" : ""].join(" ")} onClick={onGoHome || noop}>
 							<img onClick={onGoHome} src={this.props.logo || "/logo.svg"} className="app-bar-logo" alt=" " />
 						</div>
