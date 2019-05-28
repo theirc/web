@@ -328,7 +328,7 @@ class Services extends React.Component {
 			}
 		};
 
-		const getLocationName = (slug) => {
+		const getLocatioName = (slug) => {
 			if(this.sessionStorage.location) {
 				let l = JSON.parse(this.sessionStorage.location);
 				if(l.slug === slug) {
@@ -369,7 +369,7 @@ class Services extends React.Component {
 			goToLocationMap(location);
 		}
 
-		const getLocatioName = (slug) =>{
+		const getLocationName = (slug) =>{
 			const { regions} = this.props;
 			if (!this.state.locationName){
 				var loc = regions.filter(x => x.slug === slug);				
@@ -385,7 +385,7 @@ class Services extends React.Component {
 						exact
 						path={`${match.url}/map/`}
 						component={props => (
-							<Skeleton>
+							<Skeleton headerColor='light'>
 								<div className="SkeletonContainer">
 									<ServiceMap
 										{...props}
@@ -409,7 +409,7 @@ class Services extends React.Component {
 						path={`${match.url}/all/`}
 						exact
 						component={props => (
-							<Skeleton>
+							<Skeleton headerColor='light'>
 								<div className="SkeletonContainer">
 									<ServiceList
 										{...props}
@@ -428,7 +428,7 @@ class Services extends React.Component {
 						path={`${match.url}/nearby/`}
 						exact
 						component={props => (
-							<Skeleton>
+							<Skeleton headerColor='light'>
 								<div className="SkeletonContainer">
 									<ServiceList
 										{...props}
@@ -448,7 +448,7 @@ class Services extends React.Component {
 						path={`${match.url}/locations/`}
 						exact
 						component={props => (
-							<Skeleton>
+							<Skeleton headerColor='light'>
 								<div className="SkeletonContainer">
 									<ServiceLocationList
 										{...props}
@@ -476,7 +476,7 @@ class Services extends React.Component {
 						path={`${match.url}/departments/`}
 						exact
 						component={props => (
-							<Skeleton>
+							<Skeleton headerColor='light'>
 								<div className="SkeletonContainer">
 									<ServiceDepartmentList
 										{...props}
@@ -501,7 +501,7 @@ class Services extends React.Component {
 						path={`${match.url}/preview/:serviceId/`}
 						exact
 						component={props => (
-							<Skeleton>
+							<Skeleton headerColor='light'>
 								<div className="SkeletonContainer">
 									<ServiceDetail
 										{...props}
@@ -518,7 +518,7 @@ class Services extends React.Component {
 						path={`${match.url}/:serviceId/`}
 						exact
 						component={props => (
-							<Skeleton>
+							<Skeleton headerColor='light'>
 								<div className="SkeletonContainer">
 									<ServiceDetail
 										{...props}
@@ -536,7 +536,7 @@ class Services extends React.Component {
 					exact
 					path={`${match.url}/by-category/:categoryId/map`}
 					component={props => (
-						<Skeleton>
+						<Skeleton headerColor='light'>
 							<div className="SkeletonContainer">
 								<ServiceMap
 									{...props}
@@ -562,7 +562,7 @@ class Services extends React.Component {
 					exact
 					path={`${match.url}/by-category/:categoryId/`}
 					component={props => (
-						<Skeleton showMapButton={true} goToMap={() => servicesInCategoryMap(this.state.category, this.state.location)} >
+						<Skeleton headerColor='light' showMapButton={true} goToMap={() => servicesInCategoryMap(this.state.category, this.state.location)} >
 							<div className="SkeletonContainer">
 								<ServiceList
 									{...props}
@@ -583,7 +583,7 @@ class Services extends React.Component {
 					exact
 					path={`${match.url}/by-location/:location/`}
 					component={props => (
-						<Skeleton>
+						<Skeleton headerColor='light'>
 							<div className="SkeletonContainer">
 								<ServiceCategoryList
 									fetchCategories={() => this.serviceTypesByLocation(props.match.params.location)}
@@ -607,7 +607,7 @@ class Services extends React.Component {
 					exact
 					path={`${match.url}/by-category/:categoryId/location/:location`}
 					component={props => (
-						<Skeleton showMapButton={true} goToMap={() => servicesInCategoryMap(this.state.category, this.state.location)} >
+						<Skeleton headerColor='light' showMapButton={true} goToMap={() => servicesInCategoryMap(this.state.category, this.state.location)} >
 							<div className="SkeletonContainer">
 								<ServiceList
 									{...props}
@@ -629,14 +629,14 @@ class Services extends React.Component {
 					exact
 					path={`${match.url}/by-category/:categoryId/location/:location/map`}
 					component={props => (
-						<Skeleton showMapButton={true} goToMap={() => servicesInCategoryMap(this.state.category, this.state.location)} >
+						<Skeleton headerColor='light' showMapButton={true} goToMap={() => servicesInCategoryMap(this.state.category, this.state.location)} >
 							<div className="SkeletonContainer">
 								<ServiceMap
 									{...props}
 									goToService={goToService}
 									language={language}
 									locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
-									measureDistance={this.measureDistance(geolocation, language)}
+						 			measureDistance={this.measureDistance(geolocation, language)}
 									toggleLocation={() => _.identity()}
 									findServicesInLocation={bbox => this.fetchServicesWithinCategoryLocation(bbox, props.match.params.location, props.match.params.categoryId)}
 									nearby={true}
@@ -653,7 +653,7 @@ class Services extends React.Component {
 					exact
 					path={`${match.url}/by-location/:location/all`}
 					component={props => (
-						<Skeleton showMapButton={true} goToMap={() => servicesInLocationMap(this.state.location)}>
+						<Skeleton headerColor='light' showMapButton={true} goToMap={() => servicesInLocationMap(this.state.location)}>
 							<div className="SkeletonContainer">
 							<ServiceList
 									{...props}
@@ -676,7 +676,7 @@ class Services extends React.Component {
 					exact
 					path={`${match.url}/by-location/:location/map/`}
 					component={props => (
-						<Skeleton>
+						<Skeleton headerColor='light'>
 							<div className="SkeletonContainer">
 								<ServiceMap
 									{...props}
@@ -700,7 +700,7 @@ class Services extends React.Component {
 					exact
 					path={`${match.url}`}
 					component={() => (
-						<Skeleton>
+						<Skeleton headerColor='light'>
 							<div className="SkeletonContainer">
 								<ServiceCategoryList
 									fetchCategories={() => this.serviceTypes()}

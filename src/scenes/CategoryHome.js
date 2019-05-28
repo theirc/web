@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux'
 import {ArticleList} from '../components'
 import { push } from "react-router-redux";
+import { Skeleton } from ".";
+
 
 const Remarkable = require("remarkable");
 
@@ -26,13 +28,18 @@ class CategoryHome extends React.Component {
         }
 
         return (
-            <ArticleList
-                country= {country}
-                category = {category}
-                onNavigate = {onNavigate}
-                md = {md}
-                t = {t}
-            />
+            <Skeleton headerColor='light'>
+					<div className="SkeletonContainer">
+                        <ArticleList
+                            country= {country}
+                            category = {category}
+                            onNavigate = {onNavigate}
+                            md = {md}
+                            t = {t}
+                        />
+					</div>
+				</Skeleton>
+            
         );
     }
 }

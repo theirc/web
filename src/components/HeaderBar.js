@@ -20,8 +20,7 @@ class HeaderBar extends Component {
 			<div className="HeaderBar">
 				<input type="checkbox" name={triggerKey} id={triggerKey} />
 				<label htmlFor={triggerKey}>
-					<h1>
-						{subtitle && <small>{subtitle}</small>}
+					<h1>						
 						{title}
 					</h1>
 					{children && [

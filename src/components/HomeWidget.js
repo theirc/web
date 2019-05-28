@@ -10,7 +10,9 @@ import { ArticleWidget } from "./";
 import { CategoryWidget } from "./";
 
 class HomeWidget extends Component {
+
 	renderWidget(w) {
+
 		if (w.fields.type === "Latest Article of Category") {
 			let category = _.first(w.fields.related);
 			if (category) {
@@ -54,18 +56,16 @@ class HomeWidget extends Component {
 	}
 
 	renderArticle(article, category, showHero = true, showFullArticle = false) {
-		const { country, onNavigate, language  } = this.props;
-
+		const { isHome, index, country, onNavigate, language  } = this.props;
 		/*jshint ignore:start*/
 		/*eslint-disable*/
-		return <ArticleWidget country={country} onNavigate={onNavigate} article={article} language={language} category={category} showHero={showHero} showFullArticle={showFullArticle} />;
+		return <ArticleWidget isHome={isHome} index={index} country={country} onNavigate={onNavigate} article={article} language={language} category={category} showHero={showHero} showFullArticle={showFullArticle} />;
 		/*eslint-enable*/
 		/*jshint ignore:end*/
 	}
 
 	renderCategory(c) {
-		const { country, onNavigate, language  } = this.props;
-
+		const { country, onNavigate, language  } = this.props;		
 		/*jshint ignore:start*/
 		/*eslint-disable*/
 		return <CategoryWidget country={country} onNavigate={onNavigate} language={language} c={c} />;
@@ -109,6 +109,7 @@ class HomeWidget extends Component {
 		if (!content) {
 			return null;
 		}
+		
 		try {
 			let rendered = null;
 			

@@ -11,8 +11,8 @@ body {
 	footer {
 		border-bottom-width: 0;
 		border-top-width: 0;
-		border-right-width: $desktopPaddingWidth;
-		border-left-width: $desktopPaddingWidth;
+		border-right-width: 0px;
+		border-left-width: 0px;
 		border-style: solid;
 
 		border-color: darken(gray, 30%);
@@ -20,8 +20,10 @@ body {
 	.SkeletonContainer {
 		border-bottom-width: 0;
 		border-top-width: 0;
-		border-right-width: $desktopPaddingWidth;
-		border-left-width: $desktopPaddingWidth;
+		border-right-width: 0;
+		border-left-width: 0;
+		padding-left: $desktopPaddingWidth;
+		padding-right: $desktopPaddingWidth;
 		border-style: solid;
 
 		border-color: darken(gray, 30%);
@@ -35,12 +37,14 @@ body {
 		margin-right: $bigDesktopPaddingWidth;
 	}
 	footer {
-		border-right-width: $bigDesktopPaddingWidth;
-		border-left-width: $bigDesktopPaddingWidth;
+		border-right-width: 0px;
+		border-left-width: 0px;
 	}
 	.SkeletonContainer {
-		border-right-width: $bigDesktopPaddingWidth;
-		border-left-width: $bigDesktopPaddingWidth;
+		border-right-width: 0;
+		border-left-width: 0;
+		padding-left: $bigDesktopPaddingWidth;
+		padding-right: $bigDesktopPaddingWidth;
 	}
 }
 

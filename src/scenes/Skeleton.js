@@ -50,7 +50,7 @@ class Skeleton extends React.Component {
 		}
 	}
 	render() {
-		const { children, country, language, match, onGoHome, onGoToSearch, onChangeLocation, onChangeLanguage, deviceType, router, hideFooter, removeErrorMessage, showMapButton, goToMap } = this.props;
+		const { children, country, language, match, onGoHome, onGoToServices, onGoToCategories, onGoToSearch, onChangeLocation, onChangeLanguage, deviceType, router, hideFooter, removeErrorMessage, showMapButton, goToMap, headerColor } = this.props;
 		const { errorMessage } = this.state;
 		const { config } = this.context;
 
@@ -95,7 +95,6 @@ class Skeleton extends React.Component {
 
 		let showFooter = !hideFooter && country && language;
 		let logo = _.template(config.logo)({ language: language || "en" });
-
 		return (
 			<I18nextProvider i18n={i18n}>
 				<div className="Skeleton">
@@ -106,10 +105,14 @@ class Skeleton extends React.Component {
 						country={country}
 						language={language}
 						onGoHome={onGoHome(country)}
+						onGoToServices={onGoToServices(country)}
+						onGoToCategories= {onGoToCategories(country)}
 						onGoToSearch={q => onGoToSearch(country, q)}
 						onChangeCountry={onChangeLocation}
 						onChangeLanguage={onChangeLanguage.bind(this, router.location.pathname)}
+						headerColor = {headerColor}
 						logo={logo}
+						logoBlack={config.logoBlack}
 					/>
 					{notifications}
 					{children}
@@ -126,7 +129,8 @@ class Skeleton extends React.Component {
 							customQuestionLink={config.customQuestionLink}
 						/>
 					)}
-					{country && language && <BottomNavContainer match={match} showMapButton={showMapButton} goToMap={goToMap} showDepartments={config.showDepartments}/>}
+					{country && language && <BottomNavContainer  match={match} showMapButton={showMapButton} goToMap={goToMap} showDepartments={config.showDepartments}/>}
+
 				</div>
 			</I18nextProvider>
 		);
@@ -150,6 +154,12 @@ const mapDispatch = (d, p) => {
 		onGoToSearch: (country, query) => {
 			if (country) d(push(`/${country.fields.slug}/search?q=${query}`));
 		},
+		onGoToServices: country => () =>{
+			if (country) d(push(`/${country.fields.slug || ""}`+'/services'));
+		},
+		onGoToCategories: country => () =>{
+			if (country) d(push(`/${country.fields.slug || ""}`+'/categories'));
+		},
 		onChangeLocation: () => {
 			d(actions.changeCountry(null));
 			d(push(`/selectors`));
@@ -164,7 +174,7 @@ const mapDispatch = (d, p) => {
 		},
 		removeErrorMessage() {
 			d(actions.showErrorMessage(null));
-		},
+		}
 	};
 };
 

@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import { IconButton } from "material-ui";
+import { connect } from "react-redux";
 import Headroom from "react-headrooms";
 import PropTypes from "prop-types";
 import { translate, Interpolate } from "react-i18next";
 import { Close } from "material-ui-icons";
 import "./AppHeader.css";
+import { lang } from "moment";
+import { push } from "react-router-redux";
 
 class AppHeader extends Component {
 	static propTypes = {
@@ -13,6 +16,8 @@ class AppHeader extends Component {
 		onGoHome: PropTypes.func,
 		country: PropTypes.object,
 		language: PropTypes.string,
+		onGoToServices: PropTypes.func,
+		onGoToCategories: PropTypes.func,
 	};
 
 	state = {
@@ -58,26 +63,39 @@ class AppHeader extends Component {
 	}
 
 	render() {
-		const { onChangeCountry, onChangeLanguage, disableLanguageSelector, disableCountrySelector, onGoHome, country, language, t } = this.props;
+		const { onChangeCountry, onChangeLanguage, disableLanguageSelector, disableCountrySelector, onGoHome, onGoToServices, onGoToCategories, country, language, t, headerColor } = this.props;
 		const { search, searchText } = this.state;
+		const backgroundDark = headerColor === 'light' ? false : true;
+		const logo = this.props.logo || "/logo.svg";
+		const logoBlack = this.props.logoBlack || logo;
+		console.log("backgroundDark", backgroundDark, "Logo:", logo, "Logo Black:", logoBlack);
 		const noop = () => {
 			console.log("noop");
 		};
 		const cookiePolicyLink = <a href="/greece/privacy/cookies" target="_blank" rel="noopener noreferrer">Cookie Policy</a>;
 		const privacyPolicyLink = <a href="/greece/privacy/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>;
-
+		const showHeaderBackground = !country || !language;
 		return (
-			<div className="AppHeader">
+			<div className={backgroundDark ? 'AppHeader' : 'AppHeaderLight'}>
 
-				<Headroom tolerance={5} offset={200}>
-					<div className="app-bar">
+				<Headroom tolerance={5} offset={200}>					
+					<div className={backgroundDark ? 'app-bar' : 'app-bar-light'}>
 						<div className={["app-bar-container logo", !(country && language) ? "logo-centered" : ""].join(" ")} onClick={onGoHome || noop}>
-							<img onClick={onGoHome} src={this.props.logo || "/logo.svg"} className="app-bar-logo" alt=" " />
+							<img onClick={onGoHome} src={backgroundDark ? logo : logoBlack} className="app-bar-logo" alt=" " />
 						</div>
 						{country &&
 							language && (
 								<div className="app-bar-container buttons">
 									<div className="app-bar-buttons">
+									<span className="app-bar-selectors top-menu" color="contrast" onClick={onGoHome || noop}>
+											{t("Home")}
+										</span>
+										<span className="app-bar-selectors top-menu" color="contrast" onClick={onGoToCategories || noop}>
+											{t("Blog")}
+										</span>
+										<span className="app-bar-selectors top-menu" color="contrast" onClick={onGoToServices || noop}>
+											{t("Services")}	
+										</span>
 										{!disableCountrySelector && (
 											<span className="app-bar-selectors" color="contrast" onClick={onChangeCountry || noop}>
 												{(country && country.fields.name) || " "}
@@ -90,7 +108,7 @@ class AppHeader extends Component {
 											</span>
 										)}
 
-										<div className="app-bar-separator" />
+										<div className="app-bar-separator separator-searchIcon" />
 										<IconButton
 											className={`search-close ${[this.state.search && "active"].join(" ")} search-button `}
 											color="contrast"
@@ -101,15 +119,16 @@ class AppHeader extends Component {
 								</div>
 							)}
 					</div>
-				</Headroom>
-				<div
+				</Headroom>				
+				{showHeaderBackground &&  <div
 					style={{
 						backgroundColor: "#000000",
 						display: "block",
 						width: "100%",
 						height: 64,
 					}}
-				/>
+				/>}
+				{!showHeaderBackground &&  <div className={backgroundDark ? 'headerBackground': 'headerBackgroundLight'}></div>}
 				{search && (
 					<form onSubmit={this.handleSubmit.bind(this)} className="SearchBar">
 						<input autoComplete="off" autoFocus name="searchText" placeholder={t("Search")} type="text" value={searchText} onChange={this.handleInputChange.bind(this)} />
@@ -133,6 +152,4 @@ class AppHeader extends Component {
 
 		);
 	}
-}
-
-export default translate()(AppHeader);
+}export default translate()(AppHeader);

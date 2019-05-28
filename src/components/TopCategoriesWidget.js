@@ -11,18 +11,9 @@ class TopCategoriesWidget extends Component {
         /*eslint-disable*/
         return (
             <div className="TopCategories">
-                <s>
-                    <a
-                        href="#/"
-                        onClick={() => {
-                            onNavigate(`/${country.fields.slug}/categories`);
-                            return false;
-                        }}
-                    >
-                        {t("See More")}
-                    </a>
-                </s>
+                
                 <h3>{t("Top Categories")}</h3>
+                <div className="title-line"></div>
                 {categories.map(c => {
                     let article = articleFunc(c);
                     return (
@@ -34,6 +25,17 @@ class TopCategoriesWidget extends Component {
                         </div>
                     );
                 })}
+                <s>
+                    <a
+                        href="#/"
+                        onClick={() => {
+                            onNavigate(`/${country.fields.slug}/categories`);
+                            return false;
+                        }}
+                    >
+                        {t("See More")}
+                    </a>
+                </s>
             </div>
         );
     }
