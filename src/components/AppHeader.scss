@@ -72,7 +72,6 @@ Less me
 	
 }
 
-
 .headerBackground{	
 	display: block;
 	background-color: #000000;
@@ -199,6 +198,12 @@ Less me
 .AppHeaderLight{
 	.headroom--not-top{
 		background-color: #ffffff;
+	}
+	.headroom--top{
+		background-color: #ffffff;
+	}
+	.app-bar-buttons{
+		color: #000000;
 	}
 }
 .headroom--not-top{

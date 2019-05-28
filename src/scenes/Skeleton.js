@@ -50,11 +50,9 @@ class Skeleton extends React.Component {
 		}
 	}
 	render() {
-		const { children, country, language, match, onGoHome, onGoToSearch, onChangeLocation, onChangeLanguage, deviceType, router, hideFooter, removeErrorMessage, showMapButton, goToMap, headerColor } = this.props;
+		const { children, country, language, match, onGoHome, onGoToCategories, onGoToSearch, onChangeLocation, onChangeLanguage, deviceType, router, hideFooter, removeErrorMessage, showMapButton, goToMap, headerColor } = this.props;
 		const { errorMessage } = this.state;
 		const { config } = this.context;
-
-		console.log("Props", this.props);
 
 		let notifications = [];
 		const notificationType = n => {
@@ -97,7 +95,7 @@ class Skeleton extends React.Component {
 
 		let showFooter = !hideFooter && country && language;
 		let logo = _.template(config.logo)({ language: language || "en" });
-
+		console.log('logoBlack', config.logoBlack);
 		return (
 			<I18nextProvider i18n={i18n}>
 				<div className="Skeleton">
@@ -108,11 +106,13 @@ class Skeleton extends React.Component {
 						country={country}
 						language={language}
 						onGoHome={onGoHome(country)}
+						onGoToServices={() => {this.goToServices(country.fields.slug)}}
 						onGoToSearch={q => onGoToSearch(country, q)}
 						onChangeCountry={onChangeLocation}
 						onChangeLanguage={onChangeLanguage.bind(this, router.location.pathname)}
 						headerColor = {headerColor}
 						logo={logo}
+						logoBlack={config.logoBlack}
 					/>
 					{notifications}
 					{children}
@@ -168,7 +168,7 @@ const mapDispatch = (d, p) => {
 		},
 		removeErrorMessage() {
 			d(actions.showErrorMessage(null));
-		},
+		}
 	};
 };
 

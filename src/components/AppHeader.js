@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { IconButton } from "material-ui";
+import { connect } from "react-redux";
 import Headroom from "react-headrooms";
 import PropTypes from "prop-types";
 import { translate, Interpolate } from "react-i18next";
 import { Close } from "material-ui-icons";
 import "./AppHeader.css";
 import { lang } from "moment";
+import { push } from "react-router-redux";
 
 class AppHeader extends Component {
 	static propTypes = {
@@ -59,10 +61,12 @@ class AppHeader extends Component {
 	}
 
 	render() {
-		const { onChangeCountry, onChangeLanguage, onGoToCategories, onGoToServices, disableLanguageSelector, disableCountrySelector, onGoHome, country, language, t, headerColor } = this.props;
+		const { onChangeCountry, onChangeLanguage, disableLanguageSelector, disableCountrySelector, onGoHome, onGoToServices, country, language, t, headerColor } = this.props;
 		const { search, searchText } = this.state;
-		const backgroundDark = headerColor == 'light' ? false : true;
-		console.log("bg", backgroundDark);
+		const backgroundDark = headerColor === 'light' ? false : true;
+		const logo = this.props.logo || "/logo.svg";
+		const logoBlack = this.props.logoBlack || logo;
+		console.log("backgroundDark", backgroundDark, "Logo:", logo, "Logo Black:", logoBlack);
 		const noop = () => {
 			console.log("noop");
 		};
@@ -75,16 +79,16 @@ class AppHeader extends Component {
 				<Headroom tolerance={5} offset={200}>					
 					<div className={backgroundDark ? 'app-bar' : 'app-bar-light'}>
 						<div className={["app-bar-container logo", !(country && language) ? "logo-centered" : ""].join(" ")} onClick={onGoHome || noop}>
-							<img onClick={onGoHome} src={this.props.logo || "/logo.svg"} className="app-bar-logo" alt=" " />
+							<img onClick={onGoHome} src={backgroundDark ? logo : logoBlack} className="app-bar-logo" alt=" " />
 						</div>
 						{country &&
 							language && (
 								<div className="app-bar-container buttons">
 									<div className="app-bar-buttons">
-									<span className="app-bar-selectors top-menu" color="contrast" onClick={onGoToCategories || noop}>
+									<span className="app-bar-selectors top-menu" color="contrast" onClick={onGoHome || noop}>
 											{t("Home")}
 										</span>
-										<span className="app-bar-selectors top-menu" color="contrast" onClick={onGoToCategories || noop}>
+										<span className="app-bar-selectors top-menu" color="contrast" onClick={noop}>
 											{t("Blog")}
 										</span>
 										<span className="app-bar-selectors top-menu" color="contrast" onClick={onGoToServices || noop}>
@@ -146,6 +150,4 @@ class AppHeader extends Component {
 
 		);
 	}
-}
-
-export default translate()(AppHeader);
+}export default translate()(AppHeader);

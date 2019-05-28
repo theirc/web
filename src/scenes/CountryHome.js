@@ -50,7 +50,6 @@ class CountryHome extends React.Component {
 
 	render() {
 		const { country, onNavigate, direction, language } = this.props;
-		console.log("Home", country.fields.home);
 		if (!country || !country.fields.home) {
 			return null;
 		}

@@ -13,7 +13,7 @@ class TopCategoriesWidget extends Component {
             <div className="TopCategories">
                 
                 <h3>{t("Top Categories")}</h3>
-                <div class="title-line"></div>
+                <div className="title-line"></div>
                 {categories.map(c => {
                     let article = articleFunc(c);
                     return (
