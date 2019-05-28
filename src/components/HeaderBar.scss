@@ -74,11 +74,14 @@
 	}
 
 	h1 {
-		font-size: 36px;
+		font-size: 14px;
 		display: block;
 		width: 100%;
 		margin: 0;
 		flex: 1;
+		@media (min-width: $desktopBreakpoint) {
+			font-size: 36px;
+		}
 	}
 	h1 > small {
 		font-size: 12px;

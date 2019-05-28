@@ -16,6 +16,8 @@ class AppHeader extends Component {
 		onGoHome: PropTypes.func,
 		country: PropTypes.object,
 		language: PropTypes.string,
+		onGoToServices: PropTypes.func,
+		onGoToCategories: PropTypes.func,
 	};
 
 	state = {
@@ -61,7 +63,7 @@ class AppHeader extends Component {
 	}
 
 	render() {
-		const { onChangeCountry, onChangeLanguage, disableLanguageSelector, disableCountrySelector, onGoHome, onGoToServices, country, language, t, headerColor } = this.props;
+		const { onChangeCountry, onChangeLanguage, disableLanguageSelector, disableCountrySelector, onGoHome, onGoToServices, onGoToCategories, country, language, t, headerColor } = this.props;
 		const { search, searchText } = this.state;
 		const backgroundDark = headerColor === 'light' ? false : true;
 		const logo = this.props.logo || "/logo.svg";
@@ -88,7 +90,7 @@ class AppHeader extends Component {
 									<span className="app-bar-selectors top-menu" color="contrast" onClick={onGoHome || noop}>
 											{t("Home")}
 										</span>
-										<span className="app-bar-selectors top-menu" color="contrast" onClick={noop}>
+										<span className="app-bar-selectors top-menu" color="contrast" onClick={onGoToCategories || noop}>
 											{t("Blog")}
 										</span>
 										<span className="app-bar-selectors top-menu" color="contrast" onClick={onGoToServices || noop}>

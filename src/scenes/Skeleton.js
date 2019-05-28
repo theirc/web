@@ -50,7 +50,7 @@ class Skeleton extends React.Component {
 		}
 	}
 	render() {
-		const { children, country, language, match, onGoHome, onGoToCategories, onGoToSearch, onChangeLocation, onChangeLanguage, deviceType, router, hideFooter, removeErrorMessage, showMapButton, goToMap, headerColor } = this.props;
+		const { children, country, language, match, onGoHome, onGoToServices, onGoToCategories, onGoToSearch, onChangeLocation, onChangeLanguage, deviceType, router, hideFooter, removeErrorMessage, showMapButton, goToMap, headerColor } = this.props;
 		const { errorMessage } = this.state;
 		const { config } = this.context;
 
@@ -95,7 +95,6 @@ class Skeleton extends React.Component {
 
 		let showFooter = !hideFooter && country && language;
 		let logo = _.template(config.logo)({ language: language || "en" });
-		console.log('logoBlack', config.logoBlack);
 		return (
 			<I18nextProvider i18n={i18n}>
 				<div className="Skeleton">
@@ -106,7 +105,8 @@ class Skeleton extends React.Component {
 						country={country}
 						language={language}
 						onGoHome={onGoHome(country)}
-						onGoToServices={() => {this.goToServices(country.fields.slug)}}
+						onGoToServices={onGoToServices(country)}
+						onGoToCategories= {onGoToCategories(country)}
 						onGoToSearch={q => onGoToSearch(country, q)}
 						onChangeCountry={onChangeLocation}
 						onChangeLanguage={onChangeLanguage.bind(this, router.location.pathname)}
@@ -153,6 +153,12 @@ const mapDispatch = (d, p) => {
 		},
 		onGoToSearch: (country, query) => {
 			if (country) d(push(`/${country.fields.slug}/search?q=${query}`));
+		},
+		onGoToServices: country => () =>{
+			if (country) d(push(`/${country.fields.slug || ""}`+'/services'));
+		},
+		onGoToCategories: country => () =>{
+			if (country) d(push(`/${country.fields.slug || ""}`+'/categories'));
 		},
 		onChangeLocation: () => {
 			d(actions.changeCountry(null));

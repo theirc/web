@@ -87,7 +87,8 @@ Less me
 	width: 100%;
 	height: 64px;
 	@media (min-width: $desktopBreakpoint) {
-		display: none,		
+		display: none,	
+
 	}
 }
 
@@ -196,11 +197,17 @@ Less me
 }
 
 .AppHeaderLight{
+	@media (min-width: $desktopBreakpoint) {
+		margin-bottom: 63px;
+	}
+	
 	.headroom--not-top{
 		background-color: #ffffff;
+		box-shadow: 0px 1px 8px -5px;
 	}
 	.headroom--top{
 		background-color: #ffffff;
+		box-shadow: 0px 1px 8px -5px;
 	}
 	.app-bar-buttons{
 		color: #000000;
@@ -208,6 +215,7 @@ Less me
 }
 .headroom--not-top{
 	background-color: #000000;
+	
 }
 
 .AppHeader {
