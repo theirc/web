@@ -36,6 +36,54 @@
 		margin: 0;
 		padding: 0;
 	}
+	@media (min-width: $desktopBreakpoint) {
+		ul li{
+			width: 30%;
+			display: inline-block;
+			height: 70px;
+			box-shadow: 2px 2px 4px -3px;
+			margin: 1%;
+			background-color: white;
+			overflow: hidden;
+
+			&.selected{
+				background-color: #fdda14;
+			}
+		}
+
+		ul li ul{
+			position: absolute;
+			left: 2vw;
+			right: 6vw;
+			background-color: white;
+			margin-top: 20px !important;
+			box-shadow: 6px 6px 10px -2px;
+		}
+		ul li ul li{
+			width: 33%;
+			margin: 0px;
+			box-shadow: 0px 0px 0px 0px;
+			line-height: 45px;
+			border-bottom: 1px solid #e1dfdf;
+			font-size: 16px;
+		}
+		.line{
+			display: none;
+		}
+		.material-icons{
+			font-size: 20px;
+		}
+
+		ul li .container{
+			width: calc(100% - 32px);
+			display: inline-table;
+			flex-direction: row;
+			justify-content: center;
+			align-items: center;
+			user-select: none;			
+		}
+	}
+	
 	ul li .container {
 		padding: 16px;
 		display: flex;
@@ -105,7 +153,7 @@
 		}
 
 		&> li {
-			font-size: 14px;
+			font-size: 16px;
 		}
 	}
 	.category-name {

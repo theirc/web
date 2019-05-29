@@ -14,6 +14,24 @@ class CategoryList extends Component {
 
 		let showCategory = c => c && c.fields && !c.fields.hide && c.fields.slug && (c.fields.overview || c.fields.articles);
 		const overviewOrFirst = c => c.fields.overview || (c.fields.articles.length && c.fields.articles[0]);
+		const clk = (tab) => {   ///Needs refactor
+			//Add selected class if checked
+			let selected = document.getElementById("tab-"+tab);
+			let buttonTab = selected.parentElement;
+			if (selected.checked){
+				buttonTab.classList.add("selected");
+			}else{
+				buttonTab.classList.remove("selected");
+			}
+			//Uncheck any other checked input
+			let chk = document.getElementsByClassName("tabs");
+			for(let i=0; i<chk.length; i++){		
+				if(chk[i].id !== "tab-"+tab){
+					chk[i].checked=false;
+					chk[i].parentElement.classList.remove("selected");
+				}
+			}			
+		}
 		return (
 			<div className="CategoryList">
 				<HeaderBar title={t("Categories").toUpperCase()} />
@@ -21,7 +39,7 @@ class CategoryList extends Component {
 					{(categories || []).filter(showCategory).map((c, i) => (
 						<li key={c.sys.id}>
 							{i > 0 && <hr className="line" />}
-							<input type="checkbox" name={"tab"} id={`tab-${i}`} />
+							<input type="checkbox" className="tabs" name={"tab"} id={`tab-${i}`} onClick={() => clk(i)} />
 							{showToggle(c) && [
 								<label key="a-1" htmlFor={`tab-${i}`} className="container">
 									<i className={c.fields.iconClass || "material-icons"}>{c.fields.iconText || ((!c.fields.iconClass || c.fields.iconClass === "material-icons") && "add")}</i>
