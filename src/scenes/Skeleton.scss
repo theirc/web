@@ -29,6 +29,9 @@ body {
 		border-color: darken(gray, 30%);
 		//@include grayscale-brand-colors("border-color");
 	}
+	.bg-gray{
+		background-color: #f8f8f8;
+	}
 }
 
 @media (min-width: $bigDesktopBreakpoint) {

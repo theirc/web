@@ -28,7 +28,7 @@ class Categories extends React.Component {
 		}
 
 		return <Skeleton headerColor='light'>
-					<div className="SkeletonContainer">
+					<div className="SkeletonContainer bg-gray">
 						<CategoryList categories={country.fields.categories} country={country} onNavigate={onNavigate} language={language} />
 					</div>
 				</Skeleton>
