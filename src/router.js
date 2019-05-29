@@ -6,7 +6,6 @@ import { history } from "./store";
 import { Skeleton } from "./scenes";
 import { withCountry, withCategory } from "./shared/hoc";
 import Placeholder from "./shared/placeholder";
-
 class ScrollToTop extends Component {
 	componentDidUpdate(prevProps) {
 		if (this.props.location !== prevProps.location) {
@@ -42,7 +41,6 @@ class Router extends Component {
 	}
 
 	render() {
-		//const ServicesWithCountry = withCountry(Services);
 		return (
 			<ConnectedRouter history={history}>
 				<Placeholder>
