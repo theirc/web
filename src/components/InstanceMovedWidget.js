@@ -13,7 +13,7 @@ class InstanceMovedWidget extends Component {
 				<br /><br />
 				<h3>{t("Instance moved Bulgaria small")}</h3>
 				<br />
-				<a href={link}>{t("Instance moved Bulgaria label")}</a>
+				<a href={link} target="_blank">{t("Instance moved Bulgaria label")}</a>
 			</div>
 		)
 	}

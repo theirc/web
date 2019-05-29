@@ -1,9 +1,8 @@
 @import "../shared/includes.scss";
 
 .InstanceMovedWidget {
-	padding: 50px 0;
+	padding: 50px 20px;
 	text-align: center;
-	width: 100%;
 	span {
 		background-image: url("/instance-moved.png");
 		background-size: contain;
@@ -12,19 +11,18 @@
 		width: 100px;
 		height: 100px;
 	}
-	a {
+	a, .rtl a {
 		background-color: $accentIRC;
+		border-bottom: none !important;
 		display: block;
 		font-weight: bold;
 		height: 70px;
-		line-height: 70px;
-		margin: 10px 15px 50px 15px;
+		line-height: 70px !important;
 		outline: none;
 		padding: 5px;
 		text-decoration: none;
 	}
 	h1 {
-		padding: 0 50px;
 		text-transform: uppercase;
 	}
 }
