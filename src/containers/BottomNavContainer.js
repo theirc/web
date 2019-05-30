@@ -32,7 +32,8 @@ class BottomNavContainer extends React.Component {
 	componentWillMount() {}
 
 	render() {
-		const { country, onGoToCategories, onGoHome, onGoToSearch, showServiceMap, router, showMapButton, goToMap, showDepartments } = this.props;
+		const { country, onGoToCategories, onGoHome, onGoToSearch, router, showMapButton, goToMap, showDepartments } = this.props;
+		let { showServiceMap } = this.props;
 		let pathParts = router.location.pathname.split("/");
 		let selectedIndex = 0;
 		if (pathParts.length > 2) {
@@ -47,6 +48,8 @@ class BottomNavContainer extends React.Component {
 			}
 		}
 
+		country && country.fields && country.fields.slug === 'italy' && (showServiceMap = false);
+		
 		return (
 			<BottomNav
 				showServiceMap={showServiceMap}
