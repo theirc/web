@@ -1,7 +1,7 @@
 import React from "react";
 import moment from "moment";
 import { connect } from "react-redux";
-import { HomeWidget, HomeWidgetCollection } from "../components";
+import { HomeWidget, HomeWidgetCollection, InstanceMovedWidget } from "../components";
 import { push } from "react-router-redux";
 import getSessionStorage from "../shared/sessionStorage";
 
@@ -50,14 +50,23 @@ class CountryHome extends React.Component {
 
 	render() {
 		const { country, onNavigate, direction, language } = this.props;
+		const instanceMoved = country.fields.slug === 'bulgaria';
 
 		if (!country || !country.fields.home) {
 			return null;
 		}
+		
 		return (
-			<HomeWidgetCollection key={"HomeWidgetCollection"}>
-				{country.fields.home.map(e => <HomeWidget direction={direction} onNavigate={onNavigate} language={language} country={country} content={e} key={e.sys.id} />)}
-			</HomeWidgetCollection>
+			<div>
+				{ !instanceMoved &&
+					<HomeWidgetCollection key={"HomeWidgetCollection"}>
+						{country.fields.home.map(e => <HomeWidget direction={direction} onNavigate={onNavigate} language={language} country={country} content={e} key={e.sys.id} />)}
+					</HomeWidgetCollection>
+				}
+				{ instanceMoved &&
+					<InstanceMovedWidget link="http://refugeelife.bg/" />
+				}
+			</div>
 		);
 	}
 }
