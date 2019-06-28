@@ -26,6 +26,7 @@ var urlsToCache = [
       'https://cdnjs.cloudflare.com/ajax/libs/react/16.7.0/umd/react.production.min.js',
       'https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.7.0/umd/react-dom.production.min.js',
       'http://images.ctfassets.net/e17qk44d7f2w/5lL1DFX7jymqYwkaMIEKSK/a8aae35aca1aef19f56e268ee674fe7b/cn-hero.jpg?fm=jpg&fl=progressive'
+      
       ];
 
 self.addEventListener('install', function(event) {
@@ -53,17 +54,16 @@ self.addEventListener('activate', (event) => {
 
 
 self.addEventListener('fetch', function(event) {
-  let online = navigator.onLine;
-  if(!online){   
-    event.respondWith(
-      caches.match(event.request).then(function(response) {       
-          if(response){
-            return response;
-          }     
-          requestBackend(event);
-      })
-    );
-  }
+   
+  event.respondWith(
+    caches.match(event.request).then(function(response) {       
+        if(response){
+          return response;
+        }     
+        requestBackend(event);
+    })
+  );
+ 
   
 });
 
