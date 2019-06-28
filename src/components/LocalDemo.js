@@ -20,9 +20,26 @@ class LocalDemo extends Component {
 	render() {
         const { language, country, t } = this.props;
         const startCache = () =>{
-            console.log("Start");
+			var CACHE_NAME ='rescue-cache-v3';
+			var urlsToCache = [
+				'https://cdn.contentful.com/spaces/e17qk44d7f2w/entries?content_type=country&locale=es',
+				'https://admin.cuentanos.org/e/production/v2/services/searchlist/?filter=relatives&geographic_region=el-salvador&page=1&page_size=1000&type_numbers=',
+				
+
+			];
+			
+			caches.open(CACHE_NAME)
+			.then(function(cache) {
+				// Open a cache and cache our files
+				urlsToCache.map(url => {
+					return fetch(url).then((res)=> {
+						var response = res.clone();
+						cache.put(url, response);						
+					})
+				}) 
+				//return cache.addAll(urlsToCache);
+			})
         }
-        console.log(country);
 		return (
 			<div className="LocalDemo">
                 <Helmet>

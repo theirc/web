@@ -210,11 +210,6 @@ class Services extends React.Component {
 			.fetchAllServices(location || country.fields.slug, language, category, null)
 			.then(s => s.results)
 			.then(services => ({ services, category: null }));
-
-		// return servicesApi
-		// 	.fetchAllServicesInBBox(location || country.fields.slug, language, bbox, 1000, category)
-		// 	.then(s => s.results)
-		// 	.then(services => ({ services, category: null }));
 	}
 	fetchServicesWithinLocation(bbox, location = null) {
 		const { country, language } = this.props;

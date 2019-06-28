@@ -1,6 +1,5 @@
 import getSessionStorage from "../shared/sessionStorage";
 import getLocalStorage from "../shared/localStorage";
-import localcache from "../content/localcache";
 import cms from "./cms";
 
 var request = require("superagent");
@@ -20,6 +19,7 @@ module.exports = {
 			if (sessionStorage[`${language}-${region}-service-categories`] && sessionStorage[`${language}-${region}-service-categories`] !== "[]") {
 				resolve(JSON.parse(sessionStorage[`${language}-${region}-service-categories`]));
 			} else {
+				
 				request
 					.get(RI_URL + "/service-types/" + (region ? `?region=${region}` : ""))
 					.set("Accept-Language", language)
@@ -107,6 +107,7 @@ module.exports = {
 		}
 		
 		return new Promise((resolve, reject) => {
+			console.log("start promise");
 			var requestUrl =
 				"/services/searchlist/?filter="+ filter +"&geographic_region=" +
 				country +
@@ -117,35 +118,52 @@ module.exports = {
 				(searchTerm ? "&search=" + searchTerm : "");
 				
 				let sl = sessionStorage[`serviceList`] !==  undefined ? JSON.parse(sessionStorage[`serviceList`]) : null;		
-				console.log("Fetch:", RI_URL + requestUrl);
 				if (sl && sl.country === country && sl.language === language && sl.categoryId === categoryId && (sl.searchTerm === null || sl.searchTerm === undefined)){
+					console.log("en store");
 					resolve(sl.services);
 					
 				}else{
 					fetch(RI_URL + requestUrl)
-						.then(res => {
-							console.log("res:",res);
-						});
-					request
-					.get(RI_URL + requestUrl)
-					.set("Accept-Language", language)
-					.end((err, res) => {
-						if (err) {
+						.then(res => res.json())
+						.then(response => {
+							console.log("res:",response);
+							let servicesList = {
+								country: country,
+								language: language,
+								categoryId: categoryId,
+								searchTerm: searchTerm,
+								services: response
+							};
+							sessionStorage[`serviceList`] = JSON.stringify(servicesList);
+							let services = response
+	
+							resolve(services);
+						})
+						.catch((err) => {
+							console.log("error", err);
 							reject(err);
 							return;
-						}
-						let servicesList = {
-							country: country,
-							language: language,
-							categoryId: categoryId,
-							searchTerm: searchTerm,
-							services: res.body
-						};
-						sessionStorage[`serviceList`] = JSON.stringify(servicesList);
-						let services = res.body;
+						});
+					// request
+					// .get(RI_URL + requestUrl)
+					// .set("Accept-Language", language)
+					// .end((err, res) => {
+					// 	if (err) {
+					// 		reject(err);
+					// 		return;
+					// 	}
+					// 	let servicesList = {
+					// 		country: country,
+					// 		language: language,
+					// 		categoryId: categoryId,
+					// 		searchTerm: searchTerm,
+					// 		services: res.body
+					// 	};
+					// 	sessionStorage[`serviceList`] = JSON.stringify(servicesList);
+					// 	let services = res.body;
 
-						resolve(services);
-					});
+					// 	resolve(services);
+					// });
 
 				}
 			
@@ -155,26 +173,6 @@ module.exports = {
 		return new Promise((resolve, reject) => {
 			var requestUrl = `/services/search/?filter=relatives&geographic_region=${country}&page=1&page_size=${pageSize}&near=${position.join(", ")}&near_km=${distance}`;
 
-			request
-				.get(RI_URL + requestUrl)
-				.set("Accept-Language", language)
-				.end((err, res) => {
-					if (err) {
-						reject(err);
-						return;
-					}
-					let services = res.body;
-
-					resolve(services);
-				});
-		});
-	},
-	fetchAllServicesInBBox(country, language, bounds = [], pageSize = 200, category = null) {
-		return new Promise((resolve, reject) => {
-			var requestUrl = `/services/searchlist/?filter=relatives&geographic_region=${country}&page=1&page_size=${pageSize}&bounds=${bounds.join(", ")}`;
-			if (category) {
-				requestUrl += "&type_numbers=" + (category || "");
-			}
 			request
 				.get(RI_URL + requestUrl)
 				.set("Accept-Language", language)
