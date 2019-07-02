@@ -189,6 +189,11 @@ module.exports = {
 	},
 	fetchServiceById(language, serviceId) {
 		return new Promise((resolve, reject) => {
+			if (sessionStorage['service-list']) {
+				let list = JSON.parse(sessionStorage['service-list']);
+				console.log("list", list);
+				resolve(list.filter(c => {return c.id === serviceId}));
+			} else {
 			request
 				.get(RI_URL + "/services/search/?id=" + serviceId)
 				.set("Accept-Language", language)
@@ -201,6 +206,7 @@ module.exports = {
 
 					resolve(services);
 				});
+			}
 		});
 	},
 	fetchServicePreviewById(language, serviceId) {

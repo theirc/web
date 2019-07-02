@@ -2,13 +2,19 @@ import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { Helmet } from "react-helmet";
 import HeaderBar from "./HeaderBar";
+import PropTypes from "prop-types";
 
 import "./LocalDemo.css";
 import getSessionStorage from "../shared/sessionStorage";
 
 class LocalDemo extends Component {
 	static propTypes = {};
-
+	static contextTypes = {
+		config: PropTypes.object,
+	};
+	state = {
+		loaded: true,
+	};
 	componentDidMount() {
 		if (global.window) {
 			const sessionStorage = getSessionStorage();
@@ -18,26 +24,46 @@ class LocalDemo extends Component {
 	}
     
 	render() {
-        const { language, country, t } = this.props;
+		const { config } = this.context;
+		const { country, language, t } = this.props;
+		const { loaded } = this.state;
         const startCache = () =>{
-			var CACHE_NAME ='rescue-cache-v1';
-			var urlsToCache = [
-				'https://admin.cuentanos.org/e/production/v2/services/searchlist/?filter=relatives&geographic_region=el-salvador&page=1&page_size=1000&type_numbers=',
-				'https://admin.cuentanos.org/e/production/v2/service-types/?region=el-salvador',
-				'https://admin.cuentanos.org/e/production/v2/regions/?exclude_geometry=true'
-			];
-			console.log('start cache');
-			caches.open(CACHE_NAME)
-			.then(function(cache) {
-				// Open a cache and cache our files
-				// urlsToCache.map(url => {
-				// 	return fetch(url).then((res)=> {
-				// 		var response = res.clone();
-				// 		cache.put(url, response);						
-				// 	})
-				// }) 
-				return cache.addAll(urlsToCache).then(console.log("end"));
+			this.setState({loaded: false});
+			var demoConfig = {
+				"CN":{
+					urlsToStore:[
+						{storeName: 'service-list', url:'https://admin.cuentanos.org/e/production/v2/services/searchlist/?filter=relatives&geographic_region=el-salvador&page=1&page_size=2000&type_numbers='},
+						{storeName: `${language}-${country.fields.slug}-service-categories`, url:'https://admin.cuentanos.org/e/production/v2/service-types/?region=el-salvador'},
+						{storeName: `${language}-countries`, url:'https://admin.cuentanos.org/e/production/v2/regions/?exclude_geometry=true'}
+					],
+					buttonColor: 'greeen',
+					title: 'Descargar información para uso sin conexión'
+				},	
+				"RI":{
+					urlsToStore:[
+						{storeName: 'service-list', url:`https://admin.refugee.info/e/production/v2/services/searchlist/?filter=relatives&geographic_region=${country.fields.slug}&page=1&page_size=2000&type_numbers=`},
+						{storeName: `${language}-${country.fields.slug}-service-categories`, url:`https://admin.refugee.info/e/production/v2/service-types/?region=${country.fields.slug}`},
+						{storeName: `${language}-countries`, url:'https://admin.refugee.info/e/production/v2/regions/?exclude_geometry=true'}
+					],
+					buttonColor: 'yellow',
+					title: 'Download data for offline use',
+				}
+			};
+			
+			let site = config.siteCode;
+			let urlsToStore = demoConfig[site].urlsToStore;
+			urlsToStore.map(url => {
+				fetch(url.url)
+				.then(res => {
+					return res.json();	
+				})
+				.then(res => {
+					sessionStorage.setItem(url.storeName, JSON.stringify(res));
+					return this.setState({loaded: true});
+				})
+				return console.log(url);
 			})
+			
         }
 		return (
 			<div className="LocalDemo">
@@ -45,11 +71,11 @@ class LocalDemo extends Component {
 					<title>{t('Download data for offline use')}</title>
 				</Helmet>
                 <HeaderBar title={t('Download data for offline use')} />
-                {/* <span>{country.fields.name}</span>
-                <span>{language}</span> */}
                 <div className="content">
-					<button onClick={startCache} className="downloadButton">{t('Click to download data')}</button>
+					{loaded && <button onClick={startCache} className="downloadButton">{t('Click to download data')}</button>}
+					{!loaded && <div className="loader" />}
 				</div>
+				
 			</div>
 		);
 	}
