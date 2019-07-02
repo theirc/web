@@ -85,7 +85,7 @@ class ServiceList extends React.Component {
 
 		// vacancy === false --> available
 		// vacancy === true  --> unavailable
-		const availableServices = (services || []).filter(s => !s.provider.vacancy);
+		const availableServices = services.filter(s => !s.provider.vacancy);
 		let sortedAvailableServices =[]
 		if (availableServices){
 			sortedAvailableServices = _.orderBy(availableServices, ["region.level", "region.name", "name"], ["desc", "asc", "asc"]);
