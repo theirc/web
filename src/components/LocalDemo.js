@@ -32,18 +32,22 @@ class LocalDemo extends Component {
 			var demoConfig = {
 				"CN":{
 					urlsToStore:[
-						{storeName: 'service-list', url:'https://admin.cuentanos.org/e/production/v2/services/searchlist/?filter=relatives&geographic_region=el-salvador&page=1&page_size=2000&type_numbers='},
+						{storeName: 'serviceList', url:'https://admin.cuentanos.org/e/production/v2/services/searchlist/?filter=relatives&geographic_region=el-salvador&page=1&page_size=1000&type_numbers='},
 						{storeName: `${language}-${country.fields.slug}-service-categories`, url:'https://admin.cuentanos.org/e/production/v2/service-types/?region=el-salvador'},
 						{storeName: `${language}-countries`, url:'https://admin.cuentanos.org/e/production/v2/regions/?exclude_geometry=true'}
 					],
+					services:[ 1501, 1833, 1694],
 					buttonColor: 'greeen',
 					title: 'Descargar información para uso sin conexión'
 				},	
 				"RI":{
 					urlsToStore:[
-						{storeName: 'service-list', url:`https://admin.refugee.info/e/production/v2/services/searchlist/?filter=relatives&geographic_region=${country.fields.slug}&page=1&page_size=2000&type_numbers=`},
+						{storeName: 'serviceList', url:`https://admin.refugee.info/e/production/v2/services/searchlist/?filter=relatives&geographic_region=${country.fields.slug}&page=1&page_size=1000&type_numbers=`},
 						{storeName: `${language}-${country.fields.slug}-service-categories`, url:`https://admin.refugee.info/e/production/v2/service-types/?region=${country.fields.slug}`},
 						{storeName: `${language}-countries`, url:'https://admin.refugee.info/e/production/v2/regions/?exclude_geometry=true'}
+					],
+					services:[
+
 					],
 					buttonColor: 'yellow',
 					title: 'Download data for offline use',
@@ -62,6 +66,18 @@ class LocalDemo extends Component {
 					return this.setState({loaded: true});
 				})
 				return console.log(url);
+			})
+			let backendUrl = 'https://admin.refugee.info/e/production/v2/services/search/?id=';
+
+			let offlineServices  =[];
+			demoConfig[site].services.map(id => {
+				fetch(backendUrl+id)
+				.then(res =>{
+					return res.json()
+				})
+				.then(res => {
+					
+				})
 			})
 			
         }

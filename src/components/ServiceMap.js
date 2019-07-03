@@ -148,126 +148,128 @@ class ServiceMap extends React.Component {
 
 		This way we can run updates on the content of the map
 		*/
-
-		const map = L.citymaps.map("MapCanvas", null, {
-			scrollWheelZoom: true,
-			zoomControl: true,
-			// Citymaps will automatically select "global" if language is not supported or undefined.
-			language: this.props.i18n.language,
-			worldCopyJump: true
-		});
-
-		let clusters = L.markerClusterGroup({
-			maxClusterRadius: 20, // in pixels. Decreasing this will create more, smaller clusters.
-			spiderfyDistanceMultiplier: 1.5,
-			spiderfyOnMaxZoom: true
-		});
-		map.addLayer(clusters);
-		// var locate = L.control.locate();
-		// locate.addTo(map);
-
-		if (sessionStorage.serviceMapBounds) {
-			const b = sessionStorage.serviceMapBounds.split(",").map(c => parseFloat(c));
-			const zoom = sessionStorage.serviceMapZoom;
-			
-			map.fitBounds([
-				[b[1], b[0]],
-				[b[3], b[2]]
-			]);
-			map.setZoom(zoom);
-			
-			setTimeout(() => {
-				map.invalidateSize();
-			  }, 500);
-		}
+		if (navigator.onLine){
 		
-		map.on("dragend", a => {		
-			if (findServicesInLocation && this.state.services.length === 0) {
-                /*
-        This is the buggest change in the code: I changed the near to a bbox of the map.
+			const map = L.citymaps.map("MapCanvas", null, {
+				scrollWheelZoom: true,
+				zoomControl: true,
+				// Citymaps will automatically select "global" if language is not supported or undefined.
+				language: this.props.i18n.language,
+				worldCopyJump: true
+			});
 
-        Whenever the user moves the map, it will reload the data in the backend
-        */
-				let bounds = a.target.getBounds();
-				let sw = bounds.getSouthWest();
-				let ne = bounds.getNorthEast();
-				if (sw.lat - ne.lat === 0 || sw.lng - ne.lng === 0){
-					const b = sessionStorage.serviceMapBounds.split(",").map(c => parseFloat(c));
-					let p1 = L.latLng(b[1], b[0]);
-					let p2 = L.latLng(b[3], b[2]);
-					bounds = L.latLngBounds(p1, p2);
-					sw = bounds.getSouthWest();
-				 	ne = bounds.getNorthEast();
-				}
-				findServicesInLocation([sw.lng, sw.lat, ne.lng, ne.lat])
-					.then(({
-						services,
-						category
-					}) => {
-						this.setState({
-							services,
-							category,
-							loaded: true
-						});
-						map.invalidateSize();
-					})
-					.catch(c => this.setState({
-						errorMessage: c.message,
-						category: null,
-						loaded: true
-					}));
-				if (this.map) {
-					this.map.fitBounds(bounds);
-				}
+			let clusters = L.markerClusterGroup({
+				maxClusterRadius: 20, // in pixels. Decreasing this will create more, smaller clusters.
+				spiderfyDistanceMultiplier: 1.5,
+				spiderfyOnMaxZoom: true
+			});
+			map.addLayer(clusters);
+			// var locate = L.control.locate();
+			// locate.addTo(map);
+
+			if (sessionStorage.serviceMapBounds) {
+				const b = sessionStorage.serviceMapBounds.split(",").map(c => parseFloat(c));
+				const zoom = sessionStorage.serviceMapZoom;
 				
-				
-			}
-		});
-
-		map.on("moveend", function (e) {
-			var bounds = map.getBounds();
-			const sw = bounds.getSouthWest();
-			const ne = bounds.getNorthEast();
-			if (sw.lat - ne.lat !== 0 && sw.lng - ne.lng !== 0){
-				sessionStorage.serviceMapBounds = bounds.toBBoxString();
-				sessionStorage.serviceMapZoom = map.getZoom();
-			}
-			
-		});
-
-			/*
-		We try to get the user's position first, if that doesn't work, we use the key coordinate for the country
-		Then we make a circle of 100k radius around that point, get the box around it and call it the bounds for the screen.
-
-		*/
-		if (sessionStorage.serviceMapBounds) {
-			const b = sessionStorage.serviceMapBounds.split(",").map(c => parseFloat(c));
-			const zoom = sessionStorage.serviceMapZoom;
-			
-			map.fitBounds([
-				[b[1], b[0]],
-				[b[3], b[2]]
-			]);
-			map.setZoom(zoom);
-			map.fire("dragend");
-		} else {
-			this.findUsersPosition(defaultLocation).then(l => {
-				var center = [l.longitude, l.latitude];
-				var radius = 100;
-				var options = {
-					units: "kilometers"
-				};
-				var c = circle(center, radius, null, null, options);
-				var b = bbox(c);
 				map.fitBounds([
 					[b[1], b[0]],
 					[b[3], b[2]]
 				]);
-				map.fire("dragend");
+				map.setZoom(zoom);
+				
+				setTimeout(() => {
+					map.invalidateSize();
+				}, 500);
+			}
+			
+			map.on("dragend", a => {		
+				if (findServicesInLocation && this.state.services.length === 0) {
+					/*
+			This is the buggest change in the code: I changed the near to a bbox of the map.
+
+			Whenever the user moves the map, it will reload the data in the backend
+			*/
+					let bounds = a.target.getBounds();
+					let sw = bounds.getSouthWest();
+					let ne = bounds.getNorthEast();
+					if (sw.lat - ne.lat === 0 || sw.lng - ne.lng === 0){
+						const b = sessionStorage.serviceMapBounds.split(",").map(c => parseFloat(c));
+						let p1 = L.latLng(b[1], b[0]);
+						let p2 = L.latLng(b[3], b[2]);
+						bounds = L.latLngBounds(p1, p2);
+						sw = bounds.getSouthWest();
+						ne = bounds.getNorthEast();
+					}
+					findServicesInLocation([sw.lng, sw.lat, ne.lng, ne.lat])
+						.then(({
+							services,
+							category
+						}) => {
+							this.setState({
+								services,
+								category,
+								loaded: true
+							});
+							map.invalidateSize();
+						})
+						.catch(c => this.setState({
+							errorMessage: c.message,
+							category: null,
+							loaded: true
+						}));
+					if (this.map) {
+						this.map.fitBounds(bounds);
+					}
+					
+					
+				}
 			});
+
+			map.on("moveend", function (e) {
+				var bounds = map.getBounds();
+				const sw = bounds.getSouthWest();
+				const ne = bounds.getNorthEast();
+				if (sw.lat - ne.lat !== 0 && sw.lng - ne.lng !== 0){
+					sessionStorage.serviceMapBounds = bounds.toBBoxString();
+					sessionStorage.serviceMapZoom = map.getZoom();
+				}
+				
+			});
+
+				/*
+			We try to get the user's position first, if that doesn't work, we use the key coordinate for the country
+			Then we make a circle of 100k radius around that point, get the box around it and call it the bounds for the screen.
+
+			*/
+			if (sessionStorage.serviceMapBounds) {
+				const b = sessionStorage.serviceMapBounds.split(",").map(c => parseFloat(c));
+				const zoom = sessionStorage.serviceMapZoom;
+				
+				map.fitBounds([
+					[b[1], b[0]],
+					[b[3], b[2]]
+				]);
+				map.setZoom(zoom);
+				map.fire("dragend");
+			} else {
+				this.findUsersPosition(defaultLocation).then(l => {
+					var center = [l.longitude, l.latitude];
+					var radius = 100;
+					var options = {
+						units: "kilometers"
+					};
+					var c = circle(center, radius, null, null, options);
+					var b = bbox(c);
+					map.fitBounds([
+						[b[1], b[0]],
+						[b[3], b[2]]
+					]);
+					map.fire("dragend");
+				});
+			}
+			this.clusters = clusters;
+			this.map = map;
 		}
-		this.clusters = clusters;
-		this.map = map;
 	}
 
 	componentDidUpdate() {
@@ -331,23 +333,32 @@ class ServiceMap extends React.Component {
 			loaded,
 			errorMessage
 		} = this.state;
-		
+		let isOnline = navigator.onLine;
+		let isMobile = document.documentElement.clientWidth < 1000;
+		let image = isMobile ? "url(/images/cn-offline-map-mobile.png)" : "url(/images/cn-offline-map.png)"
         /*
       Very small tweak on the render. toggling the visibility so we can run the L.map on didMount
     */
 
-		return (
+		return (			
 			<div className="ServiceMap">
 				{errorMessage && (
 					<div className="Error">
 						<em>{errorMessage}</em>
 					</div>
 				)}
+				{isOnline && 
 				<div className="ServiceMapContainer">
 					<div id="MapCanvas" style={{ width: "100%", position: "absolute", top: 64, bottom: 56, right: 0, visibility: loaded ? "visible" : "hidden" }} />
 					{!loaded && <div className="loader" />}
 					
 				</div>
+				}
+				{!isOnline &&
+				<div className="ServiceMapContainer2" style={{width: "100%", position: "absolute", top: 64, bottom: 56, right: 0,backgroundImage: "url('/images/cn-offline-map.png')",backgroundSize: "contain"}}>
+					<div id="MapCanvas2"></div>
+				</div>
+				}
 			</div>
 		);
 	}

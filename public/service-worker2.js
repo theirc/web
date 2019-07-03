@@ -19,13 +19,26 @@ var urlsToCache = [
       '/sockjs-node/info?t=1557509894850',
       '/css/material-icons.css',
       '/css/ionicons.min.css',  
-      '/fonts/KFOlCnqEu92Fr1MmSU5fBBc4AMP6lQ.woff2',
+      '/fonts/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2',
       '/fonts/fontawesome-webfont.woff2',
       '/css/fac4bfa814.css',
       '/css/fontawesome.min.css',
-      'https://cdnjs.cloudflare.com/ajax/libs/react/16.7.0/umd/react.production.min.js',
-      'https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.7.0/umd/react-dom.production.min.js',
-      'http://images.ctfassets.net/e17qk44d7f2w/5lL1DFX7jymqYwkaMIEKSK/a8aae35aca1aef19f56e268ee674fe7b/cn-hero.jpg?fm=jpg&fl=progressive'
+      '/images/cn-offline-map.png',
+      '/images/cn-offline-map-mobile.png',
+      '/images/ri-offline-map.png',
+      '/images/ri-offline-map-mobile.png',
+      'http://images.ctfassets.net/e17qk44d7f2w/5lL1DFX7jymqYwkaMIEKSK/a8aae35aca1aef19f56e268ee674fe7b/cn-hero.jpg?fm=jpg&fl=progressive',
+      // 'https://afeld.github.io/emoji-css/emoji.css',
+      // 'https://ta-media.citymaps.io/lib/v1.0.63/citymaps.css',
+      // 'https://refugeecdn.blob.core.windows.net/$web/webapp-libs/lodash/4.17.4/lodash.min.js',
+      // 'https://refugeecdn.blob.core.windows.net/$web/webapp-libs/moment/2.19.1/moment-with-locales.min.js',
+      // 'https://refugeecdn.blob.core.windows.net/$web/webapp-libs/autolinker/1.4.4/Autolinker.min.js',
+      // 'https://refugeecdn.blob.core.windows.net/$web/webapp-libs/contentful/5.0.1/contentful.browser.min.js',
+      // 'https://refugeecdn.blob.core.windows.net/$web/webapp-libs/remarkable/1.7.1/remarkable.min.js',
+      // 'https://refugeecdn.blob.core.windows.net/$web/webapp-libs/immutable/3.8.2/immutable.min.js',
+      'https://refugeecdn.blob.core.windows.net/$web/webapp-libs/react/16.7.0/react.production.min.js',
+      'https://refugeecdn.blob.core.windows.net/$web/webapp-libs/react-dom/16.7.0/react-dom.production.min.js',
+      // 'https://refugeecdn.blob.core.windows.net/$web/webapp-libs/bluebird/3.5.1/bluebird.min.js'
       
       ];
 
@@ -54,33 +67,38 @@ self.addEventListener('activate', (event) => {
 
 
 self.addEventListener('fetch', function(event) {
-   
   event.respondWith(
-    caches.match(event.request).then(function(response) {       
-        if(response){
+    caches.match(event.request).then(function(resp) {
+      return resp || fetch(event.request).then(function(response) {
+        return caches.open(CACHE_NAME).then(function(cache) {
+          cache.put(event.request, response.clone());
           return response;
-        }     
-        requestBackend(event);
+        });  
+      });
     })
   );
+  // event.respondWith(
+  //   caches.match(event.request).then(function(response) {       
+  //       if(response){
+  //         return response;
+  //       }     
+  //       requestBackend(event);
+  //   })
+  // );
  
   
 });
 
-function requestBackend(event){
+async function requestBackend(event){
   var url = event.request.clone();
-  return fetch(url).then(function(res){
-      //if not a valid response send the error
-      if(!res || res.status !== 200 || res.type !== 'basic'){
-          return res;
-      }
-
-      var response = res.clone();
-
-      caches.open(CACHE_NAME).then(function(cache){
-          cache.put(event.request, response);
-      });
-
-      return res;
-  })
+  const res = await fetch(url);
+  //if not a valid response send the error
+  if (!res || res.status !== 200 || res.type !== 'basic') {
+    return res;
+  }
+  var response = res.clone();
+  caches.open(CACHE_NAME).then(function (cache) {
+    cache.put(event.request, response);
+  });
+  return res;
 }

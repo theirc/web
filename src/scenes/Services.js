@@ -227,7 +227,6 @@ class Services extends React.Component {
 		const { language } = this.props;
 		const { match } = props;
 		const serviceId = match.params.serviceId;
-
 		return servicesApi.fetchServiceById(language, serviceId);
 	}
 	fetchServicePreview(props) {
@@ -737,7 +736,7 @@ const mapDispatch = (d, p) => {
 			return d(push(`/${p.country.fields.slug}/services/nearby/`));
 		},
 		goToService(id) {
-			return d(push(`/${p.country.fields.slug}/services/${id}/`));
+			return d(push(`/${p.country.fields.slug}/services/${id}/?language=${p.language}`));
 		},
 		listAllServices() {
 			return d(push(`/${p.country.fields.slug}/services/all/`));

@@ -75,10 +75,13 @@ module.exports = {
 		});
 	},
 	fetchCategoryById(language, categoryId) {
+		
 		return new Promise((resolve, reject) => {
 			const sessionStorage = getSessionStorage();
 			if (sessionStorage[`${language}-service-categories`]) {
+				
 				let categories = JSON.parse(sessionStorage[`${language}-service-categories`]);
+				
 				resolve(_.first(categories.filter(c => c.id === categoryId)));
 			} else {
 				request
@@ -98,7 +101,7 @@ module.exports = {
 	fetchAllServices(country, language, categoryId, searchTerm, pageSize = 1000) {
 		//If the region is a country, search for all the services in any location from that country
 		//If the region is a city, search for all the services in the city AND country wide services
-		console.log('fecth all services');
+		
 		let filter = "with-parents";
 		if (sessionStorage[`${language}-regions`]){
 			let regions = JSON.parse(sessionStorage[`${language}-regions`]);			
@@ -107,8 +110,23 @@ module.exports = {
 		}
 		
 		return new Promise((resolve, reject) => {
-			console.log("start promise");
-			var requestUrl =
+			
+			let sl = sessionStorage[`serviceList`] !==  undefined ? JSON.parse(sessionStorage[`serviceList`]) : null;		
+			if (sl && sl.country === country && sl.language === language && /*sl.categoryId === categoryId && */(sl.searchTerm === null || sl.searchTerm === undefined)){ 				
+				
+				if (sl.categoryId == null && sl.services.results && categoryId){
+					window.serviceList = sl.services.results;
+					let list = sl.services.results && sl.services.results.filter(s => {
+						return (s.type && s.type.id == categoryId) || (s.types && s.types.filter(t => {return t.id == categoryId}).length > 0)});
+					sl.services.results = list;
+					resolve(sl.services);
+				}else{
+					resolve(sl.services);
+				}
+				
+				
+			}else{
+				var requestUrl =
 				"/services/searchlist/?filter="+ filter +"&geographic_region=" +
 				country +
 				"&page=1&page_size=" +
@@ -117,55 +135,30 @@ module.exports = {
 				(categoryId || "") +
 				(searchTerm ? "&search=" + searchTerm : "");
 				
-				let sl = sessionStorage[`serviceList`] !==  undefined ? JSON.parse(sessionStorage[`serviceList`]) : null;		
-				if (sl && sl.country === country && sl.language === language && sl.categoryId === categoryId && (sl.searchTerm === null || sl.searchTerm === undefined)){
-					console.log("en store");
-					resolve(sl.services);
-					
-				}else{
-					fetch(RI_URL + requestUrl)
-						.then(res => res.json())
-						.then(response => {
-							console.log("res:",response);
-							let servicesList = {
-								country: country,
-								language: language,
-								categoryId: categoryId,
-								searchTerm: searchTerm,
-								services: response
-							};
+				fetch(RI_URL + requestUrl)
+					.then(res => res.json())
+					.then(response => {
+						let servicesList = {
+							country: country,
+							language: language,
+							categoryId: categoryId,
+							searchTerm: searchTerm,
+							services: response
+						};
+						if (!sl || sl.categoryId !== null){
 							sessionStorage[`serviceList`] = JSON.stringify(servicesList);
-							let services = response
-	
-							resolve(services);
-						})
-						.catch((err) => {
-							console.log("error", err);
-							reject(err);
-							return;
-						});
-					// request
-					// .get(RI_URL + requestUrl)
-					// .set("Accept-Language", language)
-					// .end((err, res) => {
-					// 	if (err) {
-					// 		reject(err);
-					// 		return;
-					// 	}
-					// 	let servicesList = {
-					// 		country: country,
-					// 		language: language,
-					// 		categoryId: categoryId,
-					// 		searchTerm: searchTerm,
-					// 		services: res.body
-					// 	};
-					// 	sessionStorage[`serviceList`] = JSON.stringify(servicesList);
-					// 	let services = res.body;
+						}							
+						let services = response
 
-					// 	resolve(services);
-					// });
+						resolve(services);
+					})
+					.catch((err) => {
+						console.log("error", err);
+						reject(err);
+						return;
+					});
 
-				}
+			}
 			
 		});
 	},
@@ -189,10 +182,14 @@ module.exports = {
 	},
 	fetchServiceById(language, serviceId) {
 		return new Promise((resolve, reject) => {
-			if (sessionStorage['service-list']) {
-				let list = JSON.parse(sessionStorage['service-list']);
-				console.log("list", list);
-				resolve(list.filter(c => {return c.id === serviceId}));
+			let list = sessionStorage[`offline-services`] !==  undefined ? JSON.parse(sessionStorage[`offline-services`]) : null;
+			if (!navigator.onLine && list && list.filter(s => {return s.id == serviceId}).length > 0) {
+				
+				console.log("list",list);	
+				console.log("ID:", serviceId);
+				let service = list.services.results.filter(c => {return c.id == serviceId});
+				console.log("service id", service);
+				resolve(_.first(service));
 			} else {
 			request
 				.get(RI_URL + "/services/search/?id=" + serviceId)
