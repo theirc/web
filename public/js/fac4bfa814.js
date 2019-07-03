@@ -9,7 +9,7 @@ window.FontAwesomeCdnConfig = {
     enabled: false
   },
   //useUrl: "use.fontawesome.com",
-  useUrl: "localhost:3000/css",
+  useUrl: "/css",
   faCdnUrl: "https://cdn.fontawesome.com:443",
   code: "fac4bfa814"
 };
