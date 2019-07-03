@@ -9,5 +9,17 @@ import LanguageSelectorScene from "./LanguageSelectorScene";
 import Services from "./Services";
 import Search from "./Search";
 import Selectors from "./Selectors";
-
-export { Home, Article, Categories, CountryHome, CategoryHome, Skeleton, CountrySelectorScene, LanguageSelectorScene, Search, Services, Selectors };
+import DemoTool from "./DemoTool";
+export { Home, 
+        Article, 
+        Categories, 
+        CountryHome, 
+        CategoryHome, 
+        Skeleton, 
+        CountrySelectorScene, 
+        LanguageSelectorScene, 
+        Search, 
+        Services, 
+        Selectors,
+        DemoTool,
+};
