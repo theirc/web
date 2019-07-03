@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Switch, withRouter } from "react-router";
+import { Route, Switch, withRouter, Redirect } from "react-router";
 import { ConnectedRouter } from "react-router-redux";
 import { Home, Article, Categories, CountryHome, CategoryHome, CountrySelectorScene, LanguageSelectorScene, Search, Services, Selectors } from "./scenes";
 import { DemoTool} from "./scenes";
@@ -7,7 +7,6 @@ import { history } from "./store";
 import { Skeleton } from "./scenes";
 import { withCountry, withCategory } from "./shared/hoc";
 import Placeholder from "./shared/placeholder";
-
 class ScrollToTop extends Component {
 	componentDidUpdate(prevProps) {
 		if (this.props.location !== prevProps.location) {
@@ -42,12 +41,12 @@ class Router extends Component {
 	}
 
 	render() {
-		//const ServicesWithCountry = withCountry(Services);
 		return (
 			<ConnectedRouter history={history}>
 				<Placeholder>
 					<ScrollToTop />
 					<Switch>
+						<Route exact path="/italy/services*" render={() => <Redirect to="/italy" />} />
 						<Route path="/:country/services" component={props => <ServicesWithCountry {...props} />} />
 						<Route exact path="/:country/demo" component={withCountry(DemoTool)}/>
 						<Skeleton>
