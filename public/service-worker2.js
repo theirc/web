@@ -27,7 +27,7 @@ var urlsToCache = [
       '/images/cn-offline-map-mobile.png',
       '/images/ri-offline-map.png',
       '/images/ri-offline-map-mobile.png',
-      'http://images.ctfassets.net/e17qk44d7f2w/5lL1DFX7jymqYwkaMIEKSK/a8aae35aca1aef19f56e268ee674fe7b/cn-hero.jpg?fm=jpg&fl=progressive',
+      'https://images.ctfassets.net/e17qk44d7f2w/5lL1DFX7jymqYwkaMIEKSK/a8aae35aca1aef19f56e268ee674fe7b/cn-hero.jpg?fm=jpg&fl=progressive',
       // 'https://afeld.github.io/emoji-css/emoji.css',
       // 'https://ta-media.citymaps.io/lib/v1.0.63/citymaps.css',
       // 'https://refugeecdn.blob.core.windows.net/$web/webapp-libs/lodash/4.17.4/lodash.min.js',
