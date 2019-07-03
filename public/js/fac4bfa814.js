@@ -9,7 +9,7 @@ window.FontAwesomeCdnConfig = {
     enabled: false
   },
   //useUrl: "use.fontawesome.com",
-  useUrl: "qa.cuentanos.org/css",
+  useUrl: "https://qa.cuentanos.org/css",
   faCdnUrl: "https://cdn.fontawesome.com:443",
   code: "fac4bfa814"
 };
