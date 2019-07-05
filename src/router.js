@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Route, Switch, withRouter, Redirect } from "react-router";
 import { ConnectedRouter } from "react-router-redux";
 import { Home, Article, Categories, CountryHome, CategoryHome, CountrySelectorScene, LanguageSelectorScene, Search, Services, Selectors } from "./scenes";
+import { DemoTool} from "./scenes";
 import { history } from "./store";
 import { Skeleton } from "./scenes";
 import { withCountry, withCategory } from "./shared/hoc";
@@ -20,7 +21,6 @@ class ScrollToTop extends Component {
 
 ScrollToTop = withRouter(ScrollToTop);
 const ServicesWithCountry = withCountry(Services);
-
 class Router extends Component {
 	componentDidMount() {
 		if (global.window) {
@@ -48,6 +48,7 @@ class Router extends Component {
 					<Switch>
 						<Route exact path="/italy/services*" render={() => <Redirect to="/italy" />} />
 						<Route path="/:country/services" component={props => <ServicesWithCountry {...props} />} />
+						<Route exact path="/:country/demo" component={withCountry(DemoTool)}/>
 						<Skeleton>
 							<div className="SkeletonContainer">
 								<Switch>

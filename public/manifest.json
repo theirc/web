@@ -1,14 +1,21 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Rescue.Info App",
+  "name": "Rescue.Info App",
   "icons": [
     {
       "src": "favicon.ico",
       "sizes": "64x64",
       "type": "image/png"
+    },
+    {
+      "src": "cn-favicon.png",
+      "type": "image/png",
+      "sizes": "4185×4083"
+
     }
   ],
   "start_url": "./index.html",
+  "scope": "/",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"
