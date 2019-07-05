@@ -19,7 +19,7 @@ var urlsToCache = [
       '/sockjs-node/info?t=1557509894850',
       '/css/material-icons.css',
       '/css/ionicons.min.css',  
-      '/fonts/MaterialIcons-Regular.ttf',
+      'https://fonts.gstatic.com/s/materialicons/v47/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2',
       '/fonts/fontawesome-webfont.woff2',
       '/css/fac4bfa814.css',
       '/css/fontawesome.min.css',
