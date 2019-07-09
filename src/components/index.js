@@ -22,6 +22,8 @@ import TopCategoriesWidget from "./TopCategoriesWidget";
 import LocalGuideWidget from "./LocalGuideWidget";
 import ArticleWidget from "./ArticleWidget";
 import CategoryWidget from "./CategoryWidget";
+import LocalDemo from "./LocalDemo";
+import InstanceMovedWidget from "./InstanceMovedWidget";
 
 export {
 	AppHeader,
@@ -48,5 +50,6 @@ export {
 	LocalGuideWidget,
 	ArticleWidget,
 	CategoryWidget,
-	
+	LocalDemo,
+	InstanceMovedWidget,
 };

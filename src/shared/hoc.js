@@ -131,7 +131,7 @@ export function withCategory(WrappedComponent) {
                 const category = _.first(
                     _.flattenDeep(country.fields.categories.filter(c => c.fields).map(c => [c, c.fields.categories]))
                     .filter(_.identity)
-                    .filter(c => c && c.fields.slug === match.params.category)
+                    .filter(c => c && c.fields && c.fields.slug &&c.fields && c.fields.slug &&  c.fields.slug === match.params.category)
                 );
 
                 this.setState({
@@ -154,7 +154,7 @@ export function withCategory(WrappedComponent) {
                 const category = _.first(
                     _.flattenDeep(country.fields.categories.filter(c => c.fields).map(c => [c, c.fields.categories]))
                     .filter(_.identity)
-                    .filter(c => c && c.fields.slug === match.params.category)
+                    .filter(c => c && c.fields && c.fields.slug && c.fields.slug === match.params.category)
                 );
                 this.setState({
                     category

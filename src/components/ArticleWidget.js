@@ -58,7 +58,6 @@ class ArticleWidget extends Component {
 			var title = tokens[idx].title;
 			return `<a href="${tokens[idx].href}?language=${language}" ${tokens[idx].title}>`; 
 		}
-		// console.log(content);
 
 		return (
 			<div className="Article" key={article.sys.id}>
