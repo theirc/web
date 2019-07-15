@@ -288,6 +288,9 @@ class ServiceDetail extends React.Component {
 					{service.address_in_country_language && <h3>{t("Address in Local Language")}</h3>}
 					{service.address_in_country_language && <p>{service.address_in_country_language}</p>}
 
+					{service.cost_of_service && <h3>{t("Cost of service")}</h3>}
+					{service.cost_of_service && <p>{service.cost_of_service}</p>}
+
 					{point && (
 						<p>
 							<img
