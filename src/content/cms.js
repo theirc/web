@@ -6,13 +6,17 @@ let client = null;
 let siteConfig = null;
 
 for (let key of Object.keys(config)) {
+	console.log({key});
 	if (global.window && global.window.location) {
+		console.log("location", global.window.location);
 		if (window.location.hostname.indexOf(key) > -1) {
+			console.log('key:', key, "hostname:". window.location.hostname);
 			siteConfig = config[key];
 			siteConfig.languageDictionary = Object.assign(config.languageDictionary, siteConfig.languageDictionary);
 			client = contentful.createClient({
 				...siteConfig,
 			});
+			console.log({client});
 		}
 	}
 }
