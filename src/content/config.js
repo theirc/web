@@ -277,7 +277,7 @@ module.exports = {
 		customQuestionLink:[["italy","https://www.facebook.com/Refugee.Info.Italy/"]],
 		hideLangsPerCountry: [],
 	},
-	"https://theirc-refugee-info-frontend-design-ri.azurewebsites.net": {
+	"theirc-refugee-info-frontend-design-ri.azurewebsites.net": {
 		theme: "irc",
 		accessToken: "0cd5c6bfefa4f7f33a98c487012e6f34c2031aee1ff2f6858b11be592ab349d9",
 		space: "ktglofo8nf88",
@@ -306,7 +306,7 @@ module.exports = {
 			langs: ['fr'],
 		}],
 	},
-	"https://theirc-refugee-info-frontend-design-ki.azurewebsites.net": {
+	"theirc-refugee-info-frontend-design-ki.azurewebsites.net": {
 		theme: "mc",
 		accessToken: "55bea7f7ed5d0e812aa1d48e378dd9a2edb8f9f78c17bd9d2ffa6a014ea3ee2b",
 		space: "l4oa58axtceh",
