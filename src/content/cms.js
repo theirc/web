@@ -18,6 +18,7 @@ for (let key of Object.keys(config)) {
 }
 
 if (!client) {
+	console.log("No client. Loading RI as default");
 	siteConfig = config["refugee.info"];
 	client = contentful.createClient({
 		...siteConfig,
