@@ -13,7 +13,7 @@ export default {
             "Change location": "تغییر مکان",
             "Click here to find more information about the location selected": "اینجا را کلیک کنید تا اطلاعات بیشتری درمورد مکان مورد نظرتان به‌دست آورید.",
             "Address in local language": "آدرس به زبان محلی",
-            "Cost of service":"هزینه ی خدمات"
+            "Cost of service":"هزینه ی خدمات",
             "Share": "اشتراک‌گذاری",
             "Map of Services": "نقشه خدمات",
             "This page last updated on:": "این صفحه آخرین بار در این تاریخ به‌روز شده:",
@@ -167,7 +167,7 @@ export default {
             "Change location": "تغيير الموقع",
             "Click here to find more information about the location selected": "انقر هنا لمزيد من المعلومات حول المكان المحدد",
             "Address in local language": "العنوان باللغة المحلية",
-            "Cost of service":"تكلفة الخدمة"
+            "Cost of service":"تكلفة الخدمة",
             "Share": "شارك",
             "Map of Services": "خريطة الخدمـات",
             "This page last updated on:": "آخر تحديث لهذه الصفحة كان بتاريخ:",
@@ -321,7 +321,7 @@ export default {
             "Change location": "جگہ/مقام تبدیل کریں",
             "Click here to find more information about the location selected": "منتخب کردہ مقام/جگہ کے بارے میں مزید معلومات تلاش کرنے کے لئے یہاں کلک کریں",
             "Address in local language": "مقامی زبان میں پتہ/ ایڈریس",
-            "Cost of service":"سروس کی قیمت";
+            "Cost of service":"سروس کی قیمت",
             "Share": "شیئر کریں",
             "Map of Services": "خدمات کا نقشہ",
             "This page last updated on:": "یہ صفحہ آخری دفعہ اپ ڈیٹ کیا گیا:",
@@ -610,7 +610,7 @@ export default {
             "Change location": "Modifier le lieu",
             "Click here to find more information about the location selected": "Cliquez ici pour trouver plus d'informations au sujet du lieu choisi.",
             "Address in local language": "Adresse dans la langue locale",
-            "Cost of service":"Le coût du service"
+            "Cost of service":"Le coût du service",
             "Share": "Partager",
             "Map of Services": "Carte des Services",
             "This page last updated on:": "Cette page a été mise à jour pour la dernière fois le:",
