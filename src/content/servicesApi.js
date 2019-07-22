@@ -112,7 +112,7 @@ module.exports = {
 		return new Promise((resolve, reject) => {
 			
 			let sl = sessionStorage[`serviceList`] !==  undefined ? JSON.parse(sessionStorage[`serviceList`]) : null;		
-			if (sl && sl.country === country && sl.language === language && /*sl.categoryId === categoryId && */(sl.searchTerm === null || sl.searchTerm === undefined)){ 				
+			if (sl && sl.country === country && sl.language === language && sl.categoryId === categoryId && (sl.searchTerm === null || sl.searchTerm === undefined)){ 				
 				
 				if (sl.categoryId == null && sl.services.results && categoryId){
 					window.serviceList = sl.services.results;
