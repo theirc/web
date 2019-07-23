@@ -53,7 +53,6 @@ class Skeleton extends React.Component {
 		const { children, country, language, match, onGoHome, onGoToServices, onGoToCategories, onGoToSearch, onChangeLocation, onChangeLanguage, deviceType, router, hideFooter, removeErrorMessage, showMapButton, goToMap, headerColor } = this.props;
 		const { errorMessage } = this.state;
 		const { config } = this.context;
-
 		let notifications = [];
 		const notificationType = n => {
 			switch (n.fields.type) {

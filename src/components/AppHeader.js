@@ -68,7 +68,7 @@ class AppHeader extends Component {
 		const backgroundDark = headerColor === 'light' ? false : true;
 		const logo = this.props.logo || "/logo.svg";
 		const logoBlack = this.props.logoBlack || logo;
-		console.log("backgroundDark", backgroundDark, "Logo:", logo, "Logo Black:", logoBlack);
+		
 		const noop = () => {
 			console.log("noop");
 		};
