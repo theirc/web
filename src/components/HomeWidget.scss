@@ -16,6 +16,8 @@
 			flex-basis: 100%;
 		}
 		& .hero {
+			max-height: 500px;
+			overflow: hidden;
 		}
 
 		&:first-child.Highlighted .hero {
