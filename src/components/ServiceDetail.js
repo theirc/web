@@ -5,7 +5,6 @@ import _ from "lodash";
 import { Share, Link  } from "material-ui-icons";
 import { Helmet } from "react-helmet";
 import HeaderBar from "./HeaderBar";
-import { CopyToClipboard } from "react-copy-to-clipboard";
 import PropTypes from "prop-types";
 
 // eslint-disable-next-line
@@ -51,6 +50,8 @@ class ServiceDetail extends React.Component {
 	}
 
 	Copiedlnk() {
+		this.state.value.select();
+		document.execCommand('copy');
 		this.setState(prevState => ({ copied: !prevState.copied }));
 		setTimeout(() => {
 			this.setState({ shareIN: true });
@@ -321,11 +322,8 @@ class ServiceDetail extends React.Component {
 								<Share className="icon" />
 								</div>
 								<div className="verticalHR"/>
-							<div className="selector sharePage" onClick={() => this.Copiedlnk()}>
-								<CopyToClipboard sharePage={this.sharePage} text={this.state.value}>
-									{this.state.copied ? <h1>{t("Copy Link")}</h1> : <h1>{t("Copied")}</h1>}
-								</CopyToClipboard>
-								<Link className="icon" />
+							<div className="selector sharePage" onClick={() => this.copy()}>
+								{this.state.copied ? <div><h1 >{t("Copy Link")}</h1> <Link className="icon" /></div>: <div><h1>{t("Copied")}</h1> <Link className="icon" /></div>}
 							</div>
 						</div>
 					)}
