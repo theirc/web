@@ -281,7 +281,7 @@ module.exports = {
 		space: "ktglofo8nf88",
 		languages: [["en", "English"], ["ar", "العربيـة"], ["ur", "اردو"], ["fa", "فارسی"], ["fr", "Français"]],
 		logo: "/ri-logo-<%= language %>.png",
-		logoblack: "/logo-black.png",
+		logoBlack: "/images/RI-logo-black.png",
 		title: "Refugee Info",
 		questionLink: "https://m.me/refugee.info",
 		customQuestionLink:[["italy","https://www.facebook.com/Refugee.Info.Italy/"]],
