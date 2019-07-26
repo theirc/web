@@ -54,14 +54,14 @@ self.addEventListener('install', function(event) {
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(self.clients.claim());
-  // event.waitUntil(async function() {
-  //   const cacheNames = await caches.keys();
-  //   await Promise.all(
-  //     cacheNames.filter((cacheName) => {
-  //       //return true;
-  //     }).map(cacheName => caches.delete(cacheName))
-  //   );
-  // }());
+  event.waitUntil(async function() {
+    const cacheNames = await caches.keys();
+    await Promise.all(
+      cacheNames.filter((cacheName) => {
+        return true;
+      }).map(cacheName => caches.delete(cacheName))
+    );
+  }());
 });
 
 
