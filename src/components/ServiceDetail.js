@@ -178,7 +178,7 @@ class ServiceDetail extends React.Component {
 		const mLocale = d => {
 			let a = moment(d)
 				.locale(language)
-				.format("LLL");
+				.format("ll");
 			return a;
 		};
 		const amPmTime = time => {
