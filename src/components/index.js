@@ -13,6 +13,7 @@ import HomeWidgetCollection from "./HomeWidgetCollection";
 import SearchPage from "./SearchPage";
 import ServiceMap from "./ServiceMap";
 import ServiceCategoryList from "./ServiceCategoryList";
+import ServiceCategoryListDesktop from "./ServiceCategoryListDesktop";
 import ServiceLocationList from "./ServiceLocationList";
 import ServiceDepartmentList from "./ServiceDepartmentList";
 import ServiceList from "./ServiceList";
@@ -39,6 +40,7 @@ export {
 	SearchPage,
 	ServiceMap,
 	ServiceCategoryList,
+	ServiceCategoryListDesktop,
 	ServiceLocationList,
 	ServiceDepartmentList,
 	ServiceList,

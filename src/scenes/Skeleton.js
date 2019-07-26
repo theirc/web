@@ -154,10 +154,10 @@ const mapDispatch = (d, p) => {
 			if (country) d(push(`/${country.fields.slug}/search?q=${query}`));
 		},
 		onGoToServices: country => () =>{
-			if (country) d(push(`/${country.fields.slug || ""}`+'/services'));
+			if (country) d(push(`/${country.fields.slug || ""}/services`));
 		},
 		onGoToCategories: country => () =>{
-			if (country) d(push(`/${country.fields.slug || ""}`+'/categories'));
+			if (country) d(push(`/${country.fields.slug || ""}/categories`));
 		},
 		onChangeLocation: () => {
 			d(actions.changeCountry(null));

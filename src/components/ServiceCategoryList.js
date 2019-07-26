@@ -1,15 +1,27 @@
 import React from "react";
 import "./ServiceHome.css";
+import "./ServiceCategoryList.css";
+
 import { translate } from "react-i18next";
 
 import HeaderBar from "./HeaderBar";
 import _ from "lodash";
 import tinycolor from "tinycolor2";
+import { ServiceCategoryListDesktop } from ".";
 
 class ServiceCategoryList extends React.Component {
 	state = {
 		categories: [],
 		loaded: false,
+		width: window.innerWidth,
+	};
+
+	componentWillMount() {
+		window.addEventListener('resize', this.handleWindowSizeChange);
+	}
+
+	handleWindowSizeChange = () => {
+		this.setState({ width: window.innerWidth });
 	};
 
 	componentDidMount() {
@@ -32,6 +44,7 @@ class ServiceCategoryList extends React.Component {
 	}
 
 	renderCategory(c) {		
+		  
 		let { onSelectCategory } = this.props;
 		onSelectCategory = onSelectCategory || (() => console.log("noop"));
 
@@ -61,7 +74,9 @@ class ServiceCategoryList extends React.Component {
 	render() {
 		const { categories, loaded } = this.state;
 		const { t, locationEnabled, toggleLocation, listAllServices, goToLocationList, goToMap, locationName, departmentSelected } = this.props;	
-		
+		const { width } = this.state;
+		const isMobile = width <= 1000;
+
 		if (!loaded) {
 			return (
 				<div className="ServiceCategoryList">
@@ -84,7 +99,8 @@ class ServiceCategoryList extends React.Component {
 				</div>
 			);
 		}
-		
+		let categoryName = 'All Categories';
+		let location = locationName ? locationName : 'All Locations';
 		return <div>
 			<HeaderBar key={"Header"} title={t("Service Categories").toUpperCase()}>
 				<li onClick={toggleLocation || _.identity}>
@@ -93,6 +109,7 @@ class ServiceCategoryList extends React.Component {
 					{locationEnabled && <i className="MenuIcon material-icons">radio_button_checked</i>}
 				</li>
 			</HeaderBar>
+			{ isMobile && 
 			<div key={"List"} className="ServiceCategoryList">
 				<ul>
 					{locationName  && 
@@ -139,6 +156,12 @@ class ServiceCategoryList extends React.Component {
 					{categories.map(c => this.renderCategory(c))}
 				</ul>
 			</div>
+			}
+			{!isMobile &&
+				<ServiceCategoryListDesktop {...this.props}>
+
+				</ServiceCategoryListDesktop>
+			} 
 		</div>
 	}
 }

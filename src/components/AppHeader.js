@@ -1,13 +1,10 @@
 import React, { Component } from "react";
 import { IconButton } from "material-ui";
-import { connect } from "react-redux";
 import Headroom from "react-headrooms";
 import PropTypes from "prop-types";
 import { translate, Interpolate } from "react-i18next";
 import { Close } from "material-ui-icons";
 import "./AppHeader.css";
-import { lang } from "moment";
-import { push } from "react-router-redux";
 
 class AppHeader extends Component {
 	static propTypes = {
