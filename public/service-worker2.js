@@ -67,24 +67,23 @@ self.addEventListener('activate', (event) => {
 
 
 self.addEventListener('fetch', function(event) {
-  event.respondWith(
-    caches.match(event.request).then(function(resp) {
-      return resp || fetch(event.request).then(function(response) {
-        return caches.open(CACHE_NAME).then(function(cache) {
-          cache.put(event.request, response.clone());
-          return response;
-        });  
-      });
+  if (navigator.onLine){
+    fetch(event.request).then(function(response) {
+      return response
     })
-  );
-  // event.respondWith(
-  //   caches.match(event.request).then(function(response) {       
-  //       if(response){
-  //         return response;
-  //       }     
-  //       requestBackend(event);
-  //   })
-  // );
+  }else{
+    event.respondWith(
+      caches.match(event.request).then(function(resp) {
+        return resp || fetch(event.request).then(function(response) {
+          return caches.open(CACHE_NAME).then(function(cache) {
+            cache.put(event.request, response.clone());
+            return response;
+          });  
+        });
+      })
+    );
+  }
+  
  
   
 });
