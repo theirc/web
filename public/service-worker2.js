@@ -54,38 +54,34 @@ self.addEventListener('install', function(event) {
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(self.clients.claim());
-  // event.waitUntil(async function() {
-  //   const cacheNames = await caches.keys();
-  //   await Promise.all(
-  //     cacheNames.filter((cacheName) => {
-  //       //return true;
-  //     }).map(cacheName => caches.delete(cacheName))
-  //   );
-  // }());
+  event.waitUntil(async function() {
+    const cacheNames = await caches.keys();
+    await Promise.all(
+      cacheNames.filter((cacheName) => {
+        //return true;
+      }).map(cacheName => caches.delete(cacheName))
+    );
+  }());
 });
 
 
 
 self.addEventListener('fetch', function(event) {
-  event.respondWith(
-    caches.match(event.request).then(function(resp) {
-      return resp || fetch(event.request).then(function(response) {
-        return caches.open(CACHE_NAME).then(function(cache) {
-          cache.put(event.request, response.clone());
-          return response;
-        });  
-      });
+  if (navigator.onLine){
+    fetch(event.request).then(function(response) {
+      return response
     })
-  );
-  // event.respondWith(
-  //   caches.match(event.request).then(function(response) {       
-  //       if(response){
-  //         return response;
-  //       }     
-  //       requestBackend(event);
-  //   })
-  // );
- 
+  }else{
+    event.respondWith(
+      caches.match(event.request).then(function(resp) {
+        return resp || fetch(event.request).then(function(response) {
+          return caches.open(CACHE_NAME).then(function(cache) {
+            cache.put(event.request, response.clone());
+            return response;
+          });  
+        });
+      })
+    );
   
 });
 

@@ -117,7 +117,7 @@ module.exports = {
 				if (sl.categoryId == null && sl.services.results && categoryId){
 					window.serviceList = sl.services.results;
 					let list = sl.services.results && sl.services.results.filter(s => {
-						return (s.type && s.type.id == categoryId) || (s.types && s.types.filter(t => {return t.id === categoryId}).length > 0)});
+						return (s.type && s.type.id === categoryId) || (s.types && s.types.filter(t => {return t.id === categoryId}).length > 0)});
 					sl.services.results = list;
 					resolve(sl.services);
 				}else{
@@ -183,11 +183,11 @@ module.exports = {
 	fetchServiceById(language, serviceId) {
 		return new Promise((resolve, reject) => {
 			let list = sessionStorage[`offline-services`] !==  undefined ? JSON.parse(sessionStorage[`offline-services`]) : null;
-			if (!navigator.onLine && list && list.filter(s => {return s.id == serviceId}).length > 0) {
+			if (!navigator.onLine && list && list.filter(s => {return s.id === serviceId}).length > 0) {
 				
 				console.log("list",list);	
 				console.log("ID:", serviceId);
-				let service = list.services.results.filter(c => {return c.id == serviceId});
+				let service = list.services.results.filter(c => {return c.id === serviceId});
 				console.log("service id", service);
 				resolve(_.first(service));
 			} else {
