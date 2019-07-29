@@ -16,15 +16,12 @@ class ServiceCategoryList extends React.Component {
 		width: window.innerWidth,
 	};
 
-	componentWillMount() {
-		window.addEventListener('resize', this.handleWindowSizeChange);
-	}
-
 	handleWindowSizeChange = () => {
 		this.setState({ width: window.innerWidth });
 	};
 
 	componentDidMount() {
+		window.addEventListener('resize', this.handleWindowSizeChange);
 		const { fetchCategories} = this.props;
 		const { categories} = this.state;
 		if (fetchCategories && categories.length === 0) {

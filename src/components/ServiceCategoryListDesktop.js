@@ -10,18 +10,19 @@ class ServiceCategoryListDesktop extends React.Component {
         categories: [],
 		loaded: false,
         width: window.innerWidth,
-        location: {}
+		location: {},
+		category:  null,
     };
     
     componentWillMount(){
-        const { country, regions } = this.props;
-        console.log(country.fields.slug)
-        let c = regions.filter(r => r.slug === country.fields.slug)[0]
-
-        this.setState({ location: c});
+        
     }
 
 	componentDidMount() {
+		const { country, regions } = this.props;
+        let c = regions.filter(r => r.slug === country.fields.slug)[0]
+
+        this.setState({ location: c});
 		const { fetchCategories} = this.props;
         const { categories} = this.state;
         
@@ -42,17 +43,13 @@ class ServiceCategoryListDesktop extends React.Component {
     }
     
     onSelectLocation = (element) => {
-        console.log(element)
+		this.setState({ location: element});
     }
-    onSelectCategory = (category) =>{
-        this.setState = { category: category};
-        console.log(this.state)
+    onSelectCategory = (element) =>{
+        this.setState({ category: element});
     }
 
 	renderCategory(c) {		
-		  
-		let { onSelectCategory } = this.props;
-		onSelectCategory = onSelectCategory || (() => console.log("noop"));
 
 		let { id, name, vector_icon } = c;
 		let iconPrefix = vector_icon.split("-")[0];
@@ -66,9 +63,8 @@ class ServiceCategoryListDesktop extends React.Component {
             color: "black",
             float: "left"
 		};
-		
 		return (
-			<button key={c.id} className={this.state.category && c.id === this.state.category.id ? "location-item-selected" : "location-item"} onClick={() => this.onSelectLocation(c)}><i className={`${iconPrefix} ${vector_icon}`} style={style} />{c.name}</button>
+			<button key={c.id} className={this.state.category && c.id === this.state.category.id ? "location-item-selected" : "location-item"} onClick={() => this.onSelectCategory(c)}><i className={`${iconPrefix} ${vector_icon}`} style={style} />{c.name}</button>
 		);
 		
 	}
@@ -78,8 +74,7 @@ class ServiceCategoryListDesktop extends React.Component {
         const { width } = this.state;
         //locations.push(...locationsl3);
         let l3 = regions.filter(r => r.slug === 'greece' || (r.parent === 1 && r.level ===3 && !r.hidden) || (!r.hidden &&regions.filter(r => r.parent == 1 && r.level ==2).map(t => t.id).indexOf(r.parent) >= 0))
-        console.table(l3);
-        console.log(this.state);
+        
 		if (!loaded) {
 			return (
 				<div className="ServiceCategoryList">
@@ -91,36 +86,41 @@ class ServiceCategoryListDesktop extends React.Component {
 			);
 		}
 		
-		let categoryName = 'All Categories';
+		let categoryName = this.state.category ? this.state.category.name : 'All Categories';
         let location = this.state.location ? this.state.location.title : 'All Locations';
         
 		return <div>
-			
+
 				<div id="filter-bar" className="filter-bar">
 					<button id="btn-Locations" className="btn-filter">{location}</button>
 					<button id="btn-Categories" className="btn-filter">{categoryName}</button>
 					<label id="toggle-map">{t('Map view')}<input type="checkbox" className="switch bigswitch cn"  /><div className="toggle-btn"><div></div></div>
 					</label>
 				</div>
-                <div id="locations">
-                    <div id="location-title">LOCATIONS</div>
-                    <div id="location-list">
-                        {l3.map((l) => (
-                            <button key={l.id} className={l.id === this.state.location.id ? "location-item-selected" : "location-item"} onClick={() => this.onSelectLocation(l)}>{l.title}</button>
-                        ))}
-                    </div>
-                </div>
-                <div id="categories">
-                    <div id="location-title">CATEGORIES</div>
-                    <div id="location-list">
-                        <button key={0} className={!this.state.category  ? "location-item-selected" : "location-item"} onClick={() => this.onSelectCategory(null)}>{t('All Categories')}</button>
+				<div className="card">
+					<div id="locations">
+						<div id="location-title">LOCATIONS</div>
+						<div id="location-list">
+							{l3.map((l) => (
+								<button key={l.id} className={l.id === this.state.location.id ? "location-item-selected" : "location-item"} onClick={() => this.onSelectLocation(l)}>{l.title}</button>
+							))}
+						</div>
+					</div>
+					<div id="categories">
+						<div id="location-title">CATEGORIES</div>
+						<div id="location-list">
+							<button key={0} className={!this.state.category  ? "location-item-selected" : "location-item"} onClick={() => this.onSelectCategory(null)}>{t('All Categories')}</button>
 
-                        {this.state.categories.map((c) => (
-                            this.renderCategory(c)
-                        ))}
-                    </div>
-                </div>
-		
+							{this.state.categories.map((c) => (
+								this.renderCategory(c)
+							))}
+						</div>
+					</div>
+					<div id="button-search">
+						<button className="show-services">Show Services</button>
+					</div>
+				</div>
+			
 		</div>
 	}
 }

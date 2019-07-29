@@ -119,7 +119,7 @@ input[type="checkbox"].ri.switch:checked + div > div {
     font-size: 15px;
     height: 41px;
     margin-right: 20px;
-    border-radius: 7px;
+    border-radius: 5px;
     outline: 0;
     padding-left: 15px;
     padding-right: 15px;
@@ -165,4 +165,43 @@ input[type="checkbox"].ri.switch:checked + div > div {
     cursor: pointer;
     font-size: 15px;
     outline: none;
+}
+.show-services{
+    background-color: #FDDA14;
+    color: black;
+    font-family: "Roboto", sans-serif;
+    font-size: 15px;
+    height: 41px;
+    width: 50%;
+    border-radius: 5px;
+    outline: 0;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: 9px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+#button-search{
+    width: 100%;
+    text-align: center;
+}
+.card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+}
+.card-body{
+    flex: 1 1 auto;
+    padding: 1.25rem;
+}
+.card-text{
+
 }
