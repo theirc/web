@@ -95,6 +95,7 @@ module.exports = {
 		});
 	},
 	fetchAllServices(country, language, categoryId, searchTerm, pageSize = 1000) {
+		console.log("fetch", country, language, categoryId);
 		//If the region is a country, search for all the services in any location from that country
 		//If the region is a city, search for all the services in the city AND country wide services
 		let filter = "with-parents";

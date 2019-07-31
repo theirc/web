@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { ServiceMap, ServiceCategoryList, ServiceLocationList, ServiceList, ServiceDetail, ServiceDepartmentList } from "../components";
+import { ServiceMap, ServiceCategoryList, ServiceLocationList, ServiceList, ServiceDetail, ServiceDepartmentList, ServiceCategoryListDesktop } from "../components";
 import { Route, Switch } from "react-router";
 import { Skeleton } from ".";
 import { push } from "react-router-redux";
@@ -26,12 +26,18 @@ class Services extends React.Component {
 		departmentName: null,
 		department: null,
 		departmentId: null,
-		keepPreviousZoom: true
+		keepPreviousZoom: true,
+		width: window.innerWidth,
 	};
 
 	static contextTypes = {
 		config: PropTypes.object,
 	};
+	
+
+	componentDidMount(){
+		window.addEventListener('resize', () => { this.setState({ width: window.innerWidth })});
+	}
 
 	sessionStorage = getSessionStorage();
 
@@ -274,6 +280,11 @@ class Services extends React.Component {
 		return this.state.location ? this.state.location : country.fields.slug;
 	}
 
+	fetchServices(location, category){
+		const { language } = this.props;
+		return servicesApi.fetchAllServices(location, language, category, null, 2000)
+	}
+
 	render() {
 		const {
 			country,
@@ -296,7 +307,9 @@ class Services extends React.Component {
 			match,
 			regions,
 		} = this.props;
-
+		const { width } = this.state;
+		const isMobile = width <= 1000;
+		  
 		let regionDictionary = _.fromPairs(regions.map(r => [r.id, r]));
 		let regionsWithCountry = regions.map(r => {
 			let parent = r.parent ? regionDictionary[r.parent] : null;
@@ -327,16 +340,6 @@ class Services extends React.Component {
 				goToLocationByCategory(c.id, this.state.location);
 			}
 		};
-
-		const getLocatioName = (slug) => {
-			if(this.sessionStorage.location) {
-				let l = JSON.parse(this.sessionStorage.location);
-				if(l.slug === slug) {
-					return l[`title_${language}`] ? l[`title_${language}`] : l.name;
-				}
-			}
-			return null;
-		}
 
 		const onOpenLocation = (location,name ) => {
 			this.sessionStorage.location = JSON.stringify(location);
@@ -387,7 +390,7 @@ class Services extends React.Component {
 						component={props => (
 							<Skeleton headerColor='light'>
 								<div className="SkeletonContainer">
-									<ServiceMap
+									{ isMobile && <ServiceMap
 										{...props}
 										goToService={goToService}
 										language={language}
@@ -400,7 +403,27 @@ class Services extends React.Component {
 										categoryName="All Services"
 										keepPreviousZoom = {this.state.keepPreviousZoom}
 										changeCategory={() => { goToLocation(this.state.location) }}
-									/>
+									/>}
+									{ !isMobile && 
+										<ServiceCategoryListDesktop
+											{...props}
+											goToService={goToService}
+											language={language}
+											locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
+											findServicesInLocation={bbox => this.fetchServicesWithinLocation(bbox, props.match.params.location)}
+											measureDistance={this.measureDistance(geolocation, language)}
+											toggleLocation={() => _.identity()}
+											nearby={true}
+											defaultLocation={defaultLocation}
+											categoryName="All Services"
+											keepPreviousZoom = {this.state.keepPreviousZoom}
+											changeCategory={() => { goToLocation(this.state.location) }}
+											mapView={true}
+											fetchCategories={() => this.serviceTypesByLocation(props.match.params.location)}
+											fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
+										/>
+									
+									}
 								</div>
 							</Skeleton>
 						)}
@@ -411,6 +434,7 @@ class Services extends React.Component {
 						component={props => (
 							<Skeleton headerColor='light'>
 								<div className="SkeletonContainer">
+								{ isMobile && 
 									<ServiceList
 										{...props}
 										goToService={goToService}
@@ -419,7 +443,35 @@ class Services extends React.Component {
 										toggleLocation={() => this.setState({ sortingByLocationEnabled: true })}
 										servicesByType={() => this.fetchAllServices()}
 										showMap={() => goToMap()}
-									/>
+									/>}
+									{ !isMobile && 
+								<ServiceCategoryListDesktop
+									{...props}
+									goToService={goToService}
+									language={language}
+									locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
+									measureDistance={this.measureDistance(geolocation, language)}
+									toggleLocation={() => _.identity()}
+									nearby={true}
+									defaultLocation={defaultLocation}
+									keepPreviousZoom = {this.state.keepPreviousZoom}
+									changeCategory={() => { goToLocation(this.state.location) }}
+									mapView={false}									
+									location = {null}
+									category = {null}
+									fetchCategories={() => this.serviceTypesByLocation(props.match.params.location)}
+									onGoToListAll={ listAllServices }
+									onGoToMap = { goToMap }
+									onGoToAllinLocation = { listAllServicesinLocation }
+									onGoToAllinLocatioMap = { servicesInLocationMap }
+									onGoToAllinCategory = { listServicesInCategory }
+									onGoToCategoryMap = { goToCategoryMap }
+									onGoToLocationByCategory = { goToLocationByCategory }
+									onGoToLocationCategoryMap = { goToLocationCategoryMap }
+									fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
+								/>
+							
+							}	
 								</div>
 							</Skeleton>
 						)}
@@ -538,6 +590,7 @@ class Services extends React.Component {
 					component={props => (
 						<Skeleton headerColor='light'>
 							<div className="SkeletonContainer">
+							{ isMobile &&
 								<ServiceMap
 									{...props}
 									goToService={goToService}
@@ -552,7 +605,35 @@ class Services extends React.Component {
 									directMap = {this.state.directMap}
 									changeCategory={() => { goToLocation(this.state.location) }}
 									
+								/>}
+								{ !isMobile && 
+								<ServiceCategoryListDesktop
+									{...props}
+									goToService={goToService}
+									language={language}
+									locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
+									measureDistance={this.measureDistance(geolocation, language)}
+									toggleLocation={() => _.identity()}
+									nearby={true}
+									defaultLocation={defaultLocation}
+									keepPreviousZoom = {this.state.keepPreviousZoom}
+									changeCategory={() => { goToLocation(this.state.location) }}
+									mapView={true}
+									location = {null}
+									category = {props.match.params.categoryId}
+									fetchCategories={() => this.serviceTypesByLocation(props.match.params.location)}
+									onGoToListAll={ listAllServices }
+									onGoToMap = { goToMap }
+									onGoToAllinLocation = { listAllServicesinLocation }
+									onGoToAllinLocatioMap = { servicesInLocationMap }
+									onGoToAllinCategory = { listServicesInCategory }
+									onGoToCategoryMap = { goToCategoryMap }
+									onGoToLocationByCategory = { goToLocationByCategory }
+									onGoToLocationCategoryMap = { goToLocationCategoryMap }
+									fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
 								/>
+							
+							}	
 							</div>
 						</Skeleton>
 					)}
@@ -564,6 +645,7 @@ class Services extends React.Component {
 					component={props => (
 						<Skeleton headerColor='light' showMapButton={true} goToMap={() => servicesInCategoryMap(this.state.category, this.state.location)} >
 							<div className="SkeletonContainer">
+							{ isMobile && 
 								<ServiceList
 									{...props}
 									goToMap={() => goToMap()}
@@ -575,6 +657,35 @@ class Services extends React.Component {
 									showMap={() => goToCategoryMap(props.match.params.categoryId)}
 									title={this.state.categoryName}
 								/>
+							}
+								{ !isMobile && 
+								<ServiceCategoryListDesktop
+									{...props}
+									goToService={goToService}
+									language={language}
+									locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
+									measureDistance={this.measureDistance(geolocation, language)}
+									toggleLocation={() => _.identity()}
+									nearby={true}
+									defaultLocation={defaultLocation}
+									keepPreviousZoom = {this.state.keepPreviousZoom}
+									changeCategory={() => { goToLocation(this.state.location) }}
+									mapView={false}
+									location = {null}
+									category = {props.match.params.categoryId}
+									fetchCategories={() => this.serviceTypesByLocation(props.match.params.location)}
+									onGoToListAll={ listAllServices }
+									onGoToMap = { goToMap }
+									onGoToAllinLocation = { listAllServicesinLocation }
+									onGoToAllinLocatioMap = { servicesInLocationMap }
+									onGoToAllinCategory = { listServicesInCategory }
+									onGoToCategoryMap = { goToCategoryMap }
+									onGoToLocationByCategory = { goToLocationByCategory }
+									onGoToLocationCategoryMap = { goToLocationCategoryMap }
+									fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
+								/>
+							
+							}	
 							</div>
 						</Skeleton>
 					)}
@@ -585,6 +696,7 @@ class Services extends React.Component {
 					component={props => (
 						<Skeleton headerColor='light'>
 							<div className="SkeletonContainer">
+								{ isMobile &&
 								<ServiceCategoryList
 									fetchCategories={() => this.serviceTypesByLocation(props.match.params.location)}
 									locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
@@ -599,6 +711,35 @@ class Services extends React.Component {
 									locationName={getLocationName(props.match.params.location)}
 									departmentSelected = {this.state.department}
 								/>
+								}
+								{ !isMobile && 
+								<ServiceCategoryListDesktop
+									{...props}
+									goToService={goToService}
+									language={language}
+									locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
+									measureDistance={this.measureDistance(geolocation, language)}
+									toggleLocation={() => _.identity()}
+									nearby={true}
+									defaultLocation={defaultLocation}
+									keepPreviousZoom = {this.state.keepPreviousZoom}
+									changeCategory={() => { goToLocation(this.state.location) }}
+									mapView={false}
+									location = {props.match.params.location}
+									category = {null}
+									fetchCategories={() => this.serviceTypesByLocation(props.match.params.location)}
+									onGoToListAll={ listAllServices }
+									onGoToMap = { goToMap }
+									onGoToAllinLocation = { listAllServicesinLocation }
+									onGoToAllinLocatioMap = { servicesInLocationMap }
+									onGoToAllinCategory = { listServicesInCategory }
+									onGoToCategoryMap = { goToCategoryMap }
+									onGoToLocationByCategory = { goToLocationByCategory }
+									onGoToLocationCategoryMap = { goToLocationCategoryMap }
+									fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
+								/>
+							
+							}	
 							</div>
 						</Skeleton>
 					)}
@@ -609,6 +750,7 @@ class Services extends React.Component {
 					component={props => (
 						<Skeleton headerColor='light' showMapButton={true} goToMap={() => servicesInCategoryMap(this.state.category, this.state.location)} >
 							<div className="SkeletonContainer">
+							{ isMobile && 
 								<ServiceList
 									{...props}
 									goToMap={() => goToLocationCategoryMap(props.match.params.location,props.match.params.categoryId )}
@@ -621,6 +763,43 @@ class Services extends React.Component {
 									title={this.state.categoryName}
 									location={props.match.params.location}
 								/>
+							}
+								{ !isMobile && 
+								<ServiceCategoryListDesktop
+									{...props}
+									goToService={goToService}
+									language={language}
+									locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
+									measureDistance={this.measureDistance(geolocation, language)}
+									toggleLocation={() => _.identity()}
+									nearby={true}
+									defaultLocation={defaultLocation}
+									keepPreviousZoom = {this.state.keepPreviousZoom}
+									changeCategory={() => { goToLocation(this.state.location) }}
+									mapView={false}
+									location = {props.match.params.location}
+									category = {props.match.params.categoryId}
+									fetchCategories={() => this.serviceTypesByLocation(props.match.params.location)}
+									//Go to All Services
+									onGoToListAll={ listAllServices }
+									//Go to All Service Map
+									onGoToMap = { goToMap }
+									//Go To By Location
+									onGoToAllinLocation = { listAllServicesinLocation }
+									//Go to By Location Map
+									onGoToAllinLocatioMap = { servicesInLocationMap }
+									//Go to by Category
+									onGoToAllinCategory = { listServicesInCategory }
+									//Go To by Category Map
+									onGoToCategoryMap = {goToCategoryMap}
+									//Go to By Location and Category
+									onGoToLocationByCategory = { goToLocationByCategory }
+									//Go to By Location and Category Map
+									onGoToLocationCategoryMap = { goToLocationCategoryMap }
+									fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
+								/>
+							
+							}	
 							</div>
 						</Skeleton>
 					)}
@@ -631,6 +810,7 @@ class Services extends React.Component {
 					component={props => (
 						<Skeleton headerColor='light' showMapButton={true} goToMap={() => servicesInCategoryMap(this.state.category, this.state.location)} >
 							<div className="SkeletonContainer">
+							{ isMobile && 
 								<ServiceMap
 									{...props}
 									goToService={goToService}
@@ -644,7 +824,43 @@ class Services extends React.Component {
 									categoryName="All Services"
 									keepPreviousZoom = {this.state.keepPreviousZoom}
 									changeCategory={() => { goToLocation(this.state.location) }}
-								/>								
+							/>}	
+								{ !isMobile && 
+								<ServiceCategoryListDesktop
+									{...props}
+									goToService={goToService}
+									language={language}
+									locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
+									measureDistance={this.measureDistance(geolocation, language)}
+									toggleLocation={() => _.identity()}
+									nearby={true}
+									defaultLocation={defaultLocation}
+									keepPreviousZoom = {this.state.keepPreviousZoom}
+									changeCategory={() => { goToLocation(this.state.location) }}
+									mapView={true}
+									location = {props.match.params.location}
+									category = {props.match.params.categoryId}
+									fetchCategories={() => this.serviceTypesByLocation(props.match.params.location)}
+									//Go to All Services
+									onGoToListAll={ listAllServices }
+									//Go to All Service Map
+									onGoToMap = { goToMap }
+									//Go To By Location
+									onGoToAllinLocation = { listAllServicesinLocation }
+									//Go to By Location Map
+									onGoToAllinLocatioMap = { servicesInLocationMap }
+									//Go to by Category
+									onGoToAllinCategory = { listServicesInCategory }
+									//Go To by Category Map
+									onGoToCategoryMap = {goToCategoryMap}
+									//Go to By Location and Category
+									onGoToLocationByCategory = { goToLocationByCategory }
+									//Go to By Location and Category Map
+									onGoToLocationCategoryMap = { goToLocationCategoryMap }
+									fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
+								/>
+							
+							}							
 							</div>
 						</Skeleton>
 					)}
@@ -655,7 +871,8 @@ class Services extends React.Component {
 					component={props => (
 						<Skeleton headerColor='light' showMapButton={true} goToMap={() => servicesInLocationMap(this.state.location)}>
 							<div className="SkeletonContainer">
-							<ServiceList
+							{ isMobile && 
+								<ServiceList
 									{...props}
 									goToMap={() => goToMap()}
 									goToService={goToService}
@@ -666,7 +883,43 @@ class Services extends React.Component {
 									showMap={() => goToLocationMap(props.match.params.location )}
 									title={this.state.categoryName}
 									location={props.match.params.location}
+								/>}
+							{ !isMobile && 
+								<ServiceCategoryListDesktop
+									{...props}
+									goToService={goToService}
+									language={language}
+									locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
+									measureDistance={this.measureDistance(geolocation, language)}
+									toggleLocation={() => _.identity()}
+									nearby={true}
+									defaultLocation={defaultLocation}
+									keepPreviousZoom = {this.state.keepPreviousZoom}
+									changeCategory={() => { goToLocation(this.state.location) }}
+									mapView={false}
+									location = {props.match.params.location}
+									category = {null}
+									fetchCategories={() => this.serviceTypesByLocation(props.match.params.location)}
+									//Go to All Services
+									onGoToListAll={ listAllServices }
+									//Go to All Service Map
+									onGoToMap = { goToMap }
+									//Go To By Location
+									onGoToAllinLocation = { listAllServicesinLocation }
+									//Go to By Location Map
+									onGoToAllinLocatioMap = { servicesInLocationMap }
+									//Go to by Category
+									onGoToAllinCategory = { listServicesInCategory }
+									//Go To by Category Map
+									onGoToCategoryMap = {goToCategoryMap}
+									//Go to By Location and Category
+									onGoToLocationByCategory = { goToLocationByCategory }
+									//Go to By Location and Category Map
+									onGoToLocationCategoryMap = { goToLocationCategoryMap }
+									fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
 								/>
+							
+							}
 							</div>
 						</Skeleton>
 					)}
@@ -678,6 +931,7 @@ class Services extends React.Component {
 					component={props => (
 						<Skeleton headerColor='light'>
 							<div className="SkeletonContainer">
+							{ isMobile && 
 								<ServiceMap
 									{...props}
 									goToService={goToService}
@@ -691,7 +945,43 @@ class Services extends React.Component {
 									categoryName="All Services"
 									keepPreviousZoom = {this.state.keepPreviousZoom}
 									changeCategory={() => { goToLocation(this.state.location) }}
+								/>}
+								{ !isMobile && 
+								<ServiceCategoryListDesktop
+									{...props}
+									goToService={goToService}
+									language={language}
+									locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
+									measureDistance={this.measureDistance(geolocation, language)}
+									toggleLocation={() => _.identity()}
+									nearby={true}
+									defaultLocation={defaultLocation}
+									keepPreviousZoom = {this.state.keepPreviousZoom}
+									changeCategory={() => { goToLocation(this.state.location) }}
+									mapView={true}
+									location = {props.match.params.location}
+									category = {null}
+									fetchCategories={() => this.serviceTypesByLocation(props.match.params.location)}
+									//Go to All Services
+									onGoToListAll={ listAllServices }
+									//Go to All Service Map
+									onGoToMap = { goToMap }
+									//Go To By Location
+									onGoToAllinLocation = { listAllServicesinLocation }
+									//Go to By Location Map
+									onGoToAllinLocatioMap = { servicesInLocationMap }
+									//Go to by Category
+									onGoToAllinCategory = { listServicesInCategory }
+									//Go To by Category Map
+									onGoToCategoryMap = {goToCategoryMap}
+									//Go to By Location and Category
+									onGoToLocationByCategory = { goToLocationByCategory }
+									//Go to By Location and Category Map
+									onGoToLocationCategoryMap = { goToLocationCategoryMap }
+									fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
 								/>
+							
+							}
 							</div>
 						</Skeleton>
 					)}
@@ -699,9 +989,10 @@ class Services extends React.Component {
 				<Route
 					exact
 					path={`${match.url}`}
-					component={() => (
+					component={props => (
 						<Skeleton headerColor='light'>
 							<div className="SkeletonContainer">
+							{ isMobile && 
 								<ServiceCategoryList
 									fetchCategories={() => this.serviceTypes()}
 									locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
@@ -713,6 +1004,45 @@ class Services extends React.Component {
 									goToLocationList={()=> {goToLocations(true)}}
 									showLocations={true}
 								/>
+							}
+
+							{ !isMobile && 
+								<ServiceCategoryListDesktop
+									{...props}
+									goToService={goToService}
+									language={language}
+									locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
+									findServicesInLocation={bbox => this.fetchServicesWithinLocation(bbox, props.match.params.location)}
+									measureDistance={this.measureDistance(geolocation, language)}
+									toggleLocation={() => _.identity()}
+									nearby={true}
+									defaultLocation={defaultLocation}
+									categoryName="All Services"
+									keepPreviousZoom = {this.state.keepPreviousZoom}
+									changeCategory={() => { goToLocation(this.state.location) }}
+									mapView={false}
+									showFilter = { true }
+									fetchCategories={() => this.serviceTypesByLocation(props.match.params.location)}
+									//Go to All Services
+									onGoToListAll={ listAllServices }
+									//Go to All Service Map
+									onGoToMap = { goToMap }
+									//Go To By Location
+									onGoToAllinLocation = { listAllServicesinLocation }
+									//Go to By Location Map
+									onGoToAllinLocatioMap = { servicesInLocationMap }
+									//Go to by Category
+									onGoToAllinCategory = { listServicesInCategory }
+									//Go To by Category Map
+									onGoToCategoryMap = {goToCategoryMap}
+									//Go to By Location and Category
+									onGoToLocationByCategory = { goToLocationByCategory }
+									//Go to By Location and Category Map
+									onGoToLocationCategoryMap = { goToLocationCategoryMap }
+									fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
+								/>
+							
+							}
 							</div>
 						</Skeleton>
 					)}

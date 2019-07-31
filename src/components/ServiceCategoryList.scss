@@ -124,6 +124,7 @@ input[type="checkbox"].ri.switch:checked + div > div {
     padding-left: 15px;
     padding-right: 15px;
     margin-top: 9px;
+    cursor: pointer;
 }
 #toggle-map{
     float: right;
@@ -135,6 +136,7 @@ input[type="checkbox"].ri.switch:checked + div > div {
     font-family: "Roboto", sans-serif;
     font-size: 24px;
     text-align: center;
+    padding: 20px
 }
 #location-list{
     content: "";
@@ -204,4 +206,17 @@ input[type="checkbox"].ri.switch:checked + div > div {
 }
 .card-text{
 
+}
+.btn-close{
+    position: absolute;
+    padding: 20px;
+    color: grey;
+    font-family: Roboto;
+    cursor: pointer;
+}
+.filter-title{
+    text-align: center;
+    padding: 20px;
+    font-size: 20px;
+    font-weight: 600;
 }

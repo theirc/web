@@ -13,15 +13,10 @@ class ServiceCategoryList extends React.Component {
 	state = {
 		categories: [],
 		loaded: false,
-		width: window.innerWidth,
 	};
 
-	handleWindowSizeChange = () => {
-		this.setState({ width: window.innerWidth });
-	};
 
 	componentDidMount() {
-		window.addEventListener('resize', this.handleWindowSizeChange);
 		const { fetchCategories} = this.props;
 		const { categories} = this.state;
 		if (fetchCategories && categories.length === 0) {
@@ -71,8 +66,6 @@ class ServiceCategoryList extends React.Component {
 	render() {
 		const { categories, loaded } = this.state;
 		const { t, locationEnabled, toggleLocation, listAllServices, goToLocationList, goToMap, locationName, departmentSelected } = this.props;	
-		const { width } = this.state;
-		const isMobile = width <= 1000;
 
 		if (!loaded) {
 			return (
@@ -96,8 +89,6 @@ class ServiceCategoryList extends React.Component {
 				</div>
 			);
 		}
-		let categoryName = 'All Categories';
-		let location = locationName ? locationName : 'All Locations';
 		return <div>
 			<HeaderBar key={"Header"} title={t("Service Categories").toUpperCase()}>
 				<li onClick={toggleLocation || _.identity}>
@@ -106,7 +97,6 @@ class ServiceCategoryList extends React.Component {
 					{locationEnabled && <i className="MenuIcon material-icons">radio_button_checked</i>}
 				</li>
 			</HeaderBar>
-			{ isMobile && 
 			<div key={"List"} className="ServiceCategoryList">
 				<ul>
 					{locationName  && 
@@ -153,12 +143,6 @@ class ServiceCategoryList extends React.Component {
 					{categories.map(c => this.renderCategory(c))}
 				</ul>
 			</div>
-			}
-			{!isMobile &&
-				<ServiceCategoryListDesktop {...this.props}>
-
-				</ServiceCategoryListDesktop>
-			} 
 		</div>
 	}
 }
