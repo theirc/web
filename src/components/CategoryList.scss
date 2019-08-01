@@ -31,20 +31,33 @@
 		align-items: center;
 	}
 
+	.tiles-desktop {
+		display: none;
+	}
+	
 	ul {
 		list-style: none;
 		margin: 0;
 		padding: 0;
 	}
 	@media (min-width: $desktopBreakpoint) {
-		ul li{
-			width: 30%;
+		.tiles-mobile {
+			display: none;
+		}
+		.tiles-desktop {
 			display: inline-block;
-			height: 70px;
-			box-shadow: 2px 2px 4px -3px;
+			width: 100%;
+		}
+		ul li{
+			width: 48%;
+			display: inline-block;
 			margin: 1%;
-			background-color: white;
 			overflow: hidden;
+
+			img {
+				max-height: 280px;
+				width: 100%;
+			}
 
 			&.selected{
 				background-color: #fdda14;
@@ -206,5 +219,9 @@
 		display: block;
 
 		transition: display 2s ease-in-out;
+	}
+
+	.tile {
+		
 	}
 }

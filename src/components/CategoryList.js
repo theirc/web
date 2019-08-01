@@ -4,7 +4,44 @@ import HeaderBar from "./HeaderBar";
 import "./CategoryList.css";
 
 class CategoryList extends Component {
-	static propTypes = {};
+	state = {
+		selectedCategory: ''
+	};
+
+	onChange = (e) => {
+		this.setState({ selectedCategory: e.target.value });
+	}
+
+
+	handleWindowSizeChange = () => {
+		this.setState({ width: window.innerWidth });
+	};
+
+	renderTiles(c) {
+		
+		if(c.fields.categories) return c.fields.categories.map(a => (
+					<li className='tile' key={a.sys.id}>
+						{!a.fields.hero && <img src='/placeholder.png' alt='' />}
+						{a.fields && <a href='#'><h2>{a.fields.name}</h2></a>}
+					</li>
+				)
+			);
+
+		if(!c.fields.categories && !c.fields.articles) return (
+				<li className='tile'>
+					{!c.fields.hero && <img src='/placeholder.png' alt='' />}
+					{c.fields && <a href='#'><h2>{c.fields.name}</h2></a>}
+				</li>
+			);
+
+		if(c.fields.articles) return c.fields.articles.map(a => a.fields && (
+				<li key={a.sys.id} className='tile'>
+					{a.fields.hero && a.fields.hero.fields && <img src={a.fields.hero.fields.file.url + '?fm=jpg&fl=progressive'} alt='' />}
+					{!a.fields.hero && <img src='/placeholder.png' alt='' />}
+					<a href='#'><h2>{a.fields.title}</h2></a>
+				</li>
+			));
+	}
 
 	render() {
 		const { country, categories, onNavigate, t, language } = this.props;
@@ -32,10 +69,23 @@ class CategoryList extends Component {
 				}
 			}			
 		}
+
 		return (
 			<div className="CategoryList">
-				<HeaderBar title={t("Categories").toUpperCase()} />
-				<ul>
+				{/* <HeaderBar title={t("Categories").toUpperCase()} /> */}
+				<div className='tiles-desktop'>
+					<select value={this.state.selectedCategory} onChange={this.onChange}>
+						{(categories || []).filter(showCategory).map(e => <option key={e.sys.id} value={e.sys.id}>{e.fields.name}</option>)}
+					</select>
+					<ul>
+						{(categories || []).filter(showCategory).map(c => {
+							if(c.sys.id === this.state.selectedCategory || !this.state.selectedCategory.length) {
+								return this.renderTiles(c);
+							}
+						})}
+					</ul>
+				</div>
+				<ul className='tiles-mobile'>
 					{(categories || []).filter(showCategory).map((c, i) => (
 						<li key={c.sys.id}>
 							{i > 0 && <hr className="line" />}
