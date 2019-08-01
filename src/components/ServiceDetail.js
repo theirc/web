@@ -6,6 +6,7 @@ import { Share, Link  } from "material-ui-icons";
 import { Helmet } from "react-helmet";
 import HeaderBar from "./HeaderBar";
 import PropTypes from "prop-types";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 // eslint-disable-next-line
 var tinycolor = require("tinycolor2");
@@ -48,10 +49,7 @@ class ServiceDetail extends React.Component {
 	sharePage() {
 		this.setState(prevState => ({ shareIN: false }));
 	}
-
 	Copiedlnk() {
-		this.state.value.select();
-		document.execCommand('copy');
 		this.setState(prevState => ({ copied: !prevState.copied }));
 		setTimeout(() => {
 			this.setState({ shareIN: true });
@@ -322,8 +320,11 @@ class ServiceDetail extends React.Component {
 								<Share className="icon" />
 								</div>
 								<div className="verticalHR"/>
-							<div className="selector sharePage" onClick={() => this.copy()}>
-								{this.state.copied ? <div><h1 >{t("Copy Link")}</h1> <Link className="icon" /></div>: <div><h1>{t("Copied")}</h1> <Link className="icon" /></div>}
+								<div className="selector sharePage" onClick={() => this.Copiedlnk()}>
+								<CopyToClipboard sharePage={this.sharePage} text={this.state.value}>
+									{this.state.copied ? <h1>{t("Copy Link")}</h1> : <h1>{t("Copied")}</h1>}
+								</CopyToClipboard>
+								<Link className="icon" />
 							</div>
 						</div>
 					)}
