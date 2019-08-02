@@ -90,7 +90,7 @@ class CategoryList extends Component {
 			<div className="CategoryList">
 				{/* <HeaderBar title={t("Categories").toUpperCase()} /> */}
 				<div className='tiles-desktop'>
-					<select value={this.state.selectedCategory} onChange={this.onChange}>
+					<select className='select-css' value={this.state.selectedCategory} onChange={this.onChange}>
 						<option value=''>All Categories</option>
 						{(categories || []).filter(showCategory).map(e => <option key={e.sys.id} value={e.sys.id}>{e.fields.name}</option>)}
 					</select>
