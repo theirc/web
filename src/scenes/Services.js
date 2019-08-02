@@ -281,6 +281,7 @@ class Services extends React.Component {
 		return servicesApi.fetchAllServices(location, language, category, null, 2000)
 	}
 	goTo(location, category, mapview = false){	
+		console.log("Go to", location, category, mapview);
 		const {
 			goToLocationMap,
 			goToCategoryMap,

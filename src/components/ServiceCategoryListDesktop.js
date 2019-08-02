@@ -14,7 +14,7 @@ class ServiceCategoryListDesktop extends React.Component {
 		location: {},
 		category:  null,
 		showFilter: true,
-		showMap: null,
+		showMap: this.props.mapView,
 		services: [],
 		showServices: false
     };
@@ -24,15 +24,15 @@ class ServiceCategoryListDesktop extends React.Component {
     }
 
 	componentDidMount() {
-		const { country, regions, showFilter, mapView, location, category } = this.props;
-		
+		const { country, regions, showFilter, location, category } = this.props;
+		console.log("did mount");
 		let c = regions.filter(r => r.slug === country.fields.slug)[0]
 		let currentLocation = c;
 		if (location){
 			let l = regions.filter(r => r.slug === location);
 			currentLocation = l.length > 0 ? l[0] : c;
 		}
-		this.setState({location: currentLocation, showFilter: showFilter, showMap: mapView, loaded: true})
+		this.setState({location: currentLocation, showFilter: showFilter, loaded: true})
 		const { fetchCategories} = this.props;
         const { categories } = this.state;
 		if (fetchCategories && categories.length === 0) {
@@ -73,7 +73,8 @@ class ServiceCategoryListDesktop extends React.Component {
 	
 	showServices = () => {
 		const { goTo } = this.props;
-		goTo(this.state.location, this.state.category);
+		console.log("Map", this.state.showMap)
+		goTo(this.state.location, this.state.category, this.state.showMap);
 	}
 
 	closeFilter = () => {
@@ -85,8 +86,9 @@ class ServiceCategoryListDesktop extends React.Component {
 	}
 
 	toggleMap = () => {
-		let status = this.state.showMap;
-		this.setState({showMap: !status})
+		this.setState(prevState => ({showMap: !prevState.showMap}));
+		console.log("New status", this.state.showMap)
+		this.showServices();
 		
 	}
 
@@ -229,6 +231,9 @@ class ServiceCategoryListDesktop extends React.Component {
 						{services.map(this.renderService.bind(this))}
 					</div>
 				</div>
+				}
+				{!showServices && !this.state.showFilter && 
+					<div className="loader" />
 				}
 			
 		</div>
