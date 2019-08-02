@@ -47,15 +47,32 @@
 		.tiles-desktop {
 			display: inline-block;
 			width: 100%;
+
+			select {
+				margin: 25px auto;
+			}
+
+			.tile {
+				a {
+					text-decoration: none;
+					
+					&:hover {
+						text-decoration: underline;
+					}
+				}
+			}
 		}
 		ul li{
 			width: 48%;
 			display: inline-block;
 			margin: 1%;
-			overflow: hidden;
+
+			.img-viewport {
+				height: 22vw;
+				overflow: hidden;
+			}
 
 			img {
-				max-height: 280px;
 				width: 100%;
 			}
 
@@ -221,7 +238,4 @@
 		transition: display 2s ease-in-out;
 	}
 
-	.tile {
-		
-	}
 }
