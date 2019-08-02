@@ -280,8 +280,7 @@ class Services extends React.Component {
 		const { language } = this.props;
 		return servicesApi.fetchAllServices(location, language, category, null, 2000)
 	}
-
-	goTo(location, category, mapview = false){
+	goTo(location, category, mapview = false){	
 		const {
 			goToLocationMap,
 			goToCategoryMap,
@@ -290,7 +289,7 @@ class Services extends React.Component {
 			goToMap,
 			listAllServices,
 			listAllServicesinLocation,
-			listServicesInCategory,
+			listServicesInCategory
 		} = this.props;
 		if (mapview){
 			if ((!location || location.level === 1)  && !category){
@@ -451,6 +450,7 @@ class Services extends React.Component {
 											mapView={true}
 											fetchCategories={() => this.serviceTypesByLocation(props.match.params.location)}
 											fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
+											goTo={(location, category, mapview) => this.goTo(location, category, mapview)}
 										/>
 									
 									}
@@ -490,14 +490,7 @@ class Services extends React.Component {
 									location = {null}
 									category = {null}
 									fetchCategories={() => this.serviceTypesByLocation(props.match.params.location)}
-									onGoToListAll={ listAllServices }
-									onGoToMap = { goToMap }
-									onGoToAllinLocation = { listAllServicesinLocation }
-									onGoToAllinLocatioMap = { servicesInLocationMap }
-									onGoToAllinCategory = { listServicesInCategory }
-									onGoToCategoryMap = { goToCategoryMap }
-									onGoToLocationByCategory = { goToLocationByCategory }
-									onGoToLocationCategoryMap = { goToLocationCategoryMap }
+									goTo={(location, category, mapview) => this.goTo(location, category, mapview)}
 									fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
 								/>
 							
@@ -652,14 +645,7 @@ class Services extends React.Component {
 									location = {null}
 									category = {props.match.params.categoryId}
 									fetchCategories={() => this.serviceTypesByLocation(props.match.params.location)}
-									onGoToListAll={ listAllServices }
-									onGoToMap = { goToMap }
-									onGoToAllinLocation = { listAllServicesinLocation }
-									onGoToAllinLocatioMap = { servicesInLocationMap }
-									onGoToAllinCategory = { listServicesInCategory }
-									onGoToCategoryMap = { goToCategoryMap }
-									onGoToLocationByCategory = { goToLocationByCategory }
-									onGoToLocationCategoryMap = { goToLocationCategoryMap }
+									goTo={(location, category, mapview) => this.goTo(location, category, mapview)}
 									fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
 								/>
 							
@@ -704,14 +690,7 @@ class Services extends React.Component {
 									location = {null}
 									category = {props.match.params.categoryId}
 									fetchCategories={() => this.serviceTypesByLocation(props.match.params.location)}
-									onGoToListAll={ listAllServices }
-									onGoToMap = { goToMap }
-									onGoToAllinLocation = { listAllServicesinLocation }
-									onGoToAllinLocatioMap = { servicesInLocationMap }
-									onGoToAllinCategory = { listServicesInCategory }
-									onGoToCategoryMap = { goToCategoryMap }
-									onGoToLocationByCategory = { goToLocationByCategory }
-									onGoToLocationCategoryMap = { goToLocationCategoryMap }
+									goTo={(location, category, mapview) => this.goTo(location, category, mapview)}
 									fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
 								/>
 							
@@ -758,14 +737,7 @@ class Services extends React.Component {
 									location = {props.match.params.location}
 									category = {null}
 									fetchCategories={() => this.serviceTypesByLocation(props.match.params.location)}
-									onGoToListAll={ listAllServices }
-									onGoToMap = { goToMap }
-									onGoToAllinLocation = { listAllServicesinLocation }
-									onGoToAllinLocatioMap = { servicesInLocationMap }
-									onGoToAllinCategory = { listServicesInCategory }
-									onGoToCategoryMap = { goToCategoryMap }
-									onGoToLocationByCategory = { goToLocationByCategory }
-									onGoToLocationCategoryMap = { goToLocationCategoryMap }
+									goTo={(location, category, mapview) => this.goTo(location, category, mapview)}
 									fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
 								/>
 							
@@ -810,22 +782,7 @@ class Services extends React.Component {
 									location = {props.match.params.location}
 									category = {props.match.params.categoryId}
 									fetchCategories={() => this.serviceTypesByLocation(props.match.params.location)}
-									//Go to All Services
-									onGoToListAll={ listAllServices }
-									//Go to All Service Map
-									onGoToMap = { goToMap }
-									//Go To By Location
-									onGoToAllinLocation = { listAllServicesinLocation }
-									//Go to By Location Map
-									onGoToAllinLocatioMap = { servicesInLocationMap }
-									//Go to by Category
-									onGoToAllinCategory = { listServicesInCategory }
-									//Go To by Category Map
-									onGoToCategoryMap = {goToCategoryMap}
-									//Go to By Location and Category
-									onGoToLocationByCategory = { goToLocationByCategory }
-									//Go to By Location and Category Map
-									onGoToLocationCategoryMap = { goToLocationCategoryMap }
+									goTo={(location, category, mapview) => this.goTo(location, category, mapview)}
 									fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
 								/>
 							
@@ -871,22 +828,7 @@ class Services extends React.Component {
 									location = {props.match.params.location}
 									category = {props.match.params.categoryId}
 									fetchCategories={() => this.serviceTypesByLocation(props.match.params.location)}
-									//Go to All Services
-									onGoToListAll={ listAllServices }
-									//Go to All Service Map
-									onGoToMap = { goToMap }
-									//Go To By Location
-									onGoToAllinLocation = { listAllServicesinLocation }
-									//Go to By Location Map
-									onGoToAllinLocatioMap = { servicesInLocationMap }
-									//Go to by Category
-									onGoToAllinCategory = { listServicesInCategory }
-									//Go To by Category Map
-									onGoToCategoryMap = {goToCategoryMap}
-									//Go to By Location and Category
-									onGoToLocationByCategory = { goToLocationByCategory }
-									//Go to By Location and Category Map
-									onGoToLocationCategoryMap = { goToLocationCategoryMap }
+									goTo={(location, category, mapview) => this.goTo(location, category, mapview)}
 									fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
 								/>
 							
@@ -930,22 +872,7 @@ class Services extends React.Component {
 									location = {props.match.params.location}
 									category = {null}
 									fetchCategories={() => this.serviceTypesByLocation(props.match.params.location)}
-									//Go to All Services
-									onGoToListAll={ listAllServices }
-									//Go to All Service Map
-									onGoToMap = { goToMap }
-									//Go To By Location
-									onGoToAllinLocation = { listAllServicesinLocation }
-									//Go to By Location Map
-									onGoToAllinLocatioMap = { servicesInLocationMap }
-									//Go to by Category
-									onGoToAllinCategory = { listServicesInCategory }
-									//Go To by Category Map
-									onGoToCategoryMap = {goToCategoryMap}
-									//Go to By Location and Category
-									onGoToLocationByCategory = { goToLocationByCategory }
-									//Go to By Location and Category Map
-									onGoToLocationCategoryMap = { goToLocationCategoryMap }
+									goTo={(location, category, mapview) => this.goTo(location, category, mapview)}
 									fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
 								/>
 							
@@ -992,22 +919,7 @@ class Services extends React.Component {
 									location = {props.match.params.location}
 									category = {null}
 									fetchCategories={() => this.serviceTypesByLocation(props.match.params.location)}
-									//Go to All Services
-									onGoToListAll={ listAllServices }
-									//Go to All Service Map
-									onGoToMap = { goToMap }
-									//Go To By Location
-									onGoToAllinLocation = { listAllServicesinLocation }
-									//Go to By Location Map
-									onGoToAllinLocatioMap = { servicesInLocationMap }
-									//Go to by Category
-									onGoToAllinCategory = { listServicesInCategory }
-									//Go To by Category Map
-									onGoToCategoryMap = {goToCategoryMap}
-									//Go to By Location and Category
-									onGoToLocationByCategory = { goToLocationByCategory }
-									//Go to By Location and Category Map
-									onGoToLocationCategoryMap = { goToLocationCategoryMap }
+									goTo={(location, category, mapview) => this.goTo(location, category, mapview)}
 									fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
 								/>
 							
@@ -1053,22 +965,7 @@ class Services extends React.Component {
 									mapView={false}
 									showFilter = { true }
 									fetchCategories={() => this.serviceTypesByLocation(props.match.params.location)}
-									//Go to All Services
-									onGoToListAll={ listAllServices }
-									//Go to All Service Map
-									onGoToMap = { goToMap }
-									//Go To By Location
-									onGoToAllinLocation = { listAllServicesinLocation }
-									//Go to By Location Map
-									onGoToAllinLocatioMap = { servicesInLocationMap }
-									//Go to by Category
-									onGoToAllinCategory = { listServicesInCategory }
-									//Go To by Category Map
-									onGoToCategoryMap = {goToCategoryMap}
-									//Go to By Location and Category
-									onGoToLocationByCategory = { goToLocationByCategory }
-									//Go to By Location and Category Map
-									onGoToLocationCategoryMap = { goToLocationCategoryMap }
+									goTo={(location, category, mapview) => this.goTo(location, category, mapview)}
 									fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
 								/>
 							
@@ -1086,10 +983,13 @@ const mapState = ({ country, language, regions }, p) => {
 	return { country, language, regions };
 };
 const mapDispatch = (d, p) => {
+	const _goToCategoryMap = (category)=> {
+		return d(push(`/${p.country.fields.slug}/services/by-category/${category}/map/`));
+	}
 	return {
-		goToCategoryMap(category) {
-			return d(push(`/${p.country.fields.slug}/services/by-category/${category}/map/`));
-		},
+		
+		goToCategoryMap:_goToCategoryMap,
+
 		goToLocation(location) {
 			return d(push(`/${p.country.fields.slug}/services/by-location/${location}/`));
 		},

@@ -52,7 +52,6 @@ class ServiceCategoryListDesktop extends React.Component {
 				services => this.setState({services: services.results, showServices: true})
 			)
 		}
-		
 
 	}
 
@@ -73,19 +72,8 @@ class ServiceCategoryListDesktop extends React.Component {
 	}
 	
 	showServices = () => {
-		const { onGoToListAll, onGoToAllinLocation, onGoToAllinCategory, onGoToLocationByCategory } = this.props;
-		const { onGoToMap, onGoToAllinLocatioMap, onGoToCategoryMap, onGoToLocationCategoryMap } = this.props
-
-		if ((!this.state.location || this.state.location.level === 1)  && !this.state.category){
-			onGoToListAll();
-		}else if(this.state.location && this.state.location.level !== 1 && !this.state.category){
-			onGoToAllinLocation(this.state.location.slug);			
-		}else if((!this.state.location || this.state.location.level === 1) && this.state.category){			
-			onGoToAllinCategory(this.state.category);
-		}else if(this.state.location && this.state.location.level !== 1 && this.state.category){			
-			onGoToLocationByCategory(this.state.category.id, this.state.location.slug);
-		}
-
+		const { goTo } = this.props;
+		goTo(this.state.location, this.state.category);
 	}
 
 	closeFilter = () => {
@@ -235,7 +223,7 @@ class ServiceCategoryListDesktop extends React.Component {
 					</div>
 				</div>
 				}
-				{showServices && 
+				{showServices && !this.state.showFilter && 
 				<div className="ServiceList">
 					<div className="ServiceListContainer">
 						{services.map(this.renderService.bind(this))}
