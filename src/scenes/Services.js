@@ -219,10 +219,6 @@ class Services extends React.Component {
 			.then(s => s.results)
 			.then(services => ({ services, category: null }));
 
-		// return servicesApi
-		// 	.fetchAllServicesInBBox(location || country.fields.slug, language, bbox, 1000, category)
-		// 	.then(s => s.results)
-		// 	.then(services => ({ services, category: null }));
 	}
 	fetchServicesWithinLocation(bbox, location = null) {
 		const { country, language } = this.props;
@@ -283,6 +279,40 @@ class Services extends React.Component {
 	fetchServices(location, category){
 		const { language } = this.props;
 		return servicesApi.fetchAllServices(location, language, category, null, 2000)
+	}
+
+	goTo(location, category, mapview = false){
+		const {
+			goToLocationMap,
+			goToCategoryMap,
+			goToLocationCategoryMap,
+			goToLocationByCategory,
+			goToMap,
+			listAllServices,
+			listAllServicesinLocation,
+			listServicesInCategory,
+		} = this.props;
+		if (mapview){
+			if ((!location || location.level === 1)  && !category){
+				goToMap();
+			}else if(location && location.level !== 1 && !category){
+				goToLocationMap(location.slug);			
+			}else if((!location || location.level === 1) && category){			
+				goToCategoryMap(category.id);
+			}else if(location && location.level !== 1 && category){			
+				goToLocationCategoryMap(location.slug, category.id);
+			}
+		}else{
+			if ((!location || location.level === 1)  && !category){
+				listAllServices();
+			}else if(location && location.level !== 1 && !category){
+				listAllServicesinLocation(location.slug);			
+			}else if((!location || location.level === 1) && category){			
+				listServicesInCategory(category);
+			}else if(location && location.level !== 1 && category){			
+				goToLocationByCategory(category.id, location.slug);
+			}
+		}
 	}
 
 	render() {
