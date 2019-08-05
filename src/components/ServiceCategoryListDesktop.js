@@ -71,10 +71,10 @@ class ServiceCategoryListDesktop extends React.Component {
         this.setState({ category: element});
 	}
 	
-	showServices = () => {
+	showServices = (mapState = null) => {
+		let showMap = mapState != null ? mapState : this.state.showMap;
 		const { goTo } = this.props;
-		console.log("Map", this.state.showMap)
-		goTo(this.state.location, this.state.category, this.state.showMap);
+		goTo(this.state.location, this.state.category, showMap);
 	}
 
 	closeFilter = () => {
@@ -86,10 +86,7 @@ class ServiceCategoryListDesktop extends React.Component {
 	}
 
 	toggleMap = () => {
-		this.setState(prevState => ({showMap: !prevState.showMap}));
-		console.log("New status", this.state.showMap)
-		this.showServices();
-		
+		this.showServices(!this.state.showMap);
 	}
 
 	renderCategory(c) {	
@@ -167,7 +164,7 @@ class ServiceCategoryListDesktop extends React.Component {
 		const { t, locationEnabled, toggleLocation, regions, country, language } = this.props;	
         
         let l3 = regions.filter(r => r.slug === 'greece' || (r.parent === 1 && r.level === 3 && !r.hidden) || (!r.hidden &&regions.filter(r => r.parent === 1 && r.level === 2).map(t => t.id).indexOf(r.parent) >= 0))
-        console.log("Services:",this.state.services);
+        
 		if (!loaded) {
 			return (
 				<div>
@@ -225,7 +222,7 @@ class ServiceCategoryListDesktop extends React.Component {
 					</div>
 				</div>
 				}
-				{showServices && !this.state.showFilter && 
+				{showServices && !this.state.showMap && !this.state.showFilter && 
 				<div className="ServiceList">
 					<div className="ServiceListContainer">
 						{services.map(this.renderService.bind(this))}
@@ -234,6 +231,13 @@ class ServiceCategoryListDesktop extends React.Component {
 				}
 				{!showServices && !this.state.showFilter && 
 					<div className="loader" />
+				}
+				{showServices && this.state.showMap && !this.state.showFilter && 
+				<div className="MapView">
+					<div className="Map">
+						Map View
+					</div>
+				</div>
 				}
 			
 		</div>
