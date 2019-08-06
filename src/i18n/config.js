@@ -453,7 +453,9 @@ export default {
     },
     es: {
         translation: {
-			"All": "Todos",
+            "All": "Todos",
+            "All_Categories": "Todas las categorías",
+            "Service_Categories" : "Categorías",
             "About us": "Sobre nosotros",
             "Sunday": "Domingo",
             "Detect Location": "Detectar ubicación",
@@ -873,6 +875,8 @@ export default {
     en: {
         translation: {
             "About us": "About us",
+            "All_Categories": "All Cateogries",
+            "Service_Categories" : "Categories",
             Sunday: "Sunday",
             "Detect Location": "Detect Location",
             "Our team has not yet mapped the services in your location.": "Our team has not yet mapped the services in your location.",

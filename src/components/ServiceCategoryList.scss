@@ -136,7 +136,8 @@ input[type="checkbox"].ri.switch:checked + div > div {
     font-family: "Roboto", sans-serif;
     font-size: 24px;
     text-align: center;
-    padding: 20px
+    padding: 20px;
+    text-transform: uppercase;
 }
 #location-list{
     content: "";

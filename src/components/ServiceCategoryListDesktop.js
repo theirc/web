@@ -2,11 +2,12 @@ import React from "react";
 import "./ServiceHome.css";
 import "./ServiceCategoryList.css";
 import ServiceMapDesktop from "./ServiceMapDesktop";
-
+import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import _ from "lodash";
 import tinycolor from "tinycolor2";
 import HeaderBar from "./HeaderBar";
+import { compose } from "redux";
 
 class ServiceCategoryListDesktop extends React.Component {
 	state = {
@@ -175,8 +176,8 @@ class ServiceCategoryListDesktop extends React.Component {
 				</div>
 			);
 		}
-		let categoryName = this.state.category ? this.state.category.name : 'All Categories';
-        let location = this.state.location ? this.state.location.title : 'All Locations';
+		let categoryName = this.state.category ? this.state.category.name : t('All_Categories');
+        let location = this.state.location ? this.state.location.title : t('All Locations');
         
 		return <div>
 					<HeaderBar key={"Header"} title={"Services".toUpperCase()}>
@@ -197,7 +198,7 @@ class ServiceCategoryListDesktop extends React.Component {
 					<a id="btn-close-filter" onClick={this.closeFilter} className="btn-close">X</a>
 					<div id="title" className="filter-title">FILTERS CATEGORIES AND LOCATIONS</div>
 					<div id="locations">
-						<div id="location-title">LOCATIONS</div>
+						<div id="location-title">{t('Locations')}</div>
 						<div id="location-list">
 							{l3.map((l) => (
 								<button key={l.id} className={l.id === this.state.location.id ? "location-item-selected" : "location-item"} onClick={() => this.onSelectLocation(l)}>{l.title}</button>
@@ -205,7 +206,7 @@ class ServiceCategoryListDesktop extends React.Component {
 						</div>
 					</div>
 					<div id="categories">
-						<div id="location-title">CATEGORIES</div>
+						<div id="location-title">{t("Service_Categories")}</div>
 						<div id="location-list">
 							<button key={0} className={!this.state.category  ? "location-item-selected" : "location-item"} onClick={() => this.onSelectCategory(null)}>{'All Categories'}</button>
 
@@ -239,6 +240,6 @@ class ServiceCategoryListDesktop extends React.Component {
 const mapState = ({ country, language, regions }, p) => {
 	return { country, language, regions };
 };
-export default connect(mapState)(ServiceCategoryListDesktop);
+export default translate()(connect(mapState)(ServiceCategoryListDesktop));
 
-//#export default translate()(ServiceCategoryListDesktop);
+
