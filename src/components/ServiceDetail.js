@@ -322,9 +322,11 @@ class ServiceDetail extends React.Component {
 								<div className="verticalHR"/>
 								<div className="selector sharePage" onClick={() => this.Copiedlnk()}>
 								<CopyToClipboard sharePage={this.sharePage} text={this.state.value}>
-									{this.state.copied ? <h1>{t("Copy Link")}</h1> : <h1>{t("Copied")}</h1>}
+								{this.state.copied ? <h1 >{t("Copy Link")}</h1> : <h1>{t("Copied")}</h1>}
 								</CopyToClipboard>
+								<CopyToClipboard sharePage={this.sharePage} text={this.state.value}>
 								<Link className="icon" />
+							</CopyToClipboard>
 							</div>
 						</div>
 					)}
