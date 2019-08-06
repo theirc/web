@@ -1,4 +1,5 @@
 @import "../shared/includes.scss";
+
 input[type="checkbox"] { 
     position: absolute;
     opacity: 0;
@@ -21,8 +22,11 @@ input[type="checkbox"].switch + div {
 input[type="checkbox"].switch:checked + div {
     width: 40px;
     background-position: 0 0;
-    background-color: #29991f;
-    border: 1px solid #29991f;
+    @include brand-colors( "background-color");
+    @include brand-colors( "border-color");
+	@include brand-colors-inverse( "color");
+    
+    border: 1px solid;
     box-shadow: inset 0 0 0 10px #29991f;
 }
 
@@ -113,7 +117,10 @@ input[type="checkbox"].ri.switch:checked + div > div {
     padding: 10px;
 }
 .btn-filter{
-    background-color: #FDDA14;
+    @include brand-colors( "background-color");
+    @include brand-colors( "border-color");
+	@include brand-colors-inverse( "color");
+    /*background-color: #FDDA14; */
     color: black;
     font-family: "Roboto", sans-serif;
     font-size: 15px;
@@ -159,7 +166,8 @@ input[type="checkbox"].ri.switch:checked + div > div {
     
 }
 .location-item-selected{
-    background-color: #FDDA14;
+    @include brand-colors( "background-color");
+	@include brand-colors-inverse( "color");
     width: calc(25% - 20px);
     height: 40px;
     margin: 10px;
@@ -170,7 +178,8 @@ input[type="checkbox"].ri.switch:checked + div > div {
     outline: none;
 }
 .show-services{
-    background-color: #FDDA14;
+    @include brand-colors( "background-color");
+    @include brand-colors-inverse( "color");
     color: black;
     font-family: "Roboto", sans-serif;
     font-size: 15px;

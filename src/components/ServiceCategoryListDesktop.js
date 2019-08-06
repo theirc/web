@@ -19,7 +19,9 @@ class ServiceCategoryListDesktop extends React.Component {
 		showFilter: true,
 		showMap: this.props.mapView,
 		services: [],
-		showServices: false
+		showServices: false,
+		departments: [],
+		municipalities: []
     };
     
     componentWillMount(){
@@ -27,15 +29,20 @@ class ServiceCategoryListDesktop extends React.Component {
     }
 
 	componentDidMount() {
-		const { country, regions, showFilter, location, category } = this.props;
+		const { country, regions, showFilter, location, category, showDepartments } = this.props;
 		let c = regions.filter(r => r.slug === country.fields.slug)[0]
+		let departments = [];
+		if(showDepartments){
+			departments = regions.filter(r => r.parent === country.fields.id);
+		}
 	
 		let currentLocation = c;
 		if (location){
 			let l = regions.filter(r => r.slug === location);
 			currentLocation = l.length > 0 ? l[0] : c;
 		}
-		this.setState({location: currentLocation, showFilter: showFilter, loaded: true})
+		this.setState({location: currentLocation, showFilter: showFilter, loaded: true, departments: departments})
+
 		const { fetchCategories} = this.props;
         const { categories } = this.state;
 		if (fetchCategories && categories.length === 0) {
@@ -162,7 +169,8 @@ class ServiceCategoryListDesktop extends React.Component {
 		const { t, locationEnabled, toggleLocation, regions, goToService, country } = this.props;	
         
         let l3 = regions.filter(r => r.slug === country.fields.slug || (r.parent === country.fields.id && r.level === 3 && !r.hidden) || (!r.hidden &&regions.filter(r => r.parent === country.fields.id && r.level === 2).map(t => t.id).indexOf(r.parent) >= 0))
-       
+		let departments = regions.filter(r => r.parent === country.fields.id);
+
 		if (!loaded) {
 			return (
 				<div>
@@ -190,13 +198,13 @@ class ServiceCategoryListDesktop extends React.Component {
 				<div id="filter-bar" className="filter-bar">					
 					<button id="btn-Locations" className="btn-filter" onClick={this.showFilters}>{location}</button>
 					<button id="btn-Categories" className="btn-filter" onClick={this.showFilters}>{categoryName}</button>
-					<label id="toggle-map">{'Map view'}<input type="checkbox" className="switch yellow bigswitch cn" checked={this.state.showMap} onChange={this.toggleMap}/><div className="toggle-btn"><div></div></div>
+					<label id="toggle-map">{'Map view'}<input type="checkbox" className="switch  bigswitch cn" checked={this.state.showMap} onChange={this.toggleMap}/><div className="toggle-btn"><div></div></div>
 					</label>
 				</div>
 				{ this.state.showFilter && 
 				<div className="card">
 					<a id="btn-close-filter" onClick={this.closeFilter} className="btn-close">X</a>
-					<div id="title" className="filter-title">FILTERS CATEGORIES AND LOCATIONS</div>
+					<div id="title" className="filter-title">{t("FILTERS CATEGORIES AND LOCATIONS")}</div>
 					<div id="locations">
 						<div id="location-title">{t('Locations')}</div>
 						<div id="location-list">
