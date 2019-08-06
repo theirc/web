@@ -27,8 +27,8 @@ class ServiceCategoryListDesktop extends React.Component {
 
 	componentDidMount() {
 		const { country, regions, showFilter, location, category } = this.props;
-		console.log("did mount");
 		let c = regions.filter(r => r.slug === country.fields.slug)[0]
+	
 		let currentLocation = c;
 		if (location){
 			let l = regions.filter(r => r.slug === location);
@@ -158,10 +158,10 @@ class ServiceCategoryListDesktop extends React.Component {
 	}
 	render() {
 		const { loaded, services, showServices } = this.state;
-		const { t, locationEnabled, toggleLocation, regions, goToService } = this.props;	
+		const { t, locationEnabled, toggleLocation, regions, goToService, country } = this.props;	
         
-        let l3 = regions.filter(r => r.slug === 'greece' || (r.parent === 1 && r.level === 3 && !r.hidden) || (!r.hidden &&regions.filter(r => r.parent === 1 && r.level === 2).map(t => t.id).indexOf(r.parent) >= 0))
-        
+        let l3 = regions.filter(r => r.slug === country.fields.slug || (r.parent === country.fields.id && r.level === 3 && !r.hidden) || (!r.hidden &&regions.filter(r => r.parent === country.fields.id && r.level === 2).map(t => t.id).indexOf(r.parent) >= 0))
+       
 		if (!loaded) {
 			return (
 				<div>
