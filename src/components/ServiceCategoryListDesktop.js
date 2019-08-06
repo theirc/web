@@ -41,7 +41,7 @@ class ServiceCategoryListDesktop extends React.Component {
 			fetchCategories().then(categories => {
 				this.setState({ categories, loaded: true });
 				if (category){
-					let cat = categories.filter(c => c.id == category)[0];
+					let cat = categories.filter(c => c.id === category)[0];
 					if (cat){
 						this.setState({category: cat});
 					}
@@ -74,6 +74,7 @@ class ServiceCategoryListDesktop extends React.Component {
 	}
 	
 	showServices = (mapState = null) => {
+		console.log(mapState, this.state.showMap);
 		let showMap = mapState != null ? mapState : this.state.showMap;
 		const { goTo } = this.props;
 		goTo(this.state.location, this.state.category, showMap);
@@ -92,13 +93,8 @@ class ServiceCategoryListDesktop extends React.Component {
 	}
 
 	renderCategory(c) {	
-		let { id, name, vector_icon } = c;
+		let { vector_icon } = c;
 		let iconPrefix = vector_icon.split("-")[0];
-
-		let color = this.fixColor(c.color);
-		color = tinycolor(color)
-			.saturate(30)
-			.toHexString();
 
 		let style = {
             color: "black",
@@ -193,7 +189,7 @@ class ServiceCategoryListDesktop extends React.Component {
 				<div id="filter-bar" className="filter-bar">					
 					<button id="btn-Locations" className="btn-filter" onClick={this.showFilters}>{location}</button>
 					<button id="btn-Categories" className="btn-filter" onClick={this.showFilters}>{categoryName}</button>
-					<label id="toggle-map">{'Map view'}<input type="checkbox" className="switch bigswitch cn" checked={this.state.showMap} onChange={this.toggleMap}/><div className="toggle-btn"><div></div></div>
+					<label id="toggle-map">{'Map view'}<input type="checkbox" className="switch yellow bigswitch cn" checked={this.state.showMap} onChange={this.toggleMap}/><div className="toggle-btn"><div></div></div>
 					</label>
 				</div>
 				{ this.state.showFilter && 
@@ -219,7 +215,7 @@ class ServiceCategoryListDesktop extends React.Component {
 						</div>
 					</div>
 					<div id="button-search">
-						<button className="show-services" onClick={this.showServices}>Show Services</button>
+						<button className="show-services" onClick={() => this.showServices(null)}>Show Services</button>
 					</div>
 				</div>
 				}

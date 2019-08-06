@@ -7,7 +7,6 @@ import { translate } from "react-i18next";
 import HeaderBar from "./HeaderBar";
 import _ from "lodash";
 import tinycolor from "tinycolor2";
-import { ServiceCategoryListDesktop } from ".";
 
 class ServiceCategoryList extends React.Component {
 	state = {

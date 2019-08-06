@@ -1,10 +1,42 @@
 import React, { Component } from "react";
 import moment from "moment";
 import "./Footer.css";
-import { MyLocation, Translate } from "material-ui-icons";
+import { MyLocation, Translate, Share, Link } from "material-ui-icons";
 import { translate } from "react-i18next";
+import PropTypes from "prop-types";
+
 
 class Footer extends Component {
+	static contextTypes = {
+		config: PropTypes.object,
+	};
+	onCopyLink = () => {
+
+	}
+	onShareOnFacebook = () => {
+		const { language } = this.props
+		if (global.window) {
+			const { FB } = global.window;
+			let { href } = window.location;
+			console.log(FB, href)
+			href += (href.indexOf("?") > -1 ? "&" : "?") + "language=" + language;
+
+			if (FB) {
+				FB.ui(
+					{
+						method: "share",
+						href,
+					},
+					function (response) { }
+				);
+			}
+		}
+	}
+
+	onFindOnFacebook = () => {
+		
+	}
+
 	render() {
 		const { onChangeLocation, onChangeLanguage, disableCountrySelector, disableLanguageSelector, questionLink, t, showLinkToAdministration, country, customQuestionLink } = this.props;
 		// const {deviceType,} = this.props;
@@ -15,7 +47,6 @@ class Footer extends Component {
 		if(result[0]){
 			link = result[0][1];
 		}
-
 		return (
 			<footer className="Footer">
 				<div className="light">
@@ -28,7 +59,7 @@ class Footer extends Component {
 					{(!disableCountrySelector || !disableLanguageSelector) && (
 						<div className="button-container">
 							{!disableCountrySelector && (
-								<div className="button left" onClick={onChangeLocation}>
+								<div className="button " onClick={onChangeLocation}>
 									<div className="icon-container">
 										<MyLocation />
 									</div>
@@ -36,7 +67,7 @@ class Footer extends Component {
 								</div>
 							)}
 							{!disableLanguageSelector && (
-								<div className="button" onClick={onChangeLanguage}>
+								<div className="button " onClick={onChangeLanguage}>
 									<div className="icon-container">
 										<Translate />
 									</div>
@@ -44,6 +75,27 @@ class Footer extends Component {
 									<span>{t("Change Language")}</span>
 								</div>
 							)}
+							<div className="button " onClick={this.onShareOnFacebook}>
+								<div className="icon-container">
+									<Share />
+								</div>
+
+								<span>{t("Share on Facebook")}</span>
+							</div>
+							<div className="button " onClick={this.onCopyLink}>
+								<div className="icon-container">
+									<Link />
+								</div>
+
+								<span>{t("Copy Link")}</span>
+							</div>
+							<div className="button " onClick={this.onFindOnFacebook}>
+								<div className="icon-container">
+								<i className="fa fa-facebook-f" style={{ fontSize: 24 }}/>
+								</div>
+
+								<span>{t("Find us on Facebook")}</span>
+							</div>
 						</div>
 					)}
 					{/*

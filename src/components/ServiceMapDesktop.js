@@ -5,8 +5,6 @@ import "./ServiceHome.css";
 import {
 	translate
 } from "react-i18next";
-import circle from "@turf/circle";
-import getSessionStorage from "../shared/sessionStorage";
 
 var tinycolor = require("tinycolor2");
 let iconWithPrefix = vector_icon => vector_icon.split("-")[0] + " " + vector_icon;
@@ -30,11 +28,9 @@ let categoryStyle = color => {
 
 class ServiceIcon extends React.Component {
 	render() {
-		let s = this.props.service;
-		let idx = this.props.idx;
-		let type = this.props.type;	
+		const { service, idx, type } = this.props;
 		return type ? (
-			<div className="Icon" key={`${s.id}-${idx}`}>
+			<div className="Icon" key={`${service.id}-${idx}`}>
 				<i className={iconWithPrefix(type.vector_icon)} style={categoryStyle(type.color)} />
 			</div>
 		) : (
@@ -45,38 +41,32 @@ class ServiceIcon extends React.Component {
 
 class ServiceItem extends React.Component {
 	render() {
-		const s = this.props.service;
-		const {
-			goToService,
-			// measureDistance
-		} = this.props;
-		// const distance = measureDistance && s.location && measureDistance(s.location);
-		const mainType = s.type ? s.type : s.types[0];
-		
-		const types = (s.types || []).filter(t => t.id !== mainType.id);
+		const { service, goToService} = this.props; 
+		const mainType = service.type ? service.type : service.types[0];
+		const types = (service.types || []).filter(t => t.id !== mainType.id);
 		
 		return (
-			<div key={s.id} className="Item" onClick={() => goToService(s.id)}>
+			<div key={service.id} className="Item" onClick={() => goToService(service.id)}>
 				<div className="Info">
 					<div className="Item-content title">
-						<h1>{s.name}</h1>
+						<h1>{service.name}</h1>
 						<i className="material-icons" id="goToServiceIcon"/>
 					</div>
-					<h2 className="Item-content">{s.provider.name}{" "}</h2>
+					<h2 className="Item-content">{service.provider.name}{" "}</h2>
 					<address className="fullAddress Item-content">
-						{s.address}
+						{service.address}
 					</address>
-					{s.address_city &&
+					{service.address_city &&
 						<address className="regionTitle Item-content">
-							{s.address_city}
+							{service.address_city}
 						</address>
 					}
 				</div>
 				<div className="Icons Item-content">
 					{mainType &&
-							<ServiceIcon key={`si-${mainType.idx}`} idx={0} isMainType={1} service={s} type={mainType} />
+							<ServiceIcon key={`si-${mainType.idx}`} idx={0} isMainType={1} service={service} type={mainType} />
 					}
-					{types.map((t, idx) => t && <ServiceIcon key={`si-${idx}`} idx={idx} isMainType={0} service={s} type={t} />)}
+					{types.map((t, idx) => t && <ServiceIcon key={`si-${idx}`} idx={idx} isMainType={0} service={service} type={t} />)}
 				</div>
 			</div>
 		);
@@ -95,9 +85,6 @@ class ServiceMapDesktop extends React.Component {
 
 	componentDidMount() {
 		const L = window.Leaflet;
-		
-		
-
 		const map = L.citymaps.map("MapCanvas", null, {
 			scrollWheelZoom: true,
 			zoomControl: true,
@@ -111,11 +98,8 @@ class ServiceMapDesktop extends React.Component {
 			spiderfyDistanceMultiplier: 1.5,
 			spiderfyOnMaxZoom: true
 		});
-		map.addLayer(clusters);
-		// var locate = L.control.locate();
-		// locate.addTo(map);
-
-
+        map.addLayer(clusters);
+        
         this.setState({
             loaded: true
         });
@@ -142,13 +126,8 @@ class ServiceMapDesktop extends React.Component {
 	componentDidUpdate() {
 		const L = window.Leaflet;
 		const {
-			// map,
 			clusters
 		} = this;
-		// const {
-		// 	defaultLocation,
-		// 	findServicesInLocation
-		// } = this.props;
 		let keepPreviousZoom = this.props.keepPreviousZoom;
 		if (this.state.loaded) {
 			if (this.props.services.length) {

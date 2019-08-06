@@ -126,6 +126,7 @@ class Skeleton extends React.Component {
 							showLinkToAdministration={!!config.showLinkToAdministration}
 							country={country}
 							customQuestionLink={config.customQuestionLink}
+							language={language}
 						/>
 					)}
 					{country && language && <BottomNavContainer  match={match} showMapButton={showMapButton} goToMap={goToMap} showDepartments={config.showDepartments}/>}

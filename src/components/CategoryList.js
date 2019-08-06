@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { translate } from "react-i18next";
-import HeaderBar from "./HeaderBar";
 import "./CategoryList.css";
 
 class CategoryList extends Component {
@@ -27,7 +26,7 @@ class CategoryList extends Component {
 						<div className='img-viewport'>
 							{!a.fields.hero && <img src='/placeholder.png' alt='' />}
 						</div>
-						{a.fields && <a href='#'><h2>{a.fields.name}</h2></a>}
+						{a.fields && <a href='#/'><h2>{a.fields.name}</h2></a>}
 					</li>
 				)
 				);
@@ -41,7 +40,7 @@ class CategoryList extends Component {
 					<div className='img-viewport'>
 						<img src={image} alt='' />
 					</div>
-					{c.fields && <a href='#'><h2>{c.fields.name}</h2></a>}
+					{c.fields && <a href='#/'><h2>{c.fields.name}</h2></a>}
 				</li>
 			);
 		}
@@ -53,7 +52,7 @@ class CategoryList extends Component {
 						{a.fields.hero && a.fields.hero.fields && <img src={a.fields.hero.fields.file.url + '?fm=jpg&fl=progressive'} alt='' />}
 						{!a.fields.hero && <img src='/placeholder.png' alt='' />}
 					</div>
-					<a href='#'><h2>{a.fields.title}</h2></a>
+					<a href='#/'><h2>{a.fields.title}</h2></a>
 				</li>
 			));
 		}
