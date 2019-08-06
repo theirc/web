@@ -19,8 +19,12 @@ class HeaderBar extends Component {
 		return (
 			<div className="HeaderBar">
 				<input type="checkbox" name={triggerKey} id={triggerKey} />
+				<div className="social">
+					<a href='#' className="share">Share this page</a>
+					<a href='#' className="copy">Copy link</a>
+				</div>
 				<label htmlFor={triggerKey}>
-					<h1>						
+					<h1>
 						{title}
 					</h1>
 					{children && [
