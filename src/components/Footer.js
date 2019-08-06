@@ -7,12 +7,25 @@ import PropTypes from "prop-types";
 
 
 class Footer extends Component {
+	state = {
+		copied: false
+	}
+
 	static contextTypes = {
 		config: PropTypes.object,
 	};
-	onCopyLink = () => {
 
+	onCopyLink = () => {
+		this.setState({ copied: true });
+		let url = document.getElementById("url");
+		url.focus();
+		url.select();
+		document.execCommand('copy');
+		setTimeout(() => {
+			this.setState({ copied: false });
+		}, 1500);
 	}
+
 	onShareOnFacebook = () => {
 		const { language } = this.props
 		if (global.window) {
@@ -43,10 +56,16 @@ class Footer extends Component {
 		const year = moment().year();
 		let link = questionLink;
 
+		const { config } = this.context;
+		
+		let configfbpage = (config.facebookPage || []).filter(c => c[0] === country.fields.slug);
+		const fblink = configfbpage[0] ? configfbpage[0][1] : '';
+
 		let result = (customQuestionLink || []).filter(c  => c[0] === country.fields.slug);
 		if(result[0]){
 			link = result[0][1];
 		}
+		const url = window.location.href;
 		return (
 			<footer className="Footer">
 				<div className="light">
@@ -86,16 +105,18 @@ class Footer extends Component {
 								<div className="icon-container">
 									<Link />
 								</div>
-
-								<span>{t("Copy Link")}</span>
+								<input type="text" id="url" readOnly style={{display:"block", width:"1px", height:"1px", opacity:"0", position: "absolute"}} value={url}/>
+								<span>{this.state.copied ? t("Copied") : t("Copy Link")}</span>
 							</div>
-							<div className="button " onClick={this.onFindOnFacebook}>
+							{fblink && 
+							<div className="button " onClick={() => window.open(fblink) }>
 								<div className="icon-container">
 								<i className="fa fa-facebook-f" style={{ fontSize: 24 }}/>
 								</div>
 
 								<span>{t("Find us on Facebook")}</span>
 							</div>
+							}
 						</div>
 					)}
 					{/*

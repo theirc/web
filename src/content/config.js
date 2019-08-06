@@ -23,6 +23,7 @@ module.exports = {
 		showDepartments: false,
 		showLinkToAdministration: false,
 		hideCountries: ["bosnia"],
+		facebookPage: [["italy", "https://www.facebook.com/Refugee.Info.Italy/"], ["greece", "https://www.facebook.com/refugee.info"], ["serbia", "https://www.facebook.com/refugee.info"]],
 		hideLangsPerCountry: [{
 			country: 'italy',
 			langs: ['ar', 'ur', 'fa', 'fr'],
@@ -54,6 +55,7 @@ module.exports = {
 		showDepartments: false,
 		showLinkToAdministration: false,
 		hideCountries: ["bosnia"],
+		facebookPage: [["italy", "https://www.facebook.com/Refugee.Info.Italy/"], ["greece", "https://www.facebook.com/refugee.info"], ["serbia", "https://www.facebook.com/refugee.info"]],
 		hideLangsPerCountry: [{
 			country: 'italy',
 			langs: ['ar', 'ur', 'fa', 'fr'],
@@ -85,6 +87,7 @@ module.exports = {
 		showDepartments: false,
 		showLinkToAdministration: false,
 		hideCountries: ["bosnia"],
+		facebookPage: [["italy", "https://www.facebook.com/Refugee.Info.Italy/"], ["greece", "https://www.facebook.com/refugee.info"], ["serbia", "https://www.facebook.com/refugee.info"]],
 		hideLangsPerCountry: [{
 			country: 'italy',
 			langs: ['ar', 'ur', 'fa', 'fr'],
@@ -115,6 +118,7 @@ module.exports = {
 		showDepartments: false,
 		showLinkToAdministration: false,
 		hideLangsPerCountry: [],
+		facebookPage: [["jordan", "https://www.facebook.com/khabronainfo.mc.7"]],
 	},	
 	"qa.khabrona.info": {
 		theme: "mc",
@@ -136,6 +140,7 @@ module.exports = {
 		backendUrl: 'https://admin-qa.refugee.info/e/production/v2',
 		showLinkToAdministration: false,
 		hideLangsPerCountry: [],
+		facebookPage: [["jordan", "https://www.facebook.com/khabronainfo.mc.7"]],
 	},	
 	"staging.khabrona.info": {
 		theme: "mc",
@@ -157,6 +162,7 @@ module.exports = {
 		backendUrl: 'https://admin-staging.refugee.info/e/production/v2',
 		showLinkToAdministration: false,
 		hideLangsPerCountry: [],
+		facebookPage: [["jordan", "https://www.facebook.com/khabronainfo.mc.7"]],
 	},	
 	"cuentanos.org": {
 		theme: "generic",
@@ -179,6 +185,7 @@ module.exports = {
 		showDepartments: true,
 		showLinkToAdministration: true,
 		hideLangsPerCountry: [],
+		facebookPage: [["el-salvador", "https://www.facebook.com/Cu%C3%A9ntanos-2039927102928299/"]],
 	},
 	"staging.cuentanos.org": {
 		theme: "generic",
@@ -201,6 +208,7 @@ module.exports = {
 		showLinkToAdministration: false,
 		customQuestionLink:[["italy","https://www.facebook.com/Refugee.Info.Italy/"]],
 		hideLangsPerCountry: [],
+		facebookPage: [["el-salvador", "https://www.facebook.com/Cu%C3%A9ntanos-2039927102928299/"]],
 	},
 	"qa.cuentanos.org": {
 		theme: "generic",
@@ -223,6 +231,7 @@ module.exports = {
 		showLinkToAdministration: false,
 		customQuestionLink:[["italy","https://www.facebook.com/Refugee.Info.Italy/"]],
 		hideLangsPerCountry: [],
+		facebookPage: [["el-salvador", "https://www.facebook.com/Cu%C3%A9ntanos-2039927102928299/"]],
 	},
 	"localhost": {
 		theme: "irc",
@@ -242,6 +251,7 @@ module.exports = {
 		showDepartments: false,
 		showLinkToAdministration: false,
 		hideCountries: ["bosnia"],
+		facebookPage: [["italy", "https://www.facebook.com/Refugee.Info.Italy/"], ["greece", "https://www.facebook.com/refugee.info"], ["serbia", "https://www.facebook.com/refugee.info"]],
 		hideLangsPerCountry: [{
 			country: 'italy',
 			langs: ['ar', 'ur', 'fa', 'fr'],
@@ -274,6 +284,7 @@ module.exports = {
 		showDepartments: true,
 		showLinkToAdministration: true,
 		hideLangsPerCountry: [],
+		facebookPage: [["el-salvador", "https://www.facebook.com/Cu%C3%A9ntanos-2039927102928299/"]],
 	},
 	"theirc-refugee-info-frontend-design-ri.azurewebsites.net": {
 		theme: "irc",
@@ -293,6 +304,7 @@ module.exports = {
 		showDepartments: false,
 		showLinkToAdministration: false,
 		hideCountries: ["bosnia"],
+		facebookPage: [["italy", "https://www.facebook.com/Refugee.Info.Italy/"], ["greece", "https://www.facebook.com/refugee.info"], ["serbia", "https://www.facebook.com/refugee.info"]],
 		hideLangsPerCountry: [{
 			country: 'italy',
 			langs: ['ar', 'ur', 'fa', 'fr'],

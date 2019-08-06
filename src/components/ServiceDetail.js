@@ -300,30 +300,6 @@ class ServiceDetail extends React.Component {
 				{this.state.showOtherServices ? (
 				<div className="footer">
 
-					{<hr className="divider" />}
-					{this.state.shareIN ? (
-						<div className="selector" onClick={() => this.sharePage()}>
-							<h1>{t("Share this page")}</h1>
-							<Share className="icon" />
-						</div>
-					) : (
-						<div>
-							<div className="selector sharePage" onClick={() => {this.share();}}>
-								<h1>
-									{t("Share on Facebook")}
-								</h1>
-								<Share className="icon" />
-								</div>
-								<div className="verticalHR"/>
-							<div className="selector sharePage" onClick={() => this.Copiedlnk()}>
-								<CopyToClipboard sharePage={this.sharePage} text={this.state.value}>
-									{this.state.copied ? <h1>{t("Copy Link")}</h1> : <h1>{t("Copied")}</h1>}
-								</CopyToClipboard>
-								<Link className="icon" />
-							</div>
-						</div>
-					)}
-
 					{service.location && <hr />}
 					{service.location && (
 						<div className="Selector" onClick={() => window.open(`https://www.google.com/maps/search/?api=1&query=${point}`)}>

@@ -112,28 +112,7 @@ class ArticleFooter extends Component {
 					</div>
 				)}
 				{previous && <hr className="divider" />}
-				{this.state.shareIN ? (
-					<div className="selector" onClick={() => this.sharePage()}>
-						<h1>{t("Share this page")}</h1>
-						<Share className="icon" />
-					</div>
-				) : (
-					<div className="selector">
-					<div className="selector sharePage" onClick={() => {this.share();}}>
-						<h1>
-							{t("Share on Facebook")}
-						</h1>
-						<Share className="icon" />
-						</div>
-						<div className="verticalHR" />
-						<div className="selector sharePage" onClick={() => this.Copiedlnk()}>
-						<CopyToClipboard sharePage={this.sharePage} text={this.state.value}>
-							{this.state.copied ? <h1 >{t("Copy Link")}</h1> : <h1>{t("Copied")}</h1>}
-						</CopyToClipboard>
-						<Link className="icon" />
-					</div>
-					</div>
-				)}
+				
 
 				{/*
 				<hr />
