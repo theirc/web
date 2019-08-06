@@ -117,6 +117,8 @@ module.exports = {
 				
 				let sl = sessionStorage[`serviceList`] !==  undefined ? JSON.parse(sessionStorage[`serviceList`]) : null;		
 				
+				categoryId = categoryId ? categoryId : null;  //
+				
 				if (sl && sl.country === country && sl.language === language && sl.categoryId === categoryId && (sl.searchTerm === null || sl.searchTerm === undefined)){
 					resolve(sl.services);
 					

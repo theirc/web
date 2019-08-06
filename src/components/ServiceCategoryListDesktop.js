@@ -1,6 +1,8 @@
 import React from "react";
 import "./ServiceHome.css";
 import "./ServiceCategoryList.css";
+import ServiceMapDesktop from "./ServiceMapDesktop";
+
 import { connect } from "react-redux";
 import _ from "lodash";
 import tinycolor from "tinycolor2";
@@ -159,9 +161,8 @@ class ServiceCategoryListDesktop extends React.Component {
 		];
 	}
 	render() {
-		const { categories, loaded, services, showServices } = this.state;
-		const { width } = this.state;
-		const { t, locationEnabled, toggleLocation, regions, country, language } = this.props;	
+		const { loaded, services, showServices } = this.state;
+		const { t, locationEnabled, toggleLocation, regions, goToService } = this.props;	
         
         let l3 = regions.filter(r => r.slug === 'greece' || (r.parent === 1 && r.level === 3 && !r.hidden) || (!r.hidden &&regions.filter(r => r.parent === 1 && r.level === 2).map(t => t.id).indexOf(r.parent) >= 0))
         
@@ -233,11 +234,7 @@ class ServiceCategoryListDesktop extends React.Component {
 					<div className="loader" />
 				}
 				{showServices && this.state.showMap && !this.state.showFilter && 
-				<div className="MapView">
-					<div className="Map">
-						Map View
-					</div>
-				</div>
+				<ServiceMapDesktop services={this.state.services} goToService={goToService}/>
 				}
 			
 		</div>
