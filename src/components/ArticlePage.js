@@ -117,7 +117,6 @@ export default class ArticlePage extends Component {
 		const { article, category, loading } = this.props;
 		const { title, content, hero, lead } = article.fields;
 		const { contentType } = article.sys;
-		console.log("Article",article);
 
 		let html = md.render(content || lead);
 		html = html.replace(/(\+[0-9]{9,14}|00[0-9]{9,15})/g, `<a class="tel" href="tel:$1">$1</a>`);

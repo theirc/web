@@ -13,6 +13,10 @@ class HeaderBar extends Component {
 		title: PropTypes.string.isRequired,
 	};
 
+	onCopyLink = () => {
+		navigator.clipboard.writeText(document.location.href);
+	}
+
 	onShareOnFacebook = () => {
 		const { language } = this.props
 		if (global.window) {
@@ -41,7 +45,7 @@ class HeaderBar extends Component {
 				<input type="checkbox" name={triggerKey} id={triggerKey} />
 				<div className="social">
 					<a href='#' className="share" onClick={this.onShareOnFacebook}>Share this page</a>
-					<a href='#' className="copy">Copy link</a>
+					<a href='#' className="copy" onClick={this.onCopyLink} >Copy link</a>
 				</div>
 				<label htmlFor={triggerKey}>
 					<h1>
