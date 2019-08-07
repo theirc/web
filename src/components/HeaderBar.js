@@ -13,6 +13,26 @@ class HeaderBar extends Component {
 		title: PropTypes.string.isRequired,
 	};
 
+	onShareOnFacebook = () => {
+		const { language } = this.props
+		if (global.window) {
+			const { FB } = global.window;
+			let { href } = window.location;
+			console.log(FB, href)
+			href += (href.indexOf("?") > -1 ? "&" : "?") + "language=" + language;
+
+			if (FB) {
+				FB.ui(
+					{
+						method: "share",
+						href,
+					},
+					function (response) { }
+				);
+			}
+		}
+	}
+
 	render() {
 		const { subtitle, title, children } = this.props;
 		const triggerKey = generateKey("trigger");
@@ -20,7 +40,7 @@ class HeaderBar extends Component {
 			<div className="HeaderBar">
 				<input type="checkbox" name={triggerKey} id={triggerKey} />
 				<div className="social">
-					<a href='#' className="share">Share this page</a>
+					<a href='#' className="share" onClick={this.onShareOnFacebook}>Share this page</a>
 					<a href='#' className="copy">Copy link</a>
 				</div>
 				<label htmlFor={triggerKey}>
