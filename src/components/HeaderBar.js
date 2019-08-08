@@ -39,15 +39,16 @@ class HeaderBar extends Component {
 	}
 
 	render() {
-		const { subtitle, title, children, t } = this.props;
+		const { subtitle, title, children, t, social } = this.props;
 		const triggerKey = generateKey("trigger");
 		return (
 			<div className="HeaderBar">
 				<input type="checkbox" name={triggerKey} id={triggerKey} />
-				<div className="social">
+				{social && <div className="social">
 					<div href='#' className="share" onClick={this.onShareOnFacebook}>{t('Share this page')}<Share /></div>
 					<div href='#' className="copy" onClick={this.onCopyLink}>{t('Copy Link')}<Link /></div>
 				</div>
+				}
 				<label htmlFor={triggerKey}>
 					<h1>
 						{title}

@@ -138,7 +138,7 @@ export default class ArticlePage extends Component {
 							{hero.fields.description && <credit>{hero.fields.description}</credit>}
 						</div>
 					)}
-				<HeaderBar subtitle={(category.fields.articles || []).length > 1 && `${category.fields.name}:`} title={title} />
+				<HeaderBar subtitle={(category.fields.articles || []).length > 1 && `${category.fields.name}:`} title={title} social />
 				{contentType.sys.id === "video" && this.renderVideo()}
 				<article>
 					<div dangerouslySetInnerHTML={{ __html: html }} />
