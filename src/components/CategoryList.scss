@@ -60,6 +60,12 @@
 					&:hover {
 						text-decoration: underline;
 					}
+
+					h2 {
+						overflow: hidden;
+						text-overflow: ellipsis;
+						white-space: nowrap;
+					}
 				}
 			}
 		}
@@ -69,6 +75,7 @@
 			margin: 1%;
 
 			.img-viewport {
+				display: flex;
 				height: 22vw;
 				overflow: hidden;
 			}
