@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { translate } from "react-i18next";
+import { Share, Link } from "material-ui-icons";
 import PropTypes from "prop-types";
 import "./HeaderBar.css";
 
@@ -38,14 +39,14 @@ class HeaderBar extends Component {
 	}
 
 	render() {
-		const { subtitle, title, children } = this.props;
+		const { subtitle, title, children, t } = this.props;
 		const triggerKey = generateKey("trigger");
 		return (
 			<div className="HeaderBar">
 				<input type="checkbox" name={triggerKey} id={triggerKey} />
 				<div className="social">
-					<a href='#' className="share" onClick={this.onShareOnFacebook}>Share this page</a>
-					<a href='#' className="copy" onClick={this.onCopyLink} >Copy link</a>
+					<div href='#' className="share" onClick={this.onShareOnFacebook}>{t('Share this page')}<Share /></div>
+					<div href='#' className="copy" onClick={this.onCopyLink}>{t('Copy Link')}<Link /></div>
 				</div>
 				<label htmlFor={triggerKey}>
 					<h1>
