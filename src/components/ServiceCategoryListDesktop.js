@@ -240,16 +240,22 @@ class ServiceCategoryListDesktop extends React.Component {
 						<div id="location-list">
 							{showDepartments && !municipalities	&&						
 								departments.map((l) => (
-									<button key={l.id} className={l.id === this.state.location.id ? "location-item-selected" : "location-item"} onClick={() => this.onSelectLocation(l)}>{l.name}</button>
+									<button key={l.id} className={l.id === this.state.location.id ? "location-item-selected" : "location-item"} onClick={() => this.onSelectLocation(l)}>
+										{l.level === 1 && <i className='fa fa-globe' style={{marginRight: -13}}/>}<span>{l.name}</span>
+									</button>
 								))
 							}
 							{showDepartments && municipalities	&&						
 								municipalities.map((l) => (
-									<button key={l.id} className={l.id === this.state.location.id ? "location-item-selected" : "location-item"} onClick={() => this.onSelectLocation(l)}>{l.name}</button>
+									<button key={l.id} className={l.id === this.state.location.id ? "location-item-selected" : "location-item"} onClick={() => this.onSelectLocation(l)}>
+										{l.level === 1 && <i className='fa fa-globe' style={{marginRight: -13}}/>}<span>{l.name}</span>
+									</button>
 								))
 							}
 							{!showDepartments && l3.map((l) => (
-								<button key={l.id} className={l.id === this.state.location.id ? "location-item-selected" : "location-item"} onClick={() => this.onSelectLocation(l)}>{l.title}</button>
+								<button key={l.id} className={l.id === this.state.location.id ? "location-item-selected" : "location-item"} onClick={() => this.onSelectLocation(l)}>
+									{l.level === 1 && <i className='fa fa-globe' style={{marginRight: -13}}/>}<span>{l.title}</span>
+								</button>
 							))}
 						</div>
 					</div>
