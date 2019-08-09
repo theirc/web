@@ -24,6 +24,7 @@ body {
 		border-left-width: 0;
 		padding-left: $desktopPaddingWidth;
 		padding-right: $desktopPaddingWidth;
+		padding-bottom: 20px;
 		border-style: solid;
 
 		border-color: darken(gray, 30%);
@@ -48,6 +49,7 @@ body {
 		border-left-width: 0;
 		padding-left: $bigDesktopPaddingWidth;
 		padding-right: $bigDesktopPaddingWidth;
+		padding-bottom: 20px;
 	}
 }
 

@@ -202,7 +202,7 @@ class ServiceCategoryListDesktop extends React.Component {
 				</div>
 				{ this.state.showFilter && 
 				<div className="card">
-					<a id="btn-close-filter" onClick={this.closeFilter} className="btn-close">X</a>
+					{showServices && <a id="btn-close-filter" onClick={this.closeFilter} className="btn-close">X</a>}
 					<div id="title" className="filter-title">{t("FILTERS CATEGORIES AND LOCATIONS")}</div>
 					<div id="locations">
 						<div id="location-title">{t('Locations')}</div>
@@ -223,7 +223,7 @@ class ServiceCategoryListDesktop extends React.Component {
 						</div>
 					</div>
 					<div id="button-search">
-						<button className="show-services" onClick={() => this.showServices(null)}>Show Services</button>
+						<button className="show-services" onClick={() => this.showServices(null)}>{t('Show Services')}</button>
 					</div>
 				</div>
 				}

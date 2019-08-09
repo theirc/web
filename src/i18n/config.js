@@ -1,6 +1,8 @@
 export default {
     fa: {
         translation: {
+            "Show Services": "Show Services",
+            "FILTERS CATEGORIES AND LOCATIONS": "FILTERS CATEGORIES AND LOCATIONS",
             "About us": "درباره ما",
             "Sunday": "یکشنبه",
             "Detect Location": "تشخیص موقعیت",
@@ -152,6 +154,8 @@ export default {
     },
     ar: {
         translation: {
+            "Show Services": "Show Services",
+            "FILTERS CATEGORIES AND LOCATIONS": "FILTERS CATEGORIES AND LOCATIONS",
             "About us": "من نحن",
             "Sunday": "الأحد",
             "Detect Location": "تحديد الموقع",
@@ -303,6 +307,8 @@ export default {
     },
     ur: {
         translation: {
+            "Show Services": "Show Services",
+            "FILTERS CATEGORIES AND LOCATIONS": "FILTERS CATEGORIES AND LOCATIONS",
             "About us": "ہمارے متعلق",
             "Sunday": "اتوار",
             "Detect Location": "مقام/جگہ کا پتہ لگائیں",
@@ -454,6 +460,8 @@ export default {
     },
     es: {
         translation: {
+            "Show Services": "Mostrar Servicios",
+            "FILTERS CATEGORIES AND LOCATIONS": "FILTROS CATEGORÍAS Y UBICACIÓN",
             "All": "Todos",
             "All_Categories": "Todas las categorías",
             "Service_Categories" : "Categorías",
@@ -591,6 +599,8 @@ export default {
     },
     fr: {
         translation: {
+            "Show Services": "Show Services",
+            "FILTERS CATEGORIES AND LOCATIONS": "FILTERS CATEGORIES AND LOCATIONS",
             "About us": "À propos de nous",
             "Sunday": "Dimanche",
             "Detect Location": "Détecter le lieu",
@@ -742,6 +752,8 @@ export default {
     },
     ti: {
         translation: {
+            "Show Services": "Show Services",
+            "FILTERS CATEGORIES AND LOCATIONS": "FILTERS CATEGORIES AND LOCATIONS",
             "About us": "ብዛዕባና",
             "Sunday": "ሰንበት",
             "Detect Location": "ቦታ ምርካብ",
@@ -875,6 +887,8 @@ export default {
     },
     en: {
         translation: {
+            "Show Services": "Show Services",
+            "FILTERS CATEGORIES AND LOCATIONS": "FILTERS CATEGORIES AND LOCATIONS",
             "About us": "About us",
             "All_Categories": "All Cateogries",
             "Service_Categories" : "Categories",
@@ -1027,5 +1041,4 @@ export default {
             "Ventimiglia":"Ventimiglia",
         },
     }
-
 };
