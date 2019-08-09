@@ -77,6 +77,10 @@ class ServiceCategoryListDesktop extends React.Component {
     
     onSelectLocation = (element) => {
 		this.setState({ location: element});	
+		const { fetchCategoriesByLocation } = this.props;
+		fetchCategoriesByLocation(element.slug).then(
+			categories => this.setState({categories: categories, showServices: true})
+		)
     }
     onSelectCategory = (element) =>{
         this.setState({ category: element});
@@ -114,10 +118,8 @@ class ServiceCategoryListDesktop extends React.Component {
 	}
 	departamentosFilter = (e) => {
 		const { regions } = this.props;	
-		console.log(this.state);
-		console.log(regions.filter(r => r.parent === this.state.location.id));
 		let currentLocation = this.state.location.level === 3 ? regions.filter(r => r.id === this.state.location.parent)[0] : this.state.location;
-		console.log({currentLocation});
+		
 		this.setState({ location: currentLocation, showMunicipalidades: false, municipalities: null })
 	}
 
@@ -186,13 +188,14 @@ class ServiceCategoryListDesktop extends React.Component {
 		const { loaded, services, showServices } = this.state;
 		const { t, locationEnabled, toggleLocation, regions, goToService, country, showDepartments } = this.props;	
         let countryId = regions.filter(r => r.slug === country.fields.slug)[0].id;
-		let l3 = regions.filter(r => r.slug === country.fields.slug || (r.parent === country.fields.id && r.level === 3 && !r.hidden) || (!r.hidden &&regions.filter(r => r.parent === country.fields.id && r.level === 2).map(t => t.id).indexOf(r.parent) >= 0))
-		
+		window.regions = regions;
+		window.country = country;
+		let l3 = regions.filter(r => r.slug === country.fields.slug || (r.parent === countryId && r.level === 3 && !r.hidden) || (!r.hidden &&regions.filter(r => r.parent === countryId && r.level === 2).map(t => t.id).indexOf(r.parent) >= 0))
+		console.log("l3:", l3);
 		const municipalities = this.state.municipalities;
 		let departments = regions.filter(r => r.slug === country.fields.slug);
 		departments.push(...regions.filter(r => r.parent === countryId));
 
-		console.log(this.state.location);
 
 		if (!loaded) {
 			return (
