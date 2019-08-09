@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { translate } from "react-i18next";
+import { Share, Link } from "material-ui-icons";
 import PropTypes from "prop-types";
 import "./HeaderBar.css";
 
@@ -13,14 +14,43 @@ class HeaderBar extends Component {
 		title: PropTypes.string.isRequired,
 	};
 
+	onCopyLink = () => {
+		navigator.clipboard.writeText(document.location.href);
+	}
+
+	onShareOnFacebook = () => {
+		const { language } = this.props
+		if (global.window) {
+			const { FB } = global.window;
+			let { href } = window.location;
+			console.log(FB, href)
+			href += (href.indexOf("?") > -1 ? "&" : "?") + "language=" + language;
+
+			if (FB) {
+				FB.ui(
+					{
+						method: "share",
+						href,
+					},
+					function (response) { }
+				);
+			}
+		}
+	}
+
 	render() {
-		const { subtitle, title, children } = this.props;
+		const { subtitle, title, children, t, social } = this.props;
 		const triggerKey = generateKey("trigger");
 		return (
 			<div className="HeaderBar">
 				<input type="checkbox" name={triggerKey} id={triggerKey} />
+				{social && <div className="social">
+					<div href='#' className="share" onClick={this.onShareOnFacebook}>{t('Share this page')}<Share /></div>
+					<div href='#' className="copy" onClick={this.onCopyLink}>{t('Copy Link')}<Link /></div>
+				</div>
+				}
 				<label htmlFor={triggerKey}>
-					<h1>						
+					<h1>
 						{title}
 					</h1>
 					{children && [

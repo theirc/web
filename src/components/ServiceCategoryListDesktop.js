@@ -105,11 +105,10 @@ class ServiceCategoryListDesktop extends React.Component {
 		let iconPrefix = vector_icon.split("-")[0];
 
 		let style = {
-            color: "black",
-            float: "left"
+			color: "black"
 		};
 		return (
-			<button key={c.id} className={this.state.category && c.id === this.state.category.id ? "location-item-selected" : "location-item"} onClick={() => this.onSelectCategory(c)}><i className={`${iconPrefix} ${vector_icon}`} style={style} />{c.name}</button>
+			<button key={c.id} className={this.state.category && c.id === this.state.category.id ? "location-item-selected" : "location-item"} onClick={() => this.onSelectCategory(c)}><i className={`${iconPrefix} ${vector_icon}`} style={style} /><span>{c.name}</span></button>
 		);
 		
 	}
@@ -227,7 +226,7 @@ class ServiceCategoryListDesktop extends React.Component {
 				</div>
 				{ this.state.showFilter && 
 				<div className="card">
-					<a id="btn-close-filter" onClick={this.closeFilter} className="btn-close">X</a>
+					{showServices && <a id="btn-close-filter" onClick={this.closeFilter} className="btn-close">X</a>}
 					<div id="title" className="filter-title">{t("FILTERS CATEGORIES AND LOCATIONS")}</div>
 					<div id="locations">
 						{showDepartments && (<div className="location-filter" >
@@ -254,7 +253,7 @@ class ServiceCategoryListDesktop extends React.Component {
 					<div id="categories">
 						<div id="location-title">{t("Service_Categories")}</div>
 						<div id="location-list">
-							<button key={0} className={!this.state.category  ? "location-item-selected" : "location-item"} onClick={() => this.onSelectCategory(null)}>{'All Categories'}</button>
+							<button key={0} className={!this.state.category  ? "location-item-selected" : "location-item"} onClick={() => this.onSelectCategory(null)}><span>{'All Categories'}</span></button>
 
 							{this.state.categories.map((c) => (
 								this.renderCategory(c)
@@ -262,7 +261,7 @@ class ServiceCategoryListDesktop extends React.Component {
 						</div>
 					</div>
 					<div id="button-search">
-						<button className="show-services" onClick={() => this.showServices(null)}>Show Services</button>
+						<button className="show-services" onClick={() => this.showServices(null)}>{t('Show Services')}</button>
 					</div>
 				</div>
 				}

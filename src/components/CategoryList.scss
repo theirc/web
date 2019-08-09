@@ -50,7 +50,7 @@
 
 			select {
 				margin: 25px 0;
-				width: 13rem;
+				width: 23rem;
 			}
 
 			.tile {
@@ -59,6 +59,12 @@
 					
 					&:hover {
 						text-decoration: underline;
+					}
+
+					h2 {
+						overflow: hidden;
+						text-overflow: ellipsis;
+						white-space: nowrap;
 					}
 				}
 			}
@@ -69,6 +75,8 @@
 			margin: 1%;
 
 			.img-viewport {
+				cursor: pointer;
+				display: flex;
 				height: 22vw;
 				overflow: hidden;
 			}

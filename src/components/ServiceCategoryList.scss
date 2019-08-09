@@ -178,29 +178,49 @@ input[type="checkbox"].ri.switch:checked + div > div {
     width: 100%;
 }
 .location-item{
+    align-items: center;
+    cursor: pointer;
+    display: flex;
     width: calc(25% - 20px);
     background-color: #f2f2f2;
-    height: 40px;
+    height: 64px;
     margin: 10px;
     text-align: center;
     float: left;
-    cursor: pointer;
     font-size: 15px;
     outline: none;
+    padding: 0 15px;
 
-    
+    i {
+        margin-right: 9px
+    }
+
+    span {
+        width: 100%;
+    }
 }
 .location-item-selected{
+    align-items: center;
+    cursor: pointer;
+    display: flex;
     @include brand-colors( "background-color");
 	@include brand-colors-inverse( "color");
     width: calc(25% - 20px);
-    height: 40px;
+    height: 64px;
     margin: 10px;
     text-align: center;
     float: left;
-    cursor: pointer;
     font-size: 15px;
     outline: none;
+    padding: 0 15px;
+
+    i {
+        margin-right: 9px
+    }
+
+    span {
+        width: 100%;
+    }
 }
 .show-services{
     @include brand-colors( "background-color");
@@ -214,7 +234,7 @@ input[type="checkbox"].ri.switch:checked + div > div {
     outline: 0;
     padding-left: 15px;
     padding-right: 15px;
-    margin-top: 9px;
+    margin-top: 30px;
     margin-bottom: 20px;
     cursor: pointer;
 }
@@ -223,17 +243,18 @@ input[type="checkbox"].ri.switch:checked + div > div {
     text-align: center;
 }
 .card {
-    position: relative;
-    display: -ms-flexbox;
-    display: flex;
     -ms-flex-direction: column;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
     background-color: #fff;
     background-clip: border-box;
     border: 1px solid rgba(0,0,0,.125);
     border-radius: .25rem;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: 0 10px;
+    position: relative;
+    word-wrap: break-word;
 }
 .card-body{
     flex: 1 1 auto;

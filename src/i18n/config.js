@@ -1,6 +1,8 @@
 export default {
     fa: {
         translation: {
+            "Show Services": "Show Services",
+            "FILTERS CATEGORIES AND LOCATIONS": "FILTERS CATEGORIES AND LOCATIONS",
             "About us": "درباره ما",
             "Sunday": "یکشنبه",
             "Detect Location": "تشخیص موقعیت",
@@ -108,6 +110,7 @@ export default {
             "Saturday": "شنبه",
             "See More": "بیشتر ببینید",
             "Top Categories": "طبقه‌بندی‌های برتر",
+            "All Categories": "همه دسته‌بندی‌ها",
             "Local Guide": "راهنمای محلی",
             "Near me": "نزدیک من",
             "Near Me": "نزدیک من",
@@ -151,6 +154,8 @@ export default {
     },
     ar: {
         translation: {
+            "Show Services": "Show Services",
+            "FILTERS CATEGORIES AND LOCATIONS": "FILTERS CATEGORIES AND LOCATIONS",
             "About us": "من نحن",
             "Sunday": "الأحد",
             "Detect Location": "تحديد الموقع",
@@ -185,7 +190,7 @@ export default {
             "Get directions": "للاستدلال على الاتجاهات",
             "Click here to find services in the location selected": "انقر هنا لمعرفة الخدمات في الموقع المحدد",
             "Categories": "الفئات",
-            "All Categories": "الفئات",
+            "All Categories": "جميع الفئات",
             "Share this page": "شارك هذه الصفحة",
             "List": "قائمة",
             "Languages spoken": "اللغات المستخدمة",
@@ -302,6 +307,8 @@ export default {
     },
     ur: {
         translation: {
+            "Show Services": "Show Services",
+            "FILTERS CATEGORIES AND LOCATIONS": "FILTERS CATEGORIES AND LOCATIONS",
             "About us": "ہمارے متعلق",
             "Sunday": "اتوار",
             "Detect Location": "مقام/جگہ کا پتہ لگائیں",
@@ -337,7 +344,7 @@ export default {
             "Get directions": "ہدایات حاصل کریں",
             "Click here to find services in the location selected": "منتخب کردہ مقام/جگہ میں خدمات تلاش کرنے کے لئے یہاں کلک کریں",
             "Categories": "زمرہ جات",
-            "All Categories": "زمرہ جات",
+            "All Categories": "تمام زمرے",
             "Share this page": "اس صفحہ کا اشتراک/شیئر کریں",
             "List": "فہرست",
             "Languages spoken": "بولی جانے والی زبانیں",
@@ -453,6 +460,8 @@ export default {
     },
     es: {
         translation: {
+            "Show Services": "Mostrar Servicios",
+            "FILTERS CATEGORIES AND LOCATIONS": "FILTROS CATEGORÍAS Y UBICACIÓN",
             "All": "Todos",
             "All_Categories": "Todas las categorías",
             "Service_Categories" : "Categorías",
@@ -590,6 +599,8 @@ export default {
     },
     fr: {
         translation: {
+            "Show Services": "Show Services",
+            "FILTERS CATEGORIES AND LOCATIONS": "FILTERS CATEGORIES AND LOCATIONS",
             "About us": "À propos de nous",
             "Sunday": "Dimanche",
             "Detect Location": "Détecter le lieu",
@@ -624,7 +635,7 @@ export default {
             "Get directions": "Obtenir des directions",
             "Click here to find services in the location selected": "Cliquez ici pour trouver des services dans le lieu choisi",
             "Categories": "Catégories",
-            "All Categories": "Catégories",
+            "All Categories": "Toutes catégories",
             "Share this page": "Partager cette page",
             "List": "Liste",
             "Languages spoken": "Langues parlées",
@@ -741,6 +752,8 @@ export default {
     },
     ti: {
         translation: {
+            "Show Services": "Show Services",
+            "FILTERS CATEGORIES AND LOCATIONS": "FILTERS CATEGORIES AND LOCATIONS",
             "About us": "ብዛዕባና",
             "Sunday": "ሰንበት",
             "Detect Location": "ቦታ ምርካብ",
@@ -874,6 +887,8 @@ export default {
     },
     en: {
         translation: {
+            "Show Services": "Show Services",
+            "FILTERS CATEGORIES AND LOCATIONS": "FILTERS CATEGORIES AND LOCATIONS",
             "About us": "About us",
             "All_Categories": "All Cateogries",
             "Service_Categories" : "Categories",
@@ -1026,5 +1041,4 @@ export default {
             "Ventimiglia":"Ventimiglia",
         },
     }
-
 };

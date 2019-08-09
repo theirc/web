@@ -117,7 +117,6 @@ export default class ArticlePage extends Component {
 		const { article, category, loading } = this.props;
 		const { title, content, hero, lead } = article.fields;
 		const { contentType } = article.sys;
-		console.log("Article",article);
 
 		let html = md.render(content || lead);
 		html = html.replace(/(\+[0-9]{9,14}|00[0-9]{9,15})/g, `<a class="tel" href="tel:$1">$1</a>`);
@@ -139,7 +138,7 @@ export default class ArticlePage extends Component {
 							{hero.fields.description && <credit>{hero.fields.description}</credit>}
 						</div>
 					)}
-				<HeaderBar subtitle={(category.fields.articles || []).length > 1 && `${category.fields.name}:`} title={title} />
+				<HeaderBar subtitle={(category.fields.articles || []).length > 1 && `${category.fields.name}:`} title={title} social />
 				{contentType.sys.id === "video" && this.renderVideo()}
 				<article>
 					<div dangerouslySetInnerHTML={{ __html: html }} />
