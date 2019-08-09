@@ -146,6 +146,31 @@ input[type="checkbox"].ri.switch:checked + div > div {
     padding: 20px;
     text-transform: uppercase;
 }
+
+.location-filter{
+    text-align: center;
+}
+
+#location-filter{
+    font-family: "Roboto", sans-serif;
+    font-size: 24px;
+    text-align: center;
+    padding: 20px;
+    text-transform: uppercase;
+    display: inline;
+    margin-bottom: 20px;
+    color: #9b9b9b;
+    cursor: pointer;
+
+    &[disabled]{
+        cursor: not-allowed !important;
+    }
+}
+
+.location-filter-selected{
+    color: black !important
+}
+
 #location-list{
     content: "";
     display: table;

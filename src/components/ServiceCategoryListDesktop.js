@@ -21,7 +21,8 @@ class ServiceCategoryListDesktop extends React.Component {
 		services: [],
 		showServices: false,
 		departments: [],
-		municipalities: []
+		municipalities: null,
+		showMunicipalidades: false
     };
     
     componentWillMount(){
@@ -29,19 +30,19 @@ class ServiceCategoryListDesktop extends React.Component {
     }
 
 	componentDidMount() {
-		const { country, regions, showFilter, location, category, showDepartments } = this.props;
+		const { country, regions, showFilter, location, category } = this.props;
 		let c = regions.filter(r => r.slug === country.fields.slug)[0]
 		let departments = [];
-		if(showDepartments){
-			departments = regions.filter(r => r.parent === country.fields.id);
-		}
 	
 		let currentLocation = c;
 		if (location){
 			let l = regions.filter(r => r.slug === location);
 			currentLocation = l.length > 0 ? l[0] : c;
+			
 		}
-		this.setState({location: currentLocation, showFilter: showFilter, loaded: true, departments: departments})
+		let municipalities = currentLocation.level === 3 ? regions.filter(r => r.parent === currentLocation.parent) : null
+		
+		this.setState({location: currentLocation, showFilter: showFilter, loaded: true, departments: departments, municipalities: municipalities, showMunicipalidades: !!municipalities})
 
 		const { fetchCategories} = this.props;
         const { categories } = this.state;
@@ -82,7 +83,6 @@ class ServiceCategoryListDesktop extends React.Component {
 	}
 	
 	showServices = (mapState = null) => {
-		console.log(mapState, this.state.showMap);
 		let showMap = mapState != null ? mapState : this.state.showMap;
 		const { goTo } = this.props;
 		goTo(this.state.location, this.state.category, showMap);
@@ -113,6 +113,25 @@ class ServiceCategoryListDesktop extends React.Component {
 		);
 		
 	}
+	departamentosFilter = (e) => {
+		const { regions } = this.props;	
+		console.log(this.state);
+		console.log(regions.filter(r => r.parent === this.state.location.id));
+		let currentLocation = this.state.location.level === 3 ? regions.filter(r => r.id === this.state.location.parent)[0] : this.state.location;
+		console.log({currentLocation});
+		this.setState({ location: currentLocation, showMunicipalidades: false, municipalities: null })
+	}
+
+	municipalidadesFilter = () => {
+		const { regions } = this.props;	
+		const department= this.state.location;
+		if (department.level === 2){
+			const municipalities = regions.filter(r => r.parent === department.id);
+			this.setState({ municipalities: municipalities, showMunicipalidades: true })
+		}
+		
+	}
+
 	renderService(s) {
 		const { goToService, measureDistance } = this.props;
 		const distance = measureDistance && s.location && measureDistance(s.location);
@@ -166,10 +185,15 @@ class ServiceCategoryListDesktop extends React.Component {
 	}
 	render() {
 		const { loaded, services, showServices } = this.state;
-		const { t, locationEnabled, toggleLocation, regions, goToService, country } = this.props;	
-        
-        let l3 = regions.filter(r => r.slug === country.fields.slug || (r.parent === country.fields.id && r.level === 3 && !r.hidden) || (!r.hidden &&regions.filter(r => r.parent === country.fields.id && r.level === 2).map(t => t.id).indexOf(r.parent) >= 0))
-		let departments = regions.filter(r => r.parent === country.fields.id);
+		const { t, locationEnabled, toggleLocation, regions, goToService, country, showDepartments } = this.props;	
+        let countryId = regions.filter(r => r.slug === country.fields.slug)[0].id;
+		let l3 = regions.filter(r => r.slug === country.fields.slug || (r.parent === country.fields.id && r.level === 3 && !r.hidden) || (!r.hidden &&regions.filter(r => r.parent === country.fields.id && r.level === 2).map(t => t.id).indexOf(r.parent) >= 0))
+		
+		const municipalities = this.state.municipalities;
+		let departments = regions.filter(r => r.slug === country.fields.slug);
+		departments.push(...regions.filter(r => r.parent === countryId));
+
+		console.log(this.state.location);
 
 		if (!loaded) {
 			return (
@@ -185,7 +209,7 @@ class ServiceCategoryListDesktop extends React.Component {
 			);
 		}
 		let categoryName = this.state.category ? this.state.category.name : t('All_Categories');
-        let location = this.state.location ? this.state.location.title : t('All Locations');
+        let location = this.state.location ? (this.state.location.title ? this.state.location.title : this.state.location.name)  : t('All Locations');
         
 		return <div>
 					<HeaderBar key={"Header"} title={"Services".toUpperCase()}>
@@ -198,17 +222,31 @@ class ServiceCategoryListDesktop extends React.Component {
 				<div id="filter-bar" className="filter-bar">					
 					<button id="btn-Locations" className="btn-filter" onClick={this.showFilters}>{location}</button>
 					<button id="btn-Categories" className="btn-filter" onClick={this.showFilters}>{categoryName}</button>
-					<label id="toggle-map">{'Map view'}<input type="checkbox" className="switch  bigswitch cn" checked={this.state.showMap} onChange={this.toggleMap}/><div className="toggle-btn"><div></div></div>
-					</label>
+					{!this.state.showFilter && <label id="toggle-map">{t('Map view')}<input type="checkbox" className="switch  bigswitch cn" checked={this.state.showMap} onChange={this.toggleMap}/><div className="toggle-btn"><div></div></div>
+					</label>}
 				</div>
 				{ this.state.showFilter && 
 				<div className="card">
 					<a id="btn-close-filter" onClick={this.closeFilter} className="btn-close">X</a>
 					<div id="title" className="filter-title">{t("FILTERS CATEGORIES AND LOCATIONS")}</div>
 					<div id="locations">
-						<div id="location-title">{t('Locations')}</div>
+						{showDepartments && (<div className="location-filter" >
+							<a id="location-filter"  onClick={this.departamentosFilter} className={this.state.showMunicipalidades ? "" : 'location-filter-selected'}>{t('Departamentos')}</a> > 
+							<a id="location-filter"  disabled={this.state.location.level === 1} onClick={this.municipalidadesFilter} className={!this.state.showMunicipalidades ? "" : 'location-filter-selected'}>{t('Municipalidades')}</a>
+							</div>)}
+						{!showDepartments && <div id="location-title">{t('Locations')}</div>}
 						<div id="location-list">
-							{l3.map((l) => (
+							{showDepartments && !municipalities	&&						
+								departments.map((l) => (
+									<button key={l.id} className={l.id === this.state.location.id ? "location-item-selected" : "location-item"} onClick={() => this.onSelectLocation(l)}>{l.name}</button>
+								))
+							}
+							{showDepartments && municipalities	&&						
+								municipalities.map((l) => (
+									<button key={l.id} className={l.id === this.state.location.id ? "location-item-selected" : "location-item"} onClick={() => this.onSelectLocation(l)}>{l.name}</button>
+								))
+							}
+							{!showDepartments && l3.map((l) => (
 								<button key={l.id} className={l.id === this.state.location.id ? "location-item-selected" : "location-item"} onClick={() => this.onSelectLocation(l)}>{l.title}</button>
 							))}
 						</div>
