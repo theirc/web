@@ -54,6 +54,7 @@
 			}
 
 			.tile {
+				overflow: hidden;
 				a {
 					text-decoration: none;
 					
@@ -87,11 +88,18 @@
 				display: flex;
 				height: 23vw;
 				overflow: hidden;
+				-ms-flex-align: center;
+				align-items: center;
+				-ms-flex-pack: center;
+				justify-content: center;
+				margin-left: -4vw;
+				margin-right: -4vw;
+		
+				img {
+					width: 100%;
+				}
 			}
 
-			img {
-				width: 100%;
-			}
 
 			&.selected{
 				background-color: #fdda14;
