@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { NavigateBefore, NavigateNext, Share, Link } from "material-ui-icons";
 import { translate } from "react-i18next";
-import { CopyToClipboard } from "react-copy-to-clipboard";
 import "./ArticleFooter.css";
 
 /**
@@ -47,6 +46,7 @@ class ArticleFooter extends Component {
 	}
 
 	Copiedlnk() {
+		navigator.clipboard.writeText(document.location.href);
 		this.setState(prevState => ({ copied: !prevState.copied }));
 		setTimeout(() => {
 			this.setState({ shareIN: true });
@@ -127,12 +127,8 @@ class ArticleFooter extends Component {
 							</div>
 							<div className="verticalHR" />
 							<div className="selector sharePage" onClick={() => this.Copiedlnk()}>
-								<CopyToClipboard sharePage={this.sharePage} text={this.state.value}>
 								{this.state.copied ? <h1 >{t("Copy Link")}</h1> : <h1>{t("Copied")}</h1>}
-								</CopyToClipboard>
-								<CopyToClipboard sharePage={this.sharePage} text={this.state.value}>
 								<Link className="icon" />
-							</CopyToClipboard>
 							</div>
 					</div>
 					
