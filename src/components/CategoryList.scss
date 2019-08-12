@@ -70,14 +70,22 @@
 			}
 		}
 		ul li{
-			width: 48%;
 			display: inline-block;
 			margin: 1%;
+			width: 48%;
+
+			@media (min-width: $bigDesktopBreakpoint) {
+				width: 31%;
+				
+				.img-viewport {
+					height: 14vw !important;
+				}
+			}
 
 			.img-viewport {
 				cursor: pointer;
 				display: flex;
-				height: 22vw;
+				height: 23vw;
 				overflow: hidden;
 			}
 
