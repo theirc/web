@@ -446,6 +446,7 @@ class Services extends React.Component {
 											nearby={true}
 											defaultLocation={defaultLocation}
 											categoryName="All Services"
+											category={null}
 											keepPreviousZoom = {this.state.keepPreviousZoom}
 											changeCategory={() => { goToLocation(this.state.location) }}
 											mapView={true}

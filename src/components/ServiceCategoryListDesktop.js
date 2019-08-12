@@ -49,8 +49,9 @@ class ServiceCategoryListDesktop extends React.Component {
 		if (fetchCategories && categories.length === 0) {
 			fetchCategories().then(categories => {
 				this.setState({ categories, loaded: true });
+				window.categories = categories;
 				if (category){
-					let cat = categories.filter(c => c.id === category)[0];
+					let cat = categories.filter(c => c.id === parseInt(category))[0];
 					if (cat){
 						this.setState({category: cat});
 					}
@@ -191,7 +192,7 @@ class ServiceCategoryListDesktop extends React.Component {
 		window.regions = regions;
 		window.country = country;
 		let l3 = regions.filter(r => r.slug === country.fields.slug || (r.parent === countryId && r.level === 3 && !r.hidden) || (!r.hidden &&regions.filter(r => r.parent === countryId && r.level === 2).map(t => t.id).indexOf(r.parent) >= 0))
-		console.log("l3:", l3);
+		
 		const municipalities = this.state.municipalities;
 		let departments = regions.filter(r => r.slug === country.fields.slug);
 		departments.push(...regions.filter(r => r.parent === countryId));
