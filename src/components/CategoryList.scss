@@ -54,6 +54,7 @@
 			}
 
 			.tile {
+				overflow: hidden;
 				a {
 					text-decoration: none;
 					
@@ -70,20 +71,35 @@
 			}
 		}
 		ul li{
-			width: 48%;
 			display: inline-block;
 			margin: 1%;
+			width: 48%;
+
+			@media (min-width: $bigDesktopBreakpoint) {
+				width: 31%;
+				
+				.img-viewport {
+					height: 14vw !important;
+				}
+			}
 
 			.img-viewport {
 				cursor: pointer;
 				display: flex;
-				height: 22vw;
+				height: 23vw;
 				overflow: hidden;
+				-ms-flex-align: center;
+				align-items: center;
+				-ms-flex-pack: center;
+				justify-content: center;
+				margin-left: -4vw;
+				margin-right: -4vw;
+		
+				img {
+					width: 100%;
+				}
 			}
 
-			img {
-				width: 100%;
-			}
 
 			&.selected{
 				background-color: #fdda14;
