@@ -339,7 +339,6 @@ class Services extends React.Component {
 		} = this.props;
 		const { width } = this.state;
 		const isMobile = width <= 1000;
-		  
 		let regionDictionary = _.fromPairs(regions.map(r => [r.id, r]));
 		let regionsWithCountry = regions.map(r => {
 			let parent = r.parent ? regionDictionary[r.parent] : null;
