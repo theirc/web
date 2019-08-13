@@ -65,7 +65,6 @@ class AppHeader extends Component {
 		const backgroundDark = headerColor === 'light' ? false : true;
 		const logo = this.props.logo || "/logo.svg";
 		const logoBlack = this.props.logoBlack || logo;
-		
 		const noop = () => {
 			console.log("noop");
 		};
@@ -76,7 +75,7 @@ class AppHeader extends Component {
 			<div className={backgroundDark ? 'AppHeader' : 'AppHeaderLight'}>
 
 				<Headroom tolerance={5} offset={200}>					
-					<div className={backgroundDark ? 'app-bar' : 'app-bar-light'}>
+					<div className={[backgroundDark ? 'app-bar' : 'app-bar-light', !(country && language) ? 'app-bar-black' : ''].join(" ")}>
 						<div className={["app-bar-container logo", !(country && language) ? "logo-centered" : ""].join(" ")} onClick={onGoHome || noop}>
 							<img onClick={onGoHome} src={backgroundDark ? logo : logoBlack} className="app-bar-logo" alt=" " />
 						</div>
