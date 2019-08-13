@@ -271,9 +271,75 @@ Less me
 			font-size: 20px;
 			position: absolute;
 		}
+		@media (min-width: $desktopBreakpoint) {
+			position: absolute;
+			top: 65px;
+			z-index: 99;
+			width:98%;
+		}
 	}
 }
+.AppHeaderLight {
+	.SearchBar {
+		height: 30px;
+		padding-bottom: 1em;
+		padding-left: 16px;
+		padding-right: 16px;
+		background-color: rgb(216, 216, 216);;
 
+		input {
+			-webkit-appearance: none;
+			line-height: 25px;
+			font-size: 20px;
+			width: 100%;
+			box-sizing: border-box;
+			border: 0;
+			background-color: rgb(216, 216, 216);
+			border-bottom: 2px white solid;
+			color: #3a3a3a;
+
+			padding: 0;
+			border-radius: 0;
+		}
+		input:focus {
+			outline: none;
+		}
+		.fa-times-circle {
+			margin-inline-start: -33px;
+			margin: 5px 5px;
+			top: 60px;
+
+			.ltr & {
+				right: 35px;
+			}
+			.rtl & {
+				left: 35px;
+			}
+		}
+		.fa-search {
+			margin: 5px 5px;
+			top: 60px;
+			.ltr & {
+				right: 5px;
+			}
+			.rtl & {
+				left: 5px;
+			}
+		}
+		.fa {
+			color: rgb(36, 36, 36);
+			width: 25px;
+			font-size: 20px;
+			position: absolute;
+		}
+		@media (min-width: $desktopBreakpoint) {
+			position: absolute;
+			top: 65px;
+			z-index: 99;
+			width:98%;
+		}
+	}
+}
 .AppHeader, .AppHeaderLight {
 	.privacy-banner {
 		align-items: center;
