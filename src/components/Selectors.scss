@@ -40,6 +40,11 @@
 			color: darken($titleBackground, 30%);
 			border: 1px solid darken($titleBackground, 40%);
 		}
+
+		@media (min-width: $desktopBreakpoint) {
+			width: 60%;
+			margin-left: 20%;
+		}
 	}
 
 	.text {
