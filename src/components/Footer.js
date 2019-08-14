@@ -50,18 +50,8 @@ class Footer extends Component {
 	}
 
 	render() {
-		const {
-			country,
-			customQuestionLink,
-			disableCountrySelector,
-			disableLanguageSelector,
-			hideShareButtons,
-			onChangeLocation,
-			onChangeLanguage,
-			questionLink,
-			showLinkToAdministration,
-			t,
-		} = this.props;
+		const { onChangeLocation, onChangeLanguage, disableCountrySelector, disableLanguageSelector, questionLink, t, showLinkToAdministration, country, customQuestionLink, hideShareButtons } = this.props;
+		// const {deviceType,} = this.props;
 		const year = moment().year();
 		let link = questionLink;
 
