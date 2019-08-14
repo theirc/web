@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { HomeWidget, HomeWidgetCollection } from "../components";
 import { push } from "react-router-redux";
 import getSessionStorage from "../shared/sessionStorage";
-import { Skeleton } from "/";
 
 class CountryHome extends React.Component {
 	constructor() {
