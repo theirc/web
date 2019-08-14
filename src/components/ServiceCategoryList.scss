@@ -110,8 +110,8 @@ input[type="checkbox"].ri.switch:checked + div > div {
 }
 
 .filter-bar{
-    border-bottom: 1px solid grey;
-    border-top: 1px solid grey;
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd;
     height: 60px;
     margin-bottom: 20px;
     padding: 10px;
@@ -143,11 +143,12 @@ input[type="checkbox"].ri.switch:checked + div > div {
     font-family: "Roboto", sans-serif;
     font-size: 24px;
     text-align: center;
-    padding: 20px;
+    padding: 30px;
     text-transform: uppercase;
 }
 
 .location-filter{
+    padding: 30px;
     text-align: center;
 }
 
@@ -170,6 +171,19 @@ input[type="checkbox"].ri.switch:checked + div > div {
 .location-filter-selected{
     color: black !important
 }
+.separator {
+    height: 1px;
+    color: #ddd;
+    background-color: #ddd;
+    border: none;
+    margin: 30px 0 auto;
+}
+#locations {
+    .location-item, .location-item-selected {
+        border: 1px solid #ddd;
+        height: 41px;
+    }
+}
 
 #location-list{
     content: "";
@@ -179,6 +193,7 @@ input[type="checkbox"].ri.switch:checked + div > div {
 }
 .location-item{
     align-items: center;
+    border: 1px solid #ddd;
     cursor: pointer;
     display: flex;
     width: calc(25% - 20px);
@@ -201,6 +216,7 @@ input[type="checkbox"].ri.switch:checked + div > div {
 }
 .location-item-selected{
     align-items: center;
+    border: 1px solid #ddd;
     cursor: pointer;
     display: flex;
     @include brand-colors( "background-color");
@@ -225,6 +241,7 @@ input[type="checkbox"].ri.switch:checked + div > div {
 .show-services{
     @include brand-colors( "background-color");
     @include brand-colors-inverse( "color");
+    border: 1px solid #ddd;
     color: black;
     font-family: "Roboto", sans-serif;
     font-size: 15px;
@@ -271,8 +288,9 @@ input[type="checkbox"].ri.switch:checked + div > div {
     cursor: pointer;
 }
 .filter-title{
-    text-align: center;
-    padding: 20px;
+    border-bottom: 1px solid #ddd;
     font-size: 20px;
     font-weight: 600;
+    padding: 30px;
+    text-align: center;
 }

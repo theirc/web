@@ -222,6 +222,7 @@ class ServiceCategoryListDesktop extends React.Component {
 						{locationEnabled && <i className="MenuIcon material-icons">radio_button_checked</i>}
 					</li>
 					</HeaderBar>
+
 				<div id="filter-bar" className="filter-bar">					
 					<button id="btn-Locations" className="btn-filter" onClick={this.showFilters}>{location}</button>
 					<button id="btn-Categories" className="btn-filter" onClick={this.showFilters}>{categoryName}</button>
@@ -260,6 +261,7 @@ class ServiceCategoryListDesktop extends React.Component {
 							))}
 						</div>
 					</div>
+					<hr className='separator'/>
 					<div id="categories">
 						<div id="location-title">{t("Service_Categories")}</div>
 						<div id="location-list">
