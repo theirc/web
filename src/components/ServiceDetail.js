@@ -1,12 +1,13 @@
 import React from "react";
-import "./ServiceHome.css";
 import { translate } from "react-i18next";
 import _ from "lodash";
 import { Share, Link  } from "material-ui-icons";
 import { Helmet } from "react-helmet";
+import * as clipboard from "clipboard-polyfill";
 import HeaderBar from "./HeaderBar";
 import PropTypes from "prop-types";
-import { CopyToClipboard } from "react-copy-to-clipboard";
+
+import "./ServiceHome.css";
 
 // eslint-disable-next-line
 var tinycolor = require("tinycolor2");
@@ -49,7 +50,10 @@ class ServiceDetail extends React.Component {
 	sharePage() {
 		this.setState(prevState => ({ shareIN: false }));
 	}
+
 	Copiedlnk() {
+		clipboard.writeText(document.location.href);
+
 		this.setState(prevState => ({ copied: !prevState.copied }));
 		setTimeout(() => {
 			this.setState({ shareIN: true });
@@ -318,15 +322,11 @@ class ServiceDetail extends React.Component {
 									{t("Share on Facebook")}
 								</h1>
 								<Share className="icon" />
-								</div>
-								<div className="verticalHR"/>
-								<div className="selector sharePage" onClick={() => this.Copiedlnk()}>
-								<CopyToClipboard sharePage={this.sharePage} text={this.state.value}>
+							</div>
+							<div className="verticalHR"/>
+							<div className="selector sharePage" onClick={() => this.Copiedlnk()}>
 								{this.state.copied ? <h1 >{t("Copy Link")}</h1> : <h1>{t("Copied")}</h1>}
-								</CopyToClipboard>
-								<CopyToClipboard sharePage={this.sharePage} text={this.state.value}>
 								<Link className="icon" />
-							</CopyToClipboard>
 							</div>
 						</div>
 					)}
