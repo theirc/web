@@ -215,7 +215,7 @@ class ServiceCategoryListDesktop extends React.Component {
         let location = this.state.location ? (this.state.location.title ? this.state.location.title : this.state.location.name)  : t('All Locations');
         
 		return <div>
-					<HeaderBar key={"Header"} title={"Services".toUpperCase()}>
+					<HeaderBar key={"Header"} title={t("Services").toUpperCase()}>
 					<li onClick={toggleLocation || _.identity}>
 						<h1>{"Order results by distance to me"}</h1>
 						{!locationEnabled && <i className="MenuIcon material-icons">radio_button_unchecked</i>}
@@ -265,7 +265,7 @@ class ServiceCategoryListDesktop extends React.Component {
 					<div id="categories">
 						<div id="location-title">{t("Service_Categories")}</div>
 						<div id="location-list">
-							<button key={0} className={!this.state.category  ? "location-item-selected" : "location-item"} onClick={() => this.onSelectCategory(null)}><span>{'All Categories'}</span></button>
+							<button key={0} className={!this.state.category  ? "location-item-selected" : "location-item"} onClick={() => this.onSelectCategory(null)}><span>{t('All Categories')}</span></button>
 
 							{this.state.categories.map((c) => (
 								this.renderCategory(c)
