@@ -23,6 +23,7 @@ import measureDistance from "@turf/distance";
 import _ from "lodash";
 import getSessionStorage from "../shared/sessionStorage";
 import PropTypes from "prop-types";
+import { Skeleton } from ".";
 
 class Selectors extends Component {
     state = {
@@ -206,12 +207,14 @@ class Selectors extends Component {
         switch (currentPage) {
             case 1:
                 return (
+                    <Skeleton hideShareButtons={true}>
                     <LanguageSelector
 						languages={languages}
 						onSelectLanguage={l => {
 							this.selectLanguage(l);
                         }}
 					/>
+                    </Skeleton>
                 );
             case 2:
                 if(!countryList) {
@@ -227,6 +230,7 @@ class Selectors extends Component {
                     }
                     
                     return (
+                        <Skeleton hideShareButtons={true}>
                         <CountrySelector
 							onGoTo={slug => {
 								this.selectCountry(slug);
@@ -236,6 +240,7 @@ class Selectors extends Component {
 							language={language}
 							backToLanguage={this.backToLanguage.bind(this)}
 						/>
+                        </Skeleton>
                     );
                 }
             case 3:
