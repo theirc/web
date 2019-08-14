@@ -51,6 +51,7 @@ class Skeleton extends React.Component {
 	}
 	render() {
 		const { children, country, language, match, onGoHome, onGoToServices, onGoToCategories, onGoToSearch, onChangeLocation, onChangeLanguage, deviceType, router, hideFooter, removeErrorMessage, showMapButton, goToMap, headerColor } = this.props;
+		const { hideShareButtons } = this.props;
 		const { errorMessage } = this.state;
 		const { config } = this.context;
 		let notifications = [];
@@ -127,6 +128,7 @@ class Skeleton extends React.Component {
 							country={country}
 							customQuestionLink={config.customQuestionLink}
 							language={language}
+							hideShareButtons = {hideShareButtons}
 						/>
 					)}
 					{country && language && <BottomNavContainer  match={match} showMapButton={showMapButton} goToMap={goToMap} showDepartments={config.showDepartments}/>}

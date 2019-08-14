@@ -51,7 +51,7 @@ class Footer extends Component {
 	}
 
 	render() {
-		const { onChangeLocation, onChangeLanguage, disableCountrySelector, disableLanguageSelector, questionLink, t, showLinkToAdministration, country, customQuestionLink } = this.props;
+		const { onChangeLocation, onChangeLanguage, disableCountrySelector, disableLanguageSelector, questionLink, t, showLinkToAdministration, country, customQuestionLink, hideShareButtons } = this.props;
 		// const {deviceType,} = this.props;
 		const year = moment().year();
 		let link = questionLink;
@@ -75,7 +75,7 @@ class Footer extends Component {
 					</a>
 				</div>
 				<div className="dark">
-					{(!disableCountrySelector || !disableLanguageSelector) && (
+					
 						<div className="button-container">
 							{!disableCountrySelector && (
 								<div className="button " onClick={onChangeLocation}>
@@ -94,6 +94,7 @@ class Footer extends Component {
 									<span>{t("Change Language")}</span>
 								</div>
 							)}
+							{!hideShareButtons && 
 							<div className="button " onClick={this.onShareOnFacebook}>
 								<div className="icon-container">
 									<Share />
@@ -101,6 +102,8 @@ class Footer extends Component {
 
 								<span>{t("Share on Facebook")}</span>
 							</div>
+							}
+							{!hideShareButtons && 
 							<div className="button " onClick={this.onCopyLink}>
 								<div className="icon-container">
 									<Link />
@@ -108,6 +111,7 @@ class Footer extends Component {
 								<input type="text" id="url" readOnly style={{display:"block", width:"1px", height:"1px", opacity:"0", position: "absolute"}} value={url}/>
 								<span>{this.state.copied ? t("Copied") : t("Copy Link")}</span>
 							</div>
+							}
 							{fblink && 
 							<div className="button " onClick={() => window.open(fblink) }>
 								<div className="icon-container">
@@ -118,7 +122,7 @@ class Footer extends Component {
 							</div>
 							}
 						</div>
-					)}
+					
 					{/*
 					<span>Mission statement.</span>
 					{deviceType === "Android" && <img src={`/google-play-badge.png`} className="app-store-logo" alt="Get it on Google Play" />}
