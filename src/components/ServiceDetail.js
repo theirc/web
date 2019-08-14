@@ -1,12 +1,12 @@
 import React from "react";
-import "./ServiceHome.css";
 import { translate } from "react-i18next";
 import _ from "lodash";
 import { Share, Link  } from "material-ui-icons";
 import { Helmet } from "react-helmet";
-import HeaderBar from "./HeaderBar";
-import { CopyToClipboard } from "react-copy-to-clipboard";
 import PropTypes from "prop-types";
+import HeaderBar from "./HeaderBar";
+
+import "./ServiceHome.css";
 
 // eslint-disable-next-line
 var tinycolor = require("tinycolor2");

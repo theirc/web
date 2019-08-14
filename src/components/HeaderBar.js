@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { Share, Link } from "material-ui-icons";
+import * as clipboard from "clipboard-polyfill";
 import PropTypes from "prop-types";
 import "./HeaderBar.css";
 
@@ -9,13 +10,21 @@ const generateKey = pre => {
 };
 
 class HeaderBar extends Component {
+	state = {
+		copied: false
+	}
+
 	static propTypes = {
 		subtitle: PropTypes.any,
 		title: PropTypes.string.isRequired,
 	};
 
 	onCopyLink = () => {
-		navigator.clipboard.writeText(document.location.href);
+		this.setState({ copied: true });
+		
+		clipboard.writeText(document.location.href);
+
+		setTimeout(() => this.setState({ copied: false }), 1500);
 	}
 
 	onShareOnFacebook = () => {
@@ -46,7 +55,7 @@ class HeaderBar extends Component {
 				<input type="checkbox" name={triggerKey} id={triggerKey} />
 				{social && <div className="social">
 					<div href='#' className="share" onClick={this.onShareOnFacebook}>{t('Share this page')}<Share /></div>
-					<div href='#' className="copy" onClick={this.onCopyLink}>{t('Copy Link')}<Link /></div>
+					<div href='#' className="copy" onClick={this.onCopyLink}>{this.state.copied ? t("Copied") : t("Copy Link")}<Link /></div>
 				</div>
 				}
 				<label htmlFor={triggerKey}>

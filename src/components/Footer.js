@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import moment from "moment";
-import "./Footer.css";
 import { MyLocation, Translate, Share, Link } from "material-ui-icons";
 import { translate } from "react-i18next";
+import * as clipboard from "clipboard-polyfill";
 import PropTypes from "prop-types";
+
+import "./Footer.css";
 
 
 class Footer extends Component {
@@ -17,13 +19,10 @@ class Footer extends Component {
 
 	onCopyLink = () => {
 		this.setState({ copied: true });
-		let url = document.getElementById("url");
-		url.focus();
-		url.select();
-		document.execCommand('copy');
-		setTimeout(() => {
-			this.setState({ copied: false });
-		}, 1500);
+		
+		clipboard.writeText(document.location.href);
+
+		setTimeout(() => this.setState({ copied: false }), 1500);
 	}
 
 	onShareOnFacebook = () => {
@@ -51,8 +50,18 @@ class Footer extends Component {
 	}
 
 	render() {
-		const { onChangeLocation, onChangeLanguage, disableCountrySelector, disableLanguageSelector, questionLink, t, showLinkToAdministration, country, customQuestionLink } = this.props;
-		// const {deviceType,} = this.props;
+		const {
+			country,
+			customQuestionLink,
+			disableCountrySelector,
+			disableLanguageSelector,
+			onChangeLocation,
+			onChangeLanguage,
+			questionLink,
+			showLinkToAdministration,
+			t,
+		} = this.props;
+		
 		const year = moment().year();
 		let link = questionLink;
 
@@ -65,6 +74,7 @@ class Footer extends Component {
 		if(result[0]){
 			link = result[0][1];
 		}
+
 		const url = window.location.href;
 		return (
 			<footer className="Footer">
@@ -105,7 +115,6 @@ class Footer extends Component {
 								<div className="icon-container">
 									<Link />
 								</div>
-								<input type="text" id="url" readOnly style={{display:"block", width:"1px", height:"1px", opacity:"0", position: "absolute"}} value={url}/>
 								<span>{this.state.copied ? t("Copied") : t("Copy Link")}</span>
 							</div>
 							{fblink && 
