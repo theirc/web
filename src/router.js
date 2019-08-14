@@ -52,7 +52,7 @@ class Router extends Component {
 						<Route exact path="/:country/categories" component={withCountry(Categories)} />
 						<Route path="/:country/:category/:article" component={withCountry(withCategory(Article))} />
 						<Route path="/:country/:category" component={withCountry(withCategory(CategoryHome))} />
-						<Route path="/:country" component={withCountry(CountryHome)} />
+						
 						<Skeleton>
 							<div className="SkeletonContainer">
 								<Switch>									
@@ -60,10 +60,12 @@ class Router extends Component {
 									<Route exact path="/country-selector" component={CountrySelectorScene} />
 									<Route exact path="/language-selector" component={LanguageSelectorScene} />
 									<Route exact path="/:country/search" component={withCountry(Search)} />		
-									<Route exact path="/" component={Home} />							
+									<Route exact path="/" component={Home} />
+									<Route exact path="/:country" component={withCountry(CountryHome)} />							
 								</Switch>
 							</div>
 						</Skeleton>
+						
 					</Switch>
 				</Placeholder>
 			</ConnectedRouter>

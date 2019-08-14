@@ -55,14 +55,14 @@ class CountryHome extends React.Component {
 			return null;
 		}
 		return (
-			<Skeleton hideShareButtons={true}>
+			
 			<HomeWidgetCollection key={"HomeWidgetCollection"}>
 				{country.fields.home.map((e, index) => {
 				return <HomeWidget index={index} isHome={true} direction={direction} onNavigate={onNavigate} language={language} country={country} content={e} key={e.sys.id} />
 			
 				})}
 			</HomeWidgetCollection>
-			</Skeleton>
+			
 			
 		);
 	}
