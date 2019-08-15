@@ -265,7 +265,7 @@ class ServiceCategoryListDesktop extends React.Component {
 					<div id="categories">
 						<div id="location-title">{t("Service_Categories")}</div>
 						<div id="location-list">
-							<button key={0} className={!this.state.category  ? "location-item-selected" : "location-item"} onClick={() => this.onSelectCategory(null)}><span>{'All Categories'}</span></button>
+							<button key={0} className={!this.state.category  ? "location-item-selected" : "location-item"} onClick={() => this.onSelectCategory(null)}><span>{'All_Categories'}</span></button>
 
 							{this.state.categories.map((c) => (
 								this.renderCategory(c)
