@@ -216,11 +216,6 @@ class ServiceCategoryListDesktop extends React.Component {
         
 		return <div>
 					<HeaderBar key={"Header"} title={t("Services").toUpperCase()}>
-					<li onClick={toggleLocation || _.identity}>
-						<h1>{"Order results by distance to me"}</h1>
-						{!locationEnabled && <i className="MenuIcon material-icons">radio_button_unchecked</i>}
-						{locationEnabled && <i className="MenuIcon material-icons">radio_button_checked</i>}
-					</li>
 					</HeaderBar>
 
 				<div id="filter-bar" className="filter-bar">					
