@@ -251,6 +251,10 @@ class Services extends React.Component {
 		}
 		return servicesApi.fetchCategories(language, country.fields.slug);
 	}
+	serviceTypeById(id) {
+		const { language } = this.props;
+		return servicesApi.fetchCategoryById(language, id);
+	}
 
 	serviceTypesByLocation(location) {
 		const { language, country } = this.props;
@@ -580,7 +584,7 @@ class Services extends React.Component {
 											showMap={() => goToCategoryMap(props.match.params.categoryId)}
 											id={props.match.params.categoryId}
 											title={this.state.categoryName}
-											fetchCategories={() => this.serviceTypes()}
+											fetchCategory={() => this.serviceTypeById(props.match.params.categoryId)}
 										/>
 									</div>
 								</Skeleton>
@@ -628,7 +632,7 @@ class Services extends React.Component {
 											title={this.state.categoryName}
 											location={props.match.params.location}
 											id={props.match.params.categoryId}
-											fetchCategories={() => this.serviceTypes()}
+											fetchCategory={() => this.serviceTypeById(props.match.params.categoryId)}
 										/>
 									</div>
 								</Skeleton>
@@ -675,7 +679,7 @@ class Services extends React.Component {
 											showMap={() => goToLocationMap(props.match.params.location )}
 											title={this.state.categoryName}
 											id={props.match.params.categoryId}
-											fetchCategories={() => this.serviceTypes()}
+											fetchCategory={() => this.serviceTypeById(props.match.params.categoryId)}
 											location={props.match.params.location}
 										/>
 									</div>
