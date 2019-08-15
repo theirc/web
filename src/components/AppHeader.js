@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { IconButton } from "material-ui";
+import { Search } from "material-ui-icons";
 import Headroom from "react-headrooms";
 import PropTypes from "prop-types";
 import { translate, Interpolate } from "react-i18next";
@@ -105,12 +105,8 @@ class AppHeader extends Component {
 										)}
 
 										<div className="app-bar-separator separator-searchIcon" />
-										<IconButton
-											className={`search-close ${[this.state.search && "active"].join(" ")} search-button `}
-											color="contrast"
-											onClick={this.toggleSearch.bind(this)}
-											style={{ width: 36 }}
-										/>
+										<Search onClick={this.toggleSearch.bind(this)}/>
+										
 									</div>
 								</div>
 							)}
