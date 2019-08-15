@@ -109,8 +109,13 @@ class ServiceCategoryListDesktop extends React.Component {
 		let { vector_icon } = c;
 		let iconPrefix = vector_icon.split("-")[0];
 
+		let color = this.fixColor(c.color);
+		color = tinycolor(color)
+			.saturate(30)
+			.toHexString();
+
 		let style = {
-			color: "black"
+			color: color === "#ffffff" ? "black" : color,
 		};
 		return (
 			<button key={c.id} className={this.state.category && c.id === this.state.category.id ? "location-item-selected" : "location-item"} onClick={() => this.onSelectCategory(c)}><i className={`${iconPrefix} ${vector_icon}`} style={style} /><span>{c.name}</span></button>
