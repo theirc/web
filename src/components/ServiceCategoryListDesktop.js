@@ -221,8 +221,8 @@ class ServiceCategoryListDesktop extends React.Component {
 				<div id="filter-bar" className="filter-bar">					
 					<button id="btn-Locations" className="btn-filter" onClick={this.showFilters}>{location}</button>
 					<button id="btn-Categories" className="btn-filter" onClick={this.showFilters}>{categoryName}</button>
-					{!this.state.showFilter && <label id="toggle-map">{t('Map view')}<input type="checkbox" className="switch  bigswitch cn" checked={this.state.showMap} onChange={this.toggleMap}/><div className="toggle-btn"><div></div></div>
-					</label>}
+					<label id="toggle-map">{t('Map view')}<input type="checkbox" className="switch  bigswitch cn" checked={this.state.showMap} onChange={this.toggleMap}/><div className="toggle-btn"><div></div></div>
+					</label>
 				</div>
 				{ this.state.showFilter && 
 				<div className="card">
