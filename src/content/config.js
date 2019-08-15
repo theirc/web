@@ -170,7 +170,7 @@ module.exports = {
 		space: "e17qk44d7f2w",
 		languages: [["es", "Español"]],
 		logo: "/images/cn.tb.png",
-		logoBlack: "/images/cn-logo-black.png",
+		logoBlack: "/cn-logo-black.png",
 		title: "Bienvenidos a CuentaNos",
 		disableCountrySelector: true,
 		disableLanguageSelector: true,

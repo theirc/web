@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { translate } from "react-i18next";
+import HeaderBar from "./HeaderBar";
+
 import "./CategoryList.css";
 
 class CategoryList extends Component {
@@ -87,7 +89,7 @@ class CategoryList extends Component {
 
 		return (
 			<div className="CategoryList">
-				{/* <HeaderBar title={t("Categories").toUpperCase()} /> */}
+				<HeaderBar title={t("Blog").toUpperCase()} />
 				<div className='tiles-desktop'>
 					<select className='select-css' value={this.state.selectedCategory} onChange={this.onChange}>
 						<option value=''>{t('All Categories')}</option>
