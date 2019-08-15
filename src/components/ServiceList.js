@@ -4,7 +4,6 @@ import { translate } from "react-i18next";
 import _ from "lodash";
 import HeaderBar from "./HeaderBar";
 import { Language } from "material-ui-icons";
-//import console = require("console");
 
 var tinycolor = require("tinycolor2");
 
