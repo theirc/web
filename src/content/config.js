@@ -33,6 +33,11 @@ module.exports = {
 			country: 'serbia',
 			langs: ['fr'],
 		}],
+		countryPhoneCodes: [{
+			country: 'El Salvador',
+			code: '+503',
+		  },
+		],
 	},
 	"staging.refugee.info": {
 		theme: "irc",
@@ -64,6 +69,11 @@ module.exports = {
 			country: 'serbia',
 			langs: ['fr'],
 		}],
+		countryPhoneCodes: [{
+			country: 'El Salvador',
+			code: '+503',
+		  },
+		],
 	},
 	"qa.refugee.info": {
 		theme: "irc",
@@ -95,6 +105,11 @@ module.exports = {
 			country: 'serbia',
 			langs: ['fr'],
 		}],
+		countryPhoneCodes: [{
+			country: 'El Salvador',
+			code: '+503',
+		  },
+		],
 	},
 	"khabrona.info": {
 		theme: "mc",
@@ -179,6 +194,11 @@ module.exports = {
 		showDepartments: true,
 		showLinkToAdministration: true,
 		hideLangsPerCountry: [],
+		countryPhoneCodes: [{
+			country: 'El Salvador',
+			code: '+503',
+		  },
+		],
 	},
 	"staging.cuentanos.org": {
 		theme: "generic",
@@ -201,6 +221,11 @@ module.exports = {
 		showLinkToAdministration: false,
 		customQuestionLink:[["italy","https://www.facebook.com/Refugee.Info.Italy/"]],
 		hideLangsPerCountry: [],
+		countryPhoneCodes: [{
+			country: 'El Salvador',
+			code: '+503',
+		  },
+		],
 	},
 	"qa.cuentanos.org": {
 		theme: "generic",
@@ -223,6 +248,11 @@ module.exports = {
 		showLinkToAdministration: false,
 		customQuestionLink:[["italy","https://www.facebook.com/Refugee.Info.Italy/"]],
 		hideLangsPerCountry: [],
+		countryPhoneCodes: [{
+			country: 'El Salvador',
+			code: '+503',
+		  },
+		],
 	},
 	"localhost": {
 		theme: "generic",
@@ -239,26 +269,16 @@ module.exports = {
 		gaTracker: "UA-68574649-8",
 		appId: "209295296327422",
 		thumbnail: "/images/logos/cn-thumbnail.png",
-		cookieBanner: false,
-		backendUrl: 'https://admin.cuentanos.org/e/production/v2',
-		customQuestionLink:[["italy","https://www.facebook.com/Refugee.Info.Italy/"]],
-		favicon: "/favicon.ico",
-		gaTracker: "UA-68574649-6",
-		appId: "708254579325899",
-		thumbnail: "/images/logos/ri-thumbnail.png",
-		cookieBanner: true,
-		showDepartments: false,
+		cookieBanner: false,		
+		backendUrl: 'https://admin-qa.cuentanos.org/e/production/v2',
+		showDepartments: true,
 		showLinkToAdministration: false,
-		hideCountries: ["bosnia"],
-		hideLangsPerCountry: [{
-			country: 'italy',
-			langs: ['ar', 'ur', 'fa', 'fr'],
-		}, {
-			country: 'bulgaria',
-			langs: ['fr'],
-		}, {
-			country: 'serbia',
-			langs: ['fr'],
-		}],
+		customQuestionLink:[["italy","https://www.facebook.com/Refugee.Info.Italy/"]],
+		hideLangsPerCountry: [],
+		countryPhoneCodes: [{
+			country: 'El Salvador',
+			code: '+503',
+		  },
+		],
 	},
 };

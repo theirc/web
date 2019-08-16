@@ -160,7 +160,7 @@ class ServiceDetail extends React.Component {
 	
 	render() {
 		const { service, relatedServices } = this.state;
-		const { t, language, goToService } = this.props;
+		const { t, language, goToService, country, phoneCodes } = this.props;
 		
 		const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 		if (!service) {
@@ -243,6 +243,9 @@ class ServiceDetail extends React.Component {
 			return ci.index;
 		});
 		let subtitle = service.type ? service.type.name : _.first(service.types).name;
+		const currentCountry = phoneCodes.filter(pc => pc.country == country.fields.name);
+		let phoneNumberWithCode;
+		(currentCountry.length) ? (phoneNumberWithCode = currentCountry[0].code + service.phone_number) : (phoneNumberWithCode = service.phone_number);
 		return (
 			<div className="ServiceDetail">
 				<Helmet>
@@ -341,10 +344,10 @@ class ServiceDetail extends React.Component {
 
 					{service.phone_number && <hr />}
 					{service.phone_number && (
-						<div className="Selector" onClick={() => window.open(`tel:${service.phone_number}`)}>
+						<div className="Selector" onClick={() => window.open(`tel:${phoneNumberWithCode}`)}>
 							<h1>
 								{t("Call")}:
-								<a className="phoneFormat" href={`tel:${service.phone_number}`} >{service.phone_number}</a>
+								<a className="phoneFormat" href={`tel:${phoneNumberWithCode}`} >{phoneNumberWithCode}</a>
 							</h1>
 							<i className="MenuIcon fa fa-phone" aria-hidden="true" />
 						</div>
