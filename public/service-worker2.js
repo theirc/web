@@ -84,8 +84,6 @@ self.addEventListener('fetch', function(event) {
     );
   }
   
- 
-  
 });
 
 async function requestBackend(event){
