@@ -131,7 +131,7 @@ module.exports = {
 				(searchTerm ? "&search=" + searchTerm : "");
 				
 				const headers = { 'Accept-Language': language };
-				
+
 				fetch(RI_URL + requestUrl, { headers })
 					.then(res => res.json())
 					.then(response => {
