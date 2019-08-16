@@ -54,7 +54,7 @@ class HeaderBar extends Component {
 			<div className="HeaderBar">
 				<input type="checkbox" name={triggerKey} id={triggerKey} />
 				{social && <div className="social">
-					<div href='#' className="share" onClick={this.onShareOnFacebook}>{t('Share this page')}<Share /></div>
+					<div href='#' className="share" onClick={this.onShareOnFacebook}>{t('Share on Facebook')}<Share /></div>
 					<div href='#' className="copy" onClick={this.onCopyLink}>{this.state.copied ? t("Copied") : t("Copy Link")}<Link /></div>
 				</div>
 				}

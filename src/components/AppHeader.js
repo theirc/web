@@ -92,14 +92,15 @@ class AppHeader extends Component {
 										<span className="app-bar-selectors top-menu" color="contrast" onClick={onGoToServices || noop}>
 											{t("Services")}	
 										</span>
+										{!disableLanguageSelector && !disableCountrySelector && <div className="app-bar-separator" />}
 										{!disableCountrySelector && (
-											<span className="app-bar-selectors" color="contrast" onClick={onChangeCountry || noop}>
-												{(country && country.fields.name) || " "}
+											<span className="app-bar-selectors country" color="contrast" onClick={onChangeCountry || noop}>
+												{/* {(country && country.fields.name) || " "} */}
+												<img src='/gr.png' />
 											</span>
 										)}
-										{!disableLanguageSelector && !disableCountrySelector && <div className="app-bar-separator" />}
 										{!disableLanguageSelector && (
-											<span className="app-bar-selectors" color="contrast" onClick={onChangeLanguage}>
+											<span className="app-bar-selectors lang" color="contrast" onClick={onChangeLanguage}>
 												{language || " "}
 											</span>
 										)}

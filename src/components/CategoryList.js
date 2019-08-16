@@ -111,7 +111,7 @@ class CategoryList extends Component {
 							{showToggle(c) && [
 								<label key="a-1" htmlFor={`tab-${i}`} className="container">
 									<i className={c.fields.iconClass || "material-icons"}>{c.fields.iconText || ((!c.fields.iconClass || c.fields.iconClass === "material-icons") && "add")}</i>
-									<strong className="category-name">{c.fields && c.fields.name}</strong>
+									<span className="category-name">{c.fields && c.fields.name}</span>
 									<div className="up">
 										<i className="material-icons">keyboard_arrow_up</i>
 									</div>
@@ -156,7 +156,7 @@ class CategoryList extends Component {
 										onClick={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${c.fields.overview.fields.slug}?language=`+language)}
 									>
 										<i className={c.fields.iconClass || "material-icons"}>{c.fields.iconText || ((!c.fields.iconClass || c.fields.iconClass === "material-icons") && "book")}</i>
-										<strong className="category-name">{c.fields && c.fields.name}</strong>
+										<span className="category-name">{c.fields && c.fields.name}</span>
 									</label>
 								)}
 						</li>

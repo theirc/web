@@ -223,11 +223,12 @@ class ServiceCategoryListDesktop extends React.Component {
 					<HeaderBar key={"Header"} title={t("Services").toUpperCase()}>
 					</HeaderBar>
 
-				<div id="filter-bar" className="filter-bar">					
-					<button id="btn-Locations" className="btn-filter" onClick={this.showFilters}>{location}</button>
-					<button id="btn-Categories" className="btn-filter" onClick={this.showFilters}>{categoryName}</button>
-					<label id="toggle-map">{t('Map view')}<input type="checkbox" className="switch  bigswitch cn" checked={this.state.showMap} onChange={this.toggleMap}/><div className="toggle-btn"><div></div></div>
-					</label>
+				<div id="filter-bar" className="filter-bar">
+					<div className='filters'>
+						<button id="btn-Locations" className="btn-filter" onClick={this.showFilters}><span>{location}</span><i className="material-icons">keyboard_arrow_down</i></button>
+						<button id="btn-Categories" className="btn-filter" onClick={this.showFilters}><span>{categoryName}</span><i className="material-icons">keyboard_arrow_down</i></button>
+					</div>
+					{!this.state.showFilter && <label id="toggle-map">{t('Map view')}<input type="checkbox" className="switch  bigswitch cn" checked={this.state.showMap} onChange={this.toggleMap}/><div className="toggle-btn"><div></div></div></label>}
 				</div>
 				{ this.state.showFilter && 
 				<div className="card">

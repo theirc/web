@@ -88,6 +88,12 @@
 			margin:0.4rem;
 			color: #F5F5F5;
 
+			&.Signpost {
+				span {
+					color: #666;
+				}
+			}
+
 			&.padded {
 				padding: 3em;
 			}
@@ -114,7 +120,7 @@
 		width: 90%;
 		padding-top: 1.6em;
 		padding-bottom: 1.2em;
-		border-bottom: 1px $dividerColor solid;
+		border-bottom: 1px #111 solid;
 
 		.rtl & {
 			flex-direction: row-reverse;

@@ -111,32 +111,44 @@ input[type="checkbox"].ri.switch:checked + div > div {
 
 .filter-bar{
     border-bottom: 1px solid #ddd;
-    height: 60px;
+    display: flex;
+    height: 41px;
+    justify-content: space-between;
     margin-bottom: 20px;
     padding: 10px;
+
+    .filters {
+        display: flex;
+    }
 }
+
 .btn-filter{
-    @include brand-colors( "background-color");
-    @include brand-colors( "border-color");
-	@include brand-colors-inverse( "color");
-    /*background-color: #FDDA14; */
-    color: black;
-    font-family: "Roboto", sans-serif;
-    font-size: 15px;
+    // @include brand-colors( "background-color");
+    // @include brand-colors( "border-color");
+    // @include brand-colors-inverse( "color");
+    align-items: center;
+    background-color: #f2f2f2;
+    border-color: #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    font-size: 13px;
     height: 41px;
     margin-right: 20px;
-    border-radius: 5px;
     outline: 0;
     padding-left: 15px;
     padding-right: 15px;
-    margin-top: 9px;
-    cursor: pointer;
+
+    i {
+        font-size: 18px;
+        margin-left: 10px;
+    }
 }
-#toggle-map{
-    float: right;
-}
-#toggle-map div{
-   display: inline-block;
+#toggle-map {
+    margin-top: -8px;
+    div{
+        display: inline-block;
+    }
 }
 #location-title{
     font-family: "Roboto", sans-serif;
@@ -292,4 +304,8 @@ input[type="checkbox"].ri.switch:checked + div > div {
     font-weight: 600;
     padding: 30px;
     text-align: center;
+}
+
+.stronger {
+    font-weight: 500;
 }

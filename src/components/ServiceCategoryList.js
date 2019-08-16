@@ -56,7 +56,7 @@ class ServiceCategoryList extends React.Component {
 				<hr className="line" />
 				<div className="container" onClick={() => {setTimeout(() => onSelectCategory(c), 300) }}> 
 					<i className={`${iconPrefix} ${vector_icon}`} style={style} />
-					<strong>{name}</strong>
+					<span>{name}</span>
 				</div>
 			</li>
 		);
@@ -112,7 +112,7 @@ class ServiceCategoryList extends React.Component {
 					<li key="locations">
 						<div className="container" onClick={goToLocationList}>
 							<i className="fa fa-globe" />
-							<strong>{t("Locations")}</strong>
+							<span>{t("Locations")}</span>
 						</div>
 					</li>
 					}
@@ -120,7 +120,7 @@ class ServiceCategoryList extends React.Component {
 					<li key="municipalidades">
 						<div className="container" onClick={goToLocationList}>
 							<i className="fa fa-globe" />
-							<strong>{t("Municipalidades")}</strong>
+							<span>{t("Municipalidades")}</span>
 						</div>
 					</li>
 					}
@@ -128,14 +128,14 @@ class ServiceCategoryList extends React.Component {
 					<li key="map">
 						<div className="container" onClick={goToMap}>
 							<i className="fa fa-map" />
-							<strong>{t("Map")}</strong>
+							<span>{t("Map")}</span>
 						</div>
 					</li>
 					<hr className="line" />			
 					<li key="all-services">
 						<div className="container" onClick={listAllServices}>
 							<i className="fa fa-list" />
-							<strong>{t("All Services")}</strong>
+							<span>{t("All Services")}</span>
 						</div>
 					</li>
 					<hr className="line" />

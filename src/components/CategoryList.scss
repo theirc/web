@@ -63,6 +63,7 @@
 					}
 
 					h2 {
+						font-weight: normal;
 						overflow: hidden;
 						text-overflow: ellipsis;
 						white-space: nowrap;
@@ -213,6 +214,7 @@
 	}
 	.category-name {
 		flex-grow: 9;
+		font-size: 16px;
 	}
 
 
@@ -221,7 +223,7 @@
 		margin: auto;
 		border: 0;
 		border-top-width: 1px;
-		border-top-color: lighten($dividerColor, 30%);
+		border-top-color: #ddd;
 		border-style: solid;
 		border-radius: 1px;
 		height: 0;

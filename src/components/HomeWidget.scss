@@ -8,6 +8,13 @@
 		margin-top: -20px;
 	}
 
+	a {
+		font-size: 15px;
+		font-weight: 500;
+		text-decoration: none;
+		text-transform: none;
+	}
+
 	@media (min-width: $desktopBreakpoint) {
 		& {
 			flex-basis: calc(50% - 40px);
@@ -59,6 +66,7 @@ s > a:hover{opacity: 0.86}
 		}
 
 		& .icon {
+			color: #555;
 			width: 30px;
 			display: flex;
 			flex-direction: row;
@@ -70,6 +78,10 @@ s > a:hover{opacity: 0.86}
 				width: 100%;
 				text-align: center;
 				font-size: 50px;
+			}
+
+			&:hover {
+				color: black;
 			}
 			
 			//	padding-right: 5px;
