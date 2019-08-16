@@ -3,6 +3,7 @@ import "./ServiceHome.css";
 import { translate } from "react-i18next";
 import _ from "lodash";
 import HeaderBar from "./HeaderBar";
+import { Language } from "material-ui-icons";
 
 var tinycolor = require("tinycolor2");
 
@@ -12,6 +13,7 @@ class ServiceList extends React.Component {
 		services: [],
 		loaded: false,
 		errorMessage: null,
+		serviceType: [],
 	};
 	componentDidMount() {
 		const { servicesByType, listAllServices } = this.props;
@@ -25,7 +27,13 @@ class ServiceList extends React.Component {
 				.then(({ services, category }) => this.setState({ services, category, loaded: true }))
 				.catch(c => this.setState({ errorMessage: c.message, category: null, loaded: true }));
 		}
-
+		const { fetchCategory} = this.props;
+		const { serviceType } = this.state;
+		if (fetchCategory && serviceType.length === 0) {
+			fetchCategory().then(serviceType => {
+				this.setState({ serviceType });
+			});
+		}
 	}
 	renderService(s) {
 		const { goToService, measureDistance } = this.props;
@@ -79,9 +87,12 @@ class ServiceList extends React.Component {
 		];
 	}
 	render() {
-		const { services, category, loaded, errorMessage } = this.state;
-		const { t, locationEnabled, toggleLocation, nearby, showMap, title  } = this.props;
-		let titleName = title ? title : t("Services");
+		const { services, category, loaded, errorMessage, serviceType} = this.state;
+		const { t, locationEnabled, toggleLocation, nearby, showMap, title, id  } = this.props;
+		let categoryName;
+		serviceType.length != 0 && (categoryName = serviceType.name);
+		let titleName = categoryName ? categoryName : t("Services");
+
 
 		// vacancy === false --> available
 		// vacancy === true  --> unavailable
