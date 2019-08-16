@@ -58,7 +58,7 @@ self.addEventListener('activate', (event) => {
     const cacheNames = await caches.keys();
     await Promise.all(
       cacheNames.filter((cacheName) => {
-        //return true;
+        return true;
       }).map(cacheName => caches.delete(cacheName))
     );
   }());
@@ -82,6 +82,7 @@ self.addEventListener('fetch', function(event) {
         });
       })
     );
+  }
   
 });
 

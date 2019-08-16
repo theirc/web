@@ -1,12 +1,13 @@
 import React from "react";
-import "./ServiceHome.css";
 import { translate } from "react-i18next";
 import _ from "lodash";
 import { Share, Link  } from "material-ui-icons";
 import { Helmet } from "react-helmet";
+import * as clipboard from "clipboard-polyfill";
 import HeaderBar from "./HeaderBar";
-import { CopyToClipboard } from "react-copy-to-clipboard";
 import PropTypes from "prop-types";
+
+import "./ServiceHome.css";
 
 // eslint-disable-next-line
 var tinycolor = require("tinycolor2");
@@ -51,6 +52,8 @@ class ServiceDetail extends React.Component {
 	}
 
 	Copiedlnk() {
+		clipboard.writeText(document.location.href);
+
 		this.setState(prevState => ({ copied: !prevState.copied }));
 		setTimeout(() => {
 			this.setState({ shareIN: true });
@@ -177,7 +180,7 @@ class ServiceDetail extends React.Component {
 		const mLocale = d => {
 			let a = moment(d)
 				.locale(language)
-				.format("LLL");
+				.format("ll");
 			return a;
 		};
 		const amPmTime = time => {
@@ -288,6 +291,9 @@ class ServiceDetail extends React.Component {
 					{service.address_in_country_language && <h3>{t("Address in Local Language")}</h3>}
 					{service.address_in_country_language && <p>{service.address_in_country_language}</p>}
 
+					{service.cost_of_service && <h3>{t("Cost of service")}</h3>}
+					{service.cost_of_service && <p>{service.cost_of_service}</p>}
+
 					{point && (
 						<p>
 							<img
@@ -316,12 +322,10 @@ class ServiceDetail extends React.Component {
 									{t("Share on Facebook")}
 								</h1>
 								<Share className="icon" />
-								</div>
-								<div className="verticalHR"/>
+							</div>
+							<div className="verticalHR"/>
 							<div className="selector sharePage" onClick={() => this.Copiedlnk()}>
-								<CopyToClipboard sharePage={this.sharePage} text={this.state.value}>
-									{this.state.copied ? <h1>{t("Copy Link")}</h1> : <h1>{t("Copied")}</h1>}
-								</CopyToClipboard>
+								{this.state.copied ? <h1 >{t("Copy Link")}</h1> : <h1>{t("Copied")}</h1>}
 								<Link className="icon" />
 							</div>
 						</div>
