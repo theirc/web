@@ -51,7 +51,7 @@ class Skeleton extends React.Component {
 	}
 	render() {
 		const { children, country, language, match, onGoHome, onGoToServices, onGoToCategories, onGoToSearch, onChangeLocation, onChangeLanguage, deviceType, router, hideFooter, removeErrorMessage, showMapButton, goToMap, headerColor } = this.props;
-		const { hideShareButtons } = this.props;
+		const { hideShareButtons, homePage } = this.props;
 		const { errorMessage } = this.state;
 		const { config } = this.context;
 		let notifications = [];
@@ -113,6 +113,7 @@ class Skeleton extends React.Component {
 						headerColor = {headerColor}
 						logo={logo}
 						logoBlack={config.logoBlack}
+						homePage={homePage}
 					/>
 					{notifications}
 					{children}

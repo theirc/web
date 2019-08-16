@@ -78,7 +78,7 @@ Less me
 	width: 100%;
 	height: 64px;
 	@media (min-width: $desktopBreakpoint) {
-		display: none,		
+		display:none;	
 	}
 }
 .headerBackgroundLight{	
@@ -185,6 +185,10 @@ Less me
 	-moz-transform: translateY(-65px);
 	-webkit-transform: translateY(-65px);
 	transform: translateY(-65px);
+}
+.header-opacity{
+	background-color: #000000;
+	opacity: 0.5;
 }
 
 .headroom--pinned {

@@ -60,7 +60,7 @@ class AppHeader extends Component {
 	}
 
 	render() {
-		const { onChangeCountry, onChangeLanguage, disableLanguageSelector, disableCountrySelector, onGoHome, onGoToServices, onGoToCategories, country, language, t, headerColor } = this.props;
+		const { onChangeCountry, onChangeLanguage, disableLanguageSelector, disableCountrySelector, onGoHome, onGoToServices, onGoToCategories, country, language, t, headerColor, homePage } = this.props;
 		const { search, searchText } = this.state;
 		const backgroundDark = headerColor === 'light' ? false : true;
 		const logo = this.props.logo || "/logo.svg";
@@ -75,7 +75,7 @@ class AppHeader extends Component {
 			<div className={backgroundDark ? 'AppHeader' : 'AppHeaderLight'}>
 
 				<Headroom tolerance={5} offset={200}>					
-					<div className={[backgroundDark ? 'app-bar' : 'app-bar-light', !(country && language) ? 'app-bar-black' : ''].join(" ")}>
+					<div className={[homePage ? "header-opacity": "", backgroundDark ? 'app-bar' : 'app-bar-light', !(country && language) ? 'app-bar-black' : ''].join(" ")}>
 						<div className={["app-bar-container logo", !(country && language) ? "logo-centered" : ""].join(" ")} onClick={onGoHome || noop}>
 							<img onClick={onGoHome} src={backgroundDark ? logo : logoBlack} className="app-bar-logo" alt=" " />
 						</div>
