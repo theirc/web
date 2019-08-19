@@ -88,7 +88,7 @@
 	display: flex;
 	flex-wrap: wrap;
 	padding:5px;
-	
+
 	@include service-common();
 	ul {
 		list-style: none;
@@ -311,6 +311,14 @@
 		&:active {
 			background-color: #f6f6f6;
 		}
+		
+		&:hover {
+			border: 1px solid #ddd;
+
+			h1 {
+				text-decoration: underline;
+			}
+		}
 
 		> .Icon {
 			padding-top: 10px;
@@ -337,15 +345,15 @@
 			font-weight: bold;
 		}
 		h2 {
-			padding: 0;
 			margin: 0;
+			padding: 0;
 			font-size: 90%;
 			font-weight: normal;
 
 			small {
+				color: gray;
 				display: block;
-				padding-top: 6px;
-				text-decoration: underline;
+				padding-top: 12px;
 			}
 		}
 	}
