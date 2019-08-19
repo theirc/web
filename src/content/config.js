@@ -7,6 +7,7 @@ module.exports = {
 	
 	"refugee.info": {
 		theme: "irc",
+		author: 'Refugee Info',
 		accessToken: "0cd5c6bfefa4f7f33a98c487012e6f34c2031aee1ff2f6858b11be592ab349d9",
 		space: "ktglofo8nf88",
 		languages: [["en", "English"], ["ar", "العربيـة"], ["ur", "اردو"], ["fa", "فارسی"], ["fr", "Français"]],
@@ -37,6 +38,7 @@ module.exports = {
 	},
 	"staging.refugee.info": {
 		theme: "irc",
+		author: 'Refugee Info',
 		accessToken: "7597f6916d5773b57d016a39d7c06ea5c5cf4b213fe60f79893cd7487c29a215",
 		host: "preview.contentful.com",
 		space: "ktglofo8nf88",
@@ -69,6 +71,7 @@ module.exports = {
 	},
 	"qa.refugee.info": {
 		theme: "irc",
+		author: 'Refugee Info',
 		accessToken: "7597f6916d5773b57d016a39d7c06ea5c5cf4b213fe60f79893cd7487c29a215",
 		host: "preview.contentful.com",
 		space: "ktglofo8nf88",
@@ -101,6 +104,7 @@ module.exports = {
 	},
 	"khabrona.info": {
 		theme: "mc",
+		author: 'Khabrona Info',
 		accessToken: "55bea7f7ed5d0e812aa1d48e378dd9a2edb8f9f78c17bd9d2ffa6a014ea3ee2b",
 		space: "l4oa58axtceh",
 		languages: [["en", "English"], ["ar", "العربيـة"]],
@@ -122,6 +126,7 @@ module.exports = {
 	},	
 	"qa.khabrona.info": {
 		theme: "mc",
+		author: 'Khabrona Info',
 		accessToken: "55bea7f7ed5d0e812aa1d48e378dd9a2edb8f9f78c17bd9d2ffa6a014ea3ee2b",
 		space: "l4oa58axtceh",
 		languages: [["en", "English"], ["ar", "العربيـة"]],
@@ -144,6 +149,7 @@ module.exports = {
 	},	
 	"staging.khabrona.info": {
 		theme: "mc",
+		author: 'Khabrona Info',
 		accessToken: "55bea7f7ed5d0e812aa1d48e378dd9a2edb8f9f78c17bd9d2ffa6a014ea3ee2b",
 		space: "l4oa58axtceh",
 		languages: [["en", "English"], ["ar", "العربيـة"]],
@@ -166,6 +172,7 @@ module.exports = {
 	},	
 	"cuentanos.org": {
 		theme: "generic",
+		author: 'CuentaNos',
 		accessToken: "98cd6321d5578bab8cb4c9bafe022f2bd73db5ffce296420d934008f9800fb80",
 		space: "e17qk44d7f2w",
 		languages: [["es", "Español"]],
@@ -189,6 +196,7 @@ module.exports = {
 	},
 	"staging.cuentanos.org": {
 		theme: "generic",
+		author: 'CuentaNos',
 		accessToken: "98cd6321d5578bab8cb4c9bafe022f2bd73db5ffce296420d934008f9800fb80",
 		space: "e17qk44d7f2w",
 		languages: [["es", "Español"]],
@@ -212,6 +220,7 @@ module.exports = {
 	},
 	"qa.cuentanos.org": {
 		theme: "generic",
+		author: 'CuentaNos',
 		accessToken: "98cd6321d5578bab8cb4c9bafe022f2bd73db5ffce296420d934008f9800fb80",
 		space: "e17qk44d7f2w",
 		languages: [["es", "Español"]],
@@ -235,6 +244,7 @@ module.exports = {
 	},
 	"localhost": {
 		theme: "generic",
+		author: 'CuentaNos',
 		accessToken: "98cd6321d5578bab8cb4c9bafe022f2bd73db5ffce296420d934008f9800fb80",
 		space: "e17qk44d7f2w",
 		languages: [["es", "Español"]],
@@ -258,6 +268,7 @@ module.exports = {
 	},
 	"theirc-refugee-info-frontend-design.azurewebsites.net": {
 		theme: "generic",
+		author: 'CuentaNos',
 		accessToken: "8MqcrDXWgwU-c8YScijGKVIW_ABnl52EEoKsd8Ftfig",
 		space: "ejasa2kyylk9",
 		languages: [["es", "Español"]],
@@ -281,6 +292,7 @@ module.exports = {
 	},
 	"theirc-refugee-info-frontend-design-ri.azurewebsites.net": {
 		theme: "irc",
+		author: 'Refugee Info',
 		accessToken: "0cd5c6bfefa4f7f33a98c487012e6f34c2031aee1ff2f6858b11be592ab349d9",
 		space: "ktglofo8nf88",
 		languages: [["en", "English"], ["ar", "العربيـة"], ["ur", "اردو"], ["fa", "فارسی"], ["fr", "Français"]],
@@ -311,6 +323,7 @@ module.exports = {
 	},
 	"theirc-refugee-info-frontend-design-ki.azurewebsites.net": {
 		theme: "mc",
+		author: 'Khabrona Info',
 		accessToken: "55bea7f7ed5d0e812aa1d48e378dd9a2edb8f9f78c17bd9d2ffa6a014ea3ee2b",
 		space: "l4oa58axtceh",
 		languages: [["en", "English"], ["ar", "العربيـة"]],

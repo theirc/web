@@ -6,7 +6,7 @@
 		margin: auto;
 		border: 0;
 		border-top-width: 1px;
-		border-top-color: $dividerColor;
+		border-top-color: #ccc;
 		border-style: solid;
 		border-radius: 1px;
 		height: 0;
@@ -275,7 +275,7 @@
 	.Item {
 		flex: 1;
 		flex-basis: 100%;
-		border-bottom: 1px $titleBackground solid;
+		border-bottom: 1px #ddd solid;
 		min-height: 42px;
 		display: flex;
 
