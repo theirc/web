@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { translate } from "react-i18next";
+import moment from 'moment';
 import HeaderBar from "./HeaderBar";
 import cms from '../content/cms';
 
@@ -41,6 +42,7 @@ class CategoryList extends Component {
 		if(!c.fields.categories && !c.fields.articles) {
 			let image = c.fields.overview && c.fields.overview.fields && c.fields.overview.fields.hero ?
 									c.fields.overview.fields.hero.fields.file.url : '/placeholder.png';
+			
 			return (
 				<li key={c.sys.id} className='tile' onClick={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${c.fields.overview.fields.slug}?language=`+language)}>
 					<div className='img-viewport'>
@@ -48,7 +50,7 @@ class CategoryList extends Component {
 					</div>
 					<div className='text'>
 						{c.fields && <h2>{c.fields.name}</h2>}
-						<span className='author'>By <span>{cms.siteConfig.author}</span></span>
+						<span className='author'>By <span>{cms.siteConfig.author}</span>, {moment(c.sys.updatedAt).format('YYYY.MM.DD')}</span>
 					</div>
 				</li>
 			);
@@ -63,7 +65,7 @@ class CategoryList extends Component {
 					</div>
 					<div className='text'>
 						<h2>{a.fields.title}</h2>
-						<span className='author'>By <span>{cms.siteConfig.author}</span></span>
+						<span className='author'>By <span>{cms.siteConfig.author}</span>, {moment(a.sys.updatedAt).format('YYYY.MM.DD')}</span>
 					</div>
 				</li>
 			));
