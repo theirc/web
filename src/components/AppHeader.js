@@ -30,7 +30,7 @@ class AppHeader extends Component {
 	toggleSearch() {
 		const { search } = this.state;
 		if (!search) {
-			window.scrollTo(0, 0);
+			//window.scrollTo(0, 0);
 		}
 		this.setState({ search: !search });
 	}

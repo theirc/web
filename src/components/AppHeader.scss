@@ -276,7 +276,7 @@ Less me
 			position: absolute;
 		}
 		@media (min-width: $desktopBreakpoint) {
-			position: absolute;
+			position: fixed;
 			top: 65px;
 			z-index: 99;
 			width:98%;
@@ -337,7 +337,7 @@ Less me
 			position: absolute;
 		}
 		@media (min-width: $desktopBreakpoint) {
-			position: absolute;
+			position: fixed;
 			top: 65px;
 			z-index: 99;
 			width:98%;

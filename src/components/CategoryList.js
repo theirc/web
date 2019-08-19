@@ -25,10 +25,12 @@ class CategoryList extends Component {
 			return c.fields.categories.map(a =>
 				(
 					<li className='tile' key={a.sys.id} onClick={() => console.log(`/${country.fields.slug}?language=`+language)}>
-						<div className='img-viewport'>
-							{!a.fields.hero && <img src='/placeholder.png' alt='' />}
+						<div class="card">
+							<div className='img-viewport'>
+								{!a.fields.hero && <img src='/placeholder.png' alt='' />}
+							</div>
+							{a.fields && <a href='#/'><h2>{a.fields.name}</h2></a>}
 						</div>
-						{a.fields && <a href='#/'><h2>{a.fields.name}</h2></a>}
 					</li>
 				)
 				);
@@ -39,10 +41,12 @@ class CategoryList extends Component {
 									c.fields.overview.fields.hero.fields.file.url : '/placeholder.png';
 			return (
 				<li key={c.sys.id} className='tile' onClick={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${c.fields.overview.fields.slug}?language=`+language)}>
-					<div className='img-viewport'>
-						<img src={image} alt='' />
+					<div class="card">
+						<div className='img-viewport'>
+							<img src={image} alt='' />
+						</div>
+						{c.fields && <a href='#/'><h2>{c.fields.name}</h2></a>}
 					</div>
-					{c.fields && <a href='#/'><h2>{c.fields.name}</h2></a>}
 				</li>
 			);
 		}
@@ -50,11 +54,13 @@ class CategoryList extends Component {
 		if(c.fields.articles) {
 			return c.fields.articles.map(a => a.fields && (
 				<li key={a.sys.id} className='tile' onClick={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${a.fields.slug}?language=`+language)}>
+					<div class="card">
 					<div className='img-viewport'>
 						{a.fields.hero && a.fields.hero.fields && <img src={a.fields.hero.fields.file.url + '?fm=jpg&fl=progressive'} alt='' />}
 						{!a.fields.hero && <img src='/placeholder.png' alt='' />}
 					</div>
 					<a href='#/'><h2>{a.fields.title}</h2></a>
+					</div>
 				</li>
 			));
 		}
