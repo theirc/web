@@ -71,6 +71,7 @@ class AppHeader extends Component {
 		const cookiePolicyLink = <a href="/greece/privacy/cookies" target="_blank" rel="noopener noreferrer">Cookie Policy</a>;
 		const privacyPolicyLink = <a href="/greece/privacy/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>;
 		const showHeaderBackground = !country || !language;
+
 		return (
 			<div className={backgroundDark ? 'AppHeader' : 'AppHeaderLight'}>
 
@@ -96,7 +97,7 @@ class AppHeader extends Component {
 										{!disableCountrySelector && (
 											<span className="app-bar-selectors country" color="contrast" onClick={onChangeCountry || noop}>
 												{/* {(country && country.fields.name) || " "} */}
-												<img src='/gr.png' />
+												<img src={`/${country.fields.slug}.png`} />
 											</span>
 										)}
 										{!disableLanguageSelector && (
