@@ -275,6 +275,7 @@
 	}
 
 	.Item {
+		background-color: white;
 		border: 1px solid #eee;
 		border-radius: 5px;
 		box-sizing: border-box;
@@ -294,7 +295,6 @@
 		@media (min-width: $desktopBreakpoint) {
 			flex-basis: calc(50% - 10px);
 			margin:5px;
-			background-color: white;
 		}
 		i.material-icons {
 			justify-self: center;
@@ -388,7 +388,11 @@
 .ServiceMap {
   .leaflet-popup-tip-container {
     display: block;
-    margin-top: -1px;
+		margin-top: -6px;
+		
+		.leaflet-popup-tip {
+			box-shadow: none;
+		}
   }
   .leaflet-control-attribution a {
     font-size: 1em;
@@ -396,6 +400,10 @@
 	.leaflet-popup {
 		width: 300px;
 		left: -150px;
+	}
+	.leaflet-popup-content-wrapper {
+		background-color: transparent;
+		box-shadow: none;
 	}
   .leaflet-popup-content {
     // margin: 5px 0;
@@ -429,6 +437,9 @@
       .Info {
 				.title{
 					background-color: #f5f5f5;
+					border-bottom: 1px solid #eee;
+					border-top-left-radius: 5px;
+					border-top-right-radius: 5px;
 					display: flex;
 					justify-content: space-between;
 				}
@@ -436,16 +447,18 @@
           font-size: 120%;
           margin: 0;
 					padding: 10px 0;
-					text-decoration: underline;
+
+					&:hover {
+						text-decoration: underline;
+					}
         }
         h2 {
-          color: #777;
           font-size: 110%;
-          font-weight: bold;
-          margin: 5px 0;
+          margin: 10px 0 15px;
 				}
 				address {
-					text-decoration: underline;
+					color: gray;
+					font-size: 95%;
 				}
         .fullAddress {
           font-style: normal;
