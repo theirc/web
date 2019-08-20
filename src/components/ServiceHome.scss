@@ -284,6 +284,7 @@
 		flex: 1;
 		flex-basis: 100%;
 		min-height: 42px;
+		margin: 2px 0;
 
 		-webkit-touch-callout: none;
 		-webkit-user-select: none;
@@ -291,6 +292,11 @@
 		-moz-user-select: none;
 		-ms-user-select: none;
 		user-select: none;
+
+		&.service-map {
+			background-color: transparent;
+			border: none;
+		}
 
 		@media (min-width: $desktopBreakpoint) {
 			flex-basis: calc(50% - 10px);
@@ -555,7 +561,7 @@
 			}
 	
 			&:nth-child(odd) {
-				background-color: #eee;
+				background-color: #ccc;
 			}
 		}
 
