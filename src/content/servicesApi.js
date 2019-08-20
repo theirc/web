@@ -15,23 +15,18 @@ if (siteConfig && siteConfig.backendUrl) {
 module.exports = {
 	fetchCategories(language, region) {
 		return new Promise((resolve, reject) => {
-			const sessionStorage = getSessionStorage();
-			if (sessionStorage[`${language}-${region}-service-categories`] && sessionStorage[`${language}-${region}-service-categories`] !== "[]") {
-				resolve(JSON.parse(sessionStorage[`${language}-${region}-service-categories`]));
-			} else {
-				
-				request
-					.get(RI_URL + "/service-types/" + (region ? `?region=${region}` : ""))
-					.set("Accept-Language", language)
-					.end((err, res) => {
-						if (err) {
-							reject(err);
-							return;
-						}
-						sessionStorage[`${language}-${region}-service-categories`] = JSON.stringify(res.body);
-						resolve(res.body);
-					});
-			}
+			// Do not cache, categories order changes
+			request
+				.get(RI_URL + "/service-types/" + (region ? `?region=${region}` : ""))
+				.set("Accept-Language", language)
+				.end((err, res) => {
+					if (err) {
+						reject(err);
+						return;
+					}
+					
+					resolve(res.body);
+				});
 		});
 	},
 	fetchRegions(language) {
@@ -135,7 +130,9 @@ module.exports = {
 				(categoryId || "") +
 				(searchTerm ? "&search=" + searchTerm : "");
 				
-				fetch(RI_URL + requestUrl)
+				const headers = { 'Accept-Language': language };
+
+				fetch(RI_URL + requestUrl, { headers })
 					.then(res => res.json())
 					.then(response => {
 						let servicesList = {
