@@ -1,12 +1,15 @@
 import React, { Component } from "react";
+import ReactDOM from "react-dom"
 import PropTypes from "prop-types";
-import "./ArticlePage.css";
 import { Helmet } from "react-helmet";
+import * as clipboard from "clipboard-polyfill";
+import { Share, Link } from "material-ui-icons";
 import FacebookPlayer from "react-facebook-player";
 import YouTube from "react-youtube";
 import InstagramEmbed from 'react-instagram-embed';
 import HeaderBar from "./HeaderBar";
-import ReactDOM from "react-dom"
+
+import "./ArticlePage.css";
 
 const Remarkable = require("remarkable");
 const IG_URL = "https://instagr.am/p/";
@@ -21,6 +24,10 @@ const md = new Remarkable("full", {
  *
  */
 export default class ArticlePage extends Component {
+	state = {
+		copied: false
+	}
+
 	static propTypes = {
 		article: PropTypes.shape({
 			title: PropTypes.string,
@@ -113,13 +120,43 @@ export default class ArticlePage extends Component {
 		this.replaceLinks();
 	}
 
+	onCopyLink = () => {
+		this.setState({ copied: true });
+		
+		clipboard.writeText(document.location.href);
+
+		setTimeout(() => this.setState({ copied: false }), 1500);
+	}
+
+	onShareOnFacebook = () => {
+		const { language } = this.props
+		if (global.window) {
+			const { FB } = global.window;
+			let { href } = window.location;
+			console.log(FB, href)
+			href += (href.indexOf("?") > -1 ? "&" : "?") + "language=" + language;
+
+			if (FB) {
+				FB.ui(
+					{
+						method: "share",
+						href,
+					},
+					function (response) { }
+				);
+			}
+		}
+	}
+
+	
 	render() {
 		const { article, category, loading } = this.props;
 		const { title, content, hero, lead } = article.fields;
 		const { contentType } = article.sys;
-
+		
 		let html = md.render(content || lead);
 		html = html.replace(/(\+[0-9]{9,14}|00[0-9]{9,15})/g, `<a class="tel" href="tel:$1">$1</a>`);
+		const t = s => s;
 		
 		return (
 			<div ref={r => (this._ref = r)} className={["ArticlePage", loading ? "loading" : "loaded"].join(" ")}>
@@ -138,7 +175,13 @@ export default class ArticlePage extends Component {
 							{hero.fields.description && <credit>{hero.fields.description}</credit>}
 						</div>
 					)}
-				<HeaderBar subtitle={(category.fields.articles || []).length > 1 && `${category.fields.name}:`} title={title} social />
+				<HeaderBar subtitle={(category.fields.articles || []).length > 1 && `${category.fields.name}:`} title={title} />
+				<div className='filter-bar'>
+					<div className="social">
+						<div href='#' className="share" onClick={this.onShareOnFacebook}>{t('Share on Facebook')}<Share /></div>
+						<div href='#' className="copy" onClick={this.onCopyLink}>{this.state.copied ? t("Copied") : t("Copy Link")}<Link /></div>
+					</div>
+				</div>
 				{contentType.sys.id === "video" && this.renderVideo()}
 				<article>
 					<div dangerouslySetInnerHTML={{ __html: html }} />
