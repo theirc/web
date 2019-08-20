@@ -125,6 +125,18 @@ Less me
 		.rtl & {
 			font-family: "Cairo", sans-serif;
 		}
+
+		&.country {
+			padding: 2px 10px 0 30px;
+
+			img {
+				width: 20px;
+			}
+		}
+		
+		&.lang {
+			padding: 0 30px 0 10px;
+		}
 	}
 	@-moz-document url-prefix(){
 	.search-button{
@@ -139,12 +151,9 @@ Less me
 }
 .app-bar-separator {
 	border-left-width: 1px;
-	border-left-color: #ffffff;
+	border-left-color: #ccc;
 	border-left-style: solid;
 	height: 25px;
-	@include brand-colors( "border-left-color");
-
-	
 }
 .separator-searchIcon{
 	@media (min-width: 960px) {		

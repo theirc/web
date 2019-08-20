@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { translate } from "react-i18next";
+import moment from 'moment';
 import HeaderBar from "./HeaderBar";
+import cms from '../content/cms';
 
 import "./CategoryList.css";
 
@@ -8,7 +10,7 @@ class CategoryList extends Component {
 	state = {
 		selectedCategory: ''
 	};
-
+	
 	onChange = (e) => {
 		this.setState({ selectedCategory: e.target.value });
 	}
@@ -25,11 +27,12 @@ class CategoryList extends Component {
 			return c.fields.categories.map(a =>
 				(
 					<li className='tile' key={a.sys.id} onClick={() => console.log(`/${country.fields.slug}?language=`+language)}>
-						<div class="card">
-							<div className='img-viewport'>
-								{!a.fields.hero && <img src='/placeholder.png' alt='' />}
-							</div>
-							{a.fields && <a href='#/'><h2>{a.fields.name}</h2></a>}
+						<div className='img-viewport'>
+							{!a.fields.hero && <img src='/placeholder.png' alt='' />}
+						</div>
+						<div className='text'>
+							{a.fields && <h2>{a.fields.name}</h2>}
+							<span className='author'>By <span>{cms.siteConfig.author}</span></span>
 						</div>
 					</li>
 				)
@@ -39,13 +42,15 @@ class CategoryList extends Component {
 		if(!c.fields.categories && !c.fields.articles) {
 			let image = c.fields.overview && c.fields.overview.fields && c.fields.overview.fields.hero ?
 									c.fields.overview.fields.hero.fields.file.url : '/placeholder.png';
+			
 			return (
 				<li key={c.sys.id} className='tile' onClick={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${c.fields.overview.fields.slug}?language=`+language)}>
-					<div class="card">
-						<div className='img-viewport'>
-							<img src={image} alt='' />
-						</div>
-						{c.fields && <a href='#/'><h2>{c.fields.name}</h2></a>}
+					<div className='img-viewport'>
+						<img src={image} alt='' />
+					</div>
+					<div className='text'>
+						{c.fields && <h2>{c.fields.name}</h2>}
+						<span className='author'>By <span>{cms.siteConfig.author}</span>, {moment(c.sys.updatedAt).format('YYYY.MM.DD')}</span>
 					</div>
 				</li>
 			);
@@ -54,12 +59,13 @@ class CategoryList extends Component {
 		if(c.fields.articles) {
 			return c.fields.articles.map(a => a.fields && (
 				<li key={a.sys.id} className='tile' onClick={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${a.fields.slug}?language=`+language)}>
-					<div class="card">
 					<div className='img-viewport'>
 						{a.fields.hero && a.fields.hero.fields && <img src={a.fields.hero.fields.file.url + '?fm=jpg&fl=progressive'} alt='' />}
 						{!a.fields.hero && <img src='/placeholder.png' alt='' />}
 					</div>
-					<a href='#/'><h2>{a.fields.title}</h2></a>
+					<div className='text'>
+						<h2>{a.fields.title}</h2>
+						<span className='author'>By <span>{cms.siteConfig.author}</span>, {moment(a.sys.updatedAt).format('YYYY.MM.DD')}</span>
 					</div>
 				</li>
 			));
@@ -71,7 +77,6 @@ class CategoryList extends Component {
 		const showToggle = c => {
 			return (c.fields.subCategories && c.fields.subCategories.length) || (c.fields.articles && c.fields.articles.length && c.fields.type !== "News" && !c.fields.overview);
 		};
-
 		let showCategory = c => c && c.fields && !c.fields.hide && c.fields.slug && (c.fields.overview || c.fields.articles);
 		const overviewOrFirst = c => c.fields.overview || (c.fields.articles.length && c.fields.articles[0]);
 		const clk = (tab) => {   ///Needs refactor
@@ -97,10 +102,12 @@ class CategoryList extends Component {
 			<div className="CategoryList">
 				<HeaderBar title={t("Blog").toUpperCase()} />
 				<div className='tiles-desktop'>
-					<select className='select-css' value={this.state.selectedCategory} onChange={this.onChange}>
-						<option value=''>{t('All Categories')}</option>
-						{(categories || []).filter(showCategory).map(e => <option key={e.sys.id} value={e.sys.id}>{e.fields.name}</option>)}
-					</select>
+					<div className='filter-bar'>
+						<select className='select-css' value={this.state.selectedCategory} onChange={this.onChange}>
+							<option value=''>{t('All Categories')}</option>
+							{(categories || []).filter(showCategory).map(e => <option key={e.sys.id} value={e.sys.id}>{e.fields.name}</option>)}
+						</select>
+					</div>
 					<ul>
 						{(categories || []).filter(showCategory).map(c => {
 							if(c.sys.id === this.state.selectedCategory || !this.state.selectedCategory.length) {
@@ -117,7 +124,7 @@ class CategoryList extends Component {
 							{showToggle(c) && [
 								<label key="a-1" htmlFor={`tab-${i}`} className="container">
 									<i className={c.fields.iconClass || "material-icons"}>{c.fields.iconText || ((!c.fields.iconClass || c.fields.iconClass === "material-icons") && "add")}</i>
-									<strong className="category-name">{c.fields && c.fields.name}</strong>
+									<span className="category-name">{c.fields && c.fields.name}</span>
 									<div className="up">
 										<i className="material-icons">keyboard_arrow_up</i>
 									</div>
@@ -162,7 +169,7 @@ class CategoryList extends Component {
 										onClick={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${c.fields.overview.fields.slug}?language=`+language)}
 									>
 										<i className={c.fields.iconClass || "material-icons"}>{c.fields.iconText || ((!c.fields.iconClass || c.fields.iconClass === "material-icons") && "book")}</i>
-										<strong className="category-name">{c.fields && c.fields.name}</strong>
+										<span className="category-name">{c.fields && c.fields.name}</span>
 									</label>
 								)}
 						</li>

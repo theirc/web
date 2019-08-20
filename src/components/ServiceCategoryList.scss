@@ -111,32 +111,75 @@ input[type="checkbox"].ri.switch:checked + div > div {
 
 .filter-bar{
     border-bottom: 1px solid #ddd;
-    height: 60px;
+    display: flex;
+    height: 41px;
     margin-bottom: 20px;
     padding: 10px;
+
+    .filters {
+        display: flex;
+    }
 }
+
 .btn-filter{
-    @include brand-colors( "background-color");
-    @include brand-colors( "border-color");
-	@include brand-colors-inverse( "color");
-    /*background-color: #FDDA14; */
-    color: black;
-    font-family: "Roboto", sans-serif;
-    font-size: 15px;
+    // @include brand-colors( "background-color");
+    // @include brand-colors( "border-color");
+    // @include brand-colors-inverse( "color");
+    align-items: center;
+    background-color: #f2f2f2;
+    border-color: #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    font-size: 13px;
     height: 41px;
     margin-right: 20px;
-    border-radius: 5px;
     outline: 0;
     padding-left: 15px;
     padding-right: 15px;
-    margin-top: 9px;
-    cursor: pointer;
+
+    &:hover {
+        border-color: #bbb;
+    }
+
+    i {
+        font-size: 18px;
+        margin-left: 10px;
+    }
 }
-#toggle-map{
-    float: right;
-}
-#toggle-map div{
-   display: inline-block;
+#toggle-map {
+    border-left: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 20px;
+
+
+    div {
+        display: inline-block;
+    }
+    
+    input {
+        cursor: pointer;
+        width: 50px;
+        height: 25px;
+    }
+
+    span {
+        font-size: 12px;
+        text-align: center;
+    }
+
+    .toggle-btn {
+        border: none;
+        margin: 0 0 5px;
+        
+        div {
+            border: 1px solid #ccc;
+            box-shadow: none;
+            margin: 0;
+        }
+    }
 }
 #location-title{
     font-family: "Roboto", sans-serif;
@@ -292,4 +335,8 @@ input[type="checkbox"].ri.switch:checked + div > div {
     font-weight: 600;
     padding: 30px;
     text-align: center;
+}
+
+.stronger {
+    font-weight: 500;
 }
