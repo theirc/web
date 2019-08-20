@@ -520,37 +520,55 @@
 
 	@include service-common();
 	.openingTable {
-		display: flex;
 		align-items: center;
+		display: flex;
 		justify-content: center;
 	}
+
 	.MapCursor{
 		cursor:pointer;
 	}
 
 	table {
+		border: 1px solid #ddd;
 		border-collapse: collapse;
 		margin-bottom: 1em;
 
 		@media (max-width: 500px) {
 			min-width: 100%;
 		}
+
 		@media (min-width: 800px) {
 			min-width: 400px;
 		}
+
 		tr {
-			border-bottom: 1px $dividerColor solid;
+			border-bottom: 1px solid #ddd;
 			height: 30px;
+
+			&:last-child {
+				border-bottom: none;
+			}
+
+			&:nth-child(even) {
+				background-color: #ddd;
+			}
+	
+			&:nth-child(odd) {
+				background-color: #eee;
+			}
 		}
 
 		td {
 			text-align: center;
-		}
-		td.week {
-			font-weight: bold;
-			text-align: start;
-			padding-left: 5px;
-			padding-right: 5px;
+
+			&.week {
+				font-weight: bold;
+				text-align: start;
+				padding-left: 5px;
+				padding-right: 5px;
+			}
+
 		}
 	}
 	.RelatedServices {
@@ -561,6 +579,14 @@
 	}
 	.RelatedServicesTitle {
 		margin-left:15px;
+	}
+
+	@media (min-width: $desktopBreakpoint) {
+		.HeaderBar {
+			h1 {
+				padding: 18px 0;
+			}
+		}
 	}
 
 	.icon {
