@@ -123,7 +123,7 @@ class ServiceList extends React.Component {
 
 						<ul className="Items">
 							<li
-								className="Item"
+								className="Item service-map"
 								onClick={showMap}
 								style={{
 									flexBasis: "100%",
