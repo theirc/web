@@ -19,8 +19,47 @@
 		@include brand-colors("border-bottom-color");
 	}
 
-	.with-lines {
+	@media (min-width: $desktopBreakpoint) {
+		.HeaderBar {
+			h1 {
+				padding: 18px 0;
+			}
+		}
 	}
+
+	.filter-bar {
+		display: none;
+		justify-content: flex-end;
+
+		@media (min-width: $desktopBreakpoint) {
+			display: flex;
+		}
+
+		.social {
+			display: flex;
+
+			div {
+				align-items: center;
+				background-color: #f2f2f2;
+				border: 1px solid #ddd;
+				border-radius: 5px;
+				display: flex;
+				font-size: 13px;
+				justify-content: space-between;
+				margin-left: 20px;
+				padding: 0 10px;
+				text-decoration: none;
+				width: 190px;
+				height: 41px;
+	
+				&:hover {
+					cursor: pointer;
+					border-color: #bbb;
+				}
+			}
+		}
+	}
+
 	.pos,
 	.neg {
 		display: none;
@@ -143,20 +182,15 @@
 		margin-right: -4vw;
 	}
 	@media (min-width: $desktopBreakpoint) {
-		.hero {
-			max-height: 500px;
-			overflow: hidden;
-			display: block;
-		}
 		article {
 			padding-left: 4vw;
 			padding-right: 4vw;
 		}
-		.HeaderBar{
-			padding-left: 4vw;
-			padding-right: 4vw;
-			padding-top: 20px;
-			padding-bottom: 20px;
+
+		.hero {
+			max-height: 500px;
+			overflow: hidden;
+			display: block;
 		}
 	}
 

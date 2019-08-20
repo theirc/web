@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { translate } from "react-i18next";
-import { Share, Link } from "material-ui-icons";
-import * as clipboard from "clipboard-polyfill";
 import PropTypes from "prop-types";
 import "./HeaderBar.css";
 
@@ -10,54 +8,17 @@ const generateKey = pre => {
 };
 
 class HeaderBar extends Component {
-	state = {
-		copied: false
-	}
-
 	static propTypes = {
 		subtitle: PropTypes.any,
 		title: PropTypes.string.isRequired,
 	};
 
-	onCopyLink = () => {
-		this.setState({ copied: true });
-		
-		clipboard.writeText(document.location.href);
-
-		setTimeout(() => this.setState({ copied: false }), 1500);
-	}
-
-	onShareOnFacebook = () => {
-		const { language } = this.props
-		if (global.window) {
-			const { FB } = global.window;
-			let { href } = window.location;
-			console.log(FB, href)
-			href += (href.indexOf("?") > -1 ? "&" : "?") + "language=" + language;
-
-			if (FB) {
-				FB.ui(
-					{
-						method: "share",
-						href,
-					},
-					function (response) { }
-				);
-			}
-		}
-	}
-
 	render() {
-		const { subtitle, title, children, t, social } = this.props;
+		const { subtitle, title, children } = this.props;
 		const triggerKey = generateKey("trigger");
 		return (
 			<div className="HeaderBar">
 				<input type="checkbox" name={triggerKey} id={triggerKey} />
-				{social && <div className="social">
-					<div href='#' className="share" onClick={this.onShareOnFacebook}>{t('Share on Facebook')}<Share /></div>
-					<div href='#' className="copy" onClick={this.onCopyLink}>{this.state.copied ? t("Copied") : t("Copy Link")}<Link /></div>
-				</div>
-				}
 				<label htmlFor={triggerKey}>
 					<h1>
 						{title}
