@@ -39,6 +39,10 @@
 		list-style: none;
 		margin: 0;
 		padding: 0;
+
+		li.selected {
+			font-weight: bold;
+		}
 	}
 	@media (min-width: $desktopBreakpoint) {
 		.tiles-mobile {
@@ -245,8 +249,9 @@
 		}
 		
 		&>li {
-			font-size: 16px;
 			border-top: 1px solid #ddd;
+			font-size: 14px;
+			font-weight: normal;
 			padding-left: 8px;
 		}
 	}
