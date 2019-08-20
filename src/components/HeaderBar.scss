@@ -113,16 +113,20 @@
 		div {
 			align-items: center;
 			background-color: #f2f2f2;
-			box-shadow: 0 0 8px 0px #e3e3e3;
+			border: 1px solid #ddd;
+			border-radius: 5px;
 			display: flex;
+			font-size: 13px;
 			justify-content: space-between;
 			margin-left: 30px;
-			padding: 15px 20px;
+			padding: 0 10px;
 			text-decoration: none;
 			width: 190px;
+			height: 41px;
 
 			&:hover {
 				cursor: pointer;
+				border-color: #bbb;
 			}
 		}
 	}
