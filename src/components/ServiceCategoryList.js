@@ -64,7 +64,7 @@ class ServiceCategoryList extends React.Component {
 	}
 	render() {
 		const { categories, loaded } = this.state;
-		const { t, locationEnabled, toggleLocation, listAllServices, goToLocationList, goToMap, locationName, departmentSelected } = this.props;	
+		const { t, listAllServices, goToLocationList, goToMap, locationName, departmentSelected } = this.props;	
 
 		if (!loaded) {
 			return (
@@ -90,11 +90,6 @@ class ServiceCategoryList extends React.Component {
 		}
 		return <div>
 			<HeaderBar key={"Header"} title={t("Service Categories").toUpperCase()}>
-				<li onClick={toggleLocation || _.identity}>
-					<h1>{t("Order results by distance to me")}</h1>
-					{!locationEnabled && <i className="MenuIcon material-icons">radio_button_unchecked</i>}
-					{locationEnabled && <i className="MenuIcon material-icons">radio_button_checked</i>}
-				</li>
 			</HeaderBar>
 			<div key={"List"} className="ServiceCategoryList">
 				<ul>

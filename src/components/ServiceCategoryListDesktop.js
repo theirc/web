@@ -202,6 +202,12 @@ class ServiceCategoryListDesktop extends React.Component {
 		let departments = regions.filter(r => r.slug === country.fields.slug);
 		departments.push(...regions.filter(r => r.parent === countryId));
 
+		const availableServices = services.filter(s => !s.provider.vacancy);
+		let sortedAvailableServices =[]
+		if (availableServices){
+			sortedAvailableServices = _.orderBy(availableServices, ["region.level", "region.name", "name"], ["desc", "asc", "asc"]);
+		}
+		const unavailableServices = services.filter(s => s.provider.vacancy);
 
 		if (!loaded) {
 			return (
@@ -272,7 +278,7 @@ class ServiceCategoryListDesktop extends React.Component {
 					<div id="categories">
 						<div id="location-title">{t("Service_Categories")}</div>
 						<div id="location-list">
-							<button key={0} className={!this.state.category  ? "location-item-selected" : "location-item"} onClick={() => this.onSelectCategory(null)}><span>{'All_Categories'}</span></button>
+							<button key={0} className={!this.state.category  ? "location-item-selected" : "location-item"} onClick={() => this.onSelectCategory(null)}><span>{t('All_Categories')}</span></button>
 
 							{this.state.categories.map((c) => (
 								this.renderCategory(c)
@@ -285,12 +291,23 @@ class ServiceCategoryListDesktop extends React.Component {
 				</div>
 				}
 				{showServices && !this.state.showMap && !this.state.showFilter && 
-				<div className="ServiceList">
-					<div className="ServiceListContainer">
-						{services.map(this.renderService.bind(this))}
+					<div className="ServiceList">
+						<div className="ServiceListContainer">
+							{sortedAvailableServices.map(this.renderService.bind(this))}
+						</div>
 					</div>
+				}
+				{showServices && !this.state.showMap && !this.state.showFilter && unavailableServices.length > 0 && 
+					<div className="ServiceListContainer Unavailable">
+					<ul className="Items">
+						<li style={{flexBasis: "100%",}}>
+						<h1>Currently unavailable:</h1>
+						</li>
+						{unavailableServices.map(this.renderService.bind(this))}
+					</ul>
 				</div>
 				}
+
 				{!showServices && !this.state.showFilter && 
 					<div className="loader" />
 				}

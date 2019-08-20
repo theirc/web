@@ -95,14 +95,6 @@ class ServiceList extends React.Component {
 			return (
 				<div className="ServiceList">
 					<HeaderBar title={nearby ? t("Nearby Services") : titleName}>
-						{!nearby &&
-							navigator.geolocation && (
-								<li onClick={toggleLocation || _.identity}>
-									<h1>{t("Order results by distance to me")}</h1>
-									{!locationEnabled && <i className="MenuIcon material-icons">radio_button_unchecked</i>}
-									{locationEnabled && <i className="MenuIcon material-icons">radio_button_checked</i>}
-								</li>
-							)}
 					</HeaderBar>
 					<div className="loader" />
 				</div>
@@ -112,14 +104,7 @@ class ServiceList extends React.Component {
 		return (
 			<div className="ServiceList">
 				<HeaderBar title={nearby ? t("Nearby Services") : (category ? category.name : titleName)}>
-					{!nearby &&
-						navigator.geolocation && (
-							<li onClick={toggleLocation || _.identity}>
-								<h1>{t("Order results by distance to me")}</h1>
-								{!locationEnabled && <i className="MenuIcon material-icons">radio_button_unchecked</i>}
-								{locationEnabled && <i className="MenuIcon material-icons">radio_button_checked</i>}
-							</li>
-						)}
+					
 				</HeaderBar>
 				{errorMessage && (
 					<div className="Error">
