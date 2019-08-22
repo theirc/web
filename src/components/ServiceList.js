@@ -120,7 +120,6 @@ class ServiceList extends React.Component {
 
 				{sortedAvailableServices.length > 0 && (
 					<div className="ServiceListContainer">
-
 						<ul className="Items">
 							<li
 								className="Item service-map"
