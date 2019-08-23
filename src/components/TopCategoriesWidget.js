@@ -11,21 +11,7 @@ class TopCategoriesWidget extends Component {
         /*eslint-disable*/
         return (
             <div className="TopCategories">
-                
-                <h3>{t("Top Categories")}</h3>
-                <div className="title-line"></div>
-                {categories.map(c => {
-                    let article = articleFunc(c);
-                    return (
-                        <div key={c.sys.id} className="TopCategory" onClick={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${article.fields.slug}?language=${language}`)}>
-                            <div className="icon">
-                                <i className={c.fields.iconClass || "material-icons"}>{c.fields.iconText || ((!c.fields.iconClass || c.fields.iconClass === "material-icons") && "add")}</i>
-                            </div>
-                            {c.fields.name}
-                        </div>
-                    );
-                })}
-                <s>
+                <s className='Read-More'>
                     <a
                         href="#/"
                         onClick={() => {
@@ -35,7 +21,21 @@ class TopCategoriesWidget extends Component {
                     >
                         {t("See More")}
                     </a>
+                    <i className="material-icons">arrow_right</i>
                 </s>
+                <h3>{t("Top Categories")}</h3>
+                <div className="title-line"></div>
+                {categories.map(c => {
+                    let article = articleFunc(c);
+                    return (
+                        <div key={c.sys.id} className="TopCategory" onClick={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${article.fields.slug}?language=${language}`)}>
+                            <div className="icon">
+                                <i className={c.fields.iconClass || "material-icons"}>{c.fields.iconText || ((!c.fields.iconClass || c.fields.iconClass === "material-icons") && "add")}</i>
+                            </div>
+                            <span>{c.fields.name}</span>
+                        </div>
+                    );
+                })}
             </div>
         );
     }

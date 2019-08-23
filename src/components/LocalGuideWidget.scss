@@ -1,3 +1,5 @@
+@import "../shared/includes.scss";
+
 .LocalGuide {
     .ltr & {
         s {
@@ -73,10 +75,14 @@
             align-items: center;
             margin-bottom: -76px;
             color: white;
-            font-size: 12px;
+            font-size: 14px;
             letter-spacing: 0;
             line-height: 16px;
             transition: background-color 1s ease-in-out;
+
+            @media (min-width: $desktopBreakpoint) {
+                font-size: 16px;
+            }
         }
     }
 }
