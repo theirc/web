@@ -252,7 +252,7 @@ class ServiceDetail extends React.Component {
 				<HeaderBar subtitle={`${subtitle}:`} title={serviceT.name} />
 
 				<article>
-					<span className='author'>By <span>{cms.siteConfig.author}</span>, {moment(service.updated_at).format('YYYY.MM.DD')}</span>
+					<span className='author'><span>{t("LAST_UPDATED")}</span> {moment(service.updated_at).format('YYYY.MM.DD')}</span>
 
 					<h2 className='provider'>
 						{t("Service Provider")}:&nbsp;{serviceProviderElement(service)}
