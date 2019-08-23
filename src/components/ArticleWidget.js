@@ -86,6 +86,7 @@ class ArticleWidget extends Component {
 						>
 							{t("Read More")}
 						</a>
+						<i className="material-icons">arrow_right</i>
 					</s>
 				)}
 			</div>

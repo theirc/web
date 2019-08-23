@@ -38,14 +38,18 @@
 			//@include brand-colors("background-color");
 		}
 	}
-
-s > a:hover{opacity: 0.86}
-	s.Read-More {
-		line-height: 100%;
-		flex-direction: row;
+	.TopCategories {
+		.Read-More {
+			float: right;
+			position: absolute;
+			right: 20px;
+		}
+		@media (max-width: $desktopBreakpoint) {
+			i {
+				font-size: 25px !important;
+			}
+		}
 	}
-
-
 	.TopCategory {
 		width:33%;
 		display: inline-block;
@@ -62,11 +66,23 @@ s > a:hover{opacity: 0.86}
 		height: 130px;
 		text-align: center;
 
+		&:hover {
+			span {
+				text-decoration: underline;
+			}
+
+			.icon {
+				color: black;
+			}
+		}
+
+
 		@media (max-width: $desktopBreakpoint) {
-			display: block;
+			display: flex;
 			max-width: max-content;
 			height: auto;
-			width:100%;
+			text-align: left;
+			width: 100%;
 		}
 
 		& .icon {
@@ -83,11 +99,7 @@ s > a:hover{opacity: 0.86}
 				text-align: center;
 				font-size: 50px;
 			}
-
-			&:hover {
-				color: black;
-			}
-			
+						
 			//	padding-right: 5px;
 			//	padding-left: 5px;
 
