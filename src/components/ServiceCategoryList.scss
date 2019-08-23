@@ -163,6 +163,7 @@ input[type="checkbox"].ri.switch:checked + div > div {
         cursor: pointer;
         width: 50px;
         height: 25px;
+        margin: -9px 0 0;
     }
 
     span {
@@ -171,22 +172,30 @@ input[type="checkbox"].ri.switch:checked + div > div {
     }
 
     .toggle-btn {
-        border: none;
+        border: 1px solid transparent;
+        box-sizing: border-box;
         margin: 0 0 5px;
         
         div {
-            border: 1px solid #ccc;
+            border: 1px solid #ddd;
             box-shadow: none;
-            margin: 0;
+            margin: -1px 0 0 -1px;
+        }
+
+        &.hover {
+            border:1px solid #bbb;
+            div {
+                border:1px solid #ccc;
+            }
         }
     }
 }
 #location-title{
+    color: gray;
     font-family: "Roboto", sans-serif;
-    font-size: 24px;
+    font-size: 13px;
     text-align: center;
-    padding: 30px;
-    text-transform: uppercase;
+    padding: 13px 10px;
 }
 
 .location-filter{
@@ -238,15 +247,20 @@ input[type="checkbox"].ri.switch:checked + div > div {
     border: 1px solid #ddd;
     cursor: pointer;
     display: flex;
-    width: calc(25% - 20px);
-    background-color: #f2f2f2;
-    height: 64px;
+    // width: calc(25% - 20px);
+    background-color: #eee;
+    height: 30px;
     margin: 10px;
     text-align: center;
     float: left;
-    font-size: 15px;
+    font-size: 13px;
     outline: none;
     padding: 0 15px;
+    border-radius: 15px;
+
+    &:hover {
+        border: 1px solid #bbb;
+    }
 
     i {
         margin-right: 9px
@@ -258,19 +272,20 @@ input[type="checkbox"].ri.switch:checked + div > div {
 }
 .location-item-selected{
     align-items: center;
-    border: 1px solid #ddd;
+    border-color: transparent;
     cursor: pointer;
     display: flex;
-    @include brand-colors( "background-color");
+    background-color: #1e7017;
 	@include brand-colors-inverse( "color");
-    width: calc(25% - 20px);
-    height: 64px;
+    // width: calc(25% - 20px);
+    height: 30px;
     margin: 10px;
     text-align: center;
     float: left;
-    font-size: 15px;
+    font-size: 13px;
     outline: none;
     padding: 0 15px;
+    border-radius: 15px;
 
     i {
         margin-right: 9px
@@ -278,6 +293,21 @@ input[type="checkbox"].ri.switch:checked + div > div {
 
     span {
         width: 100%;
+    }
+}
+.show-more {
+    text-align: center;
+
+    button {
+        background-color: #29991f;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+        font-family: "Roboto", sans-serif;
+        font-size: 13px;
+        height: 41px;
+        margin: 20px auto 10px;
+        width: 120px;
     }
 }
 .show-services{
