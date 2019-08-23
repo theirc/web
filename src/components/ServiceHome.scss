@@ -87,6 +87,9 @@
 		color: lighten(black, 50%);
 	}
 }
+.ServiceCategoryList {
+	padding: 0 !important;
+}
 
 .ServiceCategoryList,
 .ServiceListContainer {
@@ -118,6 +121,12 @@
 		&:active {
 			background-color: #f6f6f6;
 		}
+
+		.material-icons {
+			font-size: 24px;
+			margin-left: auto;
+			padding-right: 0;
+		}
 		
 	}
 	ul li .disabled{
@@ -127,11 +136,11 @@
 	& > ul li .container > i {
 		padding-right: 10px;
 		width: 25px;
-		font-size: 18px;
+		font-size: 16px;
 		line-height: 24px;
 	}
 	& > ul li .container > strong {
-		font-size: 18px;
+		font-size: 16px;
 		min-height: 24px;
 		line-height: 24px;
 	}
@@ -142,7 +151,7 @@
 		margin: auto;
 		border: 0;
 		border-top-width: 1px;
-		border-top-color: lighten($dividerColor, 30%);
+		border-top-color: #ddd;
 		border-style: solid;
 		border-radius: 1px;
 		height: 0;
