@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Route, Switch, withRouter } from "react-router";
 import { ConnectedRouter } from "react-router-redux";
-import { Home, Article, Categories, CountryHome, CategoryHome, CountrySelectorScene, LanguageSelectorScene, Search, Services, Selectors } from "./scenes";
+import { Home, Article, Categories, CountryHome, CategoryHome, CountrySelectorScene, LanguageSelectorScene, Search, Services, Selectors, Subscribe} from "./scenes";
 import { history } from "./store";
 import { Skeleton } from "./scenes";
 import { withCountry, withCategory } from "./shared/hoc";
@@ -48,6 +48,7 @@ class Router extends Component {
 				<Placeholder>
 					<ScrollToTop />
 					<Switch>
+						<Route exact path="/:country/subscribe/:category" component={withCountry(withCategory(Subscribe))} />	
 						<Route path="/:country/services" component={props => <ServicesWithCountry {...props} />} />
 						<Route exact path="/:country/categories" component={withCountry(Categories)} />
 						<Route path="/:country/:category/:article" component={withCountry(withCategory(Article))} />
@@ -57,7 +58,8 @@ class Router extends Component {
 						
 						<Skeleton>
 							<div className="SkeletonContainer">
-								<Switch>									
+								<Switch>			
+															
 									<Route exact path="/country-selector" component={CountrySelectorScene} />
 									<Route exact path="/language-selector" component={LanguageSelectorScene} />
 									<Route exact path="/:country/search" component={withCountry(Search)} />		

@@ -52,5 +52,6 @@ export {
 	LocalGuideWidget,
 	ArticleWidget,
 	CategoryWidget,
+
 	
 };

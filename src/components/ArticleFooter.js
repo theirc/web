@@ -75,13 +75,24 @@ class ArticleFooter extends Component {
 			}
 		}
 	}
+	subscribe(article) {
+		const { onNavigateTo, country, category } = this.props;
+		onNavigateTo(`../subscribe/${category.fields.slug}`);
+	}
 
 	render() {
-		const { previous, next, onNavigateTo, direction, t } = this.props;
+		const { country, previous, next, onNavigateTo, direction, t, article } = this.props;
 		const rtl = direction === "rtl";
 
 		return (
 			<div className="ArticleFooter">
+				<div className="selector" onClick={() => {this.subscribe(article)}}>
+					<h1>
+						<small>{t("Get an SMS with updates")}:</small>
+						{t("Subscribe for Notifications")}
+					</h1>
+					{!rtl ? <NavigateNext className="icon" /> : <NavigateBefore className="icon" />}
+				</div>
 				{next && (
 					<div
 						className="selector"

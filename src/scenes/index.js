@@ -9,5 +9,7 @@ import LanguageSelectorScene from "./LanguageSelectorScene";
 import Services from "./Services";
 import Search from "./Search";
 import Selectors from "./Selectors";
+import Subscribe from "./Subscribe";
 
-export { Home, Article, Categories, CountryHome, CategoryHome, Skeleton, CountrySelectorScene, LanguageSelectorScene, Search, Services, Selectors };
+
+export { Home, Article, Categories, CountryHome, CategoryHome, Skeleton, CountrySelectorScene, LanguageSelectorScene, Search, Services, Selectors, Subscribe };

@@ -79,7 +79,7 @@ class Article extends React.Component {
 					<div className="SkeletonContainer">
 						<Placeholder>
 							<ArticlePage key={"Article"} direction={direction} category={category} other={other} article={article} loading={loading} onNavigate={onNavigate} />
-							<ArticleFooter key={"ArticleFooter"} onNavigateTo={onNavigateTo(category, country)} language={language} {...{ direction, previous, next }} />
+							<ArticleFooter key={"ArticleFooter"} onNavigateTo={onNavigateTo(category, country)} language={language} {...{ category, direction, previous, next, article, country }} />
 						</Placeholder>
 					</div>
 				</Skeleton>
