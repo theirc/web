@@ -120,10 +120,9 @@ class ServiceList extends React.Component {
 
 				{sortedAvailableServices.length > 0 && (
 					<div className="ServiceListContainer">
-
 						<ul className="Items">
 							<li
-								className="Item"
+								className="Item service-map"
 								onClick={showMap}
 								style={{
 									flexBasis: "100%",

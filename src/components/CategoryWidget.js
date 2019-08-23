@@ -21,7 +21,7 @@ class CategoryWidget extends Component {
             <div className="Category">
 				<h3>{c.fields.name}</h3>
 				<p dangerouslySetInnerHTML={{ __html: html }} />
-				<s>
+				<s className='Read-More'>
 					<a
 						href="#/"
 						onClick={() => {
@@ -31,6 +31,7 @@ class CategoryWidget extends Component {
 					>
 						{t("Read More")}
 					</a>
+					<i className="material-icons">arrow_right</i>
 				</s>
 			</div>
         )

@@ -89,8 +89,8 @@ class ServiceCategoryList extends React.Component {
 			);
 		}
 		return <div>
-			<HeaderBar key={"Header"} title={t("Service Categories").toUpperCase()}>
-			</HeaderBar>
+			<HeaderBar key={"Header"} title={t("Service Categories").toUpperCase()} />
+			
 			<div key={"List"} className="ServiceCategoryList">
 				<ul>
 					{locationName  && 

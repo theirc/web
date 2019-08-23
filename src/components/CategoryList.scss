@@ -203,9 +203,13 @@
 	}
 
 	ul li .inner-container {
-		padding: 10px;
+		padding: 15px;
 		display: flex;
 		flex-direction: row;
+
+		div {
+			line-height: 160%;
+		}
 	}
 
 	ul > li > label {
@@ -252,7 +256,6 @@
 			border-top: 1px solid #ddd;
 			font-size: 14px;
 			font-weight: normal;
-			padding-left: 8px;
 		}
 	}
 	.category-name {

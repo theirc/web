@@ -5,6 +5,8 @@ import { Share, Link  } from "material-ui-icons";
 import { Helmet } from "react-helmet";
 import PropTypes from "prop-types";
 import HeaderBar from "./HeaderBar";
+import cms from '../content/cms';
+
 
 import "./ServiceHome.css";
 
@@ -189,7 +191,7 @@ class ServiceDetail extends React.Component {
 					{s.provider.name}
 				</a>
 			) : (
-					s.provider.name
+					<span className='providerName'>{s.provider.name}</span>
 				);
 		};
 
@@ -242,18 +244,21 @@ class ServiceDetail extends React.Component {
 				<Helmet>
 					<title>{serviceT.name}</title>
 				</Helmet>
-				<HeaderBar subtitle={`${subtitle}:`} title={serviceT.name} />
 				<div className="hero">
-					<h2>
-						<small>{t("Service Provider")}:</small>
-						{serviceProviderElement(service)}
-					</h2>
 					{service.image && <div className="HeroImageContainer"><img src={service.image} alt={service.provider.name} /></div>}
 				</div>
+				{/* <em>{t("LAST_UPDATED") + " " + mLocale(service.updated_at)}</em> */}
+
+				<HeaderBar subtitle={`${subtitle}:`} title={serviceT.name} />
 
 				<article>
-					<em>{t("LAST_UPDATED") + " " + mLocale(service.updated_at)}</em>
-					<h2>{serviceT.name}</h2>
+					<span className='author'><span>{t("LAST_UPDATED")}</span> {moment(service.updated_at).format('YYYY.MM.DD')}</span>
+
+					<h2 className='provider'>
+						{t("Service Provider")}:&nbsp;{serviceProviderElement(service)}
+					</h2>
+
+					{/* <h2>{serviceT.name}</h2> */}
 					<p dangerouslySetInnerHTML={{ __html: hotlinkTels(serviceT.description) }} />
 
 					{serviceT.additional_info && <h3>{t("Additional Information")}</h3>}
@@ -322,11 +327,15 @@ class ServiceDetail extends React.Component {
 					{service.email && <hr />}
 					{service.email && (
 						<div className="Selector" onClick={() => window.open(`mailto:${service.email}`)}>
-							<h1><span style={{ display: 'inline-block', overflow: 'hidden' }}>{t('Email')}: </span><div style={{
-								display: 'inline-block', direction: 'ltr', maxWidth: '60%',
-								overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
-							}}>
-								{service.email}</div></h1>
+							<h1>
+								<span style={{ display: 'inline-block', overflow: 'hidden' }}>{t('Email')}:&nbsp;</span>
+								<div className='field' style={{
+									display: 'inline-block', direction: 'ltr', maxWidth: '60%',
+									overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
+								}}>
+									{service.email}
+								</div>
+							</h1>
 							<i className="MenuIcon fa fa-envelope-o" aria-hidden="true" />
 						</div>
 					)}
@@ -334,11 +343,15 @@ class ServiceDetail extends React.Component {
 					{service.website && <hr />}
 					{service.website && (
 						<div className="Selector" onClick={() => window.open(`${toUrl(service.website)}`)}>
-							<h1><div style={{
-								display: 'inline-block', direction: 'ltr', maxWidth: '85%',
-								overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
-							}}>
-								{t('Website')}: {service.website}</div></h1>
+							<h1>
+								<span style={{ display: 'inline-block', overflow: 'hidden' }}>{t('Website')}:&nbsp;</span>
+								<div className='field' style={{
+									display: 'inline-block', direction: 'ltr', maxWidth: '85%',
+									overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
+								}}>
+									{service.website}
+								</div>
+							</h1>
 							<i className="MenuIcon fa fa-external-link" aria-hidden="true" />
 						</div>
 					)}
@@ -346,11 +359,15 @@ class ServiceDetail extends React.Component {
 					{service.facebook_page && <hr />}
 					{service.facebook_page && (
 						<div className="Selector" onClick={() => window.open(`${toUrl(service.facebook_page)}`)}>
-							<h1><div style={{
-								display: 'inline-block', direction: 'ltr', maxWidth: '85%',
-								overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
-							}}>
-								{t('Facebook')}: {service.facebook_page}</div></h1>
+							<h1>
+								<span style={{ display: 'inline-block', overflow: 'hidden' }}>{t('Facebook')}:&nbsp;</span>
+								<div className='field' style={{
+									display: 'inline-block', direction: 'ltr', maxWidth: '85%',
+									overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
+								}}>
+									{service.facebook_page}
+								</div>
+							</h1>
 							<i className="MenuIcon fa fa-facebook-f" aria-hidden="true" />
 						</div>
 					)}
