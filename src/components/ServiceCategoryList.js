@@ -107,7 +107,8 @@ class ServiceCategoryList extends React.Component {
 					<li key="locations">
 						<div className="container" onClick={goToLocationList}>
 							<i className="fa fa-globe" />
-							<span>{t("Locations")}</span>
+							<strong>{t("Locations")}</strong>
+							<i className="material-icons">keyboard_arrow_right</i>
 						</div>
 					</li>
 					}
@@ -115,25 +116,27 @@ class ServiceCategoryList extends React.Component {
 					<li key="municipalidades">
 						<div className="container" onClick={goToLocationList}>
 							<i className="fa fa-globe" />
-							<span>{t("Municipalidades")}</span>
+							<strong>{t("Municipalidades")}</strong>
+							<i className="material-icons">keyboard_arrow_right</i>
 						</div>
 					</li>
 					}
-					<hr className="line" />			
+					<hr className="line" />
 					<li key="map">
 						<div className="container" onClick={goToMap}>
 							<i className="fa fa-map" />
-							<span>{t("Map")}</span>
-						</div>
-					</li>
-					<hr className="line" />			
-					<li key="all-services">
-						<div className="container" onClick={listAllServices}>
-							<i className="fa fa-list" />
-							<span>{t("All Services")}</span>
+							<strong>{t("Map")}</strong>
+							<i className="material-icons">keyboard_arrow_right</i>
 						</div>
 					</li>
 					<hr className="line" />
+					<li key="all-services">
+						<div className="container" onClick={listAllServices}>
+							<i className="fa fa-list" />
+							<strong>{t("All Services")}</strong>
+							<i className="material-icons">keyboard_arrow_right</i>
+						</div>
+					</li>
 					{categories.map(c => this.renderCategory(c))}
 				</ul>
 			</div>

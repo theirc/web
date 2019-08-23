@@ -370,3 +370,13 @@ input[type="checkbox"].ri.switch:checked + div > div {
 .stronger {
     font-weight: 500;
 }
+
+.departments {
+    ul {
+        li:first-child {
+            hr {
+                display: none;
+            }
+        }
+    }
+}
