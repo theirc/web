@@ -388,7 +388,7 @@ class ServiceDetail extends React.Component {
 						<hr/>
 							{relatedServices.map(r => (
 								<div key={r.id} onClick={() => goToService(r.id)}>
-									<div className="selector">
+									<div className="selector related">
 										<h1 href="#/" ><div style={{
 											display: 'inline-block', direction: 'ltr', overflow: 'hidden', 
 											whiteSpace: 'nowrap', textOverflow: 'ellipsis', width:'650px'
