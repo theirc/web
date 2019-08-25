@@ -100,7 +100,7 @@ class CategoryList extends Component {
 
 		return (
 			<div className="CategoryList">
-				<HeaderBar title={t("Blog").toUpperCase()} />
+				<HeaderBar title={t("Categories").toUpperCase()} />
 				<div className='tiles-desktop'>
 					<div className='filter-bar'>
 						<select className='select-css' value={this.state.selectedCategory} onChange={this.onChange}>

@@ -88,7 +88,7 @@ class AppHeader extends Component {
 											{t("Home")}
 										</span>
 										<span className="app-bar-selectors top-menu" color="contrast" onClick={onGoToCategories || noop}>
-											{t("Blog")}
+											{t("Categories")}
 										</span>
 										<span className="app-bar-selectors top-menu" color="contrast" onClick={onGoToServices || noop}>
 											{t("Services")}	
