@@ -161,9 +161,18 @@ Less me
 	}
 }
 
-.app-bar-logo {
-	height: 40px;
-	cursor: pointer;
+.AppHeader {
+	.app-bar-logo {
+		height: 25px;
+		cursor: pointer;
+	}
+}
+
+.AppHeaderLight {
+	.app-bar-logo {
+		height: 40px;
+		cursor: pointer;
+	}
 }
 
 .headroom {
