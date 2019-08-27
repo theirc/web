@@ -493,7 +493,7 @@ class Services extends React.Component {
 									fetchCategories={() => this.serviceTypesByLocation(props.match.params.location)}
 									fetchCategoriesByLocation={(location) => this.serviceTypesByLocation(location)}
 									goTo={(location, category, mapview) => this.goTo(location, category, mapview)}
-									fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 8)} /* TODO: Fix number of services */
+									fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)} /* TODO: Fix number of services */
 									showDepartments={config.showDepartments}
 								/>
 							

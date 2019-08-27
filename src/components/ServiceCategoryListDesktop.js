@@ -359,7 +359,7 @@ class ServiceCategoryListDesktop extends React.Component {
 				{showServices && this.state.showMap && !this.state.showFilter && 
 				<ServiceMapDesktop services={this.state.services} goToService={goToService}/>
 				}
-			{!this.state.showMap && <div className="show-more"><button>{t('Show More')}</button></div>}
+			{/* {!this.state.showMap && <div className="show-more"><button>{t('Show More')}</button></div>} */}
 		</div>
 	}
 }
