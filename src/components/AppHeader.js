@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Search } from "material-ui-icons";
 import Headroom from "react-headrooms";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import { translate, Interpolate } from "react-i18next";
 import { Close } from "material-ui-icons";
 import "./AppHeader.css";
@@ -60,7 +61,22 @@ class AppHeader extends Component {
 	}
 
 	render() {
-		const { onChangeCountry, onChangeLanguage, disableLanguageSelector, disableCountrySelector, onGoHome, onGoToServices, onGoToCategories, country, language, t, headerColor, homePage } = this.props;
+		const {
+			disableCountrySelector,
+			disableLanguageSelector,
+			country,
+			headerColor,
+			homePage,
+			language,
+			onChangeCountry,
+			onChangeLanguage,
+			onGoHome,
+			onGoToCategories,
+			onGoToServices,
+			showServiceMap,
+			t,
+		} = this.props;
+
 		const { search, searchText } = this.state;
 		const backgroundDark = headerColor === 'light' ? false : true;
 		const logo = this.props.logo || "/logo.svg";
@@ -90,9 +106,9 @@ class AppHeader extends Component {
 										<span className="app-bar-selectors top-menu" color="contrast" onClick={onGoToCategories || noop}>
 											{t("Categories")}
 										</span>
-										<span className="app-bar-selectors top-menu" color="contrast" onClick={onGoToServices || noop}>
+										{showServiceMap && <span className="app-bar-selectors top-menu" color="contrast" onClick={onGoToServices || noop}>
 											{t("Services")}	
-										</span>
+										</span>}
 										{!disableLanguageSelector && !disableCountrySelector && <div className="app-bar-separator" />}
 										{!disableCountrySelector && (
 											<span className="app-bar-selectors country" color="contrast" onClick={onChangeCountry || noop}>
@@ -148,4 +164,12 @@ class AppHeader extends Component {
 
 		);
 	}
-}export default translate()(AppHeader);
+}
+
+const mapStateToProps = ({ showServiceMap }, p) => {
+	return {
+		showServiceMap,
+	};
+};
+
+export default translate()(connect(mapStateToProps)(AppHeader));
