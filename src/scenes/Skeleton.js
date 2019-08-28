@@ -95,6 +95,8 @@ class Skeleton extends React.Component {
 
 		let showFooter = !hideFooter && country && language;
 		let logo = _.template(config.logo)({ language: language || "en" });
+		let serbiaBanner;
+		(country && country.fields.slug == "serbia") ? serbiaBanner = true : serbiaBanner = false;
 
 		return (
 			<I18nextProvider i18n={i18n}>
@@ -110,6 +112,7 @@ class Skeleton extends React.Component {
 						onChangeCountry={onChangeLocation}
 						onChangeLanguage={onChangeLanguage.bind(this, router.location.pathname)}
 						logo={logo}
+						serbiaBanner = {serbiaBanner}
 					/>
 					{notifications}
 					{children}
