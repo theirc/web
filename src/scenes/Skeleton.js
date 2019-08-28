@@ -96,7 +96,9 @@ class Skeleton extends React.Component {
 		let showFooter = !hideFooter && country && language;
 		let logo = _.template(config.logo)({ language: language || "en" });
 		let serbiaBanner;
-		(country && country.fields.slug == "serbia") ? serbiaBanner = true : serbiaBanner = false;
+		let selectorCondition;
+		(window.location.href.includes('/selectors')) ? selectorCondition = true : selectorCondition = false;
+		(country && country.fields.slug == "serbia" && !selectorCondition) ? serbiaBanner = true : serbiaBanner = false;
 
 		return (
 			<I18nextProvider i18n={i18n}>
