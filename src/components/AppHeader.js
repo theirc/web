@@ -58,14 +58,13 @@ class AppHeader extends Component {
 	}
 
 	render() {
-		const { onChangeCountry, onChangeLanguage, disableLanguageSelector, disableCountrySelector, onGoHome, country, language, t } = this.props;
+		const { onChangeCountry, onChangeLanguage, disableLanguageSelector, disableCountrySelector, onGoHome, country, language, t, serbiaBanner } = this.props;
 		const { search, searchText } = this.state;
 		const noop = () => {
 			console.log("noop");
 		};
 		const cookiePolicyLink = <a href="/greece/privacy/cookies" target="_blank" rel="noopener noreferrer">Cookie Policy</a>;
 		const privacyPolicyLink = <a href="/greece/privacy/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>;
-
 		return (
 			<div className="AppHeader">
 
@@ -127,6 +126,12 @@ class AppHeader extends Component {
 							size={36}
 							onClick={this.closeAlert.bind(this)}
 						/>
+					</div>
+				)}
+				{serbiaBanner &&(
+					<div className='serbia-banner'>
+						<span className="serbia-banner-separator"></span>
+						<p>{t("SERBIA_BANNER")}</p>
 					</div>
 				)}
 			</div>
