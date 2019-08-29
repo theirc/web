@@ -34,9 +34,6 @@
   }
 
   .BottomButton {
-    @media (max-width: 375px) {
-      font-size: 85% !important;
-    }
 
     .rtl & {
       font-family: "Cairo", "Roboto", sans-serif;
