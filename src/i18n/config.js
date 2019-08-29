@@ -535,7 +535,7 @@ export default {
             "Search": "Buscar",
             "Closest location": "Ubicación más cercana",
             "Wednesday": "Miércoles",
-            "Filter": "Filtro",
+            "Filter": "Filtrar",
             "Important information": "Información importante",
             "Change Language": "Cambiar Idioma",
             "Ask us a question": "Haznos una pregunta",

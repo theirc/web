@@ -257,10 +257,10 @@ class ServiceCategoryListDesktop extends React.Component {
 					<h1>{service.name}</h1>
 					<h2>
 						{service.provider.name}{" "}
-						<small>
+						<span>
 							{fullAddress}
 							{distance && ` - ${distance}`}
-						</small>
+						</span>
 						<div className="Icons">
 							{subTypes.map((t, idx) => (
 								<div className="Icon" key={`${service.id}-${idx}`}>
@@ -303,7 +303,7 @@ class ServiceCategoryListDesktop extends React.Component {
 
 				{!showServices && !this.state.showFilter && <div className="loader" />}
 
-				{showServices && this.state.showMap && !this.state.showFilter &&
+				{showServices && this.state.showMap &&
 					<ServiceMapDesktop services={this.state.services} goToService={goToService} />
 				}
 
