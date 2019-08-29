@@ -2,6 +2,23 @@
 
 .HomeWidget {
 	padding: 20px 20px;
+
+	h1, h3 {
+		font-size: 18px;
+		text-transform: uppercase;
+	}
+
+	&.Highlighted {
+		h1 {
+			font-size: 24px !important;
+		}
+	}
+	.Article.Home {
+		h1 {
+			font-size: 1.17em;
+		}
+	}
+
 	.hero {
 		margin-right: -20px;
 		margin-left: -20px;

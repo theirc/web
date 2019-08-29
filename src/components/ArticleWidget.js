@@ -68,11 +68,9 @@ class ArticleWidget extends Component {
 					showHero && (
 						<div className="hero">
 							<img className="heroImage" src={article.fields.hero.fields.file.url + "?fm=jpg&fl=progressive"} alt="" />
-							
 						</div>
-						
 					)}
-				{showFullArt ? <h3>{article.fields.title}</h3> : <h3 onClick={() => onNavigate(`/${country.fields.slug}/${categorySlug}/${article.fields.slug}`)}>{article.fields.title}</h3>}
+				{showFullArt ? <h1>{article.fields.title}</h1> : <h1 onClick={() => onNavigate(`/${country.fields.slug}/${categorySlug}/${article.fields.slug}`)}>{article.fields.title}</h1>}
 				{contentType.sys.id === "video" && this.renderVideo(article)}
 				<p dangerouslySetInnerHTML={{ __html: md.render(content) }} />
 				{!showFullArt && (
