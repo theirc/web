@@ -819,6 +819,12 @@
 	width: 800px;
 }
 
+.ServiceDetail {
+	.filter-bar {
+		justify-content: flex-end;
+	}
+}
+
 .filter-bar {
 	display: none;
 	justify-content: flex-start;
