@@ -131,7 +131,7 @@ input[type="checkbox"].ri.switch:checked + div > div {
     border-radius: 5px;
     cursor: pointer;
     display: flex;
-    font-size: 13px;
+    font-size: 14px;
     height: 41px;
     margin-right: 20px;
     outline: 0;
@@ -140,6 +140,10 @@ input[type="checkbox"].ri.switch:checked + div > div {
 
     &:hover {
         border-color: #bbb;
+    }
+
+    &:active {
+        border-style: solid;
     }
 
     i {

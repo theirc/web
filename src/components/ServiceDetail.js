@@ -2,6 +2,7 @@ import React from "react";
 import { translate } from "react-i18next";
 import _ from "lodash";
 import { Share, Link  } from "material-ui-icons";
+import * as clipboard from "clipboard-polyfill";
 import { Helmet } from "react-helmet";
 import PropTypes from "prop-types";
 import HeaderBar from "./HeaderBar";
@@ -38,7 +39,7 @@ class ServiceDetail extends React.Component {
 		}else{
 			copySlug = (window.location + (window.location.toString().indexOf("?") > -1 ? "&" : "?") + "language=" + language);
 		}
-		this.state = { value: copySlug, copied: true, shareIN: true, showOtherServices: true };
+		this.state = { value: copySlug, copied: false, shareIN: true, showOtherServices: true };
 		this.sharePage = this.sharePage.bind(this);
 		this.showServices = this.showServices.bind(this);
 		this.Copiedlnk = this.Copiedlnk.bind(this);
@@ -61,6 +62,35 @@ class ServiceDetail extends React.Component {
 			}, 2);
 		}, 3000);
 	}
+
+	onCopyLink = () => {
+		this.setState({ copied: true });
+		
+		clipboard.writeText(document.location.href);
+
+		setTimeout(() => this.setState({ copied: false }), 1500);
+	}
+
+	onShareOnFacebook = () => {
+		const { language } = this.props
+		if (global.window) {
+			const { FB } = global.window;
+			let { href } = window.location;
+			console.log(FB, href)
+			href += (href.indexOf("?") > -1 ? "&" : "?") + "language=" + language;
+
+			if (FB) {
+				FB.ui(
+					{
+						method: "share",
+						href,
+					},
+					function (response) { }
+				);
+			}
+		}
+	}
+
 
 	share() {
 		const { language } = this.props;
@@ -250,6 +280,12 @@ class ServiceDetail extends React.Component {
 				{/* <em>{t("LAST_UPDATED") + " " + mLocale(service.updated_at)}</em> */}
 
 				<HeaderBar subtitle={`${subtitle}:`} title={serviceT.name} />
+				<div className='filter-bar'>
+					<div className="social">
+						<div href='#' className="share" onClick={this.onShareOnFacebook}>{t('Share on Facebook')}<Share /></div>
+						<div href='#' className="copy" onClick={this.onCopyLink}>{this.state.copied ? t("Copied") : t("Copy Link")}<Link /></div>
+					</div>
+				</div>
 
 				<article>
 					<span className='author'><span>{t("LAST_UPDATED")}</span> {moment(service.updated_at).format('YYYY.MM.DD')}</span>
@@ -270,7 +306,7 @@ class ServiceDetail extends React.Component {
 					{hasHours(service.opening_time) && (
 						<span>
 							<h3>{t("Visiting hours")}</h3>
-							<div>{service.opening_time["24/7"] && t("Open 24/7")}</div>
+							<p>{service.opening_time["24/7"] && t("Open 24/7")}</p>
 							<div className="openingTable">
 								{!service.opening_time["24/7"] && (
 									<table>

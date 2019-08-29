@@ -371,7 +371,7 @@
 		h2 {
 			margin: 0;
 			padding: 0;
-			font-size: 90%;
+			font-size: 95%;
 			font-weight: normal;
 
 			small {
@@ -383,7 +383,7 @@
 	}
 	.Unavailable {
 		li > h1 {
-			font-size: 90%;
+			font-size: 95%;
 			margin-top: 30px;
 			text-align: center;
 		}
@@ -769,7 +769,7 @@
 		}
 
 		h2 {
-			font-size: 16px;
+			font-size: 17px;
 			
 			&.provider {
 				padding: 40px 0 25px;
@@ -782,7 +782,7 @@
 		}
 
 		h3 {
-			font-size: 15px;
+			font-size: 16px;
 		}
 
 		h3, h4 {
@@ -791,7 +791,8 @@
 		}
 
 		p {
-			font-size: 14px;
+			font-size: 16px;
+			font-weight: 300;
 			line-height: 150%;
 		}
 
@@ -801,6 +802,7 @@
 
 		ul li {
 			list-style-type: square;
+			padding-bottom: 8px;
 		}
 	}
 }
@@ -808,6 +810,39 @@
 #categories {
 	left: 183px;
 	width: 800px;
+}
+
+.filter-bar {
+	display: none;
+	justify-content: flex-end;
+
+	@media (min-width: $desktopBreakpoint) {
+		display: flex;
+	}
+
+	.social {
+		display: flex;
+
+		div {
+			align-items: center;
+			background-color: #f2f2f2;
+			border: 1px solid #ddd;
+			border-radius: 5px;
+			display: flex;
+			font-size: 14px;
+			justify-content: space-between;
+			margin-left: 20px;
+			padding: 0 10px;
+			text-decoration: none;
+			width: 190px;
+			height: 41px;
+
+			&:hover {
+				cursor: pointer;
+				border-color: #bbb;
+			}
+		}
+	}
 }
 
 .department-filters, .category-filters {

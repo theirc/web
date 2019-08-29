@@ -44,7 +44,7 @@
 				border: 1px solid #ddd;
 				border-radius: 5px;
 				display: flex;
-				font-size: 13px;
+				font-size: 14px;
 				justify-content: space-between;
 				margin-left: 20px;
 				padding: 0 10px;
@@ -168,10 +168,22 @@
 
 	article {
 		padding: 5px;
-		font-size: 14px;
+		font-size: 16px;
+		font-weight: 300;
 
 		p {
 			line-height: 150%;
+
+			a {
+				padding-bottom: 10px;
+			}
+		}
+
+		ol {
+			li {
+				line-height: 1.5;
+				padding-bottom: 15px;
+			}
 		}
 	}
 	.home .hero{
@@ -225,15 +237,15 @@
 		}
 
 		h1 {
-			font-size: 15px;
+			font-size: 18px;
 		}
 
 		h2 {
-			font-size: 14px;
+			font-size: 17px;
 		}
 
 		h3 {
-			font-size: 14px;
+			font-size: 16px;
 		}
 
 		ul li {
