@@ -285,7 +285,8 @@ input[type="checkbox"].ri.switch:checked + div > div {
     border-color: transparent;
     cursor: pointer;
     display: flex;
-    background-color: #1e7017;
+    // background-color: #1e7017;
+    @include darken-brand-colors("background-color", 15%);
 	@include brand-colors-inverse( "color");
     // width: calc(25% - 20px);
     height: 30px;
