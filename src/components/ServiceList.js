@@ -61,10 +61,10 @@ class ServiceList extends React.Component {
 					<h1>{s.name}</h1>
 					<h2>
 						{s.provider.name}{" "}
-						<small>
+						<span>
 							{fullAddress}
 							{distance && ` - ${distance}`}
-						</small>
+						</span>
 						<div className="Icons">
 							{subTypes.map((t, idx) => (
 								<div className="Icon" key={`${s.id}-${idx}`}>

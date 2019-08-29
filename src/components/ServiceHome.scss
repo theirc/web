@@ -50,7 +50,7 @@
 	}
 
 	.Selector > h1 {
-		font-size: 14px;
+		font-size: 15px;
 		display: block;
 		width: 85%;
 		margin: 0;
@@ -373,9 +373,10 @@
 			font-size: 95%;
 			font-weight: normal;
 
-			small {
+			span {
 				color: gray;
 				display: block;
+				font-size: 90%;
 				padding-top: 12px;
 			}
 		}
@@ -442,6 +443,7 @@
 			border-bottom: 0;
 			cursor: pointer;
 			display:block !important;
+			font-size: 14px;
 			.Item-content {
 				padding: 0 10px;
 			}
@@ -819,7 +821,7 @@
 
 .filter-bar {
 	display: none;
-	// justify-content: flex-start;
+	justify-content: flex-start;
 
 	@media (min-width: $desktopBreakpoint) {
 		display: flex;
