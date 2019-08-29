@@ -219,7 +219,7 @@ class ServiceCategoryListDesktop extends React.Component {
 					}
 					{list.map(l => renderer(l, onSelect))}
 				</div>
-				<div className='filter'><button onClick={() => { this.closeFilters(); this.showServices(); filterType === FilterTypes.DEPARTMENT && this.municipalidadesFilter();}}>{t('Filtrar')}</button></div>
+				<div className='filter'><button onClick={() => { this.closeFilters(); this.showServices(); filterType === FilterTypes.DEPARTMENT && this.municipalidadesFilter();}}>{t('Filter')}</button></div>
 			</div>
 		);
 	}
