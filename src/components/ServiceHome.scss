@@ -13,7 +13,6 @@
 		opacity: 0.6;
 	}
 	.MenuIcon {
-
 		font-size: 20px;
 	}
 
@@ -245,6 +244,10 @@
 	}
 }
 
+.ServiceMapContainer {
+	z-index: 0;
+}
+
 .ServiceList,
 .ServiceMap {
 	display: flex;
@@ -314,6 +317,7 @@
 
 		@media (min-width: $desktopBreakpoint) {
 			flex-basis: calc(50% - 10px);
+			max-width: calc(50% - 10px);
 			margin:5px;
 		}
 		i.material-icons {
