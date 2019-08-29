@@ -70,6 +70,8 @@ class AppHeader extends Component {
 		};
 		const cookiePolicyLink = <a href="/greece/privacy/cookies" target="_blank" rel="noopener noreferrer">Cookie Policy</a>;
 		const privacyPolicyLink = <a href="/greece/privacy/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>;
+		let isOnServices;
+		(window.location.href.includes("services") ? isOnServices = true : isOnServices = false);
 		return (
 			<div className="AppHeader">
 
@@ -133,7 +135,7 @@ class AppHeader extends Component {
 						/>
 					</div>
 				)}
-				{this.state.serbiaAlert == 0 && (
+				{this.state.serbiaAlert == 0 && isOnServices &&(
 					<div className={this.state.serbiaAlert ? 'serbia-banner' : 'hidden'}>
 						<span className="serbia-banner-separator"></span>
 						<p>{t("SERBIA_BANNER")}</p>
