@@ -20,6 +20,7 @@ class AppHeader extends Component {
 		prvalert: localStorage.getItem("privacy-policy"),
 		searchText: "",
 		active: false,
+		serbiaAlert: sessionStorage.getItem("serbia-alert"),
 	};
 	toggleClass() {
 		const { currentState } = this.state.active;
@@ -46,6 +47,10 @@ class AppHeader extends Component {
 			[name]: value,
 		});
 	}
+	closeSerbiaBanner(){
+		sessionStorage.setItem("serbia-alert", sessionStorage.getItem("serbia-alert")+1);
+		this.setState({ serbiaAlert: sessionStorage.getItem("serbia-alert") });
+	}
 	handleSubmit(event) {
 		const { onGoToSearch } = this.props;
 		const { searchText } = this.state;
@@ -58,7 +63,7 @@ class AppHeader extends Component {
 	}
 
 	render() {
-		const { onChangeCountry, onChangeLanguage, disableLanguageSelector, disableCountrySelector, onGoHome, country, language, t, serbiaBanner } = this.props;
+		const { onChangeCountry, onChangeLanguage, disableLanguageSelector, disableCountrySelector, onGoHome, country, language, t } = this.props;
 		const { search, searchText } = this.state;
 		const noop = () => {
 			console.log("noop");
@@ -128,10 +133,16 @@ class AppHeader extends Component {
 						/>
 					</div>
 				)}
-				{serbiaBanner &&(
-					<div className='serbia-banner'>
+				{this.state.serbiaAlert == 0 && (
+					<div className={this.state.serbiaAlert ? 'serbia-banner' : 'hidden'}>
 						<span className="serbia-banner-separator"></span>
 						<p>{t("SERBIA_BANNER")}</p>
+						<Close
+							className="close-alert"
+							color="contrast"
+							size={36}
+							onClick={this.closeSerbiaBanner.bind(this)}
+						/>
 					</div>
 				)}
 			</div>
