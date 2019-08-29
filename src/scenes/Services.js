@@ -27,7 +27,7 @@ class Services extends React.Component {
 		department: null,
 		departmentId: null,
 		keepPreviousZoom: true,
-		width: window.innerWidth,
+		isMobile: window.innerWidth <= 1000,
 	};
 
 	static contextTypes = {
@@ -35,8 +35,11 @@ class Services extends React.Component {
 	};
 	
 
-	componentDidMount(){
-		window.addEventListener('resize', () => { this.setState({ width: window.innerWidth })});
+	componentDidMount() {
+		window.addEventListener('resize', () => {
+			!this.state.isMobile && window.innerWidth <= 1000 && this.setState({ isMobile: true });
+			this.state.isMobile && window.innerWidth >= 1000 && this.setState({ isMobile: false });
+		});
 	}
 
 	sessionStorage = getSessionStorage();
@@ -336,8 +339,7 @@ class Services extends React.Component {
 			match,
 			regions,
 		} = this.props;
-		const { width } = this.state;
-		const isMobile = width <= 1000;
+		const { isMobile } = this.state;
 		let regionDictionary = _.fromPairs(regions.map(r => [r.id, r]));
 		let regionsWithCountry = regions.map(r => {
 			let parent = r.parent ? regionDictionary[r.parent] : null;
