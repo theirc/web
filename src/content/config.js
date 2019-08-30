@@ -33,6 +33,11 @@ module.exports = {
 			country: 'serbia',
 			langs: ['fr'],
 		}],
+		countryPhoneCodes: [{
+			country: 'El Salvador',
+			code: '+503',
+		  },
+		],
 	},
 	"staging.refugee.info": {
 		theme: "irc",
@@ -64,6 +69,11 @@ module.exports = {
 			country: 'serbia',
 			langs: ['fr'],
 		}],
+		countryPhoneCodes: [{
+			country: 'El Salvador',
+			code: '+503',
+		  },
+		],
 	},
 	"qa.refugee.info": {
 		theme: "irc",
@@ -95,6 +105,11 @@ module.exports = {
 			country: 'serbia',
 			langs: ['fr'],
 		}],
+		countryPhoneCodes: [{
+			country: 'El Salvador',
+			code: '+503',
+		  },
+		],
 	},
 	"khabrona.info": {
 		theme: "mc",
@@ -179,6 +194,11 @@ module.exports = {
 		showDepartments: true,
 		showLinkToAdministration: true,
 		hideLangsPerCountry: [],
+		countryPhoneCodes: [{
+			country: 'El Salvador',
+			code: '+503',
+		  },
+		],
 	},
 	"staging.cuentanos.org": {
 		theme: "generic",
@@ -201,6 +221,11 @@ module.exports = {
 		showLinkToAdministration: false,
 		customQuestionLink:[["italy","https://www.facebook.com/Refugee.Info.Italy/"]],
 		hideLangsPerCountry: [],
+		countryPhoneCodes: [{
+			country: 'El Salvador',
+			code: '+503',
+		  },
+		],
 	},
 	"qa.cuentanos.org": {
 		theme: "generic",
@@ -223,6 +248,11 @@ module.exports = {
 		showLinkToAdministration: false,
 		customQuestionLink:[["italy","https://www.facebook.com/Refugee.Info.Italy/"]],
 		hideLangsPerCountry: [],
+		countryPhoneCodes: [{
+			country: 'El Salvador',
+			code: '+503',
+		  },
+		],
 	},
 	"localhost": {
 		theme: "generic",
@@ -244,16 +274,12 @@ module.exports = {
 		customQuestionLink:[["italy","https://www.facebook.com/Refugee.Info.Italy/"]],
 		showDepartments: false,
 		showLinkToAdministration: false,
-		hideCountries: ["bosnia"],
-		hideLangsPerCountry: [{
-			country: 'italy',
-			langs: ['ar', 'ur', 'fa', 'fr'],
-		}, {
-			country: 'bulgaria',
-			langs: ['fr'],
-		}, {
-			country: 'serbia',
-			langs: ['fr'],
-		}],
+		customQuestionLink:[["italy","https://www.facebook.com/Refugee.Info.Italy/"]],
+		hideLangsPerCountry: [],
+		countryPhoneCodes: [{
+			country: 'El Salvador',
+			code: '+503',
+		  },
+		],
 	},
 };
