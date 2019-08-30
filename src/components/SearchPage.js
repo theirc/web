@@ -131,7 +131,7 @@ class SearchPage extends React.Component {
 							{servicesList.map(this.renderServiceItem.bind(this))}
 						</div>
 					</div>
-					{!searchingServices && <div className="show-action"><button className="show-more" onClick={this.toggleServices}>{toggleServicelabel}</button></div>}
+					{!searchingServices && services.length > 0 && <div className="show-action"><button className="show-more" onClick={this.toggleServices}>{toggleServicelabel}</button></div>}
 					{!searchingServices &&
 							services.length === 0 && (
 								<div>
@@ -150,7 +150,7 @@ class SearchPage extends React.Component {
 								{articleList.map(c => {
 									return this.renderTiles(c);									
 								})}
-							}
+							
 							</ul>
 						</div>
 					</div>
@@ -176,7 +176,7 @@ class SearchPage extends React.Component {
 							})}
 						</div>
 					</div>
-					{!searchingArticles && <div className="show-action"><button className="show-more" onClick={this.toggleArticles}>{toggleArticleslabel}</button></div>}
+					{!searchingArticles && articles.length > 0 && <div className="show-action"><button className="show-more" onClick={this.toggleArticles}>{toggleArticleslabel}</button></div>}
 					{!searchingArticles &&
 						articles.length === 0 && (
 							<div>
