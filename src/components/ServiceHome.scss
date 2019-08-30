@@ -234,6 +234,12 @@
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: column;
+	#MapCanvas{
+		z-index: 1;
+	}
+	#MapCanvas2{
+		z-index: 1;
+	}
 
 	@include service-common();
 
