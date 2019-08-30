@@ -751,7 +751,6 @@ class Services extends React.Component {
 									fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
 									showDepartments={config.showDepartments}
 								/>
-							
 							}	
 							</div>
 						</Skeleton>
@@ -798,7 +797,6 @@ class Services extends React.Component {
 									fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
 									showDepartments={config.showDepartments}
 								/>
-							
 							}	
 							</div>
 						</Skeleton>
@@ -892,7 +890,6 @@ class Services extends React.Component {
 									fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
 									showDepartments={config.showDepartments}
 								/>
-							
 							}
 							</div>
 						</Skeleton>
@@ -968,29 +965,6 @@ class Services extends React.Component {
 							}
 
 							{ !isMobile && <Redirect to={`/${country.fields.slug}/services/all`} />
-
-								// <ServiceCategoryListDesktop
-								// 	{...props}
-								// 	goToService={goToService}
-								// 	language={language}
-								// 	locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
-								// 	findServicesInLocation={bbox => this.fetchServicesWithinLocation(bbox, props.match.params.location)}
-								// 	measureDistance={this.measureDistance(geolocation, language)}
-								// 	toggleLocation={() => _.identity()}
-								// 	nearby={true}
-								// 	defaultLocation={defaultLocation}
-								// 	categoryName="All Services"
-								// 	keepPreviousZoom = {this.state.keepPreviousZoom}
-								// 	changeCategory={() => { goToLocation(this.state.location) }}
-								// 	mapView={false}
-								// 	showFilter = { true }
-								// 	fetchCategories={() => this.serviceTypesByLocation(props.match.params.location)}
-								// 	fetchCategoriesByLocation={(location) => this.serviceTypesByLocation(location)}
-								// 	goTo={(location, category, mapview) => this.goTo(location, category, mapview)}
-								// 	fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
-								// 	location={{}}
-								// 	showDepartments={config.showDepartments}
-								// />
 							
 							}
 							</div>

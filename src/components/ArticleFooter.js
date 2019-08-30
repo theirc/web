@@ -86,13 +86,13 @@ class ArticleFooter extends Component {
 
 		return (
 			<div className="ArticleFooter">
-				<div className="selector" onClick={() => {this.subscribe(article)}}>
+				{/* <div className="selector" onClick={() => {this.subscribe(article)}}>
 					<h1>
 						<small>{t("Get an SMS with updates")}:</small>
 						{t("Subscribe for Notifications")}
 					</h1>
 					{!rtl ? <NavigateNext className="icon" /> : <NavigateBefore className="icon" />}
-				</div>
+				</div> */}
 				{next && (
 					<div
 						className="selector"

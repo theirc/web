@@ -5,6 +5,7 @@ import { SearchPage } from "../components";
 import queryString from "query-string";
 import { push } from "react-router-redux";
 import PropTypes from "prop-types";
+import { Skeleton } from ".";
 
 /**
  * Note to future self. refactor this
@@ -69,16 +70,20 @@ class Search extends React.Component {
 		const { config } = this.context;
 
 		return (
-			<SearchPage
-				hideServices={config.hideServiceMap}
-				country={country}
-				searchingArticles={searchingArticles}
-				searchingServices={searchingServices}
-				articles={articles}
-				services={services}
-				term={term}
-				onNavigate={onNavigate}
-			/>
+			<Skeleton headerColor='light'>
+				<div className="SkeletonContainer bg-gray" >
+					<SearchPage
+						hideServices={config.hideServiceMap}
+						country={country}
+						searchingArticles={searchingArticles}
+						searchingServices={searchingServices}
+						articles={articles}
+						services={services}
+						term={term}
+						onNavigate={onNavigate}
+					/>
+				</div>
+			</Skeleton>
 		);
 	}
 }

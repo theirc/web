@@ -118,7 +118,8 @@ module.exports = {
 				
 				categoryId = categoryId ? categoryId : null;  //
 				
-				if (sl && sl.country === country && sl.language === language && sl.categoryId === categoryId && (sl.searchTerm === null || sl.searchTerm === undefined)){
+				if (sl && sl.country === country && sl.language === language && sl.categoryId === categoryId && (searchTerm === null || searchTerm === undefined)){
+					console.log({searchTerm});
 					resolve(sl.services);
 					
 				}else{
