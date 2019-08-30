@@ -23,6 +23,8 @@
 		margin-right: -20px;
 		margin-left: -20px;
 		margin-top: -20px;
+		max-height: 40vw;
+		overflow: hidden;
 	}
 
 	a {
@@ -44,8 +46,7 @@
 			flex-basis: 100%;
 		}
 		& .hero {
-			max-height: 42vw;
-			overflow: hidden;
+			max-height: 30vw;
 		}
 
 		&:first-child.Highlighted .hero {
