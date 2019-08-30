@@ -1,9 +1,13 @@
 @import "../shared/includes.scss";
 
 body {
-	background-color: darken(gray, 30%);
+	background-color: black;
 }
 @media (min-width: $desktopBreakpoint) {
+	// body {
+	// 	background-color: black;
+	// }
+
 	.app-bar-container {
 		margin-left: $desktopPaddingWidth;
 		margin-right: $desktopPaddingWidth;
