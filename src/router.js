@@ -51,6 +51,7 @@ class Router extends Component {
 						<Route exact path="/:country/subscribe/:category" component={withCountry(withCategory(Subscribe))} />	
 						<Route path="/:country/services" component={props => <ServicesWithCountry {...props} />} />
 						<Route exact path="/:country/categories" component={withCountry(Categories)} />
+						<Route exact path="/:country/search" component={withCountry(Search)} />		
 						<Route path="/:country/:category/:article" component={withCountry(withCategory(Article))} />
 						<Route path="/:country/:category" component={withCountry(withCategory(CategoryHome))} />
 						<Route exact path="/selectors" component={Selectors} />
@@ -62,7 +63,6 @@ class Router extends Component {
 															
 									<Route exact path="/country-selector" component={CountrySelectorScene} />
 									<Route exact path="/language-selector" component={LanguageSelectorScene} />
-									<Route exact path="/:country/search" component={withCountry(Search)} />		
 									<Route exact path="/" component={Home} />						
 								</Switch>
 							</div>
