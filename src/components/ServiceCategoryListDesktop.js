@@ -19,7 +19,7 @@ class ServiceCategoryListDesktop extends React.Component {
 	state = {
 		categories: [],
 		category: null,
-		department: 'Departamentos',
+		department: '',
 		filterType: null,
 		loaded: false,
 		location: {},
@@ -34,7 +34,7 @@ class ServiceCategoryListDesktop extends React.Component {
 	};
 
 	componentDidMount() {
-		const { category, country, fetchCategories, fetchServices, location, regions, showFilter } = this.props;
+		const { category, country, fetchCategories, fetchServices, location, regions, showFilter, t } = this.props;
 		let c = regions.filter(r => r.slug === country.fields.slug)[0]
 		const { categories } = this.state;
 
@@ -46,7 +46,7 @@ class ServiceCategoryListDesktop extends React.Component {
 
 		let municipalities = currentLocation.level === 3 ? regions.filter(r => r.parent === currentLocation.parent) : null;
 		let department = currentLocation.level === 3 ? (!this.props.showDepartments ? currentLocation.title : currentLocation.parent__name) :
-			(currentLocation.level === 2 ? currentLocation : this.state.department); 
+			(currentLocation.level === 2 ? currentLocation : currentLocation.title); 
 
 		this.setState({
 			loaded: true,
