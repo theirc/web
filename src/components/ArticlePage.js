@@ -178,7 +178,7 @@ class ArticlePage extends Component {
 				<HeaderBar subtitle={(category.fields.articles || []).length > 1 && `${category.fields.name}:`} title={title} />
 				<div className='filter-bar'>
 					<div className="social">
-						<div href='#' className="share" onClick={this.onShareOnFacebook}>{t('Share on Facebook')}<Share /></div>
+						<div href='#' className="share" onClick={this.onShareOnFacebook}>{t('Share on Facebook')}<i className="fa fa-facebook-f" style={{ fontSize: 16 }}/></div>
 						<div href='#' className="copy" onClick={this.onCopyLink}>{this.state.copied ? t("Copied") : t("Copy Link")}<Link /></div>
 					</div>
 				</div>
