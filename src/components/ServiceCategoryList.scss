@@ -123,6 +123,7 @@ input[type="checkbox"].ri.switch:checked + div > div {
 
     .filters {
         display: flex;
+        z-index: 1;
     }
 }
 
@@ -390,4 +391,12 @@ input[type="checkbox"].ri.switch:checked + div > div {
             }
         }
     }
+}
+.overlay{
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    z-index: 0;
 }

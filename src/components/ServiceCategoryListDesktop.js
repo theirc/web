@@ -97,6 +97,7 @@ class ServiceCategoryListDesktop extends React.Component {
 		const { fetchCategoriesByLocation } = this.props;
 
 		this.setState({ location: element, department: element });
+		this.municipalidadesFilter(element);
 
 		fetchCategoriesByLocation(element.slug).then(categories => this.setState({ categories: categories, showServices: true }));
 	}
@@ -139,12 +140,14 @@ class ServiceCategoryListDesktop extends React.Component {
 	}
 
 	municipalidadesFilter = (location = null) => {
+		
 		const { regions } = this.props;
 		const department = location ? location : this.state.location;
-		
 		if (department.level === 2) {
 			const municipalities = regions.filter(r => r.parent === department.id);
 			this.setState({ municipalities: municipalities, department: department, showMunicipalities: true })
+		}else{
+			this.setState({ showMunicipalities: false })
 		}
 	}
 
@@ -180,7 +183,6 @@ class ServiceCategoryListDesktop extends React.Component {
 	}
 
 	renderDepartmentButton(department, onSelect) {
-		const { t } = this.props;
 
 		return (
 			<button key={department.id} className={department.id === this.state.location.id ? "location-item-selected" : "location-item"} onClick={() => onSelect(department)}>
@@ -213,7 +215,7 @@ class ServiceCategoryListDesktop extends React.Component {
 					<button id="btn-Locations" className="btn-filter" onClick={() => {this.departamentosFilter(); this.openFilters(FilterTypes.DEPARTMENT)}}>
 						<span>{department}</span><i className="material-icons">keyboard_arrow_down</i>
 					</button>
-					{municipalities && showDepartments &&
+					{municipalities && showDepartments && this.state.showMunicipalities &&
 						<button id="btn-Municipalities" className="btn-filter" onClick={() => {this.openFilters(FilterTypes.MUNICIPALITY)}}>
 							<span>{municipality}</span><i className="material-icons">keyboard_arrow_down</i>
 						</button>
@@ -366,6 +368,7 @@ class ServiceCategoryListDesktop extends React.Component {
 						</ul>
 					</div>
 				} */}
+				{this.state.showFilter && <div className="overlay" onClick={this.closeFilters}></div>}
 			</div>
 		);
 	}
