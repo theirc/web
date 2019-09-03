@@ -282,21 +282,19 @@ input[type="checkbox"].ri.switch:checked + div > div {
 }
 .location-item-selected{
     align-items: center;
+    background-color: darkgray;
     border-color: transparent;
+    border-radius: 15px;
+    color: black;
     cursor: pointer;
     display: flex;
-    // background-color: #1e7017;
-    @include darken-brand-colors("background-color", 15%);
-	@include brand-colors-inverse( "color");
-    // width: calc(25% - 20px);
     height: 30px;
     margin: 10px;
-    text-align: center;
     float: left;
     font-size: 13px;
     outline: none;
     padding: 0 15px;
-    border-radius: 15px;
+    text-align: center;
 
     i {
         margin-right: 9px
