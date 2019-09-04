@@ -32,9 +32,7 @@ class Services extends React.Component {
 	static contextTypes = {
 		config: PropTypes.object,
 	};
-
 	sessionStorage = getSessionStorage();
-
 	measureDistance(a, language, sort) {
 		return b => {
 			try {
@@ -43,7 +41,6 @@ class Services extends React.Component {
 						type: "Point",
 						coordinates: [a.longitude, a.latitude],
 					};
-
 					let originalDistance = measureDistance(currentGeoJSON, b, "kilometers");
 					let distance = originalDistance;
 					let unit = "km";
@@ -253,6 +250,10 @@ class Services extends React.Component {
 			return servicesApi.fetchCategories(language, this.state.location);
 		}
 		return servicesApi.fetchCategories(language, country.fields.slug);
+	}
+	serviceTypeById(id) {
+		const { language } = this.props;
+		return servicesApi.fetchCategoryById(language, id);
 	}
 
 	serviceTypesByLocation(location) {
@@ -517,6 +518,8 @@ class Services extends React.Component {
 												goToService={goToService}
 												fetchService={() => this.fetchServicePreview(props)}
 												fetchServicesInSameLocation={() => this.fetchServicesInSameLocation(props)}
+												country={country}
+												phoneCodes={config.countryPhoneCodes}
 											/>
 										</div>
 									</Skeleton>
@@ -534,6 +537,8 @@ class Services extends React.Component {
 												goToService={goToService}
 												fetchService={() => this.fetchService(props)}
 												fetchServicesInSameLocation={() => this.fetchServicesInSameLocation(props)}
+												country={country}
+												phoneCodes={config.countryPhoneCodes}
 											/>
 										</div>
 									</Skeleton>
@@ -581,7 +586,9 @@ class Services extends React.Component {
 											toggleLocation={() => this.setState({ sortingByLocationEnabled: true })}
 											servicesByType={() => this.fetchAllInLocation(this.getLocation(), props.match.params.categoryId)}
 											showMap={() => goToCategoryMap(props.match.params.categoryId)}
+											id={props.match.params.categoryId}
 											title={this.state.categoryName}
+											fetchCategory={() => this.serviceTypeById(props.match.params.categoryId)}
 										/>
 									</div>
 								</Skeleton>
@@ -628,6 +635,8 @@ class Services extends React.Component {
 											showMap={() => goToLocationCategoryMap(props.match.params.location,props.match.params.categoryId )}
 											title={this.state.categoryName}
 											location={props.match.params.location}
+											id={props.match.params.categoryId}
+											fetchCategory={() => this.serviceTypeById(props.match.params.categoryId)}
 										/>
 									</div>
 								</Skeleton>
@@ -673,6 +682,8 @@ class Services extends React.Component {
 											servicesByType={() => this.fetchAllInLocation(props.match.params.location)}
 											showMap={() => goToLocationMap(props.match.params.location )}
 											title={this.state.categoryName}
+											id={props.match.params.categoryId}
+											fetchCategory={() => this.serviceTypeById(props.match.params.categoryId)}
 											location={props.match.params.location}
 										/>
 									</div>
