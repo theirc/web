@@ -496,7 +496,7 @@ export default {
             "Light": "Light",
             "Get directions": "Obtener las direcciones",
             "Click here to find services in the location selected": "Haga clic aquí para encontrar más servicios en la ubicación seleccionada",
-            "Categories": "Artículos",
+            "Categories": "Informativos",
             "All Categories": "Todas las categorías",
             "Share this page": "Compartir esta página",
             "List": "Lista",
