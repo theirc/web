@@ -51,7 +51,7 @@ class Skeleton extends React.Component {
 	}
 	render() {
 		const { children, country, language, match, onGoHome, onGoToServices, onGoToCategories, onGoToSearch, onChangeLocation, onChangeLanguage, deviceType, router, hideFooter, removeErrorMessage, showMapButton, goToMap, headerColor } = this.props;
-		const { hideShareButtons, homePage } = this.props;
+		const { hideShareButtons, homePage, toggleServiceMap } = this.props;
 		const { errorMessage } = this.state;
 		const { config } = this.context;
 		let notifications = [];
@@ -95,6 +95,9 @@ class Skeleton extends React.Component {
 
 		let showFooter = !hideFooter && country && language;
 		let logo = _.template(config.logo)({ language: language || "en" });
+
+		toggleServiceMap(country && country.fields && country.fields.slug !== 'italy');
+
 		return (
 			<I18nextProvider i18n={i18n}>
 				<div className="Skeleton">
@@ -151,6 +154,7 @@ const mapState = ({ country, language, deviceType, router, errorMessage }, p) =>
 };
 const mapDispatch = (d, p) => {
 	return {
+		toggleServiceMap: show => d(actions.toggleServiceMap(show)),
 		onGoHome: country => () => {
 			if (country) d(push(`/${country.fields.slug || ""}`));
 		},

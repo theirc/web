@@ -64,7 +64,7 @@ class BottomNav extends Component {
 					<BottomNavigationButton className={this.props.index === 1 ? "Selected" : ""} icon={<Assignment />} label={<span className="BottomButton">{t("Categories")}</span>} value={1} />
 				
 					{showServiceMap ? (
-						<BottomNavigationButton className={this.props.index === 3 ? "Selected" : ""} icon={<List />} label={<span className="BottomButton">{t("Service List")}</span>} value={3} />
+						<BottomNavigationButton className={this.props.index === 3 ? "Selected" : ""} icon={<List />} label={<span className="BottomButton">{t("Services")}</span>} value={3} />
 					) : (
 						<div />
 					)}
