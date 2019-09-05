@@ -270,7 +270,7 @@ module.exports = {
 		theme: "generic",
 		author: 'CuentaNos',
 		accessToken: "98cd6321d5578bab8cb4c9bafe022f2bd73db5ffce296420d934008f9800fb80",
-		space: "ejasa2kyylk9",
+		space: "e17qk44d7f2w",
 		languages: [["es", "Español"]],
 		logo: "/images/cn.tb.png",
 		logoBlack:  "/cn-logo-black.png",
