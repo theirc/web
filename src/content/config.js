@@ -269,7 +269,7 @@ module.exports = {
 	"theirc-refugee-info-frontend-design.azurewebsites.net": {
 		theme: "generic",
 		author: 'CuentaNos',
-		accessToken: "8MqcrDXWgwU-c8YScijGKVIW_ABnl52EEoKsd8Ftfig",
+		accessToken: "98cd6321d5578bab8cb4c9bafe022f2bd73db5ffce296420d934008f9800fb80",
 		space: "ejasa2kyylk9",
 		languages: [["es", "Español"]],
 		logo: "/images/cn.tb.png",
