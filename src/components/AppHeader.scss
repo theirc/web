@@ -300,9 +300,15 @@ Less me
 
 			.ltr & {
 				right: 5px;
+				@media (min-width: $desktopBreakpoint) {
+					right: 30px;
+				}
 			}
 			.rtl & {
 				left: 5px;
+				@media (min-width: $desktopBreakpoint) {
+					left: 30px;
+				}
 			}
 		}
 		.fa {
@@ -315,7 +321,7 @@ Less me
 			position: fixed;
 			top: 64px;
 			z-index: 99;
-			width:98%;
+			width: 100%;
 		}
 	}
 }
@@ -361,9 +367,15 @@ Less me
 			
 			.ltr & {
 				right: 5px;
+				@media (min-width: $desktopBreakpoint) {
+					right: 30px;
+				}
 			}
 			.rtl & {
 				left: 5px;
+				@media (min-width: $desktopBreakpoint) {
+					left: 30px;
+				}
 			}
 		}
 		.fa {
@@ -376,7 +388,7 @@ Less me
 			position: fixed;
 			top: 64px;
 			z-index: 99;
-			width:98%;
+			width: 100%;
 		}
 	}
 }
