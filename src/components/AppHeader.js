@@ -123,8 +123,8 @@ class AppHeader extends Component {
 										)}
 
 										<div className="app-bar-separator separator-searchIcon" />
-										{!search && <Search onClick={this.toggleSearch.bind(this)}/>}
-										{search && <i className="fa fa-times" onClick={this.toggleSearch.bind(this)} />}
+										{!search && <Search className='search-btn' onClick={this.toggleSearch.bind(this)}/>}
+										{search && <i className="fa fa-times search-btn" onClick={this.toggleSearch.bind(this)} />}
 										
 									</div>
 								</div>

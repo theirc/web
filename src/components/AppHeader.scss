@@ -135,7 +135,10 @@ Less me
 		}
 		
 		&.lang {
-			padding: 0 30px 0 10px;
+			padding: 0 10px;
+			@media (min-width: $desktopBreakpoint) {
+				padding-right: 30px;
+			}
 		}
 	}
 	@-moz-document url-prefix(){
@@ -154,9 +157,10 @@ Less me
 	border-left-color: #ccc;
 	border-left-style: solid;
 	height: 25px;
-}
-.separator-searchIcon{
-	padding-right: 17px;
+
+	@media (max-width: $desktopBreakpoint) {
+		display: none;
+	}
 }
 
 .fa-times {
@@ -246,10 +250,22 @@ Less me
 
 .AppHeader {
 	.SearchBar {
+		background-color: black;
 		height: 30px;
 		padding: 8px 16px;
-		background-color: black;
+		position: relative;
+		
+		@media (min-width: $desktopBreakpoint) {
+			opacity: 0.5;
 
+			input {
+				color: white;
+
+				&::placeholder {
+					color: #ddd;
+				}
+			}
+		}
 		input {
 			-webkit-appearance: none;
 			line-height: 25px;
@@ -257,7 +273,7 @@ Less me
 			width: 100%;
 			box-sizing: border-box;
 			border: 0;
-			background-color: black;
+			background-color: inherit;
 			border-bottom: 1px #666 solid;
 			color: white;
 			padding: 0;
@@ -268,7 +284,7 @@ Less me
 		.fa-times-circle {
 			margin-inline-start: -33px;
 			margin: 5px 5px;
-			top: 65px;
+			top: 2px;
 
 			.ltr & {
 				right: 39px;
@@ -278,10 +294,10 @@ Less me
 			}
 		}
 		.fa-search {
-			border-left: 1px solid #666;
 			margin: 5px 5px;
 			padding-left: 8px;
-			top: 65px;
+			top: 2px;
+
 			.ltr & {
 				right: 5px;
 			}
@@ -297,7 +313,7 @@ Less me
 		}
 		@media (min-width: $desktopBreakpoint) {
 			position: fixed;
-			top: 65px;
+			top: 64px;
 			z-index: 99;
 			width:98%;
 		}
@@ -305,9 +321,10 @@ Less me
 }
 .AppHeaderLight {
 	.SearchBar {
+		background-color: white;
 		height: 30px;
 		padding: 8px 16px;
-		background-color: white;
+		position: relative;
 
 		input {
 			-webkit-appearance: none;
@@ -316,7 +333,7 @@ Less me
 			width: 100%;
 			box-sizing: border-box;
 			border: 0;
-			background-color: white;
+			background-color: inherit;
 			border-bottom: 1px #ddd solid;
 			color: black;
 			padding: 0;
@@ -328,7 +345,7 @@ Less me
 		.fa-times-circle {
 			margin-inline-start: -33px;
 			margin: 5px 5px;
-			top: 65px;
+			top: 2px;
 
 			.ltr & {
 				right: 39px;
@@ -338,11 +355,10 @@ Less me
 			}
 		}
 		.fa-search {
-			border-left: 1px solid #ddd;
 			margin: 5px 5px;
 			padding-left: 8px;
-			top: 65px;
-
+			top: 2px;
+			
 			.ltr & {
 				right: 5px;
 			}
@@ -358,7 +374,7 @@ Less me
 		}
 		@media (min-width: $desktopBreakpoint) {
 			position: fixed;
-			top: 65px;
+			top: 64px;
 			z-index: 99;
 			width:98%;
 		}
@@ -491,6 +507,18 @@ $color: #ffffff;
 .MuiIconButton-label-30 > svg,
 .MuiSvgIcon-root-102 {
 	display: none;
+}
+
+.search-btn {
+	width: 24px;
+	padding-left: 15px;
+
+	// @media (min-width: $desktopBreakpoint) {
+	// }
+
+	&.fa-times {
+		width: 19px;
+	}
 }
 
 .SearchButton {
