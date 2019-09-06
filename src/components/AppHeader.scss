@@ -156,9 +156,11 @@ Less me
 	height: 25px;
 }
 .separator-searchIcon{
-	@media (min-width: 960px) {		
-		padding-right: 17px;
-	}
+	padding-right: 17px;
+}
+
+.fa-times {
+	padding: 0 6px 0 6px;
 }
 
 .AppHeader {
@@ -245,24 +247,20 @@ Less me
 .AppHeader {
 	.SearchBar {
 		height: 30px;
-		padding-bottom: 1em;
-		padding-left: 16px;
-		padding-right: 16px;
+		padding: 8px 16px;
 		background-color: black;
 
 		input {
 			-webkit-appearance: none;
 			line-height: 25px;
-			font-size: 20px;
+			font-size: 18px;
 			width: 100%;
 			box-sizing: border-box;
 			border: 0;
 			background-color: black;
-			border-bottom: 2px white solid;
+			border-bottom: 1px #666 solid;
 			color: white;
-
 			padding: 0;
-			border-radius: 0;
 		}
 		input:focus {
 			outline: none;
@@ -270,18 +268,20 @@ Less me
 		.fa-times-circle {
 			margin-inline-start: -33px;
 			margin: 5px 5px;
-			top: 60px;
+			top: 65px;
 
 			.ltr & {
-				right: 35px;
+				right: 39px;
 			}
 			.rtl & {
-				left: 35px;
+				left: 39px;
 			}
 		}
 		.fa-search {
+			border-left: 1px solid #666;
 			margin: 5px 5px;
-			top: 60px;
+			padding-left: 8px;
+			top: 65px;
 			.ltr & {
 				right: 5px;
 			}
@@ -306,43 +306,43 @@ Less me
 .AppHeaderLight {
 	.SearchBar {
 		height: 30px;
-		padding-bottom: 1em;
-		padding-left: 16px;
-		padding-right: 16px;
-		background-color: rgb(216, 216, 216);;
+		padding: 8px 16px;
+		background-color: white;
 
 		input {
 			-webkit-appearance: none;
 			line-height: 25px;
-			font-size: 20px;
+			font-size: 18px;
 			width: 100%;
 			box-sizing: border-box;
 			border: 0;
-			background-color: rgb(216, 216, 216);
-			border-bottom: 2px white solid;
-			color: #3a3a3a;
-
+			background-color: white;
+			border-bottom: 1px #ddd solid;
+			color: black;
 			padding: 0;
-			border-radius: 0;
 		}
+
 		input:focus {
 			outline: none;
 		}
 		.fa-times-circle {
 			margin-inline-start: -33px;
 			margin: 5px 5px;
-			top: 60px;
+			top: 65px;
 
 			.ltr & {
-				right: 35px;
+				right: 39px;
 			}
 			.rtl & {
-				left: 35px;
+				left: 39px;
 			}
 		}
 		.fa-search {
+			border-left: 1px solid #ddd;
 			margin: 5px 5px;
-			top: 60px;
+			padding-left: 8px;
+			top: 65px;
+
 			.ltr & {
 				right: 5px;
 			}
