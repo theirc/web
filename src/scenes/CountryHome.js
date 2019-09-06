@@ -1,10 +1,10 @@
 import React from "react";
 import moment from "moment";
 import { connect } from "react-redux";
-import { HomeWidget, HomeWidgetCollection } from "../components";
+import { HomeWidget, HomeWidgetCollection, InstanceMovedWidget } from "../components";
+import Skeleton from '../scenes/Skeleton';
 import { push } from "react-router-redux";
 import getSessionStorage from "../shared/sessionStorage";
-import { Skeleton } from ".";
 
 class CountryHome extends React.Component {
 	constructor() {
@@ -51,20 +51,23 @@ class CountryHome extends React.Component {
 
 	render() {
 		const { country, onNavigate, direction, language } = this.props;
+		const instanceMoved = country.fields.slug === 'bulgaria';
+
 		if (!country || !country.fields.home) {
 			return null;
 		}
+		
 		return (
 			<Skeleton hideShareButtons={true} homePage={true}>
-			<HomeWidgetCollection key={"HomeWidgetCollection"}>
-				{country.fields.home.map((e, index) => {
-				return <HomeWidget index={index} isHome={true} direction={direction} onNavigate={onNavigate} language={language} country={country} content={e} key={e.sys.id} />
-			
-				})}
-			</HomeWidgetCollection>
+				{ !instanceMoved &&
+					<HomeWidgetCollection key={"HomeWidgetCollection"}>
+						{country.fields.home.map(e => <HomeWidget direction={direction} onNavigate={onNavigate} language={language} country={country} content={e} key={e.sys.id} />)}
+					</HomeWidgetCollection>
+				}
+				{ instanceMoved &&
+					<InstanceMovedWidget link="http://refugeelife.bg/" />
+				}
 			</Skeleton>
-			
-			
 		);
 	}
 }

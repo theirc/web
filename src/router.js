@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Switch, withRouter } from "react-router";
+import { Redirect, Route, Switch, withRouter } from "react-router";
 import { ConnectedRouter } from "react-router-redux";
 import { Home, Article, Categories, CountryHome, CategoryHome, CountrySelectorScene, LanguageSelectorScene, Search, Services, Selectors, Subscribe} from "./scenes";
 import { history } from "./store";
@@ -48,6 +48,8 @@ class Router extends Component {
 				<Placeholder>
 					<ScrollToTop />
 					<Switch>
+						<Route exact path="/bulgaria/*" render={() => <Redirect to="/bulgaria" />} />
+						<Route exact path="/italy/services*" render={() => <Redirect to="/italy" />} />
 						<Route exact path="/:country/subscribe/:category" component={withCountry(withCategory(Subscribe))} />	
 						<Route path="/:country/services" component={props => <ServicesWithCountry {...props} />} />
 						<Route exact path="/:country/categories" component={withCountry(Categories)} />
