@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { translate } from "react-i18next";
-import "./InstanceMovedWidget.scss";
+import "./InstanceMovedWidget.css";
 
 class InstanceMovedWidget extends Component {
 
