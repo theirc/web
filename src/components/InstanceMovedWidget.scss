@@ -1,0 +1,48 @@
+@import "../shared/includes.scss";
+
+.InstanceMovedWidget {
+	background-color: white;
+	padding: 50px 20px;
+	text-align: center;
+
+	@media (min-width: $desktopBreakpoint) {
+		padding: 50px 20%;
+
+		h1 {
+			font-size: 30px;
+		}
+	}
+
+	span {
+		background-image: url("/instance-moved.png");
+		background-size: contain;
+		display: block;
+		margin: 0 auto 50px;
+		width: 100px;
+		height: 100px;
+	}
+
+	a, .rtl a {
+		background-color: $accentIRC;
+		border-bottom: none !important;
+		display: block;
+		font-weight: bold;
+		height: 70px;
+		line-height: 70px !important;
+		margin: 0 auto;
+		max-width: 300px;
+		outline: none;
+		padding: 5px;
+		text-decoration: none;
+	}
+
+	h1 {
+		text-transform: uppercase;
+		font-size: 25px;
+		line-height: 150%;
+	}
+
+	h3 {
+		font-weight: normal;
+	}
+}

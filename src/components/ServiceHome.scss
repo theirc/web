@@ -779,6 +779,7 @@
 			font-size: 18px;
 			
 			&.provider {
+				font-size: 20px;
 				padding: 40px 0 25px;
 
 				.providerName{
@@ -827,12 +828,12 @@
 }
 
 .filter-bar {
-	display: none;
+	display: flex;
 	justify-content: flex-start;
 
-	@media (min-width: $desktopBreakpoint) {
-		display: flex;
-	}
+	// @media (min-width: $desktopBreakpoint) {
+	// 	display: flex;
+	// }
 
 	.social {
 		display: flex;
@@ -844,11 +845,11 @@
 			border-radius: 5px;
 			display: flex;
 			font-size: 14px;
-			justify-content: space-between;
-			margin-left: 20px;
+			justify-content: center;
+			margin-left: 10px;
 			padding: 0 10px;
 			text-decoration: none;
-			width: 190px;
+			width: 25px;
 			height: 41px;
 
 			&:hover {

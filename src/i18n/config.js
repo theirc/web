@@ -148,7 +148,10 @@ export default {
             "Palermo":"پالرمو",
             "Rome":"رم",
             "Turin":"تورین",
-            "Ventimiglia":"فينتيميليا"
+            "Ventimiglia":"فينتيميليا",
+            "Instance moved Bulgaria banner": "متاسفیم! راهنمای پناهندگان دیگر اطلاعاتی در مورد بلغارستان ارائه نمی‌کند.",
+            "Instance moved Bulgaria small": "به جای آن، به بنیاد دسترسی به حقوق کمک کردیم تا وبسایت جدیدی برای پناهندگان در بلغارستان ایجاد کنند: refugeelife.bg",
+            "Instance moved Bulgaria label": "از سایت www.refugeelife.bg بازدید بفرمایید.",
         },
     },
     ar: {
@@ -300,7 +303,10 @@ export default {
             "Palermo":"باليرمو",
             "Rome":"روما",
             "Turin":"تورينو",
-            "Ventimiglia":"فينتيميليا"
+            "Ventimiglia":"فينتيميليا",
+            "Instance moved Bulgaria banner": "عذراً! توقف دليل اللاجئ عن تزويد معلومات عن بلغاريا.",
+            "Instance moved Bulgaria small": "عوضاً عن ذلك، قمنا بمساعدة منظمة الوصول إلى الحقوق (Foundation for Access to Rights) في إنشاء موقع للاجئين في بلغاريا: refugeelife.bg",
+            "Instance moved Bulgaria label": "قم بزيارة www.refugeelife.bg",
         },
     },
     ur: {
@@ -453,6 +459,9 @@ export default {
             "Rome":"روم",
             "Turin":"ٹورن",
             "Ventimiglia":"Ventimiglia",
+            "Instance moved Bulgaria banner": "ہم معذرتخواہ ہیں ریگیوجی۔انفو اب بلغاریہ کے بارے میں معلومات فراہم نہیں کرتا.",
+            "Instance moved Bulgaria small": "اس کے بجائے، ہم نے بلغاریہ میں پناہ گزینوں کے لئے  فاونڈیشن فار ایکسس ٹو رائٹس کی نئی ویب سائٹ بنانے میں مدد کی ہے: refugeelife.bg",
+            "Instance moved Bulgaria label": "پر جائیں www.refugeelife.bg",
         },
     },
     es: {
@@ -496,7 +505,7 @@ export default {
             "Light": "Light",
             "Get directions": "Obtener las direcciones",
             "Click here to find services in the location selected": "Haga clic aquí para encontrar más servicios en la ubicación seleccionada",
-            "Categories": "Artículos",
+            "Categories": "Informativos",
             "All Categories": "Todas las categorías",
             "Share this page": "Compartir esta página",
             "List": "Lista",
@@ -1035,6 +1044,9 @@ export default {
             "Rome":"Rome",
             "Turin":"Turin",
             "Ventimiglia":"Ventimiglia",
+            "Instance moved Bulgaria banner": "Sorry! Refugee.Info has stopped providing information about Bulgaria. Refugee.info no longer hosts content on Bulgaria.",
+            "Instance moved Bulgaria small": "Instead, we helped the Foundation for Access to Rights create a new site for refugees in Bulgaria: refugeelife.bg.",
+            "Instance moved Bulgaria label": "Visit www.refugeelife.bg",
         },
     }
 };
