@@ -170,7 +170,6 @@ class ArticlePage extends Component {
 						<div>
 							<div className="hero">
 								<img src={hero.fields.file.url + "?fm=jpg&fl=progressive"} alt="" />
-								
 							</div>
 							{hero.fields.description && <credit>{hero.fields.description}</credit>}
 						</div>
@@ -178,8 +177,9 @@ class ArticlePage extends Component {
 				<HeaderBar subtitle={(category.fields.articles || []).length > 1 && `${category.fields.name}:`} title={title} />
 				<div className='filter-bar'>
 					<div className="social">
-						<div href='#' className="share" onClick={this.onShareOnFacebook}>{t('Share on Facebook')}<i className="fa fa-facebook-f" style={{ fontSize: 16 }}/></div>
-						<div href='#' className="copy" onClick={this.onCopyLink}>{this.state.copied ? t("Copied") : t("Copy Link")}<Link /></div>
+						<div href='#' className="share" onClick={this.onShareOnFacebook}><i className="fa fa-facebook-f" style={{ fontSize: 16 }}/></div>
+						<div href='#' className="copy" onClick={this.onCopyLink}><Link /></div>
+						{/* <div href='#' className="copy" onClick={this.onCopyLink}>{this.state.copied ? t("Copied") : t("Copy Link")}<Link /></div> */}
 					</div>
 				</div>
 				{contentType.sys.id === "video" && this.renderVideo()}

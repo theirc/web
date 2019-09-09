@@ -282,8 +282,9 @@ class ServiceDetail extends React.Component {
 				<HeaderBar subtitle={`${subtitle}:`} title={serviceT.name} />
 				<div className='filter-bar'>
 					<div className="social">
-						<div href='#' className="share" onClick={this.onShareOnFacebook}>{t('Share on Facebook')}<Share /></div>
-						<div href='#' className="copy" onClick={this.onCopyLink}>{this.state.copied ? t("Copied") : t("Copy Link")}<Link /></div>
+						<div href='#' className="share" onClick={this.onShareOnFacebook}><i className="fa fa-facebook-f" style={{ fontSize: 16 }}/></div>
+						<div href='#' className="copy" onClick={this.onCopyLink}><Link /></div>
+						{/* <div href='#' className="copy" onClick={this.onCopyLink}>{this.state.copied ? t("Copied") : t("Copy Link")}<Link /></div> */}
 					</div>
 				</div>
 
