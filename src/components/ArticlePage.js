@@ -12,6 +12,7 @@ import HeaderBar from "./HeaderBar";
 
 import "./ArticlePage.css";
 
+const moment = global.moment;
 const Remarkable = require("remarkable");
 const IG_URL = "https://instagr.am/p/";
 const md = new Remarkable("full", {
@@ -184,6 +185,7 @@ class ArticlePage extends Component {
 				</div>
 				{contentType.sys.id === "video" && this.renderVideo()}
 				<article>
+					<span className='author'><span>{t("LAST_UPDATED")}</span> {moment(article.sys.updatedAt).format('YYYY.MM.DD')}</span>
 					<div dangerouslySetInnerHTML={{ __html: html }} />
 				</article>
 			</div>
