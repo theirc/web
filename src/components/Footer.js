@@ -95,7 +95,7 @@ class Footer extends Component {
 								</div>
 							)}
 							{!hideShareButtons && 
-							<div className="button " onClick={this.onShareOnFacebook}>
+							<div className="button button-desktop" onClick={this.onShareOnFacebook}>
 								<div className="icon-container">
 									<Share />
 								</div>
@@ -104,7 +104,7 @@ class Footer extends Component {
 							</div>
 							}
 							{!hideShareButtons && 
-							<div className="button " onClick={this.onCopyLink}>
+							<div className="button button-desktop" onClick={this.onCopyLink}>
 								<div className="icon-container">
 									<Link />
 								</div>

@@ -135,6 +135,8 @@
 		align-items: center;
 		align-content: center;
 
+		
+
 		&.left {
 			height: 100%;
 			border: 0;
@@ -145,6 +147,12 @@
 
 		.icon-container {
 			@include brand-colors( "color");
+		}
+	}
+
+	.button-desktop{
+		@media (max-width: $desktopBreakpoint) {
+			display: none;
 		}
 	}
 
