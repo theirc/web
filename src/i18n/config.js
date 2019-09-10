@@ -2,7 +2,6 @@ export default {
     fa: {
         translation: {
             "Show Services": "Show Services",
-            "FILTERS CATEGORIES AND LOCATIONS": "FILTERS CATEGORIES AND LOCATIONS",
             "About us": "درباره ما",
             "Sunday": "یکشنبه",
             "Detect Location": "تشخیص موقعیت",
@@ -153,12 +152,15 @@ export default {
             "Instance moved Bulgaria small": "به جای آن، به بنیاد دسترسی به حقوق کمک کردیم تا وبسایت جدیدی برای پناهندگان در بلغارستان ایجاد کنند: refugeelife.bg",
             "Instance moved Bulgaria label": "از سایت www.refugeelife.bg بازدید بفرمایید.",
             "Results for": "Results for",
+            "Find us on Facebook": "Find us on Facebook",
+            "Map view": "Map view",
+            "Show More": "Show More",
+            "Show Less": "Show Less",
         },
     },
     ar: {
         translation: {
             "Show Services": "Show Services",
-            "FILTERS CATEGORIES AND LOCATIONS": "FILTERS CATEGORIES AND LOCATIONS",
             "About us": "من نحن",
             "Sunday": "الأحد",
             "Detect Location": "تحديد الموقع",
@@ -309,12 +311,15 @@ export default {
             "Instance moved Bulgaria small": "عوضاً عن ذلك، قمنا بمساعدة منظمة الوصول إلى الحقوق (Foundation for Access to Rights) في إنشاء موقع للاجئين في بلغاريا: refugeelife.bg",
             "Instance moved Bulgaria label": "قم بزيارة www.refugeelife.bg",
             "Results for": "Results for",
+            "Find us on Facebook": "Find us on Facebook",
+            "Map view": "Map view",
+            "Show More": "Show More",
+            "Show Less": "Show Less",
         },
     },
     ur: {
         translation: {
             "Show Services": "Show Services",
-            "FILTERS CATEGORIES AND LOCATIONS": "FILTERS CATEGORIES AND LOCATIONS",
             "About us": "ہمارے متعلق",
             "Sunday": "اتوار",
             "Detect Location": "مقام/جگہ کا پتہ لگائیں",
@@ -465,15 +470,16 @@ export default {
             "Instance moved Bulgaria small": "اس کے بجائے، ہم نے بلغاریہ میں پناہ گزینوں کے لئے  فاونڈیشن فار ایکسس ٹو رائٹس کی نئی ویب سائٹ بنانے میں مدد کی ہے: refugeelife.bg",
             "Instance moved Bulgaria label": "پر جائیں www.refugeelife.bg",
             "Results for": "Results for",
+            "Find us on Facebook": "Find us on Facebook",
+            "Map view": "Map view",
+            "Show More": "Show More",
+            "Show Less": "Show Less",
         },
     },
     es: {
         translation: {
             "Show Services": "Mostrar Servicios",
-            "FILTERS CATEGORIES AND LOCATIONS": "FILTROS CATEGORÍAS Y UBICACIÓN",
             "All": "Todos",
-            "All_Categories": "Todas las categorías",
-            "Service_Categories" : "Categorías",
             "About us": "Sobre nosotros",
             "Sunday": "Domingo",
             "Detect Location": "Detectar ubicación",
@@ -512,7 +518,6 @@ export default {
             "All Categories": "Todas las categorías",
             "Share this page": "Compartir esta página",
             "List": "Lista",
-            "Departments": 'Departamentos',
             "Languages spoken": "Idiomas hablados",
             "View info for": "Ver información para",
             "English": "Inglés",
@@ -597,7 +602,7 @@ export default {
             "Copy Link": "Copiar Link",
             "Share on Facebook": "Compartir en el Facebook",
             "Copied": "Copiado",
-            "Locations": "Ubicaciones",
+            "Locations": "Departamentos",
             "Locations in": "Ubicaciones en",
             "Location": "Ubicación",
             "Articles": "Artículos",
@@ -606,12 +611,15 @@ export default {
 			"COOKIES_BANNER": "Utilizamos cookies para ofrecer nuestros servicios. Al continuar utilizando este sitio, acepta dicho uso y reconoce que ha leído y entendido nuestra política de cookies ({{cookiePolicy}}) y política de privacidad ({{privacyPolicy}}).",
 			"Services in": "Servicios en",
             "Results for": "Resultados para",
+            "Find us on Facebook": "Encuéntranos en Facebook",
+            "Map view": "Mapa",
+            "Show More": "Mostrar Más",
+            "Show Less": "Mostrar Menos",
         }
     },
     fr: {
         translation: {
             "Show Services": "Show Services",
-            "FILTERS CATEGORIES AND LOCATIONS": "FILTERS CATEGORIES AND LOCATIONS",
             "About us": "À propos de nous",
             "Sunday": "Dimanche",
             "Detect Location": "Détecter le lieu",
@@ -759,12 +767,15 @@ export default {
             "Turin":"Turin",
             "Ventimiglia":"Vintimille",
             "Results for": "Results for",
+            "Find us on Facebook": "Find us on Facebook",
+            "Map view": "Map view",
+            "Show More": "Show More",
+            "Show Less": "Show Less",
         }
     },
     ti: {
         translation: {
             "Show Services": "Show Services",
-            "FILTERS CATEGORIES AND LOCATIONS": "FILTERS CATEGORIES AND LOCATIONS",
             "About us": "ብዛዕባና",
             "Sunday": "ሰንበት",
             "Detect Location": "ቦታ ምርካብ",
@@ -894,15 +905,16 @@ export default {
             "COOKIES_BANNER": "ኣገልግሎትና ንምሃብ ኩኪስ(Cookies) ንጥቀም ኢና። ነዚ መርበብ’ዚ ንኽትጥቀመሉ ብምቕጻልካ ድማ፣ ነዚ ኣጠቓቕማ’ዚ ተቐቢልካዮን ንናይ ኩኪ ፖሊሲን ({{cookiePolicy}})  ፖሊሲ ምስጢራውነትን ኣንቢብካ ከም ዝተረዳእካዮ ኣፍልጦ ትህብ ኣለኻ ማለት እዩ። ({{privacyPolicy}})",
             "Services in": "ኣገልግሎታት ኣብ",
             "Results for": "Results for",
+            "Find us on Facebook": "Find us on Facebook",
+            "Map view": "Map view",
+            "Show More": "Show More",
+            "Show Less": "Show Less",
         }
     },
     en: {
         translation: {
             "Show Services": "Show Services",
-            "FILTERS CATEGORIES AND LOCATIONS": "FILTERS CATEGORIES AND LOCATIONS",
             "About us": "About us",
-            "All_Categories": "All Categories",
-            "Service_Categories" : "Categories",
             Sunday: "Sunday",
             "Detect Location": "Detect Location",
             "Our team has not yet mapped the services in your location.": "Our team has not yet mapped the services in your location.",
@@ -918,7 +930,6 @@ export default {
             "Map of Services": "Map of Services",
             "This page last updated on:": "This page last updated on:",
             LAST_UPDATED: "Last update: ",
-            "Departments": 'Departments',
             "Order results by distance to me": "Order results by distance to me",
             "Address in Serbian": "Address in Serbian",
             "Change language": "Change language",
@@ -1054,6 +1065,10 @@ export default {
             "Instance moved Bulgaria small": "Instead, we helped the Foundation for Access to Rights create a new site for refugees in Bulgaria: refugeelife.bg.",
             "Instance moved Bulgaria label": "Visit www.refugeelife.bg",
             "Results for": "Results for",
+            "Find us on Facebook": "Find us on Facebook",
+            "Map view": "Map view",
+            "Show More": "Show More",
+            "Show Less": "Show Less",
         },
     }
 };
