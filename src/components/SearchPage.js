@@ -135,7 +135,7 @@ class SearchPage extends React.Component {
 					{!searchingServices &&
 							services.length === 0 && (
 								<div>
-									<em>{t("No services found with the keywords used.")}</em>
+									<em>{t("No services found with the keywords used")}</em>
 								</div>
 							)}
 					<h1>
