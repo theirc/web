@@ -96,7 +96,7 @@ class Skeleton extends React.Component {
 		let showFooter = !hideFooter && country && language;
 		let logo = _.template(config.logo)({ language: language || "en" });
 
-		toggleServiceMap(country && country.fields && country.fields.slug !== 'italy');
+		toggleServiceMap(country && country.fields && country.fields.slug !== 'italy' && country.fields.slug !== 'jordan');
 
 		return (
 			<I18nextProvider i18n={i18n}>

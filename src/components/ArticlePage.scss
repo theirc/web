@@ -169,6 +169,10 @@
 	article {
 		font-size: 16px;
 		font-weight: 300;
+		
+		&>div {
+			padding-top: 30px;
+		}
 
 		p {
 			line-height: 150%;

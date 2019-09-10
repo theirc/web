@@ -50,6 +50,7 @@ class Router extends Component {
 					<Switch>
 						<Route exact path="/bulgaria/*" render={() => <Redirect to="/bulgaria" />} />
 						<Route exact path="/italy/services*" render={() => <Redirect to="/italy" />} />
+						<Route exact path="/jordan/services*" render={() => <Redirect to="/jordan" />} />
 						<Route exact path="/:country/subscribe/:category" component={withCountry(withCategory(Subscribe))} />	
 						<Route path="/:country/services" component={props => <ServicesWithCountry {...props} />} />
 						<Route exact path="/:country/categories" component={withCountry(Categories)} />
