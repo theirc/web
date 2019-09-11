@@ -222,17 +222,21 @@ app.get("/direct/:article/", function(req, res, err) {
 				})
 				.then(c => {		
 					if (c.items.length || [] >0){
-						let match = c.items[0];
+                        let match = c.items[0];
+                        console.log("Entry Found. Category:", match.fields.category);
 						if (match.fields.category && match.fields.country){
 							res.redirect(`/${match.fields.country.fields.slug}/${match.fields.category.fields.slug}/${article}/`);
 						}else{
+                            console.log("No Category or Country");
 							res.redirect("/");
 						}
-					}
+					}else{
+                        console.log("Entry not found");
+                    }
 				})
 				.catch(e => {
-					console.log(e);
-					res.redirect(`/${country}/`);
+					console.log("Error:",e);
+					res.redirect(`/`);
 				});
            
         }
