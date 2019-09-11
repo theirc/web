@@ -270,7 +270,7 @@ module.exports = {
 	"theirc-refugee-info-frontend-design.azurewebsites.net": {
 		theme: "generic",
 		author: 'CuentaNos',
-		accessToken: "98cd6321d5578bab8cb4c9bafe022f2bd73db5ffce296420d934008f9800fb80",
+		accessToken: "2a64ff636dd4e5b44bd21afcb7f8d77c5c238e3ebe387ec6047a0b9d5c6a704d",
 		space: "e17qk44d7f2w",
 		host: "preview.contentful.com",
 		languages: [["es", "Español"]],
