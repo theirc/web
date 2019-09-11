@@ -167,9 +167,12 @@
 	}
 
 	article {
-		padding: 5px;
 		font-size: 16px;
 		font-weight: 300;
+		
+		&>div {
+			padding-top: 30px;
+		}
 
 		p {
 			line-height: 150%;
@@ -199,10 +202,6 @@
 		margin-right: -4vw;
 	}
 	@media (min-width: $desktopBreakpoint) {
-		article {
-			padding-left: 4vw;
-			padding-right: 4vw;
-		}
 
 		.hero {
 			max-height: 42vw;
@@ -226,9 +225,21 @@
 		color: #000000;
 	}
 
+	.author {
+		color: gray;
+		float: right;
+		font-size: 12px;
+		font-style: italic;
+		font-weight: 300;
+
+		span {
+			font-style: italic;
+		}
+	}
+
 	article {
-		margin-left: 5px;
-		margin-right: 5px;
+		margin-left: 16px;
+		margin-right: 16px;
 
 		img {
 			max-width: 100%;

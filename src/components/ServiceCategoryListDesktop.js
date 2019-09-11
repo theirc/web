@@ -204,7 +204,7 @@ class ServiceCategoryListDesktop extends React.Component {
 	renderFilters = () => {
 		let { municipalities } = this.state;
 		let { t, showDepartments } = this.props;
-		let categoryName = this.state.category ? this.state.category.name : t('All_Categories');
+		let categoryName = this.state.category ? this.state.category.name : t('All Categories');
 		// let location = this.state.location ? (this.state.location.title ? this.state.location.title : this.state.location.name) : t('All Locations');
 		let department = this.state.department.name ? this.state.department.name : this.state.department;
 		let municipality = this.state.municipality.name ? this.state.municipality.name : this.state.municipality;
@@ -337,18 +337,18 @@ class ServiceCategoryListDesktop extends React.Component {
 
 				{/* RENDER POPOVERS */}
 				{this.state.showFilter && this.state.filterType === FilterTypes.DEPARTMENT && departments && showDepartments &&
-					this.renderFiltersPopover(t('Departments'), this.onSelectLocation, departments, this.renderDepartmentButton.bind(this), 'departments', FilterTypes.DEPARTMENT)
+					this.renderFiltersPopover(t('Locations'), this.onSelectLocation, departments, this.renderDepartmentButton.bind(this), 'departments', FilterTypes.DEPARTMENT)
 				}
 				{this.state.showFilter && this.state.filterType === FilterTypes.DEPARTMENT && l3 && !showDepartments &&
-					this.renderFiltersPopover(t('Departments'), this.onSelectLocation, l3, this.renderDepartmentButton.bind(this), 'departments', FilterTypes.DEPARTMENT)
+					this.renderFiltersPopover(t('Locations'), this.onSelectLocation, l3, this.renderDepartmentButton.bind(this), 'departments', FilterTypes.DEPARTMENT)
 				}
 
 				{this.state.showFilter && this.state.filterType === FilterTypes.MUNICIPALITY && municipalities &&
-					this.renderFiltersPopover(t('Municipalities'), this.onSelectMunicipality, municipalities, this.renderDepartmentButton.bind(this), 'municipalities', FilterTypes.MUNICIPALITIES)
+					this.renderFiltersPopover(t('Municipalidades'), this.onSelectMunicipality, municipalities, this.renderDepartmentButton.bind(this), 'municipalities', FilterTypes.MUNICIPALITIES)
 				}
 
 				{this.state.showFilter && this.state.filterType === FilterTypes.CATEGORY && categories &&
-					this.renderFiltersPopover(t('Service_Categories'), this.onSelectCategory, categories, this.renderCategoryButton.bind(this), 'categories', FilterTypes.CATEGORY)
+					this.renderFiltersPopover(t('Service Categories'), this.onSelectCategory, categories, this.renderCategoryButton.bind(this), 'categories', FilterTypes.CATEGORY)
 				}
 
 				{showServices && !this.state.showMap &&
