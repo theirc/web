@@ -215,15 +215,7 @@ class ServiceDetail extends React.Component {
 				.locale(language);
 			return `${m.format("hh:mm")} ${m.hour() >= 12 ? t("pm") : t("am")}`;
 		};
-		const serviceProviderElement = s => {
-			return s.provider.website ? (
-				<a href={toUrl(s.provider.website)} className="providerName" rel="noopener noreferrer" target="_blank">
-					{s.provider.name}
-				</a>
-			) : (
-					<span className='providerName'>{s.provider.name}</span>
-				);
-		};
+		const serviceProviderElement = s => <span className='providerName'>{s.provider.name}</span>;
 
 		let point = service.location && _.reverse(_.clone(service.location.coordinates)).join(",");
 
