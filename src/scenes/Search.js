@@ -65,7 +65,7 @@ class Search extends React.Component {
 		}, 10);
 	}
 	render() {
-		const { searchingArticles, searchingServices, articles, services, term } = this.state;
+		const { searchingArticles, searchingServices, language, articles, services, term } = this.state;
 		const { onNavigate, country } = this.props;
 		const { config } = this.context;
 
@@ -81,6 +81,7 @@ class Search extends React.Component {
 						services={services}
 						term={term}
 						onNavigate={onNavigate}
+						language={language}
 					/>
 				</div>
 			</Skeleton>

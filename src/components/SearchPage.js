@@ -81,12 +81,11 @@ class SearchPage extends React.Component {
 
 
 	renderTiles(a) {
-		console.log(a);
-		const { country, language } = this.props;
-		//console.log(a.fields.hero, a.fields.name)
+		const { country, onNavigate } = this.props;
 		let image = a.fields.hero ? a.fields.hero.fields.file.url : '/placeholder.png';
+
 		return (
-		<li className='tile' key={a.sys.id} onClick={() => console.log(`/${country.fields.slug}?language=`+language)}>
+		<li className='tile' key={a.sys.id} onClick={() => onNavigate(`/${country.fields.slug}/${a.fields.category.fields.slug}/${a.fields.slug}`)}>
 			<div className='img-viewport'>
 				<img src={image} alt='' />
 			</div>
@@ -147,10 +146,7 @@ class SearchPage extends React.Component {
 					<div className="CategoryList">						
 						<div className='tiles-desktop'>							
 							<ul>
-								{articleList.map(c => {
-									return this.renderTiles(c);									
-								})}
-							
+								{articleList.map(c => this.renderTiles(c))}
 							</ul>
 						</div>
 					</div>
