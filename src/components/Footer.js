@@ -94,7 +94,7 @@ class Footer extends Component {
 									<span>{t("Change Language")}</span>
 								</div>
 							)}
-							{!hideShareButtons && 
+							{/* {!hideShareButtons && 
 							<div className="button button-desktop" onClick={this.onShareOnFacebook}>
 								<div className="icon-container">
 									<Share />
@@ -110,13 +110,12 @@ class Footer extends Component {
 								</div>
 								<span>{this.state.copied ? t("Copied") : t("Copy Link")}</span>
 							</div>
-							}
+							} */}
 							{fblink && 
 							<div className="button " onClick={() => window.open(fblink) }>
 								<div className="icon-container">
 								<i className="fa fa-facebook-f" style={{ fontSize: 24 }}/>
 								</div>
-
 								<span>{t("Find us on Facebook")}</span>
 							</div>
 							}
