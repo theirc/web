@@ -860,6 +860,13 @@
 	}
 }
 
+.rtl {
+	.category-filters {
+		right: 36px;
+		left: initial;
+	}
+}
+
 .department-filters, .category-filters {
 	background-color: #f2f2f2;
 	border: 1px solid #ccc;
