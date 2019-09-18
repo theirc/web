@@ -124,7 +124,7 @@ class SearchPage extends React.Component {
 						{t("Services")}
 					</h1>
 					<hr />
-					{searchingServices && <div className="loader" />}
+					{searchingServices && <div className="LoaderContainer"><div className="loader" /></div>}
 					<div className="ServiceList">
 						<div className="ServiceListContainer">
 							{servicesList.map(this.renderServiceItem.bind(this))}
@@ -142,7 +142,7 @@ class SearchPage extends React.Component {
 					</h1>
 					<hr />
 
-					{searchingArticles && <div className="loader" />}
+					{searchingArticles && <div className="LoaderContainer"><div className="loader" /></div>}
 					<div className="CategoryList">						
 						<div className='tiles-desktop'>							
 							<ul>
