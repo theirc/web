@@ -1,6 +1,9 @@
 @import "../shared/includes.scss";
 
 .ArticlePage {
+	max-width: 1024px;
+	margin: 0 auto;
+
 	&.loading {
 		opacity: 0.2;
 		transition: opacity 0.2s ease-in-out;
@@ -204,7 +207,7 @@
 	@media (min-width: $desktopBreakpoint) {
 
 		.hero {
-			max-height: 42vw;
+			max-height: 440px;
 			overflow: hidden;
 			display: block;
 		}
