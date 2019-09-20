@@ -91,13 +91,13 @@ class AppHeader extends Component {
 		return (
 			<div className={backgroundDark ? 'AppHeader' : 'AppHeaderLight'}>
 
-				<Headroom tolerance={5} offset={200}>					
+				<Headroom tolerance={5} offset={200}>
 					<div className={[homePage ? "header-opacity": "", backgroundDark ? 'app-bar' : 'app-bar-light', !(country && language) ? 'app-bar-black' : ''].join(" ")}>
 						<div className={["app-bar-container logo", !(country && language) ? "logo-centered" : ""].join(" ")} onClick={onGoHome || noop}>
 							<img onClick={onGoHome} src={backgroundDark ? logo : logoBlack} className="app-bar-logo" alt=" " />
 						</div>
-						{country &&
-							language && (
+						{country && language &&
+							(
 								<div className="app-bar-container buttons">
 									<div className="app-bar-buttons">
 									<span className="app-bar-selectors top-menu" color="contrast" onClick={onGoHome || noop}>
@@ -128,9 +128,10 @@ class AppHeader extends Component {
 										
 									</div>
 								</div>
-							)}
+							)
+						}
 					</div>
-				</Headroom>				
+				</Headroom>
 				{showHeaderBackground &&  <div
 					style={{
 						backgroundColor: "#000000",
