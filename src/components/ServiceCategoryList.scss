@@ -200,6 +200,11 @@ input[type="checkbox"].ri.switch:checked + div > div {
         }
     }
 }
+.CategoryList {
+    margin: 0 auto;
+    max-width: 1024px;
+}
+
 #location-title{
     color: gray;
     font-family: "Roboto", sans-serif;

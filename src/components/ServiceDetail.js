@@ -171,14 +171,13 @@ class ServiceDetail extends React.Component {
 		}
 		return (
 			<div>
-				<hr />
 				<div className="Selector" onClick={() => window.open(action)}>
+					<i className={typography} aria-hidden="true" />
 					<h1>
 						<div className="ContactInformation">
 							{typeText}<div className={textClass}>{text}</div>
 						</div>
 					</h1>
-					<i className={typography} aria-hidden="true" />
 				</div>
 			</div>
 		)
@@ -334,102 +333,108 @@ class ServiceDetail extends React.Component {
 				{this.state.showOtherServices ? (
 				<div className="footer">
 
-					{service.location && <hr />}
 					{service.location && (
 						<div className="Selector" onClick={() => window.open(`https://www.google.com/maps/search/?api=1&query=${point}`)}>
+							<span className='icon-placeholder'>
+								<i className="MenuIcon fa fa-map" aria-hidden="true" />
+							</span>
 							<h1>{t("Get directions")}</h1>
-							<i className="MenuIcon fa fa-map" aria-hidden="true" />
 						</div>
 					)}
 
-					{service.phone_number && <hr />}
 					{service.phone_number && (
 						<div className="Selector" onClick={() => window.open(`tel:${service.phone_number}`)}>
+							<span className='icon-placeholder'>
+								<i className="MenuIcon fa fa-phone" aria-hidden="true" />
+							</span>
 							<h1>
 								{t("Call")}:
 								<a className="phoneFormat" href={`tel:${service.phone_number}`} >{service.phone_number}</a>
 							</h1>
-							<i className="MenuIcon fa fa-phone" aria-hidden="true" />
 						</div>
 					)}
 
-					{service.email && <hr />}
 					{service.email && (
 						<div className="Selector" onClick={() => window.open(`mailto:${service.email}`)}>
+							<span className='icon-placeholder'>
+								<i className="MenuIcon fa fa-envelope-o" aria-hidden="true" />
+							</span>
 							<h1>
 								<span style={{ display: 'inline-block', overflow: 'hidden' }}>{t('Email')}:&nbsp;</span>
 								<div className='field' style={{
-									display: 'inline-block', direction: 'ltr', maxWidth: '60%',
+									display: 'inline-block', direction: 'ltr',
 									overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
 								}}>
 									{service.email}
 								</div>
 							</h1>
-							<i className="MenuIcon fa fa-envelope-o" aria-hidden="true" />
 						</div>
 					)}
 
-					{service.website && <hr />}
 					{service.website && (
 						<div className="Selector" onClick={() => window.open(`${toUrl(service.website)}`)}>
+							<span className='icon-placeholder'>
+								<i className="MenuIcon fa fa-external-link" aria-hidden="true" />
+							</span>
 							<h1>
 								<span style={{ display: 'inline-block', overflow: 'hidden' }}>{t('Website')}:&nbsp;</span>
 								<div className='field' style={{
-									display: 'inline-block', direction: 'ltr', maxWidth: '85%',
+									display: 'inline-block', direction: 'ltr',
 									overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
 								}}>
 									{service.website}
 								</div>
 							</h1>
-							<i className="MenuIcon fa fa-external-link" aria-hidden="true" />
 						</div>
 					)}
 
-					{service.facebook_page && <hr />}
 					{service.facebook_page && (
 						<div className="Selector" onClick={() => window.open(`${toUrl(service.facebook_page)}`)}>
+							<span className='icon-placeholder'><i className="MenuIcon fa fa-facebook-f" aria-hidden="true" /></span>
 							<h1>
 								<span style={{ display: 'inline-block', overflow: 'hidden' }}>{t('Facebook')}:&nbsp;</span>
 								<div className='field' style={{
-									display: 'inline-block', direction: 'ltr', maxWidth: '85%',
+									display: 'inline-block', direction: 'ltr',
 									overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
 								}}>
 									{service.facebook_page}
 								</div>
 							</h1>
-							<i className="MenuIcon fa fa-facebook-f" aria-hidden="true" />
 						</div>
 					)}
 					{service.contact_information && sortedContactInformation.map(ci => this.renderContactInformation(ci,callAux))}
-					{<hr className="divider" />}
 					{(relatedServices || []).length > 0 && (
-					<div className="selector" onClick={() => this.showServices()}>
+					<div className="Selector" onClick={() => this.showServices()}>
+						<span className='icon-placeholder'>
+							<i className="MenuIcon fa fa-angle-right" aria-hidden="true" />
+						</span>
 						<h1>{t("OTHER_SERVICES")}</h1>
-						<i className="MenuIcon fa fa-angle-right" aria-hidden="true" />
 					</div>)}
 				</div>)
 				:(
 					<div>
 					<div className="RelatedServices">
-						<div className="selector">
+						<div className="Selector">
 							<h3 className="RelatedServicesTitle">{t("OTHER_SERVICES")}:</h3>
 						</div>
-						<hr/>
 							{relatedServices.map(r => (
 								<div key={r.id} onClick={() => goToService(r.id)}>
 									<div className="selector related">
+										<span className='icon-placeholder'>
+											<i className="MenuIcon fa fa-angle-right" aria-hidden="true" />
+										</span>
 										<h1 href="#/" ><div style={{
 											display: 'inline-block', direction: 'ltr', overflow: 'hidden', 
-											whiteSpace: 'nowrap', textOverflow: 'ellipsis', width:'650px'
+											whiteSpace: 'nowrap', textOverflow: 'ellipsis'
 										}}>{r.name}</div></h1>
-										<i className="MenuIcon fa fa-angle-right" aria-hidden="true" />
 									</div>
-									<hr/>
 								</div>
 							))}
-					<div className="selector" onClick={() => this.showServices()}>
+					<div className="Selector" onClick={() => this.showServices()}>
+						<span className='icon-placeholder'>
+							<i className="MenuIcon fa fa-angle-left" aria-hidden="true" />
+						</span>
 						<h1>{t("Back")}</h1>
-						<i className="MenuIcon fa fa-angle-left" aria-hidden="true" />
 					</div>
 					</div>
 					</div>

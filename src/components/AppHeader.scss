@@ -256,6 +256,10 @@ Less me
 		position: relative;
 		
 		@media (min-width: $desktopBreakpoint) {
+			position: fixed;
+			top: 64px;
+			z-index: 99;
+			width: 100%;
 			opacity: 0.5;
 
 			input {
@@ -317,12 +321,6 @@ Less me
 			font-size: 20px;
 			position: absolute;
 		}
-		@media (min-width: $desktopBreakpoint) {
-			position: fixed;
-			top: 64px;
-			z-index: 99;
-			width: 100%;
-		}
 	}
 }
 .AppHeaderLight {
@@ -331,6 +329,14 @@ Less me
 		height: 30px;
 		padding: 8px 16px;
 		position: relative;
+
+		@media (min-width: $desktopBreakpoint) {
+			// position: fixed;
+			top: 64px;
+			width: 98.7%;
+			z-index: 99;
+			padding-right: calc(calc(100%-1024px) / 2);
+		}
 
 		input {
 			-webkit-appearance: none;
@@ -383,12 +389,6 @@ Less me
 			width: 25px;
 			font-size: 20px;
 			position: absolute;
-		}
-		@media (min-width: $desktopBreakpoint) {
-			position: fixed;
-			top: 64px;
-			z-index: 99;
-			width: 100%;
 		}
 	}
 }

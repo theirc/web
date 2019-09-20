@@ -29,9 +29,24 @@
 
 	.footer {
 		background-color: $titleBackground;
+		border: 1px solid #ddd;
+		border-radius: 5px;
+		overflow: hidden;
 
-		& .MenuIcon {
-			margin: 0px 20px 10px 10px;
+		.Selector {
+			border-bottom: 1px solid #ddd;
+
+			&:last-child {
+				border-bottom: none;
+			}
+			
+			.icon-placeholder {
+				align-items: center;
+				background-color: #bbb;
+				display: flex;
+				justify-content: center;
+				width: 50px;
+			}
 		}
 	}
 
@@ -39,26 +54,27 @@
 		width: 100%;
 		display: flex;
 		margin: 0;
-		background-color: $titleBackground;
+		background-color: #ccc;
 		min-height: 60px;
 		flex-direction: row;
-		align-items: center;
+		align-items: stretch;
 		cursor: pointer;
+
 		&:active {
 			background-color: darken($titleBackground, 5%);
 		}
 	}
 
 	.Selector > h1 {
+		align-items: center;
+		display: flex;
 		font-size: 15px;
-		display: block;
-		width: 85%;
 		margin: 0;
-		padding: 10px 10px 10px 16px;
-		flex: 1;
-		overflow:hidden;
-		white-space:nowrap;
+		overflow: hidden;
+		padding-left: 15px;
 		text-overflow: ellipsis;
+		white-space:nowrap;
+
 		a {
 			font-weight: normal;
 			line-height: 20px;
@@ -165,6 +181,11 @@
 		flex-direction: column;
 	}
 }
+.desktop {
+	max-width: 1024px;
+	margin: 0 auto;
+}
+
 .ServiceCategoryList {
 	.CategoryContainer {
 		flex: 1;
@@ -548,6 +569,8 @@
 
 .ServiceDetail {
 	flex-wrap: wrap;
+	max-width: 1024px;
+	margin: 0 auto;
 
 	@include service-common();
 	.openingTable {

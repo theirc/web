@@ -24,7 +24,7 @@
 		margin-right: -20px;
 		margin-left: -20px;
 		margin-top: -20px;
-		max-height: 40vw;
+		max-height: 440px;
 		overflow: hidden;
 	}
 
@@ -47,21 +47,17 @@
 			flex-basis: 100%;
 		}
 		& .hero {
-			max-height: 30vw;
+			max-height: 440px;
 		}
 
 		&:first-child.Highlighted .hero {
 			background-color: black;
-			margin-left: -6vw;
-    		margin-right: -6vw;
 			//@include brand-colors("background-color");
 		}
 	}
 	.TopCategories {
 		.Read-More {
 			float: right;
-			position: absolute;
-			right: 20px;
 		}
 		@media (max-width: $desktopBreakpoint) {
 			i {
