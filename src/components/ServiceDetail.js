@@ -430,7 +430,7 @@ class ServiceDetail extends React.Component {
 									</div>
 								</div>
 							))}
-					<div className="Selector" onClick={() => this.showServices()}>
+					<div className="Selector back" onClick={() => this.showServices()}>
 						<span className='icon-placeholder'>
 							<i className="MenuIcon fa fa-angle-left" aria-hidden="true" />
 						</span>

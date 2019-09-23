@@ -35,7 +35,7 @@
 		@media (min-width: $desktopBreakpoint) {
 			border-radius: 5px;
 		}
-		
+
 		.Selector {
 			border-bottom: 1px solid #ddd;
 
@@ -43,12 +43,20 @@
 				border-bottom: none;
 			}
 			
+			&.related h1 {
+				font-weight: normal;
+			}
+
+			&.back {
+				border-top: 1px solid #ddd;
+			}
+
 			.icon-placeholder {
 				align-items: center;
 				background-color: #bbb;
 				display: flex;
 				justify-content: center;
-				width: 50px;
+				min-width: 50px;
 			}
 		}
 	}

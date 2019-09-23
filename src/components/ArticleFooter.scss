@@ -55,7 +55,7 @@
 		width: 100%;
 		
 		&.next {
-			justify-content: space-between;
+			justify-content: flex-end;
 			padding-left: 10px;
 		}
 
@@ -72,16 +72,6 @@
 			flex-flow: column;
 		}
 		
-		@media (max-width: $smBreakpoint) {
-			&.next {
-				justify-content: flex-end;
-			}
-
-			h1 {
-				display: none !important;
-			}
-		}	
-		
 		small {
 			color: lighten(black, 50%);
 			display: block;
@@ -94,7 +84,6 @@
 			font-weight: normal;
 			display: block;
 			margin: 0;
-			padding-top: 10px;
 			width: 100%;
 		}
 	}

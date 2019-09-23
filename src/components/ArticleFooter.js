@@ -90,7 +90,7 @@ class ArticleFooter extends Component {
 					<div className="page-selector prev" onClick={() => onNavigateTo(previous.fields.slug)}>
 						{!rtl ? <NavigateBefore className="icon" /> : <NavigateNext className="icon" />}
 						<div className='caption'>
-							<small>{t("PREVIOUS PAGE")}:</small>
+							{/* <small>{t("PREVIOUS PAGE")}:</small> */}
 							<h1>{previous.fields.title}</h1>
 						</div>
 					</div>
@@ -98,7 +98,7 @@ class ArticleFooter extends Component {
 				{next && (
 					<div className="page-selector next" onClick={() => onNavigateTo(next.fields.slug)}>
 						<div className='caption'>
-							<small>{t("NEXT PAGE")}:</small>
+							{/* <small>{t("NEXT PAGE")}:</small> */}
 							<h1>{next.fields.title}</h1>
 						</div>
 						{!rtl ? <NavigateNext className="icon" /> : <NavigateBefore className="icon" />}
