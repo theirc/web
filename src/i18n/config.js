@@ -156,6 +156,7 @@ export default {
             "Map view": "Map view",
             "Show More": "Show More",
             "Show Less": "Show Less",
+            "By": "By",
         },
     },
     ar: {
@@ -315,6 +316,7 @@ export default {
             "Map view": "Map view",
             "Show More": "Show More",
             "Show Less": "Show Less",
+            "By": "By",
         },
     },
     ur: {
@@ -474,6 +476,7 @@ export default {
             "Map view": "Map view",
             "Show More": "Show More",
             "Show Less": "Show Less",
+            "By": "By",
         },
     },
     es: {
@@ -615,6 +618,7 @@ export default {
             "Map view": "Mapa",
             "Show More": "Mostrar Más",
             "Show Less": "Mostrar Menos",
+            "By": "Por",
         }
     },
     fr: {
@@ -771,6 +775,7 @@ export default {
             "Map view": "Map view",
             "Show More": "Show More",
             "Show Less": "Show Less",
+            "By": "By",
         }
     },
     ti: {
@@ -909,6 +914,7 @@ export default {
             "Map view": "Map view",
             "Show More": "Show More",
             "Show Less": "Show Less",
+            "By": "By",
         }
     },
     en: {
@@ -1069,6 +1075,7 @@ export default {
             "Map view": "Map view",
             "Show More": "Show More",
             "Show Less": "Show Less",
+            "By": "By",
         },
     }
 };
