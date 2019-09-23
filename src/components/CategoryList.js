@@ -21,7 +21,7 @@ class CategoryList extends Component {
 	};
 
 	renderTiles(c) {
-		let {country, language, onNavigate} = this.props;
+		let {country, language, onNavigate, t} = this.props;
 		
 		if(c.fields.categories) {
 			return c.fields.categories.map(a =>
@@ -32,7 +32,7 @@ class CategoryList extends Component {
 						</div>
 						<div className='text'>
 							{a.fields && <h2>{a.fields.name}</h2>}
-							<span className='author'>By <span>{cms.siteConfig.author}</span></span>
+							<span className='author'>{`${t('By')} `}<span>{cms.siteConfig.author}</span></span>
 						</div>
 					</li>
 				)
@@ -50,7 +50,7 @@ class CategoryList extends Component {
 					</div>
 					<div className='text'>
 						{c.fields && <h2>{c.fields.name}</h2>}
-						<span className='author'>By <span>{cms.siteConfig.author}</span>, {moment(c.sys.updatedAt).format('YYYY.MM.DD')}</span>
+						<span className='author'>{`${t('By')} `}<span>{cms.siteConfig.author}</span>, {moment(c.sys.updatedAt).format('YYYY.MM.DD')}</span>
 					</div>
 				</li>
 			);
@@ -65,7 +65,7 @@ class CategoryList extends Component {
 					</div>
 					<div className='text'>
 						<h2>{a.fields.title}</h2>
-						<span className='author'>By <span>{cms.siteConfig.author}</span>, {moment(a.sys.updatedAt).format('YYYY.MM.DD')}</span>
+						<span className='author'>{`${t('By')} `}<span>{cms.siteConfig.author}</span>, {moment(a.sys.updatedAt).format('YYYY.MM.DD')}</span>
 					</div>
 				</li>
 			));

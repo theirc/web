@@ -86,52 +86,24 @@ class ArticleFooter extends Component {
 
 		return (
 			<div className="ArticleFooter">
-				{/* <div className="selector" onClick={() => {this.subscribe(article)}}>
-					<h1>
-						<small>{t("Get an SMS with updates")}:</small>
-						{t("Subscribe for Notifications")}
-					</h1>
-					{!rtl ? <NavigateNext className="icon" /> : <NavigateBefore className="icon" />}
-				</div> */}
+				{previous && (
+					<div className="page-selector prev" onClick={() => onNavigateTo(previous.fields.slug)}>
+						{!rtl ? <NavigateBefore className="icon" /> : <NavigateNext className="icon" />}
+						<div className='caption'>
+							<small>{t("PREVIOUS PAGE")}:</small>
+							<h1>{previous.fields.title}</h1>
+						</div>
+					</div>
+				)}
 				{next && (
-					<div
-						className="selector"
-						onClick={() => {
-							onNavigateTo(next.fields.slug);
-						}}
-					>
-						<h1>
+					<div className="page-selector next" onClick={() => onNavigateTo(next.fields.slug)}>
+						<div className='caption'>
 							<small>{t("NEXT PAGE")}:</small>
-							{next.fields.title}
-						</h1>
+							<h1>{next.fields.title}</h1>
+						</div>
 						{!rtl ? <NavigateNext className="icon" /> : <NavigateBefore className="icon" />}
 					</div>
 				)}
-				{next && <hr className={!previous ? "divider" : ""} />}
-				{previous && (
-					<div
-						className="selector"
-						onClick={() => {
-							onNavigateTo(previous.fields.slug);
-						}}
-					>
-						<h1>
-							<small>{t("PREVIOUS PAGE")}:</small>
-							{previous.fields.title}
-						</h1>
-						{!rtl ? <NavigateBefore className="icon" /> : <NavigateNext className="icon" />}
-					</div>
-				)}
-				{previous && <hr className="divider" />}
-				
-
-				{/*
-				<hr />
-				<div className="selector">
-					<h1>{t("Suggest changes to this page")}</h1>
-					<ModeEdit className="icon" />
-				</div>
-				*/}
 			</div>
 		);
 	}

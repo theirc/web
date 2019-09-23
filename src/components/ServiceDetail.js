@@ -413,13 +413,13 @@ class ServiceDetail extends React.Component {
 				</div>)
 				:(
 					<div>
-					<div className="RelatedServices">
+					<div className="footer">
 						<div className="Selector">
-							<h3 className="RelatedServicesTitle">{t("OTHER_SERVICES")}:</h3>
+							<h1 className="RelatedServicesTitle">{t("OTHER_SERVICES")}:</h1>
 						</div>
 							{relatedServices.map(r => (
 								<div key={r.id} onClick={() => goToService(r.id)}>
-									<div className="selector related">
+									<div className="Selector related">
 										<span className='icon-placeholder'>
 											<i className="MenuIcon fa fa-angle-right" aria-hidden="true" />
 										</span>

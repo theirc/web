@@ -30,9 +30,12 @@
 	.footer {
 		background-color: $titleBackground;
 		border: 1px solid #ddd;
-		border-radius: 5px;
 		overflow: hidden;
 
+		@media (min-width: $desktopBreakpoint) {
+			border-radius: 5px;
+		}
+		
 		.Selector {
 			border-bottom: 1px solid #ddd;
 
