@@ -211,10 +211,8 @@ Less me
 	transform: translateY(-65px);
 }
 .header-opacity{
-	@media (min-width: $desktopBreakpoint) {
-		background-color: #000000;
-		opacity: 0.9;
-	}
+	background-color: #000000;
+	opacity: 0.9;
 }
 
 .headroom--pinned {
