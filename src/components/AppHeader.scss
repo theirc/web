@@ -246,6 +246,14 @@ Less me
 		padding: 16px;
 		position: relative;
 
+		@media (min-width: 1000px) {
+			padding: 16px 15vw;
+		}
+
+		@media (min-width: 1400px) {
+			padding: 16px 20vw;
+		}
+
 		span {
 			border-right: 1px solid black;
 			height: 50px;
