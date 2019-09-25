@@ -152,6 +152,8 @@ export default {
             "Instance moved Bulgaria banner": "متاسفیم! راهنمای پناهندگان دیگر اطلاعاتی در مورد بلغارستان ارائه نمی‌کند.",
             "Instance moved Bulgaria small": "به جای آن، به بنیاد دسترسی به حقوق کمک کردیم تا وبسایت جدیدی برای پناهندگان در بلغارستان ایجاد کنند: refugeelife.bg",
             "Instance moved Bulgaria label": "از سایت www.refugeelife.bg بازدید بفرمایید.",
+            "GREECE_BANNER_SERVICES": "فهرست خدمات یونان از این به بعد به‌روزرسانی نخواهد شد.\nلطفا توجه داشته باشید که اطلاعاتی که اینجا نمایش داده می‌شود آخرین بار در جولای 2019 به‌روزرسانی شده و بعد از این به روز نخواهد شد.\nما به شما توصیه می‌کنیم که مستقیما با خود ارائه‌کنندگان خدمات تماس بگیرید تا درباره‌ی خدمات موجود آنها و نحوه‌ی دسترسی به آن خدمات اطلاعات کسب کنید.",
+            "GREECE_BANNER_ARTICLES": "محتوای وبسایت راهنمای پناهندگان برای یونان از این به بعد به‌روزرسانی نخواهد شد.\nتمام مطالبی مربوط به یونان که روی وبسایت راهنمای پناهندگان موجود است آخرین بار در آگوست 2019 به‌روزرسانی شده است.\nبرخی از اطلاعاتی که شما اینجا به آنها دسترسی دارید ممکن است به روزرسانی نشده و ممکن است روندها و رویه‌های به‌شدت تغییر کرده باشند.\nما به شما پیشنهاد می‌کنیم که قبل از اینکه هر اقدامی انجام دهید، اطلاعات موجود در اینجا را با یک وکیل یا یک NGO حقوقی چک کنید.",
         },
     },
     ar: {
@@ -307,6 +309,8 @@ export default {
             "Instance moved Bulgaria banner": "عذراً! توقف دليل اللاجئ عن تزويد معلومات عن بلغاريا.",
             "Instance moved Bulgaria small": "عوضاً عن ذلك، قمنا بمساعدة منظمة الوصول إلى الحقوق (Foundation for Access to Rights) في إنشاء موقع للاجئين في بلغاريا: refugeelife.bg",
             "Instance moved Bulgaria label": "قم بزيارة www.refugeelife.bg",
+            "GREECE_BANNER_SERVICES": "لم تعد قائمة الخدمات المتوفرة في اليونان\nيُرجى ملاحظة أن المعلومات الخاصة بالخدمات المذكورة هنا جرى تحديثها في شهر تموز/ يوليو عام 2019 وقد لا تكون مواكبة لآخر التطورات بعد الآن.\nللحصول على معلومات حول الخدمات المتوفرة حالياً وكيفية الحصول عليها ننصحكم دائماً بالتواصل مع الجهة المُقدمة لهذه الخدمات بشكل مباشر.",
+            "GREECE_BANNER_ARTICLES": "لم يعد محتوى موقع دليل اللاجئ في اليونان (Refugee.Info) مُحدثاً.\nتم تحديث جميع المقالات حول اليونان الموجودة على موقع دليل اللاجئ في شهر آب/أغسطس عام 2019.\nقد لا تكون بعض المعلومات الموجودة هنا حديثة وربما طرأت تغييرات كبيرة على الإجراءات والخطوات المهمة.\nقبل إتخاذ أي إجراء ننصحكم بالتأكد من المعلومات المتوفرة هنا مع محامٍ أو منظمة قانونية.",
         },
     },
     ur: {
@@ -462,6 +466,8 @@ export default {
             "Instance moved Bulgaria banner": "ہم معذرتخواہ ہیں ریگیوجی۔انفو اب بلغاریہ کے بارے میں معلومات فراہم نہیں کرتا.",
             "Instance moved Bulgaria small": "اس کے بجائے، ہم نے بلغاریہ میں پناہ گزینوں کے لئے  فاونڈیشن فار ایکسس ٹو رائٹس کی نئی ویب سائٹ بنانے میں مدد کی ہے: refugeelife.bg",
             "Instance moved Bulgaria label": "پر جائیں www.refugeelife.bg",
+            "GREECE_BANNER_SERVICES": "یونان کے لئے خدمات کی فہرست کو اب اپ ڈیٹ نہیں کیا جا رہا ہے۔\nبراہ کرم نوٹ کریں کہ یہاں دکھائی گئی خدمت کی معلومات کو آخری بار جولائی 2019 میں اپ ڈیٹ کیا گیا تھا اور اب یہ تازہ ترین نہیں ہوسکتی ہے۔\nہم آپ کو مشورہ دیتے ہیں کہ موجودہ خدمات اور ان تک رسائی حاصل کرنے کے طریقوں سے متعلق معلومات کے لئے ہمہ وقت فراہم کنندہ سے رابطہ کریں۔",
+            "GREECE_BANNER_ARTICLES": "ریفیوجی.انفو یونان کے مواد کو اب اپ ڈیٹ نہیں کیا جا رہا ہے۔\nریفیوجی۔انفو ویب سائٹ پر دستیاب یونان سے متعلق تمام مضامین کو آخری بار اگست 2019 میں اپ ڈیٹ کیا گیا تھا۔\nکچھ معلومات جو آپ کو یہاں ملیں گی وہ اب تازہ ترین نہیں ہوسکتی ہیں اور اہم طریقہ کار اور ہو سکتا ہے کہ عمل میں نمایاں طور پر تبدیلی آئی ہو۔\nکوئی کارروائی کرنے سے پہلے ، ہم آپ کو مشورہ دیتے ہیں کہ آپ یہاں دستیاب معلومات کو کسی وکیل یا کسی قانونی غیر سرکاری تنظیم کے ساتھ کراس چیک کریں۔",
         },
     },
     es: {
@@ -596,7 +602,9 @@ export default {
             "No articles found with the keywords used": "No se encontraron artículos con las palabras clave utilizadas.",
             "No services found with the keywords used.": "No se encontraron servicios con las palabras clave utilizadas.",
 			"COOKIES_BANNER": "Utilizamos cookies para ofrecer nuestros servicios. Al continuar utilizando este sitio, acepta dicho uso y reconoce que ha leído y entendido nuestra política de cookies ({{cookiePolicy}}) y política de privacidad ({{privacyPolicy}}).",
-			"Services in": "Servicios en",
+            "Services in": "Servicios en",
+            "GREECE_BANNER_SERVICES": "Greece banner",
+            "GREECE_BANNER_ARTICLES": "Greece banner",
         }
     },
     fr: {
@@ -748,6 +756,8 @@ export default {
             "Rome":"Rome",
             "Turin":"Turin",
             "Ventimiglia":"Vintimille",
+            "GREECE_BANNER_SERVICES": "La liste des services pour la Grèce n’est plus mise à jour.\nVeuillez noter que les informations sur les services présentées ici ont été mises à jour pour la dernière fois en juillet 2019 et peuvent ne plus être à jour.\nNous vous conseillons de toujours contacter directement le fournisseur de services pour obtenir des informations sur les services actuels et sur la façon d'y accéder.",
+            "GREECE_BANNER_ARTICLES": "Le contenu de Refugee.Info Grèce n’est plus mis à jour.\nTous les articles sur la Grèce disponibles sur le site internet Refugee.Info ont été mis à jour pour la dernière fois en août 2019.\nCertaines des informations que vous trouverez ici risquent de ne plus être à jour et des procédures et processus importants peuvent avoir changé de manière significative.\nAvant d’entreprendre des démarches, nous vous suggérons de vérifier les informations disponibles ici avec un avocat ou une ONG juridique.",
         }
     },
     ti: {
@@ -880,6 +890,8 @@ export default {
             "No services found with the keywords used.": "No services found with the keywords used.",
             "COOKIES_BANNER": "ኣገልግሎትና ንምሃብ ኩኪስ(Cookies) ንጥቀም ኢና። ነዚ መርበብ’ዚ ንኽትጥቀመሉ ብምቕጻልካ ድማ፣ ነዚ ኣጠቓቕማ’ዚ ተቐቢልካዮን ንናይ ኩኪ ፖሊሲን ({{cookiePolicy}})  ፖሊሲ ምስጢራውነትን ኣንቢብካ ከም ዝተረዳእካዮ ኣፍልጦ ትህብ ኣለኻ ማለት እዩ። ({{privacyPolicy}})",
             "Services in": "ኣገልግሎታት ኣብ",
+            "GREECE_BANNER_SERVICES": "Greece banner",
+            "GREECE_BANNER_ARTICLES": "Greece banner",
         }
     },
     en: {
@@ -1036,7 +1048,8 @@ export default {
             "Instance moved Bulgaria banner": "Sorry! Refugee.Info has stopped providing information about Bulgaria. Refugee.info no longer hosts content on Bulgaria.",
             "Instance moved Bulgaria small": "Instead, we helped the Foundation for Access to Rights create a new site for refugees in Bulgaria: refugeelife.bg.",
             "Instance moved Bulgaria label": "Visit www.refugeelife.bg",
+            "GREECE_BANNER_SERVICES": "The list of services for Greece is no longer being updated.\nPlease note that the service information shown here was last updated in July 2019 and may no longer be up-to-date.\nWe advise you to always contact the service provider directly for information about current services and how to access them.",
+            "GREECE_BANNER_ARTICLES": "The Refugee.Info Greece content is no longer being updated.\nAll articles on Greece available on the Refugee.Info website were last updated in August 2019.\nSome of the information you will find here may no longer be up-to-date and important procedures and processes might have changed significantly.\nBefore taking any action, we suggest you cross-check the information available here with a lawyer or a legal NGO.",
         },
     }
-
 };
