@@ -351,9 +351,8 @@ class ServiceMap extends React.Component {
 				)}
 				{isOnline && 
 				<div className="ServiceMapContainer">
-					<div id="MapCanvas" style={{ width: "100%", visibility: loaded ? "visible" : "hidden" }} />
 					{!loaded && <div className="loader" />}
-					
+					<div id="MapCanvas" style={{ width: "100%", visibility: loaded ? "visible" : "hidden" }} />
 				</div>
 				}
 				{!isOnline &&
