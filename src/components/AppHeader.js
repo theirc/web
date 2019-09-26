@@ -48,8 +48,8 @@ class AppHeader extends Component {
 		});
 	}
 	closeSerbiaBanner(){
-		sessionStorage.setItem("serbia-alert", sessionStorage.getItem("serbia-alert")+1);
-		this.setState({ serbiaAlert: sessionStorage.getItem("serbia-alert") });
+		sessionStorage.setItem("serbia-alert", 1);
+		this.setState({ serbiaAlert: 1 });
 	}
 	handleSubmit(event) {
 		const { onGoToSearch } = this.props;
@@ -70,8 +70,12 @@ class AppHeader extends Component {
 		};
 		const cookiePolicyLink = <a href="/greece/privacy/cookies" target="_blank" rel="noopener noreferrer">Cookie Policy</a>;
 		const privacyPolicyLink = <a href="/greece/privacy/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>;
-		let isOnServices;
-		(window.location.href.includes("services") ? isOnServices = true : isOnServices = false);
+		
+		let isOnServices = window.location.href.includes("/services/");
+		let isOnArticlesGreece = window.location.href.includes("/categories") || /(\/greece\/.*\/.*)/.test(window.location.href);
+
+		console.log(isOnArticlesGreece);
+
 		return (
 			<div className="AppHeader">
 
@@ -135,7 +139,8 @@ class AppHeader extends Component {
 						/>
 					</div>
 				)}
-				{this.state.serbiaAlert == 0 && isOnServices &&(
+
+				{this.state.serbiaAlert === '0' && isOnServices && window.location.href.includes('/serbia/') && (
 					<div className={this.state.serbiaAlert ? 'serbia-banner' : 'hidden'}>
 						<span className="serbia-banner-separator"></span>
 						<p>{t("SERBIA_BANNER")}</p>
@@ -147,6 +152,14 @@ class AppHeader extends Component {
 						/>
 					</div>
 				)}
+
+				{(isOnServices || isOnArticlesGreece) && window.location.href.includes('/greece/') && (
+					<div className='serbia-banner'>
+						<span className="serbia-banner-separator"></span>
+						<p>{isOnServices ? t("GREECE_BANNER_SERVICES") : t('GREECE_BANNER_ARTICLES')}</p>
+					</div>
+				)}
+
 			</div>
 
 		);
