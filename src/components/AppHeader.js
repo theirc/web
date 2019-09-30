@@ -160,6 +160,13 @@ class AppHeader extends Component {
 					</div>
 				)}
 
+				{!(isOnServices || isOnArticlesGreece) && window.location.href.includes('/greece') && (
+					<div className='serbia-banner'>
+						<span className="serbia-banner-separator"></span>
+						<p>{t('GREECE_BANNER_HP')}</p>
+					</div>
+				)}
+
 			</div>
 
 		);
