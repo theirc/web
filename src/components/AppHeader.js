@@ -74,7 +74,8 @@ class AppHeader extends Component {
 		let isOnServices = window.location.href.includes("/services/");
 		let isOnArticlesGreece = window.location.href.includes("/categories") || /(\/greece\/.*\/.*)/.test(window.location.href);
 
-		console.log(isOnArticlesGreece);
+		let disclaimersLink = `/greece/refugee-info-greece-closed/refugee-info-stops-operating-in-greece?language=${language}`;
+		disclaimersLink = window.location.href.includes(disclaimersLink) ? '#' : disclaimersLink;
 
 		return (
 			<div className="AppHeader">
@@ -156,7 +157,7 @@ class AppHeader extends Component {
 				{(isOnServices || isOnArticlesGreece) && window.location.href.includes('/greece/') && (
 					<div className='serbia-banner'>
 						<span className="serbia-banner-separator"></span>
-						<a href={`/greece/refugee-info-greece-closed/refugee-info-stops-operating-in-greece?language=${language}`}>
+						<a href={disclaimersLink}>
 							<p>{isOnServices ? t("GREECE_BANNER_SERVICES") : t('GREECE_BANNER_ARTICLES')}</p>
 						</a>
 					</div>
@@ -165,7 +166,7 @@ class AppHeader extends Component {
 				{!(isOnServices || isOnArticlesGreece) && window.location.href.includes('/greece') && (
 					<div className='serbia-banner'>
 						<span className="serbia-banner-separator"></span>
-						<a href={`/greece/refugee-info-greece-closed/refugee-info-stops-operating-in-greece?language=${language}`}>
+						<a href={disclaimersLink}>
 							<p>{t('GREECE_BANNER_HP')}</p>
 						</a>
 					</div>
