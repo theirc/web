@@ -351,13 +351,12 @@ class ServiceMap extends React.Component {
 				)}
 				{isOnline && 
 				<div className="ServiceMapContainer">
-					<div id="MapCanvas" style={{ width: "100%", position: "absolute", top: 64, bottom: 56, right: 0, visibility: loaded ? "visible" : "hidden" }} />
 					{!loaded && <div className="loader" />}
-					
+					<div id="MapCanvas" style={{ width: "100%", visibility: loaded ? "visible" : "hidden" }} />
 				</div>
 				}
 				{!isOnline &&
-				<div className="ServiceMapContainer2" style={{width: "100%", position: "absolute", top: 64, bottom: 56, right: 0,backgroundImage: "url('/images/cn-offline-map.png')",backgroundSize: "contain"}}>
+				<div className="ServiceMapContainer2" style={{width: "100%",backgroundImage: "url('/images/cn-offline-map.png')",backgroundSize: "contain"}}>
 					<div id="MapCanvas2"></div>
 				</div>
 				}

@@ -233,31 +233,41 @@ Less me
 		}
 	}
 	.serbia-banner{
-		padding-bottom: 1em;
-		padding: 16px;
+  	align-items: stretch;
 		background-color: #FCD735;
 		color: #292633;
 		display: flex;
-		position: relative;
 		flex: 1;
-		font-weight: 300;
-		position: relative;
-		height: auto;
 		flex-direction: row;
-		justify-content: center;
-  		align-items: center;
 		font-size: 14px;
-		opacity: 0.85;
-		z-index: 2;
 		font-weight: bold;
-		a {color: white; text-decoration: underline;}
-		span {padding: 4px;}
-		.serbia-banner-separator {
-			border-left-width: 1px;
-			border-left-color: black;
-			border-left-style: solid;
-			height: 50px;
-			margin-left: 7px;
+		height: auto;
+		padding: 16px;
+		position: relative;
+
+		@media (min-width: 1000px) {
+			padding: 16px 15vw;
+		}
+
+		@media (min-width: 1400px) {
+			padding: 16px 20vw;
+		}
+
+		span {
+			border-right: 1px solid black;
+			margin: 10px 15px 10px 5px;
+		}
+
+		a {
+			text-decoration: none;
+			
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+
+		p {
+			white-space: pre-line;
 		}
 	}
 }
