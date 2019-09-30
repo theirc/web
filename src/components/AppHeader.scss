@@ -233,7 +233,7 @@ Less me
 		}
 	}
 	.serbia-banner{
-  	align-items: center;
+  	align-items: stretch;
 		background-color: #FCD735;
 		color: #292633;
 		display: flex;
@@ -255,8 +255,15 @@ Less me
 
 		span {
 			border-right: 1px solid black;
-			height: 50px;
-			margin: 0 10px;
+			margin: 10px 15px 10px 5px;
+		}
+
+		a {
+			text-decoration: none;
+			
+			&:hover {
+				text-decoration: underline;
+			}
 		}
 
 		p {
