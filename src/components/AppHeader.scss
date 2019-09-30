@@ -258,6 +258,14 @@ Less me
 			margin: 10px 15px 10px 5px;
 		}
 
+		a {
+			text-decoration: none;
+			
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+
 		p {
 			white-space: pre-line;
 		}

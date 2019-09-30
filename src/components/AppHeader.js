@@ -156,14 +156,18 @@ class AppHeader extends Component {
 				{(isOnServices || isOnArticlesGreece) && window.location.href.includes('/greece/') && (
 					<div className='serbia-banner'>
 						<span className="serbia-banner-separator"></span>
-						<p>{isOnServices ? t("GREECE_BANNER_SERVICES") : t('GREECE_BANNER_ARTICLES')}</p>
+						<a href={`/greece/refugee-info-greece-closed/refugee-info-stops-operating-in-greece?language=${language}`}>
+							<p>{isOnServices ? t("GREECE_BANNER_SERVICES") : t('GREECE_BANNER_ARTICLES')}</p>
+						</a>
 					</div>
 				)}
 
 				{!(isOnServices || isOnArticlesGreece) && window.location.href.includes('/greece') && (
 					<div className='serbia-banner'>
 						<span className="serbia-banner-separator"></span>
-						<p>{t('GREECE_BANNER_HP')}</p>
+						<a href={`/greece/refugee-info-greece-closed/refugee-info-stops-operating-in-greece?language=${language}`}>
+							<p>{t('GREECE_BANNER_HP')}</p>
+						</a>
 					</div>
 				)}
 

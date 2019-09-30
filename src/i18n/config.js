@@ -1055,7 +1055,7 @@ export default {
             "Instance moved Bulgaria small": "Instead, we helped the Foundation for Access to Rights create a new site for refugees in Bulgaria: refugeelife.bg.",
             "Instance moved Bulgaria label": "Visit www.refugeelife.bg",
             "GREECE_BANNER_SERVICES": "The list of services for Greece is no longer being updated.\nPlease note that the service information shown here was last updated in July 2019 and may no longer be up-to-date.\nWe advise you to always contact the service provider directly for information about current services and how to access them.",
-            "GREECE_BANNER_ARTICLES": "The Refugee.Info Greece content is no longer being updated.\nAll articles on Greece available on the Refugee.Info website were last updated in August 2019.\nSome of the information you will find here may no longer be up-to-date and important procedures and processes might have changed significantly.\nBefore taking any action, we suggest you cross-check the information available here with a lawyer or a legal NGO. <a href='http://gooogle.com/>link</a>'>",
+            "GREECE_BANNER_ARTICLES": "The Refugee.Info Greece content is no longer being updated.\nAll articles on Greece available on the Refugee.Info website were last updated in August 2019.\nSome of the information you will find here may no longer be up-to-date and important procedures and processes might have changed significantly.\nBefore taking any action, we suggest you cross-check the information available here with a lawyer or a legal NGO.",
             "GREECE_BANNER_HP": "The Refugee.Info Greece content is no longer being updated.",
         },
     }
