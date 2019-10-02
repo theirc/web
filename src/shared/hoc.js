@@ -191,5 +191,82 @@ export function withCategory(WrappedComponent) {
 }
 
 export function withArticle(WrappedComponent){
+    class ArticleSwitcher extends Component {
+        state = {
+            category: null,
+        };
 
+        static contextTypes = {
+            config: PropTypes.object,
+            api: PropTypes.object,
+        };
+
+        componentDidMount() {
+            const {
+                match,
+                onRender
+            } = this.props;
+            
+
+            // if (country) {
+            //     const category = _.first(
+            //         _.flattenDeep(country.fields.categories.filter(c => c.fields).map(c => [c, c.fields.categories]))
+            //         .filter(_.identity)
+            //         .filter(c => c && c.fields && c.fields.slug &&c.fields && c.fields.slug &&  c.fields.slug === match.params.category)
+            //     );
+
+            //     this.setState({
+            //         category
+            //     });
+            //     onRender(category);
+            // }
+        }
+
+        componentWillReceiveProps(nextProps) {
+            const {
+                onRender
+            } = this.props;
+            const {
+                country,
+                match
+            } = nextProps;
+
+            if (country) {
+                const category = _.first(
+                    _.flattenDeep(country.fields.categories.filter(c => c.fields).map(c => [c, c.fields.categories]))
+                    .filter(_.identity)
+                    .filter(c => c && c.fields && c.fields.slug && c.fields.slug === match.params.category)
+                );
+                this.setState({
+                    category
+                });
+                onRender(category);
+            }
+        }
+
+        render() {
+            let category = this.state.category || this.props.category;
+            if (!category) return null;
+
+            return <WrappedComponent {...{ category, ...this.props }} />;
+        }
+    }
+
+    ArticleSwitcher = connect(
+        (s, p) => {
+            return {
+                location: s.router.location,
+                category: s.category,
+            };
+        },
+        (d, p) => {
+            return {
+                onRender: category => {
+                    d(actions.selectCategory(category));
+                },
+            };
+        }
+    )(ArticleSwitcher);
+
+    return ArticleSwitcher;
 }
