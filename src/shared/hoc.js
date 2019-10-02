@@ -201,13 +201,43 @@ export function withArticle(WrappedComponent){
             api: PropTypes.object,
         };
 
+        componentWillMount(){
+            const {
+                match,
+                onRender,
+                language
+            } = this.props;
+
+            const { api } = this.context;
+
+            api.getEntries({
+                content_type: "article",
+                "fields.slug": match.params.article,
+                locale: language,
+            })
+            .then(c => {		
+                if (c.items.length || [] >0){
+                    let result = c.items[0];
+                    console.log(result);
+                    if(result){
+                        
+                    }
+                }
+            })
+            .catch(e => {
+                console.log(e);
+                // res.redirect(`/${country}/`);
+            });
+        }
+
         componentDidMount() {
             const {
                 match,
                 onRender
             } = this.props;
-            
 
+            const { api } = this.context;
+            
             // if (country) {
             //     const category = _.first(
             //         _.flattenDeep(country.fields.categories.filter(c => c.fields).map(c => [c, c.fields.categories]))
