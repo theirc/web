@@ -157,6 +157,12 @@ input[type="checkbox"].ri.switch:checked + div > div {
         margin-left: 10px;
     }
 }
+.rtl {
+    .toggle-btn {
+        margin: 0 !important;
+    }
+}
+
 #toggle-map {
     border-left: 1px solid #ddd;
     display: flex;
