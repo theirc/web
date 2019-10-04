@@ -110,7 +110,7 @@ const parseLanguage = function(req) {
             return hostname.indexOf(k) > -1;
         })
     );
-    let possibleLanguages = ["en"];
+    let possibleLanguages = ["en", "es"];
 
     if (configKey) {
         const {
@@ -133,8 +133,8 @@ const parseLanguage = function(req) {
             selectedLanguage = favoriteLanguage;
         }
     }
-
-    return possibleLanguages.indexOf(selectedLanguage) > -1 ? selectedLanguage : 'en';
+    
+    return possibleLanguages.indexOf(selectedLanguage) > -1 ? selectedLanguage : possibleLanguages[0];
 };
 
 const markdownOptions = {
@@ -203,6 +203,7 @@ app.get("/direct/:article/", function(req, res, err) {
     const {
         article
     } = req.params;
+    
     try {
         if (configKey) {
 			const {
@@ -215,21 +216,21 @@ app.get("/direct/:article/", function(req, res, err) {
 				.getEntries({
 					content_type: "article",
 					"fields.slug": article,
-					locale: languageDictionary[selectedLanguage] || selectedLanguage,
+					locale: "es",//languageDictionary[selectedLanguage] || selectedLanguage,
 				})
-				.then(c => {		
+				.then(c => {	
 					if (c.items.length || [] >0){
-						let match = c.items[0];
+                        let match = c.items[0];
 						if (match.fields.category && match.fields.country){
-							res.redirect(`/${match.fields.country.fields.slug}/${match.fields.category.fields.slug}/${article}/`);
+							res.redirect(`/${match.fields.country.fields.slug}/${match.fields.category.fields.slug}/${article}/?language=${selectedLanguage}`);
 						}else{
 							res.redirect("/");
 						}
 					}
 				})
 				.catch(e => {
-					console.log(e);
-					res.redirect(`/${country}/`);
+					console.log("error", e);
+					//res.redirect(`/${country}/`);
 				});
            
         }
@@ -335,14 +336,14 @@ app.get("/:country/:category/:article", function(req, res, err) {
                     .getEntries({
                         content_type: "article",
                         "fields.slug": article,
-                        locale: languageDictionary[selectedLanguage] || selectedLanguage,
+                        locale: 'es',//languageDictionary[selectedLanguage] || selectedLanguage,
                     })
                     .then(c => {
                         return cms.client
                             .getEntries({
                                 content_type: "country",
                                 "fields.slug": country,
-                                locale: languageDictionary[selectedLanguage] || selectedLanguage,
+                                locale: 'es',//languageDictionary[selectedLanguage] || selectedLanguage,
                                 include: 10,
                             })
                             .then(cc => {
@@ -365,7 +366,7 @@ app.get("/:country/:category/:article", function(req, res, err) {
                                         .getEntries({
                                             content_type: "country",
                                             "fields.slug": country,
-                                            locale: languageDictionary[selectedLanguage] || selectedLanguage,
+                                            locale: 'es',//languageDictionary[selectedLanguage] || selectedLanguage,
                                         })
                                         .then(c => {
                                             if (c.items.length > 0) {
