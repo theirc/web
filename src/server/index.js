@@ -192,56 +192,56 @@ app.get("/preview/:serviceId/", function(req, res, err) {
     }
 });
 
-app.get("/direct/:article/", function(req, res, err) {
-    const selectedLanguage = parseLanguage(req);
-    let configKey = _.first(
-        Object.keys(conf).filter(k => {
-            return req.headers.host.indexOf(k) > -1;
-        })
-    );
-    let context = {};
-    const {
-        article
-    } = req.params;
+// app.get("/direct/:article/", function(req, res, err) {
+//     const selectedLanguage = parseLanguage(req);
+//     let configKey = _.first(
+//         Object.keys(conf).filter(k => {
+//             return req.headers.host.indexOf(k) > -1;
+//         })
+//     );
+//     let context = {};
+//     const {
+//         article
+//     } = req.params;
     
-    try {
-        if (configKey) {
-			const {
-				accessToken,
-				space
-			} = conf[configKey];
-			languageDictionary = Object.assign(languageDictionary, conf[configKey]);				
-			let cms = cmsApi(conf[configKey], languageDictionary);
-			cms.client
-				.getEntries({
-					content_type: "article",
-					"fields.slug": article,
-					locale: languageDictionary[selectedLanguage] || selectedLanguage,
-				})
-				.then(c => {	
-					if (c.items.length || [] >0){
-                        let match = c.items[0];
-						if (match.fields.category && match.fields.country){
-							res.redirect(`/${match.fields.country.fields.slug}/${match.fields.category.fields.slug}/${article}/?language=${selectedLanguage}`);
-						}else{
-							res.redirect("/");
-						}
-					}
-				})
-				.catch(e => {
-					console.log("error", e);
-					//res.redirect(`/${country}/`);
-				});
+//     try {
+//         if (configKey) {
+// 			const {
+// 				accessToken,
+// 				space
+// 			} = conf[configKey];
+// 			languageDictionary = Object.assign(languageDictionary, conf[configKey]);				
+// 			let cms = cmsApi(conf[configKey], languageDictionary);
+// 			cms.client
+// 				.getEntries({
+// 					content_type: "article",
+// 					"fields.slug": article,
+// 					locale: languageDictionary[selectedLanguage] || selectedLanguage,
+// 				})
+// 				.then(c => {	
+// 					if (c.items.length || [] >0){
+//                         let match = c.items[0];
+// 						if (match.fields.category && match.fields.country){
+// 							res.redirect(`/${match.fields.country.fields.slug}/${match.fields.category.fields.slug}/${article}/?language=${selectedLanguage}`);
+// 						}else{
+// 							res.redirect("/");
+// 						}
+// 					}
+// 				})
+// 				.catch(e => {
+// 					console.log("error", e);
+// 					//res.redirect(`/${country}/`);
+// 				});
            
-        }
-    } catch (e) {
-        mainRequest({
-            description: e.toString(),
-            image: ""
-        })(req, res, err);
-    }
+//         }
+//     } catch (e) {
+//         mainRequest({
+//             description: e.toString(),
+//             image: ""
+//         })(req, res, err);
+//     }
 	
-});
+// });
 
 app.get("/:country/services/:serviceId/", function(req, res, err) {
     const selectedLanguage = parseLanguage(req);

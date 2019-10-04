@@ -56,6 +56,7 @@ class Router extends Component {
 									<Route exact path="/selectors" component={Selectors} />
 									<Route exact path="/country-selector" component={CountrySelectorScene} />
 									<Route exact path="/language-selector" component={LanguageSelectorScene} />
+									<Route path="/direct/:article" component={withArticle(Article)} />
 									<Route exact path="/:country/search" component={withCountry(Search)} />
 									<Route exact path="/:country/categories" component={withCountry(Categories)} />
 									<Route path="/:country/:category/:article" component={withCountry(withCategory(Article))} />

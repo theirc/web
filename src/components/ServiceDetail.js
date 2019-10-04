@@ -243,7 +243,7 @@ class ServiceDetail extends React.Component {
 			return ci.index;
 		});
 		let subtitle = service.type ? service.type.name : _.first(service.types).name;
-		const currentCountry = phoneCodes.filter(pc => pc.country == country.fields.name);
+		const currentCountry = phoneCodes.filter(pc => pc.country === country.fields.name);
 		let phoneNumberWithCode;
 		(currentCountry.length) ? (phoneNumberWithCode = currentCountry[0].code + service.phone_number) : (phoneNumberWithCode = service.phone_number);
 		return (

@@ -95,7 +95,7 @@ class Skeleton extends React.Component {
 
 		let showFooter = !hideFooter && country && language;
 		let logo = _.template(config.logo)({ language: language || "en" });
-		if(country && country.fields.slug == "serbia" && sessionStorage.getItem("serbia-alert") == null)
+		if(country && country.fields.slug === "serbia" && sessionStorage.getItem("serbia-alert") == null)
 			sessionStorage.setItem("serbia-alert", 0);
 
 

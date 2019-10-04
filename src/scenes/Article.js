@@ -12,8 +12,8 @@ class Article extends React.Component {
 	static propTypes = {
 		match: PropTypes.shape({
 			params: PropTypes.shape({
-				country: PropTypes.string.isRequired,
-				category: PropTypes.string.isRequired,
+				country: PropTypes.string,
+				category: PropTypes.string,
 				article: PropTypes.string.isRequired,
 			}).isRequired,
 		}).isRequired,
@@ -26,11 +26,12 @@ class Article extends React.Component {
 	}
 
 	componentWillMount() {
-		this.setState({ loading: true });
-
-		this.props.onMount(this.props.category, this.props.match.params.article).then(s => {
-			return this.setState({ loading: false });
-		});
+		if (!this.props.articleItem){
+			this.setState({ loading: true });
+			this.props.onMount(this.props.category, this.props.match.params.article).then(s => {
+				return this.setState({ loading: false });
+			});
+		}
 	}
 
 	componentWillUnmount() {}
@@ -49,10 +50,10 @@ class Article extends React.Component {
 
 	render() {
 		const { loading } = this.state;
-		const { article, direction } = this.props;
+		const { articleItem, direction } = this.props;
 		const { category, country, onNavigateTo, onNavigate, language } = this.props;
 		const instanceMoved = country.fields.slug === 'bulgaria';
-
+		let article = articleItem;
 		if (!article || !category) return null;
 
 		let next = null;
@@ -102,6 +103,7 @@ const mapState = (s, p) => {
 const mapDispatch = (d, p) => {
 	return {
 		onMount: (category, slug) => {
+			console.log("On Mount Article");
 			if (category && (category.fields.articles || category.fields.overview)) {
 				if (category.fields.overview && category.fields.overview.fields.slug === slug) {
 					return Promise.resolve(d(actions.selectArticle(category.fields.overview)));
