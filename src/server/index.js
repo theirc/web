@@ -216,7 +216,7 @@ app.get("/direct/:article/", function(req, res, err) {
 				.getEntries({
 					content_type: "article",
 					"fields.slug": article,
-					locale: "es",//languageDictionary[selectedLanguage] || selectedLanguage,
+					locale: languageDictionary[selectedLanguage] || selectedLanguage,
 				})
 				.then(c => {	
 					if (c.items.length || [] >0){
