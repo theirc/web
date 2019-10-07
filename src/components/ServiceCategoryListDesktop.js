@@ -373,7 +373,7 @@ class ServiceCategoryListDesktop extends React.Component {
 				}
 				
 				{!this.state.showMap && !this.state.showAll && services.length <= 10 && window.location.href.includes('/services/all') &&
-					<div className='show-more'><button onClick={this.onShowAll}>Show All</button></div>
+					<div className='show-more'><button onClick={this.onShowAll}>{t('Show All')}</button></div>
 				}
 
 				{!this.state.showMap && this.state.showAll && services.length <= 10 &&
