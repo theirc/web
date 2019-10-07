@@ -320,9 +320,10 @@ input[type="checkbox"].ri.switch:checked + div > div {
     text-align: center;
 
     button {
-        background-color: #29991f;
+        @include brand-colors( "background-color");
+        @include brand-colors-inverse( "color");
+        border: none;
         border-radius: 5px;
-        color: white;
         cursor: pointer;
         font-family: "Roboto", sans-serif;
         font-size: 13px;

@@ -5,6 +5,7 @@ import _ from "lodash";
 import tinycolor from "tinycolor2";
 import HeaderBar from "./HeaderBar";
 import ServiceMapDesktop from "./ServiceMapDesktop";
+import servicesApi from '../content/servicesApi';
 
 import "./ServiceHome.css";
 import "./ServiceCategoryList.css";
@@ -27,6 +28,7 @@ class ServiceCategoryListDesktop extends React.Component {
 		municipality: 'Municipalidades',
 		services: [],
 		showFilter: true,
+		showAll: false,
 		showMap: this.props.mapView,
 		showMunicipalities: false,
 		showServices: false,
@@ -34,7 +36,7 @@ class ServiceCategoryListDesktop extends React.Component {
 	};
 
 	componentDidMount() {
-		const { category, country, fetchCategories, fetchServices, location, regions, showFilter, t } = this.props;
+		const { category, country, fetchCategories, fetchServices, location, regions, showFilter } = this.props;
 		let c = regions.filter(r => r.slug === country.fields.slug)[0]
 		const { categories } = this.state;
 
@@ -91,6 +93,17 @@ class ServiceCategoryListDesktop extends React.Component {
 			color = `#${color}`;
 		}
 		return color;
+	}
+
+	onShowAll = () => {
+		const { category, country, language, regions } = this.props;
+		let c = regions.filter(r => r.slug === country.fields.slug)[0]
+
+		this.setState({ showAll: true });
+		console.log(c, category);
+		servicesApi.fetchAllServices(c.slug, language, category, null, 2000, true).then(
+			services => this.setState({ services: services.results })
+		)		
 	}
 
 	onSelectLocation = element => {
@@ -358,16 +371,15 @@ class ServiceCategoryListDesktop extends React.Component {
 						</div>
 					</div>
 				}
-				{/* {showServices && !this.state.showMap & unavailableServices.length > 0 &&
-					<div className="ServiceListContainer Unavailable">
-						<ul className="Items">
-							<li style={{ flexBasis: "100%", }}>
-								<h1>Currently unavailable:</h1>
-							</li>
-							{unavailableServices.map(this.renderServiceItem.bind(this))}
-						</ul>
-					</div>
-				} */}
+				
+				{!this.state.showMap && !this.state.showAll && services.length <= 10 && window.location.href.includes('/services/all') &&
+					<div className='show-more'><button onClick={this.onShowAll}>Show All</button></div>
+				}
+
+				{!this.state.showMap && this.state.showAll && services.length <= 10 &&
+					<div className="loader" />
+				}
+				
 				{this.state.showFilter && <div className="overlay" onClick={this.closeFilters}></div>}
 			</div>
 		);
