@@ -170,15 +170,15 @@ class ServiceDetail extends React.Component {
 				break;
 		}
 		return (
-			<div>
-				<div className="Selector" onClick={() => window.open(action)}>
+			<div className="Selector" onClick={() => window.open(action)}>
+				<span className='icon-placeholder'>
 					<i className={typography} aria-hidden="true" />
-					<h1>
-						<div className="ContactInformation">
-							{typeText}<div className={textClass}>{text}</div>
-						</div>
-					</h1>
-				</div>
+				</span>
+				<h1>
+					<div className="ContactInformation">
+						{typeText}<div className={textClass}>{text}</div>
+					</div>
+				</h1>
 			</div>
 		)
 	}
