@@ -255,11 +255,11 @@ Less me
 		position: relative;
 		
 		@media (min-width: $desktopBreakpoint) {
-			position: fixed;
-			top: 64px;
-			z-index: 99;
-			width: 100%;
+			position: absolute;
 			opacity: 0.5;
+			top: 64px;
+			width: 100%;
+			z-index: 1;
 
 			input {
 				color: white;
@@ -330,11 +330,10 @@ Less me
 		position: relative;
 
 		@media (min-width: $desktopBreakpoint) {
-			// position: fixed;
+			position: absolute;
 			top: 64px;
 			width: 98.7%;
-			z-index: 99;
-			padding-right: calc(calc(100%-1024px) / 2);
+			z-index: 1;
 		}
 
 		input {
