@@ -212,7 +212,6 @@ export function withArticle(WrappedComponent) {
         };
 
         componentDidMount() {
-            console.log("Did mount");
             const {
                 match
             } = this.props;
@@ -220,9 +219,11 @@ export function withArticle(WrappedComponent) {
             const { api } = this.context;
 
             api.loadArticle(match.params.article,"es")
-            .then(c => {	
-                console.log("C",c);
+            .then(c => {
                 if (c){
+                    if (c.fields.country){
+                        this.props.onMount(c.fields.country);
+                    }
                     this.setState({ article : c});
                 }
             })
@@ -234,45 +235,34 @@ export function withArticle(WrappedComponent) {
 
         render() {
             const articleItem = this.state.article;
-            console.log("Item:",articleItem);
             if (articleItem){
-                
                 let category = articleItem.fields.category;
                 let country = articleItem.fields.country;
-                console.log("category:", category, "country:", country);
-                return <WrappedComponent {...{ category, country, articleItem, ...this.props }} />; 
+                return <WrappedComponent {...{ category,country, countryItem: country, articleItem, ...this.props }} />; 
             }
-            return "A";
-            // let category = this.state.category || this.props.category;
-            // let { match } = this.props;
-            // if (!category) return null;
-            // let articleItem = null;
-            // if (category && (category.fields.articles || category.fields.overview) && match.params.article) {
-			// 	if (category.fields.overview && category.fields.overview.fields.slug === match.params.article) {
-            //         articleItem = category.fields.overview;
-			// 	} else if (category.fields.articles) {
-            //         articleItem = _.first(category.fields.articles.filter(a => a && a.fields).filter(a => a.fields.slug === match.params.article));
-			// 	}
-            // }
-            // return <WrappedComponent {...{ category, articleItem, ...this.props }} />;
+            return null;
+           
         }
     }
 
-    // ArticleSwitcher = connect(
-    //     (s, p) => {
-    //         return {
-    //             location: s.router.location,
-    //             category: s.category,
-    //         };
-    //     },
-    //     (d, p) => {
-    //         return {
-    //             onRender: category => {
-    //                 d(actions.selectCategory(category));
-    //             },
-    //         };
-    //     }
-    // )(ArticleSwitcher);
+    ArticleSwitcher = connect(
+        ({
+            country
+        }) => ({
+            country
+        }),
+        (d, p) => {
+            return {
+                onMount: c => {
+                    d(actions.changeCountry(c));
+                    return Promise.resolve(c);
+                },
+                onRender: category => {
+                    d(actions.selectCategory(category));
+                },
+            };
+        }
+    )(ArticleSwitcher);
 
     return ArticleSwitcher;
 }

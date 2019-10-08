@@ -51,8 +51,8 @@ class Article extends React.Component {
 	render() {
 		const { loading } = this.state;
 		const { articleItem, direction } = this.props;
-		const { category, country, onNavigateTo, onNavigate, language } = this.props;
-		const instanceMoved = country.fields.slug === 'bulgaria';
+		const { category, country, countryItem, onNavigateTo, onNavigate, language } = this.props;
+		const instanceMoved = country && country.fields.slug === 'bulgaria';
 		let article = articleItem;
 		if (!article || !category) return null;
 
@@ -74,7 +74,7 @@ class Article extends React.Component {
 		}
 
 		const other = articles.filter(a => a.sys.id === article.sys.id);
-				
+		
 		return (
 			<div>
 				{ !instanceMoved &&
@@ -103,7 +103,6 @@ const mapState = (s, p) => {
 const mapDispatch = (d, p) => {
 	return {
 		onMount: (category, slug) => {
-			console.log("On Mount Article");
 			if (category && (category.fields.articles || category.fields.overview)) {
 				if (category.fields.overview && category.fields.overview.fields.slug === slug) {
 					return Promise.resolve(d(actions.selectArticle(category.fields.overview)));
