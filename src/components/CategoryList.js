@@ -8,13 +8,16 @@ import "./CategoryList.css";
 
 class CategoryList extends Component {
 	state = {
-		selectedCategory: ''
+		selectedCategory: 0,
+		selectedCategoryName: '',
+		showCategoriesDD: false
 	};
 	
-	onChange = (e) => {
-		this.setState({ selectedCategory: e.target.value });
+	onChange = e => {
+		this.setState({ selectedCategory: e.sys.id, selectedCategoryName: e.fields.name, showCategoriesDD: false });
 	}
 
+	toggleDD = () => this.setState({ showCategoriesDD: !this.state.showCategoriesDD});
 
 	handleWindowSizeChange = () => {
 		this.setState({ width: window.innerWidth });
@@ -103,11 +106,27 @@ class CategoryList extends Component {
 				<HeaderBar title={t("Categories").toUpperCase()} />
 				<div className='tiles-desktop'>
 					<div className='filter-bar'>
-						<select className='select-css' value={this.state.selectedCategory} onChange={this.onChange}>
-							<option value=''>{t('All Categories')}</option>
-							{(categories || []).filter(showCategory).map(e => <option key={e.sys.id} value={e.sys.id}>{e.fields.name}</option>)}
-						</select>
+						<button className='btn-filter' onClick={this.toggleDD}>
+							<span>
+								{this.state.selectedCategoryName.length ? this.state.selectedCategoryName : t('All Categories')}
+							</span>
+							<i className="material-icons">keyboard_arrow_down</i>
+						</button>
+						{this.state.showCategoriesDD &&
+							<ul className='categories'>
+								<li value={0} className={!this.state.selectedCategory ? 'active': ''} onClick={() => this.onChange({ sys: { id: 0}, fields: {name: t('All Categories')}})}><i></i><span>{t('All Categories')}</span></li>
+								{
+									(categories || []).filter(showCategory).map(e =>
+										<li key={e.sys.id} value={e.sys.id} className={e.sys.id === this.state.selectedCategory ? 'active': ''} onClick={() => this.onChange(e)}>
+											<i className={e.fields.iconClass || "material-icons"}>{e.fields.iconText || ((!e.fields.iconClass || e.fields.iconClass === "material-icons") && "add")}</i>
+											<span>{e.fields.name}</span>
+										</li>
+									)
+								}
+							</ul>
+						}
 					</div>
+					{this.state.showCategoriesDD && <div className="overlay" onClick={this.toggleDD}></div>}
 					<ul>
 						{(categories || []).filter(showCategory).map(c => {
 							if(c.sys.id === this.state.selectedCategory || !this.state.selectedCategory.length) {
