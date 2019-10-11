@@ -71,7 +71,7 @@ class Footer extends Component {
 				<div className="light">
 					<p>{t("Can't find specific information?")}</p>
 					<a href={link}>
-						<h3>{t("Ask us a question")}</h3>
+						<h3>{link.includes('mailto: ') ? link.replace('mailto: ', '') : t("Ask us a question")}</h3>
 					</a>
 				</div>
 				<div className="dark">
