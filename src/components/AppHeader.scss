@@ -104,11 +104,15 @@ Less me
 	align-items: center;
 	justify-content: flex-end;
 	flex-direction: row;
+
 	.app-bar-selectors {
+		align-items: center;
+		cursor: pointer;
+		display: flex;
+		font-size: 14px;
 		padding: 16px 5px;
 		text-transform: uppercase;
-		cursor: pointer;
-		font-size: 14px;
+
 		@media (max-width: 320px) {
 			font-size: 10px;
 		}
@@ -120,6 +124,16 @@ Less me
 			font-size: 14px;
 			font-weight: 600;
 			padding: 16px 30px 16px 30px;
+		}
+
+		.menu-item {
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+
+		svg {
+			margin-right: 10px;
 		}
 
 		.rtl & {
@@ -148,7 +162,7 @@ Less me
 }
 .top-menu{
 	@media (max-width: $desktopBreakpoint) {
-		display: none;
+		display: none !important;
 	}
 
 }

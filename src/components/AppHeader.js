@@ -4,7 +4,9 @@ import Headroom from "react-headrooms";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { translate, Interpolate } from "react-i18next";
-import { Close } from "material-ui-icons";
+import { Close, Home, List, Assignment } from "material-ui-icons";
+import cms from '../content/cms';
+
 import "./AppHeader.css";
 
 class AppHeader extends Component {
@@ -88,6 +90,7 @@ class AppHeader extends Component {
 		const privacyPolicyLink = <a href="/greece/privacy/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>;
 		const showHeaderBackground = !country || !language;
 
+		console.log(cms);
 		return (
 			<div className={backgroundDark ? 'AppHeader' : 'AppHeaderLight'}>
 
@@ -101,13 +104,13 @@ class AppHeader extends Component {
 								<div className="app-bar-container buttons">
 									<div className="app-bar-buttons">
 									<span className="app-bar-selectors top-menu" color="contrast" onClick={onGoHome || noop}>
-											{t("Home")}
+											{cms.siteConfig.author === 'CuentaNos' && <Home />}<span className='menu-item'>{t("Home")}</span>
 										</span>
 										<span className="app-bar-selectors top-menu" color="contrast" onClick={onGoToCategories || noop}>
-											{t("Categories")}
+											{cms.siteConfig.author === 'CuentaNos' && <List />}<span className='menu-item'>{t("Categories")}</span>
 										</span>
 										{showServiceMap && <span className="app-bar-selectors top-menu" color="contrast" onClick={onGoToServices || noop}>
-											{t("Services")}	
+											{cms.siteConfig.author === 'CuentaNos' && <Assignment />}<span className='menu-item'>{t("Services")}	</span>
 										</span>}
 										{!disableLanguageSelector && !disableCountrySelector && <div className="app-bar-separator" />}
 										{!disableCountrySelector && (
