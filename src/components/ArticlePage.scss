@@ -40,6 +40,7 @@
 
 		.social {
 			display: flex;
+			position: relative;
 
 			div {
 				align-items: center;
@@ -59,6 +60,17 @@
 					cursor: pointer;
 					border-color: #bbb;
 				}
+			}
+
+			.copied {
+				background-color: gray;
+				border-radius: 3px;
+				color: white;
+				font-size: 12px;
+				padding: 3px;
+				position: absolute;
+				right: 0;
+				top: 50px;
 			}
 		}
 	}
@@ -265,6 +277,15 @@
 		ul li {
 			list-style-type: square;
 			margin-bottom: 0.5em;
+		}
+	}
+}
+
+.rtl {
+	.ArticlePage {
+		.copied {
+			right: unset !important;
+			left: 10px;
 		}
 	}
 }

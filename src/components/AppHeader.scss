@@ -243,6 +243,10 @@ Less me
 		margin-bottom: 63px;
 	}
 	
+	.headroom {
+		z-index: 3;
+	}
+
 	.headroom--not-top{
 		background-color: #ffffff;
 		box-shadow: 0px 1px 8px -5px;
@@ -250,7 +254,6 @@ Less me
 	.headroom--top{
 		background-color: #ffffff;
 		box-shadow: 0px 1px 8px -5px;
-		z-index: 3;
 	}
 	.app-bar-buttons{
 		color: #000000;

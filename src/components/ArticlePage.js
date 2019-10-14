@@ -3,7 +3,7 @@ import ReactDOM from "react-dom"
 import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
 import * as clipboard from "clipboard-polyfill";
-import { Share, Link } from "material-ui-icons";
+import { LibraryBooks, Link } from "material-ui-icons";
 import FacebookPlayer from "react-facebook-player";
 import YouTube from "react-youtube";
 import InstagramEmbed from 'react-instagram-embed';
@@ -179,8 +179,10 @@ class ArticlePage extends Component {
 				<div className='filter-bar'>
 					<div className="social">
 						<div href='#' className="share" onClick={this.onShareOnFacebook}><i className="fa fa-facebook-f" style={{ fontSize: 16 }}/></div>
-						<div href='#' className="copy" onClick={this.onCopyLink}><Link /></div>
-						{/* <div href='#' className="copy" onClick={this.onCopyLink}>{this.state.copied ? t("Copied") : t("Copy Link")}<Link /></div> */}
+						<div href='#' className="copy" onClick={this.onCopyLink}>
+							{!this.state.copied ? <Link /> : <LibraryBooks />}
+						</div>
+						{this.state.copied && <span className='copied'>{t('Copied')}</span>}
 					</div>
 				</div>
 				{contentType.sys.id === "video" && this.renderVideo()}
