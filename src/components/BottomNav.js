@@ -61,7 +61,7 @@ class BottomNav extends Component {
 			>
 				<BottomNavigation showLabels={true} value={this.props.index} onChange={(e, i) => this.select(i)}>
 					<BottomNavigationButton className={this.props.index === 0 ? "Selected" : ""} icon={<Home />} label={<span className="BottomButton">{t("Home")}</span>} value={0} />
-					<BottomNavigationButton className={this.props.index === 1 ? "Selected" : ""} icon={<Assignment />} label={<span className="BottomButton">{t("Categories")}</span>} value={1} />
+					<BottomNavigationButton className={this.props.index === 1 ? "Selected" : ""} icon={<Assignment />} label={<span className="BottomButton">{t("Articles")}</span>} value={1} />
 				
 					{showServiceMap ? (
 						<BottomNavigationButton className={this.props.index === 3 ? "Selected" : ""} icon={<List />} label={<span className="BottomButton">{t("Services")}</span>} value={3} />

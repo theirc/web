@@ -107,7 +107,7 @@ class AppHeader extends Component {
 											{cms.siteConfig.author === 'CuentaNos' && <Home />}<span className='menu-item'>{t("Home")}</span>
 										</span>
 										<span className="app-bar-selectors top-menu" color="contrast" onClick={onGoToCategories || noop}>
-											{cms.siteConfig.author === 'CuentaNos' && <List />}<span className='menu-item'>{t("Categories")}</span>
+											{cms.siteConfig.author === 'CuentaNos' && <List />}<span className='menu-item'>{t("Articles")}</span>
 										</span>
 										{showServiceMap && <span className="app-bar-selectors top-menu" color="contrast" onClick={onGoToServices || noop}>
 											{cms.siteConfig.author === 'CuentaNos' && <Assignment />}<span className='menu-item'>{t("Services")}	</span>
