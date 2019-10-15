@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { Redirect, Route, Switch, withRouter } from "react-router";
 import { ConnectedRouter } from "react-router-redux";
-import { Home, Article, Categories, CountryHome, CategoryHome, CountrySelectorScene, LanguageSelectorScene, Search, Services, Selectors, Subscribe} from "./scenes";
+import { Home, Article, Categories, CountryHome, CategoryHome, CountrySelectorScene, LanguageSelectorScene, Search, Services, Selectors, Subscribe } from "./scenes";
+import { DemoTool} from "./scenes";
 import { history } from "./store";
 import { Skeleton } from "./scenes";
-import { withCountry, withCategory } from "./shared/hoc";
+import { withCountry, withCategory, withArticle } from "./shared/hoc";
 import Placeholder from "./shared/placeholder";
-
 class ScrollToTop extends Component {
 	componentDidUpdate(prevProps) {
 		if (this.props.location !== prevProps.location) {
@@ -21,7 +21,6 @@ class ScrollToTop extends Component {
 
 ScrollToTop = withRouter(ScrollToTop);
 const ServicesWithCountry = withCountry(Services);
-
 class Router extends Component {
 	componentDidMount() {
 		if (global.window) {
@@ -42,7 +41,6 @@ class Router extends Component {
 	}
 
 	render() {
-		//const ServicesWithCountry = withCountry(Services);
 		return (
 			<ConnectedRouter history={history}>
 				<Placeholder>
@@ -59,14 +57,14 @@ class Router extends Component {
 						<Route path="/:country/:category" component={withCountry(withCategory(CategoryHome))} />
 						<Route exact path="/selectors" component={Selectors} />
 						<Route exact path="/:country" component={withCountry(CountryHome)} />	
-						
+						<Route exact path="/:country/demo" component={withCountry(DemoTool)}/>
 						<Skeleton>
 							<div className="SkeletonContainer">
-								<Switch>			
-															
+								<Switch>					
 									<Route exact path="/country-selector" component={CountrySelectorScene} />
 									<Route exact path="/language-selector" component={LanguageSelectorScene} />
 									<Route exact path="/" component={Home} />						
+									<Route path="/direct/:article" component={withArticle(Article)} />
 								</Switch>
 							</div>
 						</Skeleton>

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { NavigateBefore, NavigateNext } from "material-ui-icons";
+import * as clipboard from "clipboard-polyfill";
+import { NavigateBefore, NavigateNext, Share, Link } from "material-ui-icons";
 import { translate } from "react-i18next";
-
 import "./ArticleFooter.css";
 
 /**
@@ -47,6 +47,8 @@ class ArticleFooter extends Component {
 	}
 
 	Copiedlnk() {
+		clipboard.writeText(document.location.href);
+		
 		this.setState(prevState => ({ copied: !prevState.copied }));
 		setTimeout(() => {
 			this.setState({ shareIN: true });

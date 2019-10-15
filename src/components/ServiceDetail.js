@@ -4,11 +4,9 @@ import _ from "lodash";
 import { Share, Link  } from "material-ui-icons";
 import * as clipboard from "clipboard-polyfill";
 import { Helmet } from "react-helmet";
-import PropTypes from "prop-types";
 import HeaderBar from "./HeaderBar";
+import PropTypes from "prop-types";
 import cms from '../content/cms';
-
-
 import "./ServiceHome.css";
 
 // eslint-disable-next-line
@@ -54,6 +52,8 @@ class ServiceDetail extends React.Component {
 	}
 
 	Copiedlnk() {
+		clipboard.writeText(document.location.href);
+
 		this.setState(prevState => ({ copied: !prevState.copied }));
 		setTimeout(() => {
 			this.setState({ shareIN: true });
@@ -115,7 +115,10 @@ class ServiceDetail extends React.Component {
 	componentDidMount() {
 		const { fetchService, fetchServicesInSameLocation } = this.props;
 		if (fetchService) {
-			fetchService().then(service => this.setState({ service }));
+			fetchService().then(service => {
+				console.log("then", service);
+				this.setState({ service })}
+				);
 		}
 
 		if (fetchServicesInSameLocation) {
@@ -185,7 +188,7 @@ class ServiceDetail extends React.Component {
 	
 	render() {
 		const { service, relatedServices } = this.state;
-		const { t, language, goToService } = this.props;
+		const { t, language, goToService, country, phoneCodes } = this.props;
 		
 		const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 		if (!service) {
@@ -205,7 +208,7 @@ class ServiceDetail extends React.Component {
 		const mLocale = d => {
 			let a = moment(d)
 				.locale(language)
-				.format("LLL");
+				.format("ll");
 			return a;
 		};
 		const amPmTime = time => {
@@ -260,6 +263,9 @@ class ServiceDetail extends React.Component {
 			return ci.index;
 		});
 		let subtitle = service.type ? service.type.name : _.first(service.types).name;
+		const currentCountry = phoneCodes.filter(pc => pc.country === country.fields.name);
+		let phoneNumberWithCode;
+		(currentCountry.length) ? (phoneNumberWithCode = currentCountry[0].code + service.phone_number) : (phoneNumberWithCode = service.phone_number);
 		return (
 			<div className="ServiceDetail">
 				<Helmet>
@@ -318,6 +324,9 @@ class ServiceDetail extends React.Component {
 					{service.address_in_country_language && <h3>{t("Address in Local Language")}</h3>}
 					{service.address_in_country_language && <p>{service.address_in_country_language}</p>}
 
+					{service.cost_of_service && <h3>{t("Cost of service")}</h3>}
+					{service.cost_of_service && <p>{service.cost_of_service}</p>}
+
 					{point && (
 						<p>
 							<img
@@ -349,7 +358,7 @@ class ServiceDetail extends React.Component {
 							</span>
 							<h1>
 								{t("Call")}:
-								<a className="phoneFormat" href={`tel:${service.phone_number}`} >{service.phone_number}</a>
+								<a className="phoneFormat" href={`tel:${phoneNumberWithCode}`} >{phoneNumberWithCode}</a>
 							</h1>
 						</div>
 					)}

@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import servicesApi from "../content/servicesApi";
-import { SearchPage } from "../components";
+import { SearchPage, InstanceMovedWidget } from "../components";
 import queryString from "query-string";
 import { push } from "react-router-redux";
 import PropTypes from "prop-types";
@@ -68,6 +68,7 @@ class Search extends React.Component {
 		const { searchingArticles, searchingServices, language, articles, services, term } = this.state;
 		const { onNavigate, country } = this.props;
 		const { config } = this.context;
+		const instanceMoved = country.fields.slug === 'bulgaria';
 
 		return (
 			<Skeleton headerColor='light'>

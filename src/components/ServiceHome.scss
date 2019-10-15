@@ -286,6 +286,15 @@
 	flex-wrap: wrap;
 	flex-direction: column;
 
+	#MapCanvas, #MapCanvas2 {
+		height: 400px;
+		z-index: 0;
+
+		@media (min-width: 800px) {
+			height: 600px;
+		}
+	}
+
 	@include service-common();
 
 	.Title {
