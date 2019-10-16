@@ -273,11 +273,12 @@ module.exports = {
 		appId: "209295296327422",
 		thumbnail: "/images/logos/cn-thumbnail.png",
 		cookieBanner: false,		
-		backendUrl: 'https://admin-staging.cuentanos.org/e/production/v2',
+		backendUrl: 'https://admin-qa.cuentanos.org/e/production/v2',
 		showDepartments: true,
 		showLinkToAdministration: false,
 		customQuestionLink:[["italy","https://www.facebook.com/Refugee.Info.Italy/"]],
 		hideLangsPerCountry: [],
+		hideCountries: [],
 		countryPhoneCodes: [{
 			country: 'El Salvador',
 			code: '+503',
