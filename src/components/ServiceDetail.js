@@ -1,7 +1,7 @@
 import React from "react";
 import { translate } from "react-i18next";
 import _ from "lodash";
-import { Share, Link  } from "material-ui-icons";
+import { LibraryBooks, Link  } from "material-ui-icons";
 import * as clipboard from "clipboard-polyfill";
 import { Helmet } from "react-helmet";
 import HeaderBar from "./HeaderBar";
@@ -280,8 +280,10 @@ class ServiceDetail extends React.Component {
 				<div className='filter-bar'>
 					<div className="social">
 						<div href='#' className="share" onClick={this.onShareOnFacebook}><i className="fa fa-facebook-f" style={{ fontSize: 16 }}/></div>
-						<div href='#' className="copy" onClick={this.onCopyLink}><Link /></div>
-						{/* <div href='#' className="copy" onClick={this.onCopyLink}>{this.state.copied ? t("Copied") : t("Copy Link")}<Link /></div> */}
+						<div href='#' className="copy" onClick={this.onCopyLink}>
+							{!this.state.copied ? <Link /> : <LibraryBooks />}
+						</div>
+						{this.state.copied && <span className='copied'>{t('Copied')}</span>}
 					</div>
 				</div>
 

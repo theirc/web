@@ -880,6 +880,7 @@
 
 	.social {
 		display: flex;
+		position: relative;
 
 		div {
 			align-items: center;
@@ -900,7 +901,18 @@
 				border-color: #bbb;
 			}
 		}
-	}
+
+		.copied {
+			background-color: gray;
+			border-radius: 3px;
+			color: white;
+			font-size: 12px;
+			padding: 3px;
+			position: absolute;
+			right: 0;
+			top: 50px;
+		}
+}
 }
 
 .rtl {

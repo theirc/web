@@ -239,10 +239,6 @@ Less me
 }
 
 .AppHeaderLight{
-	@media (min-width: $desktopBreakpoint) {
-		margin-bottom: 63px;
-	}
-	
 	.headroom {
 		z-index: 3;
 	}
@@ -411,6 +407,10 @@ Less me
 	background-color: #000000;
 }
 .AppHeader, .AppHeaderLight {
+	@media (min-width: $desktopBreakpoint) {
+		margin-top: 63px;
+	}
+	
 	.privacy-banner {
 		align-items: center;
 		background-color: black;

@@ -141,9 +141,9 @@ module.exports = {
 							searchTerm: searchTerm,
 							services: response
 						};
-						if (!sl || sl.categoryId !== null){
-							sessionStorage[`serviceList`] = JSON.stringify(servicesList);
-						}							
+						// if (!sl || sl.categoryId !== null){
+						// 	sessionStorage[`serviceList`] = JSON.stringify(servicesList);
+						// }							
 						let services = response
 
 						resolve(services);
