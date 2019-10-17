@@ -239,10 +239,6 @@ Less me
 }
 
 .AppHeaderLight{
-	@media (min-width: $desktopBreakpoint) {
-		margin-bottom: 63px;
-	}
-	
 	.headroom {
 		z-index: 3;
 	}
@@ -411,6 +407,10 @@ Less me
 	background-color: #000000;
 }
 .AppHeader, .AppHeaderLight {
+	@media (min-width: $desktopBreakpoint) {
+		margin-top: 63px;
+	}
+	
 	.privacy-banner {
 		align-items: center;
 		background-color: black;
@@ -451,7 +451,46 @@ Less me
 			margin-left: 7px;
 		}
 	}
+	.serbia-banner{
+  	align-items: stretch;
+		background-color: #FCD735;
+		color: #292633;
+		display: flex;
+		flex: 1;
+		flex-direction: row;
+		font-size: 14px;
+		font-weight: bold;
+		height: auto;
+		padding: 16px;
+		position: relative;
+
+		@media (min-width: 1000px) {
+			padding: 16px 15vw;
+		}
+
+		@media (min-width: 1400px) {
+			padding: 16px 20vw;
+		}
+
+		span {
+			border-right: 1px solid black;
+			margin: 10px 15px 10px 5px;
+		}
+
+		a {
+			text-decoration: none;
+			
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+
+		p {
+			white-space: pre-line;
+		}
+	}
 }
+
 
 .hidden{display: none;}
 

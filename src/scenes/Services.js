@@ -43,7 +43,6 @@ class Services extends React.Component {
 	}
 
 	sessionStorage = getSessionStorage();
-
 	measureDistance(a, language, sort) {
 		return b => {
 			try {
@@ -52,7 +51,6 @@ class Services extends React.Component {
 						type: "Point",
 						coordinates: [a.longitude, a.latitude],
 					};
-
 					let originalDistance = measureDistance(currentGeoJSON, b, "kilometers");
 					let distance = originalDistance;
 					let unit = "km";
@@ -221,7 +219,6 @@ class Services extends React.Component {
 			.fetchAllServices(location || country.fields.slug, language, category, null)
 			.then(s => s.results)
 			.then(services => ({ services, category: null }));
-
 	}
 	fetchServicesWithinLocation(bbox, location = null) {
 		const { country, language } = this.props;
@@ -239,7 +236,6 @@ class Services extends React.Component {
 		const { language } = this.props;
 		const { match } = props;
 		const serviceId = match.params.serviceId;
-
 		return servicesApi.fetchServiceById(language, serviceId);
 	}
 	fetchServicePreview(props) {
@@ -264,6 +260,10 @@ class Services extends React.Component {
 			return servicesApi.fetchCategories(language, this.state.location);
 		}
 		return servicesApi.fetchCategories(language, country.fields.slug);
+	}
+	serviceTypeById(id) {
+		const { language } = this.props;
+		return servicesApi.fetchCategoryById(language, id);
 	}
 
 	serviceTypesByLocation(location) {
@@ -589,6 +589,8 @@ class Services extends React.Component {
 										goToService={goToService}
 										fetchService={() => this.fetchServicePreview(props)}
 										fetchServicesInSameLocation={() => this.fetchServicesInSameLocation(props)}
+										country={country}
+										phoneCodes={config.countryPhoneCodes}
 									/>
 								</div>
 							</Skeleton>
@@ -606,6 +608,8 @@ class Services extends React.Component {
 										goToService={goToService}
 										fetchService={() => this.fetchService(props)}
 										fetchServicesInSameLocation={() => this.fetchServicesInSameLocation(props)}
+										country={country}
+										phoneCodes={config.countryPhoneCodes}
 									/>
 								</div>
 							</Skeleton>

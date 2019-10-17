@@ -15,22 +15,18 @@ if (siteConfig && siteConfig.backendUrl) {
 module.exports = {
 	fetchCategories(language, region) {
 		return new Promise((resolve, reject) => {
-			const sessionStorage = getSessionStorage();
-			if (sessionStorage[`${language}-${region}-service-categories`] && sessionStorage[`${language}-${region}-service-categories`] !== "[]") {
-				resolve(JSON.parse(sessionStorage[`${language}-${region}-service-categories`]));
-			} else {
-				request
-					.get(RI_URL + "/service-types/" + (region ? `?region=${region}` : ""))
-					.set("Accept-Language", language)
-					.end((err, res) => {
-						if (err) {
-							reject(err);
-							return;
-						}
-						sessionStorage[`${language}-${region}-service-categories`] = JSON.stringify(res.body);
-						resolve(res.body);
-					});
-			}
+			// Do not cache, categories order changes
+			request
+				.get(RI_URL + "/service-types/" + (region ? `?region=${region}` : ""))
+				.set("Accept-Language", language)
+				.end((err, res) => {
+					if (err) {
+						reject(err);
+						return;
+					}
+					
+					resolve(res.body);
+				});
 		});
 	},
 	fetchRegions(language) {
@@ -74,10 +70,13 @@ module.exports = {
 		});
 	},
 	fetchCategoryById(language, categoryId) {
+		
 		return new Promise((resolve, reject) => {
 			const sessionStorage = getSessionStorage();
 			if (sessionStorage[`${language}-service-categories`]) {
+				
 				let categories = JSON.parse(sessionStorage[`${language}-service-categories`]);
+				
 				resolve(_.first(categories.filter(c => c.id === categoryId)));
 			} else {
 				request
@@ -105,7 +104,23 @@ module.exports = {
 		}
 		
 		return new Promise((resolve, reject) => {
-			var requestUrl =
+			
+			let sl = sessionStorage[`serviceList`] !==  undefined ? JSON.parse(sessionStorage[`serviceList`]) : null;		
+			if (sl && sl.country === country && sl.language === language && sl.categoryId === categoryId && (sl.searchTerm === null || sl.searchTerm === undefined)){ 				
+				
+				if (sl.categoryId == null && sl.services.results && categoryId){
+					window.serviceList = sl.services.results;
+					let list = sl.services.results && sl.services.results.filter(s => {
+						return (s.type && s.type.id === categoryId) || (s.types && s.types.filter(t => {return t.id === categoryId}).length > 0)});
+					sl.services.results = list;
+					resolve(sl.services);
+				}else{
+					resolve(sl.services);
+				}
+				
+				
+			}else{
+				var requestUrl =
 				"/services/searchlist/?filter="+ filter +"&geographic_region=" +
 				country +
 				"&page=1&page_size=" +
@@ -114,37 +129,32 @@ module.exports = {
 				(categoryId || "") +
 				(searchTerm ? "&search=" + searchTerm : "");
 				
-				let sl = sessionStorage[`serviceList`] !==  undefined ? JSON.parse(sessionStorage[`serviceList`]) : null;		
-				
-				categoryId = categoryId ? categoryId : null;  //
-				
-				if (sl && sl.country === country && sl.language === language && sl.categoryId === categoryId && (searchTerm === null || searchTerm === undefined)){
-					console.log({searchTerm});
-					resolve(sl.services);
-					
-				}else{
-					request
-					.get(RI_URL + requestUrl)
-					.set("Accept-Language", language)
-					.end((err, res) => {
-						if (err) {
-							reject(err);
-							return;
-						}
+				const headers = { 'Accept-Language': language };
+
+				fetch(RI_URL + requestUrl, { headers })
+					.then(res => res.json())
+					.then(response => {
 						let servicesList = {
 							country: country,
 							language: language,
 							categoryId: categoryId,
 							searchTerm: searchTerm,
-							services: res.body
+							services: response
 						};
-						// sessionStorage[`serviceList`] = JSON.stringify(servicesList);
-						let services = res.body;
+						// if (!sl || sl.categoryId !== null){
+						// 	sessionStorage[`serviceList`] = JSON.stringify(servicesList);
+						// }							
+						let services = response
 
 						resolve(services);
+					})
+					.catch((err) => {
+						console.log("error", err);
+						reject(err);
+						return;
 					});
 
-				}
+			}
 			
 		});
 	},
@@ -166,28 +176,17 @@ module.exports = {
 				});
 		});
 	},
-	fetchAllServicesInBBox(country, language, bounds = [], pageSize = 200, category = null) {
-		return new Promise((resolve, reject) => {
-			var requestUrl = `/services/searchlist/?filter=relatives&geographic_region=${country}&page=1&page_size=${pageSize}&bounds=${bounds.join(", ")}`;
-			if (category) {
-				requestUrl += "&type_numbers=" + (category || "");
-			}
-			request
-				.get(RI_URL + requestUrl)
-				.set("Accept-Language", language)
-				.end((err, res) => {
-					if (err) {
-						reject(err);
-						return;
-					}
-					let services = res.body;
-
-					resolve(services);
-				});
-		});
-	},
 	fetchServiceById(language, serviceId) {
 		return new Promise((resolve, reject) => {
+			let list = sessionStorage[`offline-services`] !==  undefined ? JSON.parse(sessionStorage[`offline-services`]) : null;
+			if (!navigator.onLine && list && list.filter(s => {return s.id === serviceId}).length > 0) {
+				
+				console.log("list",list);	
+				console.log("ID:", serviceId);
+				let service = list.services.results.filter(c => {return c.id === serviceId});
+				console.log("service id", service);
+				resolve(_.first(service));
+			} else {
 			request
 				.get(RI_URL + "/services/search/?id=" + serviceId)
 				.set("Accept-Language", language)
@@ -200,6 +199,7 @@ module.exports = {
 
 					resolve(services);
 				});
+			}
 		});
 	},
 	fetchServicePreviewById(language, serviceId) {

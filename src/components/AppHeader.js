@@ -25,6 +25,7 @@ class AppHeader extends Component {
 		prvalert: localStorage.getItem("privacy-policy"),
 		searchText: "",
 		active: false,
+		serbiaAlert: sessionStorage.getItem("serbia-alert"),
 	};
 	toggleClass() {
 		const { currentState } = this.state.active;
@@ -50,6 +51,10 @@ class AppHeader extends Component {
 		this.setState({
 			[name]: value,
 		});
+	}
+	closeSerbiaBanner(){
+		sessionStorage.setItem("serbia-alert", 1);
+		this.setState({ serbiaAlert: 1 });
 	}
 	handleSubmit(event) {
 		const { onGoToSearch } = this.props;
@@ -89,8 +94,13 @@ class AppHeader extends Component {
 		const cookiePolicyLink = <a href="/greece/privacy/cookies" target="_blank" rel="noopener noreferrer">Cookie Policy</a>;
 		const privacyPolicyLink = <a href="/greece/privacy/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>;
 		const showHeaderBackground = !country || !language;
+		
+		let isOnServices = window.location.href.includes("/services/");
+		let isOnArticlesGreece = window.location.href.includes("/categories") || /(\/greece\/.*\/.*)/.test(window.location.href);
 
-		console.log(cms);
+		let disclaimersLink = `/greece/refugee-info-greece-closed/refugee-info-stops-operating-in-greece?language=${language}`;
+		disclaimersLink = window.location.href.includes(disclaimersLink) ? '#' : disclaimersLink;
+
 		return (
 			<div className={backgroundDark ? 'AppHeader' : 'AppHeaderLight'}>
 
@@ -165,6 +175,38 @@ class AppHeader extends Component {
 						/>
 					</div>
 				)}
+
+				{this.state.serbiaAlert === '0' && isOnServices && window.location.href.includes('/serbia/') && (
+					<div className={this.state.serbiaAlert ? 'serbia-banner' : 'hidden'}>
+						<span className="serbia-banner-separator"></span>
+						<p>{t("SERBIA_BANNER")}</p>
+						<Close
+							className="close-alert"
+							color="contrast"
+							size={36}
+							onClick={this.closeSerbiaBanner.bind(this)}
+						/>
+					</div>
+				)}
+
+				{(isOnServices || isOnArticlesGreece) && window.location.href.includes('/greece/') && (
+					<div className='serbia-banner'>
+						<span className="serbia-banner-separator"></span>
+						<a href={disclaimersLink}>
+							<p>{isOnServices ? t("GREECE_BANNER_SERVICES") : t('GREECE_BANNER_ARTICLES')}</p>
+						</a>
+					</div>
+				)}
+
+				{!(isOnServices || isOnArticlesGreece) && window.location.href.includes('/greece') && (
+					<div className='serbia-banner'>
+						<span className="serbia-banner-separator"></span>
+						<a href={disclaimersLink}>
+							<p>{t('GREECE_BANNER_HP')}</p>
+						</a>
+					</div>
+				)}
+
 			</div>
 
 		);

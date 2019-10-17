@@ -286,6 +286,15 @@
 	flex-wrap: wrap;
 	flex-direction: column;
 
+	#MapCanvas, #MapCanvas2 {
+		height: 400px;
+		z-index: 0;
+
+		@media (min-width: 800px) {
+			height: 600px;
+		}
+	}
+
 	@include service-common();
 
 	.Title {
@@ -871,6 +880,7 @@
 
 	.social {
 		display: flex;
+		position: relative;
 
 		div {
 			align-items: center;
@@ -891,7 +901,18 @@
 				border-color: #bbb;
 			}
 		}
-	}
+
+		.copied {
+			background-color: gray;
+			border-radius: 3px;
+			color: white;
+			font-size: 12px;
+			padding: 3px;
+			position: absolute;
+			right: 0;
+			top: 50px;
+		}
+}
 }
 
 .rtl {
