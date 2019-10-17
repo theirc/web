@@ -44,10 +44,14 @@ class CountrySelector extends Component {
             backToLanguage
 		} = this.props;
 		const { config } = this.context;
-        let countryList = this.props.countryList.map(_.identity);
-        let regionList = this.props.regionList.filter(r => r.languages_available.split(',').map(a => a.trim()).indexOf(language) > -1).map(r => r.slug);
-        let availableCountryList = countryList.filter(c => regionList.indexOf(c.fields.slug) > -1 &&  config.hideCountries.indexOf(c.fields.slug) === -1);
+		let countryList = this.props.countryList.map(_.identity);
+		console.log("props.regionList",this.props.regionList);
+		let regionList = this.props.regionList.filter(r => r.languages_available.split(',').map(a => a.trim()).indexOf(language) > -1).map(r => r.slug);
+		console.log("regionList", regionList);
+		let availableCountryList = countryList.filter(c => regionList.indexOf(c.fields.slug) > -1 &&  config.hideCountries.indexOf(c.fields.slug) === -1);
+		console.log("availableCountryList", availableCountryList);
 		let unavailableCountryList = countryList.filter(c => regionList.indexOf(c.fields.slug) === -1);
+		console.log("unavailableCountryList", unavailableCountryList);
 		
 		// SP-354 disable tigrinya and french from italy
         availableCountryList = this.filterCountry(config, availableCountryList, language);
