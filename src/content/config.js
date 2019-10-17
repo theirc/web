@@ -337,6 +337,11 @@ module.exports = {
 		customQuestionLink:[["italy","https://www.facebook.com/Refugee.Info.Italy/"]],
 		hideLangsPerCountry: [],
 		hideCountries: [],
+		countryPhoneCodes: [{
+			country: 'El Salvador',
+			code: '+503',
+		  },
+		],
 		facebookPage: [["el-salvador", "https://www.facebook.com/Cu%C3%A9ntanos-2039927102928299/"]],
 	},
 	"theirc-refugee-info-frontend-design-ri.azurewebsites.net": {
