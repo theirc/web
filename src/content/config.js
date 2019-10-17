@@ -192,6 +192,7 @@ module.exports = {
 		showDepartments: true,
 		showLinkToAdministration: true,
 		hideLangsPerCountry: [],
+		hideCountries: [],
 		facebookPage: [["el-salvador", "https://www.facebook.com/Cu%C3%A9ntanos-2039927102928299/"]],
 	},
 	"staging.cuentanos.org": {
@@ -217,6 +218,7 @@ module.exports = {
 		showLinkToAdministration: false,
 		customQuestionLink:[["italy","https://www.facebook.com/Refugee.Info.Italy/"]],
 		hideLangsPerCountry: [],
+		hideCountries: [],
 		facebookPage: [["el-salvador", "https://www.facebook.com/Cu%C3%A9ntanos-2039927102928299/"]],
 	},
 	"qa.cuentanos.org": {
@@ -241,6 +243,7 @@ module.exports = {
 		showLinkToAdministration: false,
 		customQuestionLink:[["italy","https://www.facebook.com/Refugee.Info.Italy/"]],
 		hideLangsPerCountry: [],
+		hideCountries: [],
 		facebookPage: [["el-salvador", "https://www.facebook.com/Cu%C3%A9ntanos-2039927102928299/"]],
 	},
 	"localhost": {
@@ -265,6 +268,7 @@ module.exports = {
 		showLinkToAdministration: false,
 		customQuestionLink:[["italy","https://www.facebook.com/Refugee.Info.Italy/"]],
 		hideLangsPerCountry: [],
+		hideCountries: [],
 		facebookPage: [["el-salvador", "https://www.facebook.com/Cu%C3%A9ntanos-2039927102928299/"]],
 	},
 	"theirc-refugee-info-frontend-design.azurewebsites.net": {
@@ -290,6 +294,7 @@ module.exports = {
 		showDepartments: true,
 		showLinkToAdministration: true,
 		hideLangsPerCountry: [],
+		hideCountries: [],
 		facebookPage: [["el-salvador", "https://www.facebook.com/Cu%C3%A9ntanos-2039927102928299/"]],
 	},
 	"theirc-refugee-info-frontend-design-ri.azurewebsites.net": {
