@@ -194,6 +194,7 @@ module.exports = {
 		showDepartments: true,
 		showLinkToAdministration: true,
 		hideLangsPerCountry: [],
+		hideCountries: [],
 		countryPhoneCodes: [{
 			country: 'El Salvador',
 			code: '+503',
@@ -222,6 +223,7 @@ module.exports = {
 		showLinkToAdministration: false,
 		customQuestionLink:[["italy","https://www.facebook.com/Refugee.Info.Italy/"]],
 		hideLangsPerCountry: [],
+		hideCountries: [],
 		countryPhoneCodes: [{
 			country: 'El Salvador',
 			code: '+503',
@@ -250,6 +252,7 @@ module.exports = {
 		showLinkToAdministration: false,
 		customQuestionLink:[["italy","https://www.facebook.com/Refugee.Info.Italy/"]],
 		hideLangsPerCountry: [],
+		hideCountries: [],
 		countryPhoneCodes: [{
 			country: 'El Salvador',
 			code: '+503',
