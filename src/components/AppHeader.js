@@ -145,14 +145,14 @@ class AppHeader extends Component {
 						}
 					</div>
 				</Headroom>
-				{showHeaderBackground &&  <div
+				{/* {showHeaderBackground &&  <div
 					style={{
 						backgroundColor: "#000000",
 						display: "block",
 						width: "100%",
 						height: 64,
 					}}
-				/>}
+				/>} */}
 				{!showHeaderBackground &&  <div className={backgroundDark ? 'headerBackground': 'headerBackgroundLight'}></div>}
 				{search && (
 					<form onSubmit={this.handleSubmit.bind(this)} className="SearchBar">
