@@ -178,32 +178,38 @@ class AppHeader extends Component {
 
 				{this.state.serbiaAlert === '0' && isOnServices && window.location.href.includes('/serbia/') && (
 					<div className={this.state.serbiaAlert ? 'serbia-banner' : 'hidden'}>
-						<span className="serbia-banner-separator"></span>
-						<p>{t("SERBIA_BANNER")}</p>
-						<Close
-							className="close-alert"
-							color="contrast"
-							size={36}
-							onClick={this.closeSerbiaBanner.bind(this)}
-						/>
+						<div className='banner-wrapper'>
+							<span className="serbia-banner-separator"></span>
+							<p>{t("SERBIA_BANNER")}</p>
+							<Close
+								className="close-alert"
+								color="contrast"
+								size={36}
+								onClick={this.closeSerbiaBanner.bind(this)}
+							/>
+						</div>
 					</div>
 				)}
 
 				{(isOnServices || isOnArticlesGreece) && window.location.href.includes('/greece/') && (
 					<div className='serbia-banner'>
-						<span className="serbia-banner-separator"></span>
-						<a href={disclaimersLink}>
-							<p>{isOnServices ? t("GREECE_BANNER_SERVICES") : t('GREECE_BANNER_ARTICLES')}</p>
-						</a>
+						<div className='banner-wrapper'>
+							<span className="serbia-banner-separator"></span>
+							<a href={disclaimersLink}>
+								<p>{isOnServices ? t("GREECE_BANNER_SERVICES") : t('GREECE_BANNER_ARTICLES')}</p>
+							</a>
+						</div>
 					</div>
 				)}
 
 				{!(isOnServices || isOnArticlesGreece) && window.location.href.includes('/greece') && (
 					<div className='serbia-banner'>
-						<span className="serbia-banner-separator"></span>
-						<a href={disclaimersLink}>
-							<p>{t('GREECE_BANNER_HP')}</p>
-						</a>
+						<div className='banner-wrapper'>
+							<span className="serbia-banner-separator"></span>
+							<a href={disclaimersLink}>
+								<p>{t('GREECE_BANNER_HP')}</p>
+							</a>
+						</div>
 					</div>
 				)}
 

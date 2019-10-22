@@ -179,7 +179,7 @@ class ServiceDetail extends React.Component {
 				</span>
 				<h1>
 					<div className="ContactInformation">
-						{typeText}<div className={textClass}>{text}</div>
+						{typeText}<a href={action} className={textClass}>{text}</a>
 					</div>
 				</h1>
 			</div>

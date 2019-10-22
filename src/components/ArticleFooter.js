@@ -87,6 +87,7 @@ class ArticleFooter extends Component {
 		const rtl = direction === "rtl";
 
 		return (
+			(previous || next) &&
 			<div className="ArticleFooter">
 				{previous && (
 					<div className="page-selector prev" onClick={() => onNavigateTo(previous.fields.slug)}>
