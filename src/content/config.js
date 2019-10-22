@@ -195,7 +195,7 @@ module.exports = {
 		showLinkToAdministration: true,
 		hideLangsPerCountry: [],
 		hideCountries: [],
-		hideArticlesFor: ['honduras', 'guatemala'],
+		hideArticlesFor: ['guatemala'],
 		countryPhoneCodes: [{
 			country: 'El Salvador',
 			code: '+503',
@@ -225,7 +225,7 @@ module.exports = {
 		customQuestionLink:[["italy","https://www.facebook.com/Refugee.Info.Italy/"]],
 		hideLangsPerCountry: [],
 		hideCountries: [],
-		hideArticlesFor: ['honduras', 'guatemala'],
+		hideArticlesFor: ['guatemala'],
 		countryPhoneCodes: [{
 			country: 'El Salvador',
 			code: '+503',
@@ -255,7 +255,7 @@ module.exports = {
 		customQuestionLink:[["italy","https://www.facebook.com/Refugee.Info.Italy/"]],
 		hideLangsPerCountry: [],
 		hideCountries: [],
-		hideArticlesFor: ['honduras', 'guatemala'],
+		hideArticlesFor: ['guatemala'],
 		countryPhoneCodes: [{
 			country: 'El Salvador',
 			code: '+503',
@@ -285,7 +285,7 @@ module.exports = {
 		customQuestionLink:[["italy","https://www.facebook.com/Refugee.Info.Italy/"]],
 		hideLangsPerCountry: [],
 		hideCountries: [],
-		hideArticlesFor: ['honduras', 'guatemala'],
+		hideArticlesFor: ['guatemala'],
 		countryPhoneCodes: [{
 			country: 'El Salvador',
 			code: '+503',

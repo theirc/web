@@ -56,8 +56,7 @@ class BottomNav extends Component {
 		const { showServiceMap, country, t } = this.props;
 		const { config } = this.context;
 		let hideArticles = config.hideArticlesFor && config.hideArticlesFor.indexOf(country) > -1;
-		console.log("hideArticles",hideArticles);
-
+		
 		return (
 			<Paper
 				style={{
