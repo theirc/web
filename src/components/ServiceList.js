@@ -3,7 +3,6 @@ import "./ServiceHome.css";
 import { translate } from "react-i18next";
 import _ from "lodash";
 import HeaderBar from "./HeaderBar";
-import { Language } from "material-ui-icons";
 
 var tinycolor = require("tinycolor2");
 
@@ -88,9 +87,8 @@ class ServiceList extends React.Component {
 	}
 	render() {
 		const { services, category, loaded, errorMessage, serviceType} = this.state;
-		const { t, locationEnabled, toggleLocation, nearby, showMap, title, id  } = this.props;
-		let categoryName;
-		serviceType.length != 0 && (categoryName = serviceType.name);
+		const { t, locationEnabled, toggleLocation, nearby, showMap } = this.props;
+		let categoryName = serviceType.length !== 0 ? serviceType.name : "";
 		let titleName = categoryName ? categoryName : t("Services");
 
 

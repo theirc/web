@@ -366,14 +366,14 @@ class Services extends React.Component {
 
 		const instanceMoved = country.fields.slug === 'bulgaria';
 
-		const getLocatioName = (slug) =>{
-			const { regions} = this.props;
-			if (!this.state.locationName){
-				var loc = regions.filter(x => x.slug === slug);				
-				return loc.length > 0 ? loc[0].name : "";
-			}
-			return this.state.locationName;
-		}
+		// const getLocatioName = (slug) =>{
+		// 	const { regions} = this.props;
+		// 	if (!this.state.locationName){
+		// 		var loc = regions.filter(x => x.slug === slug);				
+		// 		return loc.length > 0 ? loc[0].name : "";
+		// 	}
+		// 	return this.state.locationName;
+		// }
 
 		return (
 			<div>

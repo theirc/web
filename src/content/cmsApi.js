@@ -61,10 +61,35 @@ function cmsApi(config) {
 			}
 		});
 	}
+	function loadArticle(slug, language = "en"){
+		return new Promise((resolve, reject) => {
+			return client
+				.getEntries({
+					content_type: "article",
+					"fields.slug": slug,
+					locale: languageDictionary[language] || language,
+				})
+				.then((e, r) => {
+					let entities = client.parseEntries(e);
+					let { items } = entities;
+
+					if (items.length === 0) {
+						if (global.location) {
+							global.document.location = "/";
+						} else {
+							throw Error("No Country Found");
+						}
+					}
+					resolve(items[0]);
+				});
+			
+		});
+	}
 
 	return {
 		client,
 		loadCountry,
+		loadArticle,
 		listCountries,
 	};
 }
