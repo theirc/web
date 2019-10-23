@@ -138,7 +138,8 @@
 	flex-basis: calc(100% - 40px);
 }
 .title-line{
-	border-top: 2px solid #fdda14;
+	@include brand-colors( "border-color");
+	border-top: 2px solid;
 	width: 50px;
 	margin-left: calc(50% - 25px);
 	margin-bottom: 30px;
