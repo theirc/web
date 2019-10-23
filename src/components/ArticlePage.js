@@ -84,10 +84,6 @@ class ArticlePage extends Component {
 		this.replaceLinks();
 	}
 
-	componentWillMount() {
-		console.log('ArticlePage.componentWillMount');
-	}
-
 	renderVideo() {
 		const { article } = this.props;
 		const { url } = article.fields;

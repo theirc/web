@@ -41,6 +41,7 @@ class Router extends Component {
 	}
 
 	render() {
+		console.log(document, 'router');
 		return (
 			<ConnectedRouter history={history}>
 				<Placeholder>

@@ -27,7 +27,6 @@ class Article extends React.Component {
 	}
 
 	componentWillMount() {
-		console.log('Article.componentWillMount');
 		if (!this.props.articleItem){
 			this.setState({ loading: true });
 			this.props.onMount(this.props.category, this.props.match.params.article).then(s => {
