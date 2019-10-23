@@ -68,10 +68,10 @@ class ServiceList extends React.Component {
 					<h1>{s.name}</h1>
 					<h2>
 						{s.provider.name}{" "}
-						<small>
+						<span>
 							{fullAddress}
 							{distance && ` - ${distance}`}
-						</small>
+						</span>
 						<div className="Icons">
 							{subTypes.map((t, idx) => (
 								<div className="Icon" key={`${s.id}-${idx}`}>
@@ -104,14 +104,6 @@ class ServiceList extends React.Component {
 			return (
 				<div className="ServiceList">
 					<HeaderBar title={nearby ? t("Nearby Services") : titleName}>
-						{!nearby &&
-							navigator.geolocation && (
-								<li onClick={toggleLocation || _.identity}>
-									<h1>{t("Order results by distance to me")}</h1>
-									{!locationEnabled && <i className="MenuIcon material-icons">radio_button_unchecked</i>}
-									{locationEnabled && <i className="MenuIcon material-icons">radio_button_checked</i>}
-								</li>
-							)}
 					</HeaderBar>
 					<div className="loader" />
 				</div>
@@ -121,14 +113,7 @@ class ServiceList extends React.Component {
 		return (
 			<div className="ServiceList">
 				<HeaderBar title={nearby ? t("Nearby Services") : (category ? category.name : titleName)}>
-					{!nearby &&
-						navigator.geolocation && (
-							<li onClick={toggleLocation || _.identity}>
-								<h1>{t("Order results by distance to me")}</h1>
-								{!locationEnabled && <i className="MenuIcon material-icons">radio_button_unchecked</i>}
-								{locationEnabled && <i className="MenuIcon material-icons">radio_button_checked</i>}
-							</li>
-						)}
+					
 				</HeaderBar>
 				{errorMessage && (
 					<div className="Error">
@@ -144,10 +129,9 @@ class ServiceList extends React.Component {
 
 				{sortedAvailableServices.length > 0 && (
 					<div className="ServiceListContainer">
-
 						<ul className="Items">
 							<li
-								className="Item"
+								className="Item service-map"
 								onClick={showMap}
 								style={{
 									flexBasis: "100%",

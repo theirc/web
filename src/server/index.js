@@ -172,6 +172,10 @@ app.use("/", feathers.static("build"));
 app.use("/images", feathers.static("build/images"));
 app.use("/fonts", feathers.static("build/fonts"));
 
+app.get("/bulgaria/*", function(req, res, err){
+    res.redirect(`/bulgaria`);
+})
+
 app.get("/preview/:serviceId/", function(req, res, err) {
     const selectedLanguage = parseLanguage(req);
     const {

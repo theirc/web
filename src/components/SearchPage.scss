@@ -4,10 +4,14 @@
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: column;
-	width: 100%;
+	max-width: 1024px;
+	margin: 0 auto;
 
 	padding-bottom: 10px;
 
+	.CategoryList {
+		margin: unset;
+	}
 	.Article,
 	.Service {
 		display: flex;
@@ -54,6 +58,7 @@
 			padding-top: 10px;
 			flex-basis: 100%;
 		}
+		
 	}
 
 	hr {
@@ -92,7 +97,7 @@
 		width: 100%;
 		display: flex;
 		margin: 0;
-		background-color: $titleBackground;
+		/*background-color: $titleBackground;*/
 		min-height: 60px;
 		flex-direction: row;
 		align-items: center;
@@ -105,6 +110,7 @@
 		margin: 0;
 		padding: 10px;
 		flex: 1;
+		text-transform: uppercase;
 	}
 	.Title > h1 > small {
 		font-size: 12px;
@@ -164,6 +170,24 @@
 
 		ul li {
 			list-style-type: square;
+		}
+	}
+
+	.show-action {
+		text-align: center;
+		width:100%;
+
+		.show-more {
+			@include brand-colors( "background-color");
+			@include brand-colors-inverse( "color");
+			border: 1px solid #ddd;
+			border-radius: 5px;
+			cursor: pointer;
+			font-size: 13px;
+			height: 41px;
+			padding: 0 20px;
+			text-align: center;
+			white-space: nowrap;
 		}
 	}
 }

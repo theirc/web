@@ -77,71 +77,36 @@ class ArticleFooter extends Component {
 			}
 		}
 	}
+	subscribe(article) {
+		const { onNavigateTo, country, category } = this.props;
+		onNavigateTo(`../subscribe/${category.fields.slug}`);
+	}
 
 	render() {
-		const { previous, next, onNavigateTo, direction, t } = this.props;
+		const { country, previous, next, onNavigateTo, direction, t, article } = this.props;
 		const rtl = direction === "rtl";
 
 		return (
+			(previous || next) &&
 			<div className="ArticleFooter">
+				{previous && (
+					<div className="page-selector prev" onClick={() => onNavigateTo(previous.fields.slug)}>
+						{!rtl ? <NavigateBefore className="icon" /> : <NavigateNext className="icon" />}
+						<div className='caption'>
+							{/* <small>{t("PREVIOUS PAGE")}:</small> */}
+							<h1>{previous.fields.title}</h1>
+						</div>
+					</div>
+				)}
 				{next && (
-					<div
-						className="selector"
-						onClick={() => {
-							onNavigateTo(next.fields.slug);
-						}}
-					>
-						<h1>
-							<small>{t("NEXT PAGE")}:</small>
-							{next.fields.title}
-						</h1>
+					<div className="page-selector next" onClick={() => onNavigateTo(next.fields.slug)}>
+						<div className='caption'>
+							{/* <small>{t("NEXT PAGE")}:</small> */}
+							<h1>{next.fields.title}</h1>
+						</div>
 						{!rtl ? <NavigateNext className="icon" /> : <NavigateBefore className="icon" />}
 					</div>
 				)}
-				{next && <hr className={!previous ? "divider" : ""} />}
-				{previous && (
-					<div
-						className="selector"
-						onClick={() => {
-							onNavigateTo(previous.fields.slug);
-						}}
-					>
-						<h1>
-							<small>{t("PREVIOUS PAGE")}:</small>
-							{previous.fields.title}
-						</h1>
-						{!rtl ? <NavigateBefore className="icon" /> : <NavigateNext className="icon" />}
-					</div>
-				)}
-				{previous && <hr className="divider" />}
-				{this.state.shareIN ? (
-					<div className="selector" onClick={() => this.sharePage()}>
-						<h1>{t("Share this page")}</h1>
-						<Share className="icon" />
-					</div>
-				) : (
-					<div className="selector">
-						<div className="selector sharePage" onClick={() => {this.share();}}>
-							<h1>
-								{t("Share on Facebook")}
-							</h1>
-							<Share className="icon" />
-						</div>
-						<div className="verticalHR" />
-						<div className="selector sharePage" onClick={() => this.Copiedlnk()}>
-							{this.state.copied ? <h1 >{t("Copy Link")}</h1> : <h1>{t("Copied")}</h1>}
-							<Link className="icon" />
-						</div>
-					</div>
-				)}
-
-				{/*
-				<hr />
-				<div className="selector">
-					<h1>{t("Suggest changes to this page")}</h1>
-					<ModeEdit className="icon" />
-				</div>
-				*/}
 			</div>
 		);
 	}

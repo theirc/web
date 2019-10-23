@@ -1,13 +1,18 @@
 import React, { Component } from "react";
+import ReactDOM from "react-dom"
 import PropTypes from "prop-types";
-import "./ArticlePage.css";
 import { Helmet } from "react-helmet";
+import * as clipboard from "clipboard-polyfill";
+import { LibraryBooks, Link } from "material-ui-icons";
 import FacebookPlayer from "react-facebook-player";
 import YouTube from "react-youtube";
 import InstagramEmbed from 'react-instagram-embed';
+import { translate } from "react-i18next";
 import HeaderBar from "./HeaderBar";
-import ReactDOM from "react-dom"
 
+import "./ArticlePage.css";
+
+const moment = global.moment;
 const Remarkable = require("remarkable");
 const IG_URL = "https://instagr.am/p/";
 const md = new Remarkable("full", {
@@ -20,7 +25,11 @@ const md = new Remarkable("full", {
 /**
  *
  */
-export default class ArticlePage extends Component {
+class ArticlePage extends Component {
+	state = {
+		copied: false
+	}
+
 	static propTypes = {
 		article: PropTypes.shape({
 			title: PropTypes.string,
@@ -113,11 +122,40 @@ export default class ArticlePage extends Component {
 		this.replaceLinks();
 	}
 
+	onCopyLink = () => {
+		this.setState({ copied: true });
+		
+		clipboard.writeText(document.location.href);
+
+		setTimeout(() => this.setState({ copied: false }), 1500);
+	}
+
+	onShareOnFacebook = () => {
+		const { language } = this.props
+		if (global.window) {
+			const { FB } = global.window;
+			let { href } = window.location;
+			console.log(FB, href)
+			href += (href.indexOf("?") > -1 ? "&" : "?") + "language=" + language;
+
+			if (FB) {
+				FB.ui(
+					{
+						method: "share",
+						href,
+					},
+					function (response) { }
+				);
+			}
+		}
+	}
+
+	
 	render() {
-		const { article, category, loading } = this.props;
+		const { article, category, loading, t } = this.props;
 		const { title, content, hero, lead } = article.fields;
 		const { contentType } = article.sys;
-
+		
 		let html = md.render(content || lead);
 		html = html.replace(/(\+[0-9]{9,14}|00[0-9]{9,15})/g, `<a class="tel" href="tel:$1">$1</a>`);
 		
@@ -126,7 +164,7 @@ export default class ArticlePage extends Component {
 				<Helmet>
 					<title>{title}</title>
 				</Helmet>
-				<HeaderBar subtitle={(category.fields.articles || []).length > 1 && `${category.fields.name}:`} title={title} />
+				
 				{hero &&
 					hero.fields &&
 					hero.fields.file && (
@@ -137,11 +175,24 @@ export default class ArticlePage extends Component {
 							{hero.fields.description && <credit>{hero.fields.description}</credit>}
 						</div>
 					)}
+				<HeaderBar subtitle={(category.fields.articles || []).length > 1 && `${category.fields.name}:`} title={title} />
+				<div className='filter-bar'>
+					<div className="social">
+						<div href='#' className="share" onClick={this.onShareOnFacebook}><i className="fa fa-facebook-f" style={{ fontSize: 16 }}/></div>
+						<div href='#' className="copy" onClick={this.onCopyLink}>
+							{!this.state.copied ? <Link /> : <LibraryBooks />}
+						</div>
+						{this.state.copied && <span className='copied'>{t('Copied')}</span>}
+					</div>
+				</div>
 				{contentType.sys.id === "video" && this.renderVideo()}
 				<article>
+					<span className='author'><span>{t("LAST_UPDATED")}</span> {moment(article.sys.updatedAt).format('YYYY.MM.DD')}</span>
 					<div dangerouslySetInnerHTML={{ __html: html }} />
 				</article>
 			</div>
 		);
 	}
 }
+
+export default translate()(ArticlePage);

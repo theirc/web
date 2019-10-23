@@ -13,9 +13,30 @@ Less me
 	width: 100%;
 	top: 0;
 	height: 64px;
-	box-shadow: 0 1px 1px 0;
-	background-color: #000000;
+	@media (max-width: $desktopBreakpoint) {
+		box-shadow: 0 1px 1px 0;
+		background-color: #000000;
+	}
+	
 }
+
+.app-bar-light {
+	@include flexbox();
+	@include flex-direction(row);
+	@include align-items(center);
+	@include justify-content(flex-start);
+
+	position: fixed;
+	width: 100%;
+	top: 0;
+	height: 64px;
+	@media (max-width: $desktopBreakpoint) {
+		box-shadow: 0 1px 1px 0;
+		background-color: #ffffff;
+	}
+	
+}
+
 
 .app-bar-container {
 	display: -webkit-box;
@@ -46,8 +67,31 @@ Less me
 				padding-left: 18px;
 			}
 		}
+		
+	}
+	
+}
+
+.headerBackground{	
+	display: block;
+	background-color: #000000;
+	width: 100%;
+	height: 64px;
+	@media (min-width: $desktopBreakpoint) {
+		display:none;	
 	}
 }
+.headerBackgroundLight{	
+	display: block;
+	background-color: #ffffff;
+	width: 100%;
+	height: 64px;
+	@media (min-width: $desktopBreakpoint) {
+		display: none,	
+
+	}
+}
+
 
 .logo-centered {
 	align-items: center;
@@ -60,11 +104,15 @@ Less me
 	align-items: center;
 	justify-content: flex-end;
 	flex-direction: row;
+
 	.app-bar-selectors {
+		align-items: center;
+		cursor: pointer;
+		display: flex;
+		font-size: 14px;
 		padding: 16px 5px;
 		text-transform: uppercase;
-		cursor: pointer;
-		font-size: 14px;
+
 		@media (max-width: 320px) {
 			font-size: 10px;
 		}
@@ -74,11 +122,37 @@ Less me
 		}
 		@media (min-width: 960px) {
 			font-size: 14px;
-			padding: 16px 11px;
+			font-weight: 600;
+			padding: 16px 30px 16px 30px;
+		}
+
+		.menu-item {
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+
+		svg {
+			margin-right: 10px;
 		}
 
 		.rtl & {
 			font-family: "Cairo", sans-serif;
+		}
+
+		&.country {
+			padding: 2px 10px 0 30px;
+
+			img {
+				width: 20px;
+			}
+		}
+		
+		&.lang {
+			padding: 0 10px;
+			@media (min-width: $desktopBreakpoint) {
+				padding-right: 30px;
+			}
 		}
 	}
 	@-moz-document url-prefix(){
@@ -86,18 +160,39 @@ Less me
 		padding-bottom:40px !important;
 	}}
 }
+.top-menu{
+	@media (max-width: $desktopBreakpoint) {
+		display: none !important;
+	}
 
+}
 .app-bar-separator {
 	border-left-width: 1px;
-	border-left-color: #ffffff;
+	border-left-color: #ccc;
 	border-left-style: solid;
 	height: 25px;
-	@include brand-colors( "border-left-color");
+
+	@media (max-width: $desktopBreakpoint) {
+		display: none;
+	}
 }
 
-.app-bar-logo {
-	height: 40px;
-	cursor: pointer;
+.fa-times {
+	padding: 0 6px 0 6px;
+}
+
+.AppHeader {
+	.app-bar-logo {
+		height: 25px;
+		cursor: pointer;
+	}
+}
+
+.AppHeaderLight {
+	.app-bar-logo {
+		height: 40px;
+		cursor: pointer;
+	}
 }
 
 .headroom {
@@ -129,6 +224,10 @@ Less me
 	-webkit-transform: translateY(-65px);
 	transform: translateY(-65px);
 }
+.header-opacity{
+	background-color: #000000;
+	opacity: 0.9;
+}
 
 .headroom--pinned {
 	@extend .headroom--scrolled;
@@ -139,27 +238,61 @@ Less me
 	transform: translateY(0%);
 }
 
+.AppHeaderLight{
+	.headroom {
+		z-index: 3;
+	}
+
+	.headroom--not-top{
+		background-color: #ffffff;
+		box-shadow: 0px 1px 8px -5px;
+	}
+	.headroom--top{
+		background-color: #ffffff;
+		box-shadow: 0px 1px 8px -5px;
+	}
+	.app-bar-buttons{
+		color: #000000;
+	}
+}
+.headroom--not-top{
+	background-color: #000000;
+	
+}
+
 .AppHeader {
 	.SearchBar {
-		height: 30px;
-		padding-bottom: 1em;
-		padding-left: 16px;
-		padding-right: 16px;
 		background-color: black;
+		height: 30px;
+		padding: 8px 16px;
+		position: relative;
+		
+		@media (min-width: $desktopBreakpoint) {
+			position: absolute;
+			opacity: 0.5;
+			top: 64px;
+			width: 100%;
+			z-index: 1;
 
+			input {
+				color: white;
+
+				&::placeholder {
+					color: #ddd;
+				}
+			}
+		}
 		input {
 			-webkit-appearance: none;
 			line-height: 25px;
-			font-size: 20px;
+			font-size: 18px;
 			width: 100%;
 			box-sizing: border-box;
 			border: 0;
-			background-color: black;
-			border-bottom: 2px white solid;
+			background-color: inherit;
+			border-bottom: 1px #666 solid;
 			color: white;
-
 			padding: 0;
-			border-radius: 0;
 		}
 		input:focus {
 			outline: none;
@@ -167,23 +300,31 @@ Less me
 		.fa-times-circle {
 			margin-inline-start: -33px;
 			margin: 5px 5px;
-			top: 60px;
+			top: 2px;
 
 			.ltr & {
-				right: 35px;
+				right: 55px;
 			}
 			.rtl & {
-				left: 35px;
+				left: 55px;
 			}
 		}
 		.fa-search {
 			margin: 5px 5px;
-			top: 60px;
+			padding-left: 8px;
+			top: 2px;
+
 			.ltr & {
 				right: 5px;
+				@media (min-width: $desktopBreakpoint) {
+					right: 30px;
+				}
 			}
 			.rtl & {
 				left: 5px;
+				@media (min-width: $desktopBreakpoint) {
+					left: 30px;
+				}
 			}
 		}
 		.fa {
@@ -193,7 +334,83 @@ Less me
 			position: absolute;
 		}
 	}
+}
+.AppHeaderLight {
+	.SearchBar {
+		background-color: white;
+		height: 30px;
+		padding: 8px 16px;
+		position: relative;
 
+		@media (min-width: $desktopBreakpoint) {
+			position: absolute;
+			top: 64px;
+			width: 98.7%;
+			z-index: 1;
+		}
+
+		input {
+			-webkit-appearance: none;
+			line-height: 25px;
+			font-size: 18px;
+			width: 100%;
+			box-sizing: border-box;
+			border: 0;
+			background-color: inherit;
+			border-bottom: 1px #ddd solid;
+			color: black;
+			padding: 0;
+		}
+
+		input:focus {
+			outline: none;
+		}
+		.fa-times-circle {
+			margin-inline-start: -33px;
+			margin: 5px 5px;
+			top: 2px;
+
+			.ltr & {
+				right: 55px;
+			}
+			.rtl & {
+				left: 55px;
+			}
+		}
+		.fa-search {
+			margin: 5px 5px;
+			padding-left: 8px;
+			top: 2px;
+			
+			.ltr & {
+				right: 5px;
+				@media (min-width: $desktopBreakpoint) {
+					right: 30px;
+				}
+			}
+			.rtl & {
+				left: 5px;
+				@media (min-width: $desktopBreakpoint) {
+					left: 30px;
+				}
+			}
+		}
+		.fa {
+			color: rgb(36, 36, 36);
+			width: 25px;
+			font-size: 20px;
+			position: absolute;
+		}
+	}
+}
+.app-bar-black{
+	background-color: #000000;
+}
+.AppHeader, .AppHeaderLight {
+	@media (min-width: $desktopBreakpoint) {
+		margin-top: 63px;
+	}
+	
 	.privacy-banner {
 		align-items: center;
 		background-color: black;
@@ -217,6 +434,7 @@ Less me
 			color: white;
 			text-decoration: underline;
 		}
+		
 		span {
 			padding: 4px;
 		}
@@ -224,6 +442,7 @@ Less me
 		.content {
 			display: flex;
 		}
+		
 		.privacy-banner-separator {
 			border-left-width: 1px;
 			border-left-color: #ffda1a;
@@ -233,41 +452,38 @@ Less me
 		}
 	}
 	.serbia-banner{
-  	align-items: stretch;
 		background-color: #FCD735;
-		color: #292633;
-		display: flex;
-		flex: 1;
-		flex-direction: row;
-		font-size: 14px;
-		font-weight: bold;
-		height: auto;
-		padding: 16px;
-		position: relative;
+		
+		.banner-wrapper {
+			align-items: stretch;
+			color: #292633;
+			display: flex;
+			flex: 1;
+			flex-direction: row;
+			font-size: 14px;
+			font-weight: bold;
+			height: auto;
+			max-width: 1024px;
+			margin: 0 auto;
+			padding: 16px;
+			position: relative;
 
-		@media (min-width: 1000px) {
-			padding: 16px 15vw;
-		}
-
-		@media (min-width: 1400px) {
-			padding: 16px 20vw;
-		}
-
-		span {
-			border-right: 1px solid black;
-			margin: 10px 15px 10px 5px;
-		}
-
-		a {
-			text-decoration: none;
-			
-			&:hover {
-				text-decoration: underline;
+			span {
+				border-right: 1px solid black;
+				margin: 10px 15px 10px 5px;
 			}
-		}
-
-		p {
-			white-space: pre-line;
+	
+			a {
+				text-decoration: none;
+				
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+	
+			p {
+				white-space: pre-line;
+			}
 		}
 	}
 }
@@ -354,6 +570,18 @@ $color: #ffffff;
 .MuiIconButton-label-30 > svg,
 .MuiSvgIcon-root-102 {
 	display: none;
+}
+
+.search-btn {
+	width: 24px;
+	padding-left: 15px;
+
+	// @media (min-width: $desktopBreakpoint) {
+	// }
+
+	&.fa-times {
+		width: 19px;
+	}
 }
 
 .SearchButton {

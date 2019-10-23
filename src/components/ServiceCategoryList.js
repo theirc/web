@@ -1,5 +1,7 @@
 import React from "react";
 import "./ServiceHome.css";
+import "./ServiceCategoryList.css";
+
 import { translate } from "react-i18next";
 
 import HeaderBar from "./HeaderBar";
@@ -11,6 +13,7 @@ class ServiceCategoryList extends React.Component {
 		categories: [],
 		loaded: false,
 	};
+
 
 	componentDidMount() {
 		const { fetchCategories} = this.props;
@@ -32,6 +35,7 @@ class ServiceCategoryList extends React.Component {
 	}
 
 	renderCategory(c) {		
+		  
 		let { onSelectCategory } = this.props;
 		onSelectCategory = onSelectCategory || (() => console.log("noop"));
 
@@ -52,7 +56,7 @@ class ServiceCategoryList extends React.Component {
 				<hr className="line" />
 				<div className="container" onClick={() => {setTimeout(() => onSelectCategory(c), 300) }}> 
 					<i className={`${iconPrefix} ${vector_icon}`} style={style} />
-					<strong>{name}</strong>
+					<span>{name}</span>
 				</div>
 			</li>
 		);
@@ -60,8 +64,8 @@ class ServiceCategoryList extends React.Component {
 	}
 	render() {
 		const { categories, loaded } = this.state;
-		const { t, locationEnabled, toggleLocation, listAllServices, goToLocationList, goToMap, locationName, departmentSelected } = this.props;	
-		
+		const { t, listAllServices, goToLocationList, goToMap, locationName, departmentSelected } = this.props;	
+
 		if (!loaded) {
 			return (
 				<div className="ServiceCategoryList">
@@ -84,15 +88,9 @@ class ServiceCategoryList extends React.Component {
 				</div>
 			);
 		}
-		
 		return <div>
-			<HeaderBar key={"Header"} title={t("Service Categories").toUpperCase()}>
-				<li onClick={toggleLocation || _.identity}>
-					<h1>{t("Order results by distance to me")}</h1>
-					{!locationEnabled && <i className="MenuIcon material-icons">radio_button_unchecked</i>}
-					{locationEnabled && <i className="MenuIcon material-icons">radio_button_checked</i>}
-				</li>
-			</HeaderBar>
+			<HeaderBar key={"Header"} title={t("Service Categories").toUpperCase()} />
+			
 			<div key={"List"} className="ServiceCategoryList">
 				<ul>
 					{locationName  && 
@@ -110,6 +108,7 @@ class ServiceCategoryList extends React.Component {
 						<div className="container" onClick={goToLocationList}>
 							<i className="fa fa-globe" />
 							<strong>{t("Locations")}</strong>
+							<i className="material-icons">keyboard_arrow_right</i>
 						</div>
 					</li>
 					}
@@ -118,24 +117,26 @@ class ServiceCategoryList extends React.Component {
 						<div className="container" onClick={goToLocationList}>
 							<i className="fa fa-globe" />
 							<strong>{t("Municipalidades")}</strong>
+							<i className="material-icons">keyboard_arrow_right</i>
 						</div>
 					</li>
 					}
-					<hr className="line" />			
+					<hr className="line" />
 					<li key="map">
 						<div className="container" onClick={goToMap}>
 							<i className="fa fa-map" />
 							<strong>{t("Map")}</strong>
+							<i className="material-icons">keyboard_arrow_right</i>
 						</div>
 					</li>
-					<hr className="line" />			
+					<hr className="line" />
 					<li key="all-services">
 						<div className="container" onClick={listAllServices}>
 							<i className="fa fa-list" />
 							<strong>{t("All Services")}</strong>
+							<i className="material-icons">keyboard_arrow_right</i>
 						</div>
 					</li>
-					<hr className="line" />
 					{categories.map(c => this.renderCategory(c))}
 				</ul>
 			</div>

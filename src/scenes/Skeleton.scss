@@ -1,9 +1,13 @@
 @import "../shared/includes.scss";
 
 body {
-	background-color: darken(gray, 30%);
+	background-color: black;
 }
 @media (min-width: $desktopBreakpoint) {
+	// body {
+	// 	background-color: black;
+	// }
+
 	.app-bar-container {
 		margin-left: $desktopPaddingWidth;
 		margin-right: $desktopPaddingWidth;
@@ -11,8 +15,8 @@ body {
 	footer {
 		border-bottom-width: 0;
 		border-top-width: 0;
-		border-right-width: $desktopPaddingWidth;
-		border-left-width: $desktopPaddingWidth;
+		border-right-width: 0px;
+		border-left-width: 0px;
 		border-style: solid;
 
 		border-color: darken(gray, 30%);
@@ -20,12 +24,18 @@ body {
 	.SkeletonContainer {
 		border-bottom-width: 0;
 		border-top-width: 0;
-		border-right-width: $desktopPaddingWidth;
-		border-left-width: $desktopPaddingWidth;
+		border-right-width: 0;
+		border-left-width: 0;
+		padding-left: $desktopPaddingWidth;
+		padding-right: $desktopPaddingWidth;
+		padding-bottom: 20px;
 		border-style: solid;
 
 		border-color: darken(gray, 30%);
 		//@include grayscale-brand-colors("border-color");
+	}
+	.bg-gray{
+		background-color: #f8f8f8;
 	}
 }
 
@@ -35,12 +45,15 @@ body {
 		margin-right: $bigDesktopPaddingWidth;
 	}
 	footer {
-		border-right-width: $bigDesktopPaddingWidth;
-		border-left-width: $bigDesktopPaddingWidth;
+		border-right-width: 0px;
+		border-left-width: 0px;
 	}
 	.SkeletonContainer {
-		border-right-width: $bigDesktopPaddingWidth;
-		border-left-width: $bigDesktopPaddingWidth;
+		border-right-width: 0;
+		border-left-width: 0;
+		padding-left: $bigDesktopPaddingWidth;
+		padding-right: $bigDesktopPaddingWidth;
+		padding-bottom: 20px;
 	}
 }
 
@@ -56,23 +69,17 @@ square {
 		font-size: 14px;
 		font-weight: bold;
 	}
-	& > a:before {
-		@include darken-brand-colors("color", 10%);
-		@include brand-colors("border-color");
-	}
-	& > a:before {
-		content: "□";
-		vertical-align: sub;
-		margin-top: -4px;
-		font-size: 20px;
 
-		@media only screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: $desktopBreakpoint),
-			only screen and (min--moz-device-pixel-ratio: 2) and (max-width: $desktopBreakpoint),
-			only screen and (-o-min-device-pixel-ratio: 2/1) and (max-width: $desktopBreakpoint),
-			only screen and (min-device-pixel-ratio: 2) and (max-width: $desktopBreakpoint) {
-			font-size: 18px;
+	&.Read-More {
+		align-items: center;
+		@include darken-brand-colors("color", 10%);
+		display: flex;
+
+		a:hover {
+			text-decoration: underline;
 		}
 	}
+
 	.ltr & > a:before {
 		padding-right: 5px;
 	}
@@ -89,4 +96,5 @@ a,em,li{color: black;}
 	.rtl & {
 		direction: rtl;
 	}
+	background-color: #f8f8f8;
 }

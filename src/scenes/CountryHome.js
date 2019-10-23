@@ -2,6 +2,7 @@ import React from "react";
 import moment from "moment";
 import { connect } from "react-redux";
 import { HomeWidget, HomeWidgetCollection, InstanceMovedWidget } from "../components";
+import Skeleton from '../scenes/Skeleton';
 import { push } from "react-router-redux";
 import getSessionStorage from "../shared/sessionStorage";
 
@@ -57,7 +58,7 @@ class CountryHome extends React.Component {
 		}
 		
 		return (
-			<div>
+			<Skeleton hideShareButtons={true} homePage={true}>
 				{ !instanceMoved &&
 					<HomeWidgetCollection key={"HomeWidgetCollection"}>
 						{country.fields.home.map(e => <HomeWidget direction={direction} onNavigate={onNavigate} language={language} country={country} content={e} key={e.sys.id} />)}
@@ -66,7 +67,7 @@ class CountryHome extends React.Component {
 				{ instanceMoved &&
 					<InstanceMovedWidget link="http://refugeelife.bg/" />
 				}
-			</div>
+			</Skeleton>
 		);
 	}
 }

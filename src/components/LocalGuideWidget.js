@@ -10,7 +10,7 @@ class LocalGuideWidget extends Component {
 		/*eslint-disable*/
 		return (
 			<div className="LocalGuide">
-				<s>
+				<s className='Read-More'>
 					<a
 						href="#/"
 						onClick={() => {
@@ -20,6 +20,7 @@ class LocalGuideWidget extends Component {
 					>
 						{t("See More")}
 					</a>
+					<i className="material-icons">arrow_right</i>
 				</s>
 				<h3>{t("Local Guide")}</h3>
 				<div className="Container">
