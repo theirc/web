@@ -336,14 +336,14 @@ app.get("/:country/:category/:article", function(req, res, err) {
                     .getEntries({
                         content_type: "article",
                         "fields.slug": article,
-                        locale: 'es',//languageDictionary[selectedLanguage] || selectedLanguage,
+                        locale: languageDictionary[selectedLanguage] || selectedLanguage,
                     })
                     .then(c => {
                         return cms.client
                             .getEntries({
                                 content_type: "country",
                                 "fields.slug": country,
-                                locale: 'es',//languageDictionary[selectedLanguage] || selectedLanguage,
+                                locale: languageDictionary[selectedLanguage] || selectedLanguage,
                                 include: 10,
                             })
                             .then(cc => {
