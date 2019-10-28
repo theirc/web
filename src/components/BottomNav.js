@@ -21,6 +21,10 @@ class BottomNav extends Component {
 		};
 	}
 
+	static contextTypes = {
+		config: PropTypes.object,
+	};
+
 	select(selectedIndex = 0) {
 		const { onGoHome, onGoToCategories, onGoToSearch, onGoToServices, goToMap } = this.props;
 
@@ -49,7 +53,10 @@ class BottomNav extends Component {
 	}
 
 	render() {
-		const { showServiceMap, t } = this.props;
+		const { showServiceMap, country, t } = this.props;
+		const { config } = this.context;
+		let hideArticles = config.hideArticlesFor && config.hideArticlesFor.indexOf(country) > -1;
+		
 		return (
 			<Paper
 				style={{
@@ -61,6 +68,9 @@ class BottomNav extends Component {
 			>
 				<BottomNavigation showLabels={true} value={this.props.index} onChange={(e, i) => this.select(i)}>
 					<BottomNavigationButton className={this.props.index === 0 ? "Selected" : ""} icon={<Home />} label={<span className="BottomButton">{t("Home")}</span>} value={0} />
+					{!hideArticles ? (
+						<BottomNavigationButton className={this.props.index === 1 ? "Selected" : ""} icon={<Assignment />} label={<span className="BottomButton">{t("Categories")}</span>} value={1} />
+					) : (<div/>)}
 					<BottomNavigationButton className={this.props.index === 1 ? "Selected" : ""} icon={<Assignment />} label={<span className="BottomButton">{t("Articles")}</span>} value={1} />
 				
 					{showServiceMap ? (

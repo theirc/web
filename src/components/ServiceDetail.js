@@ -116,7 +116,6 @@ class ServiceDetail extends React.Component {
 		const { fetchService, fetchServicesInSameLocation } = this.props;
 		if (fetchService) {
 			fetchService().then(service => {
-				console.log("then", service);
 				this.setState({ service })}
 				);
 		}
