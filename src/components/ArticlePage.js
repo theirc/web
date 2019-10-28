@@ -170,7 +170,7 @@ class ArticlePage extends Component {
 					hero.fields.file && (
 						<div>
 							<div className="hero">
-								<img src={hero.fields.file.url + "?fm=jpg&fl=progressive"} alt="" />
+								<img src={hero.fields.file.url} alt="" />
 							</div>
 							{hero.fields.description && <credit>{hero.fields.description}</credit>}
 						</div>
