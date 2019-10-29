@@ -42,8 +42,7 @@ module.exports = {
 	"staging.refugee.info": {
 		theme: "irc",
 		siteCode: "RI",
-		accessToken: "7597f6916d5773b57d016a39d7c06ea5c5cf4b213fe60f79893cd7487c29a215",
-		host: "preview.contentful.com",
+		accessToken: "0cd5c6bfefa4f7f33a98c487012e6f34c2031aee1ff2f6858b11be592ab349d9",
 		space: "ktglofo8nf88",
 		languages: [["en", "English"], ["ar", "العربيـة"], ["ur", "اردو"], ["fa", "فارسی"], ["fr", "Français"]],
 		logo: "/ri-logo-<%= language %>.png",
@@ -230,7 +229,8 @@ module.exports = {
 	"qa.cuentanos.org": {
 		theme: "generic",
 		siteCode: "CN",
-		accessToken: "98cd6321d5578bab8cb4c9bafe022f2bd73db5ffce296420d934008f9800fb80",
+		accessToken: "2a64ff636dd4e5b44bd21afcb7f8d77c5c238e3ebe387ec6047a0b9d5c6a704d",
+		host: "preview.contentful.com",
 		space: "e17qk44d7f2w",
 		languages: [["es", "Español"]],
 		logo: "/images/cn.tb.png",
@@ -271,7 +271,6 @@ module.exports = {
 		thumbnail: "/images/logos/cn-thumbnail.png",
 		cookieBanner: false,
 		backendUrl: 'https://admin.cuentanos.org/e/production/v2',
-		customQuestionLink:[["italy","https://www.facebook.com/Refugee.Info.Italy/"]],
 		showDepartments: false,
 		showLinkToAdministration: false,
 		customQuestionLink:[["italy","https://www.facebook.com/Refugee.Info.Italy/"]],
