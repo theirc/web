@@ -153,7 +153,7 @@ class AppHeader extends Component {
 						height: 64,
 					}}
 				/>} */}
-				{!showHeaderBackground &&  <div className={backgroundDark ? 'headerBackground': 'headerBackgroundLight'}></div>}
+				{/* {!showHeaderBackground &&  <div className={backgroundDark ? 'headerBackground': 'headerBackgroundLight'}></div>} */}
 				{search && (
 					<form onSubmit={this.handleSubmit.bind(this)} className="SearchBar">
 						<input autoComplete="off" autoFocus name="searchText" placeholder={t("Search")} type="text" value={searchText} onChange={this.handleInputChange.bind(this)} />

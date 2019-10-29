@@ -407,9 +407,9 @@ Less me
 	background-color: #000000;
 }
 .AppHeader, .AppHeaderLight {
-	@media (min-width: $desktopBreakpoint) {
-		margin-top: 63px;
-	}
+	margin-top: 63px;
+	// @media (min-width: $desktopBreakpoint) {
+	// }
 	
 	.privacy-banner {
 		align-items: center;
