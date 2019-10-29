@@ -55,6 +55,25 @@
 			background-color: black;
 			//@include brand-colors("background-color");
 		}
+
+		&.CT-article {
+			background-color: #f2f2f2;
+			border: 1px solid #ddd;
+			border-radius: 5px;
+			flex-basis: unset;
+			margin: 40px auto;
+			width: 100%;
+
+			.Article.Home > h1 {
+				margin-bottom: 25px;
+			}
+
+			.Article.Home > p {
+				column-count: 2;
+				column-gap: 50px;
+				margin-bottom: unset;
+			}
+		}
 	}
 	.TopCategories {
 		.Read-More {
