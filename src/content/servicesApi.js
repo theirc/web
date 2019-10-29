@@ -181,7 +181,10 @@ module.exports = {
 			let list = sessionStorage[`offline-services`] !==  undefined ? JSON.parse(sessionStorage[`offline-services`]) : null;
 			if (!navigator.onLine && list && list.filter(s => {return s.id === serviceId}).length > 0) {
 				
+				console.log("list",list);	
+				console.log("ID:", serviceId);
 				let service = list.services.results.filter(c => {return c.id === serviceId});
+				console.log("service id", service);
 				resolve(_.first(service));
 			} else {
 			request

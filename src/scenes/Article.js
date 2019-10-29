@@ -13,8 +13,8 @@ class Article extends React.Component {
 	static propTypes = {
 		match: PropTypes.shape({
 			params: PropTypes.shape({
-				country: PropTypes.string,
-				category: PropTypes.string,
+				country: PropTypes.string.isRequired,
+				category: PropTypes.string.isRequired,
 				article: PropTypes.string.isRequired,
 			}).isRequired,
 		}).isRequired,
@@ -27,12 +27,11 @@ class Article extends React.Component {
 	}
 
 	componentWillMount() {
-		if (!this.props.articleItem){
-			this.setState({ loading: true });
-			this.props.onMount(this.props.category, this.props.match.params.article).then(s => {
-				return this.setState({ loading: false });
-			});
-		}
+		this.setState({ loading: true });
+
+		this.props.onMount(this.props.category, this.props.match.params.article).then(s => {
+			return this.setState({ loading: false });
+		});
 	}
 
 	componentWillUnmount() {}
@@ -51,10 +50,10 @@ class Article extends React.Component {
 
 	render() {
 		const { loading } = this.state;
-		const { articleItem, direction } = this.props;
-		const { category, country, countryItem, onNavigateTo, onNavigate, language } = this.props;
-		const instanceMoved = country && country.fields.slug === 'bulgaria';
-		let article = articleItem;
+		const { article, direction } = this.props;
+		const { category, country, onNavigateTo, onNavigate, language } = this.props;
+		const instanceMoved = country.fields.slug === 'bulgaria';
+
 		if (!article || !category) return null;
 
 		let next = null;
@@ -75,7 +74,7 @@ class Article extends React.Component {
 		}
 
 		const other = articles.filter(a => a.sys.id === article.sys.id);
-		
+				
 		return (
 			<Skeleton headerColor='light'>
 					<div className="SkeletonContainer">

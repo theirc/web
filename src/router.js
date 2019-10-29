@@ -5,7 +5,7 @@ import { Home, Article, Categories, CountryHome, CategoryHome, CountrySelectorSc
 import { DemoTool} from "./scenes";
 import { history } from "./store";
 import { Skeleton } from "./scenes";
-import { withCountry, withCategory, withArticle } from "./shared/hoc";
+import { withCountry, withCategory } from "./shared/hoc";
 import Placeholder from "./shared/placeholder";
 class ScrollToTop extends Component {
 	componentDidUpdate(prevProps) {

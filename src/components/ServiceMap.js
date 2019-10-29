@@ -336,8 +336,8 @@ class ServiceMap extends React.Component {
 			errorMessage
 		} = this.state;
 		let isOnline = navigator.onLine;
-		// let isMobile = document.documentElement.clientWidth < 1000;
-		//let image = isMobile ? "url(/images/cn-offline-map-mobile.png)" : "url(/images/cn-offline-map.png)"
+		let isMobile = document.documentElement.clientWidth < 1000;
+		let image = isMobile ? "url(/images/cn-offline-map-mobile.png)" : "url(/images/cn-offline-map.png)"
         /*
       Very small tweak on the render. toggling the visibility so we can run the L.map on didMount
     */
