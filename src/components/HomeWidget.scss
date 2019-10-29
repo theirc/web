@@ -11,6 +11,7 @@
 	&.Highlighted {
 		h1 {
 			font-size: 24px !important;
+			margin-top: 30px;
 		}
 	}
 	.Article.Home {
@@ -39,6 +40,12 @@
 		}
 	}
 
+	&.CT-article {
+		background-color: #f2f2f2;
+		border-top: 1px solid #ddd;
+		margin: 40px auto;
+	}
+
 	@media (min-width: $desktopBreakpoint) {
 		& {
 			flex-basis: calc(50% - 40px);
@@ -57,11 +64,9 @@
 		}
 
 		&.CT-article {
-			background-color: #f2f2f2;
 			border: 1px solid #ddd;
 			border-radius: 5px;
 			flex-basis: unset;
-			margin: 40px auto;
 			width: 100%;
 
 			.Article.Home > h1 {
