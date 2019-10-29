@@ -99,7 +99,7 @@ class Skeleton extends React.Component {
 			sessionStorage.setItem("serbia-alert", 0);
 
 
-		toggleServiceMap(country && country.fields && country.fields.slug !== 'italy' && country.fields.slug !== 'jordan');
+		toggleServiceMap(country && country.fields && country.fields.slug !== 'italy' && country.fields.slug !== 'jordan' && country.fields.slug !== 'honduras');
 
 		return (
 			<I18nextProvider i18n={i18n}>
