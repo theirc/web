@@ -320,7 +320,7 @@ input[type="checkbox"].ri.switch:checked + div > div {
     text-align: center;
 
     button {
-        @include brand-colors( "background-color");
+        @include darken-brand-colors("background-color", 10%);
         @include brand-colors-inverse( "color");
         border: none;
         border-radius: 5px;
@@ -330,6 +330,11 @@ input[type="checkbox"].ri.switch:checked + div > div {
         height: 41px;
         margin: 20px auto 10px;
         width: 120px;
+        
+        &:hover {
+            @include brand-colors("background-color");
+            text-decoration: underline;
+        }
     }
 }
 .show-services{

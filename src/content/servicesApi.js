@@ -1,5 +1,4 @@
 import getSessionStorage from "../shared/sessionStorage";
-import getLocalStorage from "../shared/localStorage";
 import cms from "./cms";
 
 var request = require("superagent");
@@ -51,9 +50,9 @@ module.exports = {
 	},
 	fetchCountries(language) {
 		return new Promise((resolve, reject) => {
-			const localStorage = getLocalStorage();
-			if (localStorage[`${language}-countries`]) {
-				resolve(JSON.parse(localStorage[`${language}-countries`]));
+			const sessionStorage = getSessionStorage();
+			if (sessionStorage[`${language}-countries`]) {
+				resolve(JSON.parse(sessionStorage[`${language}-countries`]));
 			} else {
 				request
 					.get(RI_URL + "/regions/?countries=true")
@@ -63,7 +62,7 @@ module.exports = {
 							reject(err);
 							return;
 						}
-						localStorage[`${language}-countries`] = JSON.stringify(res.body);
+						sessionStorage[`${language}-countries`] = JSON.stringify(res.body);
 						resolve(res.body);
 					});
 			}

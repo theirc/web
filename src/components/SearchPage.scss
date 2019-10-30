@@ -18,8 +18,7 @@
 		flex-wrap: wrap;
 
 		align-items: flex-start;
-		margin-top: 16px;
-		min-width: 100%;
+		padding: 16px;
 
 		.Image {
 			width: 6rem;
@@ -61,12 +60,16 @@
 		
 	}
 
+	.no-results {
+		margin: 0 10px;
+	}
+
 	hr {
 		width: 100%;
-		border-width: 1px;
-		border-style: solid;
-		border-radius: 2px;
+		border: unset;
+		border-top: 1px solid #ddd;
 		height: 0;
+
 		.ltr & {
 			margin-left: 0;
 		}
@@ -74,24 +77,12 @@
 			margin-right: 0;
 		}
 
-		color: #000000;
-		border-color: #000000;
-
-		@include brand-colors("color");
-		@include brand-colors("border-color");
+		&.line {
+			margin: 0 10px;
+			width: auto;
+		}
 	}
 
-	hr.line {
-		padding: 0;
-		margin: auto;
-		border: 0;
-		border-top-width: 1px;
-		border-top-color: lighten($dividerColor, 30%);
-		border-style: solid;
-		border-radius: 1px;
-		height: 0;
-		width: 100%;
-	}
 
 	.Title {
 		width: 100%;
@@ -104,14 +95,17 @@
 	}
 
 	.Title > h1 {
-		font-size: 18px;
+		color: #666;
 		display: block;
-		width: 100%;
+		flex: 1;
+		font-size: 14px;
+		font-weight: normal;
 		margin: 0;
 		padding: 10px;
-		flex: 1;
 		text-transform: uppercase;
+		width: 100%;
 	}
+
 	.Title > h1 > small {
 		font-size: 12px;
 		display: block;
@@ -121,8 +115,6 @@
 
 	.results {
 		display: flex;
-		margin-left: 16px;
-		margin-right: 16px;
 		flex: 1;
 		flex-direction: column;
 
@@ -135,9 +127,14 @@
 			margin: 0;
 		}
 
-		h1 {
-			font-size: 24px;
-			margin-bottom: 0;
+		.services-list > h1,
+		.articles-list > h1 {
+			font-size: 20px;
+			margin: 0 10px;
+			
+			@media (min-width: $desktopBreakpoint) {
+				font-size: 24px;
+			}
 
 			.fa {
 				.ltr & {
@@ -150,9 +147,8 @@
 		}
 
 		h2 {
-			font-size: 18px;
-			margin-top: 0;
-			margin-bottom: 0;
+			font-size: 16px;
+			font-weight: normal;
 			small {
 				display: block;
 			}
@@ -171,16 +167,21 @@
 		ul li {
 			list-style-type: square;
 		}
+
+		.articles-list {
+			margin-top: 20px;
+		}
 	}
 
 	.show-action {
+		margin: 10px auto;
 		text-align: center;
 		width:100%;
 
 		.show-more {
-			@include brand-colors( "background-color");
-			@include brand-colors-inverse( "color");
-			border: 1px solid #ddd;
+			@include darken-brand-colors("background-color", 10%);
+			@include brand-colors-inverse("color");
+			border: none;
 			border-radius: 5px;
 			cursor: pointer;
 			font-size: 13px;
@@ -188,6 +189,15 @@
 			padding: 0 20px;
 			text-align: center;
 			white-space: nowrap;
+
+			// margin: 20px auto 10px;
+			// width: 120px;
+
+
+			&:hover {
+				@include brand-colors("background-color");
+				text-decoration: underline;
+			}
 		}
 	}
 }

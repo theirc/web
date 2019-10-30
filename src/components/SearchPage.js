@@ -1,11 +1,11 @@
 import React from "react";
 import { translate } from "react-i18next";
-import "./SearchPage.css";
+import { connect } from "react-redux";
 import tinycolor from "tinycolor2";
-import "./ServiceCategoryList.css";
-
-import moment from 'moment';
 import cms from '../content/cms';
+
+import "./SearchPage.css";
+import "./ServiceCategoryList.css";
 import "./CategoryList.css";
 
 const Remarkable = require("remarkable");
@@ -107,7 +107,7 @@ class SearchPage extends React.Component {
 	}
 
 	render() {
-		const { searchingArticles, searchingServices, articles, services, term, t, onNavigate } = this.props;
+		const { articles, onNavigate, searchingArticles, searchingServices, services, showServiceMap, term, t } = this.props;
 		let servicesList = this.state.showFullServiceList ? services : services.slice().splice(0,4);
 		let articleList = this.state.showFullBlogList ? articles : articles.slice().splice(0,3);
 		const toggleServicelabel = this.state.showFullServiceList ? t('Show Less') : t('Show More');
@@ -120,67 +120,83 @@ class SearchPage extends React.Component {
 					</h1>
 				</div>
 				<div className="results">
-					<h1>
-						{t("Services")}
-					</h1>
-					<hr />
-					{searchingServices && <div className="LoaderContainer"><div className="loader" /></div>}
-					<div className="ServiceList">
-						<div className="ServiceListContainer">
-							{servicesList.map(this.renderServiceItem.bind(this))}
-						</div>
-					</div>
-					{!searchingServices && services.length > 0 && <div className="show-action"><button className="show-more" onClick={this.toggleServices}>{toggleServicelabel}</button></div>}
-					{!searchingServices &&
-							services.length === 0 && (
-								<div>
+					{ showServiceMap &&
+						<div className='services-list'>
+							<h1>{t("Services")}</h1>
+							<hr />
+						
+							{searchingServices && <div className="LoaderContainer"><div className="loader" /></div>}
+							
+							<div className="ServiceList">
+								<div className="ServiceListContainer">
+									{servicesList.map(this.renderServiceItem.bind(this))}
+								</div>
+							</div>
+							
+							{!searchingServices && services.length > 0 &&
+								<div className="show-action"><button className="show-more" onClick={this.toggleServices}>{toggleServicelabel}</button></div>
+							}
+							
+							{!searchingServices && services.length === 0 && (
+								<div className='no-results'>
 									<em>{t("No services found with the keywords used")}</em>
 								</div>
-							)}
-					<h1>
-						{t("Articles")}
-					</h1>
-					<hr />
-
-					{searchingArticles && <div className="LoaderContainer"><div className="loader" /></div>}
-					<div className="CategoryList">						
-						<div className='tiles-desktop'>							
-							<ul>
-								{articleList.map(c => this.renderTiles(c))}
-							</ul>
+								)
+							}
 						</div>
-					</div>
-					<div className="CategoryList">						
-						<div className='tiles-mobile'>	
-							{articleList.map((article, i) => {
-								let hero = article.fields.hero;
+					}
 
-								return [
-									i > 0 && <hr className="line" key={`hr-${article.sys.id}`} />,
-									<div
-										key={article.sys.id}
-										className="Article"
-										onClick={() => onNavigate(`/${article.fields.country.fields.slug}/${article.fields.category.fields.slug}/${article.fields.slug}`)}
-									>
-										{article.fields.hero && <div className="Image" style={{ backgroundImage: `url('${article.fields.hero.fields.file.url}')` }} />}
-										<div className={`Text ${article.fields.hero ? 'TextWithImage' : ''}`}>
-											<h2> {article.fields.title}</h2>
-											<p dangerouslySetInnerHTML={{ __html: md.render(article.fields.lead) }} />
-										</div>
-									</div>,
-								];
-							})}
-						</div>
-					</div>
-					{!searchingArticles && articles.length > 0 && <div className="show-action"><button className="show-more" onClick={this.toggleArticles}>{toggleArticleslabel}</button></div>}
-					{!searchingArticles &&
-						articles.length === 0 && (
-							<div>
-								<em>{t("No articles found with the keywords used")}</em>
+					<div className='articles-list'>
+						<h1>{t("Articles")}</h1>
+						<hr />
+
+						{searchingArticles && <div className="LoaderContainer"><div className="loader" /></div>}
+
+						<div className="CategoryList">
+							<div className='tiles-desktop'>
+								<ul>
+									{articleList.map(c => this.renderTiles(c))}
+								</ul>
 							</div>
-						)}
+						</div>
+
+						<div className="CategoryList">
+							<div className='tiles-mobile'>
+								{articleList.map((article, i) => {
+									let hero = article.fields.hero;
+
+									return [
+										i > 0 && <hr className="line" key={`hr-${article.sys.id}`} />,
+										<div
+											key={article.sys.id}
+											className="Article"
+											onClick={() => onNavigate(`/${article.fields.country.fields.slug}/${article.fields.category.fields.slug}/${article.fields.slug}`)}
+										>
+											{article.fields.hero && <div className="Image" style={{ backgroundImage: `url('${article.fields.hero.fields.file.url}')` }} />}
+											<div className={`Text ${article.fields.hero ? 'TextWithImage' : ''}`}>
+												<h2> {article.fields.title}</h2>
+												<p dangerouslySetInnerHTML={{ __html: md.render(article.fields.lead) }} />
+											</div>
+										</div>,
+									];
+								})}
+							</div>
+						</div>
+
+						{!searchingArticles && articles.length > 0 &&
+							<div className="show-action">
+								<button className="show-more" onClick={this.toggleArticles}>{toggleArticleslabel}</button>
+							</div>
+						}
+
+						{!searchingArticles && articles.length === 0 && (
+								<div className='no-results'>
+									<em>{t("No articles found with the keywords used")}</em>
+								</div>
+							)
+						}
+					</div>
 				</div>
-				
 			</div>
 		);
 		/*eslint-enable*/
@@ -188,9 +204,10 @@ class SearchPage extends React.Component {
 	}
 }
 
-export default translate()(SearchPage);
+const mapState = ({ showServiceMap }, p) => {
+	return {
+		showServiceMap
+	};
+};
 
-/*
-
-       
-*/
+export default translate()(connect(mapState)(SearchPage));

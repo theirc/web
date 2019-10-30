@@ -43,7 +43,7 @@
 	&.CT-article {
 		background-color: #f2f2f2;
 		border-top: 1px solid #ddd;
-		margin: 40px auto;
+		margin: 40px auto 0;
 	}
 
 	@media (min-width: $desktopBreakpoint) {
@@ -67,6 +67,7 @@
 			border: 1px solid #ddd;
 			border-radius: 5px;
 			flex-basis: unset;
+			margin-bottom: 30px;
 			width: 100%;
 
 			.Article.Home > h1 {
