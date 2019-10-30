@@ -138,7 +138,7 @@ class SearchPage extends React.Component {
 							}
 							
 							{!searchingServices && services.length === 0 && (
-								<div>
+								<div className='no-results'>
 									<em>{t("No services found with the keywords used")}</em>
 								</div>
 								)
@@ -190,7 +190,7 @@ class SearchPage extends React.Component {
 						}
 
 						{!searchingArticles && articles.length === 0 && (
-								<div>
+								<div className='no-results'>
 									<em>{t("No articles found with the keywords used")}</em>
 								</div>
 							)
