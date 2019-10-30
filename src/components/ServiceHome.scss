@@ -334,7 +334,7 @@
 
 	.Item {
 		background-color: white;
-		border: 1px solid #eee;
+		border: 1px solid #ddd;
 		border-radius: 5px;
 		box-sizing: border-box;
 		cursor: pointer;
@@ -377,7 +377,7 @@
 		}
 		
 		&:hover {
-			border: 1px solid #ddd;
+			border: 1px solid #ccc;
 
 			h1 {
 				text-decoration: underline;
