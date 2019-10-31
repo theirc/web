@@ -9,12 +9,14 @@ import "./CategoryList.css";
 class CategoryList extends Component {
 	state = {
 		selectedCategory: 0,
+		selectedCategoryClassName: 'fa fa-list',
 		selectedCategoryName: '',
+		selectedIconText: '',
 		showCategoriesDD: false
 	};
 	
 	onChange = e => {
-		this.setState({ selectedCategory: e.sys.id, selectedCategoryName: e.fields.name, showCategoriesDD: false });
+		this.setState({ selectedCategory: e.sys.id, selectedIconText: e.fields.iconText, selectedCategoryClassName: e.fields.iconClass, selectedCategoryName: e.fields.name, showCategoriesDD: false });
 	}
 
 	toggleDD = () => this.setState({ showCategoriesDD: !this.state.showCategoriesDD});
@@ -107,14 +109,15 @@ class CategoryList extends Component {
 				<div className='tiles-desktop'>
 					<div className='filter-bar'>
 						<button className='btn-filter' onClick={this.toggleDD}>
-							<span>
-								{this.state.selectedCategoryName.length ? this.state.selectedCategoryName : t('All Categories')}
-							</span>
+							<div className='content'>
+								<i className={this.state.selectedCategoryClassName || 'material-icons'}>{this.state.selectedIconText || ((!this.state.selectedCategoryClassName || this.state.selectedCategoryClassName === "material-icons") && "add")}</i>
+								<span>{this.state.selectedCategoryName.length ? this.state.selectedCategoryName : t('All Categories')}</span>
+							</div>
 							<i className="material-icons">keyboard_arrow_down</i>
 						</button>
 						{this.state.showCategoriesDD &&
 							<ul className='categories'>
-								<li value={0} className={!this.state.selectedCategory ? 'active': ''} onClick={() => this.onChange({ sys: { id: 0}, fields: {name: t('All Categories')}})}><i></i><span>{t('All Categories')}</span></li>
+								<li value={0} className={!this.state.selectedCategory ? 'active': ''} onClick={() => this.onChange({ sys: { id: 0}, fields: {name: t('All Categories'), iconClass: 'fa fa-list'}})}><i className='fa fa-list' /><span>{t('All Categories')}</span></li>
 								{
 									(categories || []).filter(showCategory).map(e =>
 										<li key={e.sys.id} value={e.sys.id} className={e.sys.id === this.state.selectedCategory ? 'active': ''} onClick={() => this.onChange(e)}>
