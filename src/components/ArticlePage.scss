@@ -197,6 +197,17 @@
 			}
 		}
 
+		s:not(.Read-More) a {
+			&:before {
+				border: 2px solid;
+				@include brand-colors("border-color");
+				display: inline-block;
+				height: 6px;
+				margin-right: 5px;
+				width: 2px;
+			}
+		}
+
 		ol {
 			li {
 				line-height: 1.5;
