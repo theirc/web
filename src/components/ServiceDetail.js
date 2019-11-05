@@ -1,16 +1,17 @@
+// libs
 import React from "react";
 import { translate } from "react-i18next";
 import _ from "lodash";
 import { LibraryBooks, Link  } from "material-ui-icons";
 import * as clipboard from "clipboard-polyfill";
 import { Helmet } from "react-helmet";
-import HeaderBar from "./HeaderBar";
 import PropTypes from "prop-types";
-import cms from '../content/cms';
+
+// local
+import HeaderBar from "./HeaderBar";
 import "./ServiceHome.css";
 
 // eslint-disable-next-line
-var tinycolor = require("tinycolor2");
 //const GMAPS_API_KEY = "AIzaSyA7eG6jYi03E6AjJ8lhedMuaLS9mVoJjJ8";
 
 //temp API Key from Andres Aguilar
@@ -204,12 +205,12 @@ class ServiceDetail extends React.Component {
 			return o["24/7"] || weekDays.map(w => o[w.toLowerCase()].map(h => !!(h.open || h.close)).indexOf(true) > -1).indexOf(true) > -1;
 		};
 		const callAux = t("Call");
-		const mLocale = d => {
-			let a = moment(d)
-				.locale(language)
-				.format("ll");
-			return a;
-		};
+		// const mLocale = d => {
+		// 	let a = moment(d)
+		// 		.locale(language)
+		// 		.format("ll");
+		// 	return a;
+		// };
 		const amPmTime = time => {
 			const m = moment(moment(`2001-01-01 ${time}`).toJSON())
 				.locale(false)

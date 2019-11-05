@@ -1,11 +1,13 @@
+// libs
 import React from "react";
-import "./ServiceHome.css";
 import { translate } from "react-i18next";
 import _ from "lodash";
+
+// local
 import HeaderBar from "./HeaderBar";
+import "./ServiceHome.css";
 
 var tinycolor = require("tinycolor2");
-
 class ServiceList extends React.Component {
 	state = {
 		category: {},
@@ -87,7 +89,7 @@ class ServiceList extends React.Component {
 	}
 	render() {
 		const { services, category, loaded, errorMessage, serviceType} = this.state;
-		const { t, locationEnabled, toggleLocation, nearby, showMap } = this.props;
+		const { t, nearby, showMap } = this.props;
 		let categoryName = serviceType.length !== 0 ? serviceType.name : "";
 		let titleName = categoryName ? categoryName : t("Services");
 

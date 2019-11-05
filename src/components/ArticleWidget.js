@@ -34,7 +34,7 @@ class ArticleWidget extends Component {
 	}
 	
 	render() {
-		const { country, onNavigate, t, article, category, showHero, showFullArticle, language, isHome, index } = this.props;
+		const { country, onNavigate, t, article, category, showHero, showFullArticle, language } = this.props;
 		if (!article) {
 			// Anti pattern, but saves 1 or more ifs.
 			return null;
@@ -55,7 +55,7 @@ class ArticleWidget extends Component {
 		let hero = article.fields.hero;
 		
 		md.renderer.rules.link_open = (tokens, idx /*, options, env */) => { 
-			var title = tokens[idx].title;
+			// var title = tokens[idx].title;
 			return `<a href="${tokens[idx].href}?language=${language}" ${tokens[idx].title}>`; 
 		}
 

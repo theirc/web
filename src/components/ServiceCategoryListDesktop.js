@@ -205,8 +205,6 @@ class ServiceCategoryListDesktop extends React.Component {
 	}
 
 	renderMunicipalityButton(municipality, onSelect) {
-		const { t } = this.props;
-
 		return (
 			<button key={municipality.id} className={municipality.id === this.state.location.id ? "location-item-selected" : "location-item"} onClick={() => onSelect(municipality)}>
 				{municipality.level === 1 && <i className='fa fa-globe' />}<span>{municipality.name}</span>
@@ -332,7 +330,7 @@ class ServiceCategoryListDesktop extends React.Component {
 		if (availableServices) {
 			sortedAvailableServices = _.orderBy(availableServices, ["region.level", "region.name", "name"], ["desc", "asc", "asc"]);
 		}
-		const unavailableServices = services.filter(s => s.provider.vacancy);
+		// const unavailableServices = services.filter(s => s.provider.vacancy);
 
 		!loaded && this.renderLoader();
 

@@ -1,12 +1,16 @@
+// libs
 import React from "react";
-import { connect } from "react-redux";
-import { ArticlePage, ArticleFooter, InstanceMovedWidget } from "../components";
-import PropTypes from "prop-types";
-import { actions } from "../store";
-import { push } from "react-router-redux";
-import Placeholder from "../shared/placeholder";
 import _ from "lodash";
+import { connect } from "react-redux";
+import { push } from "react-router-redux";
+import PropTypes from "prop-types";
+
+// local
+import { ArticlePage, ArticleFooter } from "../components";
+import Placeholder from "../shared/placeholder";
+import { actions } from "../store";
 import { Skeleton } from ".";
+
 const Promise = require("bluebird");
 
 class Article extends React.Component {
@@ -52,8 +56,7 @@ class Article extends React.Component {
 	render() {
 		const { loading } = this.state;
 		const { articleItem, direction } = this.props;
-		const { category, country, countryItem, onNavigateTo, onNavigate, language } = this.props;
-		const instanceMoved = country && country.fields.slug === 'bulgaria';
+		const { category, country, onNavigateTo, onNavigate, language } = this.props;
 		let article = articleItem;
 		if (!article || !category) return null;
 

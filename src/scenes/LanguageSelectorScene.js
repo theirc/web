@@ -1,12 +1,14 @@
+// libs
 import React from "react";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
 import { Redirect } from "react-router";
+import PropTypes from "prop-types";
 
+// local
 import { LanguageSelector } from "../components";
 import { actions } from "../store";
 import getSessionStorage from "../shared/sessionStorage";
-import PropTypes from "prop-types";
 
 class LanguageSelectorScene extends React.Component {
 	constructor() {

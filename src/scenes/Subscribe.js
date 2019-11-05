@@ -1,14 +1,14 @@
+// libs
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
-import { Share, Link } from "material-ui-icons";
 import { translate } from "react-i18next";
+
+// local
 import HeaderBar from "../components/HeaderBar";
 import { Skeleton } from ".";
 
 import "./Subscribe.css";
-
-
 
 /**
  *
@@ -64,8 +64,8 @@ class Suscribe extends Component {
 
 	
 	render() {
-        const title = "Subscribe";
-		const { t, category } = this.props;
+		const title = "Subscribe";
+		const { category } = this.props;
 		window.cat = category;
 		console.log({category});
 		return (

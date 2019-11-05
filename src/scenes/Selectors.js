@@ -1,28 +1,17 @@
-import React, {
-    Component
-} from "react";
-import {
-    connect
-} from "react-redux";
-import {
-    push
-} from "react-router-redux";
-import {
-    CountrySelector,
-    LanguageSelector,
-    DetectLocationSelector
-} from "../components";
-import {
-    Redirect
-} from "react-router";
-import {
-    actions
-} from "../store";
-import servicesApi from "../content/servicesApi";
-import measureDistance from "@turf/distance";
+// libs
+import React, { Component } from "react";
 import _ from "lodash";
-import getSessionStorage from "../shared/sessionStorage";
+import { connect } from "react-redux";
+import { push } from "react-router-redux";
+import { Redirect } from "react-router";
 import PropTypes from "prop-types";
+import measureDistance from "@turf/distance";
+
+// local
+import { CountrySelector, LanguageSelector, DetectLocationSelector } from "../components";
+import { actions } from "../store";
+import servicesApi from "../content/servicesApi";
+import getSessionStorage from "../shared/sessionStorage";
 import { Skeleton } from ".";
 
 class Selectors extends Component {

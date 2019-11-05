@@ -93,7 +93,6 @@ class AppHeader extends Component {
 		};
 		const cookiePolicyLink = <a href="/greece/privacy/cookies" target="_blank" rel="noopener noreferrer">Cookie Policy</a>;
 		const privacyPolicyLink = <a href="/greece/privacy/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>;
-		const showHeaderBackground = !country || !language;
 		
 		let isOnServices = window.location.href.includes("/services/");
 		let isOnArticlesGreece = window.location.href.includes("/categories") || /(\/greece\/.*\/.*)/.test(window.location.href);
@@ -126,7 +125,7 @@ class AppHeader extends Component {
 										{!disableCountrySelector && (
 											<span className="app-bar-selectors country" color="contrast" onClick={onChangeCountry || noop}>
 												{/* {(country && country.fields.name) || " "} */}
-												<img src={`/${country.fields.slug}.png`} />
+												<img src={`/${country.fields.slug}.png`} alt=''/>
 											</span>
 										)}
 										{!disableLanguageSelector && (

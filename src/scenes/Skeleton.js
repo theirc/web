@@ -1,19 +1,20 @@
+// libs
 import React from "react";
-import { actions } from "../store";
 import _ from "lodash";
 import { connect } from "react-redux";
-import { AppHeader, Footer, WarningDialog } from "../components";
-import { BottomNavContainer } from "../containers";
+import { I18nextProvider } from "react-i18next";
 import { push } from "react-router-redux";
 import { withRouter } from "react-router-dom";
 import moment from "moment";
 import PropTypes from "prop-types";
 
-import { I18nextProvider } from "react-i18next";
+// local
+import { actions } from "../store";
+import { BottomNavContainer } from "../containers";
+import { AppHeader, Footer, WarningDialog } from "../components";
 import i18n from "../i18n"; // initialized i18next instance
-
-import "./Skeleton.css";
 import getSessionStorage from "../shared/sessionStorage";
+import "./Skeleton.css";
 
 class Skeleton extends React.Component {
 	state = {

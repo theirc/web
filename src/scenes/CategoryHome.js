@@ -1,9 +1,11 @@
+// libs
 import React from 'react';
 import { connect } from 'react-redux'
-import {ArticleList, InstanceMovedWidget} from '../components'
 import { push } from "react-router-redux";
-import { Skeleton } from ".";
 
+// local
+import { ArticleList } from '../components'
+import { Skeleton } from ".";
 
 const Remarkable = require("remarkable");
 
@@ -22,7 +24,6 @@ class CategoryHome extends React.Component {
 
     render() {
         const { country, category, onNavigate, t } =this.props;
-		const instanceMoved = country.fields.slug === 'bulgaria';
 
         if(!country || !category) {
             return null;

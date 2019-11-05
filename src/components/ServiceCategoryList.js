@@ -1,12 +1,12 @@
+// libs
 import React from "react";
-import "./ServiceHome.css";
-import "./ServiceCategoryList.css";
-
+import tinycolor from "tinycolor2";
 import { translate } from "react-i18next";
 
+// local
 import HeaderBar from "./HeaderBar";
-import _ from "lodash";
-import tinycolor from "tinycolor2";
+import "./ServiceHome.css";
+import "./ServiceCategoryList.css";
 
 class ServiceCategoryList extends React.Component {
 	state = {

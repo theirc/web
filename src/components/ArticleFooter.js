@@ -1,8 +1,11 @@
+// libs
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import * as clipboard from "clipboard-polyfill";
-import { NavigateBefore, NavigateNext, Share, Link } from "material-ui-icons";
+import { NavigateBefore, NavigateNext } from "material-ui-icons";
 import { translate } from "react-i18next";
+
+// local
 import "./ArticleFooter.css";
 
 /**
@@ -78,12 +81,12 @@ class ArticleFooter extends Component {
 		}
 	}
 	subscribe(article) {
-		const { onNavigateTo, country, category } = this.props;
+		const { onNavigateTo, category } = this.props;
 		onNavigateTo(`../subscribe/${category.fields.slug}`);
 	}
 
 	render() {
-		const { country, previous, next, onNavigateTo, direction, t, article } = this.props;
+		const { previous, next, onNavigateTo, direction } = this.props;
 		const rtl = direction === "rtl";
 
 		return (

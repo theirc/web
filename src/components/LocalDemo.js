@@ -69,7 +69,6 @@ class LocalDemo extends Component {
 			})
 			let backendUrl = 'https://admin.refugee.info/e/production/v2/services/search/?id=';
 
-			let offlineServices  =[];
 			demoConfig[site].services.map(id => {
 				fetch(backendUrl+id)
 				.then(res =>{

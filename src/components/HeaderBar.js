@@ -14,7 +14,7 @@ class HeaderBar extends Component {
 	};
 
 	render() {
-		const { subtitle, title, children } = this.props;
+		const { title, children } = this.props;
 		const triggerKey = generateKey("trigger");
 		return (
 			<div className="HeaderBar">

@@ -1,9 +1,12 @@
+// libs
 import React from "react";
 import moment from "moment";
 import { connect } from "react-redux";
+import { push } from "react-router-redux";
+
+// local
 import { HomeWidget, HomeWidgetCollection, InstanceMovedWidget } from "../components";
 import Skeleton from '../scenes/Skeleton';
-import { push } from "react-router-redux";
 import getSessionStorage from "../shared/sessionStorage";
 
 class CountryHome extends React.Component {

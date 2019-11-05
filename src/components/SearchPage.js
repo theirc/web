@@ -163,8 +163,6 @@ class SearchPage extends React.Component {
 						<div className="CategoryList">
 							<div className='tiles-mobile'>
 								{articleList.map((article, i) => {
-									let hero = article.fields.hero;
-
 									return [
 										i > 0 && <hr className="line" key={`hr-${article.sys.id}`} />,
 										<div

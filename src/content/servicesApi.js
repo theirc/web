@@ -133,16 +133,6 @@ module.exports = {
 				fetch(RI_URL + requestUrl, { headers })
 					.then(res => res.json())
 					.then(response => {
-						let servicesList = {
-							country: country,
-							language: language,
-							categoryId: categoryId,
-							searchTerm: searchTerm,
-							services: response
-						};
-						// if (!sl || sl.categoryId !== null){
-						// 	sessionStorage[`serviceList`] = JSON.stringify(servicesList);
-						// }							
 						let services = response
 
 						resolve(services);

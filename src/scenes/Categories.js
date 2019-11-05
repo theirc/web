@@ -1,7 +1,9 @@
+// libs
 import React from "react";
 import { connect } from "react-redux";
-import { InstanceMovedWidget } from "../components";
 import PropTypes from "prop-types";
+
+// local
 import { CategoryList } from "../components";
 import { history } from "../store";
 import { Skeleton } from ".";
@@ -22,7 +24,6 @@ class Categories extends React.Component {
 
 	render() {
 		const { country, onNavigate, language } = this.props;
-		const instanceMoved = country.fields.slug === 'bulgaria';
 
 		if (!country) {
 			return null;

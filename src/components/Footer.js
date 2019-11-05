@@ -1,10 +1,12 @@
+// libs
 import React, { Component } from "react";
 import moment from "moment";
-import { MyLocation, Translate, Share, Link } from "material-ui-icons";
+import { MyLocation, Translate } from "material-ui-icons";
 import { translate } from "react-i18next";
 import * as clipboard from "clipboard-polyfill";
 import PropTypes from "prop-types";
 
+// local
 import "./Footer.css";
 
 
@@ -50,8 +52,7 @@ class Footer extends Component {
 	}
 
 	render() {
-		const { onChangeLocation, onChangeLanguage, disableCountrySelector, disableLanguageSelector, questionLink, t, showLinkToAdministration, country, customQuestionLink, hideShareButtons } = this.props;
-		// const {deviceType,} = this.props;
+		const { onChangeLocation, onChangeLanguage, disableCountrySelector, disableLanguageSelector, questionLink, t, showLinkToAdministration, country, customQuestionLink } = this.props;
 		const year = moment().year();
 		let link = questionLink;
 
@@ -65,7 +66,6 @@ class Footer extends Component {
 			link = result[0][1];
 		}
 
-		const url = window.location.href;
 		return (
 			<footer className="Footer">
 				<div className="light">

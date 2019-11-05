@@ -1,8 +1,11 @@
+// libs
 import React from "react";
 import moment from "moment";
 import { connect } from "react-redux";
-import { LocalDemo } from "../components";
 import { push } from "react-router-redux";
+
+// local
+import { LocalDemo } from "../components";
 import getSessionStorage from "../shared/sessionStorage";
 import { Skeleton } from ".";
 

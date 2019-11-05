@@ -1,15 +1,17 @@
+// libs
 import React from "react";
 import { connect } from "react-redux";
-import { ServiceMap, ServiceCategoryList, ServiceLocationList, ServiceList, ServiceDetail, ServiceDepartmentList, ServiceCategoryListDesktop } from "../components";
 import { Route, Switch } from "react-router";
-import { Skeleton } from ".";
 import { push } from "react-router-redux";
 import measureDistance from "@turf/distance";
 import PropTypes from 'prop-types';
-import {Redirect} from 'react-router';
-import _ from "lodash";
+import { Redirect } from 'react-router';
 import Promise from "bluebird";
+import _ from "lodash";
 
+// local
+import { ServiceMap, ServiceCategoryList, ServiceLocationList, ServiceList, ServiceDetail, ServiceDepartmentList, ServiceCategoryListDesktop } from "../components";
+import { Skeleton } from ".";
 import actions from "../actions";
 import servicesApi from "../content/servicesApi";
 import getSessionStorage from "../shared/sessionStorage";

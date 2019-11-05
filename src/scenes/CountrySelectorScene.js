@@ -1,10 +1,13 @@
+// libs
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
-import { CountrySelector } from "../components";
 import { Redirect } from "react-router";
-import getSessionStorage from "../shared/sessionStorage";
 import PropTypes from "prop-types";
+
+// local
+import { CountrySelector } from "../components";
+import getSessionStorage from "../shared/sessionStorage";
 
 class CountrySelectorScene extends Component {
 	state = {
