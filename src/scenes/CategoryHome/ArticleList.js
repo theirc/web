@@ -3,7 +3,7 @@ import React from "react";
 import { translate } from "react-i18next";
 
 // local
-import "./ArticleList.css";
+import "./ArticleList.scss";
 
 class ArticleList extends React.Component {
 
