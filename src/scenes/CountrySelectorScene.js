@@ -22,7 +22,7 @@ class CountrySelectorScene extends Component {
 	componentWillMount() {
 		const { language } = this.props;
 		const { api } = this.context;
-		
+
 		api
 			.listCountries(language)
 			.then(e => e.items.map(a => ({ id: a.sys.id, ...a.fields, ...a })))
@@ -70,6 +70,7 @@ const mapState = ({ countryList, country, language }, p) => {
 		language,
 	};
 };
+
 const mapDispatch = (d, p) => {
 	return {
 		onMountOrUpdate: language => {

@@ -30,10 +30,10 @@ class Categories extends React.Component {
 		}
 
 		return <Skeleton headerColor='light'>
-					<div className="SkeletonContainer bg-gray">
-						<CategoryList categories={country.fields.categories} country={country} onNavigate={onNavigate} language={language} />
-					</div>
-				</Skeleton>
+			<div className="SkeletonContainer bg-gray">
+				<CategoryList categories={country.fields.categories} country={country} onNavigate={onNavigate} language={language} />
+			</div>
+		</Skeleton>
 	}
 }
 
@@ -44,9 +44,10 @@ const mapState = (s, p) => {
 		country: s.country,
 	};
 };
+
 const mapDispatch = (d, p) => {
 	return {
-		onMount: slug => {},
+		onMount: slug => { },
 		onNavigate: path => {
 			setTimeout(() => {
 				history.push(path);

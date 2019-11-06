@@ -24,22 +24,20 @@ class Article extends React.Component {
 		}).isRequired,
 		onMount: PropTypes.func.isRequired,
 	};
+
 	constructor() {
 		super();
-
 		this.state = { loading: false };
 	}
 
 	componentWillMount() {
-		if (!this.props.articleItem){
+		if (!this.props.articleItem) {
 			this.setState({ loading: true });
 			this.props.onMount(this.props.category, this.props.match.params.article).then(s => {
 				return this.setState({ loading: false });
 			});
 		}
 	}
-
-	componentWillUnmount() {}
 
 	componentWillUpdate(nextProps, b) {
 		const articleChanged = this.props.match && nextProps.match && this.props.match.params.article !== nextProps.match.params.article;
@@ -58,6 +56,7 @@ class Article extends React.Component {
 		const { articleItem, direction } = this.props;
 		const { category, country, onNavigateTo, onNavigate, language } = this.props;
 		let article = articleItem;
+
 		if (!article || !category) return null;
 
 		let next = null;
@@ -78,17 +77,16 @@ class Article extends React.Component {
 		}
 
 		const other = articles.filter(a => a.sys.id === article.sys.id);
-		
+
 		return (
 			<Skeleton headerColor='light'>
-					<div className="SkeletonContainer">
-						<Placeholder>
-							<ArticlePage key={"Article"} direction={direction} category={category} other={other} article={article} loading={loading} onNavigate={onNavigate} />
-							<ArticleFooter key={"ArticleFooter"} onNavigateTo={onNavigateTo(category, country)} language={language} {...{ category, direction, previous, next, article, country }} />
-						</Placeholder>
-					</div>
-				</Skeleton>
-			
+				<div className="SkeletonContainer">
+					<Placeholder>
+						<ArticlePage key={"Article"} direction={direction} category={category} other={other} article={article} loading={loading} onNavigate={onNavigate} />
+						<ArticleFooter key={"ArticleFooter"} onNavigateTo={onNavigateTo(category, country)} language={language} {...{ category, direction, previous, next, article, country }} />
+					</Placeholder>
+				</div>
+			</Skeleton>
 		);
 	}
 }
@@ -102,6 +100,7 @@ const mapState = (s, p) => {
 		language: s.language,
 	};
 };
+
 const mapDispatch = (d, p) => {
 	return {
 		onMount: (category, slug) => {
@@ -115,6 +114,7 @@ const mapDispatch = (d, p) => {
 
 			return Promise.resolve(true);
 		},
+
 		onNavigateTo: (category, country) => slug => {
 			setTimeout(() => {
 				d(push(`/${country.fields.slug}/${category.fields.slug}/${slug}`));

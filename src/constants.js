@@ -1,6 +1,3 @@
-
-import { createMuiTheme } from 'material-ui/styles';
-
 var consts = {
     colors: {
         irc: '#ffda1a',

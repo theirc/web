@@ -12,6 +12,7 @@ import cms from '../content/cms';
 import "./AppHeader.css";
 
 class AppHeader extends Component {
+
 	static propTypes = {
 		onChangeCountry: PropTypes.func,
 		onGoToSearch: PropTypes.func,
@@ -29,10 +30,12 @@ class AppHeader extends Component {
 		active: false,
 		serbiaAlert: sessionStorage.getItem("serbia-alert"),
 	};
+
 	toggleClass() {
 		const { currentState } = this.state.active;
 		this.setState({ active: !currentState });
 	}
+
 	toggleSearch() {
 		const { search } = this.state;
 		if (!search) {
@@ -45,6 +48,7 @@ class AppHeader extends Component {
 		this.setState({ prvalert: true });
 		localStorage.setItem("privacy-policy", true);
 	}
+
 	handleInputChange(event) {
 		const target = event.target;
 		const value = target.type === "checkbox" ? target.checked : target.value;
@@ -54,18 +58,22 @@ class AppHeader extends Component {
 			[name]: value,
 		});
 	}
-	closeSerbiaBanner(){
+
+	closeSerbiaBanner() {
 		sessionStorage.setItem("serbia-alert", 1);
 		this.setState({ serbiaAlert: 1 });
 	}
+
 	handleSubmit(event) {
 		const { onGoToSearch } = this.props;
 		const { searchText } = this.state;
 
 		onGoToSearch(searchText);
+
 		setTimeout(() => {
 			this.setState({ search: false, searchText: "" });
 		}, 200);
+
 		event.preventDefault();
 	}
 
@@ -95,7 +103,7 @@ class AppHeader extends Component {
 		};
 		const cookiePolicyLink = <a href="/greece/privacy/cookies" target="_blank" rel="noopener noreferrer">Cookie Policy</a>;
 		const privacyPolicyLink = <a href="/greece/privacy/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>;
-		
+
 		let isOnServices = window.location.href.includes("/services/");
 		let isOnArticlesGreece = window.location.href.includes("/categories") || /(\/greece\/.*\/.*)/.test(window.location.href);
 
@@ -106,30 +114,37 @@ class AppHeader extends Component {
 			<div className={backgroundDark ? 'AppHeader' : 'AppHeaderLight'}>
 
 				<Headroom tolerance={5} offset={200}>
-					<div className={[homePage ? "header-opacity": "", backgroundDark ? 'app-bar' : 'app-bar-light', !(country && language) ? 'app-bar-black' : ''].join(" ")}>
+					<div className={[homePage ? "header-opacity" : "", backgroundDark ? 'app-bar' : 'app-bar-light', !(country && language) ? 'app-bar-black' : ''].join(" ")}>
+
 						<div className={["app-bar-container logo", !(country && language) ? "logo-centered" : ""].join(" ")} onClick={onGoHome || noop}>
 							<img onClick={onGoHome} src={backgroundDark ? logo : logoBlack} className="app-bar-logo" alt=" " />
 						</div>
+
 						{country && language &&
 							(
 								<div className="app-bar-container buttons">
 									<div className="app-bar-buttons">
-									<span className="app-bar-selectors top-menu" color="contrast" onClick={onGoHome || noop}>
+										<span className="app-bar-selectors top-menu" color="contrast" onClick={onGoHome || noop}>
 											{cms.siteConfig.author === 'CuentaNos' && <Home />}<span className='menu-item'>{t("Home")}</span>
 										</span>
+
 										<span className="app-bar-selectors top-menu" color="contrast" onClick={onGoToCategories || noop}>
 											{cms.siteConfig.author === 'CuentaNos' && <List />}<span className='menu-item'>{t("Articles")}</span>
 										</span>
+
 										{showServiceMap && <span className="app-bar-selectors top-menu" color="contrast" onClick={onGoToServices || noop}>
 											{cms.siteConfig.author === 'CuentaNos' && <Assignment />}<span className='menu-item'>{t("Services")}	</span>
 										</span>}
+
 										{!disableLanguageSelector && !disableCountrySelector && <div className="app-bar-separator" />}
+
 										{!disableCountrySelector && (
 											<span className="app-bar-selectors country" color="contrast" onClick={onChangeCountry || noop}>
 												{/* {(country && country.fields.name) || " "} */}
-												<img src={`/${country.fields.slug}.png`} alt=''/>
+												<img src={`/${country.fields.slug}.png`} alt='' />
 											</span>
 										)}
+
 										{!disableLanguageSelector && (
 											<span className="app-bar-selectors lang" color="contrast" onClick={onChangeLanguage}>
 												{language || " "}
@@ -137,24 +152,18 @@ class AppHeader extends Component {
 										)}
 
 										<div className="app-bar-separator separator-searchIcon" />
-										{!search && <Search className='search-btn' onClick={this.toggleSearch.bind(this)}/>}
+
+										{!search && <Search className='search-btn' onClick={this.toggleSearch.bind(this)} />}
+
 										{search && <i className="fa fa-times search-btn" onClick={this.toggleSearch.bind(this)} />}
-										
+
 									</div>
 								</div>
 							)
 						}
 					</div>
 				</Headroom>
-				{/* {showHeaderBackground &&  <div
-					style={{
-						backgroundColor: "#000000",
-						display: "block",
-						width: "100%",
-						height: 64,
-					}}
-				/>} */}
-				{/* {!showHeaderBackground &&  <div className={backgroundDark ? 'headerBackground': 'headerBackgroundLight'}></div>} */}
+
 				{search && (
 					<form onSubmit={this.handleSubmit.bind(this)} className="SearchBar">
 						<input autoComplete="off" autoFocus name="searchText" placeholder={t("Search")} type="text" value={searchText} onChange={this.handleInputChange.bind(this)} />
@@ -162,11 +171,12 @@ class AppHeader extends Component {
 						<i className="fa fa-search" onClick={this.handleSubmit.bind(this)} />
 					</form>
 				)}
+
 				{!this.state.prvalert && this.props.cookieBanner && (
 					<div className={this.state.prvalert ? 'hidden' : 'privacy-banner'}>
 						<div className='content'>
 							<span className="privacy-banner-separator"></span>
-							<Interpolate i18nKey="COOKIES_BANNER" cookiePolicy={cookiePolicyLink} privacyPolicy={privacyPolicyLink}/>
+							<Interpolate i18nKey="COOKIES_BANNER" cookiePolicy={cookiePolicyLink} privacyPolicy={privacyPolicyLink} />
 						</div>
 						<Close
 							className="close-alert"
@@ -213,9 +223,7 @@ class AppHeader extends Component {
 						</div>
 					</div>
 				)}
-
 			</div>
-
 		);
 	}
 }

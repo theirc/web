@@ -25,6 +25,7 @@ class DetectLocationSelector extends Component {
 						{t("LOCATION_DISCLAIMER")}
 					</h2>
 				</div>
+
 				<div className="spacer" />
 				<button
 					className="item "
@@ -70,10 +71,13 @@ class DetectLocationSelector extends Component {
 				>
 					{t("OK")}
 				</button>
+
 				<button className="item " onClick={() => onBackToList && onBackToList()}>
 					{t("Back to List")}
 				</button>
+
 				<div className="bottom" />
+				
 				<div className={["overlay", active ? "active" : ""].join(" ")}>
 					<h1>{t("Loading location")}</h1>
 				</div>

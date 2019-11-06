@@ -23,10 +23,6 @@ const md = new Remarkable("full", {
 	breaks: true,
 });
 
-
-/**
- *
- */
 class ArticlePage extends Component {
 	state = {
 		copied: false
@@ -52,14 +48,15 @@ class ArticlePage extends Component {
 
 	replaceLinks() {
 		const { onNavigate } = this.props;
-
 		let hostname = "www.refugee.info";
+
 		if (global.location) {
 			hostname = global.location.hostname;
 		}
 
 		let anchors = Array.from(this._ref.querySelectorAll("a"));
 		anchors = anchors.filter(a => a.href.indexOf("http") || a.hostname === hostname || a.hostname === "www.refugee.info");
+
 		// eslint-disable-next-line
 		let isPhoneOrAlreadyProcessed = h => h.indexOf("#") === -1 && h.indexOf("tel:") === -1 && h.indexOf("mailto:") === -1;
 
@@ -73,6 +70,7 @@ class ArticlePage extends Component {
 						.slice(3)
 						.join("/");
 			}
+
 			// eslint-disable-next-line
 			anchor.href = "#";
 			anchor.onclick = () => {
@@ -81,6 +79,7 @@ class ArticlePage extends Component {
 			};
 		}
 	}
+
 	componentDidUpdate() {
 		this.injectVideoPlaceholders();
 		this.replaceLinks();
@@ -90,32 +89,34 @@ class ArticlePage extends Component {
 		const { article } = this.props;
 		const { url } = article.fields;
 		const APP_ID = this.context.config.appId;
-		
+
 		if (/facebook.com/.test(url)) {
 			let videoId = url.replace(/.*facebook.com\/.*\/videos\/(.*)\/.*/, "$1");
-			
 			return <FacebookPlayer className={"Facebook"} videoId={videoId} appId={APP_ID} />;
 		} else if (/youtube.com/) {
 			let videoId = url.replace(/^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/, "$7");
 			return <YouTube videoId={videoId} className={"YouTube"} />;
 		}
+
 		return null;
 	}
 
 	injectVideoPlaceholders() {
 		const APP_ID = this.context.config.appId;
-		
-		Array.from(document.getElementsByClassName('YouTubePlayer') || []).forEach(e=> {
+
+		Array.from(document.getElementsByClassName('YouTubePlayer') || []).forEach(e => {
 			var videoId = e.getAttribute('videoId');
 			ReactDOM.render(<YouTube videoId={videoId} className={"YouTube"} />, e);
-		});		
-		Array.from(document.getElementsByClassName('FacebookPlayer') || []).forEach(e=> {
-			var videoId = e.getAttribute('videoId');
-			ReactDOM.render( <FacebookPlayer className={"Facebook"} videoId={videoId} appId={APP_ID} />, e);
 		});
-		Array.from(document.getElementsByClassName('InstagramPlayer') || []).forEach(e=> {
+
+		Array.from(document.getElementsByClassName('FacebookPlayer') || []).forEach(e => {
 			var videoId = e.getAttribute('videoId');
-			ReactDOM.render( <InstagramEmbed className={"Instagram"} url={`${IG_URL}${videoId}`} />, e);
+			ReactDOM.render(<FacebookPlayer className={"Facebook"} videoId={videoId} appId={APP_ID} />, e);
+		});
+
+		Array.from(document.getElementsByClassName('InstagramPlayer') || []).forEach(e => {
+			var videoId = e.getAttribute('videoId');
+			ReactDOM.render(<InstagramEmbed className={"Instagram"} url={`${IG_URL}${videoId}`} />, e);
 		});
 	}
 
@@ -126,14 +127,13 @@ class ArticlePage extends Component {
 
 	onCopyLink = () => {
 		this.setState({ copied: true });
-		
 		clipboard.writeText(document.location.href);
-
 		setTimeout(() => this.setState({ copied: false }), 1500);
 	}
 
 	onShareOnFacebook = () => {
 		const { language } = this.props
+
 		if (global.window) {
 			const { FB } = global.window;
 			let { href } = window.location;
@@ -152,21 +152,20 @@ class ArticlePage extends Component {
 		}
 	}
 
-	
 	render() {
 		const { article, category, loading, t } = this.props;
 		const { title, content, hero, lead } = article.fields;
 		const { contentType } = article.sys;
-		
+
 		let html = md.render(content || lead);
 		html = html.replace(/(\+[0-9]{9,14}|00[0-9]{9,15})/g, `<a class="tel" href="tel:$1">$1</a>`);
-		
+
 		return (
 			<div ref={r => (this._ref = r)} className={["ArticlePage", loading ? "loading" : "loaded"].join(" ")}>
 				<Helmet>
 					<title>{title}</title>
 				</Helmet>
-				
+
 				{hero &&
 					hero.fields &&
 					hero.fields.file && (
@@ -176,18 +175,25 @@ class ArticlePage extends Component {
 							</div>
 							{hero.fields.description && <credit>{hero.fields.description}</credit>}
 						</div>
-					)}
+					)
+				}
+
 				<HeaderBar subtitle={(category.fields.articles || []).length > 1 && `${category.fields.name}:`} title={title} />
+
 				<div className='filter-bar'>
 					<div className="social">
-						<div href='#' className="share" onClick={this.onShareOnFacebook}><i className="fa fa-facebook-f" style={{ fontSize: 16 }}/></div>
+						<div href='#' className="share" onClick={this.onShareOnFacebook}><i className="fa fa-facebook-f" style={{ fontSize: 16 }} /></div>
+
 						<div href='#' className="copy" onClick={this.onCopyLink}>
 							{!this.state.copied ? <Link /> : <LibraryBooks />}
 						</div>
+
 						{this.state.copied && <span className='copied'>{t('Copied')}</span>}
 					</div>
 				</div>
+
 				{contentType.sys.id === "video" && this.renderVideo()}
+				
 				<article>
 					<span className='author'><span>{t("LAST_UPDATED")}</span> {moment(article.sys.updatedAt).format('YYYY.MM.DD')}</span>
 					<div dangerouslySetInnerHTML={{ __html: html }} />

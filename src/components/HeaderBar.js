@@ -19,6 +19,7 @@ class HeaderBar extends Component {
 	render() {
 		const { title, children } = this.props;
 		const triggerKey = generateKey("trigger");
+		
 		return (
 			<div className="HeaderBar">
 				<input type="checkbox" name={triggerKey} id={triggerKey} />
@@ -26,6 +27,7 @@ class HeaderBar extends Component {
 					<h1>
 						{title}
 					</h1>
+
 					{children && [
 						<div className="up" key={"up"}>
 							<i className="material-icons">keyboard_arrow_up</i>
@@ -35,6 +37,7 @@ class HeaderBar extends Component {
 						</div>,
 					]}
 				</label>
+
 				{children && <ul>{children}</ul>}
 			</div>
 		);

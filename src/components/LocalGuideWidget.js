@@ -6,6 +6,7 @@ import { translate } from "react-i18next";
 import "./LocalGuideWidget.css";
 
 class LocalGuideWidget extends Component {
+
 	render() {
 		const { country, onNavigate, t, guideItems } = this.props;
 
@@ -25,15 +26,17 @@ class LocalGuideWidget extends Component {
 					</a>
 					<i className="material-icons">arrow_right</i>
 				</s>
+
 				<h3>{t("Local Guide")}</h3>
+
 				<div className="Container">
 					{guideItems.map(c => {
 						let image =
 							c.fields.backgroundImage && c.fields.backgroundImage.fields.file ? (
 								<img alt={c.fields.title} src={`${c.fields.backgroundImage.fields.file.url}?fm=jpg&fl=progressive`} />
 							) : (
-								<img alt={c.fields.title} src="https://upload.wikimedia.org/wikipedia/en/4/48/Blank.JPG" />
-							);
+									<img alt={c.fields.title} src="https://upload.wikimedia.org/wikipedia/en/4/48/Blank.JPG" />
+								);
 						let link = c => {
 							if (c.fields.url.indexOf("/") === 0) {
 								return onNavigate(c.fields.url);
@@ -41,6 +44,7 @@ class LocalGuideWidget extends Component {
 								return (global.document.location = c.fields.url);
 							}
 						};
+
 						return (
 							<div key={c.sys.id} className="LocalGuideItem">
 								{image}

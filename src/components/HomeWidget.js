@@ -5,11 +5,11 @@ import _ from "lodash";
 import { translate } from "react-i18next";
 
 // local
-import "./HomeWidget.css";
 import { TopCategoriesWidget } from "./";
 import { LocalGuideWidget } from "./";
 import { ArticleWidget } from "./";
 import { CategoryWidget } from "./";
+import "./HomeWidget.css";
 
 class HomeWidget extends Component {
 
@@ -48,7 +48,7 @@ class HomeWidget extends Component {
 	}
 
 	renderTopCategories(categories) {
-		const { country, onNavigate, language  } = this.props;
+		const { country, onNavigate, language } = this.props;
 
 		/*jshint ignore:start*/
 		/*eslint-disable*/
@@ -58,7 +58,7 @@ class HomeWidget extends Component {
 	}
 
 	renderArticle(article, category, showHero = true, showFullArticle = false) {
-		const { isHome, index, country, onNavigate, language  } = this.props;
+		const { isHome, index, country, onNavigate, language } = this.props;
 		/*jshint ignore:start*/
 		/*eslint-disable*/
 		return <ArticleWidget isHome={isHome} index={index} country={country} onNavigate={onNavigate} article={article} language={language} category={category} showHero={showHero} showFullArticle={showFullArticle} />;
@@ -67,13 +67,14 @@ class HomeWidget extends Component {
 	}
 
 	renderCategory(c) {
-		const { country, onNavigate, language  } = this.props;		
+		const { country, onNavigate, language } = this.props;
 		/*jshint ignore:start*/
 		/*eslint-disable*/
 		return <CategoryWidget country={country} onNavigate={onNavigate} language={language} c={c} />;
 		/*eslint-enable*/
 		/*jshint ignore:end*/
 	}
+
 	componentDidMount() {
 		const { onNavigate } = this.props;
 
@@ -111,29 +112,32 @@ class HomeWidget extends Component {
 		if (!content) {
 			return null;
 		}
-		
+
 		try {
 			let rendered = null;
-			
-			if(!content.sys.contentType) return null;
+
+			if (!content.sys.contentType) return null;
 
 			switch (content.sys.contentType.sys.id) {
 				case "article":
 					rendered = this.renderArticle(content, content.fields.category, true, true);
 					break;
+
 				case "widget":
 					rendered = this.renderWidget(content);
 					break;
+
 				case "category":
 					rendered = this.renderCategory(content);
 					break;
+
 				default:
 					rendered = null;
 			}
 
 			return (
 				<div ref={r => (this._ref = r)} className={["HomeWidget", content.fields.highlighted ? "Highlighted" : "", `CT-${content.sys.contentType.sys.id}`].join(" ")}>
-					{rendered} 
+					{rendered}
 				</div>
 			);
 		} catch (e) {

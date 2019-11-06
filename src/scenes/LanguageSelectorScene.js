@@ -20,6 +20,7 @@ class LanguageSelectorScene extends React.Component {
 		config: PropTypes.object,
 		api: PropTypes.object,
 	};
+
 	componentWillMount() {
 		const { onMountOrUpdate } = this.props;
 		onMountOrUpdate();
@@ -32,9 +33,11 @@ class LanguageSelectorScene extends React.Component {
 				onSelectLanguage(language);
 				setTimeout(() => {
 					const sessionStorage = getSessionStorage();
+
 					if (sessionStorage) {
 						delete sessionStorage.redirect;
 					}
+
 					if (/^\//.test(redirect)) {
 						redirect = redirect.substr(1);
 					}
@@ -52,10 +55,10 @@ class LanguageSelectorScene extends React.Component {
 
 		let firstTimeHere = false;
 		const sessionStorage = getSessionStorage();
+
 		if (sessionStorage) {
 			const { firstRequest } = sessionStorage;
 			firstTimeHere = !firstRequest;
-
 			redirect = sessionStorage.redirect;
 		}
 
@@ -88,9 +91,10 @@ const mapState = ({ countryList, country, language }, p) => {
 		language,
 	};
 };
+
 const mapDispatch = (d, p) => {
 	return {
-		onMountOrUpdate: () => {},
+		onMountOrUpdate: () => { },
 		onSelectLanguage: code => {
 			d(actions.changeLanguage(code));
 		},

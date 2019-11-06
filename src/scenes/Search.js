@@ -10,9 +10,6 @@ import servicesApi from "../content/servicesApi";
 import { SearchPage } from "../components";
 import { Skeleton } from ".";
 
-/**
- * Note to future self. refactor this
- */
 class Search extends React.Component {
 	state = {
 		articles: [],
@@ -32,6 +29,7 @@ class Search extends React.Component {
 			this.search(this.props);
 		}
 	}
+
 	componentWillReceiveProps(nextProps) {
 		if (!this.props.location || !nextProps.location) {
 			return;
@@ -47,6 +45,7 @@ class Search extends React.Component {
 		this.setState({ articles: [], services: [], searchingArticles: true, searchingServices: true, term: qs.q });
 		const { api, config } = this.context;
 		const languageDictionary = config.languageDictionary || {};
+
 		setTimeout(s => {
 			api.client
 				.getEntries({
@@ -67,6 +66,7 @@ class Search extends React.Component {
 				});
 		}, 10);
 	}
+
 	render() {
 		const { searchingArticles, searchingServices, language, articles, services, term } = this.state;
 		const { onNavigate, country } = this.props;
@@ -99,6 +99,7 @@ const mapState = ({ country, router, language }, p) => {
 		language,
 	};
 };
+
 const mapDispatch = (d, p) => {
 	return {
 		onNavigate(url) {

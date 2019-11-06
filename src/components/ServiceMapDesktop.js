@@ -42,30 +42,34 @@ class ServiceIcon extends React.Component {
 
 class ServiceItem extends React.Component {
 	render() {
-		const { service, goToService} = this.props; 
+		const { service, goToService } = this.props;
 		const mainType = service.type ? service.type : service.types[0];
 		const types = (service.types || []).filter(t => t.id !== mainType.id);
-		
+
 		return (
 			<div key={service.id} className="Item" onClick={() => goToService(service.id)}>
 				<div className="Info">
 					<div className="Item-content title">
 						<h1>{service.name}</h1>
-						<i className="material-icons" id="goToServiceIcon"/>
+						<i className="material-icons" id="goToServiceIcon" />
 					</div>
+
 					<h2 className="Item-content">{service.provider.name}{" "}</h2>
+
 					<address className="fullAddress Item-content">
 						{service.address}
 					</address>
+
 					{service.address_city &&
 						<address className="regionTitle Item-content">
 							{service.address_city}
 						</address>
 					}
 				</div>
+
 				<div className="Icons Item-content">
 					{mainType &&
-							<ServiceIcon key={`si-${mainType.idx}`} idx={0} isMainType={1} service={service} type={mainType} />
+						<ServiceIcon key={`si-${mainType.idx}`} idx={0} isMainType={1} service={service} type={mainType} />
 					}
 					{types.map((t, idx) => t && <ServiceIcon key={`si-${idx}`} idx={idx} isMainType={0} service={service} type={t} />)}
 				</div>
@@ -99,27 +103,27 @@ class ServiceMapDesktop extends React.Component {
 			spiderfyDistanceMultiplier: 1.5,
 			spiderfyOnMaxZoom: true
 		});
-        map.addLayer(clusters);
-        
-        this.setState({
-            loaded: true
-        });
+		map.addLayer(clusters);
+
+		this.setState({
+			loaded: true
+		});
 
 		if (sessionStorage.serviceMapBounds) {
 			const b = sessionStorage.serviceMapBounds.split(",").map(c => parseFloat(c));
 			const zoom = sessionStorage.serviceMapZoom;
-			
+
 			map.fitBounds([
 				[b[1], b[0]],
 				[b[3], b[2]]
 			]);
 			map.setZoom(zoom);
-			
+
 			setTimeout(() => {
 				map.invalidateSize();
-			  }, 500);
+			}, 500);
 		}
-		
+
 		this.clusters = clusters;
 		this.map = map;
 	}
@@ -133,7 +137,8 @@ class ServiceMapDesktop extends React.Component {
 		if (this.state.loaded) {
 			if (this.props.services.length) {
 				let locationServices = this.props.services.filter(s => s.location != null);
-				const markers = locationServices.map((s, index) => {					
+
+				const markers = locationServices.map((s, index) => {
 					let ll = s.location.coordinates.slice().reverse();
 					const mainType = s.type ? s.type : s.types[0];
 					let markerDiv = ReactDOMServer.renderToString(<ServiceIcon idx={0} service={s} type={mainType} />);
@@ -146,7 +151,7 @@ class ServiceMapDesktop extends React.Component {
 						title: s.name,
 						icon: icon
 					});
-					
+
 					let popupEl = document.createElement("div");
 					ReactDOM.render(<ServiceItem service={s} {...this.props} />, popupEl);
 					let popup = L.popup({
@@ -154,15 +159,14 @@ class ServiceMapDesktop extends React.Component {
 					}).setContent(popupEl);
 					marker.bindPopup(popup);
 
-					return marker;										
-				});				
+					return marker;
+				});
 				clusters.clearLayers();
 				clusters.addLayers(markers);
-				if (!keepPreviousZoom){
+				if (!keepPreviousZoom) {
 					let group = new L.featureGroup(markers);
 					this.map.fitBounds(group.getBounds());
 				}
-				
 			} else {
 				console.warn("no services returned");
 			}
@@ -180,10 +184,10 @@ class ServiceMapDesktop extends React.Component {
 			loaded,
 			errorMessage
 		} = this.state;
-		
-        /*
-      Very small tweak on the render. toggling the visibility so we can run the L.map on didMount
-    */
+
+		/*
+			Very small tweak on the render. toggling the visibility so we can run the L.map on didMount
+		*/
 
 		return (
 			<div className="ServiceMap">
@@ -195,7 +199,6 @@ class ServiceMapDesktop extends React.Component {
 				<div className="ServiceMapContainer">
 					<div id="MapCanvas" style={{ width: "100%", position: "relative", height: 500, visibility: loaded ? "visible" : "hidden" }} />
 					{!loaded && <div className="loader" />}
-					
 				</div>
 			</div>
 		);

@@ -12,7 +12,6 @@ import getSessionStorage from "../shared/sessionStorage";
 class CountryHome extends React.Component {
 	constructor() {
 		super();
-
 		this.state = {};
 	}
 
@@ -40,15 +39,13 @@ class CountryHome extends React.Component {
 		if (global.window) {
 			const sessionStorage = getSessionStorage();
 			const { firstRequest } = sessionStorage;
+
 			if (!firstRequest) {
 				sessionStorage.firstRequest = moment().toString();
 			}
 		}
 		const { onMount } = this.props;
 		onMount();
-		//this.requestLocation();
-	}
-	componentWillUpdate() {
 		//this.requestLocation();
 	}
 
@@ -59,15 +56,15 @@ class CountryHome extends React.Component {
 		if (!country || !country.fields.home) {
 			return null;
 		}
-		
+
 		return (
 			<Skeleton hideShareButtons={true} homePage={true}>
-				{ !instanceMoved &&
+				{!instanceMoved &&
 					<HomeWidgetCollection key={"HomeWidgetCollection"}>
 						{country.fields.home.map(e => <HomeWidget direction={direction} onNavigate={onNavigate} language={language} country={country} content={e} key={e.sys.id} />)}
 					</HomeWidgetCollection>
 				}
-				{ instanceMoved &&
+				{instanceMoved &&
 					<InstanceMovedWidget link="http://refugeelife.bg/" />
 				}
 			</Skeleton>
@@ -83,9 +80,10 @@ const mapState = (s, p) => {
 		currentCoordinates: s.currentCoordinates,
 	};
 };
+
 const mapDispatch = (d, p) => {
 	return {
-		onMount: () => {},
+		onMount: () => { },
 		onLocationRequested: (coords, country) => {
 			if (country) {
 			}

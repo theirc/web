@@ -59,6 +59,7 @@ class SearchPage extends React.Component {
 				<div className="Icon" key={`${service.id}-0`}>
 					<i className={iconWithPrefix(mainType.vector_icon)} style={categoryStyle(mainType.color)} />
 				</div>
+
 				<div className="Info">
 					<h1>{service.name}</h1>
 					<h2>
@@ -67,6 +68,7 @@ class SearchPage extends React.Component {
 							{fullAddress}
 							{distance && ` - ${distance}`}
 						</span>
+
 						<div className="Icons">
 							{subTypes.map((t, idx) => (
 								<div className="Icon" key={`${service.id}-${idx}`}>
@@ -81,39 +83,39 @@ class SearchPage extends React.Component {
 		];
 	}
 
-
 	renderTiles(a) {
 		const { country, onNavigate } = this.props;
 		let image = a.fields.hero ? a.fields.hero.fields.file.url : '/placeholder.png';
 
 		return (
-		<li className='tile' key={a.sys.id} onClick={() => onNavigate(`/${country.fields.slug}/${a.fields.category.fields.slug}/${a.fields.slug}`)}>
-			<div className='img-viewport'>
-				<img src={image} alt='' />
-			</div>
-			<div className='text'>
-				{a.fields && <h2>{a.fields.title}</h2>}
-				<span className='author'>By <span>{cms.siteConfig.author}</span></span>
-			</div>
-		</li>)
+			<li className='tile' key={a.sys.id} onClick={() => onNavigate(`/${country.fields.slug}/${a.fields.category.fields.slug}/${a.fields.slug}`)}>
+				<div className='img-viewport'>
+					<img src={image} alt='' />
+				</div>
+				<div className='text'>
+					{a.fields && <h2>{a.fields.title}</h2>}
+					<span className='author'>By <span>{cms.siteConfig.author}</span></span>
+				</div>
+			</li>)
 	}
 
-	toggleServices(){		
+	toggleServices() {
 		let newState = !this.state.showFullServiceList;
-		this.setState({ showFullServiceList : newState })
+		this.setState({ showFullServiceList: newState })
 	}
 
-	toggleArticles(){		
+	toggleArticles() {
 		let newState = !this.state.showFullBlogList;
-		this.setState({ showFullBlogList : newState })
+		this.setState({ showFullBlogList: newState })
 	}
 
 	render() {
 		const { articles, onNavigate, searchingArticles, searchingServices, services, showServiceMap, term, t } = this.props;
-		let servicesList = this.state.showFullServiceList ? services : services.slice().splice(0,4);
-		let articleList = this.state.showFullBlogList ? articles : articles.slice().splice(0,3);
+		let servicesList = this.state.showFullServiceList ? services : services.slice().splice(0, 4);
+		let articleList = this.state.showFullBlogList ? articles : articles.slice().splice(0, 3);
 		const toggleServicelabel = this.state.showFullServiceList ? t('Show Less') : t('Show More');
 		const toggleArticleslabel = this.state.showFullBlogList ? t('Show Less') : t('Show More');
+
 		return (
 			<div className="SearchPage">
 				<div className="Title">
@@ -121,35 +123,38 @@ class SearchPage extends React.Component {
 						{t("Results for")}: "{term}"
 					</h1>
 				</div>
+
 				<div className="results">
-					{ showServiceMap &&
+					{showServiceMap &&
 						<div className='services-list'>
 							<h1>{t("Services")}</h1>
+
 							<hr />
-						
+
 							{searchingServices && <div className="LoaderContainer"><div className="loader" /></div>}
-							
+
 							<div className="ServiceList">
 								<div className="ServiceListContainer">
 									{servicesList.map(this.renderServiceItem.bind(this))}
 								</div>
 							</div>
-							
+
 							{!searchingServices && services.length > 0 &&
 								<div className="show-action"><button className="show-more" onClick={this.toggleServices}>{toggleServicelabel}</button></div>
 							}
-							
+
 							{!searchingServices && services.length === 0 && (
 								<div className='no-results'>
 									<em>{t("No services found with the keywords used")}</em>
 								</div>
-								)
+							)
 							}
 						</div>
 					}
 
 					<div className='articles-list'>
 						<h1>{t("Articles")}</h1>
+						
 						<hr />
 
 						{searchingArticles && <div className="LoaderContainer"><div className="loader" /></div>}
@@ -190,10 +195,10 @@ class SearchPage extends React.Component {
 						}
 
 						{!searchingArticles && articles.length === 0 && (
-								<div className='no-results'>
-									<em>{t("No articles found with the keywords used")}</em>
-								</div>
-							)
+							<div className='no-results'>
+								<em>{t("No articles found with the keywords used")}</em>
+							</div>
+						)
 						}
 					</div>
 				</div>

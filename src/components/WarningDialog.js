@@ -39,6 +39,7 @@ export default class WarningDialog extends Component {
 			}, 30 * 1000);
 		}
 	}
+	
 	hide() {
 		this.setState({
 			hiding: true,

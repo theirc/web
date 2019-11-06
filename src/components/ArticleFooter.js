@@ -29,14 +29,14 @@ class ArticleFooter extends Component {
 	constructor(props) {
 		super(props);
 		const { language } = this.props;
-		//let { href } = window.location;		
 		let copySlug = "";
-		if (window.location.toString().indexOf("language=") > -1){
+		
+		if (window.location.toString().indexOf("language=") > -1) {
 			copySlug = window.location;
-		}else{
+		} else {
 			copySlug = (window.location += (window.location.toString().indexOf("?") > -1 ? "&" : "?") + "language=" + language);
 		}
-		//let copySlug = (href += (window.location.toString().indexOf("?") > -1 ? "&" : "?") + "language=" + language);
+
 		this.state = { value: copySlug, copied: true, shareIN: true };
 		this.sharePage = this.sharePage.bind(this);
 		this.Copiedlnk = this.Copiedlnk.bind(this);
@@ -48,7 +48,7 @@ class ArticleFooter extends Component {
 
 	Copiedlnk() {
 		clipboard.writeText(document.location.href);
-		
+
 		this.setState(prevState => ({ copied: !prevState.copied }));
 		setTimeout(() => {
 			this.setState({ shareIN: true });
@@ -72,11 +72,12 @@ class ArticleFooter extends Component {
 						method: "share",
 						href,
 					},
-					function(response) {}
+					function (response) { }
 				);
 			}
 		}
 	}
+
 	subscribe(article) {
 		const { onNavigateTo, category } = this.props;
 		onNavigateTo(`../subscribe/${category.fields.slug}`);
@@ -86,24 +87,24 @@ class ArticleFooter extends Component {
 		const { previous, next, onNavigateTo, direction } = this.props;
 		const rtl = direction === "rtl";
 
-		return (
-			(previous || next) &&
+		return ((previous || next) &&
 			<div className="ArticleFooter">
 				{previous && (
 					<div className="page-selector prev" onClick={() => onNavigateTo(previous.fields.slug)}>
 						{!rtl ? <NavigateBefore className="icon" /> : <NavigateNext className="icon" />}
+
 						<div className='caption'>
-							{/* <small>{t("PREVIOUS PAGE")}:</small> */}
 							<h1>{previous.fields.title}</h1>
 						</div>
 					</div>
 				)}
+
 				{next && (
 					<div className="page-selector next" onClick={() => onNavigateTo(next.fields.slug)}>
 						<div className='caption'>
-							{/* <small>{t("NEXT PAGE")}:</small> */}
 							<h1>{next.fields.title}</h1>
 						</div>
+
 						{!rtl ? <NavigateNext className="icon" /> : <NavigateBefore className="icon" />}
 					</div>
 				)}

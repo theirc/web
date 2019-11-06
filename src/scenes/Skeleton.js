@@ -37,8 +37,10 @@ class Skeleton extends React.Component {
 			}, 20 * 1000);
 		}
 	}
+
 	componentWillUpdate(newProps) {
 		const { language, errorMessage } = this.props;
+
 		if (language !== newProps.language) {
 			i18n.changeLanguage(newProps.language);
 		}
@@ -50,12 +52,14 @@ class Skeleton extends React.Component {
 			}, 20 * 1000);
 		}
 	}
+
 	render() {
 		const { children, country, language, match, onGoHome, onGoToServices, onGoToCategories, onGoToSearch, onChangeLocation, onChangeLanguage, deviceType, router, hideFooter, removeErrorMessage, showMapButton, goToMap, headerColor } = this.props;
 		const { hideShareButtons, homePage, toggleServiceMap } = this.props;
 		const { errorMessage } = this.state;
 		const { config } = this.context;
 		let notifications = [];
+
 		const notificationType = n => {
 			switch (n.fields.type) {
 				case "Warning":
@@ -66,6 +70,7 @@ class Skeleton extends React.Component {
 					return "yellow";
 			}
 		};
+
 		if (country && language) {
 			const sessionStorage = getSessionStorage();
 			const dismissed = JSON.parse(sessionStorage.dismissedNotifications || "[]");
@@ -85,6 +90,7 @@ class Skeleton extends React.Component {
 				</WarningDialog>
 			));
 		}
+
 		if (errorMessage) {
 			let error = (
 				<WarningDialog type={"red"} key={"Error"} onHide={() => removeErrorMessage()} autoDismiss={true} dismissable={true}>
@@ -96,9 +102,9 @@ class Skeleton extends React.Component {
 
 		let showFooter = !hideFooter && country && language;
 		let logo = _.template(config.logo)({ language: language || "en" });
-		if(country && country.fields.slug === "serbia" && sessionStorage.getItem("serbia-alert") == null)
-			sessionStorage.setItem("serbia-alert", 0);
 
+		if (country && country.fields.slug === "serbia" && sessionStorage.getItem("serbia-alert") == null)
+			sessionStorage.setItem("serbia-alert", 0);
 
 		toggleServiceMap(country && country.fields && country.fields.slug !== 'italy' && country.fields.slug !== 'jordan');
 
@@ -113,17 +119,20 @@ class Skeleton extends React.Component {
 						language={language}
 						onGoHome={onGoHome(country)}
 						onGoToServices={onGoToServices(country)}
-						onGoToCategories= {onGoToCategories(country)}
+						onGoToCategories={onGoToCategories(country)}
 						onGoToSearch={q => onGoToSearch(country, q)}
 						onChangeCountry={onChangeLocation}
 						onChangeLanguage={onChangeLanguage.bind(this, router.location.pathname)}
-						headerColor = {headerColor}
+						headerColor={headerColor}
 						logo={logo}
 						logoBlack={config.logoBlack}
 						homePage={homePage}
 					/>
+					
 					{notifications}
+
 					{children}
+					
 					{showFooter && (
 						<Footer
 							questionLink={config.questionLink}
@@ -136,11 +145,11 @@ class Skeleton extends React.Component {
 							country={country}
 							customQuestionLink={config.customQuestionLink}
 							language={language}
-							hideShareButtons = {hideShareButtons}
+							hideShareButtons={hideShareButtons}
 						/>
 					)}
-					{country && language && <BottomNavContainer  match={match} showMapButton={showMapButton} goToMap={goToMap} showDepartments={config.showDepartments}/>}
 
+					{country && language && <BottomNavContainer match={match} showMapButton={showMapButton} goToMap={goToMap} showDepartments={config.showDepartments} />}
 				</div>
 			</I18nextProvider>
 		);
@@ -156,6 +165,7 @@ const mapState = ({ country, language, deviceType, router, errorMessage }, p) =>
 		errorMessage,
 	};
 };
+
 const mapDispatch = (d, p) => {
 	return {
 		toggleServiceMap: show => d(actions.toggleServiceMap(show)),
@@ -165,10 +175,10 @@ const mapDispatch = (d, p) => {
 		onGoToSearch: (country, query) => {
 			if (country) d(push(`/${country.fields.slug}/search?q=${query}`));
 		},
-		onGoToServices: country => () =>{
+		onGoToServices: country => () => {
 			if (country) d(push(`/${country.fields.slug || ""}/services`));
 		},
-		onGoToCategories: country => () =>{
+		onGoToCategories: country => () => {
 			if (country) d(push(`/${country.fields.slug || ""}/categories`));
 		},
 		onChangeLocation: () => {

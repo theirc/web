@@ -11,9 +11,6 @@ class ServiceCategoryList extends React.Component {
 	state = {
 		regions: [],
 	};
-	componentDidMount() {
-
-	}
 
 	renderRegion(c) {
 		let {
@@ -28,9 +25,11 @@ class ServiceCategoryList extends React.Component {
 			title
 		} = c;
 		let locationName = title ? title : name;
+
 		return (
 			<li key={id}>
 				<hr className="line" />
+
 				<div className="container" onClick={() => setTimeout(() => openLocation(c, name), 300)}>
 					<i className={`fa fa-${level > 1 ? 'building' : 'globe'}`} />
 					<strong>{locationName}</strong>
@@ -38,6 +37,7 @@ class ServiceCategoryList extends React.Component {
 			</li>
 		);
 	}
+
 	render() {
 		const {
 			allRegions, t, departmentId, department, departmentName
@@ -53,22 +53,23 @@ class ServiceCategoryList extends React.Component {
 				</div>
 			);
 		}
+
 		let sortedRegions = [];
 		if (department) {
 			sortedRegions = _.filter(allRegions, ['parent', departmentId]);
 		} else {
 			sortedRegions = _.sortBy(allRegions || [], c => {
-                if(c.level === 1){
+				if (c.level === 1) {
 					return c.name;
 				}
 			});
 		}
 		let title = department ? t("Locations in") + " " + departmentName : t("Locations");
+
 		return [
-			<HeaderBar key={"Header"} title={title.toUpperCase()}>
-			</HeaderBar>,
+			<HeaderBar key={"Header"} title={title.toUpperCase()} />,
 			<div key={"List"} className="ServiceCategoryList">
-				<ul>					
+				<ul>
 					{sortedRegions.map(c => this.renderRegion(c))}
 				</ul>
 			</div>
@@ -77,4 +78,3 @@ class ServiceCategoryList extends React.Component {
 }
 
 export default translate()(ServiceCategoryList);
-

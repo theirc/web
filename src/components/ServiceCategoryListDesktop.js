@@ -43,6 +43,7 @@ class ServiceCategoryListDesktop extends React.Component {
 		const { categories } = this.state;
 
 		let currentLocation = c;
+
 		if (location) {
 			let l = regions.filter(r => r.slug === location);
 			currentLocation = l.length > 0 ? l[0] : c;
@@ -50,7 +51,7 @@ class ServiceCategoryListDesktop extends React.Component {
 
 		let municipalities = currentLocation.level === 3 ? regions.filter(r => r.parent === currentLocation.parent) : null;
 		let department = currentLocation.level === 3 ? (!this.props.showDepartments ? currentLocation.title : currentLocation.parent__name) :
-			(currentLocation.level === 2 ? currentLocation : currentLocation.title); 
+			(currentLocation.level === 2 ? currentLocation : currentLocation.title);
 
 		this.setState({
 			loaded: true,
@@ -105,7 +106,7 @@ class ServiceCategoryListDesktop extends React.Component {
 		console.log(c, category);
 		servicesApi.fetchAllServices(c.slug, language, category, null, 2000, true).then(
 			services => this.setState({ services: services.results })
-		)		
+		)
 	}
 
 	onSelectLocation = element => {
@@ -133,7 +134,7 @@ class ServiceCategoryListDesktop extends React.Component {
 		const { goTo } = this.props;
 
 		let showMap = mapState != null ? mapState : this.state.showMap;
-		this.setState({showMap, showServices: true});
+		this.setState({ showMap, showServices: true });
 		goTo(this.state.location, this.state.category, showMap);
 	}
 
@@ -155,13 +156,13 @@ class ServiceCategoryListDesktop extends React.Component {
 	}
 
 	municipalidadesFilter = (location = null) => {
-		
+
 		const { regions } = this.props;
 		const department = location ? location : this.state.location;
 		if (department.level === 2) {
 			const municipalities = regions.filter(r => r.parent === department.id);
 			this.setState({ municipalities: municipalities, department: department, showMunicipalities: true })
-		}else{
+		} else {
 			this.setState({ showMunicipalities: false })
 		}
 	}
@@ -198,7 +199,6 @@ class ServiceCategoryListDesktop extends React.Component {
 	}
 
 	renderDepartmentButton(department, onSelect) {
-
 		return (
 			<button key={department.id} className={department.id === this.state.location.id ? "location-item-selected" : "location-item"} onClick={() => onSelect(department)}>
 				{department.level === 1 && <i className='fa fa-globe' />}<span>{department.name}</span>
@@ -218,25 +218,27 @@ class ServiceCategoryListDesktop extends React.Component {
 		let { municipalities } = this.state;
 		let { t, showDepartments } = this.props;
 		let categoryName = this.state.category ? this.state.category.name : t('All Categories');
-		// let location = this.state.location ? (this.state.location.title ? this.state.location.title : this.state.location.name) : t('All Locations');
 		let department = this.state.department.name ? this.state.department.name : this.state.department;
 		let municipality = this.state.municipality.name ? this.state.municipality.name : this.state.municipality;
 
 		return (
 			<div id="filter-bar" className="filter-bar">
 				<div className='filters'>
-					<button id="btn-Locations" className="btn-filter" onClick={() => {this.departamentosFilter(); this.openFilters(FilterTypes.DEPARTMENT)}}>
+					<button id="btn-Locations" className="btn-filter" onClick={() => { this.departamentosFilter(); this.openFilters(FilterTypes.DEPARTMENT) }}>
 						<span>{department}</span><i className="material-icons">keyboard_arrow_down</i>
 					</button>
+
 					{municipalities && showDepartments && this.state.showMunicipalities &&
-						<button id="btn-Municipalities" className="btn-filter" onClick={() => {this.openFilters(FilterTypes.MUNICIPALITY)}}>
+						<button id="btn-Municipalities" className="btn-filter" onClick={() => { this.openFilters(FilterTypes.MUNICIPALITY) }}>
 							<span>{municipality}</span><i className="material-icons">keyboard_arrow_down</i>
 						</button>
 					}
+
 					<button id="btn-Categories" className="btn-filter" onClick={() => this.openFilters(FilterTypes.CATEGORY)}>
 						<span>{categoryName}</span><i className="material-icons">keyboard_arrow_down</i>
 					</button>
 				</div>
+
 				<div id="toggle-map">
 					<input type="checkbox" className="switch bigswitch cn" checked={this.state.showMap} onMouseEnter={() => this.hoverMapSwitch(true)} onMouseLeave={() => this.hoverMapSwitch(false)} onChange={this.toggleMap} />
 					<div className={`toggle-btn ${this.state.switchHover ? 'hover' : ''}`}><div></div></div>
@@ -258,9 +260,11 @@ class ServiceCategoryListDesktop extends React.Component {
 							<span>{t('All Categories')}</span>
 						</button>
 					}
+
 					{list.map(l => renderer(l, onSelect))}
 				</div>
-				<div className='filter'><button onClick={() => { this.closeFilters(); this.showServices(); filterType === FilterTypes.DEPARTMENT && this.municipalidadesFilter();}}>{t('Filter')}</button></div>
+
+				<div className='filter'><button onClick={() => { this.closeFilters(); this.showServices(); filterType === FilterTypes.DEPARTMENT && this.municipalidadesFilter(); }}>{t('Filter')}</button></div>
 			</div>
 		);
 	}
@@ -296,12 +300,14 @@ class ServiceCategoryListDesktop extends React.Component {
 				</div>
 				<div className="Info">
 					<h1>{service.name}</h1>
+
 					<h2>
 						{service.provider.name}{" "}
 						<span>
 							{fullAddress}
 							{distance && ` - ${distance}`}
 						</span>
+
 						<div className="Icons">
 							{subTypes.map((t, idx) => (
 								<div className="Icon" key={`${service.id}-${idx}`}>
@@ -311,6 +317,7 @@ class ServiceCategoryListDesktop extends React.Component {
 						</div>
 					</h2>
 				</div>
+
 				<i className="material-icons" />
 			</li>,
 		];
@@ -332,7 +339,6 @@ class ServiceCategoryListDesktop extends React.Component {
 		if (availableServices) {
 			sortedAvailableServices = _.orderBy(availableServices, ["region.level", "region.name", "name"], ["desc", "asc", "asc"]);
 		}
-		// const unavailableServices = services.filter(s => s.provider.vacancy);
 
 		!loaded && this.renderLoader();
 
@@ -371,7 +377,7 @@ class ServiceCategoryListDesktop extends React.Component {
 						</div>
 					</div>
 				}
-				
+
 				{!this.state.showMap && !this.state.showAll && services.length <= 10 && window.location.href.includes('/services/all') &&
 					<div className='show-more'><button onClick={this.onShowAll}>{t('Show All')}</button></div>
 				}
@@ -379,7 +385,7 @@ class ServiceCategoryListDesktop extends React.Component {
 				{!this.state.showMap && this.state.showAll && services.length <= 10 &&
 					<div className="loader" />
 				}
-				
+
 				{this.state.showFilter && <div className="overlay" onClick={this.closeFilters}></div>}
 			</div>
 		);

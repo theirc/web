@@ -2,7 +2,7 @@
 import React from "react";
 import { translate } from "react-i18next";
 import _ from "lodash";
-import { LibraryBooks, Link  } from "material-ui-icons";
+import { LibraryBooks, Link } from "material-ui-icons";
 import * as clipboard from "clipboard-polyfill";
 import { Helmet } from "react-helmet";
 import PropTypes from "prop-types";
@@ -15,7 +15,7 @@ import "./ServiceHome.css";
 //const GMAPS_API_KEY = "AIzaSyA7eG6jYi03E6AjJ8lhedMuaLS9mVoJjJ8";
 
 //temp API Key from Andres Aguilar
-const GMAPS_API_KEY ="AIzaSyAK54Ir69gNM--M_5dRa0fwVH8jxWnJREQ";
+const GMAPS_API_KEY = "AIzaSyAK54Ir69gNM--M_5dRa0fwVH8jxWnJREQ";
 const hotlinkTels = input => input; //input.replace(/\s(\+[1-9]{1}[0-9]{5,14})|00[0-9]{5,15}/g, `<a class="tel" href="tel:$1">$1</a>`);
 const moment = global.moment;
 
@@ -26,25 +26,28 @@ class ServiceDetail extends React.Component {
 	};
 
 	static propTypes = {
-			slug: PropTypes.string,
-			title: PropTypes.string,
-		};
-	constructor(props){
+		slug: PropTypes.string,
+		title: PropTypes.string,
+	};
+
+	constructor(props) {
 		super(props);
 		const { language } = this.props;
 		let copySlug = "";
-		if (window.location.toString().indexOf("language=") > -1){
+
+		if (window.location.toString().indexOf("language=") > -1) {
 			copySlug = window.location;
-		}else{
+		} else {
 			copySlug = (window.location + (window.location.toString().indexOf("?") > -1 ? "&" : "?") + "language=" + language);
 		}
+
 		this.state = { value: copySlug, copied: false, shareIN: true, showOtherServices: true };
 		this.sharePage = this.sharePage.bind(this);
 		this.showServices = this.showServices.bind(this);
 		this.Copiedlnk = this.Copiedlnk.bind(this);
 	}
 
-	showServices(){
+	showServices() {
 		this.setState({ showOtherServices: !this.state.showOtherServices });
 	}
 
@@ -66,7 +69,7 @@ class ServiceDetail extends React.Component {
 
 	onCopyLink = () => {
 		this.setState({ copied: true });
-		
+
 		clipboard.writeText(document.location.href);
 
 		setTimeout(() => this.setState({ copied: false }), 1500);
@@ -92,7 +95,6 @@ class ServiceDetail extends React.Component {
 		}
 	}
 
-
 	share() {
 		const { language } = this.props;
 
@@ -117,58 +119,67 @@ class ServiceDetail extends React.Component {
 		const { fetchService, fetchServicesInSameLocation } = this.props;
 		if (fetchService) {
 			fetchService().then(service => {
-				this.setState({ service })}
-				);
+				this.setState({ service })
+			}
+			);
 		}
 
 		if (fetchServicesInSameLocation) {
 			fetchServicesInSameLocation().then(relatedServices => this.setState({ relatedServices }));
 		}
 	}
-	renderContactInformation(ci,callAux) {
+
+	renderContactInformation(ci, callAux) {
 		let { text, type } = ci;
 		let typography;
 		let action;
 		let typeText;
 		let textClass = 'noPhoneFormat';
 
-		switch(type) {
+		switch (type) {
 			case "whatsapp":
 				typography = "MenuIcon fa fa-whatsapp";
 				action = `whatsapp://send?phone=${text}`;
 				typeText = "Whatsapp: ";
 				break;
+
 			case "skype":
 				typography = "MenuIcon fa fa-skype";
 				action = `skype:${text}?chat`;
 				typeText = "Skype: ";
 				break;
+
 			case "facebook_messenger":
 				typography = "MenuIcon fa fa-facebook";
 				action = `http://m.me/${text}`;
 				typeText = "Facebook Messenger: ";
 				break;
+
 			case "viber":
 				typography = "MenuIcon fa fa-phone";
 				action = `viber://add?number=${text}`;
 				typeText = "Viber: ";
 				break;
+
 			case "phone":
 				typography = "MenuIcon fa fa-phone";
 				action = `tel:${text}`;
 				typeText = callAux + ":";
 				textClass = 'phoneFormat';
 				break;
+
 			case "email":
 				typography = "MenuIcon fa fa-envelope-o";
 				action = `mailto:${text}`;
 				typeText = "Email: ";
 				break;
+
 			case "instagram":
 				typography = "MenuIcon fa fa-envelope-o";
 				action = `https://www.instagram.com/${text}`;
 				typeText = "Instagram: ";
 				break;
+
 			default:
 				break;
 		}
@@ -177,6 +188,7 @@ class ServiceDetail extends React.Component {
 				<span className='icon-placeholder'>
 					<i className={typography} aria-hidden="true" />
 				</span>
+
 				<h1>
 					<div className="ContactInformation">
 						{typeText}<a href={action} className={textClass}>{text}</a>
@@ -185,12 +197,13 @@ class ServiceDetail extends React.Component {
 			</div>
 		)
 	}
-	
+
 	render() {
 		const { service, relatedServices } = this.state;
 		const { t, language, goToService, country, phoneCodes } = this.props;
-		
+
 		const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
 		if (!service) {
 			return (
 				<div className="ServiceList">
@@ -199,18 +212,13 @@ class ServiceDetail extends React.Component {
 				</div>
 			);
 		}
+
 		const firstOrDefault = a => _.first(a) || {};
 		const toUrl = u => (u.indexOf("http") === -1 ? `http://${u}` : u);
 		const hasHours = o => {
 			return o["24/7"] || weekDays.map(w => o[w.toLowerCase()].map(h => !!(h.open || h.close)).indexOf(true) > -1).indexOf(true) > -1;
 		};
 		const callAux = t("Call");
-		// const mLocale = d => {
-		// 	let a = moment(d)
-		// 		.locale(language)
-		// 		.format("ll");
-		// 	return a;
-		// };
 		const amPmTime = time => {
 			const m = moment(moment(`2001-01-01 ${time}`).toJSON())
 				.locale(false)
@@ -246,7 +254,7 @@ class ServiceDetail extends React.Component {
 				));
 			});
 		};
-		
+
 		// service translated fields
 		let serviceT = {
 			additional_info: service[`additional_info_${language}`],
@@ -271,18 +279,21 @@ class ServiceDetail extends React.Component {
 				<Helmet>
 					<title>{serviceT.name}</title>
 				</Helmet>
+
 				<div className="hero">
 					{service.image && <div className="HeroImageContainer"><img src={service.image} alt={service.provider.name} /></div>}
 				</div>
-				{/* <em>{t("LAST_UPDATED") + " " + mLocale(service.updated_at)}</em> */}
 
 				<HeaderBar subtitle={`${subtitle}:`} title={serviceT.name} />
+
 				<div className='filter-bar'>
 					<div className="social">
-						<div href='#' className="share" onClick={this.onShareOnFacebook}><i className="fa fa-facebook-f" style={{ fontSize: 16 }}/></div>
+						<div href='#' className="share" onClick={this.onShareOnFacebook}><i className="fa fa-facebook-f" style={{ fontSize: 16 }} /></div>
+
 						<div href='#' className="copy" onClick={this.onCopyLink}>
 							{!this.state.copied ? <Link /> : <LibraryBooks />}
 						</div>
+
 						{this.state.copied && <span className='copied'>{t('Copied')}</span>}
 					</div>
 				</div>
@@ -341,117 +352,130 @@ class ServiceDetail extends React.Component {
 					)}
 
 				</article>
+
 				{this.state.showOtherServices ? (
-				<div className="footer">
-
-					{service.location && (
-						<div className="Selector" onClick={() => window.open(`https://www.google.com/maps/search/?api=1&query=${point}`)}>
-							<span className='icon-placeholder'>
-								<i className="MenuIcon fa fa-map" aria-hidden="true" />
-							</span>
-							<h1>{t("Get directions")}</h1>
-						</div>
-					)}
-
-					{service.phone_number && (
-						<div className="Selector" onClick={() => window.open(`tel:${service.phone_number}`)}>
-							<span className='icon-placeholder'>
-								<i className="MenuIcon fa fa-phone" aria-hidden="true" />
-							</span>
-							<h1>
-								{t("Call")}:
-								<a className="phoneFormat" href={`tel:${phoneNumberWithCode}`} >{phoneNumberWithCode}</a>
-							</h1>
-						</div>
-					)}
-
-					{service.email && (
-						<div className="Selector" onClick={() => window.open(`mailto:${service.email}`)}>
-							<span className='icon-placeholder'>
-								<i className="MenuIcon fa fa-envelope-o" aria-hidden="true" />
-							</span>
-							<h1>
-								<span style={{ display: 'inline-block', overflow: 'hidden' }}>{t('Email')}:&nbsp;</span>
-								<div className='field' style={{
-									display: 'inline-block', direction: 'ltr',
-									overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
-								}}>
-									{service.email}
-								</div>
-							</h1>
-						</div>
-					)}
-
-					{service.website && (
-						<div className="Selector" onClick={() => window.open(`${toUrl(service.website)}`)}>
-							<span className='icon-placeholder'>
-								<i className="MenuIcon fa fa-external-link" aria-hidden="true" />
-							</span>
-							<h1>
-								<span style={{ display: 'inline-block', overflow: 'hidden' }}>{t('Website')}:&nbsp;</span>
-								<div className='field' style={{
-									display: 'inline-block', direction: 'ltr',
-									overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
-								}}>
-									{service.website}
-								</div>
-							</h1>
-						</div>
-					)}
-
-					{service.facebook_page && (
-						<div className="Selector" onClick={() => window.open(`${toUrl(service.facebook_page)}`)}>
-							<span className='icon-placeholder'><i className="MenuIcon fa fa-facebook-f" aria-hidden="true" /></span>
-							<h1>
-								<span style={{ display: 'inline-block', overflow: 'hidden' }}>{t('Facebook')}:&nbsp;</span>
-								<div className='field' style={{
-									display: 'inline-block', direction: 'ltr',
-									overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
-								}}>
-									{service.facebook_page}
-								</div>
-							</h1>
-						</div>
-					)}
-					{service.contact_information && sortedContactInformation.map(ci => this.renderContactInformation(ci,callAux))}
-					{(relatedServices || []).length > 0 && (
-					<div className="Selector" onClick={() => this.showServices()}>
-						<span className='icon-placeholder'>
-							<i className="MenuIcon fa fa-angle-right" aria-hidden="true" />
-						</span>
-						<h1>{t("OTHER_SERVICES")}</h1>
-					</div>)}
-				</div>)
-				:(
-					<div>
 					<div className="footer">
-						<div className="Selector">
-							<h1 className="RelatedServicesTitle">{t("OTHER_SERVICES")}:</h1>
-						</div>
-							{relatedServices.map(r => (
-								<div key={r.id} onClick={() => goToService(r.id)}>
-									<div className="Selector related">
-										<span className='icon-placeholder'>
-											<i className="MenuIcon fa fa-angle-right" aria-hidden="true" />
-										</span>
-										<h1 href="#/" ><div style={{
-											display: 'inline-block', direction: 'ltr', overflow: 'hidden', 
-											whiteSpace: 'nowrap', textOverflow: 'ellipsis'
-										}}>{r.name}</div></h1>
+						{service.location && (
+							<div className="Selector" onClick={() => window.open(`https://www.google.com/maps/search/?api=1&query=${point}`)}>
+								<span className='icon-placeholder'>
+									<i className="MenuIcon fa fa-map" aria-hidden="true" />
+								</span>
+
+								<h1>{t("Get directions")}</h1>
+							</div>
+						)}
+
+						{service.phone_number && (
+							<div className="Selector" onClick={() => window.open(`tel:${service.phone_number}`)}>
+								<span className='icon-placeholder'>
+									<i className="MenuIcon fa fa-phone" aria-hidden="true" />
+								</span>
+
+								<h1>
+									{t("Call")}:
+									<a className="phoneFormat" href={`tel:${phoneNumberWithCode}`} >{phoneNumberWithCode}</a>
+								</h1>
+							</div>
+						)}
+
+						{service.email && (
+							<div className="Selector" onClick={() => window.open(`mailto:${service.email}`)}>
+								<span className='icon-placeholder'>
+									<i className="MenuIcon fa fa-envelope-o" aria-hidden="true" />
+								</span>
+
+								<h1>
+									<span style={{ display: 'inline-block', overflow: 'hidden' }}>{t('Email')}:&nbsp;</span>
+									<div className='field' style={{
+										display: 'inline-block', direction: 'ltr',
+										overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
+									}}>
+										{service.email}
 									</div>
+								</h1>
+							</div>
+						)}
+
+						{service.website && (
+							<div className="Selector" onClick={() => window.open(`${toUrl(service.website)}`)}>
+								<span className='icon-placeholder'>
+									<i className="MenuIcon fa fa-external-link" aria-hidden="true" />
+								</span>
+
+								<h1>
+									<span style={{ display: 'inline-block', overflow: 'hidden' }}>{t('Website')}:&nbsp;</span>
+									<div className='field' style={{
+										display: 'inline-block', direction: 'ltr',
+										overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
+									}}>
+										{service.website}
+									</div>
+								</h1>
+							</div>
+						)}
+
+						{service.facebook_page && (
+							<div className="Selector" onClick={() => window.open(`${toUrl(service.facebook_page)}`)}>
+								<span className='icon-placeholder'><i className="MenuIcon fa fa-facebook-f" aria-hidden="true" /></span>
+
+								<h1>
+									<span style={{ display: 'inline-block', overflow: 'hidden' }}>{t('Facebook')}:&nbsp;</span>
+									<div className='field' style={{
+										display: 'inline-block', direction: 'ltr',
+										overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
+									}}>
+										{service.facebook_page}
+									</div>
+								</h1>
+							</div>
+						)}
+
+						{service.contact_information && sortedContactInformation.map(ci => this.renderContactInformation(ci, callAux))}
+
+						{(relatedServices || []).length > 0 && (
+							<div className="Selector" onClick={() => this.showServices()}>
+								<span className='icon-placeholder'>
+									<i className="MenuIcon fa fa-angle-right" aria-hidden="true" />
+								</span>
+								<h1>{t("OTHER_SERVICES")}</h1>
+							</div>)
+						}
+					</div>)
+					: (
+						<div>
+							<div className="footer">
+								<div className="Selector">
+									<h1 className="RelatedServicesTitle">{t("OTHER_SERVICES")}:</h1>
 								</div>
-							))}
-					<div className="Selector back" onClick={() => this.showServices()}>
-						<span className='icon-placeholder'>
-							<i className="MenuIcon fa fa-angle-left" aria-hidden="true" />
-						</span>
-						<h1>{t("Back")}</h1>
-					</div>
-					</div>
-					</div>
-				)}
+
+								{relatedServices.map(r => (
+									<div key={r.id} onClick={() => goToService(r.id)}>
+										<div className="Selector related">
+											<span className='icon-placeholder'>
+												<i className="MenuIcon fa fa-angle-right" aria-hidden="true" />
+											</span>
+											<h1 href="#/" ><div style={{
+												display: 'inline-block', direction: 'ltr', overflow: 'hidden',
+												whiteSpace: 'nowrap', textOverflow: 'ellipsis'
+											}}>{r.name}</div></h1>
+										</div>
+									</div>
+								))
+								}
+
+								<div className="Selector back" onClick={() => this.showServices()}>
+									<span className='icon-placeholder'>
+										<i className="MenuIcon fa fa-angle-left" aria-hidden="true" />
+									</span>
+
+									<h1>{t("Back")}</h1>
+								</div>
+							</div>
+						</div>
+					)}
 			</div>
 		);
 	}
 }
+
 export default translate()(ServiceDetail);

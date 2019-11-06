@@ -1,21 +1,23 @@
+// libs
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import createHistory from "history/createBrowserHistory";
+import { routerMiddleware } from "react-router-redux";
+import { routerReducer } from "react-router-redux";
+import reduxPromiseMiddleware from "redux-promise-middleware";
+import reduxThunk from "redux-thunk";
 
+// local
 import reducers from "./reducers"; // Or wherever you keep your reducers
 import actions from "./actions";
 import c from "./content/cms";
-
-import { routerMiddleware } from "react-router-redux";
-import { routerReducer } from "react-router-redux";
-
-import reduxThunk from "redux-thunk";
-import reduxPromiseMiddleware from "redux-promise-middleware";
 import { analyticsMiddleware } from "./middleware.js";
 import ReactGA from "react-ga";
+
 ReactGA.initialize(c.siteConfig.gaTracker);
 
 const window = global.window || {};
 let history;
+
 if (window && window.document) {
 	history = createHistory();
 } else {
@@ -30,6 +32,7 @@ if (window && window.document) {
 }
 
 let initialState = {};
+
 if (window && window.initialState) {
 	initialState = window.initialState;
 }

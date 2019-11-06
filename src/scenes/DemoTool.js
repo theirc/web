@@ -16,8 +16,6 @@ class DemoTool extends React.Component {
 		this.state = {};
 	}
 
-	
-
 	componentWillMount() {
 		if (global.window) {
 			const sessionStorage = getSessionStorage();
@@ -26,12 +24,9 @@ class DemoTool extends React.Component {
 				sessionStorage.firstRequest = moment().toString();
 			}
 		}
+
 		const { onMount } = this.props;
 		onMount();
-		//this.requestLocation();
-	}
-	componentWillUpdate() {
-		//this.requestLocation();
 	}
 
 	render() {
@@ -40,12 +35,13 @@ class DemoTool extends React.Component {
 		if (!country || !country.fields.home) {
 			return null;
 		}
+
 		return (
 			<Skeleton>
-                <div className="SkeletonContainer">
-                    <LocalDemo country={country} language={language}></LocalDemo>
-                </div>
-            </Skeleton>
+				<div className="SkeletonContainer">
+					<LocalDemo country={country} language={language}></LocalDemo>
+				</div>
+			</Skeleton>
 		);
 	}
 }
@@ -56,9 +52,10 @@ const mapState = (s, p) => {
 		country: s.country,
 	};
 };
+
 const mapDispatch = (d, p) => {
 	return {
-		onMount: () => {},
+		onMount: () => { },
 		onLocationRequested: (coords, country) => {
 			if (country) {
 			}

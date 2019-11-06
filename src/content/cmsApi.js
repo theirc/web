@@ -16,6 +16,7 @@ function cmsApi(config) {
 	let client = contentful.createClient({
 		...config,
 	});
+
 	function listCountries(language = "en") {
 		return client.getEntries({
 			content_type: "country",
@@ -26,7 +27,8 @@ function cmsApi(config) {
 	function loadCountry(slug, language = "en") {
 		return new Promise((resolve, reject) => {
 			const sessionStorage = getSessionStorage();
-			if(sessionStorage[`${language}-${slug}`] && sessionStorage[`${language}-${slug}`] !== []) {
+
+			if (sessionStorage[`${language}-${slug}`] && sessionStorage[`${language}-${slug}`] !== []) {
 				let e = JSON.parse(sessionStorage[`${language}-${slug}`]);
 				let entities = client.parseEntries(e);
 
@@ -37,7 +39,7 @@ function cmsApi(config) {
 						content_type: "country",
 						"fields.slug": slug,
 						include: 10,
-						locale: languageDictionary[language]|| language,
+						locale: languageDictionary[language] || language,
 						resolveLinks: false,
 					})
 					.then((e, r) => {
@@ -64,7 +66,8 @@ function cmsApi(config) {
 			}
 		});
 	}
-	function loadArticle(slug, language = "en"){
+
+	function loadArticle(slug, language = "en") {
 		return new Promise((resolve, reject) => {
 			return client
 				.getEntries({
@@ -85,7 +88,6 @@ function cmsApi(config) {
 					}
 					resolve(items[0]);
 				});
-			
 		});
 	}
 

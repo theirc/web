@@ -11,9 +11,6 @@ class ServiceDepartmentList extends React.Component {
 	state = {
 		regions: [],
 	};
-	componentDidMount() {
-
-	}
 
 	renderRegion(c) {
 		let {
@@ -37,13 +34,10 @@ class ServiceDepartmentList extends React.Component {
 			</li>
 		);
 	}
+
 	render() {
-		const {
-			allRegions
-		} = this.props;
-		const {
-			t,
-		} = this.props;
+		const { allRegions, t } = this.props;
+
 		if ((allRegions || []).length === 0) {
 			return (
 				<div className="ServiceCategoryList departments">
@@ -54,12 +48,13 @@ class ServiceDepartmentList extends React.Component {
 				</div>
 			);
 		}
+
 		let sortedRegions = _.sortBy(allRegions || [], c => {
 			return c.name;
 		});
+
 		return [
-			<HeaderBar key={"Header"} title={t("Locations").toUpperCase()}>
-			</HeaderBar>,
+			<HeaderBar key={"Header"} title={t("Locations").toUpperCase()} />,
 			<div key={"List"} className="ServiceCategoryList departments">
 				<ul>
 					{sortedRegions.map(c => this.renderRegion(c))}
@@ -70,4 +65,3 @@ class ServiceDepartmentList extends React.Component {
 }
 
 export default translate()(ServiceDepartmentList);
-

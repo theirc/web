@@ -16,48 +16,45 @@ const md = new Remarkable("full", {
 	breaks: true,
 });
 
-class CategoryHome extends React.Component {  
-    state = {};   
+class CategoryHome extends React.Component {
+	state = {};
 
-    componentWillMount() {        
-    }
+	render() {
+		const { country, category, onNavigate, t } = this.props;
 
-    render() {
-        const { country, category, onNavigate, t } =this.props;
+		if (!country || !category) {
+			return null;
+		}
 
-        if(!country || !category) {
-            return null;
-        }
-
-        return (
-            <Skeleton headerColor='light'>
-					<div className="SkeletonContainer">
-                        <ArticleList
-                            country= {country}
-                            category = {category}
-                            onNavigate = {onNavigate}
-                            md = {md}
-                            t = {t}
-                        />
-					</div>
-				</Skeleton>
-            
-        );
-    }
+		return (
+			<Skeleton headerColor='light'>
+				<div className="SkeletonContainer">
+					<ArticleList
+						country={country}
+						category={category}
+						onNavigate={onNavigate}
+						md={md}
+						t={t}
+					/>
+				</div>
+			</Skeleton>
+		);
+	}
 }
 
 const mapState = (s, p) => {
-    return {
-        articles: s.articles,
-        country: s.country,
-    };
+	return {
+		articles: s.articles,
+		country: s.country,
+	};
 };
+
 const mapDispatch = (d, p) => {
-    return {
-        onNavigate(url) {
+	return {
+		onNavigate(url) {
 			d(push(url));
 		}
-    };
+	};
 };
 
 export default connect(mapState, mapDispatch)(CategoryHome);

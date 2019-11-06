@@ -7,15 +7,11 @@ import { translate } from "react-i18next";
 // local
 import HeaderBar from "../components/HeaderBar";
 import { Skeleton } from ".";
-
 import "./Subscribe.css";
 
-/**
- *
- */
 class Suscribe extends Component {
 
-	constructor(props){
+	constructor(props) {
 		super(props);
 		this.handleChange = this.handleChange.bind(this);
 		this.handleChangeCode = this.handleChangeCode.bind(this);
@@ -48,26 +44,28 @@ class Suscribe extends Component {
 		config: PropTypes.object,
 	};
 
-	handleChange(event) {		
-		this.setState({phone: event.target.value})
-	}
-	handleChangeCode(event) {		
-		this.setState({code: event.target.value})
-	}
-	handleSubmit(){
-		this.setState({ codeSent: true});
-	}
-	handleSubmitCode(){
-		console.log("Submit code");
-		this.setState({ validated: true});
+	handleChange(event) {
+		this.setState({ phone: event.target.value })
 	}
 
-	
+	handleChangeCode(event) {
+		this.setState({ code: event.target.value })
+	}
+
+	handleSubmit() {
+		this.setState({ codeSent: true });
+	}
+
+	handleSubmitCode() {
+		console.log("Submit code");
+		this.setState({ validated: true });
+	}
+
 	render() {
 		const title = "Subscribe";
 		const { category } = this.props;
 		window.cat = category;
-		console.log({category});
+		
 		return (
 			<Skeleton headerColor='light'>
 				<div className="SkeletonContainer">
@@ -75,45 +73,45 @@ class Suscribe extends Component {
 						<Helmet>
 							<title>{title}</title>
 						</Helmet>
-						
+
 						<HeaderBar subtitle={'Subscribe your phone number'} title={title} />
-						
+
 						<div className="Subscribe-content">
-							<h4>Sign up to receive updates notifications for '{category.fields.name}'' straight to your cell phone via Whatsapp or SMS! 
+							<h4>Sign up to receive updates notifications for '{category.fields.name}'' straight to your cell phone via Whatsapp or SMS!
 							</h4>
 							<h5>
-							This is a free service and only your standard text message rates will apply. 
-								You can end these notifications at any time by replying "STOP" to any message
+								This is a free service and only your standard text message rates will apply.
+									You can end these notifications at any time by replying "STOP" to any message
 							</h5>
 
-							{!this.state.codeSent && !this.validated && 
-							<div className="subscribe-form">
-								<label>Enter your phone number</label><br></br>
-								<input type="text" onChange={this.handleChange} className="subscribe-input" id="phoneNumber" value={this.state.phone}/><br></br>
-								
-								<button type="button" onClick={this.handleSubmit} className="subscribe-button"id="confirm">Submit</button>
-							</div>}
-							
-							{this.state.codeSent && !this.state.validated && 
-							<div className="subscribe-form">
-								<label>We sent you a 4 digit code to verify your number. Please enter below to activate your notifications</label><br></br>
-								<input type="text" onChange={this.handleChangeCode} className="subscribe-input" id="code" value={this.state.code}/><br></br>
-								<button type="button" onClick={this.handleSubmitCode} className="subscribe-button"id="confirm">Verify</button>
-							</div>
+							{!this.state.codeSent && !this.validated &&
+								<div className="subscribe-form">
+									<label>Enter your phone number</label><br></br>
+									<input type="text" onChange={this.handleChange} className="subscribe-input" id="phoneNumber" value={this.state.phone} /><br></br>
+
+									<button type="button" onClick={this.handleSubmit} className="subscribe-button" id="confirm">Submit</button>
+								</div>}
+
+							{this.state.codeSent && !this.state.validated &&
+								<div className="subscribe-form">
+									<label>We sent you a 4 digit code to verify your number. Please enter below to activate your notifications</label><br></br>
+									<input type="text" onChange={this.handleChangeCode} className="subscribe-input" id="code" value={this.state.code} /><br></br>
+									<button type="button" onClick={this.handleSubmitCode} className="subscribe-button" id="confirm">Verify</button>
+								</div>
 							}
 							{this.state.validated &&
-							<div className="all-set">
-							<h3>
-								All set! 
+								<div className="all-set">
+									<h3>
+										All set!
 							</h3>
-							<h4>
-								Your phone number has been verified and now you can start receiving notifications
+									<h4>
+										Your phone number has been verified and now you can start receiving notifications
 							</h4>
-							</div>}
+								</div>}
 
 						</div>
 
-						
+
 					</div>
 				</div>
 			</Skeleton>
