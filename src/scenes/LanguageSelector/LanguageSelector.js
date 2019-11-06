@@ -1,107 +1,54 @@
 // libs
-import React from "react";
-import { connect } from "react-redux";
-import { push } from "react-router-redux";
-import { Redirect } from "react-router";
-import PropTypes from "prop-types";
+import React, { Component } from "react";
+import { translate } from "react-i18next";
 
 // local
-import { LanguageSelector } from "../../components";
-import { actions } from "../../store";
+import "./LanguageSelector.css";
 import getSessionStorage from "../../shared/sessionStorage";
 
-class LanguageSelectorScene extends React.Component {
-	constructor() {
-		super();
-		this.state = { selected: false };
-	}
+class LanguageSelector extends Component {
+	static propTypes = {};
 
-	static contextTypes = {
-		config: PropTypes.object,
-		api: PropTypes.object,
-	};
+	componentDidMount() {
+		if (global.window) {
+			const sessionStorage = getSessionStorage();
 
-	componentWillMount() {
-		const { onMountOrUpdate } = this.props;
-		onMountOrUpdate();
-	}
-
-	selectLanguage(redirect, language) {
-		const { onGoTo, onSelectLanguage } = this.props;
-		this.setState({ selected: true }, () => {
-			setTimeout(() => {
-				onSelectLanguage(language);
-				setTimeout(() => {
-					const sessionStorage = getSessionStorage();
-
-					if (sessionStorage) {
-						delete sessionStorage.redirect;
-					}
-
-					if (/^\//.test(redirect)) {
-						redirect = redirect.substr(1);
-					}
-					onGoTo(redirect);
-				}, 300);
-			}, 300);
-		});
+			delete sessionStorage.country;
+			delete sessionStorage.dismissedNotifications;
+		}
 	}
 
 	render() {
-		const { country, language } = this.props;
-		const { selected } = this.state;
-		const { config } = this.context;
-		let redirect = null;
+		const { languages, onSelectLanguage, t } = this.props;
+		
+		return (
+			<div className="LanguageSelector">
+				<div className="icon" />
 
-		let firstTimeHere = false;
-		const sessionStorage = getSessionStorage();
+				<div className="text">
+					<i className="material-icons">translate</i>
+					{languages.map((c, i) => <h1 key={`choose-${c[0]}`}>{t("Choose your language", { lng: c[0] })}</h1>)}
+					<div className="p-t-20" />
+				</div>
 
-		if (sessionStorage) {
-			const { firstRequest } = sessionStorage;
-			firstTimeHere = !firstRequest;
-			redirect = sessionStorage.redirect;
-		}
+				<div className="spacer" />
 
-		const languages = config.languages;
+				{languages.map((c, i) => (
+					<button
+						className="item "
+						key={i}
+						onClick={() => {
+							onSelectLanguage(c[0]);
+						}}
+					>
+						{c[1]}
+					</button>
+				))}
 
-		if (!selected && (firstTimeHere || !language)) {
-			if (!country) {
-				return <LanguageSelector languages={languages} onSelectLanguage={this.selectLanguage.bind(this, "country-selector")} />;
-			} else {
-				return <LanguageSelector languages={languages} onSelectLanguage={this.selectLanguage.bind(this, redirect || country.fields.slug)} />;
-			}
-		} else {
-			if (!selected && language) {
-				if (!country) {
-					return <Redirect to={`/country-selector`} />;
-				} else {
-					return <Redirect to={`/${country.fields.slug}`} />;
-				}
-			} else {
-				return null;
-			}
-		}
+				<div className="spacer" />
+			</div>
+		);
 	}
 }
 
-const mapState = ({ countryList, country, language }, p) => {
-	return {
-		countryList,
-		country,
-		language,
-	};
-};
-
-const mapDispatch = (d, p) => {
-	return {
-		onMountOrUpdate: () => { },
-		onSelectLanguage: code => {
-			d(actions.changeLanguage(code));
-		},
-		onGoTo: slug => {
-			d(push(`/${slug}`));
-		},
-	};
-};
-
-export default connect(mapState, mapDispatch)(LanguageSelectorScene);
+export default translate()(LanguageSelector);
