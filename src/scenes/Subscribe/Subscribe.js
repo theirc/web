@@ -5,9 +5,9 @@ import { Helmet } from "react-helmet";
 import { translate } from "react-i18next";
 
 // local
-import HeaderBar from "../components/HeaderBar";
-import { Skeleton } from ".";
-import "./Subscribe.css";
+import HeaderBar from "../../components/HeaderBar";
+import { Skeleton } from "..";
+import "../Subscribe.css";
 
 class Suscribe extends Component {
 

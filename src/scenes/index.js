@@ -9,7 +9,7 @@ import LanguageSelectorScene from "./LanguageSelector/LanguageSelectorScene";
 import Services from "./Services";
 import Search from "./Search/Search";
 import Selectors from "./Selectors/Selectors";
-import Subscribe from "./Subscribe";
+import Subscribe from "./Subscribe/Subscribe";
 import DemoTool from "./DemoTool/DemoTool";
 
 export {
