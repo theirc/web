@@ -7,7 +7,7 @@ import Skeleton from "./Skeleton";
 import CountrySelectorScene from "./CountrySelectorScene";
 import LanguageSelectorScene from "./LanguageSelectorScene";
 import Services from "./Services";
-import Search from "./Search";
+import Search from "./Search/Search";
 import Selectors from "./Selectors";
 import Subscribe from "./Subscribe";
 import DemoTool from "./DemoTool";

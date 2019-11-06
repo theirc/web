@@ -6,9 +6,9 @@ import { push } from "react-router-redux";
 import PropTypes from "prop-types";
 
 // local
-import servicesApi from "../content/servicesApi";
-import { SearchPage } from "../components";
-import { Skeleton } from ".";
+import servicesApi from "../../content/servicesApi";
+import { SearchPage } from "../../components";
+import { Skeleton } from "..";
 
 class Search extends React.Component {
 	state = {
