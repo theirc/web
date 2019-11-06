@@ -7,7 +7,7 @@ import { translate } from "react-i18next";
 // local
 import HeaderBar from "../../components/HeaderBar";
 import { Skeleton } from "..";
-import "../Subscribe.css";
+import "./Subscribe.scss";
 
 class Suscribe extends Component {
 
