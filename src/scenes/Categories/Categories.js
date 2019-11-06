@@ -4,9 +4,9 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 // local
-import { CategoryList } from "../components";
-import { history } from "../store";
-import { Skeleton } from ".";
+import { CategoryList } from "../../components";
+import { history } from "../../store";
+import { Skeleton } from "..";
 
 class Categories extends React.Component {
 	static propTypes = {

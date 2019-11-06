@@ -1,6 +1,6 @@
 import Home from "./Home";
 import Article from "./Article/Article";
-import Categories from "./Categories";
+import Categories from "./Categories/Categories";
 import CountryHome from "./CountryHome";
 import CategoryHome from "./CategoryHome";
 import Skeleton from "./Skeleton";
