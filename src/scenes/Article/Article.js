@@ -6,10 +6,10 @@ import { push } from "react-router-redux";
 import PropTypes from "prop-types";
 
 // local
-import { ArticlePage, ArticleFooter } from "../components";
-import Placeholder from "../shared/placeholder";
-import { actions } from "../store";
-import { Skeleton } from ".";
+import { ArticlePage, ArticleFooter } from "../../components";
+import Placeholder from "../../shared/placeholder";
+import { actions } from "../../store";
+import { Skeleton } from "..";
 
 const Promise = require("bluebird");
 
