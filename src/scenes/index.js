@@ -6,7 +6,7 @@ import CategoryHome from "./CategoryHome/CategoryHome";
 import Skeleton from "./Skeleton";
 import CountrySelectorScene from "./CountrySelector/CountrySelector";
 import LanguageSelectorScene from "./LanguageSelector/LanguageSelector";
-import Services from "./Services";
+import Services from "./Services/Services";
 import Search from "./Search/Search";
 import Selectors from "./Selectors/Selectors";
 import Subscribe from "./Subscribe/Subscribe";
