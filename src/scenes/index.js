@@ -4,7 +4,7 @@ import Categories from "./Categories/Categories";
 import CountryHome from "./CountryHome/CountryHome";
 import CategoryHome from "./CategoryHome/CategoryHome";
 import Skeleton from "./Skeleton";
-import CountrySelectorScene from "./CountrySelectorScene";
+import CountrySelectorScene from "./CountrySelector/CountrySelectorScene";
 import LanguageSelectorScene from "./LanguageSelectorScene";
 import Services from "./Services";
 import Search from "./Search/Search";

@@ -6,8 +6,8 @@ import { Redirect } from "react-router";
 import PropTypes from "prop-types";
 
 // local
-import { CountrySelector } from "../components";
-import getSessionStorage from "../shared/sessionStorage";
+import { CountrySelector } from "../../components";
+import getSessionStorage from "../../shared/sessionStorage";
 
 class CountrySelectorScene extends Component {
 	state = {
