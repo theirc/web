@@ -11,7 +11,7 @@ import InstagramEmbed from 'react-instagram-embed';
 import { translate } from "react-i18next";
 
 // local
-import HeaderBar from "./HeaderBar";
+import HeaderBar from "../../components/HeaderBar";
 import "./ArticlePage.css";
 
 const moment = global.moment;
