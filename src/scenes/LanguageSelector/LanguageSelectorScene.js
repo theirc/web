@@ -6,9 +6,9 @@ import { Redirect } from "react-router";
 import PropTypes from "prop-types";
 
 // local
-import { LanguageSelector } from "../components";
-import { actions } from "../store";
-import getSessionStorage from "../shared/sessionStorage";
+import { LanguageSelector } from "../../components";
+import { actions } from "../../store";
+import getSessionStorage from "../../shared/sessionStorage";
 
 class LanguageSelectorScene extends React.Component {
 	constructor() {

@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 
 // local
-import { } from '../components';
+import { } from '../../components';
 
 class Home extends React.Component {
 	static contextTypes = {
