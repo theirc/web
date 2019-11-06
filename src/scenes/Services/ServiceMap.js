@@ -7,8 +7,8 @@ import circle from "@turf/circle";
 import bbox from "@turf/bbox";
 
 // local
-import getSessionStorage from "../shared/sessionStorage";
-import "./ServiceHome.css";
+import getSessionStorage from "../../shared/sessionStorage";
+import "../../components/ServiceHome.css";
 
 var tinycolor = require("tinycolor2");
 let iconWithPrefix = vector_icon => vector_icon.split("-")[0] + " " + vector_icon;

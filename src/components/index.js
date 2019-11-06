@@ -11,7 +11,7 @@ import LanguageSelector from "./LanguageSelector";
 import HomeWidget from "./HomeWidget";
 import HomeWidgetCollection from "./HomeWidgetCollection";
 import SearchPage from "./SearchPage";
-import ServiceMap from "./ServiceMap";
+import ServiceMap from "../scenes/Services/ServiceMap";
 import ServiceMapDesktop from "./ServiceMapDesktop";
 import ServiceCategoryList from "./ServiceCategoryList";
 import ServiceCategoryListDesktop from "./ServiceCategoryListDesktop";
