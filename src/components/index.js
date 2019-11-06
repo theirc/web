@@ -4,7 +4,7 @@ import WarningDialog from "./WarningDialog";
 import Footer from "./Footer";
 import ArticlePage from "./ArticlePage";
 import ArticleList from "../scenes/CategoryHome/ArticleList";
-import ArticleFooter from "./ArticleFooter";
+import ArticleFooter from "../scenes/Article/ArticleFooter";
 import CategoryList from "./CategoryList";
 import CountrySelector from "./CountrySelector";
 import LanguageSelector from "./LanguageSelector";
