@@ -1,9 +1,12 @@
+// libs
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import FacebookPlayer from "react-facebook-player";
 import YouTube from "react-youtube";
-import "./ArticleWidget.css";
 import PropTypes from 'prop-types';
+
+// local
+import "./ArticleWidget.css";
 
 const Remarkable = require("remarkable");
 const md = new Remarkable("full", {

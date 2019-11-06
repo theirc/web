@@ -1,8 +1,10 @@
+// libs
 import React, { Component } from "react";
 import moment from "moment";
 import _ from "lodash";
-
 import { translate } from "react-i18next";
+
+// local
 import "./HomeWidget.css";
 import { TopCategoriesWidget } from "./";
 import { LocalGuideWidget } from "./";

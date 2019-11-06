@@ -1,5 +1,8 @@
-import getSessionStorage from "../shared/sessionStorage";
+// libs
 import { Promise } from "es6-promise";
+
+// local
+import getSessionStorage from "../shared/sessionStorage";
 
 const contentful = require("contentful");
 

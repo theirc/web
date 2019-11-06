@@ -1,9 +1,11 @@
+// libs
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { Helmet } from "react-helmet";
 import HeaderBar from "./HeaderBar";
 import PropTypes from "prop-types";
 
+// local
 import "./LocalDemo.css";
 import getSessionStorage from "../shared/sessionStorage";
 

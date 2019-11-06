@@ -1,10 +1,12 @@
+// libs
 import React, { Component } from "react";
 import { Paper } from "material-ui";
 import BottomNavigation, { BottomNavigationButton } from "material-ui/BottomNavigation";
+import { Home, List, Assignment } from "material-ui-icons";
 import PropTypes from "prop-types";
 import { translate } from "react-i18next";
 
-import { Home, List, Assignment } from "material-ui-icons";
+// local
 import "./BottomNav.css";
 class BottomNav extends Component {
 	static propTypes = {

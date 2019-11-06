@@ -1,6 +1,9 @@
+// libs
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import PropTypes from "prop-types";
+
+// local
 import "./HeaderBar.css";
 
 const generateKey = pre => {

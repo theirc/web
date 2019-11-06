@@ -1,9 +1,11 @@
+// libs
 import React from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import tinycolor from "tinycolor2";
-import cms from '../content/cms';
 
+// local
+import cms from '../content/cms';
 import "./SearchPage.css";
 import "./ServiceCategoryList.css";
 import "./CategoryList.css";

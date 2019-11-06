@@ -1,5 +1,8 @@
+// libs
 import React, { Component } from "react";
 import { translate } from "react-i18next";
+
+// local
 import "./LocalGuideWidget.css";
 
 class LocalGuideWidget extends Component {

@@ -1,6 +1,9 @@
+// libs
 import React, { Component } from "react";
 import _ from "lodash";
 import { translate } from "react-i18next";
+
+// local
 import "./TopCategoriesWidget.css";
 
 class TopCategoriesWidget extends Component {

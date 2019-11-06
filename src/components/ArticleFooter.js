@@ -8,9 +8,6 @@ import { translate } from "react-i18next";
 // local
 import "./ArticleFooter.css";
 
-/**
- *
- */
 class ArticleFooter extends Component {
 	static propTypes = {
 		onNavigateTo: PropTypes.func,

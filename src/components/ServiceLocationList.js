@@ -1,11 +1,11 @@
+// libs
 import React from "react";
-import "./ServiceHome.css";
-import {
-	translate
-} from "react-i18next";
-import HeaderBar from "./HeaderBar";
 import _ from "lodash";
+import { translate } from "react-i18next";
 
+// local
+import HeaderBar from "./HeaderBar";
+import "./ServiceHome.css";
 
 class ServiceCategoryList extends React.Component {
 	state = {

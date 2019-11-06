@@ -1,12 +1,14 @@
+// libs
 import React from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import _ from "lodash";
 import tinycolor from "tinycolor2";
+
+// local
 import HeaderBar from "./HeaderBar";
 import ServiceMapDesktop from "./ServiceMapDesktop";
 import servicesApi from '../content/servicesApi';
-
 import "./ServiceHome.css";
 import "./ServiceCategoryList.css";
 

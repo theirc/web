@@ -1,3 +1,4 @@
+// libs
 import React, { Component } from "react";
 import ReactDOM from "react-dom"
 import PropTypes from "prop-types";
@@ -8,8 +9,9 @@ import FacebookPlayer from "react-facebook-player";
 import YouTube from "react-youtube";
 import InstagramEmbed from 'react-instagram-embed';
 import { translate } from "react-i18next";
-import HeaderBar from "./HeaderBar";
 
+// local
+import HeaderBar from "./HeaderBar";
 import "./ArticlePage.css";
 
 const moment = global.moment;

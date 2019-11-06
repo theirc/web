@@ -1,16 +1,12 @@
-import React, {
-    Component
-} from "react";
-//import PropTypes from 'prop-types';
-import {
-    translate
-} from "react-i18next";
-import "./CountrySelector.css";
-
-import getSessionStorage from "../shared/sessionStorage";
+// libs
+import React, { Component } from "react";
+import { translate } from "react-i18next";
 import PropTypes from "prop-types";
-
 import _ from "lodash";
+
+// local
+import getSessionStorage from "../shared/sessionStorage";
+import "./CountrySelector.css";
 
 class CountrySelector extends Component {
     static propTypes = {};

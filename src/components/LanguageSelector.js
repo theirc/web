@@ -1,6 +1,8 @@
+// libs
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 
+// local
 import "./LanguageSelector.css";
 import getSessionStorage from "../shared/sessionStorage";
 

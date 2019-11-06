@@ -1,7 +1,9 @@
+// libs
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-
 import { Close } from "material-ui-icons";
+
+// local
 import "./WarningDialog.css";
 
 const Remarkable = require("remarkable");

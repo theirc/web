@@ -1,13 +1,14 @@
+// libs
 import React from "react";
 import ReactDOM from "react-dom";
 import ReactDOMServer from "react-dom/server";
-import "./ServiceHome.css";
-import {
-	translate
-} from "react-i18next";
+import { translate } from "react-i18next";
 import circle from "@turf/circle";
 import bbox from "@turf/bbox";
+
+// local
 import getSessionStorage from "../shared/sessionStorage";
+import "./ServiceHome.css";
 
 var tinycolor = require("tinycolor2");
 let iconWithPrefix = vector_icon => vector_icon.split("-")[0] + " " + vector_icon;

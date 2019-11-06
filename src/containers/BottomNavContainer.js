@@ -1,8 +1,11 @@
+// libs
 import React from "react";
 import { connect } from "react-redux";
-import { BottomNav } from "../components";
 import PropTypes from "prop-types";
 import { push } from "react-router-redux";
+
+// local
+import { BottomNav } from "../components";
 
 class BottomNavContainer extends React.Component {
 	static propTypes = {
