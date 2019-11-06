@@ -8,11 +8,11 @@ import PropTypes from "prop-types";
 import measureDistance from "@turf/distance";
 
 // local
-import { CountrySelector, LanguageSelector, DetectLocationSelector } from "../components";
-import { actions } from "../store";
-import servicesApi from "../content/servicesApi";
-import getSessionStorage from "../shared/sessionStorage";
-import { Skeleton } from ".";
+import { CountrySelector, LanguageSelector, DetectLocationSelector } from "../../components";
+import { actions } from "../../store";
+import servicesApi from "../../content/servicesApi";
+import getSessionStorage from "../../shared/sessionStorage";
+import { Skeleton } from "..";
 
 class Selectors extends Component {
 	state = {
