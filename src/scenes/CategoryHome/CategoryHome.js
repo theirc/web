@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 import { push } from "react-router-redux";
 
 // local
-import { ArticleList } from '../components'
-import { Skeleton } from ".";
+import { ArticleList } from '../../components'
+import { Skeleton } from "..";
 
 const Remarkable = require("remarkable");
 
