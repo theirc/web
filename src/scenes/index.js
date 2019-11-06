@@ -10,7 +10,7 @@ import Services from "./Services";
 import Search from "./Search/Search";
 import Selectors from "./Selectors/Selectors";
 import Subscribe from "./Subscribe";
-import DemoTool from "./DemoTool";
+import DemoTool from "./DemoTool/DemoTool";
 
 export {
 	Home,
