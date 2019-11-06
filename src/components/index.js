@@ -16,7 +16,7 @@ import ServiceMapDesktop from "./ServiceMapDesktop";
 import ServiceCategoryList from "./ServiceCategoryList";
 import ServiceCategoryListDesktop from "./ServiceCategoryListDesktop";
 import ServiceLocationList from "./ServiceLocationList";
-import ServiceDepartmentList from "./ServiceDepartmentList";
+import ServiceDepartmentList from "../scenes/Services/ServiceDepartmentList";
 import ServiceList from "../scenes/Services/ServiceList";
 import DetectLocationSelector from "./DetectLocationSelector";
 import ServiceDetail from "../scenes/Services/ServiceDetail";
