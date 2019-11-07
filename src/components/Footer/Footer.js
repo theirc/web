@@ -9,7 +9,6 @@ import PropTypes from "prop-types";
 // local
 import "./Footer.css";
 
-
 class Footer extends Component {
 	state = {
 		copied: false
