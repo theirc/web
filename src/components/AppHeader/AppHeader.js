@@ -8,7 +8,7 @@ import { translate, Interpolate } from "react-i18next";
 import { Close, Home, List, Assignment } from "material-ui-icons";
 
 // local
-import cms from '../content/cms';
+import cms from '../../content/cms';
 import "./AppHeader.css";
 
 class AppHeader extends Component {
