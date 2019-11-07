@@ -24,7 +24,7 @@ import TopCategoriesWidget from "./TopCategoriesWidget";
 import LocalGuideWidget from "./LocalGuideWidget";
 import ArticleWidget from "./ArticleWidget";
 import CategoryWidget from "../scenes/CountryHome/CategoryWidget";
-import LocalDemo from "./LocalDemo";
+import LocalDemo from "../scenes/DemoTool/LocalDemo";
 import InstanceMovedWidget from "./InstanceMovedWidget";
 
 export {
