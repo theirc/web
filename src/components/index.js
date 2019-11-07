@@ -1,5 +1,5 @@
 import AppHeader from "./AppHeader/AppHeader";
-import BottomNav from "./BottomNav";
+import BottomNav from "./BottomNav/BottomNav";
 import WarningDialog from "./WarningDialog";
 import Footer from "./Footer";
 import ArticlePage from "../scenes/Article/ArticlePage";

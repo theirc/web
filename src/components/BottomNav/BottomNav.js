@@ -8,6 +8,7 @@ import { translate } from "react-i18next";
 
 // local
 import "./BottomNav.css";
+
 class BottomNav extends Component {
 	static propTypes = {
 		classes: PropTypes.object,
