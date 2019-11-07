@@ -7,8 +7,8 @@ import PropTypes from "prop-types";
 
 // local
 import servicesApi from "../../content/servicesApi";
-import { SearchPage } from "./SearchPage";
-import { Skeleton } from "..";
+import { SearchPage } from "../../components";
+import { Skeleton } from "../../scenes";
 
 class Search extends React.Component {
 	state = {
