@@ -4,7 +4,7 @@ import _ from "lodash";
 import { translate } from "react-i18next";
 
 // local
-import HeaderBar from "../../components/HeaderBar";
+import HeaderBar from "../../components/HeaderBar/HeaderBar";
 import "../../scenes/Services/ServiceHome.css";
 
 class ServiceCategoryList extends React.Component {

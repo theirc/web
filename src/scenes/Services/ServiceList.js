@@ -4,7 +4,7 @@ import { translate } from "react-i18next";
 import _ from "lodash";
 
 // local
-import HeaderBar from "../../components/HeaderBar";
+import HeaderBar from "../../components/HeaderBar/HeaderBar";
 import "../../scenes/Services/ServiceHome.css";
 
 var tinycolor = require("tinycolor2");

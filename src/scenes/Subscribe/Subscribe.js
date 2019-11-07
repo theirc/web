@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet";
 import { translate } from "react-i18next";
 
 // local
-import HeaderBar from "../../components/HeaderBar";
+import HeaderBar from "../../components/HeaderBar/HeaderBar";
 import { Skeleton } from "..";
 import "./Subscribe.scss";
 

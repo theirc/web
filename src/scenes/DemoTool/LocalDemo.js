@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { Helmet } from "react-helmet";
-import HeaderBar from "../../components/HeaderBar";
+import HeaderBar from "../../components/HeaderBar/HeaderBar";
 import PropTypes from "prop-types";
 
 // local

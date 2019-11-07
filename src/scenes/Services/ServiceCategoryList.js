@@ -4,7 +4,7 @@ import tinycolor from "tinycolor2";
 import { translate } from "react-i18next";
 
 // local
-import HeaderBar from "../../components/HeaderBar";
+import HeaderBar from "../../components/HeaderBar/HeaderBar";
 import "./ServiceHome.css";
 import "./ServiceCategoryList.css";
 

@@ -1,6 +1,6 @@
 import AppHeader from "./AppHeader/AppHeader";
 import BottomNav from "./BottomNav/BottomNav";
-import WarningDialog from "./WarningDialog";
+import WarningDialog from "./WarningDialog/WarningDialog";
 import Footer from "./Footer/Footer";
 import ArticlePage from "../scenes/Article/ArticlePage";
 import ArticleList from "../scenes/CategoryHome/ArticleList";

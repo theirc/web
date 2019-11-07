@@ -8,7 +8,7 @@ import { Helmet } from "react-helmet";
 import PropTypes from "prop-types";
 
 // local
-import HeaderBar from "../../components/HeaderBar";
+import HeaderBar from "../../components/HeaderBar/HeaderBar";
 import "../../scenes/Services/ServiceHome.css";
 
 // eslint-disable-next-line

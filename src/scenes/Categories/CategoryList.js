@@ -4,7 +4,7 @@ import { translate } from "react-i18next";
 import moment from 'moment';
 
 // local
-import HeaderBar from "../../components/HeaderBar";
+import HeaderBar from "../../components/HeaderBar/HeaderBar";
 import cms from '../../content/cms';
 import "./CategoryList.css";
 
