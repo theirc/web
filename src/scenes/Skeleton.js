@@ -10,8 +10,7 @@ import PropTypes from "prop-types";
 
 // local
 import { actions } from "../store";
-import { BottomNavContainer } from "../containers";
-import { AppHeader, Footer, WarningDialog } from "../components";
+import { AppHeader, BottomNavContainer, Footer, WarningDialog } from "../components";
 import i18n from "../i18n"; // initialized i18next instance
 import getSessionStorage from "../shared/sessionStorage";
 import "./Skeleton.css";

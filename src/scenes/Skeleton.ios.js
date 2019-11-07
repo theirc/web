@@ -3,7 +3,7 @@ import { actions, history } from "../store";
 import _ from "lodash";
 import { connect } from "react-redux";
 import { AppHeader, Footer, WarningDialog, HomeWidget } from "../components";
-import { BottomNavContainer } from "../containers";
+import { BottomNavContainer } from "../components";
 import { push, goBack } from "react-router-redux";
 import moment from "moment";
 import { AppRegistry, StyleSheet, StatusBar, View, ScrollView, Dimensions, BackHandler } from "react-native";

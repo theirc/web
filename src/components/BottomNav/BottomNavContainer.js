@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { push } from "react-router-redux";
 
 // local
-import { BottomNav } from "../components";
+import { BottomNav } from "../";
 
 class BottomNavContainer extends React.Component {
 	static propTypes = {

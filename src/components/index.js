@@ -1,5 +1,6 @@
 import AppHeader from "./AppHeader/AppHeader";
 import BottomNav from "./BottomNav/BottomNav";
+import BottomNavContainer from "./BottomNav/BottomNavContainer";
 import WarningDialog from "./WarningDialog/WarningDialog";
 import Footer from "./Footer/Footer";
 import ArticlePage from "../scenes/Article/ArticlePage";
@@ -30,6 +31,7 @@ import InstanceMovedWidget from "../scenes/CountryHome/InstanceMovedWidget";
 export {
 	AppHeader,
 	BottomNav,
+	BottomNavContainer,
 	WarningDialog,
 	Footer,
 	ArticlePage,
