@@ -7,9 +7,9 @@ import reduxPromiseMiddleware from "redux-promise-middleware";
 import createMemoryHistory from "history/createMemoryHistory";
 
 // local
-import reducers from "../reducers"; // Or wherever you keep your reducers
-import actions from "../actions";
-import { analyticsMiddleware } from "../middleware.js";
+import reducers from "./reducers"; // Or wherever you keep your reducers
+import actions from "./actions";
+import { analyticsMiddleware } from "./middleware";
 
 const history = createMemoryHistory();
 
