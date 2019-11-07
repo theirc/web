@@ -1,21 +1,21 @@
 import React from "react";
-import { actions, history } from "../store";
+import { actions, history } from "../../store";
 import _ from "lodash";
 import { connect } from "react-redux";
-import { AppHeader, Footer, WarningDialog, HomeWidget } from "../components";
-import { BottomNavContainer } from "../components";
+import { AppHeader, Footer, WarningDialog, HomeWidget } from "..";
+import { BottomNavContainer } from "..";
 import { push, goBack } from "react-router-redux";
 import moment from "moment";
 import { AppRegistry, StyleSheet, StatusBar, View, ScrollView, Dimensions, BackHandler } from "react-native";
 import PropTypes from "prop-types";
 
 import { I18nextProvider } from "react-i18next";
-import i18n from "../i18n"; // initialized i18next instance
-import getSessionStorage from "../shared/sessionStorage";
-import window from "../shared/nativeDimensions";
+import i18n from "../../i18n"; // initialized i18next instance
+import getSessionStorage from "../../shared/sessionStorage";
+import window from "../../shared/nativeDimensions";
 import { Platform } from "react-native";
 import DeviceInfo from "react-native-device-info";
-import getDirection from "../shared/getDirection";
+import getDirection from "../../shared/getDirection";
 
 const deviceDirection = getDirection(_.first(DeviceInfo.getDeviceLocale().split("-")));
 

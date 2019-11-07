@@ -3,7 +3,7 @@ import Article from "./Article/Article";
 import Categories from "./Categories/Categories";
 import CountryHome from "./CountryHome/CountryHome";
 import CategoryHome from "./CategoryHome/CategoryHome";
-import Skeleton from "./Skeleton";
+import Skeleton from "../components/Skeleton/Skeleton";
 import CountrySelectorScene from "./CountrySelector/CountrySelectorScene";
 import LanguageSelectorScene from "./LanguageSelector/LanguageSelectorScene";
 import Services from "./Services/Services";

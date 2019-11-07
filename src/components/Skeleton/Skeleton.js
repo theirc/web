@@ -9,10 +9,10 @@ import moment from "moment";
 import PropTypes from "prop-types";
 
 // local
-import { actions } from "../store";
-import { AppHeader, BottomNavContainer, Footer, WarningDialog } from "../components";
-import i18n from "../i18n"; // initialized i18next instance
-import getSessionStorage from "../shared/sessionStorage";
+import { actions } from "../../store";
+import { AppHeader, BottomNavContainer, Footer, WarningDialog } from "..";
+import i18n from "../../i18n"; // initialized i18next instance
+import getSessionStorage from "../../shared/sessionStorage";
 import "./Skeleton.css";
 
 class Skeleton extends React.Component {
