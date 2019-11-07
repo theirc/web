@@ -22,7 +22,7 @@ import DetectLocationSelector from "../scenes/Selectors/DetectLocationSelector";
 import ServiceDetail from "../scenes/Services/ServiceDetail";
 import TopCategoriesWidget from "../scenes/CountryHome/TopCategoriesWidget";
 import LocalGuideWidget from "../scenes/CountryHome/LocalGuideWidget";
-import ArticleWidget from "./ArticleWidget";
+import ArticleWidget from "../scenes/CountryHome/ArticleWidget";
 import CategoryWidget from "../scenes/CountryHome/CategoryWidget";
 import LocalDemo from "../scenes/DemoTool/LocalDemo";
 import InstanceMovedWidget from "../scenes/CountryHome/InstanceMovedWidget";
