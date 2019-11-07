@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 // local
 import { ArticlePage, ArticleFooter } from "../../components";
 import Placeholder from "../../shared/placeholder";
-import { actions } from "../../store";
+import { actions } from "../../shared/store";
 import { Skeleton } from "..";
 
 const Promise = require("bluebird");

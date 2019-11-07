@@ -1,16 +1,12 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
+// libs
 import React, { Component } from "react";
 import { AppRegistry, StyleSheet, Text, View, Dimensions } from "react-native";
-import { Skeleton } from "./src/scenes";
-import { store } from "./src/store";
+import { store } from "./src/shared/store";
 import App from "./src/App";
 import { Provider } from "react-redux";
 import PropTypes from "prop-types";
+
+// local
 import nativeColors from "./src/shared/nativeColors";
 import nativeDimensions from "./src/shared/nativeDimensions";
 

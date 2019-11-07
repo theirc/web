@@ -1,16 +1,15 @@
+// libs
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
-
-import reducers from "./reducers"; // Or wherever you keep your reducers
-import actions from "./actions";
-
 import { routerMiddleware } from "react-router-redux";
 import { routerReducer } from "react-router-redux";
-
 import reduxThunk from "redux-thunk";
 import reduxPromiseMiddleware from "redux-promise-middleware";
-import { analyticsMiddleware } from "./middleware.js";
-
 import createMemoryHistory from "history/createMemoryHistory";
+
+// local
+import reducers from "../reducers"; // Or wherever you keep your reducers
+import actions from "../actions";
+import { analyticsMiddleware } from "../middleware.js";
 
 const history = createMemoryHistory();
 

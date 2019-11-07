@@ -5,7 +5,7 @@ import _ from "lodash";
 import PropTypes from "prop-types";
 
 // local
-import { actions } from "../store";
+import { actions } from "./store";
 import servicesApi from "../content/servicesApi";
 
 export function withCountry(WrappedComponent) {

@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 
 // local
-import { store } from "./store";
+import { store } from "./shared/store";
 import App from "./App";
 import * as serviceWorker from './registerServiceWorker';
 

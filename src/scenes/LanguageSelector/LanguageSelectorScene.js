@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 
 // local
 import { LanguageSelector } from "./LanguageSelector";
-import { actions } from "../../store";
+import { actions } from "../../shared/store";
 import getSessionStorage from "../../shared/sessionStorage";
 
 class LanguageSelectorScene extends React.Component {

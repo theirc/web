@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 
 // local
 import { CategoryList } from "../../components";
-import { history } from "../../store";
+import { history } from "../../shared/store";
 import { Skeleton } from "..";
 
 class Categories extends React.Component {

@@ -9,7 +9,7 @@ import measureDistance from "@turf/distance";
 
 // local
 import { CountrySelector, LanguageSelector, DetectLocationSelector } from "../../components";
-import { actions } from "../../store";
+import { actions } from "../../shared/store";
 import servicesApi from "../../content/servicesApi";
 import getSessionStorage from "../../shared/sessionStorage";
 import { Skeleton } from "..";
