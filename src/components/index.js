@@ -21,7 +21,7 @@ import ServiceList from "../scenes/Services/ServiceList";
 import DetectLocationSelector from "../scenes/Selectors/DetectLocationSelector";
 import ServiceDetail from "../scenes/Services/ServiceDetail";
 import TopCategoriesWidget from "./TopCategoriesWidget";
-import LocalGuideWidget from "./LocalGuideWidget";
+import LocalGuideWidget from "../scenes/CountryHome/LocalGuideWidget";
 import ArticleWidget from "./ArticleWidget";
 import CategoryWidget from "../scenes/CountryHome/CategoryWidget";
 import LocalDemo from "../scenes/DemoTool/LocalDemo";
