@@ -5,7 +5,7 @@ import Footer from "./Footer";
 import ArticlePage from "../scenes/Article/ArticlePage";
 import ArticleList from "../scenes/CategoryHome/ArticleList";
 import ArticleFooter from "../scenes/Article/ArticleFooter";
-import CategoryList from "./CategoryList";
+import CategoryList from "../scenes/Categories/CategoryList";
 import CountrySelector from "../scenes/CountrySelector/CountrySelector";
 import LanguageSelector from "../scenes/LanguageSelector/LanguageSelector";
 import HomeWidget from "./HomeWidget";

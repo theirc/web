@@ -5,7 +5,7 @@ import ReactDOMServer from "react-dom/server";
 import { translate } from "react-i18next";
 
 // local
-import "./ServiceHome.css";
+import "../scenes/Services/ServiceHome.css";
 
 var tinycolor = require("tinycolor2");
 let iconWithPrefix = vector_icon => vector_icon.split("-")[0] + " " + vector_icon;

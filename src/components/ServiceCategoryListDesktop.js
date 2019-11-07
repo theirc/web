@@ -9,7 +9,7 @@ import tinycolor from "tinycolor2";
 import HeaderBar from "./HeaderBar";
 import ServiceMapDesktop from "./ServiceMapDesktop";
 import servicesApi from '../content/servicesApi';
-import "./ServiceHome.css";
+import "../scenes/Services/ServiceHome.css";
 import "./ServiceCategoryList.css";
 
 const FilterTypes = {

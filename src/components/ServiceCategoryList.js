@@ -5,7 +5,7 @@ import { translate } from "react-i18next";
 
 // local
 import HeaderBar from "./HeaderBar";
-import "./ServiceHome.css";
+import "../scenes/Services/ServiceHome.css";
 import "./ServiceCategoryList.css";
 
 class ServiceCategoryList extends React.Component {

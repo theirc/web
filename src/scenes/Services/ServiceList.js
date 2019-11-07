@@ -5,7 +5,7 @@ import _ from "lodash";
 
 // local
 import HeaderBar from "../../components/HeaderBar";
-import "../../components/ServiceHome.css";
+import "../../scenes/Services/ServiceHome.css";
 
 var tinycolor = require("tinycolor2");
 class ServiceList extends React.Component {
