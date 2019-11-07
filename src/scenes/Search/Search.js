@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 
 // local
 import servicesApi from "../../content/servicesApi";
-import { SearchPage } from "../../components";
+import { SearchPage } from "./SearchPage";
 import { Skeleton } from "..";
 
 class Search extends React.Component {
