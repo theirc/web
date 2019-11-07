@@ -25,7 +25,7 @@ import LocalGuideWidget from "../scenes/CountryHome/LocalGuideWidget";
 import ArticleWidget from "./ArticleWidget";
 import CategoryWidget from "../scenes/CountryHome/CategoryWidget";
 import LocalDemo from "../scenes/DemoTool/LocalDemo";
-import InstanceMovedWidget from "./InstanceMovedWidget";
+import InstanceMovedWidget from "../scenes/CountryHome/InstanceMovedWidget";
 
 export {
 	AppHeader,
