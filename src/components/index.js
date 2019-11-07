@@ -9,7 +9,7 @@ import CategoryList from "../scenes/Categories/CategoryList";
 import CountrySelector from "../scenes/CountrySelector/CountrySelector";
 import LanguageSelector from "../scenes/LanguageSelector/LanguageSelector";
 import HomeWidget from "../scenes/CountryHome/HomeWidget";
-import HomeWidgetCollection from "./HomeWidgetCollection";
+import HomeWidgetCollection from "../scenes/CountryHome/HomeWidgetCollection";
 import SearchPage from "../scenes/Search/SearchPage";
 import ServiceMap from "../scenes/Services/ServiceMap";
 import ServiceMapDesktop from "../scenes/Services/ServiceMapDesktop";
