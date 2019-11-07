@@ -7,7 +7,7 @@ import tinycolor from "tinycolor2";
 // local
 import cms from '../content/cms';
 import "./SearchPage.css";
-import "./ServiceCategoryList.css";
+import "../scenes/Services/ServiceCategoryList.css";
 import "../scenes/Categories/CategoryList.css";
 
 const Remarkable = require("remarkable");

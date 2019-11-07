@@ -6,10 +6,10 @@ import _ from "lodash";
 import tinycolor from "tinycolor2";
 
 // local
-import HeaderBar from "./HeaderBar";
+import HeaderBar from "../../components/HeaderBar";
+import servicesApi from '../../content/servicesApi';
 import ServiceMapDesktop from "./ServiceMapDesktop";
-import servicesApi from '../content/servicesApi';
-import "../scenes/Services/ServiceHome.css";
+import "./ServiceHome.css";
 import "./ServiceCategoryList.css";
 
 const FilterTypes = {
