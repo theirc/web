@@ -5,10 +5,10 @@ import _ from "lodash";
 import { translate } from "react-i18next";
 
 // local
-import { TopCategoriesWidget } from "./";
-import { LocalGuideWidget } from "./";
-import { ArticleWidget } from "./";
-import { CategoryWidget } from "./";
+import { TopCategoriesWidget } from "../../components";
+import { LocalGuideWidget } from "../../components";
+import { ArticleWidget } from "../../components";
+import { CategoryWidget } from "../../components";
 import "./HomeWidget.css";
 
 class HomeWidget extends Component {

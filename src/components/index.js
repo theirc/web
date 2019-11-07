@@ -8,7 +8,7 @@ import ArticleFooter from "../scenes/Article/ArticleFooter";
 import CategoryList from "../scenes/Categories/CategoryList";
 import CountrySelector from "../scenes/CountrySelector/CountrySelector";
 import LanguageSelector from "../scenes/LanguageSelector/LanguageSelector";
-import HomeWidget from "./HomeWidget";
+import HomeWidget from "../scenes/CountryHome/HomeWidget";
 import HomeWidgetCollection from "./HomeWidgetCollection";
 import SearchPage from "./SearchPage";
 import ServiceMap from "../scenes/Services/ServiceMap";
@@ -23,7 +23,7 @@ import ServiceDetail from "../scenes/Services/ServiceDetail";
 import TopCategoriesWidget from "./TopCategoriesWidget";
 import LocalGuideWidget from "./LocalGuideWidget";
 import ArticleWidget from "./ArticleWidget";
-import CategoryWidget from "./CategoryWidget";
+import CategoryWidget from "../scenes/CountryHome/CategoryWidget";
 import LocalDemo from "./LocalDemo";
 import InstanceMovedWidget from "./InstanceMovedWidget";
 
