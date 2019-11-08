@@ -19,7 +19,7 @@ import ServiceCategoryListDesktop from "../scenes/Services/ServiceCategoryListDe
 import ServiceLocationList from "../scenes/Services/ServiceLocationList";
 import ServiceDepartmentList from "../scenes/Services/ServiceDepartmentList";
 import ServiceList from "../scenes/Services/ServiceList";
-import DetectLocationSelector from "../scenes/Selectors/DetectLocationSelector";
+import DetectLocationSelector from "../scenes/Selectors/components/DetectLocationSelector";
 import ServiceDetail from "../scenes/Services/ServiceDetail";
 import TopCategoriesWidget from "../scenes/CountryHome/components/TopCategoriesWidget";
 import LocalGuideWidget from "../scenes/CountryHome/components/LocalGuideWidget";
