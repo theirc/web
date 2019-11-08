@@ -4,8 +4,8 @@ import { translate } from "react-i18next";
 import moment from 'moment';
 
 // local
-import HeaderBar from "../../components/HeaderBar/HeaderBar";
-import cms from '../../backend/cms';
+import HeaderBar from "../../../components/HeaderBar/HeaderBar";
+import cms from '../../../backend/cms';
 import "./CategoryList.css";
 
 class CategoryList extends Component {

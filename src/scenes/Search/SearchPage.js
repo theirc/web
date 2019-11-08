@@ -8,7 +8,7 @@ import tinycolor from "tinycolor2";
 import cms from '../../backend/cms';
 import "./SearchPage.css";
 import "../Services/ServiceCategoryList.css";
-import "../Categories/CategoryList.css";
+import "../Categories/components/CategoryList.css";
 
 const Remarkable = require("remarkable");
 
