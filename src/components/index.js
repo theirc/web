@@ -9,8 +9,8 @@ import ArticleFooter from "../scenes/Article/components/ArticleFooter";
 import CategoryList from "../scenes/Categories/components/CategoryList";
 import CountrySelector from "../scenes/CountrySelector/CountrySelector";
 import LanguageSelector from "../scenes/LanguageSelector/LanguageSelector";
-import HomeWidget from "../scenes/CountryHome/HomeWidget";
-import HomeWidgetCollection from "../scenes/CountryHome/HomeWidgetCollection";
+import HomeWidget from "../scenes/CountryHome/components/HomeWidget";
+import HomeWidgetCollection from "../scenes/CountryHome/components/HomeWidgetCollection";
 import SearchPage from "../scenes/Search/SearchPage";
 import ServiceMap from "../scenes/Services/ServiceMap";
 import ServiceMapDesktop from "../scenes/Services/ServiceMapDesktop";
@@ -21,12 +21,12 @@ import ServiceDepartmentList from "../scenes/Services/ServiceDepartmentList";
 import ServiceList from "../scenes/Services/ServiceList";
 import DetectLocationSelector from "../scenes/Selectors/DetectLocationSelector";
 import ServiceDetail from "../scenes/Services/ServiceDetail";
-import TopCategoriesWidget from "../scenes/CountryHome/TopCategoriesWidget";
-import LocalGuideWidget from "../scenes/CountryHome/LocalGuideWidget";
-import ArticleWidget from "../scenes/CountryHome/ArticleWidget";
-import CategoryWidget from "../scenes/CountryHome/CategoryWidget";
+import TopCategoriesWidget from "../scenes/CountryHome/components/TopCategoriesWidget";
+import LocalGuideWidget from "../scenes/CountryHome/components/LocalGuideWidget";
+import ArticleWidget from "../scenes/CountryHome/components/ArticleWidget";
+import CategoryWidget from "../scenes/CountryHome/components/CategoryWidget";
 import LocalDemo from "../scenes/DemoTool/LocalDemo";
-import InstanceMovedWidget from "../scenes/CountryHome/InstanceMovedWidget";
+import InstanceMovedWidget from "../scenes/CountryHome/components/InstanceMovedWidget";
 
 export {
 	AppHeader,

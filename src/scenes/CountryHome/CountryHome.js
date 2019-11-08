@@ -6,7 +6,7 @@ import { push } from "react-router-redux";
 
 // local
 import { HomeWidget, HomeWidgetCollection} from "../../components";
-import { InstanceMovedWidget } from './InstanceMovedWidget';
+import { InstanceMovedWidget } from './components/InstanceMovedWidget';
 import Skeleton from '../../components/Skeleton/Skeleton';
 import getSessionStorage from "../../shared/sessionStorage";
 
