@@ -11,7 +11,7 @@ import CountrySelector from "../scenes/CountrySelector/components/CountrySelecto
 import LanguageSelector from "../scenes/LanguageSelector/components/LanguageSelector";
 import HomeWidget from "../scenes/CountryHome/components/HomeWidget";
 import HomeWidgetCollection from "../scenes/CountryHome/components/HomeWidgetCollection";
-import SearchPage from "../scenes/Search/SearchPage";
+import SearchPage from "../scenes/Search/components/SearchPage";
 import ServiceMap from "../scenes/Services/ServiceMap";
 import ServiceMapDesktop from "../scenes/Services/ServiceMapDesktop";
 import ServiceCategoryList from "../scenes/Services/ServiceCategoryList";
