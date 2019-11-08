@@ -4,7 +4,7 @@ import { translate } from "react-i18next";
 
 // local
 import "./LanguageSelector.css";
-import getSessionStorage from "../../shared/sessionStorage";
+import getSessionStorage from "../../../shared/sessionStorage";
 
 class LanguageSelector extends Component {
 	static propTypes = {};

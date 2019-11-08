@@ -6,7 +6,7 @@ import { Redirect } from "react-router";
 import PropTypes from "prop-types";
 
 // local
-import { LanguageSelector } from "./LanguageSelector";
+import { LanguageSelector } from "./components/LanguageSelector";
 import { actions } from "../../shared/store";
 import getSessionStorage from "../../shared/sessionStorage";
 
