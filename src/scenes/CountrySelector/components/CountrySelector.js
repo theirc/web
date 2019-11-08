@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import _ from "lodash";
 
 // local
-import getSessionStorage from "../../shared/sessionStorage";
+import getSessionStorage from "../../../shared/sessionStorage";
 import "./CountrySelector.css";
 
 class CountrySelector extends Component {

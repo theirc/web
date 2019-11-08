@@ -7,7 +7,7 @@ import ArticlePage from "../scenes/Article/components/ArticlePage";
 import ArticleList from "../scenes/CategoryHome/components/ArticleList";
 import ArticleFooter from "../scenes/Article/components/ArticleFooter";
 import CategoryList from "../scenes/Categories/components/CategoryList";
-import CountrySelector from "../scenes/CountrySelector/CountrySelector";
+import CountrySelector from "../scenes/CountrySelector/components/CountrySelector";
 import LanguageSelector from "../scenes/LanguageSelector/LanguageSelector";
 import HomeWidget from "../scenes/CountryHome/components/HomeWidget";
 import HomeWidgetCollection from "../scenes/CountryHome/components/HomeWidgetCollection";
