@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { push } from "react-router-redux";
 
 // local
-import { LocalDemo } from "./LocalDemo";
+import { LocalDemo } from "./components/LocalDemo";
 import getSessionStorage from "../../shared/sessionStorage";
 import { Skeleton } from "..";
 
