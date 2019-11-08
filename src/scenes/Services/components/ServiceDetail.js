@@ -8,8 +8,8 @@ import { Helmet } from "react-helmet";
 import PropTypes from "prop-types";
 
 // local
-import HeaderBar from "../../components/HeaderBar/HeaderBar";
-import "../../scenes/Services/ServiceHome.css";
+import HeaderBar from "../../../components/HeaderBar/HeaderBar";
+import "./ServiceHome.css";
 
 // eslint-disable-next-line
 //const GMAPS_API_KEY = "AIzaSyA7eG6jYi03E6AjJ8lhedMuaLS9mVoJjJ8";

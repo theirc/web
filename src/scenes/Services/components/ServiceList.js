@@ -4,8 +4,8 @@ import { translate } from "react-i18next";
 import _ from "lodash";
 
 // local
-import HeaderBar from "../../components/HeaderBar/HeaderBar";
-import "../../scenes/Services/ServiceHome.css";
+import HeaderBar from "../../../components/HeaderBar/HeaderBar";
+import "./ServiceHome.css";
 
 var tinycolor = require("tinycolor2");
 class ServiceList extends React.Component {

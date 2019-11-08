@@ -6,8 +6,8 @@ import _ from "lodash";
 import tinycolor from "tinycolor2";
 
 // local
-import HeaderBar from "../../components/HeaderBar/HeaderBar";
-import servicesApi from '../../backend/servicesApi';
+import HeaderBar from "../../../components/HeaderBar/HeaderBar";
+import servicesApi from '../../../backend/servicesApi';
 import ServiceMapDesktop from "./ServiceMapDesktop";
 import "./ServiceHome.css";
 import "./ServiceCategoryList.css";
