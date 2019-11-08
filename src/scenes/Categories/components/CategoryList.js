@@ -157,6 +157,7 @@ class CategoryList extends Component {
 							if (c.sys.id === this.state.selectedCategory || !this.state.selectedCategory.length) {
 								return this.renderTiles(c);
 							}
+							return null;
 						})}
 					</ul>
 				</div>

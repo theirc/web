@@ -72,7 +72,7 @@ class LocalDemo extends Component {
 			})
 			let backendUrl = 'https://admin.refugee.info/e/production/v2/services/search/?id=';
 
-			demoConfig[site].services.map(id => {
+			demoConfig[site].services.map(id =>
 				fetch(backendUrl + id)
 					.then(res => {
 						return res.json()
@@ -80,8 +80,7 @@ class LocalDemo extends Component {
 					.then(res => {
 
 					})
-			})
-
+			)
 		}
 		return (
 			<div className="LocalDemo">

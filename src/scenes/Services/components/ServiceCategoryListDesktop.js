@@ -69,7 +69,7 @@ class ServiceCategoryListDesktop extends React.Component {
 			fetchCategories().then(categories => {
 				this.setState({ categories, loaded: true });
 				if (category) {
-					let cat = categories.filter(c => c.id === parseInt(category))[0];
+					let cat = categories.filter(c => c.id === parseInt(category, 10))[0];
 					if (cat) {
 						this.setState({ category: cat });
 					}
