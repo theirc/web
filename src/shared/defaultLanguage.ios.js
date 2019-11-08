@@ -3,7 +3,7 @@ import getSessionStorage from "./sessionStorage";
 import appConfig from "../../config.app.json";
 import DeviceInfo from "react-native-device-info";
 
-const conf = require("../content/config");
+const conf = require("../backend/config");
 const sessionStorage = getSessionStorage();
 let defaultLanguage = "en";
 const config = conf[appConfig.app.url];

@@ -5,7 +5,7 @@ import moment from 'moment';
 
 // local
 import HeaderBar from "../../components/HeaderBar/HeaderBar";
-import cms from '../../content/cms';
+import cms from '../../backend/cms';
 import "./CategoryList.css";
 
 class CategoryList extends Component {

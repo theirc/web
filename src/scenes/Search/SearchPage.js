@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import tinycolor from "tinycolor2";
 
 // local
-import cms from '../../content/cms';
+import cms from '../../backend/cms';
 import "./SearchPage.css";
 import "../Services/ServiceCategoryList.css";
 import "../Categories/CategoryList.css";

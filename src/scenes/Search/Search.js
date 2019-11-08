@@ -6,7 +6,7 @@ import { push } from "react-router-redux";
 import PropTypes from "prop-types";
 
 // local
-import servicesApi from "../../content/servicesApi";
+import servicesApi from "../../backend/servicesApi";
 import { SearchPage } from "../../components";
 import { Skeleton } from "../../scenes";
 

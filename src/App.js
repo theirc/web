@@ -8,8 +8,8 @@ import { Helmet } from "react-helmet";
 
 // local
 import Router from "./router";
-import cmsApi from "./content/cmsApi";
-import cms from "./content/cms";
+import cmsApi from "./backend/cmsApi";
+import cms from "./backend/cms";
 import "./App.css";
 
 

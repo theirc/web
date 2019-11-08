@@ -11,10 +11,10 @@ import nativeColors from "./src/shared/nativeColors";
 import nativeDimensions from "./src/shared/nativeDimensions";
 
 const window = Dimensions.get("window");
-const conf = require("./src/content/config");
-const cms = require("./src/content/cms").default;
-const servicesApi = require("./src/content/servicesApi");
-const cmsApi = require("./src/content/cmsApi").default;
+const conf = require("./src/backend/config");
+const cms = require("./src/backend/cms").default;
+const servicesApi = require("./src/backend/servicesApi");
+const cmsApi = require("./src/backend/cmsApi").default;
 const appConfig = require("./config.app.json");
 
 export default class Signpost extends Component {

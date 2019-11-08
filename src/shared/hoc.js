@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 
 // local
 import { actions } from "./store";
-import servicesApi from "../content/servicesApi";
+import servicesApi from "../backend/servicesApi";
 
 export function withCountry(WrappedComponent) {
 	class CountrySwitcher extends Component {

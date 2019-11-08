@@ -7,7 +7,7 @@ import tinycolor from "tinycolor2";
 
 // local
 import HeaderBar from "../../components/HeaderBar/HeaderBar";
-import servicesApi from '../../content/servicesApi';
+import servicesApi from '../../backend/servicesApi';
 import ServiceMapDesktop from "./ServiceMapDesktop";
 import "./ServiceHome.css";
 import "./ServiceCategoryList.css";

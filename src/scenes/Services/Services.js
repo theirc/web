@@ -13,7 +13,7 @@ import _ from "lodash";
 import { ServiceMap, ServiceCategoryList, ServiceLocationList, ServiceList, ServiceDetail, ServiceDepartmentList, ServiceCategoryListDesktop } from "../../components";
 import { Skeleton } from "..";
 import actions from "../../shared/actions";
-import servicesApi from "../../content/servicesApi";
+import servicesApi from "../../backend/servicesApi";
 import getSessionStorage from "../../shared/sessionStorage";
 
 class Services extends React.Component {

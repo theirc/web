@@ -2,7 +2,7 @@
 import queryString from "query-string";
 
 // local
-import cms from "../content/cms";
+import cms from "../backend/cms";
 import getLocalStorage from "./localStorage";
 
 const localStorage = getLocalStorage();

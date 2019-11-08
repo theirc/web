@@ -17,10 +17,10 @@ const logger = require("winston");
 const less = require("less");
 const fs = require("fs");
 const nunjucks = require("nunjucks");
-const conf = require("../content/config");
-const cms = require("../content/cms").default;
-const servicesApi = require("../content/servicesApi");
-const cmsApi = require("../content/cmsApi").default;
+const conf = require("../backend/config");
+const cms = require("../backend/cms").default;
+const servicesApi = require("../backend/servicesApi");
+const cmsApi = require("../backend/cmsApi").default;
 const ReactApp = require("../App").default;
 
 const React = require("react");
