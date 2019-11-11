@@ -9,12 +9,14 @@ import "./CategoryList.css";
 class CategoryList extends Component {
 	state = {
 		selectedCategory: 0,
+		selectedCategoryClassName: 'fa fa-list',
 		selectedCategoryName: '',
+		selectedIconText: '',
 		showCategoriesDD: false
 	};
 	
 	onChange = e => {
-		this.setState({ selectedCategory: e.sys.id, selectedCategoryName: e.fields.name, showCategoriesDD: false });
+		this.setState({ selectedCategory: e.sys.id, selectedIconText: e.fields.iconText, selectedCategoryClassName: e.fields.iconClass, selectedCategoryName: e.fields.name, showCategoriesDD: false });
 	}
 
 	toggleDD = () => this.setState({ showCategoriesDD: !this.state.showCategoriesDD});
@@ -27,24 +29,34 @@ class CategoryList extends Component {
 		let {country, language, onNavigate, t} = this.props;
 		
 		if(c.fields.categories) {
-			return c.fields.categories.map(a =>
-				(
-					<li className='tile' key={a.sys.id} onClick={() => console.log(`/${country.fields.slug}?language=`+language)}>
-						<div className='img-viewport'>
-							{!a.fields.hero && <img src='/placeholder.png' alt='' />}
-						</div>
-						<div className='text'>
-							{a.fields && <h2>{a.fields.name}</h2>}
-							<span className='author'>{`${t('By')} `}<span>{cms.siteConfig.author}</span></span>
-						</div>
-					</li>
-				)
-				);
-			}
+			return c.fields.categories.map(a => {
+
+				let image = '/placeholder.png';
+				a.fields.hero && (image = a.fields.hero.fields.file.url);
+				a.fields.gallery && (image = a.fields.gallery.fields.file.url);
+
+				return (
+						<li className='tile' key={a.sys.id} onClick={() => console.log(`/${country.fields.slug}?language=`+language)}>
+							<div className='img-viewport'>
+								<img src={image} alt='' />
+							</div>
+							<div className='text'>
+								{a.fields && <h2>{a.fields.name}</h2>}
+								<span className='author'>{`${t('By')} `}<span>{cms.siteConfig.author}</span></span>
+							</div>
+						</li>
+					)
+				}
+			);
+		}
 			
 		if(!c.fields.categories && !c.fields.articles) {
-			let image = c.fields.overview && c.fields.overview.fields && c.fields.overview.fields.hero ?
-									c.fields.overview.fields.hero.fields.file.url : '/placeholder.png';
+			let image = '/placeholder.png';
+			if(c.fields.overview) {
+				c.fields.overview.fields && c.fields.overview.fields.hero && (image = c.fields.overview.fields.hero.fields.file.url);
+				c.fields.overview.fields && c.fields.overview.fields.gallery && (image = c.fields.overview.fields.gallery.fields.file.url);
+			}
+					
 			
 			return (
 				<li key={c.sys.id} className='tile' onClick={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${c.fields.overview.fields.slug}?language=`+language)}>
@@ -60,18 +72,25 @@ class CategoryList extends Component {
 		}
 
 		if(c.fields.articles) {
-			return c.fields.articles.map(a => a.fields && (
-				<li key={a.sys.id} className='tile' onClick={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${a.fields.slug}?language=`+language)}>
-					<div className='img-viewport'>
-						{a.fields.hero && a.fields.hero.fields && <img src={a.fields.hero.fields.file.url + '?fm=jpg&fl=progressive'} alt='' />}
-						{!a.fields.hero && <img src='/placeholder.png' alt='' />}
-					</div>
-					<div className='text'>
-						<h2>{a.fields.title}</h2>
-						<span className='author'>{`${t('By')} `}<span>{cms.siteConfig.author}</span>, {moment(a.sys.updatedAt).format('YYYY.MM.DD')}</span>
-					</div>
-				</li>
-			));
+			return c.fields.articles.map(a => {
+
+				let image = '/placeholder.png';
+				a.fields.hero && (image = a.fields.hero.fields.file.url);
+				a.fields.gallery && (image = a.fields.gallery.fields.file.url);
+
+				return (
+					<li key={a.sys.id} className='tile' onClick={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${a.fields.slug}?language=`+language)}>
+						<div className='img-viewport'>
+							<img src={image} alt='' />
+						</div>
+						<div className='text'>
+							<h2>{a.fields.title}</h2>
+							<span className='author'>{`${t('By')} `}<span>{cms.siteConfig.author}</span>, {moment(a.sys.updatedAt).format('YYYY.MM.DD')}</span>
+						</div>
+					</li>
+					)
+				}
+			);
 		}
 	}
 
@@ -107,14 +126,15 @@ class CategoryList extends Component {
 				<div className='tiles-desktop'>
 					<div className='filter-bar'>
 						<button className='btn-filter' onClick={this.toggleDD}>
-							<span>
-								{this.state.selectedCategoryName.length ? this.state.selectedCategoryName : t('All Categories')}
-							</span>
+							<div className='content'>
+								<i className={this.state.selectedCategoryClassName || 'material-icons'}>{this.state.selectedIconText || ((!this.state.selectedCategoryClassName || this.state.selectedCategoryClassName === "material-icons") && "add")}</i>
+								<span>{this.state.selectedCategoryName.length ? this.state.selectedCategoryName : t('All Categories')}</span>
+							</div>
 							<i className="material-icons">keyboard_arrow_down</i>
 						</button>
 						{this.state.showCategoriesDD &&
 							<ul className='categories'>
-								<li value={0} className={!this.state.selectedCategory ? 'active': ''} onClick={() => this.onChange({ sys: { id: 0}, fields: {name: t('All Categories')}})}><i></i><span>{t('All Categories')}</span></li>
+								<li value={0} className={!this.state.selectedCategory ? 'active': ''} onClick={() => this.onChange({ sys: { id: 0}, fields: {name: t('All Categories'), iconClass: 'fa fa-list'}})}><i className='fa fa-list' /><span>{t('All Categories')}</span></li>
 								{
 									(categories || []).filter(showCategory).map(e =>
 										<li key={e.sys.id} value={e.sys.id} className={e.sys.id === this.state.selectedCategory ? 'active': ''} onClick={() => this.onChange(e)}>

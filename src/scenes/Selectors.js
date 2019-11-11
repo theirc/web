@@ -235,7 +235,7 @@ class Selectors extends Component {
 							onGoTo={slug => {
 								this.selectCountry(slug);
 							}}
-							countryList={countryList}
+							countryList={countryList.sort()}
 							regionList={regionList}
 							language={language}
 							backToLanguage={this.backToLanguage.bind(this)}
