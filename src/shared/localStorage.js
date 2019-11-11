@@ -15,16 +15,17 @@ export default function getLocalStorage() {
 	if (!lsTest()) {
 		if (global.Proxy) {
 			var handler = {
-				get: function(target, name) {
+				get: function (target, name) {
 					return target[name];
 				},
-				set: function(target, name, value) {
+				set: function (target, name, value) {
 					target[name] = _.isObjectLike(value) ? JSON.stringify(value) : _.toString(value);
 					return target[name];
 				},
 			};
 
 			var p = new Proxy({}, handler);
+			
 			if (global.window) {
 				global.window.mocklocalStorage = p;
 			}

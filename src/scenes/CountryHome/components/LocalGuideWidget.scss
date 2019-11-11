@@ -1,0 +1,88 @@
+@import "../../../shared/includes.scss";
+
+.LocalGuide {
+    .ltr & {
+        s {
+            float: right;
+        }
+    }
+    .rtl & {
+        s {
+            float: left;
+        }
+    }
+    .Container {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+
+        .LocalGuideItem {
+            display: block;
+            flex-basis: calc(50% - 5px);
+            margin-bottom: 5px;
+            margin-right: 10px;
+            .rtl & {
+                margin-left: 10px;
+                margin-right: 0;
+            }
+            text-align: center;
+            justify-content: center;
+
+            img {
+                height: 72px;
+                width: 100%;
+                object-fit: cover;
+            }
+            &:nth-child(odd) {
+                color: red;
+                margin-right: 5px;
+                margin-left: 0;
+
+                .rtl & {
+                    margin-left: 5px;
+                    margin-right: 0;
+                }
+            }
+
+            &:nth-child(even) {
+                color: blue;
+                margin-left: 5px;
+                margin-right: 0;
+
+                .rtl & {
+                    margin-right: 5px;
+                    margin-left: 0;
+                }
+            }
+        }
+        .Overlay:hover,
+        .Overlay:active {
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .Overlay {
+            cursor: pointer;
+            display: flex;
+            position: relative;
+            top: -76px;
+            .rtl & {
+                top: -80px;
+            }
+            background-color: rgba(0, 0, 0, 0.7);
+            height: 72px;
+            justify-content: center;
+            align-content: center;
+            align-items: center;
+            margin-bottom: -76px;
+            color: white;
+            font-size: 14px;
+            letter-spacing: 0;
+            line-height: 16px;
+            transition: background-color 1s ease-in-out;
+
+            @media (min-width: $desktopBreakpoint) {
+                font-size: 16px;
+            }
+        }
+    }
+}
