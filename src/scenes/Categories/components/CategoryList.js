@@ -30,8 +30,12 @@ class CategoryList extends Component {
 	renderTiles(c) {
 		let { country, language, onNavigate, t } = this.props;
 
+		if(!c.fields) { console.log('c.fields is null', c); return null;}
+
 		if (c.fields.categories) {
 			return c.fields.categories.map(a => {
+
+				if(!a.fields) return null;
 
 				let image = '/placeholder.png';
 				a.fields.hero && (image = a.fields.hero.fields.file.url);
@@ -74,6 +78,8 @@ class CategoryList extends Component {
 
 		if (c.fields.articles) {
 			return c.fields.articles.map(a => {
+
+				if(!a.fields) return null;
 
 				let image = '/placeholder.png';
 				a.fields.hero && (image = a.fields.hero.fields.file.url);
