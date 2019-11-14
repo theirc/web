@@ -229,7 +229,6 @@ class Selectors extends Component {
                         return <div className="LoaderContainer"><div className="loader" /></div>;
                     }
                     
-                    console.log(countryList, countryList.sort());
                     return (
                         <Skeleton hideShareButtons={true}>
                         <CountrySelector
