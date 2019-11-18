@@ -1,9 +1,12 @@
 import React, { Component } from "react";
-import { IconButton } from "material-ui";
+import { Search } from "material-ui-icons";
 import Headroom from "react-headrooms";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import { translate, Interpolate } from "react-i18next";
-import { Close } from "material-ui-icons";
+import { Close, Home, List, Assignment } from "material-ui-icons";
+import cms from '../content/cms';
+
 import "./AppHeader.css";
 
 class AppHeader extends Component {
@@ -13,6 +16,8 @@ class AppHeader extends Component {
 		onGoHome: PropTypes.func,
 		country: PropTypes.object,
 		language: PropTypes.string,
+		onGoToServices: PropTypes.func,
+		onGoToCategories: PropTypes.func,
 	};
 
 	state = {
@@ -29,7 +34,7 @@ class AppHeader extends Component {
 	toggleSearch() {
 		const { search } = this.state;
 		if (!search) {
-			window.scrollTo(0, 0);
+			//window.scrollTo(0, 0);
 		}
 		this.setState({ search: !search });
 	}
@@ -63,13 +68,32 @@ class AppHeader extends Component {
 	}
 
 	render() {
-		const { onChangeCountry, onChangeLanguage, disableLanguageSelector, disableCountrySelector, onGoHome, country, language, t } = this.props;
+		const {
+			disableCountrySelector,
+			disableLanguageSelector,
+			country,
+			headerColor,
+			homePage,
+			language,
+			onChangeCountry,
+			onChangeLanguage,
+			onGoHome,
+			onGoToCategories,
+			onGoToServices,
+			showServiceMap,
+			t,
+		} = this.props;
+
 		const { search, searchText } = this.state;
+		const backgroundDark = headerColor === 'light' ? false : true;
+		const logo = this.props.logo || "/logo.svg";
+		const logoBlack = this.props.logoBlack || logo;
 		const noop = () => {
 			console.log("noop");
 		};
 		const cookiePolicyLink = <a href="/greece/privacy/cookies" target="_blank" rel="noopener noreferrer">Cookie Policy</a>;
 		const privacyPolicyLink = <a href="/greece/privacy/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>;
+		const showHeaderBackground = !country || !language;
 		
 		let isOnServices = window.location.href.includes("/services/");
 		let isOnArticlesGreece = window.location.href.includes("/categories") || /(\/greece\/.*\/.*)/.test(window.location.href);
@@ -78,49 +102,58 @@ class AppHeader extends Component {
 		disclaimersLink = window.location.href.includes(disclaimersLink) ? '#' : disclaimersLink;
 
 		return (
-			<div className="AppHeader">
+			<div className={backgroundDark ? 'AppHeader' : 'AppHeaderLight'}>
 
 				<Headroom tolerance={5} offset={200}>
-					<div className="app-bar">
+					<div className={[homePage ? "header-opacity": "", backgroundDark ? 'app-bar' : 'app-bar-light', !(country && language) ? 'app-bar-black' : ''].join(" ")}>
 						<div className={["app-bar-container logo", !(country && language) ? "logo-centered" : ""].join(" ")} onClick={onGoHome || noop}>
-							<img onClick={onGoHome} src={this.props.logo || "/logo.svg"} className="app-bar-logo" alt=" " />
+							<img onClick={onGoHome} src={backgroundDark ? logo : logoBlack} className="app-bar-logo" alt=" " />
 						</div>
-						{country &&
-							language && (
+						{country && language &&
+							(
 								<div className="app-bar-container buttons">
 									<div className="app-bar-buttons">
+									<span className="app-bar-selectors top-menu" color="contrast" onClick={onGoHome || noop}>
+											{cms.siteConfig.author === 'CuentaNos' && <Home />}<span className='menu-item'>{t("Home")}</span>
+										</span>
+										<span className="app-bar-selectors top-menu" color="contrast" onClick={onGoToCategories || noop}>
+											{cms.siteConfig.author === 'CuentaNos' && <List />}<span className='menu-item'>{t("Articles")}</span>
+										</span>
+										{showServiceMap && <span className="app-bar-selectors top-menu" color="contrast" onClick={onGoToServices || noop}>
+											{cms.siteConfig.author === 'CuentaNos' && <Assignment />}<span className='menu-item'>{t("Services")}	</span>
+										</span>}
+										{!disableLanguageSelector && !disableCountrySelector && <div className="app-bar-separator" />}
 										{!disableCountrySelector && (
-											<span className="app-bar-selectors" color="contrast" onClick={onChangeCountry || noop}>
-												{(country && country.fields.name) || " "}
+											<span className="app-bar-selectors country" color="contrast" onClick={onChangeCountry || noop}>
+												{/* {(country && country.fields.name) || " "} */}
+												<img src={`/${country.fields.slug}.png`} />
 											</span>
 										)}
-										{!disableLanguageSelector && !disableCountrySelector && <div className="app-bar-separator" />}
 										{!disableLanguageSelector && (
-											<span className="app-bar-selectors" color="contrast" onClick={onChangeLanguage}>
+											<span className="app-bar-selectors lang" color="contrast" onClick={onChangeLanguage}>
 												{language || " "}
 											</span>
 										)}
 
-										<div className="app-bar-separator" />
-										<IconButton
-											className={`search-close ${[this.state.search && "active"].join(" ")} search-button `}
-											color="contrast"
-											onClick={this.toggleSearch.bind(this)}
-											style={{ width: 36 }}
-										/>
+										<div className="app-bar-separator separator-searchIcon" />
+										{!search && <Search className='search-btn' onClick={this.toggleSearch.bind(this)}/>}
+										{search && <i className="fa fa-times search-btn" onClick={this.toggleSearch.bind(this)} />}
+										
 									</div>
 								</div>
-							)}
+							)
+						}
 					</div>
 				</Headroom>
-				<div
+				{/* {showHeaderBackground &&  <div
 					style={{
 						backgroundColor: "#000000",
 						display: "block",
 						width: "100%",
 						height: 64,
 					}}
-				/>
+				/>} */}
+				{/* {!showHeaderBackground &&  <div className={backgroundDark ? 'headerBackground': 'headerBackgroundLight'}></div>} */}
 				{search && (
 					<form onSubmit={this.handleSubmit.bind(this)} className="SearchBar">
 						<input autoComplete="off" autoFocus name="searchText" placeholder={t("Search")} type="text" value={searchText} onChange={this.handleInputChange.bind(this)} />
@@ -130,8 +163,10 @@ class AppHeader extends Component {
 				)}
 				{!this.state.prvalert && this.props.cookieBanner && (
 					<div className={this.state.prvalert ? 'hidden' : 'privacy-banner'}>
-						<span className="privacy-banner-separator"></span>
-						<Interpolate i18nKey="COOKIES_BANNER" cookiePolicy={cookiePolicyLink} privacyPolicy={privacyPolicyLink}/>
+						<div className='content'>
+							<span className="privacy-banner-separator"></span>
+							<Interpolate i18nKey="COOKIES_BANNER" cookiePolicy={cookiePolicyLink} privacyPolicy={privacyPolicyLink}/>
+						</div>
 						<Close
 							className="close-alert"
 							color="contrast"
@@ -143,32 +178,38 @@ class AppHeader extends Component {
 
 				{this.state.serbiaAlert === '0' && isOnServices && window.location.href.includes('/serbia/') && (
 					<div className={this.state.serbiaAlert ? 'serbia-banner' : 'hidden'}>
-						<span className="serbia-banner-separator"></span>
-						<p>{t("SERBIA_BANNER")}</p>
-						<Close
-							className="close-alert"
-							color="contrast"
-							size={36}
-							onClick={this.closeSerbiaBanner.bind(this)}
-						/>
+						<div className='banner-wrapper'>
+							<span className="serbia-banner-separator"></span>
+							<p>{t("SERBIA_BANNER")}</p>
+							<Close
+								className="close-alert"
+								color="contrast"
+								size={36}
+								onClick={this.closeSerbiaBanner.bind(this)}
+							/>
+						</div>
 					</div>
 				)}
 
 				{(isOnServices || isOnArticlesGreece) && window.location.href.includes('/greece/') && (
 					<div className='serbia-banner'>
-						<span className="serbia-banner-separator"></span>
-						<a href={disclaimersLink}>
-							<p>{isOnServices ? t("GREECE_BANNER_SERVICES") : t('GREECE_BANNER_ARTICLES')}</p>
-						</a>
+						<div className='banner-wrapper'>
+							<span className="serbia-banner-separator"></span>
+							<a href={disclaimersLink}>
+								<p>{isOnServices ? t("GREECE_BANNER_SERVICES") : t('GREECE_BANNER_ARTICLES')}</p>
+							</a>
+						</div>
 					</div>
 				)}
 
 				{!(isOnServices || isOnArticlesGreece) && window.location.href.includes('/greece') && (
 					<div className='serbia-banner'>
-						<span className="serbia-banner-separator"></span>
-						<a href={disclaimersLink}>
-							<p>{t('GREECE_BANNER_HP')}</p>
-						</a>
+						<div className='banner-wrapper'>
+							<span className="serbia-banner-separator"></span>
+							<a href={disclaimersLink}>
+								<p>{t('GREECE_BANNER_HP')}</p>
+							</a>
+						</div>
 					</div>
 				)}
 
@@ -178,4 +219,10 @@ class AppHeader extends Component {
 	}
 }
 
-export default translate()(AppHeader);
+const mapStateToProps = ({ showServiceMap }, p) => {
+	return {
+		showServiceMap,
+	};
+};
+
+export default translate()(connect(mapStateToProps)(AppHeader));

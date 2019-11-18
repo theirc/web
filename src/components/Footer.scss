@@ -81,15 +81,21 @@
 		}
 
 		span {
-			text-align: center;
+			align-items: baseline;
+			color: #F5F5F5;
 			font-size: 12px;
 			letter-spacing: inherit;
-			align-items: baseline;
 			margin:0.4rem;
-			color: #F5F5F5;
+			text-align: center;
+
+			&.Signpost {
+				span {
+					color: #888;
+				}
+			}
 
 			&.padded {
-				padding: 3em;
+				padding: 2em 0 5em 0;
 			}
 			.administration-button{
 				width: 328px;
@@ -109,12 +115,11 @@
 	}
 
 	.button-container {
+		border-bottom: 1px #222 solid;
 		display: flex;
 		flex-direction: row;
+		padding: 2em 0;
 		width: 90%;
-		padding-top: 1.6em;
-		padding-bottom: 1.2em;
-		border-bottom: 1px $dividerColor solid;
 
 		.rtl & {
 			flex-direction: row-reverse;
@@ -130,6 +135,8 @@
 		align-items: center;
 		align-content: center;
 
+		
+
 		&.left {
 			height: 100%;
 			border: 0;
@@ -143,7 +150,11 @@
 		}
 	}
 
-	& {
-		margin-bottom: 57px;
+	.button-desktop{
+		@media (max-width: $desktopBreakpoint) {
+			display: none;
+		}
 	}
+
+	
 }

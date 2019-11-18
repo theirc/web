@@ -31,6 +31,7 @@ class ArticleList extends React.Component {
                                 </div>
                                 <s className="Read-More">
                                     <a href="#/">Read More</a>
+                                    <i className="material-icons">arrow_right</i>
                                 </s>
                             </div>,
                         ];

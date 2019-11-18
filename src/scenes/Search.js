@@ -5,6 +5,7 @@ import { SearchPage, InstanceMovedWidget } from "../components";
 import queryString from "query-string";
 import { push } from "react-router-redux";
 import PropTypes from "prop-types";
+import { Skeleton } from ".";
 
 /**
  * Note to future self. refactor this
@@ -64,14 +65,14 @@ class Search extends React.Component {
 		}, 10);
 	}
 	render() {
-		const { searchingArticles, searchingServices, articles, services, term } = this.state;
+		const { searchingArticles, searchingServices, language, articles, services, term } = this.state;
 		const { onNavigate, country } = this.props;
 		const { config } = this.context;
 		const instanceMoved = country.fields.slug === 'bulgaria';
 
 		return (
-			<div>
-				{ !instanceMoved &&
+			<Skeleton headerColor='light'>
+				<div className="SkeletonContainer bg-gray" >
 					<SearchPage
 						hideServices={config.hideServiceMap}
 						country={country}
@@ -81,12 +82,10 @@ class Search extends React.Component {
 						services={services}
 						term={term}
 						onNavigate={onNavigate}
+						language={language}
 					/>
-				}
-				{ instanceMoved &&
-					<InstanceMovedWidget link="http://refugeelife.bg/" />
-				}
-			</div>
+				</div>
+			</Skeleton>
 		);
 	}
 }

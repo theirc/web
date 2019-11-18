@@ -1,5 +1,4 @@
 import getSessionStorage from "../shared/sessionStorage";
-import getLocalStorage from "../shared/localStorage";
 import cms from "./cms";
 
 var request = require("superagent");
@@ -51,9 +50,9 @@ module.exports = {
 	},
 	fetchCountries(language) {
 		return new Promise((resolve, reject) => {
-			const localStorage = getLocalStorage();
-			if (localStorage[`${language}-countries`]) {
-				resolve(JSON.parse(localStorage[`${language}-countries`]));
+			const sessionStorage = getSessionStorage();
+			if (sessionStorage[`${language}-countries`]) {
+				resolve(JSON.parse(sessionStorage[`${language}-countries`]));
 			} else {
 				request
 					.get(RI_URL + "/regions/?countries=true")
@@ -63,7 +62,7 @@ module.exports = {
 							reject(err);
 							return;
 						}
-						localStorage[`${language}-countries`] = JSON.stringify(res.body);
+						sessionStorage[`${language}-countries`] = JSON.stringify(res.body);
 						resolve(res.body);
 					});
 			}
@@ -93,12 +92,11 @@ module.exports = {
 			}
 		});
 	},
-	fetchAllServices(country, language, categoryId, searchTerm, pageSize = 1000) {
+	fetchAllServices(country, language, categoryId, searchTerm, pageSize = 1000, ignoreRegions=false) {
 		//If the region is a country, search for all the services in any location from that country
 		//If the region is a city, search for all the services in the city AND country wide services
-		
-		let filter = "with-parents";
-		if (sessionStorage[`${language}-regions`]){
+		let filter = ignoreRegions ? 'relatives' : "with-parents";
+		if (!ignoreRegions && sessionStorage[`${language}-regions`]){
 			let regions = JSON.parse(sessionStorage[`${language}-regions`]);			
 			let region = _.first(regions.filter(c => c.slug === country));
 			filter = region.level === 3 ? "with-parents" : "relatives" ;
@@ -142,9 +140,9 @@ module.exports = {
 							searchTerm: searchTerm,
 							services: response
 						};
-						if (!sl || sl.categoryId !== null){
-							sessionStorage[`serviceList`] = JSON.stringify(servicesList);
-						}							
+						// if (!sl || sl.categoryId !== null){
+						// 	sessionStorage[`serviceList`] = JSON.stringify(servicesList);
+						// }							
 						let services = response
 
 						resolve(services);

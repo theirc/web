@@ -1,12 +1,12 @@
 import React from "react";
 import { translate } from "react-i18next";
 import _ from "lodash";
-import { Share, Link  } from "material-ui-icons";
-import { Helmet } from "react-helmet";
+import { LibraryBooks, Link  } from "material-ui-icons";
 import * as clipboard from "clipboard-polyfill";
+import { Helmet } from "react-helmet";
 import HeaderBar from "./HeaderBar";
 import PropTypes from "prop-types";
-
+import cms from '../content/cms';
 import "./ServiceHome.css";
 
 // eslint-disable-next-line
@@ -37,7 +37,7 @@ class ServiceDetail extends React.Component {
 		}else{
 			copySlug = (window.location + (window.location.toString().indexOf("?") > -1 ? "&" : "?") + "language=" + language);
 		}
-		this.state = { value: copySlug, copied: true, shareIN: true, showOtherServices: true };
+		this.state = { value: copySlug, copied: false, shareIN: true, showOtherServices: true };
 		this.sharePage = this.sharePage.bind(this);
 		this.showServices = this.showServices.bind(this);
 		this.Copiedlnk = this.Copiedlnk.bind(this);
@@ -62,6 +62,35 @@ class ServiceDetail extends React.Component {
 			}, 2);
 		}, 3000);
 	}
+
+	onCopyLink = () => {
+		this.setState({ copied: true });
+		
+		clipboard.writeText(document.location.href);
+
+		setTimeout(() => this.setState({ copied: false }), 1500);
+	}
+
+	onShareOnFacebook = () => {
+		const { language } = this.props
+		if (global.window) {
+			const { FB } = global.window;
+			let { href } = window.location;
+			console.log(FB, href)
+			href += (href.indexOf("?") > -1 ? "&" : "?") + "language=" + language;
+
+			if (FB) {
+				FB.ui(
+					{
+						method: "share",
+						href,
+					},
+					function (response) { }
+				);
+			}
+		}
+	}
+
 
 	share() {
 		const { language } = this.props;
@@ -143,16 +172,15 @@ class ServiceDetail extends React.Component {
 				break;
 		}
 		return (
-			<div>
-				<hr />
-				<div className="Selector" onClick={() => window.open(action)}>
-					<h1>
-						<div className="ContactInformation">
-							{typeText}<div className={textClass}>{text}</div>
-						</div>
-					</h1>
+			<div className="Selector" onClick={() => window.open(action)}>
+				<span className='icon-placeholder'>
 					<i className={typography} aria-hidden="true" />
-				</div>
+				</span>
+				<h1>
+					<div className="ContactInformation">
+						{typeText}<a href={action} className={textClass}>{text}</a>
+					</div>
+				</h1>
 			</div>
 		)
 	}
@@ -188,15 +216,7 @@ class ServiceDetail extends React.Component {
 				.locale(language);
 			return `${m.format("hh:mm")} ${m.hour() >= 12 ? t("pm") : t("am")}`;
 		};
-		const serviceProviderElement = s => {
-			return s.provider.website ? (
-				<a href={toUrl(s.provider.website)} className="providerName" rel="noopener noreferrer" target="_blank">
-					{s.provider.name}
-				</a>
-			) : (
-					s.provider.name
-				);
-		};
+		const serviceProviderElement = s => <span className='providerName'>{s.provider.name}</span>;
 
 		let point = service.location && _.reverse(_.clone(service.location.coordinates)).join(",");
 
@@ -250,18 +270,30 @@ class ServiceDetail extends React.Component {
 				<Helmet>
 					<title>{serviceT.name}</title>
 				</Helmet>
-				<HeaderBar subtitle={`${subtitle}:`} title={serviceT.name} />
 				<div className="hero">
-					<h2>
-						<small>{t("Service Provider")}:</small>
-						{serviceProviderElement(service)}
-					</h2>
 					{service.image && <div className="HeroImageContainer"><img src={service.image} alt={service.provider.name} /></div>}
+				</div>
+				{/* <em>{t("LAST_UPDATED") + " " + mLocale(service.updated_at)}</em> */}
+
+				<HeaderBar subtitle={`${subtitle}:`} title={serviceT.name} />
+				<div className='filter-bar'>
+					<div className="social">
+						<div href='#' className="share" onClick={this.onShareOnFacebook}><i className="fa fa-facebook-f" style={{ fontSize: 16 }}/></div>
+						<div href='#' className="copy" onClick={this.onCopyLink}>
+							{!this.state.copied ? <Link /> : <LibraryBooks />}
+						</div>
+						{this.state.copied && <span className='copied'>{t('Copied')}</span>}
+					</div>
 				</div>
 
 				<article>
-					<em>{t("LAST_UPDATED") + " " + mLocale(service.updated_at)}</em>
-					<h2>{serviceT.name}</h2>
+					<span className='author'><span>{t("LAST_UPDATED")}</span> {moment(service.updated_at).format('YYYY.MM.DD')}</span>
+
+					<h2 className='provider'>
+						{t("Service Provider")}:&nbsp;{serviceProviderElement(service)}
+					</h2>
+
+					{/* <h2>{serviceT.name}</h2> */}
 					<p dangerouslySetInnerHTML={{ __html: hotlinkTels(serviceT.description) }} />
 
 					{serviceT.additional_info && <h3>{t("Additional Information")}</h3>}
@@ -273,7 +305,7 @@ class ServiceDetail extends React.Component {
 					{hasHours(service.opening_time) && (
 						<span>
 							<h3>{t("Visiting hours")}</h3>
-							<div>{service.opening_time["24/7"] && t("Open 24/7")}</div>
+							<p>{service.opening_time["24/7"] && t("Open 24/7")}</p>
 							<div className="openingTable">
 								{!service.opening_time["24/7"] && (
 									<table>
@@ -311,112 +343,108 @@ class ServiceDetail extends React.Component {
 				{this.state.showOtherServices ? (
 				<div className="footer">
 
-					{<hr className="divider" />}
-					{this.state.shareIN ? (
-						<div className="selector" onClick={() => this.sharePage()}>
-							<h1>{t("Share this page")}</h1>
-							<Share className="icon" />
-						</div>
-					) : (
-						<div>
-							<div className="selector sharePage" onClick={() => {this.share();}}>
-								<h1>
-									{t("Share on Facebook")}
-								</h1>
-								<Share className="icon" />
-							</div>
-							<div className="verticalHR"/>
-							<div className="selector sharePage" onClick={() => this.Copiedlnk()}>
-								{this.state.copied ? <h1 >{t("Copy Link")}</h1> : <h1>{t("Copied")}</h1>}
-								<Link className="icon" />
-							</div>
-						</div>
-					)}
-
-					{service.location && <hr />}
 					{service.location && (
 						<div className="Selector" onClick={() => window.open(`https://www.google.com/maps/search/?api=1&query=${point}`)}>
+							<span className='icon-placeholder'>
+								<i className="MenuIcon fa fa-map" aria-hidden="true" />
+							</span>
 							<h1>{t("Get directions")}</h1>
-							<i className="MenuIcon fa fa-map" aria-hidden="true" />
 						</div>
 					)}
 
-					{service.phone_number && <hr />}
 					{service.phone_number && (
-						<div className="Selector" onClick={() => window.open(`tel:${phoneNumberWithCode}`)}>
+						<div className="Selector" onClick={() => window.open(`tel:${service.phone_number}`)}>
+							<span className='icon-placeholder'>
+								<i className="MenuIcon fa fa-phone" aria-hidden="true" />
+							</span>
 							<h1>
 								{t("Call")}:
 								<a className="phoneFormat" href={`tel:${phoneNumberWithCode}`} >{phoneNumberWithCode}</a>
 							</h1>
-							<i className="MenuIcon fa fa-phone" aria-hidden="true" />
 						</div>
 					)}
 
-					{service.email && <hr />}
 					{service.email && (
 						<div className="Selector" onClick={() => window.open(`mailto:${service.email}`)}>
-							<h1><span style={{ display: 'inline-block', overflow: 'hidden' }}>{t('Email')}: </span><div style={{
-								display: 'inline-block', direction: 'ltr', maxWidth: '60%',
-								overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
-							}}>
-								{service.email}</div></h1>
-							<i className="MenuIcon fa fa-envelope-o" aria-hidden="true" />
+							<span className='icon-placeholder'>
+								<i className="MenuIcon fa fa-envelope-o" aria-hidden="true" />
+							</span>
+							<h1>
+								<span style={{ display: 'inline-block', overflow: 'hidden' }}>{t('Email')}:&nbsp;</span>
+								<div className='field' style={{
+									display: 'inline-block', direction: 'ltr',
+									overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
+								}}>
+									{service.email}
+								</div>
+							</h1>
 						</div>
 					)}
 
-					{service.website && <hr />}
 					{service.website && (
 						<div className="Selector" onClick={() => window.open(`${toUrl(service.website)}`)}>
-							<h1><div style={{
-								display: 'inline-block', direction: 'ltr', maxWidth: '85%',
-								overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
-							}}>
-								{t('Website')}: {service.website}</div></h1>
-							<i className="MenuIcon fa fa-external-link" aria-hidden="true" />
+							<span className='icon-placeholder'>
+								<i className="MenuIcon fa fa-external-link" aria-hidden="true" />
+							</span>
+							<h1>
+								<span style={{ display: 'inline-block', overflow: 'hidden' }}>{t('Website')}:&nbsp;</span>
+								<div className='field' style={{
+									display: 'inline-block', direction: 'ltr',
+									overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
+								}}>
+									{service.website}
+								</div>
+							</h1>
 						</div>
 					)}
 
-					{service.facebook_page && <hr />}
 					{service.facebook_page && (
 						<div className="Selector" onClick={() => window.open(`${toUrl(service.facebook_page)}`)}>
-							<h1><div style={{
-								display: 'inline-block', direction: 'ltr', maxWidth: '85%',
-								overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
-							}}>
-								{t('Facebook')}: {service.facebook_page}</div></h1>
-							<i className="MenuIcon fa fa-facebook-f" aria-hidden="true" />
+							<span className='icon-placeholder'><i className="MenuIcon fa fa-facebook-f" aria-hidden="true" /></span>
+							<h1>
+								<span style={{ display: 'inline-block', overflow: 'hidden' }}>{t('Facebook')}:&nbsp;</span>
+								<div className='field' style={{
+									display: 'inline-block', direction: 'ltr',
+									overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
+								}}>
+									{service.facebook_page}
+								</div>
+							</h1>
 						</div>
 					)}
 					{service.contact_information && sortedContactInformation.map(ci => this.renderContactInformation(ci,callAux))}
-					{<hr className="divider" />}
 					{(relatedServices || []).length > 0 && (
-					<div className="selector" onClick={() => this.showServices()}>
+					<div className="Selector" onClick={() => this.showServices()}>
+						<span className='icon-placeholder'>
+							<i className="MenuIcon fa fa-angle-right" aria-hidden="true" />
+						</span>
 						<h1>{t("OTHER_SERVICES")}</h1>
-						<i className="MenuIcon fa fa-angle-right" aria-hidden="true" />
 					</div>)}
 				</div>)
 				:(
 					<div>
-					<div className="RelatedServices">
-						<div className="selector">
-							<h3 className="RelatedServicesTitle">{t("OTHER_SERVICES")}:</h3>
+					<div className="footer">
+						<div className="Selector">
+							<h1 className="RelatedServicesTitle">{t("OTHER_SERVICES")}:</h1>
 						</div>
-						<hr/>
 							{relatedServices.map(r => (
 								<div key={r.id} onClick={() => goToService(r.id)}>
-									<div className="selector">
+									<div className="Selector related">
+										<span className='icon-placeholder'>
+											<i className="MenuIcon fa fa-angle-right" aria-hidden="true" />
+										</span>
 										<h1 href="#/" ><div style={{
 											display: 'inline-block', direction: 'ltr', overflow: 'hidden', 
-											whiteSpace: 'nowrap', textOverflow: 'ellipsis', width:'650px'
+											whiteSpace: 'nowrap', textOverflow: 'ellipsis'
 										}}>{r.name}</div></h1>
-										<i className="MenuIcon fa fa-angle-right" aria-hidden="true" />
 									</div>
-									<hr/>
 								</div>
 							))}
-					<div className="selector" onClick={() => this.showServices()}>
+					<div className="Selector back" onClick={() => this.showServices()}>
+						<span className='icon-placeholder'>
+							<i className="MenuIcon fa fa-angle-left" aria-hidden="true" />
+						</span>
 						<h1>{t("Back")}</h1>
-						<i className="MenuIcon fa fa-angle-left" aria-hidden="true" />
 					</div>
 					</div>
 					</div>

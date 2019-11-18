@@ -50,10 +50,10 @@ class Skeleton extends React.Component {
 		}
 	}
 	render() {
-		const { children, country, language, match, onGoHome, onGoToSearch, onChangeLocation, onChangeLanguage, deviceType, router, hideFooter, removeErrorMessage, showMapButton, goToMap } = this.props;
+		const { children, country, language, match, onGoHome, onGoToServices, onGoToCategories, onGoToSearch, onChangeLocation, onChangeLanguage, deviceType, router, hideFooter, removeErrorMessage, showMapButton, goToMap, headerColor } = this.props;
+		const { hideShareButtons, homePage, toggleServiceMap } = this.props;
 		const { errorMessage } = this.state;
 		const { config } = this.context;
-
 		let notifications = [];
 		const notificationType = n => {
 			switch (n.fields.type) {
@@ -99,6 +99,8 @@ class Skeleton extends React.Component {
 			sessionStorage.setItem("serbia-alert", 0);
 
 
+		toggleServiceMap(country && country.fields && country.fields.slug !== 'italy' && country.fields.slug !== 'jordan');
+
 		return (
 			<I18nextProvider i18n={i18n}>
 				<div className="Skeleton">
@@ -109,10 +111,15 @@ class Skeleton extends React.Component {
 						country={country}
 						language={language}
 						onGoHome={onGoHome(country)}
+						onGoToServices={onGoToServices(country)}
+						onGoToCategories= {onGoToCategories(country)}
 						onGoToSearch={q => onGoToSearch(country, q)}
 						onChangeCountry={onChangeLocation}
 						onChangeLanguage={onChangeLanguage.bind(this, router.location.pathname)}
+						headerColor = {headerColor}
 						logo={logo}
+						logoBlack={config.logoBlack}
+						homePage={homePage}
 					/>
 					{notifications}
 					{children}
@@ -127,9 +134,12 @@ class Skeleton extends React.Component {
 							showLinkToAdministration={!!config.showLinkToAdministration}
 							country={country}
 							customQuestionLink={config.customQuestionLink}
+							language={language}
+							hideShareButtons = {hideShareButtons}
 						/>
 					)}
-					{country && language && <BottomNavContainer match={match} showMapButton={showMapButton} goToMap={goToMap} showDepartments={config.showDepartments}/>}
+					{country && language && <BottomNavContainer  match={match} showMapButton={showMapButton} goToMap={goToMap} showDepartments={config.showDepartments}/>}
+
 				</div>
 			</I18nextProvider>
 		);
@@ -147,11 +157,18 @@ const mapState = ({ country, language, deviceType, router, errorMessage }, p) =>
 };
 const mapDispatch = (d, p) => {
 	return {
+		toggleServiceMap: show => d(actions.toggleServiceMap(show)),
 		onGoHome: country => () => {
 			if (country) d(push(`/${country.fields.slug || ""}`));
 		},
 		onGoToSearch: (country, query) => {
 			if (country) d(push(`/${country.fields.slug}/search?q=${query}`));
+		},
+		onGoToServices: country => () =>{
+			if (country) d(push(`/${country.fields.slug || ""}/services`));
+		},
+		onGoToCategories: country => () =>{
+			if (country) d(push(`/${country.fields.slug || ""}/categories`));
 		},
 		onChangeLocation: () => {
 			d(actions.changeCountry(null));
@@ -167,7 +184,7 @@ const mapDispatch = (d, p) => {
 		},
 		removeErrorMessage() {
 			d(actions.showErrorMessage(null));
-		},
+		}
 	};
 };
 

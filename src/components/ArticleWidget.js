@@ -34,7 +34,7 @@ class ArticleWidget extends Component {
 	}
 	
 	render() {
-		const { country, onNavigate, t, article, category, showHero, showFullArticle, language } = this.props;
+		const { country, onNavigate, t, article, category, showHero, showFullArticle, language, isHome, index } = this.props;
 		if (!article) {
 			// Anti pattern, but saves 1 or more ifs.
 			return null;
@@ -60,16 +60,16 @@ class ArticleWidget extends Component {
 		}
 
 		return (
-			<div className="Article" key={article.sys.id}>
+			<div className="Article Home" key={article.sys.id}>
 				{hero &&
 					hero.fields &&
 					hero.fields.file &&
 					showHero && (
 						<div className="hero">
-							<img src={article.fields.hero.fields.file.url + "?fm=jpg&fl=progressive"} alt="" />
+							<img className="heroImage" src={article.fields.hero.fields.file.url + "?fm=jpg&fl=progressive"} alt="" />
 						</div>
 					)}
-				{showFullArt ? <h3>{article.fields.title}</h3> : <h3 onClick={() => onNavigate(`/${country.fields.slug}/${categorySlug}/${article.fields.slug}`)}>{article.fields.title}</h3>}
+				{showFullArt ? <h1>{article.fields.title}</h1> : <h1 onClick={() => onNavigate(`/${country.fields.slug}/${categorySlug}/${article.fields.slug}`)}>{article.fields.title}</h1>}
 				{contentType.sys.id === "video" && this.renderVideo(article)}
 				<p dangerouslySetInnerHTML={{ __html: md.render(content) }} />
 				{!showFullArt && (
@@ -83,6 +83,7 @@ class ArticleWidget extends Component {
 						>
 							{t("Read More")}
 						</a>
+						<i className="material-icons">arrow_right</i>
 					</s>
 				)}
 			</div>

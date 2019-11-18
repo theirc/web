@@ -1,6 +1,22 @@
+@import "../shared/includes.scss";
 .TopCategories {
     h3 {
+        font-size: 25px;
+        margin: 0 auto 25px;
+        text-align: center;
         text-transform: uppercase;
+        width: 80%;
+
+        @media (max-width: $desktopBreakpoint) {
+            display: block;
+            font-size: 1.17em;
+            margin-block-start: 1em;
+            margin-block-end: 1em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+            font-weight: bold;
+            text-align: left;
+        }
     }
     .ltr & {
         s {
@@ -12,4 +28,5 @@
             float: left;
         }
     }
+
 }

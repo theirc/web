@@ -21,7 +21,6 @@ class HeaderBar extends Component {
 				<input type="checkbox" name={triggerKey} id={triggerKey} />
 				<label htmlFor={triggerKey}>
 					<h1>
-						{subtitle && <small>{subtitle}</small>}
 						{title}
 					</h1>
 					{children && [

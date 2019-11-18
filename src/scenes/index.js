@@ -9,7 +9,9 @@ import LanguageSelectorScene from "./LanguageSelectorScene";
 import Services from "./Services";
 import Search from "./Search";
 import Selectors from "./Selectors";
+import Subscribe from "./Subscribe";
 import DemoTool from "./DemoTool";
+
 export { Home, 
         Article, 
         Categories, 
@@ -22,4 +24,5 @@ export { Home,
         Services, 
         Selectors,
         DemoTool,
+        Subscribe,
 };

@@ -29,7 +29,7 @@ class ServiceDepartmentList extends React.Component {
 			<li key={id}>
 				<hr className="line" />
 				<div className="container" onClick={() => setTimeout(() => onOpenDepartment(c.id, c.slug, name), 300)}>
-					<strong>{name}</strong>
+					{name}
 					<div className="right">
 						<i className="material-icons">keyboard_arrow_right</i>
 					</div>
@@ -46,7 +46,7 @@ class ServiceDepartmentList extends React.Component {
 		} = this.props;
 		if ((allRegions || []).length === 0) {
 			return (
-				<div className="ServiceCategoryList">
+				<div className="ServiceCategoryList departments">
 					<div className="Title">
 						<h1>{t("Service Categories")}</h1>
 					</div>
@@ -60,7 +60,7 @@ class ServiceDepartmentList extends React.Component {
 		return [
 			<HeaderBar key={"Header"} title={t("Locations").toUpperCase()}>
 			</HeaderBar>,
-			<div key={"List"} className="ServiceCategoryList">
+			<div key={"List"} className="ServiceCategoryList departments">
 				<ul>
 					{sortedRegions.map(c => this.renderRegion(c))}
 				</ul>

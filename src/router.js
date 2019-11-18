@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Route, Switch, withRouter, Redirect } from "react-router";
+import { Redirect, Route, Switch, withRouter } from "react-router";
 import { ConnectedRouter } from "react-router-redux";
-import { Home, Article, Categories, CountryHome, CategoryHome, CountrySelectorScene, LanguageSelectorScene, Search, Services, Selectors } from "./scenes";
+import { Home, Article, Categories, CountryHome, CategoryHome, CountrySelectorScene, LanguageSelectorScene, Search, Services, Selectors, Subscribe } from "./scenes";
 import { DemoTool} from "./scenes";
 import { history } from "./store";
 import { Skeleton } from "./scenes";
@@ -41,30 +41,35 @@ class Router extends Component {
 	}
 
 	render() {
+		console.log(document, 'router');
 		return (
 			<ConnectedRouter history={history}>
 				<Placeholder>
 					<ScrollToTop />
 					<Switch>
+						<Route exact path="/bulgaria/*" render={() => <Redirect to="/bulgaria" />} />
 						<Route exact path="/italy/services*" render={() => <Redirect to="/italy" />} />
+						<Route exact path="/jordan/services*" render={() => <Redirect to="/jordan" />} />
+						<Route exact path="/:country/subscribe/:category" component={withCountry(withCategory(Subscribe))} />	
 						<Route path="/:country/services" component={props => <ServicesWithCountry {...props} />} />
+						<Route exact path="/:country/categories" component={withCountry(Categories)} />
+						<Route exact path="/:country/search" component={withCountry(Search)} />		
+						<Route path="/:country/:category/:article" component={withCountry(withCategory(Article))} />
+						<Route path="/:country/:category" component={withCountry(withCategory(CategoryHome))} />
+						<Route exact path="/selectors" component={Selectors} />
+						<Route exact path="/:country" component={withCountry(CountryHome)} />	
 						<Route exact path="/:country/demo" component={withCountry(DemoTool)}/>
 						<Skeleton>
 							<div className="SkeletonContainer">
-								<Switch>
-									<Route exact path="/" component={Home} />
-									<Route exact path="/selectors" component={Selectors} />
+								<Switch>					
 									<Route exact path="/country-selector" component={CountrySelectorScene} />
 									<Route exact path="/language-selector" component={LanguageSelectorScene} />
+									<Route exact path="/" component={Home} />						
 									<Route path="/direct/:article" component={withArticle(Article)} />
-									<Route exact path="/:country/search" component={withCountry(Search)} />
-									<Route exact path="/:country/categories" component={withCountry(Categories)} />
-									<Route path="/:country/:category/:article" component={withCountry(withCategory(Article))} />
-									<Route path="/:country/:category" component={withCountry(withCategory(CategoryHome))} />
-									<Route path="/:country" component={withCountry(CountryHome)} />
 								</Switch>
 							</div>
 						</Skeleton>
+						
 					</Switch>
 				</Placeholder>
 			</ConnectedRouter>
