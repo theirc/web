@@ -1,5 +1,12 @@
 @import "../../../shared/includes.scss";
 
+.SearchPage {
+	.CategoryList {
+		.tiles-desktop {
+			min-height: initial;
+		}
+	}
+}
 .CategoryList {
 	.article-title:hover {
 		cursor: pointer;

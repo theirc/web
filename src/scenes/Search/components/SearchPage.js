@@ -101,6 +101,7 @@ class SearchPage extends React.Component {
 
 	toggleServices() {
 		let newState = !this.state.showFullServiceList;
+		!newState && window.scroll(0, 0);
 		this.setState({ showFullServiceList: newState })
 	}
 
