@@ -204,14 +204,14 @@ class Selectors extends Component {
 		switch (currentPage) {
 			case 1:
 				return (
-					<Skeleton hideShareButtons={true}>
+					// <Skeleton hideShareButtons={true}>
 						<LanguageSelector
 							languages={languages}
 							onSelectLanguage={l => {
 								this.selectLanguage(l);
 							}}
 						/>
-					</Skeleton>
+					// </Skeleton>
 				);
 
 			case 2:
@@ -228,7 +228,7 @@ class Selectors extends Component {
 					}
 
 					return (
-						<Skeleton hideShareButtons={true}>
+						// <Skeleton hideShareButtons={true}>
 							<CountrySelector
 								onGoTo={slug => {
 									this.selectCountry(slug);
@@ -238,7 +238,7 @@ class Selectors extends Component {
 								language={language}
 								backToLanguage={this.backToLanguage.bind(this)}
 							/>
-						</Skeleton>
+						// </Skeleton>
 					);
 				}
 
@@ -267,8 +267,6 @@ const mapState = ({
 
 const mapDispatch = (d, p) => {
 	return {
-		onMountOrUpdate: language => { },
-
 		onSelectLanguage: code => {
 			d(actions.changeLanguage(code));
 		},

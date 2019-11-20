@@ -61,19 +61,12 @@ class Router extends Component {
 						<Route exact path="/:country/search" component={withCountry(Search)} />
 						<Route path="/:country/:category/:article" component={withCountry(withCategory(Article))} />
 						<Route path="/:country/:category" component={withCountry(withCategory(CategoryHome))} />
-						<Route exact path="/selectors" component={Selectors} />
+						<Route exact path="/selectors" component={props => <Skeleton {...props}><Selectors /></Skeleton>} />
 						<Route exact path="/:country" component={withCountry(CountryHome)} />
 						<Route exact path="/:country/demo" component={withCountry(DemoTool)} />
-						<Skeleton>
-							<div className="SkeletonContainer">
-								<Switch>
-									<Route exact path="/country-selector" component={CountrySelectorScene} />
-									<Route exact path="/language-selector" component={LanguageSelectorScene} />
-									<Route exact path="/" component={Home} />
-									<Route path="/direct/:article" component={withArticle(Article)} />
-								</Switch>
-							</div>
-						</Skeleton>
+
+						<Route exact path="/" component={Home} />
+						<Route path="/direct/:article" component={withArticle(Article)} />
 
 					</Switch>
 				</Placeholder>
