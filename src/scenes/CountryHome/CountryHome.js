@@ -5,8 +5,7 @@ import { connect } from "react-redux";
 import { push } from "react-router-redux";
 
 // local
-import { HomeWidget, HomeWidgetCollection} from "../../components";
-import { InstanceMovedWidget } from './components/InstanceMovedWidget';
+import { HomeWidget, HomeWidgetCollection, InstanceMovedWidget } from "../../components";
 import Skeleton from '../../components/Skeleton/Skeleton';
 import getSessionStorage from "../../shared/sessionStorage";
 
