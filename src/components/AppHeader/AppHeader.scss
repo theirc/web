@@ -15,7 +15,7 @@ Less me
 	height: 64px;
 	@media (max-width: $desktopBreakpoint) {
 		box-shadow: 0 1px 1px 0;
-		background-color: #000000;
+		background-color: white;
 	}
 	
 }
@@ -241,13 +241,14 @@ Less me
 
 .AppHeaderLight{
 	.headroom {
+		background-color: #ffffff;
 		z-index: 3;
 	}
 
-	.headroom--not-top{
-		background-color: #ffffff;
-		box-shadow: 0px 1px 8px -5px;
-	}
+	// .headroom--not-top{
+	// 	background-color: #ffffff;
+	// 	box-shadow: 0px 1px 8px -5px;
+	// }
 	.headroom--top{
 		background-color: #ffffff;
 		box-shadow: 0px 1px 8px -5px;
@@ -256,10 +257,10 @@ Less me
 		color: #000000;
 	}
 }
-.headroom--not-top{
-	background-color: #000000;
+// .headroom--not-top{
+// 	background-color: #000000;
 	
-}
+// }
 
 .AppHeader {
 	.SearchBar {
