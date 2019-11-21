@@ -15,26 +15,6 @@ class CountryHome extends React.Component {
 		this.state = {};
 	}
 
-	requestLocation() {
-		const { geolocation } = global.navigator;
-		const { onLocationRequested, country } = this.props;
-
-		if (geolocation) {
-			geolocation.getCurrentPosition(
-				c => {
-					onLocationRequested(c.coords, country);
-				},
-				e => {
-					console.log("Error with geolocation", e);
-				},
-				{
-					enableHighAccuracy: true,
-					timeout: 5000,
-				}
-			);
-		}
-	}
-
 	componentWillMount() {
 		if (global.window) {
 			const sessionStorage = getSessionStorage();
@@ -44,9 +24,6 @@ class CountryHome extends React.Component {
 				sessionStorage.firstRequest = moment().toString();
 			}
 		}
-		const { onMount } = this.props;
-		onMount();
-		//this.requestLocation();
 	}
 
 	render() {
@@ -83,11 +60,6 @@ const mapState = (s, p) => {
 
 const mapDispatch = (d, p) => {
 	return {
-		onMount: () => { },
-		onLocationRequested: (coords, country) => {
-			if (country) {
-			}
-		},
 		onNavigate: path => {
 			d(push(path));
 		},

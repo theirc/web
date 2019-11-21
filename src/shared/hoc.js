@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 // local
 import { actions } from "./store";
 import servicesApi from "../backend/servicesApi";
+import { Skeleton } from "../scenes";
 
 export function withCountry(WrappedComponent) {
 	class CountrySwitcher extends Component {
@@ -76,7 +77,7 @@ export function withCountry(WrappedComponent) {
 
 		render() {
 			let country = this.state.country || this.props.country;
-			if (!country || !this.state.loaded) return <div className="LoaderContainer"><div className="loader" /></div>;
+			if (!country || !this.state.loaded) return <Skeleton><div className="LoaderContainer"><div className="loader" /></div></Skeleton>;
 			return <WrappedComponent {...{ country, ...this.props }} />;
 		}
 	}
