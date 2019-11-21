@@ -604,16 +604,14 @@
 	}
 
 	table {
+		background-color: #eee;
 		border: 1px solid #ddd;
 		border-collapse: collapse;
 		margin-bottom: 1em;
-
-		@media (max-width: 500px) {
-			min-width: 100%;
-		}
-
-		@media (min-width: 800px) {
-			min-width: 400px;
+		min-width: 100%;
+		
+		@media (min-width: 500px) {
+			min-width: 500px;
 		}
 
 		tr {
@@ -624,13 +622,13 @@
 				border-bottom: none;
 			}
 
-			&:nth-child(even) {
-				background-color: #ddd;
-			}
+			// &:nth-child(even) {
+			// 	background-color: #ddd;
+			// }
 	
-			&:nth-child(odd) {
-				background-color: #ccc;
-			}
+			// &:nth-child(odd) {
+			// 	background-color: #ccc;
+			// }
 		}
 
 		td {
