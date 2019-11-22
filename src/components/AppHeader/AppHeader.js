@@ -8,7 +8,7 @@ import { translate, Interpolate } from "react-i18next";
 import { Close, Home, List, Assignment } from "material-ui-icons";
 
 // local
-import cms from '../../backend/cms';
+import selectedMenuItem from "../../helpers/menu-items";
 import "./AppHeader.css";
 
 class AppHeader extends Component {
@@ -110,6 +110,8 @@ class AppHeader extends Component {
 		let disclaimersLink = `/greece/refugee-info-greece-closed/refugee-info-stops-operating-in-greece?language=${language}`;
 		disclaimersLink = window.location.href.includes(disclaimersLink) ? '#' : disclaimersLink;
 
+		let selectedIndex = selectedMenuItem();
+
 		return (
 			<div className={backgroundDark ? 'AppHeader' : 'AppHeaderLight'}>
 
@@ -124,15 +126,15 @@ class AppHeader extends Component {
 							(
 								<div className="app-bar-container buttons">
 									<div className="app-bar-buttons">
-										<span className="app-bar-selectors top-menu" color="contrast" onClick={onGoHome || noop}>
+										<span className={`app-bar-selectors top-menu ${selectedIndex === 0 ? "Selected" : ""}`} color="contrast" onClick={onGoHome || noop}>
 											<Home /><span className='menu-item'>{t("Home")}</span>
 										</span>
 
-										<span className="app-bar-selectors top-menu" color="contrast" onClick={onGoToCategories || noop}>
+										<span className={`app-bar-selectors top-menu ${selectedIndex === 1 ? "Selected" : ""}`} color="contrast" onClick={onGoToCategories || noop}>
 											<List /><span className='menu-item'>{t("Articles")}</span>
 										</span>
 
-										{showServiceMap && <span className="app-bar-selectors top-menu" color="contrast" onClick={onGoToServices || noop}>
+										{showServiceMap && <span className={`app-bar-selectors top-menu ${selectedIndex === 2 ? "Selected" : ""}`} color="contrast" onClick={onGoToServices || noop}>
 											<Assignment /><span className='menu-item'>{t("Services")}	</span>
 										</span>}
 

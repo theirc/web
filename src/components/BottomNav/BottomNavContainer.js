@@ -6,6 +6,7 @@ import { push } from "react-router-redux";
 
 // local
 import { BottomNav } from "../";
+import selectedMenuItem from '../../helpers/menu-items';
 
 class BottomNavContainer extends React.Component {
 	static propTypes = {
@@ -36,20 +37,7 @@ class BottomNavContainer extends React.Component {
 		const { country, onGoToCategories, onGoHome, onGoToSearch, router, showMapButton, goToMap, showDepartments } = this.props;
 
 		let { showServiceMap } = this.props;
-		let pathParts = router.location.pathname.split("/");
-		let selectedIndex = 0;
-
-		if (pathParts.length > 2) {
-			if (pathParts[2] === "article") {
-				selectedIndex = -1;
-			} else if (pathParts[2] === "search") {
-				selectedIndex = 2;
-			} else if (pathParts[2] === "services") {
-				selectedIndex = 3;
-			} else {
-				selectedIndex = 1;
-			}
-		}
+		let selectedIndex = selectedMenuItem();
 
 		country && country.fields && country.fields.slug === 'italy' && (showServiceMap = false);
 

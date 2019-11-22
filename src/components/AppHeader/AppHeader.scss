@@ -126,9 +126,23 @@ Less me
 			padding: 16px 30px 16px 30px;
 		}
 
-		.menu-item {
-			&:hover {
-				text-decoration: underline;
+		&.top-menu {
+			.menu-item {
+				font-weight: 100;
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+
+			&.Selected {
+				svg {
+					@include darken-brand-colors( "color", 5%);
+				}
+
+				.menu-item {
+					font-weight: bold;
+					text-decoration: underline;
+				}
 			}
 		}
 
