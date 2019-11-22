@@ -1,0 +1,8 @@
+@import "../../Selectors/Selectors.scss";
+
+.CountrySelector {
+	@include selectors();
+	.item {
+		cursor:pointer;
+	}
+}

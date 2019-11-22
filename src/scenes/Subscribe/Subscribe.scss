@@ -1,0 +1,57 @@
+@import "../../shared/includes.scss";
+
+.Subscribe {
+    h3 {
+        text-transform: uppercase;
+        width: 100%;
+        text-align: center;
+        font-size: 30px;
+        @media (max-width: $desktopBreakpoint) {
+            display: block;
+            font-size: 1.17em;
+            margin-block-start: 1em;
+            margin-block-end: 1em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+            font-weight: bold;
+            text-align: left;
+        }
+    }
+    .ltr & {
+        s {
+            float: right;
+        }
+    }
+    .rtl & {
+        s {
+            float: left;
+        }
+    }
+
+}
+.subscribe-form{
+    width: 100%;
+    text-align: center;
+}
+.subscribe-input{
+    width: 200px;
+    font-size: 20px;
+    height: 30px;
+    line-height: 30px;
+    padding: 10px;
+    border-radius: 5px 5px 5px 5px;
+    border-style: ridge;
+    margin: 10px;
+}
+.subscribe-button{
+    background-color: #e8e8e8;
+    width: 220px;
+    font-size: 20px;
+    line-height: 20px;
+    cursor: pointer;
+    height: 40px;
+}
+.all-set{
+    text-align: center;
+    width:100%;
+}

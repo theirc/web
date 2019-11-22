@@ -1,24 +1,20 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
+// libs
 import React, { Component } from "react";
 import { AppRegistry, StyleSheet, Text, View, Dimensions } from "react-native";
-import { Skeleton } from "./src/scenes";
-import { store } from "./src/store";
+import { store } from "./src/shared/store";
 import App from "./src/App";
 import { Provider } from "react-redux";
 import PropTypes from "prop-types";
+
+// local
 import nativeColors from "./src/shared/nativeColors";
 import nativeDimensions from "./src/shared/nativeDimensions";
 
 const window = Dimensions.get("window");
-const conf = require("./src/content/config");
-const cms = require("./src/content/cms").default;
-const servicesApi = require("./src/content/servicesApi");
-const cmsApi = require("./src/content/cmsApi").default;
+const conf = require("./src/backend/config");
+const cms = require("./src/backend/cms").default;
+const servicesApi = require("./src/backend/servicesApi");
+const cmsApi = require("./src/backend/cmsApi").default;
 const appConfig = require("./config.app.json");
 
 export default class Signpost extends Component {

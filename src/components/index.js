@@ -1,35 +1,37 @@
-import AppHeader from "./AppHeader";
-import BottomNav from "./BottomNav";
-import WarningDialog from "./WarningDialog";
-import Footer from "./Footer";
-import ArticlePage from "./ArticlePage";
-import ArticleList from "./ArticleList";
-import ArticleFooter from "./ArticleFooter";
-import CategoryList from "./CategoryList";
-import CountrySelector from "./CountrySelector";
-import LanguageSelector from "./LanguageSelector";
-import HomeWidget from "./HomeWidget";
-import HomeWidgetCollection from "./HomeWidgetCollection";
-import SearchPage from "./SearchPage";
-import ServiceMap from "./ServiceMap";
-import ServiceMapDesktop from "./ServiceMapDesktop";
-import ServiceCategoryList from "./ServiceCategoryList";
-import ServiceCategoryListDesktop from "./ServiceCategoryListDesktop";
-import ServiceLocationList from "./ServiceLocationList";
-import ServiceDepartmentList from "./ServiceDepartmentList";
-import ServiceList from "./ServiceList";
-import DetectLocationSelector from "./DetectLocationSelector";
-import ServiceDetail from "./ServiceDetail";
-import TopCategoriesWidget from "./TopCategoriesWidget";
-import LocalGuideWidget from "./LocalGuideWidget";
-import ArticleWidget from "./ArticleWidget";
-import CategoryWidget from "./CategoryWidget";
-import LocalDemo from "./LocalDemo";
-import InstanceMovedWidget from "./InstanceMovedWidget";
+import AppHeader from "./AppHeader/AppHeader";
+import BottomNav from "./BottomNav/BottomNav";
+import BottomNavContainer from "./BottomNav/BottomNavContainer";
+import WarningDialog from "./WarningDialog/WarningDialog";
+import Footer from "./Footer/Footer";
+import ArticlePage from "../scenes/Article/components/ArticlePage";
+import ArticleList from "../scenes/CategoryHome/components/ArticleList";
+import ArticleFooter from "../scenes/Article/components/ArticleFooter";
+import CategoryList from "../scenes/Categories/components/CategoryList";
+import CountrySelector from "../scenes/CountrySelector/components/CountrySelector";
+import LanguageSelector from "../scenes/LanguageSelector/components/LanguageSelector";
+import HomeWidget from "../scenes/CountryHome/components/HomeWidget";
+import HomeWidgetCollection from "../scenes/CountryHome/components/HomeWidgetCollection";
+import SearchPage from "../scenes/Search/components/SearchPage";
+import ServiceMap from "../scenes/Services/components/ServiceMap";
+import ServiceMapDesktop from "../scenes/Services/components/ServiceMapDesktop";
+import ServiceCategoryList from "../scenes/Services/components/ServiceCategoryList";
+import ServiceCategoryListDesktop from "../scenes/Services/components/ServiceCategoryListDesktop";
+import ServiceLocationList from "../scenes/Services/components/ServiceLocationList";
+import ServiceDepartmentList from "../scenes/Services/components/ServiceDepartmentList";
+import ServiceList from "../scenes/Services/components/ServiceList";
+import DetectLocationSelector from "../scenes/Selectors/components/DetectLocationSelector";
+import ServiceDetail from "../scenes/Services/components/ServiceDetail";
+import TopCategoriesWidget from "../scenes/CountryHome/components/TopCategoriesWidget";
+import LocalGuideWidget from "../scenes/CountryHome/components/LocalGuideWidget";
+import ArticleWidget from "../scenes/CountryHome/components/ArticleWidget";
+import CategoryWidget from "../scenes/CountryHome/components/CategoryWidget";
+import LocalDemo from "../scenes/DemoTool/components/LocalDemo";
+import InstanceMovedWidget from "../scenes/CountryHome/components/InstanceMovedWidget";
 
 export {
 	AppHeader,
 	BottomNav,
+	BottomNavContainer,
 	WarningDialog,
 	Footer,
 	ArticlePage,
