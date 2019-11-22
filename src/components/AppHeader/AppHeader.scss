@@ -98,6 +98,21 @@ Less me
 	justify-content: center;
 }
 
+// make the selected item look lighter for black bg
+.AppHeader {
+	.app-bar-buttons {
+		.app-bar-selectors {
+			&.top-menu {
+				&.Selected {
+					svg {
+						@include darken-brand-colors( "color", 5%);
+					}
+				}
+			}
+		}
+	}
+}
+
 .app-bar-buttons {
 	flex: 1;
 	display: flex;
@@ -136,7 +151,7 @@ Less me
 
 			&.Selected {
 				svg {
-					@include darken-brand-colors( "color", 5%);
+					@include darken-brand-colors( "color", 10%);
 				}
 
 				.menu-item {
