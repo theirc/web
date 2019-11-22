@@ -9,6 +9,7 @@ import FacebookPlayer from "react-facebook-player";
 import YouTube from "react-youtube";
 import InstagramEmbed from 'react-instagram-embed';
 import { translate } from "react-i18next";
+import { history } from "../../../shared/store";
 
 // local
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
@@ -181,6 +182,15 @@ class ArticlePage extends Component {
 				<HeaderBar subtitle={(category.fields.articles || []).length > 1 && `${category.fields.name}:`} title={title} />
 
 				<div className='filter-bar'>
+					{article && article.fields.category &&
+						<button className='btn-filter' onClick={ history.goBack }>
+							<i className="material-icons">keyboard_arrow_left</i>
+							<i className={article.fields.category.fields.iconClass || "material-icons"}>{article.fields.category.fields.iconText || ((!article.fields.category.fields.iconClass || article.fields.category.fields.iconClass === "material-icons") && "add")}</i>
+							<span>{article.fields.category.fields.name}</span>
+						</button>}
+					{(!article || !article.fields.category) && <span style={{visibility: 'hidden'}}></span>}
+					
+
 					<div className="social">
 						<div href='#' className="share" onClick={this.onShareOnFacebook}><i className="fa fa-facebook-f" style={{ fontSize: 16 }} /></div>
 
@@ -193,7 +203,7 @@ class ArticlePage extends Component {
 				</div>
 
 				{contentType.sys.id === "video" && this.renderVideo()}
-				
+
 				<article>
 					<span className='author'><span>{t("LAST_UPDATED")}</span> {moment(article.sys.updatedAt).format('YYYY.MM.DD')}</span>
 					<div dangerouslySetInnerHTML={{ __html: html }} />
