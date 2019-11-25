@@ -4,37 +4,33 @@ Less me
 @import "../../shared/includes.scss";
 
 .app-bar {
+	@include align-items(center);
 	@include flexbox();
 	@include flex-direction(row);
-	@include align-items(center);
 	@include justify-content(flex-start);
 
-	position: fixed;
-	width: 100%;
-	top: 0;
+	box-shadow: 0 1px 1px 0;
 	height: 64px;
-	@media (max-width: $desktopBreakpoint) {
-		box-shadow: 0 1px 1px 0;
-		background-color: white;
-	}
-	
+	position: fixed;
+	top: 0;
+	width: 100%;
 }
 
 .app-bar-light {
+	@include align-items(center);
 	@include flexbox();
 	@include flex-direction(row);
-	@include align-items(center);
 	@include justify-content(flex-start);
 
-	position: fixed;
-	width: 100%;
-	top: 0;
 	height: 64px;
+	position: fixed;
+	top: 0;
+	width: 100%;
+
 	@media (max-width: $desktopBreakpoint) {
 		box-shadow: 0 1px 1px 0;
 		background-color: #ffffff;
 	}
-	
 }
 
 
@@ -271,6 +267,7 @@ Less me
 .AppHeaderLight{
 	.headroom {
 		background-color: #ffffff;
+		box-shadow: 0px 1px 8px -5px;
 		z-index: 3;
 	}
 
@@ -280,7 +277,6 @@ Less me
 	// }
 	.headroom--top{
 		background-color: #ffffff;
-		box-shadow: 0px 1px 8px -5px;
 	}
 	.app-bar-buttons{
 		color: #000000;
@@ -438,7 +434,7 @@ Less me
 	background-color: #000000;
 }
 .AppHeader, .AppHeaderLight {
-	margin-top: 63px;
+	margin-top: 64px;
 	// @media (min-width: $desktopBreakpoint) {
 	// }
 	
