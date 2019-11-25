@@ -131,11 +131,11 @@ class AppHeader extends Component {
 										</span>
 
 										<span className={`app-bar-selectors top-menu ${selectedIndex === 1 ? "Selected" : ""}`} color="contrast" onClick={onGoToCategories || noop}>
-											<List /><span className='menu-item'>{t("Articles")}</span>
+											<Assignment /><span className='menu-item'>{t("Articles")}</span>
 										</span>
 
 										{showServiceMap && <span className={`app-bar-selectors top-menu ${selectedIndex === 2 ? "Selected" : ""}`} color="contrast" onClick={onGoToServices || noop}>
-											<Assignment /><span className='menu-item'>{t("Services")}	</span>
+											<List /><span className='menu-item'>{t("Services")}</span>
 										</span>}
 
 										{!disableLanguageSelector && !disableCountrySelector && <div className="app-bar-separator" />}
