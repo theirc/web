@@ -140,6 +140,8 @@ Less me
 		&.top-menu {
 			.menu-item {
 				font-weight: 100;
+				white-space: pre;
+				
 				&:hover {
 					text-decoration: underline;
 				}
