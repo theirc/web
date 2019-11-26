@@ -31,7 +31,6 @@ Less me
 	}
 }
 
-
 .app-bar-container {
 	display: -webkit-box;
 	display: -webkit-flex;
@@ -52,16 +51,7 @@ Less me
 			.ltr & {
 				padding-left: 18px;
 			}
-		}
-		&.buttons {
-			.ltr & {
-				padding-right: 18px;
-			}
-			.rtl & {
-				padding-left: 18px;
-			}
-		}
-		
+		}		
 	}
 	
 }
@@ -110,18 +100,39 @@ Less me
 	}
 }
 
-.rtl {
-	.top-menu svg {
-		margin: 0 0 0 10px !important;
+.selectors {
+	display: flex;
+	padding: 0 15px;
+
+	span {
+		cursor: pointer;
+		padding: 0 10px;
 	}
 
+	.country {
+		align-items: center;
+		display: inherit;
+		opacity: 0.8;
+		
+		&:hover {
+			opacity: 1;
+		}
+		
+		img {
+			border: 1px solid #ccc;
+			border-radius: 2px;
+			width: 28px;
+		}
+	}
+	
 	.lang {
-		padding: 0 0 0 20px !important;
+		text-transform: uppercase;
+
+		&:hover {
+			text-decoration: underline;
+		}
 	}
 
-	.search-btn {
-		padding: 0 15px 0 0 !important;
-	}
 }
 
 .app-bar-buttons {
@@ -180,32 +191,6 @@ Less me
 			margin-right: 10px;
 		}
 
-		&.country {
-			opacity: 0.8;
-			padding: 0 20px 0 30px;
-			
-			&:hover {
-				opacity: 1;
-			}
-			
-			img {
-				border: 1px solid #ccc;
-				border-radius: 2px;
-				width: 28px;
-			}
-		}
-		
-		&.lang {
-			padding: 0 20px 0 0;
-
-			&:hover {
-				text-decoration: underline;
-			}
-
-			@media (min-width: $desktopBreakpoint) {
-				padding-right: 30px;
-			}
-		}
 	}
 	@-moz-document url-prefix(){
 	.search-button{
@@ -216,17 +201,23 @@ Less me
 	@media (max-width: $desktopBreakpoint) {
 		display: none !important;
 	}
-
 }
+
+.rtl {
+	.app-bar-selectors {
+		svg {
+			margin-right: 0;
+			margin-left: 10px;
+		}
+	}
+}
+
+
 .app-bar-separator {
 	border-left-width: 1px;
 	border-left-color: #ccc;
 	border-left-style: solid;
 	height: 25px;
-
-	// @media (max-width: $desktopBreakpoint) {
-	// 	display: none;
-	// }
 }
 
 .fa-times {
@@ -303,10 +294,6 @@ Less me
 		z-index: 3;
 	}
 
-	// .headroom--not-top{
-	// 	background-color: #ffffff;
-	// 	box-shadow: 0px 1px 8px -5px;
-	// }
 	.headroom--top{
 		background-color: #ffffff;
 	}
@@ -314,10 +301,6 @@ Less me
 		color: #000000;
 	}
 }
-// .headroom--not-top{
-// 	background-color: #000000;
-	
-// }
 
 .AppHeader {
 	.SearchBar {
@@ -467,8 +450,6 @@ Less me
 }
 .AppHeader, .AppHeaderLight {
 	margin-top: 64px;
-	// @media (min-width: $desktopBreakpoint) {
-	// }
 	
 	.privacy-banner {
 		align-items: center;
@@ -620,12 +601,14 @@ $color: #ffffff;
 	transition: all $transition-duration, background-color 0s linear 0.3s;
 	transform: translateX(-$border-width / 2) rotate(45deg);
 }
+
 .active > span:first-of-type:after {
 	height: 100%;
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%) rotate(-45deg);
 }
+
 .MuiIconButton-label-30 > svg,
 .MuiSvgIcon-root-102 {
 	display: none;
@@ -634,15 +617,11 @@ $color: #ffffff;
 .search-btn {
 	cursor: pointer;
 	opacity: 0.6;
-	padding-left: 15px;
+	padding: 0 15px;
 	width: 24px;
 
 	&:hover {
 		opacity: 1;
-	}
-
-	&.fa-times {
-		width: 19px;
 	}
 }
 
@@ -678,6 +657,7 @@ $color: #ffffff;
 	transform: rotate(45deg);
 	transition: all $transition-duration, background-color 0s linear 0s;
 }
+
 .active .SearchButton:before {
 	width: 0;
 	height: 100%;
@@ -701,6 +681,7 @@ $color: #ffffff;
 	transform: translate(-50%, -50%) rotate(-45deg);
 	transition: all $transition-duration;
 }
+
 .active .SearchButton:after {
 	height: 100%;
 	left: 50%;

@@ -140,18 +140,20 @@ class AppHeader extends Component {
 
 										{/* {!disableLanguageSelector && !disableCountrySelector && <div className="app-bar-separator" />} */}
 
-										{!disableCountrySelector && (
-											<span className="app-bar-selectors country" color="contrast" onClick={onChangeCountry || noop}>
-												{/* {(country && country.fields.name) || " "} */}
-												<img src={`/${country.fields.slug}.png`} alt='' />
-											</span>
-										)}
+										<span className='selectors'>
+											{!disableCountrySelector && (
+												<span className="country" color="contrast" onClick={onChangeCountry || noop}>
+													{/* {(country && country.fields.name) || " "} */}
+													<img src={`/${country.fields.slug}.png`} alt='' />
+												</span>
+											)}
 
-										{!disableLanguageSelector && (
-											<span className="app-bar-selectors lang" color="contrast" onClick={onChangeLanguage}>
-												{language || " "}
-											</span>
-										)}
+											{!disableLanguageSelector && (
+												<span className="lang" color="contrast" onClick={onChangeLanguage}>
+													{language || " "}
+												</span>
+											)}
+										</span>
 
 										<div className="app-bar-separator separator-searchIcon" />
 
