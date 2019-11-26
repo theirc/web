@@ -11,9 +11,9 @@ import "./CategoryList.css";
 class CategoryList extends Component {
 	state = {
 		selectedCategory: 0,
-		selectedCategoryClassName: 'fa fa-list',
+		selectedCategoryClassName: 'material-icons',
 		selectedCategoryName: '',
-		selectedIconText: '',
+		selectedIconText: 'assignment',
 		showCategoriesDD: false
 	};
 
@@ -143,7 +143,7 @@ class CategoryList extends Component {
 
 						{this.state.showCategoriesDD &&
 							<ul className='categories'>
-								<li value={0} className={!this.state.selectedCategory ? 'active' : ''} onClick={() => this.onChange({ sys: { id: 0 }, fields: { name: t('All Categories'), iconClass: 'fa fa-list' } })}><i className='fa fa-list' /><span>{t('All Categories')}</span></li>
+								<li value={0} className={!this.state.selectedCategory ? 'active' : ''} onClick={() => this.onChange({ sys: { id: 0 }, fields: { name: t('All Categories'), iconClass: 'material-icons', iconText: 'assignment' } })}><i className='material-icons'>assignment</i><span>{t('All Categories')}</span></li>
 								{
 									(categories || []).filter(showCategory).map(e =>
 										<li key={e.sys.id} value={e.sys.id} className={e.sys.id === this.state.selectedCategory ? 'active' : ''} onClick={() => this.onChange(e)}>
