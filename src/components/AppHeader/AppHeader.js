@@ -138,7 +138,7 @@ class AppHeader extends Component {
 											<List /><span className='menu-item'>{t("Services")}</span>
 										</span>}
 
-										{!disableLanguageSelector && !disableCountrySelector && <div className="app-bar-separator" />}
+										{/* {!disableLanguageSelector && !disableCountrySelector && <div className="app-bar-separator" />} */}
 
 										{!disableCountrySelector && (
 											<span className="app-bar-selectors country" color="contrast" onClick={onChangeCountry || noop}>
