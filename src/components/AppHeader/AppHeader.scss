@@ -245,6 +245,12 @@ Less me
 		height: 40px;
 		cursor: pointer;
 	}
+
+	.country {
+		img {
+			border: 1px solid #666 !important;
+		}
+	}
 }
 
 .headroom {
