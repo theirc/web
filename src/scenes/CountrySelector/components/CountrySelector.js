@@ -79,15 +79,11 @@ class CountrySelector extends Component {
 				))
 				}
 
-				{!disableLanguageSelector && unavailableCountryList.length > 0 && (<button
-					className="item "
-					onClick={() => {
-						backToLanguage();
-					}}
-				>{t("Choose your language")}
-				</button>)
+				{!disableLanguageSelector && availableCountryList.length > 0 && (
+				<span className="item-language" onClick={() => backToLanguage()}>
+					{t("Choose your language")}
+				</span>)
 				}
-				<div className="spacer" />
 			</div>
 		);
 	}
