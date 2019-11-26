@@ -7,10 +7,15 @@
 	}
 	
 	.item-language {
+		color: #666;
     cursor: pointer;
     font-size: 15px;
     font-weight: lighter;
 		margin: 17px auto;
-    text-decoration: underline;
+		text-decoration: underline;
+		
+		&:hover {
+			color: black;
+		}
 	}
 }

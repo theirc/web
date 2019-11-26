@@ -163,6 +163,7 @@ export default {
             "GREECE_BANNER_SERVICES": "فهرست خدمات یونان از این به بعد به‌روزرسانی نخواهد شد.\nلطفا توجه داشته باشید که اطلاعاتی که اینجا نمایش داده می‌شود آخرین بار در جولای 2019 به‌روزرسانی شده و بعد از این به روز نخواهد شد.\nما به شما توصیه می‌کنیم که مستقیما با خود ارائه‌کنندگان خدمات تماس بگیرید تا درباره‌ی خدمات موجود آنها و نحوه‌ی دسترسی به آن خدمات اطلاعات کسب کنید.",
             "GREECE_BANNER_ARTICLES": "محتوای وبسایت راهنمای پناهندگان برای یونان از این به بعد به‌روزرسانی نخواهد شد.\nتمام مطالبی مربوط به یونان که روی وبسایت راهنمای پناهندگان موجود است آخرین بار در آگوست 2019 به‌روزرسانی شده است.\nبرخی از اطلاعاتی که شما اینجا به آنها دسترسی دارید ممکن است به روزرسانی نشده و ممکن است روندها و رویه‌های به‌شدت تغییر کرده باشند.\nما به شما پیشنهاد می‌کنیم که قبل از اینکه هر اقدامی انجام دهید، اطلاعات موجود در اینجا را با یک وکیل یا یک NGO حقوقی چک کنید.",
             "GREECE_BANNER_HP": "محتوای وبسایت راهنمای پناهندگان برای یونان از این به بعد به‌روزرسانی نخواهد شد.",
+            "Choose a different language": "زبان دیگری را انتخاب کنید",
         },
     },
     ar: {
@@ -329,6 +330,7 @@ export default {
             "GREECE_BANNER_SERVICES": "لم تعد قائمة الخدمات المتوفرة في اليونان\nيُرجى ملاحظة أن المعلومات الخاصة بالخدمات المذكورة هنا جرى تحديثها في شهر تموز/ يوليو عام 2019 وقد لا تكون مواكبة لآخر التطورات بعد الآن.\nللحصول على معلومات حول الخدمات المتوفرة حالياً وكيفية الحصول عليها ننصحكم دائماً بالتواصل مع الجهة المُقدمة لهذه الخدمات بشكل مباشر.",
             "GREECE_BANNER_ARTICLES": "لم يعد محتوى موقع دليل اللاجئ في اليونان (Refugee.Info) مُحدثاً.\nتم تحديث جميع المقالات حول اليونان الموجودة على موقع دليل اللاجئ في شهر آب/أغسطس عام 2019.\nقد لا تكون بعض المعلومات الموجودة هنا حديثة وربما طرأت تغييرات كبيرة على الإجراءات والخطوات المهمة.\nقبل إتخاذ أي إجراء ننصحكم بالتأكد من المعلومات المتوفرة هنا مع محامٍ أو منظمة قانونية.",
             "GREECE_BANNER_HP": "لم يعد محتوى موقع دليل اللاجئ في اليونان (Refugee.Info) مُحدثاً.",
+            "Choose a different language": "اختر لغة مختلفة",
         },
     },
     ur: {
@@ -495,6 +497,7 @@ export default {
             "GREECE_BANNER_SERVICES": "یونان کے لئے خدمات کی فہرست کو اب اپ ڈیٹ نہیں کیا جا رہا ہے۔\nبراہ کرم نوٹ کریں کہ یہاں دکھائی گئی خدمت کی معلومات کو آخری بار جولائی 2019 میں اپ ڈیٹ کیا گیا تھا اور اب یہ تازہ ترین نہیں ہوسکتی ہے۔\nہم آپ کو مشورہ دیتے ہیں کہ موجودہ خدمات اور ان تک رسائی حاصل کرنے کے طریقوں سے متعلق معلومات کے لئے ہمہ وقت فراہم کنندہ سے رابطہ کریں۔",
             "GREECE_BANNER_ARTICLES": "ریفیوجی.انفو یونان کے مواد کو اب اپ ڈیٹ نہیں کیا جا رہا ہے۔\nریفیوجی۔انفو ویب سائٹ پر دستیاب یونان سے متعلق تمام مضامین کو آخری بار اگست 2019 میں اپ ڈیٹ کیا گیا تھا۔\nکچھ معلومات جو آپ کو یہاں ملیں گی وہ اب تازہ ترین نہیں ہوسکتی ہیں اور اہم طریقہ کار اور ہو سکتا ہے کہ عمل میں نمایاں طور پر تبدیلی آئی ہو۔\nکوئی کارروائی کرنے سے پہلے ، ہم آپ کو مشورہ دیتے ہیں کہ آپ یہاں دستیاب معلومات کو کسی وکیل یا کسی قانونی غیر سرکاری تنظیم کے ساتھ کراس چیک کریں۔",
             "GREECE_BANNER_HP": "ریفیوجی.انفو یونان کے مواد کو اب اپ ڈیٹ نہیں کیا جا رہا ہے۔",
+            "Choose a different language": "ایک مختلف زبان کا انتخاب کریں",
         },
     },
     es: {
@@ -642,6 +645,7 @@ export default {
             "GREECE_BANNER_SERVICES": "Greece banner",
             "GREECE_BANNER_ARTICLES": "Greece banner",
             "GREECE_BANNER_HP": "Greece banner",
+            "Choose a different language": "Seleccionar otro idioma",
         }
     },
     fr: {
@@ -804,6 +808,7 @@ export default {
             "GREECE_BANNER_SERVICES": "La liste des services pour la Grèce n’est plus mise à jour.\nVeuillez noter que les informations sur les services présentées ici ont été mises à jour pour la dernière fois en juillet 2019 et peuvent ne plus être à jour.\nNous vous conseillons de toujours contacter directement le fournisseur de services pour obtenir des informations sur les services actuels et sur la façon d'y accéder.",
             "GREECE_BANNER_ARTICLES": "Le contenu de Refugee.Info Grèce n’est plus mis à jour.\nTous les articles sur la Grèce disponibles sur le site internet Refugee.Info ont été mis à jour pour la dernière fois en août 2019.\nCertaines des informations que vous trouverez ici risquent de ne plus être à jour et des procédures et processus importants peuvent avoir changé de manière significative.\nAvant d’entreprendre des démarches, nous vous suggérons de vérifier les informations disponibles ici avec un avocat ou une ONG juridique.",
             "GREECE_BANNER_HP": "Le contenu de Refugee.Info Grèce n’est plus mis à jour.",
+            "Choose a different language": "Choisissez une autre langue",
         }
     },
     ti: {
@@ -947,6 +952,7 @@ export default {
             "GREECE_BANNER_SERVICES": "Greece banner",
             "GREECE_BANNER_ARTICLES": "Greece banner",
             "GREECE_BANNER_HP": "Greece banner",
+            "Choose a different language": "Choose a different language",
         }
     },
     en: {
@@ -1114,6 +1120,7 @@ export default {
             "GREECE_BANNER_SERVICES": "The list of services for Greece is no longer being updated.\nPlease note that the service information shown here was last updated in July 2019 and may no longer be up-to-date.\nWe advise you to always contact the service provider directly for information about current services and how to access them.",
             "GREECE_BANNER_ARTICLES": "The Refugee.Info Greece content is no longer being updated.\nAll articles on Greece available on the Refugee.Info website were last updated in August 2019.\nSome of the information you will find here may no longer be up-to-date and important procedures and processes might have changed significantly.\nBefore taking any action, we suggest you cross-check the information available here with a lawyer or a legal NGO.",
             "GREECE_BANNER_HP": "The Refugee.Info Greece content is no longer being updated.",
+            "Choose a different language": "Choose a different language",
         },
     }
 };

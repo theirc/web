@@ -81,7 +81,7 @@ class CountrySelector extends Component {
 
 				{!disableLanguageSelector && availableCountryList.length > 0 && (
 				<span className="item-language" onClick={() => backToLanguage()}>
-					{t("Choose your language")}
+					{t("Choose a different language")}
 				</span>)
 				}
 			</div>
