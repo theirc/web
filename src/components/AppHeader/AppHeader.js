@@ -143,8 +143,7 @@ class AppHeader extends Component {
 										<span className='selectors'>
 											{!disableCountrySelector && (
 												<span className="country" color="contrast" onClick={onChangeCountry || noop}>
-													{/* {(country && country.fields.name) || " "} */}
-													<img src={`/${country.fields.slug}.png`} alt='' />
+													<img src={`/images/flags/${country.fields.slug}.png`} alt='' />
 												</span>
 											)}
 
