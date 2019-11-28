@@ -22,10 +22,16 @@
 		@include brand-colors("border-bottom-color");
 	}
 
+	.HeaderBar {
+		h1 {
+			text-align: center;
+		}
+	}
+
 	@media (min-width: $desktopBreakpoint) {
 		.HeaderBar {
 			h1 {
-				padding: 18px 0;
+				padding: 40px 0;
 			}
 		}
 	}
@@ -153,21 +159,18 @@
 	}
 
 	.btn-filter{
-		// @include brand-colors( "background-color");
-		// @include brand-colors( "border-color");
-		// @include brand-colors-inverse( "color");
 		align-items: center;
 		background-color: #f2f2f2;
-		border-color: #ddd;
+		border: 1px solid #ddd;
 		border-radius: 5px;
+		box-sizing: content-box;
 		cursor: pointer;
 		display: flex;
 		font-size: 14px;
 		height: 41px;
 		margin-right: 20px;
 		outline: 0;
-		padding-left: 5px;
-		padding-right: 15px;
+		padding: 0 15px 0 5px;
 
 		&:hover {
 				border-color: #bbb;
@@ -247,19 +250,13 @@
 			}
 		}
 	}
-	.home .hero{
-		margin-left: -2vw;
-		margin-right: -2vw;
-	}
 	.hero {
-		display: flex;
 		align-items: center;
+		border-top: 1px solid #ddd;
+		display: flex;
 		justify-content: center;
-		margin-left: -4vw;
-		margin-right: -4vw;
 	}
 	@media (min-width: $desktopBreakpoint) {
-
 		.hero {
 			// max-height: 440px;
 			overflow: hidden;
@@ -331,6 +328,13 @@
 		.copied {
 			right: unset !important;
 			left: 10px;
+		}
+
+		.social {
+			div {
+				margin-left: 0;
+				margin-right: 10px;
+			}
 		}
 	}
 }

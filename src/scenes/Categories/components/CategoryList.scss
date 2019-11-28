@@ -133,6 +133,7 @@
 				border: 1px solid #ddd;
 				box-sizing: border-box;
 				overflow: hidden;
+				padding: 5px;
 				
 				&:hover {
 					border: 1px solid #bbb;
@@ -147,18 +148,39 @@
 				}
 
 				.text {
-					// background-color: #f5f5f5;
 					background-color: white;
+					border-top: 1px solid #ddd;
 					cursor: pointer;
-					padding: 15px;
+					margin-top: 5px;
+					padding: 10px;
+
+					.category {
+						align-items: center;
+						display: flex;
+						font-size: 14px;
+						font-weight: lighter;
+						padding-bottom: 15px;
+						
+						i {
+							text-align: center;
+							min-width: 31px;
+						}
+						
+						span {
+							align-items: center;
+							display: flex;
+							height: 33px;
+							padding: 0 5px;
+						}
+					}
 
 					h2 {
 						font-size: 17px;
 						font-weight: normal;
+						height: 60px;
 						margin: 0 0 7px 0;
 						overflow: hidden;
 						text-overflow: ellipsis;
-						white-space: nowrap;
 					}
 
 					.author {

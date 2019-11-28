@@ -653,10 +653,15 @@
 		margin-left:15px;
 	}
 
+	.HeaderBar {
+		h1 {
+			text-align: center;
+		}
+	}
 	@media (min-width: $desktopBreakpoint) {
 		.HeaderBar {
 			h1 {
-				padding: 18px 0;
+				padding: 40px 0;
 			}
 		}
 	}
@@ -777,9 +782,9 @@
 
 	.hero {
 		background-color: #ffffff;
+		border-top: 1px solid #ddd;
 		display: flex;
 		flex-direction: column;
-		margin: 0 -4vw 0 -4vw;
 
 		a {
 			color: white;
@@ -867,14 +872,19 @@
 		justify-content: flex-end;
 	}
 }
-
+.rtl {
+	.filter-bar {
+		.social {
+			div {
+				margin-left: 0;
+				margin-right: 10px;
+			}
+		}
+	}
+}
 .filter-bar {
 	display: flex;
 	justify-content: flex-start;
-
-	// @media (min-width: $desktopBreakpoint) {
-	// 	display: flex;
-	// }
 
 	.social {
 		display: flex;

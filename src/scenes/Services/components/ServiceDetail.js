@@ -280,11 +280,13 @@ class ServiceDetail extends React.Component {
 					<title>{serviceT.name}</title>
 				</Helmet>
 
-				<div className="hero">
-					{service.image && <div className="HeroImageContainer"><img src={service.image} alt={service.provider.name} /></div>}
-				</div>
-
 				<HeaderBar subtitle={`${subtitle}:`} title={serviceT.name} />
+
+				{service.image &&
+					<div className="hero">
+						<div className="HeroImageContainer"><img src={service.image} alt={service.provider.name} /></div>
+					</div>
+				}
 
 				<div className='filter-bar'>
 					<div className="social">

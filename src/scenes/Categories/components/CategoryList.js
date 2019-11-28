@@ -32,29 +32,6 @@ class CategoryList extends Component {
 
 		if(!c.fields) { console.log('c.fields is null', c); return null;}
 
-		if (c.fields.categories) {
-			return c.fields.categories.map(a => {
-
-				if(!a.fields) return null;
-
-				let image = '/placeholder.png';
-				a.fields.hero && (image = a.fields.hero.fields.file.url);
-				a.fields.gallery && (image = a.fields.gallery.fields.file.url);
-
-				return (
-					<li className='tile' key={a.sys.id} onClick={() => console.log(`/${country.fields.slug}?language=` + language)}>
-						<div className='img-viewport'>
-							<img src={image} alt='' />
-						</div>
-						<div className='text'>
-							{a.fields && <h2>{a.fields.name}</h2>}
-							<span className='author'>{`${t('By')} `}<span>{cms.siteConfig.author}</span></span>
-						</div>
-					</li>
-				);
-			});
-		}
-
 		if (!c.fields.categories && !c.fields.articles) {
 			let image = '/placeholder.png';
 			if (c.fields.overview) {
@@ -68,9 +45,15 @@ class CategoryList extends Component {
 						<img src={image} alt='' />
 					</div>
 
+
 					<div className='text'>
+						<div className='category'>
+							<i className={c.fields.iconClass || "material-icons"}>{c.fields.iconText || ((!c.fields.iconClass || c.fields.iconClass === "material-icons") && "add")}</i>
+							<span>{c.fields.name}</span>
+						</div>
+						
 						{c.fields && <h2>{c.fields.name}</h2>}
-						<span className='author'>{`${t('By')} `}<span>{cms.siteConfig.author}</span>, {moment(c.sys.updatedAt).format('YYYY.MM.DD')}</span>
+						<span className='author'>{moment(c.sys.updatedAt).format('YYYY.MM.DD')}</span>
 					</div>
 				</li>
 			);
@@ -92,13 +75,18 @@ class CategoryList extends Component {
 						</div>
 
 						<div className='text'>
+							{a.fields.category &&
+							<div className='category'>
+								<i className={a.fields.category.fields.iconClass || "material-icons"}>{a.fields.category.fields.iconText || ((!a.fields.category.fields.iconClass || a.fields.category.fields.iconClass === "material-icons") && "add")}</i>
+								<span>{a.fields.category.fields.name}</span>
+							</div>}
+
 							<h2>{a.fields.title}</h2>
-							<span className='author'>{`${t('By')} `}<span>{cms.siteConfig.author}</span>, {moment(a.sys.updatedAt).format('YYYY.MM.DD')}</span>
+							<span className='author'>{moment(a.sys.updatedAt).format('YYYY.MM.DD')}</span>
 						</div>
 					</li>
 				)
-			}
-			);
+			});
 		}
 	}
 
