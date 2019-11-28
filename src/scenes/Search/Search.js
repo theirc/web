@@ -68,8 +68,8 @@ class Search extends React.Component {
 	}
 
 	render() {
-		const { searchingArticles, searchingServices, language, articles, services, term } = this.state;
-		const { onNavigate, country } = this.props;
+		const { searchingArticles, searchingServices, articles, services, term } = this.state;
+		const { onNavigate, country, language } = this.props;
 		const { config } = this.context;
 
 		return (

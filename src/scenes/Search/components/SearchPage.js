@@ -31,7 +31,7 @@ class SearchPage extends React.Component {
 	}
 
 	renderServiceItem(service) {
-		const { onNavigate, measureDistance, country } = this.props;
+		const { onNavigate, language, measureDistance, country } = this.props;
 		const distance = measureDistance && service.location && measureDistance(service.location);
 
 		let iconWithPrefix = vector_icon => vector_icon.split("-")[0] + " " + vector_icon;
@@ -55,7 +55,7 @@ class SearchPage extends React.Component {
 		let subTypes = service.types.filter(t => t.id > 0 && t.id !== mainType.id);
 
 		return [
-			<li key={service.id} className="Item" onClick={() => onNavigate(`/${country.fields.slug}/services/${service.id}/`)}>
+			<li key={service.id} className="Item" onClick={() => onNavigate(`/${country.fields.slug}/services/${service.id}?language=${language}`)}>
 				<div className="Icon" key={`${service.id}-0`}>
 					<i className={iconWithPrefix(mainType.vector_icon)} style={categoryStyle(mainType.color)} />
 				</div>
@@ -84,11 +84,11 @@ class SearchPage extends React.Component {
 	}
 
 	renderTiles(a) {
-		const { country, onNavigate } = this.props;
+		const { country, language, onNavigate } = this.props;
 		let image = a.fields.hero ? a.fields.hero.fields.file.url : '/placeholder.png';
 
 		return (
-			<li className='tile' key={a.sys.id} onClick={() => onNavigate(`/${country.fields.slug}/${a.fields.category.fields.slug}/${a.fields.slug}`)}>
+			<li className='tile' key={a.sys.id} onClick={() => onNavigate(`/${country.fields.slug}/${a.fields.category.fields.slug}/${a.fields.slug}?language=${language}`)}>
 				<div className='img-viewport'>
 					<img src={image} alt='' />
 				</div>
@@ -111,7 +111,7 @@ class SearchPage extends React.Component {
 	}
 
 	render() {
-		const { articles, onNavigate, searchingArticles, searchingServices, services, showServiceMap, term, t } = this.props;
+		const { articles, language, onNavigate, searchingArticles, searchingServices, services, showServiceMap, term, t } = this.props;
 		let servicesList = this.state.showFullServiceList ? services : services.slice().splice(0, 4);
 		let articleList = this.state.showFullBlogList ? articles : articles.slice().splice(0, 3);
 		const toggleServicelabel = this.state.showFullServiceList ? t('Show Less') : t('Show More');
@@ -176,7 +176,7 @@ class SearchPage extends React.Component {
 										<div
 											key={article.sys.id}
 											className="Article"
-											onClick={() => onNavigate(`/${article.fields.country.fields.slug}/${article.fields.category.fields.slug}/${article.fields.slug}`)}
+											onClick={() => onNavigate(`/${article.fields.country.fields.slug}/${article.fields.category.fields.slug}/${article.fields.slug}?language=${language}`)}
 										>
 											{article.fields.hero && <div className="Image" style={{ backgroundImage: `url('${article.fields.hero.fields.file.url}')` }} />}
 											<div className={`Text ${article.fields.hero ? 'TextWithImage' : ''}`}>
