@@ -167,6 +167,8 @@ class ArticlePage extends Component {
 					<title>{title}</title>
 				</Helmet>
 
+				<HeaderBar subtitle={(category.fields.articles || []).length > 1 && `${category.fields.name}:`} title={title} />
+
 				{hero &&
 					hero.fields &&
 					hero.fields.file && (
@@ -178,8 +180,6 @@ class ArticlePage extends Component {
 						</div>
 					)
 				}
-
-				<HeaderBar subtitle={(category.fields.articles || []).length > 1 && `${category.fields.name}:`} title={title} />
 
 				<div className='filter-bar'>
 					{article && article.fields.category &&
