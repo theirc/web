@@ -124,14 +124,14 @@ class CategoryList extends Component {
 						<button className='btn-filter' onClick={this.toggleDD}>
 							<div className='content'>
 								<i className={this.state.selectedCategoryClassName || 'material-icons'}>{this.state.selectedIconText || ((!this.state.selectedCategoryClassName || this.state.selectedCategoryClassName === "material-icons") && "add")}</i>
-								<span>{this.state.selectedCategoryName.length ? this.state.selectedCategoryName : t('All Categories')}</span>
+								<span>{this.state.selectedCategoryName.length ? this.state.selectedCategoryName : t('All Articles')}</span>
 							</div>
 							<i className="material-icons">keyboard_arrow_down</i>
 						</button>
 
 						{this.state.showCategoriesDD &&
 							<ul className='categories'>
-								<li value={0} className={!this.state.selectedCategory ? 'active' : ''} onClick={() => this.onChange({ sys: { id: 0 }, fields: { name: t('All Categories'), iconClass: 'material-icons', iconText: 'assignment' } })}><i className='material-icons'>assignment</i><span>{t('All Categories')}</span></li>
+								<li value={0} className={!this.state.selectedCategory ? 'active' : ''} onClick={() => this.onChange({ sys: { id: 0 }, fields: { name: t('All Articles'), iconClass: 'material-icons', iconText: 'assignment' } })}><i className='material-icons'>assignment</i><span>{t('All Articles')}</span></li>
 								{
 									(categories || []).filter(showCategory).map(e =>
 										<li key={e.sys.id} value={e.sys.id} className={e.sys.id === this.state.selectedCategory ? 'active' : ''} onClick={() => this.onChange(e)}>
