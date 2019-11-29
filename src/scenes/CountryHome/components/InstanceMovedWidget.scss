@@ -2,6 +2,7 @@
 
 .InstanceMovedWidget {
 	background-color: white;
+	border-radius: 5px;
 	padding: 50px 20px;
 	text-align: center;
 
@@ -25,8 +26,10 @@
 	}
 
 	a, .rtl a {
-		background-color: $accentIRC;
+		@include darken-brand-colors("background-color", 10%);
+		@include brand-colors-inverse("color");
 		border-bottom: none !important;
+		border-radius: 5px;
 		display: block;
 		font-weight: bold;
 		height: 70px;
@@ -36,12 +39,17 @@
 		outline: none;
 		padding: 5px;
 		text-decoration: none;
+
+		&:hover {
+			@include brand-colors("background-color");
+			text-decoration: underline;
+		}
 	}
 
 	h1 {
-		text-transform: uppercase;
 		font-size: 25px;
 		line-height: 150%;
+		text-transform: uppercase;
 	}
 
 	h3 {
