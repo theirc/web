@@ -4,7 +4,7 @@ import { Redirect, Route, Switch, withRouter } from "react-router";
 import { ConnectedRouter } from "react-router-redux";
 
 // local
-import { Home, Article, Categories, CountryHome, CategoryHome, CountrySelectorScene, LanguageSelectorScene, Search, Services, Selectors, Subscribe } from "./scenes";
+import { Home, Article, Categories, CountryHome, CategoryHome, Search, Services, Selectors, Subscribe } from "./scenes";
 import { DemoTool } from "./scenes";
 import { history } from "./shared/store";
 import { Skeleton } from "./scenes";

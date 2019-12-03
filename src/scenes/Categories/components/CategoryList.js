@@ -5,7 +5,6 @@ import moment from 'moment';
 
 // local
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
-import cms from '../../../backend/cms';
 import "./CategoryList.css";
 
 class CategoryList extends Component {
@@ -28,7 +27,7 @@ class CategoryList extends Component {
 	};
 
 	renderTiles(c) {
-		let { country, language, onNavigate, t } = this.props;
+		let { country, language, onNavigate } = this.props;
 
 		if(!c.fields) { console.log('c.fields is null', c); return null;}
 
