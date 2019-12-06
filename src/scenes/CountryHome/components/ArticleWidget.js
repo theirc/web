@@ -70,7 +70,7 @@ class ArticleWidget extends Component {
 					hero.fields.file &&
 					showHero && (
 						<div className="hero">
-							<img className="heroImage" src={article.fields.hero.fields.file.url + "?fm=jpg&fl=progressive"} alt="" />
+							<img className="heroImage" src={article.fields.hero.fields.file.url} alt="" />
 						</div>
 					)
 				}
