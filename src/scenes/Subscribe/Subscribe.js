@@ -7,7 +7,7 @@ import { translate } from "react-i18next";
 // local
 import HeaderBar from "../../components/HeaderBar/HeaderBar";
 import { Skeleton } from "..";
-import "./Subscribe.scss";
+import "./Subscribe.css";
 
 class Suscribe extends Component {
 
@@ -53,8 +53,23 @@ class Suscribe extends Component {
 	}
 
 	handleSubmit() {
+	
+		const options = {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({phone: this.state.phone, categoryId: this.props.category.fields.slug, code: 0, active: false})
+		}
+		fetch("https://admin-qa.cuentanos.org/v2/add-subscription/", options).then(response => {
+			console.log(response)
+		});
+	
 		this.setState({ codeSent: true });
 	}
+
+	
 
 	handleSubmitCode() {
 		console.log("Submit code");
@@ -64,7 +79,6 @@ class Suscribe extends Component {
 	render() {
 		const title = "Subscribe";
 		const { category } = this.props;
-		window.cat = category;
 		
 		return (
 			<Skeleton headerColor='light'>
