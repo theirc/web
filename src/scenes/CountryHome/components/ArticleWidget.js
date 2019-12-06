@@ -64,7 +64,7 @@ class ArticleWidget extends Component {
 		}
 
 		return (
-			<div className="Article Home" key={article.sys.id}>
+			<div className="Article ArticleWidget Home" key={article.sys.id}>
 				{hero &&
 					hero.fields &&
 					hero.fields.file &&

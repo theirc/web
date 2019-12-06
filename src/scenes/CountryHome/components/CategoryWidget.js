@@ -21,7 +21,7 @@ class CategoryWidget extends Component {
 		let article = c.fields.overview || _.first(c.fields.articles);
 
 		return (
-			<div className="Category">
+			<div className="Category CategoryWidget">
 				<h3>{c.fields.name}</h3>
 				<p dangerouslySetInnerHTML={{ __html: html }} />
 				<s className='Read-More'>

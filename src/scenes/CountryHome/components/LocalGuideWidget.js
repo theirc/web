@@ -13,7 +13,7 @@ class LocalGuideWidget extends Component {
 		/*jshint ignore:start*/
 		/*eslint-disable*/
 		return (
-			<div className="LocalGuide">
+			<div className="LocalGuide LocalGuideWidget">
 				<s className='Read-More'>
 					<a
 						href="#/"
