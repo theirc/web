@@ -34,7 +34,7 @@ class BottomNavContainer extends React.Component {
 	}
 
 	render() {
-		const { country, onGoToCategories, onGoHome, onGoToSearch, router, showMapButton, goToMap, showDepartments } = this.props;
+		const { country, onGoToCategories, onGoHome, onGoToSearch, showMapButton, goToMap, showDepartments } = this.props;
 
 		let { showServiceMap } = this.props;
 		let selectedIndex = selectedMenuItem();

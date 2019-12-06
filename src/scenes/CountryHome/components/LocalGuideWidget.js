@@ -8,12 +8,12 @@ import "./LocalGuideWidget.css";
 class LocalGuideWidget extends Component {
 
 	render() {
-		const { country, onNavigate, t, guideItems } = this.props;
+		const { country, language, onNavigate, t, guideItems } = this.props;
 
 		/*jshint ignore:start*/
 		/*eslint-disable*/
 		return (
-			<div className="LocalGuide">
+			<div className="LocalGuide LocalGuideWidget">
 				<s className='Read-More'>
 					<a
 						href="#/"
@@ -39,7 +39,7 @@ class LocalGuideWidget extends Component {
 								);
 						let link = c => {
 							if (c.fields.url.indexOf("/") === 0) {
-								return onNavigate(c.fields.url);
+								return onNavigate(`${c.fields.url}?language=${language}`);
 							} else {
 								return (global.document.location = c.fields.url);
 							}

@@ -35,16 +35,18 @@ class CountryHome extends React.Component {
 		}
 
 		return (
-			<Skeleton hideShareButtons={true} homePage={true}>
-				{!instanceMoved &&
-					<HomeWidgetCollection key={"HomeWidgetCollection"}>
-						{country.fields.home.map(e => <HomeWidget direction={direction} onNavigate={onNavigate} language={language} country={country} content={e} key={e.sys.id} />)}
-					</HomeWidgetCollection>
-				}
-				{instanceMoved &&
-					<InstanceMovedWidget link="http://refugeelife.bg/" />
-				}
-			</Skeleton>
+			<div className='CountryHome'>
+				<Skeleton hideShareButtons={true} homePage={true}>
+					{!instanceMoved &&
+						<HomeWidgetCollection key={"HomeWidgetCollection"} className='HomeWidgetCollection'>
+							{country.fields.home.map(e => <HomeWidget direction={direction} onNavigate={onNavigate} language={language} country={country} content={e} key={e.sys.id} />)}
+						</HomeWidgetCollection>
+					}
+					{instanceMoved &&
+						<InstanceMovedWidget link="http://refugeelife.bg/" />
+					}
+				</Skeleton>
+			</div>
 		);
 	}
 }

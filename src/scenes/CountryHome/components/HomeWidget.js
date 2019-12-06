@@ -133,9 +133,8 @@ class HomeWidget extends Component {
 			}
 
 			return (
-				<div ref={r => (this._ref = r)} className={["HomeWidget", content.fields.highlighted ? "Highlighted" : "", `CT-${content.sys.contentType.sys.id}`].join(" ")}>
-					{rendered}
-				</div>
+				rendered ? <div ref={r => (this._ref = r)} className={["HomeWidget", content.fields.highlighted ? "Highlighted" : "", `CT-${content.sys.contentType.sys.id}`].join(" ")}>
+					{rendered}</div> : null
 			);
 		} catch (e) {
 			console.log("Ignoring", e);

@@ -58,11 +58,6 @@
 			max-height: 440px;
 		}
 
-		&:first-child.Highlighted .hero {
-			background-color: black;
-			//@include brand-colors("background-color");
-		}
-
 		&.CT-article {
 			border: 1px solid #ddd;
 			border-radius: 5px;

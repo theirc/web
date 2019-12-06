@@ -27,7 +27,7 @@ class CategoryHome extends React.Component {
 		}
 
 		return (
-			<Skeleton headerColor='light'>
+			<Skeleton headerColor='light' className='CategoryHome'>
 				<div className="SkeletonContainer">
 					<ArticleList
 						country={country}

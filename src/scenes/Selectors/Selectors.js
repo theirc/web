@@ -12,7 +12,6 @@ import { CountrySelector, LanguageSelector, DetectLocationSelector } from "../..
 import { actions } from "../../shared/store";
 import servicesApi from "../../backend/servicesApi";
 import getSessionStorage from "../../shared/sessionStorage";
-import { Skeleton } from "..";
 
 class Selectors extends Component {
 	state = {

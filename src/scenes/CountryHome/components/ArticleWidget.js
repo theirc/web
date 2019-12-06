@@ -64,13 +64,13 @@ class ArticleWidget extends Component {
 		}
 
 		return (
-			<div className="Article Home" key={article.sys.id}>
+			<div className="Article ArticleWidget Home" key={article.sys.id}>
 				{hero &&
 					hero.fields &&
 					hero.fields.file &&
 					showHero && (
 						<div className="hero">
-							<img className="heroImage" src={article.fields.hero.fields.file.url + "?fm=jpg&fl=progressive"} alt="" />
+							<img className="heroImage" src={article.fields.hero.fields.file.url} alt="" />
 						</div>
 					)
 				}

@@ -15,7 +15,7 @@ class TopCategoriesWidget extends Component {
 		/*eslint-disable*/
 
 		return (
-			<div className="TopCategories">
+			<div className="TopCategories TopCategoriesWidget">
 				<s className='Read-More'>
 					<a
 						href="#/"
