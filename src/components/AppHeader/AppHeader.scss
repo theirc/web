@@ -88,7 +88,7 @@ Less me
 		.app-bar-selectors {
 			&.top-menu {
 				&.Selected {
-					border-bottom: 2px solid;
+					border-bottom: 3px solid;
 					@include brand-colors("border-bottom-color");
 
 					svg {
@@ -112,16 +112,16 @@ Less me
 	.country {
 		align-items: center;
 		display: inherit;
-		opacity: 0.8;
 		
-		&:hover {
-			opacity: 1;
-		}
 		
 		img {
 			border: 1px solid #ccc;
 			border-radius: 2px;
 			width: 28px;
+
+			&:hover {
+				border: 1px solid white;
+			}
 		}
 	}
 	
@@ -160,7 +160,7 @@ Less me
 		@media (min-width: 960px) {
 			font-size: 14px;
 			font-weight: 600;
-			padding: 19px 30px;
+			padding: 18px 30px;
 		}
 
 		&.top-menu {
@@ -174,7 +174,7 @@ Less me
 			}
 
 			&.Selected {
-				border-bottom: 2px solid;
+				border-bottom: 3px solid;
 				@include darken-brand-colors( "border-bottom-color", 10%);
 
 				svg {
@@ -239,7 +239,11 @@ Less me
 
 	.country {
 		img {
-			border: 1px solid #666 !important;
+			border: 1px solid #888;
+
+			&:hover {
+				border: 1px solid #555;
+			}
 		}
 	}
 }
