@@ -108,7 +108,7 @@ class Suscribe extends Component {
 
 							{this.state.codeSent && !this.state.validated &&
 								<div className="subscribe-form">
-									<label>We sent you a 4 digit code to verify your number. Please enter below to activate your notifications</label><br></br>
+									<label>Le hemos enviado un código de confirmación. Por favor ingréselo debajo para verificar su número</label><br></br>
 									<input type="text" onChange={this.handleChangeCode} className="subscribe-input" id="code" value={this.state.code} /><br></br>
 									<button type="button" onClick={this.handleSubmitCode} className="subscribe-button" id="confirm">Verify</button>
 								</div>
@@ -116,10 +116,10 @@ class Suscribe extends Component {
 							{this.state.validated &&
 								<div className="all-set">
 									<h3>
-										All set!
+										Listo!
 							</h3>
 									<h4>
-										Your phone number has been verified and now you can start receiving notifications
+										Su número de telefono ha quedado registrado y ahora recibirás notificaciones cuando haya nueva información disponible.
 							</h4>
 								</div>}
 
