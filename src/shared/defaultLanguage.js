@@ -1,5 +1,8 @@
-import cms from "../content/cms";
+// libs
 import queryString from "query-string";
+
+// local
+import cms from "../backend/cms";
 import getLocalStorage from "./localStorage";
 
 const localStorage = getLocalStorage();
@@ -9,14 +12,14 @@ if (global.window && global.location && global.navigator) {
 	let parsed = queryString.parse(global.location.search);
 
 	// SP-354 disable tigrinya and french from italy
-	for(let i = 0; i < cms.siteConfig.hideLangsPerCountry.length; i++) {
-		if(global.location.href.indexOf(`/${cms.siteConfig.hideLangsPerCountry[i].country}`) > 0 &&
+	for (let i = 0; i < cms.siteConfig.hideLangsPerCountry.length; i++) {
+		if (global.location.href.indexOf(`/${cms.siteConfig.hideLangsPerCountry[i].country}`) > 0 &&
 			(cms.siteConfig.hideLangsPerCountry[i].langs.indexOf(parsed.language) >= 0 ||
-			cms.siteConfig.hideLangsPerCountry[i].langs.indexOf(localStorage.language) >= 0)) {
+				cms.siteConfig.hideLangsPerCountry[i].langs.indexOf(localStorage.language) >= 0)) {
 			parsed.language = 'en';
 		}
 	}
-	
+
 	if (parsed.language) {
 		defaultLanguage = parsed.language;
 		localStorage.language = defaultLanguage;

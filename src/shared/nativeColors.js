@@ -24,11 +24,13 @@ function darken(color, percent = 0) {
 		.darken(percent)
 		.toHexString();
 }
+
 function lighten(color, percent = 0) {
 	return tinycolor(color)
 		.lighten(percent)
 		.toHexString();
 }
+
 const themes = _.fromPairs(
 	Object.keys(brandColors).map(k => [
 		k,
@@ -49,7 +51,6 @@ export default {
 	themes,
 	darken,
 	lighten,
-
 	titleBackground,
 	dividerColor,
 };

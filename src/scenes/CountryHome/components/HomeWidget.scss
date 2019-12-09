@@ -1,0 +1,169 @@
+@import "../../../shared/includes.scss";
+
+.HomeWidget {
+	padding: 20px 20px;
+
+	h1, h3 {
+		font-size: 18px;
+		text-transform: uppercase;
+	}
+
+	&.Highlighted {
+		h1 {
+			font-size: 24px !important;
+			margin-top: 30px;
+		}
+	}
+	.Article.Home {
+		h1 {
+			font-size: 1.17em;
+		}
+	}
+
+	.hero {
+		// align-items: flex-start !important;
+		margin-right: -20px;
+		margin-left: -20px;
+		margin-top: -20px;
+		max-height: 440px;
+		overflow: hidden;
+	}
+
+	a {
+		font-size: 15px;
+		font-weight: 500;
+		text-decoration: none;
+		text-transform: none;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
+	&.CT-article {
+		background-color: #f2f2f2;
+		border-top: 1px solid #ddd;
+		margin: 40px auto 0;
+	}
+
+	@media (min-width: $desktopBreakpoint) {
+		& {
+			flex-basis: calc(50% - 40px);
+		}
+		&.Highlighted {
+			// margin-top: 64px;
+			flex-basis: 100%;
+		}
+		& .hero {
+			max-height: 440px;
+		}
+
+		&.CT-article {
+			border: 1px solid #ddd;
+			border-radius: 5px;
+			flex-basis: unset;
+			margin-bottom: 30px;
+			width: 100%;
+
+			.Article.Home > h1 {
+				margin-bottom: 25px;
+			}
+
+			.Article.Home > p {
+				column-count: 2;
+				column-gap: 50px;
+				margin-bottom: unset;
+			}
+		}
+	}
+	.TopCategories {
+		.Read-More {
+			float: right;
+		}
+		@media (max-width: $desktopBreakpoint) {
+			i {
+				font-size: 25px !important;
+			}
+		}
+	}
+	.TopCategory {
+		width:33%;
+		display: inline-block;
+		flex-direction: row;
+		align-items: center;
+		cursor: pointer;
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+		padding-bottom: 16px;
+		height: 130px;
+		text-align: center;
+
+		&:hover {
+			span {
+				text-decoration: underline;
+			}
+
+			.icon {
+				color: black;
+			}
+		}
+
+
+		@media (max-width: $desktopBreakpoint) {
+			display: flex;
+			max-width: max-content;
+			height: auto;
+			text-align: left;
+			width: 100%;
+		}
+
+		& .icon {
+			color: #555;
+			width: 30px;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			display: inline-block;
+			justify-content: center;
+			font-size: 120%;
+			@media (min-width: $desktopBreakpoint) {
+				width: 100%;
+				text-align: center;
+				font-size: 50px;
+			}
+						
+			//	padding-right: 5px;
+			//	padding-left: 5px;
+
+			.ltr & {
+				padding-right: 10px;
+			}
+			.rtl & {
+				padding-left: 10px;
+			}
+
+			& .material-icons{
+				font-size: 50px;
+			}
+
+			
+		}
+	}
+}
+.CT-widget{
+	flex-basis: calc(100% - 40px);
+}
+.title-line{
+	@include brand-colors( "border-color");
+	border-top: 2px solid;
+	width: 50px;
+	margin-left: calc(50% - 25px);
+	margin-bottom: 30px;
+	@media (max-width: $desktopBreakpoint) {
+		display: none;
+	}
+}
