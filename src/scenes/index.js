@@ -4,8 +4,6 @@ import Categories from "./Categories/Categories";
 import CountryHome from "./CountryHome/CountryHome";
 import CategoryHome from "./CategoryHome/CategoryHome";
 import Skeleton from "../components/Skeleton/Skeleton";
-import CountrySelectorScene from "./CountrySelector/CountrySelectorScene";
-import LanguageSelectorScene from "./LanguageSelector/LanguageSelectorScene";
 import Services from "./Services/Services";
 import Search from "./Search/Search";
 import Selectors from "./Selectors/Selectors";
@@ -19,8 +17,6 @@ export {
 	CountryHome,
 	CategoryHome,
 	Skeleton,
-	CountrySelectorScene,
-	LanguageSelectorScene,
 	Search,
 	Services,
 	Selectors,

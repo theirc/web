@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ReactNative, { View } from "react-native";
 import { NativeRouter, Router, Route, Switch, Link, StatusBar } from "react-router-native";
 import { ConnectedRouter } from "react-router-redux";
-import { Home, Article, Categories, CountryHome, CategoryHome, CountrySelectorScene, LanguageSelectorScene, Search, Services, Selectors } from "./scenes";
+import { Home, Article, Categories, CountryHome, CategoryHome, Search, Services, Selectors } from "./scenes";
 import { history } from "./shared/store";
 import { Skeleton } from "./scenes";
 import { withCountry, withCategory } from "./shared/hoc";
@@ -21,8 +21,6 @@ class AppRouter extends Component {
 							<Switch>
 								<Route exact path="/" component={Home} />
 								<Route exact path="/selectors" component={Selectors} />
-								<Route exact path="/country-selector" component={CountrySelectorScene} />
-								<Route exact path="/language-selector" component={LanguageSelectorScene} />
 								<Route exact path="/:country/search" component={withCountry(Search)} />
 								<Route exact path="/:country/categories" component={withCountry(Categories)} />
 								<Route path="/:country/:category/:article" component={withCountry(withCategory(Article))} />

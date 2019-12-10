@@ -343,7 +343,7 @@ class ServiceCategoryListDesktop extends React.Component {
 		!loaded && this.renderLoader();
 
 		return (
-			<div className='desktop'>
+			<div className='desktop ServiceCategoryListDesktop'>
 				<HeaderBar key={"Header"} title={t("Services").toUpperCase()} />
 
 				{this.renderFilters()}
