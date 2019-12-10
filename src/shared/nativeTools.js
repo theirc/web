@@ -1,4 +1,5 @@
 import { Linking } from "react-native";
+
 export default {
 	wrapHTML(direction = "ltr", theme = "", css = "", html = "") {
 		return `<html dir="${direction}"><head><meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -30,6 +31,7 @@ export default {
 
 			return false;
 		}
+		
 		return true;
 	},
 };

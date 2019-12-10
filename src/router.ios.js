@@ -3,7 +3,7 @@ import ReactNative, { View } from "react-native";
 import { NativeRouter, Router, Route, Switch, Link, StatusBar } from "react-router-native";
 import { ConnectedRouter } from "react-router-redux";
 import { Home, Article, Categories, CountryHome, CategoryHome, CountrySelectorScene, LanguageSelectorScene, Search, Services, Selectors } from "./scenes";
-import { history } from "./store";
+import { history } from "./shared/store";
 import { Skeleton } from "./scenes";
 import { withCountry, withCategory } from "./shared/hoc";
 import Placeholder from "./shared/placeholder";

@@ -2,6 +2,7 @@ import _ from "lodash";
 
 function lsTest() {
 	var test = "test";
+
 	try {
 		global.localStorage.setItem(test, test);
 		global.localStorage.removeItem(test);
@@ -13,19 +14,19 @@ function lsTest() {
 
 export default function getSessionStorage() {
 	if (!lsTest()) {
-		//global.window.sessionStorage = null;
 		if (global.Proxy) {
 			var handler = {
-				get: function(target, name) {
+				get: function (target, name) {
 					return target[name];
 				},
-				set: function(target, name, value) {
+				set: function (target, name, value) {
 					target[name] = _.isObjectLike(value) ? JSON.stringify(value) : _.toString(value);
 					return target[name];
 				},
 			};
 
 			var p = new Proxy({}, handler);
+
 			if (global.window) {
 				global.window.mockSessionStorage = p;
 			}

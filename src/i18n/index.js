@@ -1,10 +1,12 @@
+// libs
 import i18n from "i18next";
-//import LanguageDetector from "i18next-browser-languagedetector";
 import { reactI18nextModule } from "react-i18next";
+
+// local
 import i18nConfig from "./config.js";
 
 i18n
-//	.use(LanguageDetector)
+	//	.use(LanguageDetector)
 	.use(reactI18nextModule) // if not using I18nextProvider
 	.init({
 		fallbackLng: "en",
@@ -15,7 +17,7 @@ i18n
 		},
 		resources: i18nConfig,
 		saveMissing: true,
-		missingKeyHandler: function(lng, ns, key, fallbackValue) {
+		missingKeyHandler: function (lng, ns, key, fallbackValue) {
 			window.missingKey = window.missingKey || {};
 			window.missingKey[lng] = window.missingKey[lng] || [];
 			window.missingKey[lng].push(key);
