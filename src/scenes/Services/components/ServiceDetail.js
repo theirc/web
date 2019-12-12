@@ -9,6 +9,8 @@ import PropTypes from "prop-types";
 
 // local
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
+import "../../../components/ActionsBar/ActionsBar.css";
+import "./ServiceDetail.css";
 import "./ServiceHome.css";
 
 // eslint-disable-next-line
@@ -288,15 +290,16 @@ class ServiceDetail extends React.Component {
 					</div>
 				}
 
-				<div className='filter-bar'>
+				<div className='ActionsBar'>
+					<div className="left"></div>
 					<div className="social">
-						<div href='#' className="share" onClick={this.onShareOnFacebook}><i className="fa fa-facebook-f" style={{ fontSize: 16 }} /></div>
+						<div href='#' className="social-btn" onClick={this.onShareOnFacebook}><i className="fa fa-facebook-f" style={{ fontSize: 16 }} /></div>
 
-						<div href='#' className="copy" onClick={this.onCopyLink}>
+						<div href='#' className="social-btn" onClick={this.onCopyLink}>
 							{!this.state.copied ? <Link /> : <LibraryBooks />}
+							{this.state.copied && <span className='copied'>{t('Copied')}</span>}
 						</div>
 
-						{this.state.copied && <span className='copied'>{t('Copied')}</span>}
 					</div>
 				</div>
 
