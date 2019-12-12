@@ -15,7 +15,7 @@ import _ from 'lodash';
 import { history } from "../../../shared/store";
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
 import "../../../components/ActionsBar/ActionsBar.css";
-import "./ArticlePage.css";
+import "./ArticleDetail.css";
 
 const moment = global.moment;
 const Remarkable = require("remarkable");
@@ -26,7 +26,7 @@ const md = new Remarkable("full", {
 	breaks: true,
 });
 
-class ArticlePage extends Component {
+class ArticleDetail extends Component {
 	state = {
 		copied: false
 	}
@@ -164,7 +164,7 @@ class ArticlePage extends Component {
 		html = html.replace(/(\+[0-9]{9,14}|00[0-9]{9,15})/g, `<a class="tel" href="tel:$1">$1</a>`);
 
 		return (
-			<div ref={r => (this._ref = r)} className={["ArticlePage", loading ? "loading" : "loaded"].join(" ")}>
+			<div ref={r => (this._ref = r)} className={["ArticleDetail", loading ? "loading" : "loaded"].join(" ")}>
 				<Helmet>
 					<title>{title}</title>
 				</Helmet>
@@ -212,4 +212,4 @@ class ArticlePage extends Component {
 	}
 }
 
-export default translate()(ArticlePage);
+export default translate()(ArticleDetail);
