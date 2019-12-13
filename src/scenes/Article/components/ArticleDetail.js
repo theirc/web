@@ -12,7 +12,7 @@ import { translate } from "react-i18next";
 import _ from 'lodash';
 
 // local
-import { history } from "../../../shared/store";
+import { history } from "../../../shared/redux/store";
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
 import "../../../components/ActionsBar/ActionsBar.css";
 import "./ArticleDetail.css";

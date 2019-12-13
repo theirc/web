@@ -12,7 +12,7 @@ import _ from "lodash";
 // local
 import { ServiceMap, ServiceCategoryList, ServiceLocationList, ServiceList, ServiceDetail, ServiceDepartmentList, ServiceCategoryListDesktop } from "../../components";
 import { Skeleton } from "..";
-import actions from "../../shared/actions";
+import actions from "../../shared/redux/actions";
 import servicesApi from "../../backend/servicesApi";
 import getSessionStorage from "../../shared/sessionStorage";
 

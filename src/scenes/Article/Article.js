@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 // local
 import { ArticleDetail, ArticleFooter } from "../../components";
 import Placeholder from "../../shared/placeholder";
-import { actions } from "../../shared/store";
+import { actions } from "../../shared/redux/store";
 import { Skeleton } from "..";
 
 const Promise = require("bluebird");

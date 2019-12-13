@@ -25,10 +25,6 @@ const ReactApp = require("../App").default;
 
 const React = require("react");
 const renderToString = require("react-dom/server").renderToString;
-const {
-	store,
-	history
-} = require("../shared/store");
 const Provider = require("react-redux").Provider;
 const _ = require("lodash");
 const toMarkdown = require("to-markdown");

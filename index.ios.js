@@ -1,7 +1,7 @@
 // libs
 import React, { Component } from "react";
 import { AppRegistry, StyleSheet, Text, View, Dimensions } from "react-native";
-import { store } from "./src/shared/store";
+import { store } from "./src/shared/redux/store";
 import App from "./src/App";
 import { Provider } from "react-redux";
 import PropTypes from "prop-types";
