@@ -4,10 +4,8 @@ import { Redirect, Route, Switch, withRouter } from "react-router";
 import { ConnectedRouter } from "react-router-redux";
 
 // local
-import { Home, Article, Categories, CountryHome, CategoryHome, Search, Services, Selectors, Subscribe } from "./scenes";
-import { DemoTool } from "./scenes";
+import { Article, Categories, CategoryHome, CountryHome, DemoTool, Home, Search, Selectors, Services, Skeleton, Subscribe } from "./scenes";
 import { history } from "./shared/redux/store";
-import { Skeleton } from "./scenes";
 import { withCountry, withCategory, withArticle } from "./shared/hoc";
 import Placeholder from "./shared/placeholder";
 
