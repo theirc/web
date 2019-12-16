@@ -867,22 +867,6 @@
 	width: 800px;
 }
 
-.ServiceDetail {
-	.filter-bar {
-		justify-content: flex-end;
-	}
-}
-.rtl {
-	.filter-bar {
-		.social {
-			div {
-				margin-left: 0;
-				margin-right: 10px;
-			}
-		}
-	}
-}
-
 .ServiceMapFilter{
 	height: 20px;
     z-index: 400;

@@ -6,9 +6,9 @@ import { NavigateBefore, NavigateNext } from "material-ui-icons";
 import { translate } from "react-i18next";
 
 // local
-import "./ArticleFooter.css";
+import "./DetailFooter.css";
 
-class ArticleFooter extends Component {
+class DetailFooter extends Component {
 	static propTypes = {
 		onNavigateTo: PropTypes.func,
 		country: PropTypes.object,
@@ -88,7 +88,7 @@ class ArticleFooter extends Component {
 		const rtl = direction === "rtl";
 
 		return ((previous || next) &&
-			<div className="ArticleFooter">
+			<div className="DetailFooter">
 				{previous && (
 					<div className="page-selector prev" onClick={() => onNavigateTo(previous.fields.slug)}>
 						{!rtl ? <NavigateBefore className="icon" /> : <NavigateNext className="icon" />}
@@ -113,4 +113,4 @@ class ArticleFooter extends Component {
 	}
 }
 
-export default translate()(ArticleFooter);
+export default translate()(DetailFooter);

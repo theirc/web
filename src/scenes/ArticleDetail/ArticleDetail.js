@@ -6,7 +6,7 @@ import { push } from "react-router-redux";
 import PropTypes from "prop-types";
 
 // local
-import { ArticleDetail, ArticleFooter } from "../../components";
+import { DetailBody, DetailFooter } from "../../components";
 import Placeholder from "../../shared/placeholder";
 import { actions } from "../../shared/redux/store";
 import { Skeleton } from "..";
@@ -82,8 +82,8 @@ class Article extends React.Component {
 			<Skeleton headerColor='light'>
 				<div className="SkeletonContainer">
 					<Placeholder>
-						<ArticleDetail key={"Article"} direction={direction} category={category} other={other} article={article} loading={loading} onNavigate={onNavigate} />
-						<ArticleFooter key={"ArticleFooter"} onNavigateTo={onNavigateTo(category, country)} language={language} {...{ category, direction, previous, next, article, country }} />
+						<DetailBody key={"DetailBody"} direction={direction} category={category} other={other} article={article} loading={loading} onNavigate={onNavigate} />
+						<DetailFooter key={"DetailFooter"} onNavigateTo={onNavigateTo(category, country)} language={language} {...{ category, direction, previous, next, article, country }} />
 					</Placeholder>
 				</div>
 			</Skeleton>

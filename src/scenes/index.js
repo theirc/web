@@ -1,5 +1,5 @@
 import Home from "./Home/Home";
-import Article from "./Article/Article";
+import ArticleDetail from "./ArticleDetail/ArticleDetail";
 import Categories from "./Categories/Categories";
 import CountryHome from "./CountryHome/CountryHome";
 import CategoryHome from "./CategoryHome/CategoryHome";
@@ -12,7 +12,7 @@ import DemoTool from "./DemoTool/DemoTool";
 
 export {
 	Home,
-	Article,
+	ArticleDetail,
 	Categories,
 	CountryHome,
 	CategoryHome,
