@@ -4,7 +4,7 @@ import BottomNavContainer from "./BottomNav/BottomNavContainer";
 import WarningDialog from "./WarningDialog/WarningDialog";
 import Footer from "./Footer/Footer";
 import DetailBody from "../scenes/ArticleDetail/components/DetailBody";
-import ArticleList from "../scenes/CategoryHome/components/ArticleList";
+import ArticleListOOD from "../scenes/CategoryHome/components/ArticleListOOD";
 import DetailFooter from "../scenes/ArticleDetail/components/DetailFooter";
 import CategoryList from "../scenes/Categories/components/CategoryList";
 import CountrySelector from "../scenes/Selectors/components/CountrySelector";
@@ -35,7 +35,7 @@ export {
 	WarningDialog,
 	Footer,
 	DetailBody,
-	ArticleList,
+	ArticleListOOD,
 	DetailFooter,
 	CategoryList,
 	CountrySelector,
