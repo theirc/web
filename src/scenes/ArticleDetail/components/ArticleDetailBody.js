@@ -15,7 +15,7 @@ import _ from 'lodash';
 import { history } from "../../../shared/redux/store";
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
 import "../../../components/ActionsBar/ActionsBar.css";
-import "./DetailBody.css";
+import "./ArticleDetailBody.css";
 
 const moment = global.moment;
 const Remarkable = require("remarkable");
@@ -26,7 +26,7 @@ const md = new Remarkable("full", {
 	breaks: true,
 });
 
-class DetailBody extends Component {
+class ArticleDetailBody extends Component {
 	state = {
 		copied: false
 	}
@@ -164,7 +164,7 @@ class DetailBody extends Component {
 		html = html.replace(/(\+[0-9]{9,14}|00[0-9]{9,15})/g, `<a class="tel" href="tel:$1">$1</a>`);
 
 		return (
-			<div ref={r => (this._ref = r)} className={["DetailBody", loading ? "loading" : "loaded"].join(" ")}>
+			<div ref={r => (this._ref = r)} className={["ArticleDetailBody", loading ? "loading" : "loaded"].join(" ")}>
 				<Helmet>
 					<title>{title}</title>
 				</Helmet>
@@ -212,4 +212,4 @@ class DetailBody extends Component {
 	}
 }
 
-export default translate()(DetailBody);
+export default translate()(ArticleDetailBody);

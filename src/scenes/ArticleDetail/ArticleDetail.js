@@ -6,14 +6,15 @@ import { push } from "react-router-redux";
 import PropTypes from "prop-types";
 
 // local
-import { DetailBody, DetailFooter } from "../../components";
+import ArticleDetailBody from "./components/ArticleDetailBody";
+import ArticleDetailFooter from "./components/ArticleDetailFooter";
 import Placeholder from "../../shared/placeholder";
 import { actions } from "../../shared/redux/store";
 import { Skeleton } from "..";
 
 const Promise = require("bluebird");
 
-class Article extends React.Component {
+class ArticleDetail extends React.Component {
 	static propTypes = {
 		match: PropTypes.shape({
 			params: PropTypes.shape({
@@ -82,8 +83,8 @@ class Article extends React.Component {
 			<Skeleton headerColor='light'>
 				<div className="SkeletonContainer">
 					<Placeholder>
-						<DetailBody key={"DetailBody"} direction={direction} category={category} other={other} article={article} loading={loading} onNavigate={onNavigate} />
-						<DetailFooter key={"DetailFooter"} onNavigateTo={onNavigateTo(category, country)} language={language} {...{ category, direction, previous, next, article, country }} />
+						<ArticleDetailBody key={"ArticleDetailBody"} direction={direction} category={category} other={other} article={article} loading={loading} onNavigate={onNavigate} />
+						<ArticleDetailFooter key={"ArticleDetailFooter"} onNavigateTo={onNavigateTo(category, country)} language={language} {...{ category, direction, previous, next, article, country }} />
 					</Placeholder>
 				</div>
 			</Skeleton>
@@ -127,4 +128,4 @@ const mapDispatch = (d, p) => {
 	};
 };
 
-export default connect(mapState, mapDispatch)(Article);
+export default connect(mapState, mapDispatch)(ArticleDetail);

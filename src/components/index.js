@@ -3,9 +3,7 @@ import BottomNav from "./BottomNav/BottomNav";
 import BottomNavContainer from "./BottomNav/BottomNavContainer";
 import WarningDialog from "./WarningDialog/WarningDialog";
 import Footer from "./Footer/Footer";
-import DetailBody from "../scenes/ArticleDetail/components/DetailBody";
 import ArticleListOOD from "../scenes/CategoryHome/components/ArticleListOOD";
-import DetailFooter from "../scenes/ArticleDetail/components/DetailFooter";
 import CategoryList from "../scenes/Categories/components/CategoryList";
 import CountrySelector from "../scenes/Selectors/components/CountrySelector";
 import LanguageSelector from "../scenes/Selectors/components/LanguageSelector";
@@ -34,9 +32,7 @@ export {
 	BottomNavContainer,
 	WarningDialog,
 	Footer,
-	DetailBody,
 	ArticleListOOD,
-	DetailFooter,
 	CategoryList,
 	CountrySelector,
 	LanguageSelector,
