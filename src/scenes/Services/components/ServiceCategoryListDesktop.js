@@ -9,8 +9,10 @@ import tinycolor from "tinycolor2";
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
 import servicesApi from '../../../backend/servicesApi';
 import ServiceMapDesktop from "./ServiceMapDesktop";
+import "../../../components/ActionsBar/ActionsBar.css";
 import "./ServiceHome.css";
 import "./ServiceCategoryList.css";
+import "./ServiceCategoryListDesktop.css";
 
 const FilterTypes = {
 	DEPARTMENT: 1,
@@ -222,27 +224,29 @@ class ServiceCategoryListDesktop extends React.Component {
 		let municipality = this.state.municipality.name ? this.state.municipality.name : this.state.municipality;
 
 		return (
-			<div id="filter-bar" className="filter-bar">
-				<div className='filters'>
-					<button id="btn-Locations" className="btn-filter" onClick={() => { this.departamentosFilter(); this.openFilters(FilterTypes.DEPARTMENT) }}>
+			<div className="ActionsBar">
+				<div className="left">
+					<div id="btn-Locations" className="btn" onClick={() => { this.departamentosFilter(); this.openFilters(FilterTypes.DEPARTMENT) }}>
 						<span>{department}</span><i className="material-icons">keyboard_arrow_down</i>
-					</button>
+					</div>
 
 					{municipalities && showDepartments && this.state.showMunicipalities &&
-						<button id="btn-Municipalities" className="btn-filter" onClick={() => { this.openFilters(FilterTypes.MUNICIPALITY) }}>
+						<div className="btn" onClick={() => { this.openFilters(FilterTypes.MUNICIPALITY) }}>
 							<span>{municipality}</span><i className="material-icons">keyboard_arrow_down</i>
-						</button>
+						</div>
 					}
 
-					<button id="btn-Categories" className="btn-filter" onClick={() => this.openFilters(FilterTypes.CATEGORY)}>
+					<div className="btn" onClick={() => this.openFilters(FilterTypes.CATEGORY)}>
 						<span>{categoryName}</span><i className="material-icons">keyboard_arrow_down</i>
-					</button>
-				</div>
+					</div>
 
-				<div id="toggle-map">
-					<input type="checkbox" className="switch bigswitch cn" checked={this.state.showMap} onMouseEnter={() => this.hoverMapSwitch(true)} onMouseLeave={() => this.hoverMapSwitch(false)} onChange={this.toggleMap} />
-					<div className={`toggle-btn ${this.state.switchHover ? 'hover' : ''}`}><div></div></div>
-					<span>{t('Map view')}</span>
+					<div className="line" />
+
+					<div id="services-list-map-toggle">
+						<input type="checkbox" className="switch bigswitch cn" checked={this.state.showMap} onMouseEnter={() => this.hoverMapSwitch(true)} onMouseLeave={() => this.hoverMapSwitch(false)} onChange={this.toggleMap} />
+						<div className={`toggle-btn ${this.state.switchHover ? 'hover' : ''}`}><div></div></div>
+						<span>{t('Map view')}</span>
+					</div>
 				</div>
 			</div>
 		);
@@ -252,7 +256,7 @@ class ServiceCategoryListDesktop extends React.Component {
 		const { t } = this.props;
 
 		return (
-			<div className={`category-filters ${className}`}>
+			<div className={`services-list-popover ${className}`}>
 				<div id="location-title">{title}</div>
 				<div id="location-list">
 					{filterType === FilterTypes.CATEGORY &&
@@ -343,7 +347,7 @@ class ServiceCategoryListDesktop extends React.Component {
 		!loaded && this.renderLoader();
 
 		return (
-			<div className='desktop'>
+			<div className='desktop ServiceCategoryListDesktop'>
 				<HeaderBar key={"Header"} title={t("Services").toUpperCase()} />
 
 				{this.renderFilters()}

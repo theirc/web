@@ -9,7 +9,7 @@ import measureDistance from "@turf/distance";
 
 // local
 import { CountrySelector, LanguageSelector, DetectLocationSelector } from "../../components";
-import { actions } from "../../shared/store";
+import { actions } from "../../shared/redux/store";
 import servicesApi from "../../backend/servicesApi";
 import getSessionStorage from "../../shared/sessionStorage";
 

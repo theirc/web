@@ -6,7 +6,7 @@ import { translate } from "react-i18next";
 
 // local
 import { ArticleWidget, CategoryWidget, LocalGuideWidget, TopCategoriesWidget } from "../../../components";
-import "./HomeWidget.css";
+import "./HomeWidgetFactory.css";
 
 class HomeWidget extends Component {
 

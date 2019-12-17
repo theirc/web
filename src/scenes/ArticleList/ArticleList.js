@@ -4,11 +4,11 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 // local
-import { CategoryList } from "../../components";
-import { history } from "../../shared/store";
+import ArticleListBody  from "./components/desktop/ArticleListBody";
+import { history } from "../../shared/redux/store";
 import { Skeleton } from "..";
 
-class Categories extends React.Component {
+class ArticleList extends React.Component {
 	static propTypes = {
 		match: PropTypes.shape({
 			params: PropTypes.shape({
@@ -30,8 +30,8 @@ class Categories extends React.Component {
 		}
 
 		return <Skeleton headerColor='light'>
-			<div className="SkeletonContainer bg-gray">
-				<CategoryList categories={country.fields.categories} country={country} onNavigate={onNavigate} language={language} />
+			<div className="SkeletonContainer ArticleList bg-gray">
+				<ArticleListBody categories={country.fields.categories} country={country} onNavigate={onNavigate} language={language} />
 			</div>
 		</Skeleton>
 	}
@@ -56,4 +56,4 @@ const mapDispatch = (d, p) => {
 	};
 };
 
-export default connect(mapState, mapDispatch)(Categories);
+export default connect(mapState, mapDispatch)(ArticleList);

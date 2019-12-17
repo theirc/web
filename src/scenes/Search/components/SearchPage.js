@@ -8,7 +8,7 @@ import tinycolor from "tinycolor2";
 import cms from '../../../backend/cms';
 import "./SearchPage.css";
 import "../../Services/components/ServiceCategoryList.css";
-import "../../Categories/components/CategoryList.css";
+import "../../ArticleList/components/desktop/ArticleListBody.css";
 
 const Remarkable = require("remarkable");
 
@@ -160,7 +160,7 @@ class SearchPage extends React.Component {
 
 						{searchingArticles && <div className="LoaderContainer"><div className="loader" /></div>}
 
-						<div className="CategoryList">
+						<div className="ArticleListBody">
 							<div className='tiles-desktop'>
 								<ul>
 									{articleList.map(c => this.renderTiles(c))}
@@ -168,7 +168,7 @@ class SearchPage extends React.Component {
 							</div>
 						</div>
 
-						<div className="CategoryList">
+						<div className="ArticleListBody">
 							<div className='tiles-mobile'>
 								{articleList.map((article, i) => {
 									return [

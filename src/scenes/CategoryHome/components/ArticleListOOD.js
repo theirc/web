@@ -3,14 +3,14 @@ import React from "react";
 import { translate } from "react-i18next";
 
 // local
-import "./ArticleList.css";
+import "./ArticleListOOD.css";
 
-class ArticleList extends React.Component {
+class ArticleListOOD extends React.Component {
 
 	render() {
 		const { country, category, onNavigate, md } = this.props;
 		return (
-			<div className="ArticleListPage">
+			<div className="ArticleListOOD">
 				<div className="Title">
 					<h1>
 						{category.fields.name}
@@ -46,4 +46,4 @@ class ArticleList extends React.Component {
 	}
 }
 
-export default translate()(ArticleList);
+export default translate()(ArticleListOOD);

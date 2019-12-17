@@ -9,11 +9,13 @@ import FacebookPlayer from "react-facebook-player";
 import YouTube from "react-youtube";
 import InstagramEmbed from 'react-instagram-embed';
 import { translate } from "react-i18next";
-import { history } from "../../../shared/store";
+import _ from 'lodash';
 
 // local
+import { history } from "../../../shared/redux/store";
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
-import "./ArticlePage.css";
+import "../../../components/ActionsBar/ActionsBar.css";
+import "./ArticleDetailBody.css";
 
 const moment = global.moment;
 const Remarkable = require("remarkable");
@@ -24,7 +26,7 @@ const md = new Remarkable("full", {
 	breaks: true,
 });
 
-class ArticlePage extends Component {
+class ArticleDetailBody extends Component {
 	state = {
 		copied: false
 	}
@@ -162,43 +164,40 @@ class ArticlePage extends Component {
 		html = html.replace(/(\+[0-9]{9,14}|00[0-9]{9,15})/g, `<a class="tel" href="tel:$1">$1</a>`);
 
 		return (
-			<div ref={r => (this._ref = r)} className={["ArticlePage", loading ? "loading" : "loaded"].join(" ")}>
+			<div ref={r => (this._ref = r)} className={["ArticleDetailBody", loading ? "loading" : "loaded"].join(" ")}>
 				<Helmet>
 					<title>{title}</title>
 				</Helmet>
 
 				<HeaderBar subtitle={(category.fields.articles || []).length > 1 && `${category.fields.name}:`} title={title} />
 
-				{hero &&
-					hero.fields &&
-					hero.fields.file && (
+				{_.has(hero, 'fields.file') &&
 						<div>
 							<div className="hero">
 								<img src={hero.fields.file.url} alt="" />
 							</div>
 							{hero.fields.description && <credit>{hero.fields.description}</credit>}
 						</div>
-					)
 				}
 
-				<div className='filter-bar'>
-					{article && article.fields.category &&
-						<button className='btn-filter' onClick={ history.goBack }>
-							<i className="material-icons">keyboard_arrow_left</i>
-							<i className={article.fields.category.fields.iconClass || "material-icons"}>{article.fields.category.fields.iconText || ((!article.fields.category.fields.iconClass || article.fields.category.fields.iconClass === "material-icons") && "add")}</i>
-							<span>{article.fields.category.fields.name}</span>
-						</button>}
-					{(!article || !article.fields.category) && <span style={{visibility: 'hidden'}}></span>}
-					
+				<div className='ActionsBar'>
+					<div className='left'>
+						{_.has(article, 'fields.category.fields') &&
+							<div className='btn' onClick={ history.goBack }>
+								<i className="material-icons">keyboard_arrow_left</i>
+								<i className={article.fields.category.fields.iconClass || "material-icons"}>{article.fields.category.fields.iconText || ((!article.fields.category.fields.iconClass || article.fields.category.fields.iconClass === "material-icons") && "add")}</i>
+								<span>{article.fields.category.fields.name}</span>
+							</div>
+						}
+					</div>
 
 					<div className="social">
-						<div href='#' className="share" onClick={this.onShareOnFacebook}><i className="fa fa-facebook-f" style={{ fontSize: 16 }} /></div>
+						<div href='#' className="social-btn" onClick={this.onShareOnFacebook}><i className="fa fa-facebook-f" /></div>
 
-						<div href='#' className="copy" onClick={this.onCopyLink}>
+						<div href='#' className="social-btn" onClick={this.onCopyLink}>
 							{!this.state.copied ? <Link /> : <LibraryBooks />}
+							{this.state.copied && <span className='copied'>{t('Copied')}</span>}
 						</div>
-
-						{this.state.copied && <span className='copied'>{t('Copied')}</span>}
 					</div>
 				</div>
 
@@ -213,4 +212,4 @@ class ArticlePage extends Component {
 	}
 }
 
-export default translate()(ArticlePage);
+export default translate()(ArticleDetailBody);

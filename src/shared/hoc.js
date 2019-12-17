@@ -5,7 +5,7 @@ import _ from "lodash";
 import PropTypes from "prop-types";
 
 // local
-import { actions } from "./store";
+import { actions } from "./redux/store";
 import servicesApi from "../backend/servicesApi";
 import { Skeleton } from "../scenes";
 

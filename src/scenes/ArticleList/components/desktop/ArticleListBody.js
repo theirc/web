@@ -4,10 +4,11 @@ import { translate } from "react-i18next";
 import moment from 'moment';
 
 // local
-import HeaderBar from "../../../components/HeaderBar/HeaderBar";
-import "./CategoryList.css";
+import HeaderBar from "../../../../components/HeaderBar/HeaderBar";
+import "../../../../components/ActionsBar/ActionsBar.css";
+import "./ArticleListBody.css";
 
-class CategoryList extends Component {
+class ArticleListBody extends Component {
 	state = {
 		selectedCategory: 0,
 		selectedCategoryClassName: 'material-icons',
@@ -116,20 +117,22 @@ class CategoryList extends Component {
 		}
 
 		return (
-			<div className="CategoryList">
+			<div className="ArticleListBody">
 				<HeaderBar title={t("Categories").toUpperCase()} />
 				<div className='tiles-desktop'>
-					<div className='filter-bar'>
-						<button className='btn-filter' onClick={this.toggleDD}>
-							<div className='content'>
-								<i className={this.state.selectedCategoryClassName || 'material-icons'}>{this.state.selectedIconText || ((!this.state.selectedCategoryClassName || this.state.selectedCategoryClassName === "material-icons") && "add")}</i>
-								<span>{this.state.selectedCategoryName.length ? this.state.selectedCategoryName : t('All Articles')}</span>
+					<div className='ActionsBar'>
+						<div className="left">
+							<div id='articles-list-dropdown' onClick={this.toggleDD}>
+								<div className='content'>
+									<i className={this.state.selectedCategoryClassName || 'material-icons'}>{this.state.selectedIconText || ((!this.state.selectedCategoryClassName || this.state.selectedCategoryClassName === "material-icons") && "add")}</i>
+									<span>{this.state.selectedCategoryName.length ? this.state.selectedCategoryName : t('All Articles')}</span>
+								</div>
+								<i className="material-icons">keyboard_arrow_down</i>
 							</div>
-							<i className="material-icons">keyboard_arrow_down</i>
-						</button>
+						</div>
 
 						{this.state.showCategoriesDD &&
-							<ul className='categories'>
+							<ul id='articles-list-popover'>
 								<li value={0} className={!this.state.selectedCategory ? 'active' : ''} onClick={() => this.onChange({ sys: { id: 0 }, fields: { name: t('All Articles'), iconClass: 'material-icons', iconText: 'assignment' } })}><i className='material-icons'>assignment</i><span>{t('All Articles')}</span></li>
 								{
 									(categories || []).filter(showCategory).map(e =>
@@ -221,4 +224,4 @@ class CategoryList extends Component {
 	}
 }
 
-export default translate()(CategoryList);
+export default translate()(ArticleListBody);

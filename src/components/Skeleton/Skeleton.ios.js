@@ -1,5 +1,5 @@
 import React from "react";
-import { actions, history } from "../../shared/store";
+import { actions, history } from "../../shared/redux/store";
 import _ from "lodash";
 import { connect } from "react-redux";
 import { AppHeader, Footer, WarningDialog, HomeWidget } from "..";

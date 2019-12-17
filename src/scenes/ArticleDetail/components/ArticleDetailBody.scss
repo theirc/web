@@ -1,6 +1,6 @@
 @import "../../../shared/includes.scss";
 
-.ArticlePage {
+.ArticleDetailBody {
 	max-width: 1024px;
 	margin: 0 auto;
 
@@ -32,47 +32,6 @@
 		.HeaderBar {
 			h1 {
 				padding: 40px 0;
-			}
-		}
-	}
-
-	.filter-bar {
-		display: flex;
-		justify-content: space-between;
-
-		.social {
-			display: flex;
-			position: relative;
-
-			div {
-				align-items: center;
-				background-color: #f2f2f2;
-				border: 1px solid #ddd;
-				border-radius: 5px;
-				display: flex;
-				font-size: 14px;
-				justify-content: center;
-				margin-left: 10px;
-				padding: 0 10px;
-				text-decoration: none;
-				width: 25px;
-				height: 41px;
-	
-				&:hover {
-					cursor: pointer;
-					border-color: #bbb;
-				}
-			}
-
-			.copied {
-				background-color: gray;
-				border-radius: 3px;
-				color: white;
-				font-size: 12px;
-				padding: 3px;
-				position: absolute;
-				right: 0;
-				top: 50px;
 			}
 		}
 	}
@@ -156,39 +115,6 @@
 
 		@include brand-colors("color");
 		@include brand-colors("border-color");
-	}
-
-	.btn-filter{
-		align-items: center;
-		background-color: #f2f2f2;
-		border: 1px solid #ddd;
-		border-radius: 5px;
-		box-sizing: content-box;
-		cursor: pointer;
-		display: flex;
-		font-size: 14px;
-		height: 41px;
-		margin-right: 20px;
-		outline: 0;
-		padding: 0 15px 0 5px;
-
-		&:hover {
-				border-color: #bbb;
-		}
-
-		&:active {
-				border-style: solid;
-		}
-
-		i {
-				font-size: 18px;
-				padding-right: 10px;
-				margin-left: 0;
-
-				&.material-icons {
-					padding-right: 2px;
-				}
-		}
 	}
 
 	.title {
@@ -319,22 +245,6 @@
 		ul li {
 			list-style-type: square;
 			margin-bottom: 0.5em;
-		}
-	}
-}
-
-.rtl {
-	.ArticlePage {
-		.copied {
-			right: unset !important;
-			left: 10px;
-		}
-
-		.social {
-			div {
-				margin-left: 0;
-				margin-right: 10px;
-			}
 		}
 	}
 }
