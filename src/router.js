@@ -4,7 +4,7 @@ import { Redirect, Route, Switch, withRouter } from "react-router";
 import { ConnectedRouter } from "react-router-redux";
 
 // local
-import { ArticleDetail, Categories, CategoryHome, CountryHome, DemoTool, Home, Search, Selectors, Services, Skeleton, Subscribe } from "./scenes";
+import { ArticleDetail, ArticleList, CategoryHome, CountryHome, DemoTool, Home, Search, Selectors, Services, Skeleton, Subscribe } from "./scenes";
 import { history } from "./shared/redux/store";
 import { withCountry, withCategory, withArticle } from "./shared/hoc";
 import Placeholder from "./shared/placeholder";
@@ -55,7 +55,7 @@ class Router extends Component {
 						<Route exact path="/jordan/services*" render={() => <Redirect to="/jordan" />} />
 						<Route exact path="/:country/subscribe/:category" component={withCountry(withCategory(Subscribe))} />
 						<Route path="/:country/services" component={props => <ServicesWithCountry {...props} />} />
-						<Route exact path="/:country/categories" component={withCountry(Categories)} />
+						<Route exact path="/:country/categories" component={withCountry(ArticleList)} />
 						<Route exact path="/:country/search" component={withCountry(Search)} />
 						<Route path="/:country/:category/:article" component={withCountry(withCategory(ArticleDetail))} />
 						<Route path="/:country/:category" component={withCountry(withCategory(CategoryHome))} />

@@ -4,7 +4,6 @@ import BottomNavContainer from "./BottomNav/BottomNavContainer";
 import WarningDialog from "./WarningDialog/WarningDialog";
 import Footer from "./Footer/Footer";
 import ArticleListOOD from "../scenes/CategoryHome/components/ArticleListOOD";
-import CategoryList from "../scenes/Categories/components/CategoryList";
 import CountrySelector from "../scenes/Selectors/components/CountrySelector";
 import LanguageSelector from "../scenes/Selectors/components/LanguageSelector";
 import HomeWidget from "../scenes/CountryHome/components/HomeWidgetFactory";
@@ -33,7 +32,6 @@ export {
 	WarningDialog,
 	Footer,
 	ArticleListOOD,
-	CategoryList,
 	CountrySelector,
 	LanguageSelector,
 	HomeWidget,

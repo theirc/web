@@ -4,11 +4,11 @@ import { translate } from "react-i18next";
 import moment from 'moment';
 
 // local
-import HeaderBar from "../../../components/HeaderBar/HeaderBar";
-import "../../../components/ActionsBar/ActionsBar.css";
-import "./CategoryList.css";
+import HeaderBar from "../../../../components/HeaderBar/HeaderBar";
+import "../../../../components/ActionsBar/ActionsBar.css";
+import "./ArticleListBody.css";
 
-class CategoryList extends Component {
+class ArticleListBody extends Component {
 	state = {
 		selectedCategory: 0,
 		selectedCategoryClassName: 'material-icons',
@@ -117,7 +117,7 @@ class CategoryList extends Component {
 		}
 
 		return (
-			<div className="CategoryList">
+			<div className="ArticleListBody">
 				<HeaderBar title={t("Categories").toUpperCase()} />
 				<div className='tiles-desktop'>
 					<div className='ActionsBar'>
@@ -224,4 +224,4 @@ class CategoryList extends Component {
 	}
 }
 
-export default translate()(CategoryList);
+export default translate()(ArticleListBody);

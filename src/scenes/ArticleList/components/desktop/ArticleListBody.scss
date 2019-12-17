@@ -1,13 +1,13 @@
-@import "../../../shared/includes.scss";
+@import "../../../../shared/includes.scss";
 
 .SearchPage {
-	.CategoryList {
+	.ArticleListBody {
 		.tiles-desktop {
 			min-height: initial;
 		}
 	}
 }
-.CategoryList {
+.ArticleListBody {
 	.article-title:hover {
 		cursor: pointer;
 		text-decoration: underline;

@@ -1,6 +1,6 @@
 import Home from "./Home/Home";
 import ArticleDetail from "./ArticleDetail/ArticleDetail";
-import Categories from "./Categories/Categories";
+import ArticleList from "./ArticleList/ArticleList";
 import CountryHome from "./CountryHome/CountryHome";
 import CategoryHome from "./CategoryHome/CategoryHome";
 import Skeleton from "../components/Skeleton/Skeleton";
@@ -13,7 +13,7 @@ import DemoTool from "./DemoTool/DemoTool";
 export {
 	Home,
 	ArticleDetail,
-	Categories,
+	ArticleList,
 	CountryHome,
 	CategoryHome,
 	Skeleton,
