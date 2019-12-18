@@ -33,7 +33,7 @@ class ServiceCategoryListDesktop extends React.Component {
 		services: [],
 		showFilter: true,
 		showAll: false,
-		showMap: this.props.mapView,
+		showMap: !!this.props.mapView,
 		showMunicipalities: false,
 		showServices: false,
 		switchHover: false
@@ -105,7 +105,6 @@ class ServiceCategoryListDesktop extends React.Component {
 		let c = regions.filter(r => r.slug === country.fields.slug)[0]
 
 		this.setState({ showAll: true });
-		console.log(c, category);
 		servicesApi.fetchAllServices(c.slug, language, category, null, 2000, true).then(
 			services => this.setState({ services: services.results })
 		)
