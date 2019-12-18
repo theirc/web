@@ -431,7 +431,6 @@ class Services extends React.Component {
 									{isMobile && <ServiceMap
 										{...props}
 										goToService={goToService}
-										language={language}
 										locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
 										findServicesInLocation={bbox => this.fetchServicesWithinLocation(bbox, props.match.params.location)}
 										measureDistance={this.measureDistance(geolocation, language)}
@@ -613,7 +612,6 @@ class Services extends React.Component {
 									<ServiceMap
 										{...props}
 										goToService={goToService}
-										language={language}
 										locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
 										measureDistance={this.measureDistance(geolocation, language)}
 										toggleLocation={() => _.identity()}
@@ -789,7 +787,6 @@ class Services extends React.Component {
 									<ServiceMap
 										{...props}
 										goToService={goToService}
-										language={language}
 										locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
 										measureDistance={this.measureDistance(geolocation, language)}
 										toggleLocation={() => _.identity()}
@@ -877,7 +874,6 @@ class Services extends React.Component {
 									<ServiceMap
 										{...props}
 										goToService={goToService}
-										language={language}
 										locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
 										measureDistance={this.measureDistance(geolocation, language)}
 										toggleLocation={() => _.identity()}
