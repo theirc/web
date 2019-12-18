@@ -8,6 +8,9 @@
 	}
 }
 .ArticleListBody {
+	margin: 0 auto;
+	max-width: 1024px;
+
 	.article-title:hover {
 		cursor: pointer;
 		text-decoration: underline;

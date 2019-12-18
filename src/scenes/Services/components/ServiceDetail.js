@@ -2,6 +2,7 @@
 import React from "react";
 import { translate } from "react-i18next";
 import _ from "lodash";
+import { connect } from "react-redux";
 import { LibraryBooks, Link } from "material-ui-icons";
 import * as clipboard from "clipboard-polyfill";
 import { Helmet } from "react-helmet";
@@ -483,4 +484,8 @@ class ServiceDetail extends React.Component {
 	}
 }
 
-export default translate()(ServiceDetail);
+const mapState = ({ country, language }, p) => {
+	return { country, language };
+};
+
+export default translate()(connect(mapState)(ServiceDetail));

@@ -576,11 +576,9 @@ class Services extends React.Component {
 								<div className="SkeletonContainer">
 									<ServiceDetail
 										{...props}
-										language={language}
 										goToService={goToService}
 										fetchService={() => this.fetchServicePreview(props)}
 										fetchServicesInSameLocation={() => this.fetchServicesInSameLocation(props)}
-										country={country}
 										phoneCodes={config.countryPhoneCodes}
 									/>
 								</div>
@@ -595,11 +593,9 @@ class Services extends React.Component {
 								<div className="SkeletonContainer">
 									<ServiceDetail
 										{...props}
-										language={language}
 										goToService={goToService}
 										fetchService={() => this.fetchService(props)}
 										fetchServicesInSameLocation={() => this.fetchServicesInSameLocation(props)}
-										country={country}
 										phoneCodes={config.countryPhoneCodes}
 									/>
 								</div>
