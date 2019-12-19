@@ -135,7 +135,11 @@
 		align-items: center;
 		align-content: center;
 
-		
+		&:hover {
+			span {
+				text-decoration: underline;
+			}
+		}
 
 		&.left {
 			height: 100%;
