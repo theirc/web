@@ -457,7 +457,6 @@ class Services extends React.Component {
 											fetchCategories={() => this.serviceTypesByLocation(props.match.params.location)}
 											fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
 											goTo={(location, category, mapview) => this.goTo(location, category, mapview)}
-											showDepartments={config.showDepartments}
 										/>
 
 									}
@@ -495,7 +494,6 @@ class Services extends React.Component {
 											fetchCategoriesByLocation={(location) => this.serviceTypesByLocation(location)}
 											goTo={(location, category, mapview) => this.goTo(location, category, mapview)}
 											fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 10)} /* TODO: Fix number of services */
-											showDepartments={config.showDepartments}
 										/>
 
 									}
@@ -639,7 +637,6 @@ class Services extends React.Component {
 										fetchCategoriesByLocation={(location) => this.serviceTypesByLocation(location)}
 										goTo={(location, category, mapview) => this.goTo(location, category, mapview)}
 										fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
-										showDepartments={config.showDepartments}
 									/>
 
 								}
@@ -682,7 +679,6 @@ class Services extends React.Component {
 										fetchCategoriesByLocation={(location) => this.serviceTypesByLocation(location)}
 										goTo={(location, category, mapview) => this.goTo(location, category, mapview)}
 										fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
-										showDepartments={config.showDepartments}
 									/>
 
 								}
@@ -727,7 +723,6 @@ class Services extends React.Component {
 										fetchCategoriesByLocation={(location) => this.serviceTypesByLocation(location)}
 										goTo={(location, category, mapview) => this.goTo(location, category, mapview)}
 										fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
-										showDepartments={config.showDepartments}
 									/>
 								}
 							</div>
@@ -770,7 +765,6 @@ class Services extends React.Component {
 										fetchCategoriesByLocation={(location) => this.serviceTypesByLocation(location)}
 										goTo={(location, category, mapview) => this.goTo(location, category, mapview)}
 										fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
-										showDepartments={config.showDepartments}
 									/>
 								}
 							</div>
@@ -814,7 +808,6 @@ class Services extends React.Component {
 										fetchCategoriesByLocation={(location) => this.serviceTypesByLocation(location)}
 										goTo={(location, category, mapview) => this.goTo(location, category, mapview)}
 										fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
-										showDepartments={config.showDepartments}
 									/>
 
 								}
@@ -856,7 +849,6 @@ class Services extends React.Component {
 										fetchCategoriesByLocation={(location) => this.serviceTypesByLocation(location)}
 										goTo={(location, category, mapview) => this.goTo(location, category, mapview)}
 										fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
-										showDepartments={config.showDepartments}
 									/>
 								}
 							</div>
@@ -900,7 +892,6 @@ class Services extends React.Component {
 										fetchCategoriesByLocation={(location) => this.serviceTypesByLocation(location)}
 										goTo={(location, category, mapview) => this.goTo(location, category, mapview)}
 										fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
-										showDepartments={config.showDepartments}
 									/>
 
 								}
