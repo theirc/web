@@ -35,9 +35,15 @@
 			direction: rtl!important;
 			flex-direction: row-reverse;
 		}
-		span{
+
+		span { 
 			padding:0 3px 0 3px;
+
+			&:hover {
+				color: #ccc !important;
+			}
 		}
+
 	}
 
 	.light {
@@ -118,7 +124,7 @@
 		border-bottom: 1px #222 solid;
 		display: flex;
 		flex-direction: row;
-		padding: 2em 0;
+		height: 120px;
 		width: 90%;
 
 		.rtl & {

@@ -5,6 +5,7 @@ import ReactDOMServer from "react-dom/server";
 import { translate } from "react-i18next";
 import circle from "@turf/circle";
 import bbox from "@turf/bbox";
+import { connect } from "react-redux";
 
 // local
 import getSessionStorage from "../../../shared/sessionStorage";
@@ -367,4 +368,8 @@ class ServiceMap extends React.Component {
 	}
 }
 
-export default translate()(ServiceMap);
+const mapState = ({ defaultLocation }, p) => {
+	return { defaultLocation };
+};
+
+export default translate()(connect(mapState)(ServiceMap));
