@@ -437,18 +437,19 @@ class Services extends React.Component {
 						component={props => (
 							<Skeleton headerColor='light'>
 								<div className="SkeletonContainer">
-									{isMobile && <ServiceMap
-										{...props}
-										goToService={goToService}
-										locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
-										findServicesInLocation={bbox => this.fetchServicesWithinLocation(bbox, props.match.params.location)}
-										measureDistance={this.measureDistance(geolocation, language)}
-										toggleLocation={() => _.identity()}
-										nearby={true}
-										categoryName="All Services"
-										keepPreviousZoom={this.state.keepPreviousZoom}
-										changeCategory={() => { goToLocation(this.state.location) }}
-									/>}
+									{isMobile &&
+										<ServiceMap
+											{...props}
+											goToService={goToService}
+											locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
+											findServicesInLocation={bbox => this.fetchServicesWithinLocation(bbox, props.match.params.location)}
+											measureDistance={this.measureDistance(geolocation, language)}
+											toggleLocation={() => _.identity()}
+											categoryName="All Services"
+											keepPreviousZoom={this.state.keepPreviousZoom}
+											changeCategory={() => { goToLocation(this.state.location) }}
+										/>
+									}
 									{!isMobile &&
 										<ServiceCategoryListDesktop
 											{...props}
@@ -464,7 +465,6 @@ class Services extends React.Component {
 											fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
 											goTo={(location, category, mapview) => this.goTo(location, category, mapview)}
 										/>
-
 									}
 								</div>
 							</Skeleton>
@@ -500,7 +500,6 @@ class Services extends React.Component {
 											goTo={(location, category, mapview) => this.goTo(location, category, mapview)}
 											fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 10)} /* TODO: Fix number of services */
 										/>
-
 									}
 								</div>
 							</Skeleton>
@@ -529,7 +528,6 @@ class Services extends React.Component {
 										locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
 										measureDistance={this.measureDistance(geolocation, language)}
 										toggleLocation={() => _.identity()}
-										nearby={true}
 										openLocation={(location, name) => {
 											onOpenLocation(location, name);
 											goToLocation(location.slug);
@@ -557,7 +555,6 @@ class Services extends React.Component {
 										locationEnabled={sortingByLocationEnabled && !errorWithGeolocation}
 										measureDistance={this.measureDistance(geolocation, language)}
 										toggleLocation={() => _.identity()}
-										nearby={true}
 										onOpenDepartment={(id, department, name) => {
 											onOpenDepartment(id, department, name);
 											goToLocation(department);
@@ -619,12 +616,11 @@ class Services extends React.Component {
 										measureDistance={this.measureDistance(geolocation, language)}
 										toggleLocation={() => _.identity()}
 										findServicesInLocation={bbox => this.fetchServicesWithin(bbox, props.match.params.categoryId)}
-										nearby={true}
 										categoryName={this.state.categoryName}
 										directMap={this.state.directMap}
 										changeCategory={() => { goToLocation(this.state.location) }}
-
-									/>}
+									/>
+								}
 								{!isMobile &&
 									<ServiceCategoryListDesktop
 										{...props}
@@ -641,7 +637,6 @@ class Services extends React.Component {
 										goTo={(location, category, mapview) => this.goTo(location, category, mapview)}
 										fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
 									/>
-
 								}
 							</div>
 						</Skeleton>
@@ -682,7 +677,6 @@ class Services extends React.Component {
 										goTo={(location, category, mapview) => this.goTo(location, category, mapview)}
 										fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
 									/>
-
 								}
 							</div>
 						</Skeleton>
@@ -785,11 +779,11 @@ class Services extends React.Component {
 										measureDistance={this.measureDistance(geolocation, language)}
 										toggleLocation={() => _.identity()}
 										findServicesInLocation={bbox => this.fetchServicesWithinCategoryLocation(bbox, props.match.params.location, props.match.params.categoryId)}
-										nearby={true}
 										categoryName="All Services"
 										keepPreviousZoom={this.state.keepPreviousZoom}
 										changeCategory={() => { goToLocation(this.state.location) }}
-									/>}
+									/>
+								}
 								{!isMobile &&
 									<ServiceCategoryListDesktop
 										{...props}
@@ -807,7 +801,6 @@ class Services extends React.Component {
 										goTo={(location, category, mapview) => this.goTo(location, category, mapview)}
 										fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
 									/>
-
 								}
 							</div>
 						</Skeleton>
@@ -831,7 +824,8 @@ class Services extends React.Component {
 										showMap={() => goToLocationMap(props.match.params.location)}
 										title={this.state.categoryName}
 										location={props.match.params.location}
-									/>}
+									/>
+								}
 								{!isMobile &&
 									<ServiceCategoryListDesktop
 										{...props}
@@ -852,7 +846,6 @@ class Services extends React.Component {
 						</Skeleton>
 					)}
 				/>
-
 				<Route
 					exact
 					path={`${match.url}/by-location/:location/map/`}
@@ -867,11 +860,11 @@ class Services extends React.Component {
 										measureDistance={this.measureDistance(geolocation, language)}
 										toggleLocation={() => _.identity()}
 										findServicesInLocation={bbox => this.fetchServicesWithinLocation(bbox, props.match.params.location)}
-										nearby={true}
 										categoryName="All Services"
 										keepPreviousZoom={this.state.keepPreviousZoom}
 										changeCategory={() => { goToLocation(this.state.location) }}
-									/>}
+									/>
+								}
 								{!isMobile &&
 									<ServiceCategoryListDesktop
 										{...props}
@@ -888,7 +881,6 @@ class Services extends React.Component {
 										goTo={(location, category, mapview) => this.goTo(location, category, mapview)}
 										fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
 									/>
-
 								}
 							</div>
 						</Skeleton>
@@ -913,9 +905,8 @@ class Services extends React.Component {
 										showLocations={true}
 									/>
 								}
-
-								{!isMobile && <Redirect to={`/${country.fields.slug}/services/all`} />
-
+								{!isMobile &&
+									<Redirect to={`/${country.fields.slug}/services/all`} />
 								}
 							</div>
 						</Skeleton>
