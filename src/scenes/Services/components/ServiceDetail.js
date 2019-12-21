@@ -28,6 +28,10 @@ class ServiceDetail extends React.Component {
 		relatedServices: [],
 	};
 
+	static contextTypes = {
+		config: PropTypes.object,
+	};
+
 	static propTypes = {
 		slug: PropTypes.string,
 		title: PropTypes.string,
@@ -83,7 +87,7 @@ class ServiceDetail extends React.Component {
 		if (global.window) {
 			const { FB } = global.window;
 			let { href } = window.location;
-			console.log(FB, href)
+
 			href += (href.indexOf("?") > -1 ? "&" : "?") + "language=" + language;
 
 			if (FB) {
@@ -203,8 +207,9 @@ class ServiceDetail extends React.Component {
 
 	render() {
 		const { service, relatedServices } = this.state;
-		const { t, language, goToService, country, phoneCodes } = this.props;
-
+		const { t, language, goToService, country } = this.props;
+		const { config } = this.context;
+		const phoneCodes = config.countryPhoneCodes;
 		const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 		if (!service) {

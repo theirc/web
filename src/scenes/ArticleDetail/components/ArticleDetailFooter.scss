@@ -53,7 +53,13 @@
 		min-height: 60px;
 		// padding: 10px 0 0;
 		width: 100%;
-		
+
+		&:hover {
+			h1 {
+				text-decoration: underline;
+			}
+		}
+
 		&.next {
 			justify-content: flex-end;
 			padding-left: 10px;
@@ -61,10 +67,6 @@
 
 		&.prev {
 			padding-right: 10px;
-		}
-
-		&:active {
-			background-color: darken($titleBackground, 5%);
 		}
 
 		.caption {
@@ -80,12 +82,12 @@
 		}
 
 		h1 {
+			display: block;
 			font-size: 15px;
 			font-weight: normal;
-			display: block;
 			margin: 0;
-			width: 100%;
 			user-select: none;
+			width: 100%;
 		}
 	}
 
