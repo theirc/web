@@ -3,6 +3,7 @@ import { createAction } from "redux-actions";
 const actionTypes = {
 	changeOrganization: "CHANGE_ORGANIZATION",
 	changeCountry: "CHANGE_COUNTRY",
+	changeDefaultLocation: "CHANGE_DEFAULT_LOCATION",
 	changeLanguage: "CHANGE_LANGUAGE",
 	selectCategory: "SELECT_CATEGORY",
 	selectArticle: "SELECT_ARTICLE",
@@ -28,6 +29,7 @@ export default {
 	changeDeviceType: createAction(actionTypes.changeDeviceType),
 	changeOrganization: createAction(actionTypes.changeOrganization),
 	changeCountry: createAction(actionTypes.changeCountry),
+	changeDefaultLocation: createAction(actionTypes.changeDefaultLocation),
 	changeLanguage: createAction(actionTypes.changeLanguage),
 	selectCategory: createAction(actionTypes.selectCategory),
 	selectArticle: createAction(actionTypes.selectArticle),

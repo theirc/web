@@ -14,9 +14,6 @@ import "../../../components/ActionsBar/ActionsBar.css";
 import "./ServiceDetail.css";
 import "./ServiceHome.css";
 
-// eslint-disable-next-line
-//const GMAPS_API_KEY = "AIzaSyA7eG6jYi03E6AjJ8lhedMuaLS9mVoJjJ8";
-
 //temp API Key from Andres Aguilar
 const GMAPS_API_KEY = "AIzaSyAK54Ir69gNM--M_5dRa0fwVH8jxWnJREQ";
 const hotlinkTels = input => input; //input.replace(/\s(\+[1-9]{1}[0-9]{5,14})|00[0-9]{5,15}/g, `<a class="tel" href="tel:$1">$1</a>`);
@@ -26,6 +23,10 @@ class ServiceDetail extends React.Component {
 	state = {
 		service: null,
 		relatedServices: [],
+	};
+
+	static contextTypes = {
+		config: PropTypes.object,
 	};
 
 	static propTypes = {
@@ -83,7 +84,7 @@ class ServiceDetail extends React.Component {
 		if (global.window) {
 			const { FB } = global.window;
 			let { href } = window.location;
-			console.log(FB, href)
+
 			href += (href.indexOf("?") > -1 ? "&" : "?") + "language=" + language;
 
 			if (FB) {
@@ -203,8 +204,9 @@ class ServiceDetail extends React.Component {
 
 	render() {
 		const { service, relatedServices } = this.state;
-		const { t, language, goToService, country, phoneCodes } = this.props;
-
+		const { t, language, goToService, country } = this.props;
+		const { config } = this.context;
+		const phoneCodes = config.countryPhoneCodes;
 		const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 		if (!service) {
