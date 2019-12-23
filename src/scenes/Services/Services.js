@@ -44,10 +44,7 @@ class Services extends React.Component {
 		let regionsWithCountry = regions.map(r => {
 			let parent = r.parent ? regionDictionary[r.parent] : null;
 			let country = r.parent ? (parent.parent ? regionDictionary[parent.parent] : parent) : r;
-			return {
-				country,
-				...r
-			};
+			return { country, ...r };
 		});
 		let countryRegions = regionsWithCountry.filter(c => c.country.slug === country.fields.slug && [1, 3].indexOf(c.level) > - 1 && !c.hidden);
 		let countryDepartments = regionsWithCountry.filter(c => c.country.slug === country.fields.slug && c.level === 2 && !c.hidden);
