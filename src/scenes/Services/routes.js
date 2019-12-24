@@ -1,42 +1,16 @@
 export default {
+	goToCategoryMap: (country, category) => (`/${country.fields.slug}/services/by-category/${category}/map/`),
+	goToDepartmentList: (country) => (`/${country.fields.slug}/services/departments/`),
+	goToLocation: (country, location) => (`/${country.fields.slug}/services/by-location/${location}/`),
+	goToLocationByCategory: (country, category, location) => (`/${country.fields.slug}/services/by-category/${category}/location/${location}`),
+	goToLocationCategoryMap: (country, location, category) => (`/${country.fields.slug}/services/by-category/${category}/location/${location}/map/`),
+	goToLocationMap: (country, location) => (`/${country.fields.slug}/services/by-location/${location}/map/`),
+	goToLocationList: (country) => (`/${country.fields.slug}/services/locations/`),
+	goToMap: (country) => (`/${country.fields.slug}/services/map/`),
 	goToService: (country, language, id) => (`/${country.fields.slug}/services/${id}?language=${language}`),
-	// goToCategoryMap: (country, category) => {
-	// 	return d(push(`/${country.fields.slug}/services/by-category/${category}/map/`));
-	// },
-	// goToLocation: (location) => {
-	// 	return d(push(`/${p.country.fields.slug}/services/by-location/${location}/`));
-	// },
-	// goToLocationByCategory: (category, location) => {
-	// 	return d(push(`/${p.country.fields.slug}/services/by-category/${category}/location/${location}`));
-	// },
-	// goToLocationList: () => {
-	// 	return d(push(`/${p.country.fields.slug}/services/locations/`));
-	// },
-	// goToDepartmentList: () => {
-	// 	return d(push(`/${p.country.fields.slug}/services/departments/`));
-	// },
-	// goToLocationMap: (location) => {
-	// 	return d(push(`/${p.country.fields.slug}/services/by-location/${location}/map/`));
-	// },
-	// goToLocationCategoryMap: (location, category) => {
-	// 	return d(push(`/${p.country.fields.slug}/services/by-category/${category}/location/${location}/map/`));
-	// },
-	// goToMap: () => {
-	// 	return d(push(`/${p.country.fields.slug}/services/map/`));
-	// },
-	// listAllServices: () => {
-	// 	return d(push(`/${p.country.fields.slug}/services/all/`));
-	// },
-	// listAllServicesinLocation: (location) => {
-	// 	return d(push(`/${p.country.fields.slug}/services/by-location/${location}/all/`));
-	// },
-	// listServicesInCategory: (category) => {
-	// 	return d(push(`/${p.country.fields.slug}/services/by-category/${category.id}/`));
-	// },
-	// servicesInCategoryMap: (category, location) => {
-	// 	return d(push(`/${p.country.fields.slug}/services/by-location/${location}/by-category/${category}/map`));
-	// },
-	// servicesInLocationMap: (location) => {
-	// 	return d(push(`/${p.country.fields.slug}/services/by-location/${location}/map`));
-	// }
+	listAllServices: (country) => (`/${country.fields.slug}/services/all/`),
+	listAllServicesinLocation: (country, location) => (`/${country.fields.slug}/services/by-location/${location}/all/`),
+	listServicesInCategory: (country, category) => (`/${country.fields.slug}/services/by-category/${category.id}/`),
+	servicesInCategoryMap: (country, category, location) => (`/${country.fields.slug}/services/by-location/${location}/by-category/${category}/map`),
+	servicesInLocationMap: (country, location) => (`/${country.fields.slug}/services/by-location/${location}/map`),
 };
