@@ -281,6 +281,7 @@ class ServiceDetail extends React.Component {
 		const currentCountry = phoneCodes.filter(pc => pc.country === country.fields.name);
 		let phoneNumberWithCode;
 		(currentCountry.length) ? (phoneNumberWithCode = currentCountry[0].code + service.phone_number) : (phoneNumberWithCode = service.phone_number);
+
 		return (
 			<div className="ServiceDetail">
 				<Helmet>

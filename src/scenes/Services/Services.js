@@ -153,11 +153,6 @@ class Services extends React.Component {
 			.then(services => ({ services, category: null }));
 	}
 
-	fetchAllServices() {
-		const { country } = this.props;
-		return this.fetchAllInLocation(country.fields.slug);
-	}
-
 	fetchAllServicesNearby() {
 		const { country, language } = this.props;
 		const { fetchingLocation, errorWithGeolocation, geolocation } = this.state;
@@ -220,29 +215,6 @@ class Services extends React.Component {
 			.fetchAllServices(location || country.fields.slug, language, null, null)
 			.then(s => s.results)
 			.then(services => ({ services, category: null }));
-	}
-
-	fetchService(props) {
-		const { language } = this.props;
-		const { match } = props;
-		const serviceId = match.params.serviceId;
-		return servicesApi.fetchServiceById(language, serviceId);
-	}
-
-	fetchServicePreview(props) {
-		const { language } = this.props;
-		const { match } = props;
-		const serviceId = match.params.serviceId;
-
-		return servicesApi.fetchServicePreviewById(language, serviceId);
-	}
-
-	fetchServicesInSameLocation(props) {
-		const { language } = this.props;
-		const { match } = props;
-		const serviceId = match.params.serviceId;
-
-		return servicesApi.fetchServicesInSameLocation(language, serviceId);
 	}
 
 	serviceTypes() {
@@ -415,7 +387,7 @@ class Services extends React.Component {
 										<ServiceList
 											{...props}
 											measureDistance={this.measureDistance(geolocation, language)}
-											servicesByType={() => this.fetchAllServices()}
+											servicesByType={() => this.fetchAllInLocation(country.fields.slug)}
 											showMap={() => goToMap()}
 										/>}
 									{!isMobile &&
@@ -490,8 +462,8 @@ class Services extends React.Component {
 								<div className="SkeletonContainer">
 									<ServiceDetail
 										{...props}
-										fetchService={() => this.fetchServicePreview(props)}
-										fetchServicesInSameLocation={() => this.fetchServicesInSameLocation(props)}
+										fetchService={() => servicesApi.fetchServicePreviewById(language, props.match.params.serviceId)}
+										fetchServicesInSameLocation={() => servicesApi.fetchServicesInSameLocation(language, props.match.params.serviceId)}
 									/>
 								</div>
 							</Skeleton>
@@ -505,8 +477,8 @@ class Services extends React.Component {
 								<div className="SkeletonContainer">
 									<ServiceDetail
 										{...props}
-										fetchService={() => this.fetchService(props)}
-										fetchServicesInSameLocation={() => this.fetchServicesInSameLocation(props)}
+										fetchService={() => servicesApi.fetchServiceById(language, props.match.params.serviceId)}
+										fetchServicesInSameLocation={() => servicesApi.fetchServicesInSameLocation(language, props.match.params.serviceId)}
 									/>
 								</div>
 							</Skeleton>
