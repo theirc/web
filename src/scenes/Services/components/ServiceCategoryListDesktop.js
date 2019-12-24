@@ -2,6 +2,7 @@
 import React from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
+import { push } from "react-router-redux";
 import _ from "lodash";
 import tinycolor from "tinycolor2";
 import PropTypes from "prop-types";
@@ -10,6 +11,7 @@ import PropTypes from "prop-types";
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
 import servicesApi from '../../../backend/servicesApi';
 import ServiceMapDesktop from "./ServiceMapDesktop";
+import routes from '../routes';
 import "../../../components/ActionsBar/ActionsBar.css";
 import "./ServiceHome.css";
 import "./ServiceCategoryList.css";
@@ -281,7 +283,7 @@ class ServiceCategoryListDesktop extends React.Component {
 	}
 
 	renderServiceItem(service) {
-		const { goToService, measureDistance } = this.props;
+		const { country, goToService, language, measureDistance } = this.props;
 		const distance = measureDistance && service.location && measureDistance(service.location);
 
 		let iconWithPrefix = vector_icon => vector_icon.split("-")[0] + " " + vector_icon;
@@ -305,7 +307,7 @@ class ServiceCategoryListDesktop extends React.Component {
 		let subTypes = service.types.filter(t => t.id > 0 && t.id !== mainType.id);
 
 		return [
-			<li key={service.id} className="Item" onClick={() => goToService(service.id)}>
+			<li key={service.id} className="Item" onClick={() => goToService(country, language, service.id)}>
 				<div className="Icon" key={`${service.id}-0`}>
 					<i className={iconWithPrefix(mainType.vector_icon)} style={categoryStyle(mainType.color)} />
 				</div>
@@ -336,7 +338,7 @@ class ServiceCategoryListDesktop extends React.Component {
 
 	render() {
 		const { categories, loaded, services, showServices } = this.state;
-		const { t, regions, goToService, country } = this.props;
+		const { t, regions, country } = this.props;
 		const { config } = this.context;
 		let countryId = regions.filter(r => r.slug === country.fields.slug)[0].id;
 		let l3 = regions.filter(r => r.slug === country.fields.slug || (r.parent === countryId && r.level === 3 && !r.hidden) || (!r.hidden && regions.filter(r => r.parent === countryId && r.level === 2).map(t => t.id).indexOf(r.parent) >= 0))
@@ -363,7 +365,7 @@ class ServiceCategoryListDesktop extends React.Component {
 				{!showServices && !this.state.showFilter && <div className="loader" />}
 
 				{showServices && this.state.showMap &&
-					<ServiceMapDesktop services={this.state.services} goToService={goToService} />
+					<ServiceMapDesktop services={this.state.services} />
 				}
 
 				{/* RENDER POPOVERS */}
@@ -408,4 +410,8 @@ const mapState = ({ country, language, regions }, p) => {
 	return { country, language, regions };
 };
 
-export default translate()(connect(mapState)(ServiceCategoryListDesktop));
+const mapDispatch = (d, p) => ({
+	goToService: (country, language, id) => d(push(routes.goToService(country, language, id)))
+});
+
+export default translate()(connect(mapState, mapDispatch)(ServiceCategoryListDesktop));

@@ -3,8 +3,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import ReactDOMServer from "react-dom/server";
 import { translate } from "react-i18next";
+import { connect } from "react-redux";
+import { push } from "react-router-redux";
 
 // local
+import routes from '../routes';
 import "./ServiceHome.css";
 
 var tinycolor = require("tinycolor2");
@@ -42,12 +45,12 @@ class ServiceIcon extends React.Component {
 
 class ServiceItem extends React.Component {
 	render() {
-		const { service, goToService } = this.props;
+		const { country, goToService, language, service } = this.props;
 		const mainType = service.type ? service.type : service.types[0];
 		const types = (service.types || []).filter(t => t.id !== mainType.id);
 
 		return (
-			<div key={service.id} className="Item" onClick={() => goToService(service.id)}>
+			<div key={service.id} className="Item" onClick={() => goToService(country, language, service.id)}>
 				<div className="Info">
 					<div className="Item-content title">
 						<h1>{service.name}</h1>
@@ -205,4 +208,12 @@ class ServiceMapDesktop extends React.Component {
 	}
 }
 
-export default translate()(ServiceMapDesktop);
+const mapState = ({ country, language }, p) => {
+	return { country, language };
+};
+
+const mapDispatch = (d, p) => ({
+	goToService: (country, language, id) => d(push(routes.goToService(country, language, id)))
+});
+
+export default translate()(connect(mapState, mapDispatch)(ServiceMapDesktop));

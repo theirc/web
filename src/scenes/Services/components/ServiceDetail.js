@@ -3,6 +3,7 @@ import React from "react";
 import { translate } from "react-i18next";
 import _ from "lodash";
 import { connect } from "react-redux";
+import { push } from "react-router-redux";
 import { LibraryBooks, Link } from "material-ui-icons";
 import * as clipboard from "clipboard-polyfill";
 import { Helmet } from "react-helmet";
@@ -10,6 +11,7 @@ import PropTypes from "prop-types";
 
 // local
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
+import routes from '../routes';
 import "../../../components/ActionsBar/ActionsBar.css";
 import "./ServiceDetail.css";
 import "./ServiceHome.css";
@@ -204,7 +206,7 @@ class ServiceDetail extends React.Component {
 
 	render() {
 		const { service, relatedServices } = this.state;
-		const { t, language, goToService, country } = this.props;
+		const { country, goToService, language, t } = this.props;
 		const { config } = this.context;
 		const phoneCodes = config.countryPhoneCodes;
 		const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -457,7 +459,7 @@ class ServiceDetail extends React.Component {
 								</div>
 
 								{relatedServices.map(r => (
-									<div key={r.id} onClick={() => goToService(r.id)}>
+									<div key={r.id} onClick={() => goToService(country, language, r.id)}>
 										<div className="Selector related">
 											<span className='icon-placeholder'>
 												<i className="MenuIcon fa fa-angle-right" aria-hidden="true" />
@@ -490,4 +492,8 @@ const mapState = ({ country, language }, p) => {
 	return { country, language };
 };
 
-export default translate()(connect(mapState)(ServiceDetail));
+const mapDispatch = (d, p) => ({
+	goToService: (country, language, id) => d(push(routes.goToService(country, language, id)))
+});
+
+export default translate()(connect(mapState, mapDispatch)(ServiceDetail));

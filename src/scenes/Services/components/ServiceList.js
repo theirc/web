@@ -1,10 +1,13 @@
 // libs
 import React from "react";
 import { translate } from "react-i18next";
+import { connect } from "react-redux";
+import { push } from "react-router-redux";
 import _ from "lodash";
 
 // local
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
+import routes from '../routes';
 import "./ServiceHome.css";
 
 var tinycolor = require("tinycolor2");
@@ -43,7 +46,7 @@ class ServiceList extends React.Component {
 	}
 
 	renderService(s) {
-		const { goToService, measureDistance } = this.props;
+		const { country, goToService, language, measureDistance } = this.props;
 		const distance = measureDistance && s.location && measureDistance(s.location);
 
 		let iconWithPrefix = vector_icon => vector_icon.split("-")[0] + " " + vector_icon;
@@ -69,7 +72,7 @@ class ServiceList extends React.Component {
 		let subTypes = s.types.filter(t => t.id > 0 && t.id !== mainType.id);
 
 		return [
-			<li key={s.id} className="Item" onClick={() => goToService(s.id)}>
+			<li key={s.id} className="Item" onClick={() => goToService(country, language, s.id)}>
 				<div className="Icon" key={`${s.id}-0`}>
 					<i className={iconWithPrefix(mainType.vector_icon)} style={categoryStyle(mainType.color)} />
 				</div>
@@ -179,4 +182,12 @@ class ServiceList extends React.Component {
 	}
 }
 
-export default translate()(ServiceList);
+const mapState = ({ country, language }, p) => {
+	return { country, language };
+};
+
+const mapDispatch = (d, p) => ({
+	goToService: (country, language, id) => d(push(routes.goToService(country, language, id)))
+});
+
+export default translate()(connect(mapState, mapDispatch)(ServiceList));

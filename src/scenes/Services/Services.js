@@ -314,7 +314,6 @@ class Services extends React.Component {
 			goToLocationCategoryMap,
 			goToLocationByCategory,
 			goToMap,
-			goToService,
 			language,
 			listAllServices,
 			listAllServicesinLocation,
@@ -389,7 +388,6 @@ class Services extends React.Component {
 										<ServiceMap
 											{...props}
 											findServicesInLocation={bbox => this.fetchServicesWithinLocation(bbox, props.match.params.location)}
-											goToService={goToService}
 											keepPreviousZoom={this.state.keepPreviousZoom}
 										/>
 									}
@@ -399,7 +397,6 @@ class Services extends React.Component {
 											fetchCategories={() => this.serviceTypesByLocation(props.match.params.location)}
 											fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
 											goTo={(location, category, mapview) => this.goTo(location, category, mapview)}
-											goToService={goToService}
 											mapView={true}
 											measureDistance={this.measureDistance(geolocation, language)}
 										/>
@@ -417,7 +414,6 @@ class Services extends React.Component {
 									{isMobile &&
 										<ServiceList
 											{...props}
-											goToService={goToService}
 											measureDistance={this.measureDistance(geolocation, language)}
 											servicesByType={() => this.fetchAllServices()}
 											showMap={() => goToMap()}
@@ -429,7 +425,6 @@ class Services extends React.Component {
 											fetchCategoriesByLocation={(location) => this.serviceTypesByLocation(location)}
 											fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 10)} /* TODO: Fix number of services */
 											goTo={(location, category, mapview) => this.goTo(location, category, mapview)}
-											goToService={goToService}
 											measureDistance={this.measureDistance(geolocation, language)}
 										/>
 									}
@@ -497,7 +492,6 @@ class Services extends React.Component {
 										{...props}
 										fetchService={() => this.fetchServicePreview(props)}
 										fetchServicesInSameLocation={() => this.fetchServicesInSameLocation(props)}
-										goToService={goToService}
 									/>
 								</div>
 							</Skeleton>
@@ -511,7 +505,6 @@ class Services extends React.Component {
 								<div className="SkeletonContainer">
 									<ServiceDetail
 										{...props}
-										goToService={goToService}
 										fetchService={() => this.fetchService(props)}
 										fetchServicesInSameLocation={() => this.fetchServicesInSameLocation(props)}
 									/>
@@ -530,7 +523,6 @@ class Services extends React.Component {
 									<ServiceMap
 										{...props}
 										findServicesInLocation={bbox => this.fetchServicesWithin(bbox, props.match.params.categoryId)}
-										goToService={goToService}
 									/>
 								}
 								{!isMobile &&
@@ -541,7 +533,6 @@ class Services extends React.Component {
 										fetchCategoriesByLocation={(location) => this.serviceTypesByLocation(location)}
 										fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
 										goTo={(location, category, mapview) => this.goTo(location, category, mapview)}
-										goToService={goToService}
 										mapView={true}
 										measureDistance={this.measureDistance(geolocation, language)}
 									/>
@@ -560,7 +551,6 @@ class Services extends React.Component {
 								{isMobile &&
 									<ServiceList
 										{...props}
-										goToService={goToService}
 										measureDistance={this.measureDistance(geolocation, language)}
 										servicesByType={() => this.fetchAllInLocation(this.getLocation(), props.match.params.categoryId)}
 										showMap={() => goToCategoryMap(props.match.params.categoryId)}
@@ -574,7 +564,6 @@ class Services extends React.Component {
 										fetchCategoriesByLocation={(location) => this.serviceTypesByLocation(location)}
 										fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
 										goTo={(location, category, mapview) => this.goTo(location, category, mapview)}
-										goToService={goToService}
 										measureDistance={this.measureDistance(geolocation, language)}
 									/>
 								}
@@ -606,7 +595,6 @@ class Services extends React.Component {
 										fetchCategoriesByLocation={(location) => this.serviceTypesByLocation(location)}
 										fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
 										goTo={(location, category, mapview) => this.goTo(location, category, mapview)}
-										goToService={goToService}
 										location={props.match.params.location}
 										measureDistance={this.measureDistance(geolocation, language)}
 									/>
@@ -624,7 +612,6 @@ class Services extends React.Component {
 								{isMobile &&
 									<ServiceList
 										{...props}
-										goToService={goToService}
 										measureDistance={this.measureDistance(geolocation, language)}
 										servicesByType={() => this.fetchAllInLocation(props.match.params.location, props.match.params.categoryId)}
 										showMap={() => goToLocationCategoryMap(props.match.params.location, props.match.params.categoryId)}
@@ -638,7 +625,6 @@ class Services extends React.Component {
 										fetchCategoriesByLocation={(location) => this.serviceTypesByLocation(location)}
 										fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
 										goTo={(location, category, mapview) => this.goTo(location, category, mapview)}
-										goToService={goToService}
 										location={props.match.params.location}
 										measureDistance={this.measureDistance(geolocation, language)}
 									/>
@@ -657,7 +643,6 @@ class Services extends React.Component {
 									<ServiceMap
 										{...props}
 										findServicesInLocation={bbox => this.fetchServicesWithinCategoryLocation(bbox, props.match.params.location, props.match.params.categoryId)}
-										goToService={goToService}
 										keepPreviousZoom={this.state.keepPreviousZoom}
 									/>
 								}
@@ -669,7 +654,6 @@ class Services extends React.Component {
 										fetchCategoriesByLocation={(location) => this.serviceTypesByLocation(location)}
 										fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
 										goTo={(location, category, mapview) => this.goTo(location, category, mapview)}
-										goToService={goToService}
 										location={props.match.params.location}
 										mapView={true}
 										measureDistance={this.measureDistance(geolocation, language)}
@@ -688,7 +672,6 @@ class Services extends React.Component {
 								{isMobile &&
 									<ServiceList
 										{...props}
-										goToService={goToService}
 										measureDistance={this.measureDistance(geolocation, language)}
 										servicesByType={() => this.fetchAllInLocation(props.match.params.location)}
 										showMap={() => goToLocationMap(props.match.params.location)}
@@ -701,7 +684,6 @@ class Services extends React.Component {
 										fetchCategoriesByLocation={(location) => this.serviceTypesByLocation(location)}
 										fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
 										goTo={(location, category, mapview) => this.goTo(location, category, mapview)}
-										goToService={goToService}
 										location={props.match.params.location}
 										measureDistance={this.measureDistance(geolocation, language)}
 									/>
@@ -720,7 +702,6 @@ class Services extends React.Component {
 									<ServiceMap
 										{...props}
 										findServicesInLocation={bbox => this.fetchServicesWithinLocation(bbox, props.match.params.location)}
-										goToService={goToService}
 										keepPreviousZoom={this.state.keepPreviousZoom}
 									/>
 								}
@@ -731,7 +712,6 @@ class Services extends React.Component {
 										fetchCategoriesByLocation={(location) => this.serviceTypesByLocation(location)}
 										fetchServices={(location, category) => servicesApi.fetchAllServices(location, language, category, null, 2000)}
 										goTo={(location, category, mapview) => this.goTo(location, category, mapview)}
-										goToService={goToService}
 										location={props.match.params.location}
 										mapView={true}
 										measureDistance={this.measureDistance(geolocation, language)}
@@ -803,9 +783,6 @@ const mapDispatch = (d, p) => {
 		},
 		goToMap() {
 			return d(push(`/${p.country.fields.slug}/services/map/`));
-		},
-		goToService(id) {
-			return d(push(`/${p.country.fields.slug}/services/${id}?language=${p.language}`));
 		},
 		listAllServices() {
 			return d(push(`/${p.country.fields.slug}/services/all/`));
