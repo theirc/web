@@ -1,0 +1,44 @@
+{
+	"ar": {
+		"ArticleDetail": {
+			"section": {
+				"element": "ArticleDetail ar"
+			}
+		}
+	},
+	"en": {
+		"ArticleDetail": {
+			"section": {
+				"element": "ArticleDetail en"
+			}
+		}
+	},
+	"es": {
+		"ArticleDetail": {
+			"section": {
+				"element": "ArticleDetail es"
+			}
+		}
+	},
+	"fa": {
+		"ArticleDetail": {
+			"section": {
+				"element": "ArticleDetail fa"
+			}
+		}
+	},
+	"fr": {
+		"ArticleDetail": {
+			"section": {
+				"element": "ArticleDetail fr"
+			}
+		}
+	},
+	"ur": {
+		"ArticleDetail": {
+			"section": {
+				"element": "ArticleDetail ur"
+			}
+		}
+	}
+}

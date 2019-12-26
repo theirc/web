@@ -1,0 +1,44 @@
+{
+	"ar": {
+		"ArticleList": {
+			"section": {
+				"element": "ArticleList ar"
+			}
+		}
+	},
+	"en": {
+		"ArticleList": {
+			"section": {
+				"element": "ArticleList en"
+			}
+		}
+	},
+	"es": {
+		"ArticleList": {
+			"section": {
+				"element": "ArticleList es"
+			}
+		}
+	},
+	"fa": {
+		"ArticleList": {
+			"section": {
+				"element": "ArticleList fa"
+			}
+		}
+	},
+	"fr": {
+		"ArticleList": {
+			"section": {
+				"element": "ArticleList fr"
+			}
+		}
+	},
+	"ur": {
+		"ArticleList": {
+			"section": {
+				"element": "ArticleList ur"
+			}
+		}
+	}
+}

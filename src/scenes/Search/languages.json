@@ -1,0 +1,44 @@
+{
+	"ar": {
+		"Search": {
+			"section": {
+				"element": "Search ar"
+			}
+		}
+	},
+	"en": {
+		"Search": {
+			"section": {
+				"element": "Search en"
+			}
+		}
+	},
+	"es": {
+		"Search": {
+			"section": {
+				"element": "Search es"
+			}
+		}
+	},
+	"fa": {
+		"Search": {
+			"section": {
+				"element": "Search fa"
+			}
+		}
+	},
+	"fr": {
+		"Search": {
+			"section": {
+				"element": "Search fr"
+			}
+		}
+	},
+	"ur": {
+		"Search": {
+			"section": {
+				"element": "Search ur"
+			}
+		}
+	}
+}

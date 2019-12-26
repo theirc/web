@@ -1,0 +1,44 @@
+{
+	"ar": {
+		"AppHeader": {
+			"section": {
+				"element": "AppHeader ar"
+			}
+		}
+	},
+	"en": {
+		"AppHeader": {
+			"section": {
+				"element": "AppHeader en"
+			}
+		}
+	},
+	"es": {
+		"AppHeader": {
+			"section": {
+				"element": "AppHeader es"
+			}
+		}
+	},
+	"fa": {
+		"AppHeader": {
+			"section": {
+				"element": "AppHeader fa"
+			}
+		}
+	},
+	"fr": {
+		"AppHeader": {
+			"section": {
+				"element": "AppHeader fr"
+			}
+		}
+	},
+	"ur": {
+		"AppHeader": {
+			"section": {
+				"element": "AppHeader ur"
+			}
+		}
+	}
+}

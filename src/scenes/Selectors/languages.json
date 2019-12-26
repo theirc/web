@@ -1,0 +1,44 @@
+{
+	"ar": {
+		"Selectors": {
+			"section": {
+				"element": "Selectors ar"
+			}
+		}
+	},
+	"en": {
+		"Selectors": {
+			"section": {
+				"element": "Selectors en"
+			}
+		}
+	},
+	"es": {
+		"Selectors": {
+			"section": {
+				"element": "Selectors es"
+			}
+		}
+	},
+	"fa": {
+		"Selectors": {
+			"section": {
+				"element": "Selectors fa"
+			}
+		}
+	},
+	"fr": {
+		"Selectors": {
+			"section": {
+				"element": "Selectors fr"
+			}
+		}
+	},
+	"ur": {
+		"Selectors": {
+			"section": {
+				"element": "Selectors ur"
+			}
+		}
+	}
+}

@@ -1,0 +1,44 @@
+{
+	"ar": {
+		"BottomNav": {
+			"section": {
+				"element": "BottomNav ar"
+			}
+		}
+	},
+	"en": {
+		"BottomNav": {
+			"section": {
+				"element": "BottomNav en"
+			}
+		}
+	},
+	"es": {
+		"BottomNav": {
+			"section": {
+				"element": "BottomNav es"
+			}
+		}
+	},
+	"fa": {
+		"BottomNav": {
+			"section": {
+				"element": "BottomNav fa"
+			}
+		}
+	},
+	"fr": {
+		"BottomNav": {
+			"section": {
+				"element": "BottomNav fr"
+			}
+		}
+	},
+	"ur": {
+		"BottomNav": {
+			"section": {
+				"element": "BottomNav ur"
+			}
+		}
+	}
+}

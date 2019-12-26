@@ -1,0 +1,44 @@
+{
+	"ar": {
+		"CountryHome": {
+			"section": {
+				"element": "CountryHome ar"
+			}
+		}
+	},
+	"en": {
+		"CountryHome": {
+			"section": {
+				"element": "CountryHome en"
+			}
+		}
+	},
+	"es": {
+		"CountryHome": {
+			"section": {
+				"element": "CountryHome es"
+			}
+		}
+	},
+	"fa": {
+		"CountryHome": {
+			"section": {
+				"element": "CountryHome fa"
+			}
+		}
+	},
+	"fr": {
+		"CountryHome": {
+			"section": {
+				"element": "CountryHome fr"
+			}
+		}
+	},
+	"ur": {
+		"CountryHome": {
+			"section": {
+				"element": "CountryHome ur"
+			}
+		}
+	}
+}

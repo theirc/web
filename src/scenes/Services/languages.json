@@ -1,0 +1,44 @@
+{
+	"ar": {
+		"Services": {
+			"section": {
+				"element": "Services ar"
+			}
+		}
+	},
+	"en": {
+		"Services": {
+			"section": {
+				"element": "Services en"
+			}
+		}
+	},
+	"es": {
+		"Services": {
+			"section": {
+				"element": "Services es"
+			}
+		}
+	},
+	"fa": {
+		"Services": {
+			"section": {
+				"element": "Services fa"
+			}
+		}
+	},
+	"fr": {
+		"Services": {
+			"section": {
+				"element": "Services fr"
+			}
+		}
+	},
+	"ur": {
+		"Services": {
+			"section": {
+				"element": "Services ur"
+			}
+		}
+	}
+}

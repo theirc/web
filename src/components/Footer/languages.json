@@ -1,0 +1,44 @@
+{
+	"ar": {
+		"Footer": {
+			"section": {
+				"element": "Footer ar"
+			}
+		}
+	},
+	"en": {
+		"Footer": {
+			"section": {
+				"element": "Footer en"
+			}
+		}
+	},
+	"es": {
+		"Footer": {
+			"section": {
+				"element": "Footer es"
+			}
+		}
+	},
+	"fa": {
+		"Footer": {
+			"section": {
+				"element": "Footer fa"
+			}
+		}
+	},
+	"fr": {
+		"Footer": {
+			"section": {
+				"element": "Footer fr"
+			}
+		}
+	},
+	"ur": {
+		"Footer": {
+			"section": {
+				"element": "Footer ur"
+			}
+		}
+	}
+}
