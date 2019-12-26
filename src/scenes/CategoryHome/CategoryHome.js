@@ -42,19 +42,8 @@ class CategoryHome extends React.Component {
 	}
 }
 
-const mapState = (s, p) => {
-	return {
-		articles: s.articles,
-		country: s.country,
-	};
-};
+const mapState = ({ country }, p) => ({ country });
 
-const mapDispatch = (d, p) => {
-	return {
-		onNavigate(url) {
-			d(push(url));
-		}
-	};
-};
+const mapDispatch = (d, p) => ({ onNavigate: (url) => d(push(url)) });
 
 export default connect(mapState, mapDispatch)(CategoryHome);

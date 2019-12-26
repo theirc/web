@@ -406,12 +406,8 @@ class ServiceCategoryListDesktop extends React.Component {
 	}
 }
 
-const mapState = ({ country, language, regions }, p) => {
-	return { country, language, regions };
-};
+const mapState = ({ country, language, regions }, p) => ({ country, language, regions });
 
-const mapDispatch = (d, p) => ({
-	goToService: (country, language, id) => d(push(routes.goToService(country, language, id)))
-});
+const mapDispatch = (d, p) => ({ goToService: (country, language, id) => d(push(routes.goToService(country, language, id))) });
 
 export default translate()(connect(mapState, mapDispatch)(ServiceCategoryListDesktop));

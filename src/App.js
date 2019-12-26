@@ -59,11 +59,6 @@ class ThemedApp extends Component {
 	}
 }
 
-ThemedApp = connect(({ organization, direction, language }) => {
-	return {
-		direction,
-		language,
-	};
-})(ThemedApp);
+const mapState = ({ direction, language }) => ({ direction,	language });
 
-export default ThemedApp;
+export default connect(mapState)(ThemedApp);

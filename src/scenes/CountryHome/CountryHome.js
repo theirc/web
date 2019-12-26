@@ -51,21 +51,8 @@ class CountryHome extends React.Component {
 	}
 }
 
-const mapState = (s, p) => {
-	return {
-		articles: s.articles,
-		country: s.country,
-		direction: s.direction,
-		currentCoordinates: s.currentCoordinates,
-	};
-};
+const mapState = ({ country, direction }, p) => ({ country, direction });
 
-const mapDispatch = (d, p) => {
-	return {
-		onNavigate: path => {
-			d(push(path));
-		},
-	};
-};
+const mapDispatch = (d, p) => ({ onNavigate: path => (d(push(path))) });
 
 export default connect(mapState, mapDispatch)(CountryHome);

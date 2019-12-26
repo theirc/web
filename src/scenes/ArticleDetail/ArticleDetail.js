@@ -92,15 +92,13 @@ class ArticleDetail extends React.Component {
 	}
 }
 
-const mapState = (s, p) => {
-	return {
-		article: s.article,
-		match: p.match,
-		country: p.country || s.country,
-		direction: s.direction,
-		language: s.language,
-	};
-};
+const mapState = (s, p) => ({
+	article: s.article,
+	match: p.match,
+	country: p.country || s.country,
+	direction: s.direction,
+	language: s.language,
+});
 
 const mapDispatch = (d, p) => {
 	return {
@@ -117,14 +115,10 @@ const mapDispatch = (d, p) => {
 		},
 
 		onNavigateTo: (category, country) => slug => {
-			setTimeout(() => {
-				d(push(`/${country.fields.slug}/${category.fields.slug}/${slug}`));
-			}, 200);
+			setTimeout(() => d(push(`/${country.fields.slug}/${category.fields.slug}/${slug}`)), 0);
 		},
 
-		onNavigate: path => {
-			d(push(path));
-		},
+		onNavigate: path => d(push(path))
 	};
 };
 

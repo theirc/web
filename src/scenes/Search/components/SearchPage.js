@@ -210,10 +210,6 @@ class SearchPage extends React.Component {
 	}
 }
 
-const mapState = ({ showServiceMap }, p) => {
-	return {
-		showServiceMap
-	};
-};
+const mapState = ({ showServiceMap }, p) => ({ showServiceMap });
 
 export default translate()(connect(mapState)(SearchPage));

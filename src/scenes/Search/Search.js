@@ -92,20 +92,8 @@ class Search extends React.Component {
 	}
 }
 
-const mapState = ({ country, router, language }, p) => {
-	return {
-		country,
-		location: router.location,
-		language,
-	};
-};
+const mapState = ({ country, router, language }, p) => ({ country, location: router.location, language });
 
-const mapDispatch = (d, p) => {
-	return {
-		onNavigate(url) {
-			d(push(url));
-		},
-	};
-};
+const mapDispatch = (d, p) => ({ onNavigate: (url) => d(push(url)) });
 
 export default connect(mapState, mapDispatch)(Search);

@@ -231,10 +231,6 @@ class AppHeader extends Component {
 	}
 }
 
-const mapStateToProps = ({ showServiceMap }, p) => {
-	return {
-		showServiceMap,
-	};
-};
+const mapStateToProps = ({ showServiceMap }, p) => ({ showServiceMap });
 
 export default translate()(connect(mapStateToProps)(AppHeader));

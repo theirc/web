@@ -253,27 +253,11 @@ class Selectors extends Component {
 	}
 }
 
-const mapState = ({
-	countryList,
-	country,
-	language
-}, p) => {
-	return {
-		language,
-		country,
-	};
-};
+const mapState = ({ countryList, country, language }, p) => ({ language, country });
 
-const mapDispatch = (d, p) => {
-	return {
-		onSelectLanguage: code => {
-			d(actions.changeLanguage(code));
-		},
-
-		onGoTo: slug => {
-			d(push(`/${slug}`));
-		}
-	};
-};
+const mapDispatch = (d, p) => ({
+	onGoTo: slug => d(push(`/${slug}`)),
+	onSelectLanguage: code => d(actions.changeLanguage(code)),
+});
 
 export default connect(mapState, mapDispatch)(Selectors);

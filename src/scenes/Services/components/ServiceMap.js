@@ -358,12 +358,8 @@ class ServiceMap extends React.Component {
 	}
 }
 
-const mapState = ({ country, defaultLocation, language }, p) => {
-	return { country, defaultLocation, language };
-};
+const mapState = ({ country, defaultLocation, language }, p) => ({ country, defaultLocation, language });
 
-const mapDispatch = (d, p) => ({
-	goToService: (country, language, id) => d(push(routes.goToService(country, language, id)))
-});
+const mapDispatch = (d, p) => ({ goToService: (country, language, id) => d(push(routes.goToService(country, language, id))) });
 
 export default translate()(connect(mapState, mapDispatch)(ServiceMap));

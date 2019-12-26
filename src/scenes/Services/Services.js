@@ -702,21 +702,21 @@ class Services extends React.Component {
 const mapState = ({ country, language, regions }, p) => ({ country, language, regions });
 
 const mapDispatch = (d, p) => ({
-	changeDefaultLocation: (location) => (d(actions.changeDefaultLocation(location))),
-	goToCategoryMap: (country, category) => (d(push(routes.goToCategoryMap(country, category)))),
-	goToLocation: (country, location) => (d(push(routes.goToLocation(country, location)))),
-	goToLocationByCategory: (country, category, location) => (d(push(routes.goToLocationByCategory(country, category, location)))),
-	goToLocationList: (country) => (d(push(routes.goToLocationList(country)))),
-	goToDepartmentList: (country) => (d(push(routes.goToDepartmentList(country)))),
-	goToLocationMap: (country, location) => (d(push(routes.goToLocationMap(country, location)))),
-	goToLocationCategoryMap: (country, location, category) => (d(push(routes.goToLocationCategoryMap(country, location, category)))),
-	goToMap: (country) => (d(push(routes.goToMap(country)))),
-	listAllServices: (country) => (d(push(routes.listAllServices(country)))),
-	listAllServicesinLocation: (country, location) => (d(push(routes.listAllServicesinLocation(country, location)))),
-	listServicesInCategory: (country, category) => (d(push(routes.listServicesInCategory(country, category)))),
-	servicesInCategoryMap: (country, category, location) => (d(push(routes.servicesInCategoryMap(country, category, location)))),
-	servicesInLocationMap: (country, location) => (d(push(routes.servicesInLocationMap(country, location)))),
-	showErrorMessage: (error) => (d(actions.showErrorMessage(error))),
+	changeDefaultLocation: (location) => d(actions.changeDefaultLocation(location)),
+	goToCategoryMap: (country, category) => d(push(routes.goToCategoryMap(country, category))),
+	goToLocation: (country, location) => d(push(routes.goToLocation(country, location))),
+	goToLocationByCategory: (country, category, location) => d(push(routes.goToLocationByCategory(country, category, location))),
+	goToLocationList: (country) => d(push(routes.goToLocationList(country))),
+	goToDepartmentList: (country) => d(push(routes.goToDepartmentList(country))),
+	goToLocationMap: (country, location) => d(push(routes.goToLocationMap(country, location))),
+	goToLocationCategoryMap: (country, location, category) => d(push(routes.goToLocationCategoryMap(country, location, category))),
+	goToMap: (country) => d(push(routes.goToMap(country))),
+	listAllServices: (country) => d(push(routes.listAllServices(country))),
+	listAllServicesinLocation: (country, location) => d(push(routes.listAllServicesinLocation(country, location))),
+	listServicesInCategory: (country, category) => d(push(routes.listServicesInCategory(country, category))),
+	servicesInCategoryMap: (country, category, location) => d(push(routes.servicesInCategoryMap(country, category, location))),
+	servicesInLocationMap: (country, location) => d(push(routes.servicesInLocationMap(country, location))),
+	showErrorMessage: (error) => d(actions.showErrorMessage(error)),
 });
 
 export default connect(mapState, mapDispatch)(Services);

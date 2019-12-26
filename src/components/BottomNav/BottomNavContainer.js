@@ -57,14 +57,7 @@ class BottomNavContainer extends React.Component {
 	}
 }
 
-const mapState = ({ category, country, showServiceMap, router }, p) => {
-	return {
-		category,
-		country,
-		showServiceMap,
-		router,
-	};
-};
+const mapState = ({ category, country, showServiceMap, router }, p) => ({ category, country, showServiceMap, router });
 
 const mapDispatch = (d, p) => {
 	return {

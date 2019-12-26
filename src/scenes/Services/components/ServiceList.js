@@ -182,12 +182,8 @@ class ServiceList extends React.Component {
 	}
 }
 
-const mapState = ({ country, language }, p) => {
-	return { country, language };
-};
+const mapState = ({ country, language }, p) => ({ country, language });
 
-const mapDispatch = (d, p) => ({
-	goToService: (country, language, id) => d(push(routes.goToService(country, language, id)))
-});
+const mapDispatch = (d, p) => ({ goToService: (country, language, id) => d(push(routes.goToService(country, language, id))) });
 
 export default translate()(connect(mapState, mapDispatch)(ServiceList));
