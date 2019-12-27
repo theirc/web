@@ -6,6 +6,8 @@ import { translate } from "react-i18next";
 // local
 import "./TopCategoriesWidget.css";
 
+const NS = { ns: 'CountryHome' };
+
 class TopCategoriesWidget extends Component {
 
 	render() {
@@ -24,12 +26,12 @@ class TopCategoriesWidget extends Component {
 							return false;
 						}}
 					>
-						{t("See More")}
+						{t("global.See More", NS)}
 					</a>
 					<i className="material-icons">arrow_right</i>
 				</s>
 
-				<h3>{t("Top Categories")}</h3>
+				<h3>{t("top.Top Categories", NS)}</h3>
 
 				<div className="title-line"></div>
 

@@ -8,6 +8,8 @@ import PropTypes from 'prop-types';
 // local
 import "./ArticleWidget.css";
 
+const NS = { ns: 'CountryHome' };
+
 const Remarkable = require("remarkable");
 const md = new Remarkable("full", {
 	html: true,
@@ -90,7 +92,7 @@ class ArticleWidget extends Component {
 								return false;
 							}}
 						>
-							{t("Read More")}
+							{t("global.Read More", NS)}
 						</a>
 						<i className="material-icons">arrow_right</i>
 					</s>

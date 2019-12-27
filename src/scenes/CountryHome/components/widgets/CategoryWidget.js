@@ -6,6 +6,8 @@ import { translate } from "react-i18next";
 // local
 import "./CategoryWidget.css";
 
+const NS = { ns: 'CountryHome' };
+
 const Remarkable = require("remarkable");
 const md = new Remarkable("full", {
 	html: true,
@@ -32,7 +34,7 @@ class CategoryWidget extends Component {
 							return false;
 						}}
 					>
-						{t("Read More")}
+						{t("global.Read More", NS)}
 					</a>
 					<i className="material-icons">arrow_right</i>
 				</s>

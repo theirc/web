@@ -5,8 +5,6 @@ import moment from 'moment';
 
 // local
 import HeaderBar from "../../../../components/HeaderBar/HeaderBar";
-import i18nHelpers from '../../../../helpers/i18n';
-import languages from '../../languages.json';
 import "../../../../components/ActionsBar/ActionsBar.css";
 import "./ArticleListBody.css";
 
@@ -20,10 +18,6 @@ class ArticleListBody extends Component {
 		selectedIconText: 'assignment',
 		showCategoriesDD: false
 	};
-
-	componentDidMount() {
-		i18nHelpers.loadResource(languages, NS.ns);
-	}	
 
 	onChange = e => {
 		this.setState({ selectedCategory: e.sys.id, selectedIconText: e.fields.iconText, selectedCategoryClassName: e.fields.iconClass, selectedCategoryName: e.fields.name, showCategoriesDD: false });
