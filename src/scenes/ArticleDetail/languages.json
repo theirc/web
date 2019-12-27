@@ -1,43 +1,49 @@
 {
 	"ar": {
 		"ArticleDetail": {
-			"section": {
-				"element": "ArticleDetail ar"
+			"actions": {
+				"Copied": "تم النسخ",
+				"LAST_UPDATED": "آخر تحديث لهذه الصفحة كان بتاريخ:"
 			}
 		}
 	},
 	"en": {
 		"ArticleDetail": {
-			"section": {
-				"element": "ArticleDetail en"
+			"actions": {
+				"Copied": "Copied",
+				"LAST_UPDATED": "Last update: "
 			}
 		}
 	},
 	"es": {
 		"ArticleDetail": {
-			"section": {
-				"element": "ArticleDetail es"
+			"actions": {
+				"Copied": "Copiado",
+				"LAST_UPDATED": "Última actualización: "
 			}
 		}
 	},
 	"fa": {
 		"ArticleDetail": {
-			"section": {
-				"element": "ArticleDetail fa"
+			"actions": {
+				"Copied": "کپی‌شده",
+				"LAST_UPDATED": "این صفحه آخرین بار در این تاریخ به‌روز شده:"
 			}
 		}
 	},
 	"fr": {
 		"ArticleDetail": {
-			"section": {
-				"element": "ArticleDetail fr"
+			"actions": {
+				"Copied": "Copié",
+				"LAST_UPDATED": "Dernière mise à jour:"
 			}
 		}
 	},
 	"ur": {
 		"ArticleDetail": {
-			"section": {
-				"element": "ArticleDetail ur"
+			"actions": {
+				"Copied": "کی ہوئی کاپی",
+				"LAST_UPDATED": "یہ صفحہ آخری دفعہ اپ ڈیٹ کیا گیا:"
 			}
 		}
 	}
