@@ -10,6 +10,8 @@ import "./SearchPage.css";
 import "../../Services/components/ServiceCategoryList.css";
 import "../../ArticleList/components/desktop/ArticleListBody.css";
 
+const NS = { ns: 'Search' };
+
 const Remarkable = require("remarkable");
 
 const md = new Remarkable("full", {
@@ -114,21 +116,21 @@ class SearchPage extends React.Component {
 		const { articles, language, onNavigate, searchingArticles, searchingServices, services, showServiceMap, term, t } = this.props;
 		let servicesList = this.state.showFullServiceList ? services : services.slice().splice(0, 4);
 		let articleList = this.state.showFullBlogList ? articles : articles.slice().splice(0, 3);
-		const toggleServicelabel = this.state.showFullServiceList ? t('Show Less') : t('Show More');
-		const toggleArticleslabel = this.state.showFullBlogList ? t('Show Less') : t('Show More');
+		const toggleServicelabel = this.state.showFullServiceList ? t('buttons.Show Less', NS) : t('buttons.Show More', NS);
+		const toggleArticleslabel = this.state.showFullBlogList ? t('buttons.Show Less', NS) : t('buttons.Show More', NS);
 
 		return (
 			<div className="SearchPage">
 				<div className="Title">
 					<h1>
-						{t("Results for")}: "{term}"
+						{t("title.Results for", NS)}: "{term}"
 					</h1>
 				</div>
 
 				<div className="results">
 					{showServiceMap &&
 						<div className='services-list'>
-							<h1>{t("Services")}</h1>
+							<h1>{t("list.Services", NS)}</h1>
 
 							<hr />
 
@@ -146,7 +148,7 @@ class SearchPage extends React.Component {
 
 							{!searchingServices && services.length === 0 && (
 								<div className='no-results'>
-									<em>{t("No services found with the keywords used")}</em>
+									<em>{t("list.No services found with the keywords used", NS)}</em>
 								</div>
 							)
 							}
@@ -154,7 +156,7 @@ class SearchPage extends React.Component {
 					}
 
 					<div className='articles-list'>
-						<h1>{t("Articles")}</h1>
+						<h1>{t("list.Articles", NS)}</h1>
 						
 						<hr />
 
@@ -197,7 +199,7 @@ class SearchPage extends React.Component {
 
 						{!searchingArticles && articles.length === 0 && (
 							<div className='no-results'>
-								<em>{t("No articles found with the keywords used")}</em>
+								<em>{t("list.No articles found with the keywords used", NS)}</em>
 							</div>
 						)
 						}
