@@ -35,7 +35,6 @@ class BottomNav extends Component {
 	componentDidMount() {
 		i18nHelpers.loadResource(languages, NS.ns);
 	}	
-	
 
 	// TODO: move these props to local dispatch
 	select(selectedIndex = 0) {
