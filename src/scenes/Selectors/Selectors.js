@@ -10,8 +10,12 @@ import measureDistance from "@turf/distance";
 // local
 import { CountrySelector, LanguageSelector, DetectLocationSelector } from "../../components";
 import { actions } from "../../shared/redux/store";
+import i18nHelpers from '../../helpers/i18n';
+import languages from './languages.json';
 import servicesApi from "../../backend/servicesApi";
 import getSessionStorage from "../../shared/sessionStorage";
+
+const NS = { ns: 'Selectors' };
 
 class Selectors extends Component {
 	state = {
@@ -28,6 +32,10 @@ class Selectors extends Component {
 		config: PropTypes.object,
 		api: PropTypes.object,
 	};
+
+	componentDidMount() {
+		i18nHelpers.loadResource(languages, NS.ns);
+	}	
 
 	componentWillMount() {
 		let {
@@ -242,7 +250,9 @@ class Selectors extends Component {
 				}
 
 			case 3:
-				return <DetectLocationSelector onBackToList={() => this.setState({ currentPage: 2 })} onLocationFound={l => this.lookupCoordinates(l)} onLocationError={l => this.logError(l)} />;
+				console.log('DetectLocationSelector');
+				return null;
+				// return <DetectLocationSelector onBackToList={() => this.setState({ currentPage: 2 })} onLocationFound={l => this.lookupCoordinates(l)} onLocationError={l => this.logError(l)} />;
 
 			case -1:
 				return <Redirect to={this.state.redirect} />;
