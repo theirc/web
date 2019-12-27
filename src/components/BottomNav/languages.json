@@ -1,43 +1,55 @@
 {
 	"ar": {
 		"BottomNav": {
-			"section": {
-				"element": "BottomNav ar"
+			"menu": {
+				"Articles": "المقالات ",
+				"Home": "الصفحة الرئيسية",
+				"Services": "الخـدمات"
 			}
 		}
 	},
 	"en": {
 		"BottomNav": {
-			"section": {
-				"element": "BottomNav en"
+			"menu": {
+				"Articles": "Articles",
+				"Home": "Home",
+				"Services": "Services"
 			}
 		}
 	},
 	"es": {
 		"BottomNav": {
-			"section": {
-				"element": "BottomNav es"
+			"menu": {
+				"Articles": "Informativos",
+				"Home": "Inicio",
+				"Services": "Servicios"
 			}
 		}
 	},
 	"fa": {
 		"BottomNav": {
-			"section": {
-				"element": "BottomNav fa"
+			"menu": {
+				"Articles": "مقاله‌ها",
+				"Home": "خانه",
+				"Services": "خدمات"
 			}
 		}
 	},
 	"fr": {
 		"BottomNav": {
-			"section": {
-				"element": "BottomNav fr"
+			"menu": {
+				"Articles": "Articles",
+				"Home": "Accueil",
+				"Services": "Services"
 			}
 		}
 	},
 	"ur": {
 		"BottomNav": {
-			"section": {
-				"element": "BottomNav ur"
+			"menu": {
+				"Articles": "مضامین",
+				"Home": "صفحہ اوّل ",
+				"Services": "خدمات"
 			}
 		}
 	}
