@@ -1,43 +1,67 @@
 {
 	"ar": {
 		"ArticleList": {
-			"section": {
-				"element": "ArticleList ar"
+			"header": {
+				"Categories": "Articles"
+			},
+			"actions": {
+				"All Articles": "جميع المقالات",
+				"": ""
 			}
 		}
 	},
 	"en": {
 		"ArticleList": {
-			"section": {
-				"element": "ArticleList en"
+			"header": {
+				"Categories": "Articles"
+			},
+			"actions": {
+				"All Articles": "All Articles",
+				"": ""
 			}
 		}
 	},
 	"es": {
 		"ArticleList": {
-			"section": {
-				"element": "ArticleList es"
+			"header": {
+				"Categories": "Informativos"
+			},
+			"actions": {
+				"All Articles": "Todos los Informativos",
+				"": ""
 			}
 		}
 	},
 	"fa": {
 		"ArticleList": {
-			"section": {
-				"element": "ArticleList fa"
+			"header": {
+				"Categories": "Articles"
+			},
+			"actions": {
+				"All Articles": "همه مقالات",
+				"": ""
 			}
 		}
 	},
 	"fr": {
 		"ArticleList": {
-			"section": {
-				"element": "ArticleList fr"
+			"header": {
+				"Categories": "Articles"
+			},
+			"actions": {
+				"All Articles": "Tous les articles",
+				"": ""
 			}
 		}
 	},
 	"ur": {
 		"ArticleList": {
-			"section": {
-				"element": "ArticleList ur"
+			"header": {
+				"Categories": "Articles"
+			},
+			"actions": {
+				"All Articles": "تمام مضامین",
+				"": ""
 			}
 		}
 	}

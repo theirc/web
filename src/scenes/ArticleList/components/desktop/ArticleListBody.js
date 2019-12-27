@@ -5,8 +5,12 @@ import moment from 'moment';
 
 // local
 import HeaderBar from "../../../../components/HeaderBar/HeaderBar";
+import i18nHelpers from '../../../../helpers/i18n';
+import languages from '../../languages.json';
 import "../../../../components/ActionsBar/ActionsBar.css";
 import "./ArticleListBody.css";
+
+const NS = { ns: 'ArticleList' };
 
 class ArticleListBody extends Component {
 	state = {
@@ -16,6 +20,10 @@ class ArticleListBody extends Component {
 		selectedIconText: 'assignment',
 		showCategoriesDD: false
 	};
+
+	componentDidMount() {
+		i18nHelpers.loadResource(languages, NS.ns);
+	}	
 
 	onChange = e => {
 		this.setState({ selectedCategory: e.sys.id, selectedIconText: e.fields.iconText, selectedCategoryClassName: e.fields.iconClass, selectedCategoryName: e.fields.name, showCategoriesDD: false });
@@ -118,14 +126,15 @@ class ArticleListBody extends Component {
 
 		return (
 			<div className="ArticleListBody">
-				<HeaderBar title={t("Categories").toUpperCase()} />
+				{/* TODO: Translate this */}
+				<HeaderBar title={t("header.Categories", NS).toUpperCase()} />
 				<div className='tiles-desktop'>
 					<div className='ActionsBar'>
 						<div className="left">
 							<div id='articles-list-dropdown' onClick={this.toggleDD}>
 								<div className='content'>
 									<i className={this.state.selectedCategoryClassName || 'material-icons'}>{this.state.selectedIconText || ((!this.state.selectedCategoryClassName || this.state.selectedCategoryClassName === "material-icons") && "add")}</i>
-									<span>{this.state.selectedCategoryName.length ? this.state.selectedCategoryName : t('All Articles')}</span>
+									<span>{this.state.selectedCategoryName.length ? this.state.selectedCategoryName : t('actions.All Articles', NS)}</span>
 								</div>
 								<i className="material-icons">keyboard_arrow_down</i>
 							</div>
@@ -133,7 +142,7 @@ class ArticleListBody extends Component {
 
 						{this.state.showCategoriesDD &&
 							<ul id='articles-list-popover'>
-								<li value={0} className={!this.state.selectedCategory ? 'active' : ''} onClick={() => this.onChange({ sys: { id: 0 }, fields: { name: t('All Articles'), iconClass: 'material-icons', iconText: 'assignment' } })}><i className='material-icons'>assignment</i><span>{t('All Articles')}</span></li>
+								<li value={0} className={!this.state.selectedCategory ? 'active' : ''} onClick={() => this.onChange({ sys: { id: 0 }, fields: { name: t('actions.All Articles', NS), iconClass: 'material-icons', iconText: 'assignment' } })}><i className='material-icons'>assignment</i><span>{t('actions.All Articles', NS)}</span></li>
 								{
 									(categories || []).filter(showCategory).map(e =>
 										<li key={e.sys.id} value={e.sys.id} className={e.sys.id === this.state.selectedCategory ? 'active' : ''} onClick={() => this.onChange(e)}>
