@@ -12,10 +12,14 @@ import _ from "lodash";
 // local
 import { ServiceMap, ServiceCategoryList, ServiceLocationList, ServiceList, ServiceDetail, ServiceDepartmentList, ServiceCategoryListDesktop } from "../../components";
 import { Skeleton } from "..";
+import i18nHelpers from '../../helpers/i18n';
+import languages from './languages.json';
 import routes from './routes';
 import actions from "../../shared/redux/actions";
 import servicesApi from "../../backend/servicesApi";
 import getSessionStorage from "../../shared/sessionStorage";
+
+const NS = { ns: 'Services' };
 
 class Services extends React.Component {
 	state = {
@@ -62,6 +66,8 @@ class Services extends React.Component {
 	}
 	
 	componentDidMount() {
+		i18nHelpers.loadResource(languages, NS.ns);
+
 		window.addEventListener('resize', () => {
 			!this.state.isMobile && window.innerWidth <= 1000 && this.setState({ isMobile: true });
 			this.state.isMobile && window.innerWidth >= 1000 && this.setState({ isMobile: false });
@@ -682,7 +688,7 @@ class Services extends React.Component {
 									<ServiceCategoryList
 										fetchCategories={() => this.serviceTypes()}
 										onSelectCategory={onSelectCategory}
-										listAllServices={listAllServices}
+										listAllServices={() => listAllServices(country)}
 										goToMap={() => onGoToMap(true)}
 										goToLocationList={() => { goToLocations(true) }}
 									/>

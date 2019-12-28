@@ -9,9 +9,12 @@ import PropTypes from "prop-types";
 import ArticleDetailBody from "./components/ArticleDetailBody";
 import ArticleDetailFooter from "./components/ArticleDetailFooter";
 import Placeholder from "../../shared/placeholder";
+import i18nHelpers from '../../helpers/i18n';
+import languages from './languages.json';
 import { actions } from "../../shared/redux/store";
 import { Skeleton } from "..";
 
+const NS = { ns: 'ArticleDetail' };
 const Promise = require("bluebird");
 
 class ArticleDetail extends React.Component {
@@ -29,6 +32,10 @@ class ArticleDetail extends React.Component {
 	constructor() {
 		super();
 		this.state = { loading: false };
+	}
+
+	componentDidMount() {
+		i18nHelpers.loadResource(languages, NS.ns);
 	}
 
 	componentWillMount() {

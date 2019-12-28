@@ -14,8 +14,6 @@ import _ from 'lodash';
 // local
 import { history } from "../../../shared/redux/store";
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
-import i18nHelpers from '../../../helpers/i18n';
-import languages from '../languages.json';
 import "../../../components/ActionsBar/ActionsBar.css";
 import "./ArticleDetailBody.css";
 
@@ -87,6 +85,11 @@ class ArticleDetailBody extends Component {
 		}
 	}
 
+	componentDidMount() {
+		this.injectVideoPlaceholders();
+		this.replaceLinks();
+	}
+
 	componentDidUpdate() {
 		this.injectVideoPlaceholders();
 		this.replaceLinks();
@@ -125,13 +128,6 @@ class ArticleDetailBody extends Component {
 			var videoId = e.getAttribute('videoId');
 			ReactDOM.render(<InstagramEmbed className={"Instagram"} url={`${IG_URL}${videoId}`} />, e);
 		});
-	}
-
-	componentDidMount() {
-		i18nHelpers.loadResource(languages, NS.ns);
-
-		this.injectVideoPlaceholders();
-		this.replaceLinks();
 	}
 
 	onCopyLink = () => {
