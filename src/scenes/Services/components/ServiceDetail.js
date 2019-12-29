@@ -16,6 +16,8 @@ import "../../../components/ActionsBar/ActionsBar.css";
 import "./ServiceDetail.css";
 import "./ServiceHome.css";
 
+const NS = { ns: 'Services' };
+
 //temp API Key from Andres Aguilar
 const GMAPS_API_KEY = "AIzaSyAK54Ir69gNM--M_5dRa0fwVH8jxWnJREQ";
 const hotlinkTels = input => input; //input.replace(/\s(\+[1-9]{1}[0-9]{5,14})|00[0-9]{5,15}/g, `<a class="tel" href="tel:$1">$1</a>`);
@@ -214,7 +216,7 @@ class ServiceDetail extends React.Component {
 		if (!service) {
 			return (
 				<div className="ServiceList">
-					<HeaderBar title={t("Service Detail")} />
+					<HeaderBar title={t("services.Service Detail", NS)} />
 					<div className="loader" />
 				</div>
 			);
@@ -225,12 +227,12 @@ class ServiceDetail extends React.Component {
 		const hasHours = o => {
 			return o["24/7"] || weekDays.map(w => o[w.toLowerCase()].map(h => !!(h.open || h.close)).indexOf(true) > -1).indexOf(true) > -1;
 		};
-		const callAux = t("Call");
+		const callAux = t("services.Call", NS);
 		const amPmTime = time => {
 			const m = moment(moment(`2001-01-01 ${time}`).toJSON())
 				.locale(false)
 				.locale(language);
-			return `${m.format("hh:mm")} ${m.hour() >= 12 ? t("pm") : t("am")}`;
+			return `${m.format("hh:mm")} ${m.hour() >= 12 ? t("services.pm", NS) : t("services.am", NS)}`;
 		};
 		const serviceProviderElement = s => <span className='providerName'>{s.provider.name}</span>;
 
@@ -242,7 +244,7 @@ class ServiceDetail extends React.Component {
 					return (
 						<tr key={`tr-${i}`}>
 							<td className="week">{t(w)}</td>
-							<td colSpan="3">{t("Closed")}</td>
+							<td colSpan="3">{t("services.Closed", NS)}</td>
 						</tr>
 					);
 				}
@@ -303,32 +305,32 @@ class ServiceDetail extends React.Component {
 
 						<div href='#' className="social-btn" onClick={this.onCopyLink}>
 							{!this.state.copied ? <Link /> : <LibraryBooks />}
-							{this.state.copied && <span className='copied'>{t('Copied')}</span>}
+							{this.state.copied && <span className='copied'>{t('services.Copied', NS)}</span>}
 						</div>
 
 					</div>
 				</div>
 
 				<article>
-					<span className='author'><span>{t("LAST_UPDATED")}</span> {moment(service.updated_at).format('YYYY.MM.DD')}</span>
+					<span className='author'><span>{t("services.LAST_UPDATED", NS)}</span> {moment(service.updated_at).format('YYYY.MM.DD')}</span>
 
 					<h2 className='provider'>
-						{t("Service Provider")}:&nbsp;{serviceProviderElement(service)}
+						{t("services.Service Provider", NS)}:&nbsp;{serviceProviderElement(service)}
 					</h2>
 
 					{/* <h2>{serviceT.name}</h2> */}
 					<p dangerouslySetInnerHTML={{ __html: hotlinkTels(serviceT.description) }} />
 
-					{serviceT.additional_info && <h3>{t("Additional Information")}</h3>}
+					{serviceT.additional_info && <h3>{t("services.Additional Information", NS)}</h3>}
 					{serviceT.additional_info && <p dangerouslySetInnerHTML={{ __html: hotlinkTels(serviceT.additional_info) }} />}
 
-					{serviceT.languages_spoken && <h3>{t("Languages Spoken")}</h3>}
+					{serviceT.languages_spoken && <h3>{t("services.Languages Spoken", NS)}</h3>}
 					{serviceT.languages_spoken && <p dangerouslySetInnerHTML={{ __html: serviceT.languages_spoken }} />}
 
 					{hasHours(service.opening_time) && (
 						<span>
-							<h3>{t("Visiting hours")}</h3>
-							<p>{service.opening_time["24/7"] && t("Open 24/7")}</p>
+							<h3>{t("services.Visiting hours", NS)}</h3>
+							<p>{service.opening_time["24/7"] && t("services.Open 24/7", NS)}</p>
 							<div className="openingTable">
 								{!service.opening_time["24/7"] && (
 									<table>
@@ -338,17 +340,17 @@ class ServiceDetail extends React.Component {
 							</div>
 						</span>
 					)}
-					{serviceT.address_city && <h4>{t("Location")}</h4>}
+					{serviceT.address_city && <h4>{t("services.Location", NS)}</h4>}
 					{serviceT.address_city && <p>{serviceT.address_city}</p>}
 
-					{serviceT.address && <h3>{t("Address")}</h3>}
+					{serviceT.address && <h3>{t("services.Address", NS)}</h3>}
 					{serviceT.address_floor && <p>{serviceT.address_floor}</p>}
 					{serviceT.address && <p>{serviceT.address}</p>}
 
-					{service.address_in_country_language && <h3>{t("Address in Local Language")}</h3>}
+					{service.address_in_country_language && <h3>{t("services.Address in Local Language", NS)}</h3>}
 					{service.address_in_country_language && <p>{service.address_in_country_language}</p>}
 
-					{service.cost_of_service && <h3>{t("Cost of service")}</h3>}
+					{service.cost_of_service && <h3>{t("services.Cost of service", NS)}</h3>}
 					{service.cost_of_service && <p>{service.cost_of_service}</p>}
 
 					{point && (
@@ -372,7 +374,7 @@ class ServiceDetail extends React.Component {
 									<i className="MenuIcon fa fa-map" aria-hidden="true" />
 								</span>
 
-								<h1>{t("Get directions")}</h1>
+								<h1>{t("services.Get directions", NS)}</h1>
 							</div>
 						)}
 
@@ -383,7 +385,7 @@ class ServiceDetail extends React.Component {
 								</span>
 
 								<h1>
-									{t("Call")}:
+									{t("services.Call", NS)}:
 									<a className="phoneFormat" href={`tel:${phoneNumberWithCode}`} >{phoneNumberWithCode}</a>
 								</h1>
 							</div>
@@ -396,7 +398,7 @@ class ServiceDetail extends React.Component {
 								</span>
 
 								<h1>
-									<span style={{ display: 'inline-block', overflow: 'hidden' }}>{t('Email')}:&nbsp;</span>
+									<span style={{ display: 'inline-block', overflow: 'hidden' }}>{t('services.Email', NS)}:&nbsp;</span>
 									<div className='field' style={{
 										display: 'inline-block', direction: 'ltr',
 										overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
@@ -414,7 +416,7 @@ class ServiceDetail extends React.Component {
 								</span>
 
 								<h1>
-									<span style={{ display: 'inline-block', overflow: 'hidden' }}>{t('Website')}:&nbsp;</span>
+									<span style={{ display: 'inline-block', overflow: 'hidden' }}>{t('services.Website', NS)}:&nbsp;</span>
 									<div className='field' style={{
 										display: 'inline-block', direction: 'ltr',
 										overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
@@ -448,7 +450,7 @@ class ServiceDetail extends React.Component {
 								<span className='icon-placeholder'>
 									<i className="MenuIcon fa fa-angle-right" aria-hidden="true" />
 								</span>
-								<h1>{t("OTHER_SERVICES")}</h1>
+								<h1>{t("services.OTHER_SERVICES", NS)}</h1>
 							</div>)
 						}
 					</div>)
@@ -456,7 +458,7 @@ class ServiceDetail extends React.Component {
 						<div>
 							<div className="footer">
 								<div className="Selector">
-									<h1 className="RelatedServicesTitle">{t("OTHER_SERVICES")}:</h1>
+									<h1 className="RelatedServicesTitle">{t("services.OTHER_SERVICES", NS)}:</h1>
 								</div>
 
 								{relatedServices.map(r => (
@@ -479,7 +481,7 @@ class ServiceDetail extends React.Component {
 										<i className="MenuIcon fa fa-angle-left" aria-hidden="true" />
 									</span>
 
-									<h1>{t("Back")}</h1>
+									<h1>{t("services.Back", NS)}</h1>
 								</div>
 							</div>
 						</div>

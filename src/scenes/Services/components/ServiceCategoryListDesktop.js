@@ -17,6 +17,8 @@ import "./ServiceHome.css";
 import "./ServiceCategoryList.css";
 import "./ServiceCategoryListDesktop.css";
 
+const NS = { ns: 'Services' };
+
 const FilterTypes = {
 	DEPARTMENT: 1,
 	MUNICIPALITY: 2,
@@ -228,7 +230,7 @@ class ServiceCategoryListDesktop extends React.Component {
 		let { t } = this.props;
 		const { config } = this.context;
 
-		let categoryName = this.state.category ? this.state.category.name : t('All Categories');
+		let categoryName = this.state.category ? this.state.category.name : t('services.All Categories', NS);
 		let department = this.state.department.name ? this.state.department.name : this.state.department;
 		let municipality = this.state.municipality.name ? this.state.municipality.name : this.state.municipality;
 
@@ -254,7 +256,7 @@ class ServiceCategoryListDesktop extends React.Component {
 					<div id="services-list-map-toggle">
 						<input type="checkbox" className="switch bigswitch cn" checked={this.state.showMap} onMouseEnter={() => this.hoverMapSwitch(true)} onMouseLeave={() => this.hoverMapSwitch(false)} onChange={this.toggleMap} />
 						<div className={`toggle-btn ${this.state.switchHover ? 'hover' : ''}`}><div></div></div>
-						<span>{t('Map view')}</span>
+						<span>{t('services.Map view', NS)}</span>
 					</div>
 				</div>
 			</div>
@@ -270,14 +272,14 @@ class ServiceCategoryListDesktop extends React.Component {
 				<div id="location-list">
 					{filterType === FilterTypes.CATEGORY &&
 						<button key={0} className={!this.state.category ? "location-item-selected" : "location-item"} onClick={() => onSelect(null)}>
-							<span>{t('All Categories')}</span>
+							<span>{t('services.All Categories', NS)}</span>
 						</button>
 					}
 
 					{list.map(l => renderer(l, onSelect))}
 				</div>
 
-				<div className='filter'><button onClick={() => { this.closeFilters(); this.showServices(); filterType === FilterTypes.DEPARTMENT && this.municipalidadesFilter(); }}>{t('Filter')}</button></div>
+				<div className='filter'><button onClick={() => { this.closeFilters(); this.showServices(); filterType === FilterTypes.DEPARTMENT && this.municipalidadesFilter(); }}>{t('services.Filter', NS)}</button></div>
 			</div>
 		);
 	}
@@ -358,7 +360,7 @@ class ServiceCategoryListDesktop extends React.Component {
 
 		return (
 			<div className='desktop ServiceCategoryListDesktop'>
-				<HeaderBar key={"Header"} title={t("Services").toUpperCase()} />
+				<HeaderBar key={"Header"} title={t("services.Services", NS).toUpperCase()} />
 
 				{this.renderFilters()}
 
@@ -370,18 +372,18 @@ class ServiceCategoryListDesktop extends React.Component {
 
 				{/* RENDER POPOVERS */}
 				{this.state.showFilter && this.state.filterType === FilterTypes.DEPARTMENT && departments && config.showDepartments &&
-					this.renderFiltersPopover(t('Locations'), this.onSelectLocation, departments, this.renderDepartmentButton.bind(this), 'departments', FilterTypes.DEPARTMENT)
+					this.renderFiltersPopover(t('services.Locations', NS), this.onSelectLocation, departments, this.renderDepartmentButton.bind(this), 'departments', FilterTypes.DEPARTMENT)
 				}
 				{this.state.showFilter && this.state.filterType === FilterTypes.DEPARTMENT && l3 && !config.showDepartments &&
-					this.renderFiltersPopover(t('Locations'), this.onSelectLocation, l3, this.renderDepartmentButton.bind(this), 'departments', FilterTypes.DEPARTMENT)
+					this.renderFiltersPopover(t('services.Locations', NS), this.onSelectLocation, l3, this.renderDepartmentButton.bind(this), 'departments', FilterTypes.DEPARTMENT)
 				}
 
 				{this.state.showFilter && this.state.filterType === FilterTypes.MUNICIPALITY && municipalities &&
-					this.renderFiltersPopover(t('Municipalidades'), this.onSelectMunicipality, municipalities, this.renderDepartmentButton.bind(this), 'municipalities', FilterTypes.MUNICIPALITIES)
+					this.renderFiltersPopover(t('services.Municipalidades', NS), this.onSelectMunicipality, municipalities, this.renderDepartmentButton.bind(this), 'municipalities', FilterTypes.MUNICIPALITIES)
 				}
 
 				{this.state.showFilter && this.state.filterType === FilterTypes.CATEGORY && categories &&
-					this.renderFiltersPopover(t('Service Categories'), this.onSelectCategory, categories, this.renderCategoryButton.bind(this), 'categories', FilterTypes.CATEGORY)
+					this.renderFiltersPopover(t('services.Service Categories', NS), this.onSelectCategory, categories, this.renderCategoryButton.bind(this), 'categories', FilterTypes.CATEGORY)
 				}
 
 				{showServices && !this.state.showMap &&
@@ -393,7 +395,7 @@ class ServiceCategoryListDesktop extends React.Component {
 				}
 
 				{!this.state.showMap && !this.state.showAll && services.length <= 10 && window.location.href.includes('/services/all') &&
-					<div className='show-more'><button onClick={this.onShowAll}>{t('Show All')}</button></div>
+					<div className='show-more'><button onClick={this.onShowAll}>{t('services.Show All', NS)}</button></div>
 				}
 
 				{!this.state.showMap && this.state.showAll && services.length <= 10 &&
