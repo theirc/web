@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 import measureDistance from "@turf/distance";
 
 // local
-import { CountrySelector, LanguageSelector, DetectLocationSelector } from "../../components";
+import { CountrySelector, LanguageSelector } from "../../components";
 import { actions } from "../../shared/redux/store";
 import i18nHelpers from '../../helpers/i18n';
 import languages from './languages.json';
