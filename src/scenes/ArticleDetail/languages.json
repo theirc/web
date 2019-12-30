@@ -3,9 +3,7 @@
 		"ArticleDetail": {
 			"actions": {
 				"Copied": "تم النسخ",
-				"LAST_UPDATED": "آخر تحديث لهذه الصفحة كان بتاريخ:",
-				"NEXT PAGE": "الصفحة التالية",
-				"PREVIOUS PAGE": "الصفحة السابقة"
+				"LAST_UPDATED": "آخر تحديث لهذه الصفحة كان بتاريخ:"
 			}
 		}
 	},
@@ -13,9 +11,7 @@
 		"ArticleDetail": {
 			"actions": {
 				"Copied": "Copied",
-				"LAST_UPDATED": "Last update: ",
-				"NEXT PAGE": "NEXT PAGE",
-				"PREVIOUS PAGE": "PREVIOUS PAGE"
+				"LAST_UPDATED": "Last update: "
 			}
 		}
 	},
@@ -23,9 +19,7 @@
 		"ArticleDetail": {
 			"actions": {
 				"Copied": "Copiado",
-				"LAST_UPDATED": "Última actualización: ",
-				"NEXT PAGE": "PÁGINA SIGUIENTE",
-				"PREVIOUS PAGE": "PAGINA ANTERIOR"
+				"LAST_UPDATED": "Última actualización: "
 			}
 		}
 	},
@@ -33,9 +27,7 @@
 		"ArticleDetail": {
 			"actions": {
 				"Copied": "کپی‌شده",
-				"LAST_UPDATED": "این صفحه آخرین بار در این تاریخ به‌روز شده:",
-				"NEXT PAGE": "صفحه بعد",
-				"PREVIOUS PAGE": "صفحه قبلی"
+				"LAST_UPDATED": "این صفحه آخرین بار در این تاریخ به‌روز شده:"
 			}
 		}
 	},
@@ -43,9 +35,7 @@
 		"ArticleDetail": {
 			"actions": {
 				"Copied": "Copié",
-				"LAST_UPDATED": "Dernière mise à jour:",
-				"NEXT PAGE": "PAGE SUIVANTE",
-				"PREVIOUS PAGE": "PAGE PRÉCÉDENTE"
+				"LAST_UPDATED": "Dernière mise à jour:"
 			}
 		}
 	},
@@ -53,9 +43,7 @@
 		"ArticleDetail": {
 			"actions": {
 				"Copied": "کی ہوئی کاپی",
-				"LAST_UPDATED": "یہ صفحہ آخری دفعہ اپ ڈیٹ کیا گیا:",
-				"NEXT PAGE": "اگلا صفحہ",
-				"PREVIOUS PAGE": "سابقہ صفحہ"
+				"LAST_UPDATED": "یہ صفحہ آخری دفعہ اپ ڈیٹ کیا گیا:"
 			}
 		}
 	}
