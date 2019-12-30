@@ -6,8 +6,10 @@ import { translate } from "react-i18next";
 import circle from "@turf/circle";
 import bbox from "@turf/bbox";
 import { connect } from "react-redux";
+import { push } from "react-router-redux";
 
 // local
+import routes from '../routes';
 import getSessionStorage from "../../../shared/sessionStorage";
 import "./ServiceHome.css";
 
@@ -48,13 +50,13 @@ class ServiceIcon extends React.Component {
 class ServiceItem extends React.Component {
 
 	render() {
-		const { goToService, service } = this.props;
+		const { country, goToService, language, service } = this.props;
 		const mainType = service.type ? service.type : service.types[0];
 
 		const types = (service.types || []).filter(t => t.id !== mainType.id);
 
 		return (
-			<div key={service.id} className="Item" onClick={() => goToService(service.id)}>
+			<div key={service.id} className="Item" onClick={() => goToService(country, language, service.id)}>
 				<div className="Info">
 					<div className="Item-content title">
 						<h1>{service.name}</h1>
@@ -356,8 +358,8 @@ class ServiceMap extends React.Component {
 	}
 }
 
-const mapState = ({ defaultLocation }, p) => {
-	return { defaultLocation };
-};
+const mapState = ({ country, defaultLocation, language }, p) => ({ country, defaultLocation, language });
 
-export default translate()(connect(mapState)(ServiceMap));
+const mapDispatch = (d, p) => ({ goToService: (country, language, id) => d(push(routes.goToService(country, language, id))) });
+
+export default translate()(connect(mapState, mapDispatch)(ServiceMap));

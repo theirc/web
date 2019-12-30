@@ -5,8 +5,12 @@ import PropTypes from "prop-types";
 
 // local
 import ArticleListBody  from "./components/desktop/ArticleListBody";
+import i18nHelpers from '../../helpers/i18n';
+import languages from './languages.json';
 import { history } from "../../shared/redux/store";
 import { Skeleton } from "..";
+
+const NS = { ns: 'ArticleList' };
 
 class ArticleList extends React.Component {
 	static propTypes = {
@@ -17,6 +21,10 @@ class ArticleList extends React.Component {
 		}).isRequired,
 		onMount: PropTypes.func.isRequired,
 	};
+
+	componentDidMount() {
+		i18nHelpers.loadResource(languages, NS.ns);
+	}	
 
 	componentWillMount() {
 		this.props.onMount(this.props.match.params.country);

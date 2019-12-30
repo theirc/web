@@ -9,9 +9,12 @@ import PropTypes from "prop-types";
 import ArticleDetailBody from "./components/ArticleDetailBody";
 import ArticleDetailFooter from "./components/ArticleDetailFooter";
 import Placeholder from "../../shared/placeholder";
+import i18nHelpers from '../../helpers/i18n';
+import languages from './languages.json';
 import { actions } from "../../shared/redux/store";
 import { Skeleton } from "..";
 
+const NS = { ns: 'ArticleDetail' };
 const Promise = require("bluebird");
 
 class ArticleDetail extends React.Component {
@@ -29,6 +32,10 @@ class ArticleDetail extends React.Component {
 	constructor() {
 		super();
 		this.state = { loading: false };
+	}
+
+	componentDidMount() {
+		i18nHelpers.loadResource(languages, NS.ns);
 	}
 
 	componentWillMount() {
@@ -92,15 +99,13 @@ class ArticleDetail extends React.Component {
 	}
 }
 
-const mapState = (s, p) => {
-	return {
-		article: s.article,
-		match: p.match,
-		country: p.country || s.country,
-		direction: s.direction,
-		language: s.language,
-	};
-};
+const mapState = (s, p) => ({
+	article: s.article,
+	match: p.match,
+	country: p.country || s.country,
+	direction: s.direction,
+	language: s.language,
+});
 
 const mapDispatch = (d, p) => {
 	return {
@@ -117,14 +122,10 @@ const mapDispatch = (d, p) => {
 		},
 
 		onNavigateTo: (category, country) => slug => {
-			setTimeout(() => {
-				d(push(`/${country.fields.slug}/${category.fields.slug}/${slug}`));
-			}, 200);
+			setTimeout(() => d(push(`/${country.fields.slug}/${category.fields.slug}/${slug}`)), 0);
 		},
 
-		onNavigate: path => {
-			d(push(path));
-		},
+		onNavigate: path => d(push(path))
 	};
 };
 

@@ -6,6 +6,8 @@ import { translate } from "react-i18next";
 import "./LanguageSelector.css";
 import getSessionStorage from "../../../shared/sessionStorage";
 
+const NS = { ns: 'Selectors' };
+
 class LanguageSelector extends Component {
 	static propTypes = {};
 
@@ -26,7 +28,7 @@ class LanguageSelector extends Component {
 
 				<div className="text">
 					<i className="material-icons">translate</i>
-					{languages.map((c, i) => <h1 key={`choose-${c[0]}`}>{t("Choose your language", { lng: c[0] })}</h1>)}
+					{languages.map((c, i) => <h1 key={`choose-${c[0]}`}>{t("language.Choose your language", { lng: c[0], ns: NS.ns })}</h1>)}
 					<div className="p-t-20" />
 				</div>
 

@@ -6,6 +6,7 @@ import { push } from "react-router-redux";
 
 // local
 import { BottomNav } from "../";
+import routes from '../../routes';
 import selectedMenuItem from '../../helpers/menu-items';
 
 class BottomNavContainer extends React.Component {
@@ -41,6 +42,7 @@ class BottomNavContainer extends React.Component {
 
 		country && country.fields && country.fields.slug === 'italy' && (showServiceMap = false);
 
+		// TODO: dereference country inside routes?
 		return (
 			<BottomNav
 				showServiceMap={showServiceMap}
@@ -57,33 +59,14 @@ class BottomNavContainer extends React.Component {
 	}
 }
 
-const mapState = ({ category, country, showServiceMap, router }, p) => {
-	return {
-		category,
-		country,
-		showServiceMap,
-		router,
-	};
-};
+const mapState = ({ category, country, showServiceMap, router }, p) => ({ category, country, showServiceMap, router });
 
-const mapDispatch = (d, p) => {
-	return {
-		onGoToCategories: country => {
-			d(push(`/${country}/categories`));
-		},
-		onGoHome: country => {
-			d(push(`/${country}`));
-		},
-		onGoToSearch: country => {
-			d(push(`/${country}/search`));
-		},
-		onGoToServices: country => {
-			d(push(`/${country}/services/`));
-		},
-		onGoToDepartments: country => {
-			d(push(`/${country}/services/`));
-		},
-	};
-};
+const mapDispatch = (d, p) => ({
+	onGoToCategories: country => d(push(routes.goToCategories(country))),
+	onGoHome: country => d(push(routes.goHome(country))),
+	onGoToSearch: country => d(push(routes.goToSearch(country))),
+	onGoToServices: country => d(push(routes.goToServices(country))),
+	onGoToDepartments: country => d(push(routes.goToDepartments(country))),
+});
 
 export default connect(mapState, mapDispatch)(BottomNavContainer);

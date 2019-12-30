@@ -6,14 +6,22 @@ import { push } from "react-router-redux";
 
 // local
 import { HomeWidget, HomeWidgetCollection, InstanceMovedWidget } from "../../components";
+import i18nHelpers from '../../helpers/i18n';
+import languages from './languages.json';
 import Skeleton from '../../components/Skeleton/Skeleton';
 import getSessionStorage from "../../shared/sessionStorage";
+
+const NS = { ns: 'CountryHome' };
 
 class CountryHome extends React.Component {
 	constructor() {
 		super();
 		this.state = {};
 	}
+
+	componentDidMount() {
+		i18nHelpers.loadResource(languages, NS.ns);
+	}	
 
 	componentWillMount() {
 		if (global.window) {
@@ -51,21 +59,8 @@ class CountryHome extends React.Component {
 	}
 }
 
-const mapState = (s, p) => {
-	return {
-		articles: s.articles,
-		country: s.country,
-		direction: s.direction,
-		currentCoordinates: s.currentCoordinates,
-	};
-};
+const mapState = ({ country, direction }, p) => ({ country, direction });
 
-const mapDispatch = (d, p) => {
-	return {
-		onNavigate: path => {
-			d(push(path));
-		},
-	};
-};
+const mapDispatch = (d, p) => ({ onNavigate: path => (d(push(path))) });
 
 export default connect(mapState, mapDispatch)(CountryHome);
