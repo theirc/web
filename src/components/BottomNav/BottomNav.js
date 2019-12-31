@@ -8,7 +8,7 @@ import { translate } from "react-i18next";
 
 // local
 import i18nHelpers from '../../helpers/i18n';
-import languages from './languages.json';
+import languages from './languages';
 import "./BottomNav.css";
 
 const NS = { ns: 'BottomNav' };

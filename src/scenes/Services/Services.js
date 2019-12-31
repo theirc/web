@@ -13,7 +13,7 @@ import _ from "lodash";
 import { ServiceMap, ServiceCategoryList, ServiceLocationList, ServiceList, ServiceDetail, ServiceDepartmentList, ServiceCategoryListDesktop } from "../../components";
 import { Skeleton } from "..";
 import i18nHelpers from '../../helpers/i18n';
-import languages from './languages.json';
+import languages from './languages';
 import routes from './routes';
 import actions from "../../shared/redux/actions";
 import servicesApi from "../../backend/servicesApi";

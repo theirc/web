@@ -1,4 +1,4 @@
-{
+export default {
 	"ar": {
 		"Footer": {
 			"dark": {

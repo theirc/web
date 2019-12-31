@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 
 // local
 import i18nHelpers from '../../helpers/i18n';
-import languages from './languages.json';
+import languages from './languages';
 import "./Footer.css";
 
 const NS = { ns: 'Footer' };

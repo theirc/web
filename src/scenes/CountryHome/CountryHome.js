@@ -7,7 +7,7 @@ import { push } from "react-router-redux";
 // local
 import { HomeWidget, HomeWidgetCollection, InstanceMovedWidget } from "../../components";
 import i18nHelpers from '../../helpers/i18n';
-import languages from './languages.json';
+import languages from './languages';
 import Skeleton from '../../components/Skeleton/Skeleton';
 import getSessionStorage from "../../shared/sessionStorage";
 

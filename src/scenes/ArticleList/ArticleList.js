@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 // local
 import ArticleListBody  from "./components/desktop/ArticleListBody";
 import i18nHelpers from '../../helpers/i18n';
-import languages from './languages.json';
+import languages from './languages';
 import { history } from "../../shared/redux/store";
 import { Skeleton } from "..";
 

@@ -10,7 +10,7 @@ import { Close, Home, List, Assignment } from "material-ui-icons";
 // local
 import selectedMenuItem from "../../helpers/menu-items";
 import i18nHelpers from '../../helpers/i18n';
-import languages from './languages.json';
+import languages from './languages';
 import "./AppHeader.css";
 
 const NS = { ns: 'AppHeader' };

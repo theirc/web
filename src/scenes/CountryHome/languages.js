@@ -1,4 +1,4 @@
-{
+export default {
 	"ar": {
 		"CountryHome": {
 			"banner": {

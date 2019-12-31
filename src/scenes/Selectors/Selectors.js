@@ -11,7 +11,7 @@ import measureDistance from "@turf/distance";
 import { CountrySelector, LanguageSelector } from "../../components";
 import { actions } from "../../shared/redux/store";
 import i18nHelpers from '../../helpers/i18n';
-import languages from './languages.json';
+import languages from './languages';
 import servicesApi from "../../backend/servicesApi";
 import getSessionStorage from "../../shared/sessionStorage";
 

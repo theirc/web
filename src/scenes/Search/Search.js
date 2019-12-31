@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 // local
 import servicesApi from "../../backend/servicesApi";
 import i18nHelpers from '../../helpers/i18n';
-import languages from './languages.json';
+import languages from './languages';
 import { SearchPage } from "../../components";
 import { Skeleton } from "../../scenes";
 

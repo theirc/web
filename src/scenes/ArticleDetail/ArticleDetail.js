@@ -10,7 +10,7 @@ import ArticleDetailBody from "./components/ArticleDetailBody";
 import ArticleDetailFooter from "./components/ArticleDetailFooter";
 import Placeholder from "../../shared/placeholder";
 import i18nHelpers from '../../helpers/i18n';
-import languages from './languages.json';
+import languages from './languages';
 import { actions } from "../../shared/redux/store";
 import { Skeleton } from "..";
 
