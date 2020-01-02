@@ -5,8 +5,11 @@ import ReactDOMServer from "react-dom/server";
 import { translate } from "react-i18next";
 import circle from "@turf/circle";
 import bbox from "@turf/bbox";
+import { connect } from "react-redux";
+import { push } from "react-router-redux";
 
 // local
+import routes from '../routes';
 import getSessionStorage from "../../../shared/sessionStorage";
 import "./ServiceHome.css";
 
@@ -47,43 +50,38 @@ class ServiceIcon extends React.Component {
 class ServiceItem extends React.Component {
 
 	render() {
-		const s = this.props.service;
-		const {
-			goToService,
-			// measureDistance
-		} = this.props;
-		// const distance = measureDistance && s.location && measureDistance(s.location);
-		const mainType = s.type ? s.type : s.types[0];
+		const { country, goToService, language, service } = this.props;
+		const mainType = service.type ? service.type : service.types[0];
 
-		const types = (s.types || []).filter(t => t.id !== mainType.id);
+		const types = (service.types || []).filter(t => t.id !== mainType.id);
 
 		return (
-			<div key={s.id} className="Item" onClick={() => goToService(s.id)}>
+			<div key={service.id} className="Item" onClick={() => goToService(country, language, service.id)}>
 				<div className="Info">
 					<div className="Item-content title">
-						<h1>{s.name}</h1>
+						<h1>{service.name}</h1>
 						<i className="material-icons" id="goToServiceIcon" />
 					</div>
 
-					<h2 className="Item-content">{s.provider.name}{" "}</h2>
+					<h2 className="Item-content">{service.provider.name}{" "}</h2>
 
 					<address className="fullAddress Item-content">
-						{s.address}
+						{service.address}
 					</address>
 
-					{s.address_city &&
+					{service.address_city &&
 						<address className="regionTitle Item-content">
-							{s.address_city}
+							{service.address_city}
 						</address>
 					}
 				</div>
 
 				<div className="Icons Item-content">
 					{mainType &&
-						<ServiceIcon key={`si-${mainType.idx}`} idx={0} isMainType={1} service={s} type={mainType} />
+						<ServiceIcon key={`si-${mainType.idx}`} idx={0} isMainType={1} service={service} type={mainType} />
 					}
 
-					{types.map((t, idx) => t && <ServiceIcon key={`si-${idx}`} idx={idx} isMainType={0} service={s} type={t} />)}
+					{types.map((t, idx) => t && <ServiceIcon key={`si-${idx}`} idx={idx} isMainType={0} service={service} type={t} />)}
 				</div>
 			</div>
 		);
@@ -330,17 +328,10 @@ class ServiceMap extends React.Component {
 	}
 
 	render() {
-		const {
-			loaded,
-			errorMessage
-		} = this.state;
+		const { loaded, errorMessage } = this.state;
 		let isOnline = navigator.onLine;
-		// let isMobile = document.documentElement.clientWidth < 1000;
-		//let image = isMobile ? "url(/images/cn-offline-map-mobile.png)" : "url(/images/cn-offline-map.png)"
-		/*
-			Very small tweak on the render. toggling the visibility so we can run the L.map on didMount
-		*/
 
+		console.log(this.props);
 		return (
 			<div className="ServiceMap">
 				{errorMessage && (
@@ -367,4 +358,8 @@ class ServiceMap extends React.Component {
 	}
 }
 
-export default translate()(ServiceMap);
+const mapState = ({ country, defaultLocation, language }, p) => ({ country, defaultLocation, language });
+
+const mapDispatch = (d, p) => ({ goToService: (country, language, id) => d(push(routes.goToService(country, language, id))) });
+
+export default translate()(connect(mapState, mapDispatch)(ServiceMap));

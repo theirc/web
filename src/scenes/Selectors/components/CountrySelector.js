@@ -8,6 +8,8 @@ import _ from "lodash";
 import getSessionStorage from "../../../shared/sessionStorage";
 import "./CountrySelector.css";
 
+const NS = { ns: 'Selectors' };
+
 class CountrySelector extends Component {
 	static propTypes = {};
 
@@ -53,7 +55,7 @@ class CountrySelector extends Component {
 				id: "detect-me",
 				fields: {
 					slug: "detect-me",
-					name: t("Detect My Location"),
+					name: t("country.Detect My Location", NS),
 				},
 			});
 		}
@@ -62,7 +64,7 @@ class CountrySelector extends Component {
 			<div className="CountrySelector">
 				<div className="text">
 					<i className="material-icons">my_location</i>
-					<h1>{t("Where are you now?")}</h1>
+					<h1>{t("country.Where are you now?", NS)}</h1>
 				</div>
 
 				{availableCountryList.map((c, i) => (
@@ -80,7 +82,7 @@ class CountrySelector extends Component {
 
 				{!disableLanguageSelector && availableCountryList.length > 0 && (
 				<span className="item-language" onClick={() => backToLanguage()}>
-					{t("Choose a different language")}
+					{t("country.Choose a different language", NS)}
 				</span>)
 				}
 			</div>

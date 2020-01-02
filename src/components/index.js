@@ -16,7 +16,6 @@ import ServiceCategoryListDesktop from "../scenes/Services/components/ServiceCat
 import ServiceLocationList from "../scenes/Services/components/ServiceLocationList";
 import ServiceDepartmentList from "../scenes/Services/components/ServiceDepartmentList";
 import ServiceList from "../scenes/Services/components/ServiceList";
-import DetectLocationSelector from "../scenes/Selectors/components/DetectLocationSelector";
 import ServiceDetail from "../scenes/Services/components/ServiceDetail";
 import TopCategoriesWidget from "../scenes/CountryHome/components/widgets/TopCategoriesWidget";
 import LocalGuideWidget from "../scenes/CountryHome/components/widgets/LocalGuideWidget";
@@ -45,7 +44,6 @@ export {
 	ServiceDepartmentList,
 	ServiceList,
 	ServiceDetail,
-	DetectLocationSelector,
 	TopCategoriesWidget,
 	LocalGuideWidget,
 	ArticleWidget,

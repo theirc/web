@@ -7,6 +7,8 @@ import { translate } from "react-i18next";
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
 import "./ServiceHome.css";
 
+const NS = { ns: 'Services' };
+
 class ServiceCategoryList extends React.Component {
 	state = {
 		regions: [],
@@ -47,7 +49,7 @@ class ServiceCategoryList extends React.Component {
 			return (
 				<div className="ServiceCategoryList">
 					<div className="Title">
-						<h1>{t("Service Categories")}</h1>
+						<h1>{t("services.Service Categories", NS)}</h1>
 					</div>
 					<div className="loader" />
 				</div>
@@ -64,7 +66,7 @@ class ServiceCategoryList extends React.Component {
 				}
 			});
 		}
-		let title = department ? t("Locations in") + " " + departmentName : t("Locations");
+		let title = department ? t("services.Locations in", NS) + " " + departmentName : t("services.Locations", NS);
 
 		return [
 			<HeaderBar key={"Header"} title={title.toUpperCase()} />,

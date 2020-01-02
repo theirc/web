@@ -5,6 +5,8 @@ import { translate } from "react-i18next";
 // local
 import "./LocalGuideWidget.css";
 
+const NS = { ns: 'CountryHome' };
+
 class LocalGuideWidget extends Component {
 
 	render() {
@@ -22,12 +24,12 @@ class LocalGuideWidget extends Component {
 							return false;
 						}}
 					>
-						{t("See More")}
+						{t("global.See More", NS)}
 					</a>
 					<i className="material-icons">arrow_right</i>
 				</s>
 
-				<h3>{t("Local Guide")}</h3>
+				<h3>{t("guide.Local Guide", NS)}</h3>
 
 				<div className="Container">
 					{guideItems.map(c => {
