@@ -356,46 +356,7 @@ app.get("/:country/:category/:article", function(req, res, err) {
 		})(req, res, err);
 	}
 });
-
-app.get("/get-phone-tree/:slug", (req, res ,err) => {
-	const selectedLanguage = parseLanguage(req);
-
-	let configKey = _.first(
-        Object.keys(conf).filter(k => {
-            return req.headers.host.indexOf(k) > -1;
-        })
-	);
-	console.log("config", configKey);
-    const {
-        slug,
-	} = req.params;
-	console.log("slug",slug);
-	
-	languageDictionary = Object.assign(languageDictionary, conf[configKey]);
-	let cms = cmsApi(conf[configKey], languageDictionary);
-	try{
-		cms.client
-		.getEntries({
-			content_type: "phoneTreeMessage",
-			"fields.slug": slug,
-			locale: languageDictionary[selectedLanguage] || selectedLanguage,
-		})
-		.then(c => {
-			console.log(c.items);
-			res.contentType("application/json");
-			res.send(c);
-
-		})
-		.catch(e => {
-			console.log(e);
-			res.redirect(`/${country}/`);
-		});
-	}catch (e) {
-		console.log("ERROR", e);
-	}
-	
-	
-});
+require('./twilio-routes.js')(app);
 
 app.get("*", (req, res, err) => mainRequest({})(req, res, err));
 
