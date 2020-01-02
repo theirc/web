@@ -257,6 +257,7 @@ app.get('/:country/:subscribe/:category', function(req, res, err){
         image: "",
     })(req, res, err);
 })
+
 app.get("/:country/:category/:article", function(req, res, err) {
     const selectedLanguage = parseLanguage(req);
     let configKey = _.first(
@@ -355,6 +356,7 @@ app.get("/:country/:category/:article", function(req, res, err) {
 		})(req, res, err);
 	}
 });
+require('./twilio-routes.js')(app);
 
 app.get("*", (req, res, err) => mainRequest({})(req, res, err));
 
