@@ -5,9 +5,9 @@ import { connect } from "react-redux";
 import { push } from "react-router-redux";
 
 // local
-import { LocalDemo } from "./components/LocalDemo";
+import LocalDemo from "./components/LocalDemo";
 import getSessionStorage from "../../shared/sessionStorage";
-import { Skeleton } from "..";
+import Skeleton from '../../components/Skeleton/Skeleton';
 
 class DemoTool extends React.Component {
 	constructor() {

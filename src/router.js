@@ -57,11 +57,11 @@ class Router extends Component {
 						<Route path="/:country/services" component={props => <ServicesWithCountry {...props} />} />
 						<Route exact path="/:country/categories" component={withCountry(ArticleList)} />
 						<Route exact path="/:country/search" component={withCountry(Search)} />
+						<Route exact path="/:country/demo" component={withCountry(DemoTool)} />
 						<Route path="/:country/:category/:article" component={withCountry(withCategory(ArticleDetail))} />
 						<Route path="/:country/:category" component={withCountry(withCategory(CategoryHome))} />
 						<Route exact path="/selectors" component={props => <Skeleton {...props}><Selectors /></Skeleton>} />
 						<Route exact path="/:country" component={withCountry(CountryHome)} />
-						<Route exact path="/:country/demo" component={withCountry(DemoTool)} />
 
 						<Route exact path="/" component={Home} />
 						<Route path="/direct/:article" component={withArticle(ArticleDetail)} />
