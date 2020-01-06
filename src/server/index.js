@@ -172,6 +172,8 @@ app.get("/bulgaria/*", function (req, res, err) {
 	res.redirect(`/bulgaria`);
 })
 
+require('./twilio-routes.js')(app);
+
 app.get("/preview/:serviceId/", function (req, res, err) {
 	const selectedLanguage = parseLanguage(req);
 	const {
@@ -356,7 +358,6 @@ app.get("/:country/:category/:article", function(req, res, err) {
 		})(req, res, err);
 	}
 });
-require('./twilio-routes.js')(app);
 
 app.get("*", (req, res, err) => mainRequest({})(req, res, err));
 
