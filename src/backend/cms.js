@@ -1,6 +1,28 @@
 import getSessionStorage from "../shared/sessionStorage";
 
+
+const loadInstanceConfig = () => {
+	let { instance, env } = require(`../config/localhost`).default;
+
+	// load settings depending on the environment/instance
+	if(window.location.hostname !== 'localhost') {
+		let subdomain = window.location.hostname.split('.');
+		env = subdomain.shift(); // e.g.: qa
+		instance = subdomain.join('.'); // e.g.: cuentanos.org
+	}
+	
+	let config = {
+		...require(`../config/${instance}/instance`).default, // load whole instance object
+		env: require(`../config/${instance}/envs/${env}`).default // load specific env (qa, staging, www)
+	};
+
+	console.log(config);
+};
+
+loadInstanceConfig();
+
 const config = require("./config");
+// const instance = window.location.hostname === 'localhost' ? require('../config/cuentanos.org/instance') : null;
 const contentful = require("contentful");
 let client = null;
 let siteConfig = null;
