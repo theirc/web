@@ -75,6 +75,42 @@ module.exports = function(app) {
             console.log("ERROR", e);
         }
     });
+    app.get("/get-articles/:slug/:category", (req, res, err) => {
+
+        console.log("get category");
+        const {
+                slug,
+                category,
+            } = req.params;
+      
+        const selectedLanguage = parseLanguage(req);
+        let configKey = _.first(
+            Object.keys(conf).filter(k => {
+                return req.headers.host.indexOf(k) > -1;
+            })
+        );
+        
+        languageDictionary = Object.assign(languageDictionary, conf[configKey]);
+        let cms = cmsApi(conf[configKey], languageDictionary);
+        let locale = languageDictionary[selectedLanguage] || selectedLanguage;
+        try{
+            cms.client
+            .getEntries({
+                content_type: "phoneTreeMessage",
+                "fields.slug": slug,
+                locale: locale,
+            })
+            .then(c => {
+                res.contentType("application/json");
+                res.send(c.items[0].fields.options[category-1].fields.option1);
+            })
+            .catch(e => {
+                res.redirect(`/${country}/`);
+            });
+        }catch (e) {
+            console.log("ERROR", e);
+        }
+    })
     app.get("/get-article/:slug/:category/:article", (req, res, err) => {
         const selectedLanguage = parseLanguage(req);
         let configKey = _.first(
