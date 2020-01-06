@@ -8,10 +8,14 @@ import PropTypes from "prop-types";
 import measureDistance from "@turf/distance";
 
 // local
-import { CountrySelector, LanguageSelector, DetectLocationSelector } from "../../components";
+import { CountrySelector, LanguageSelector } from "../../components";
 import { actions } from "../../shared/redux/store";
+import i18nHelpers from '../../helpers/i18n';
+import languages from './languages';
 import servicesApi from "../../backend/servicesApi";
 import getSessionStorage from "../../shared/sessionStorage";
+
+const NS = { ns: 'Selectors' };
 
 class Selectors extends Component {
 	state = {
@@ -28,6 +32,10 @@ class Selectors extends Component {
 		config: PropTypes.object,
 		api: PropTypes.object,
 	};
+
+	componentDidMount() {
+		i18nHelpers.loadResource(languages, NS.ns);
+	}	
 
 	componentWillMount() {
 		let {
@@ -242,7 +250,9 @@ class Selectors extends Component {
 				}
 
 			case 3:
-				return <DetectLocationSelector onBackToList={() => this.setState({ currentPage: 2 })} onLocationFound={l => this.lookupCoordinates(l)} onLocationError={l => this.logError(l)} />;
+				console.log('DetectLocationSelector');
+				return null;
+				// return <DetectLocationSelector onBackToList={() => this.setState({ currentPage: 2 })} onLocationFound={l => this.lookupCoordinates(l)} onLocationError={l => this.logError(l)} />;
 
 			case -1:
 				return <Redirect to={this.state.redirect} />;
@@ -253,27 +263,11 @@ class Selectors extends Component {
 	}
 }
 
-const mapState = ({
-	countryList,
-	country,
-	language
-}, p) => {
-	return {
-		language,
-		country,
-	};
-};
+const mapState = ({ countryList, country, language }, p) => ({ language, country });
 
-const mapDispatch = (d, p) => {
-	return {
-		onSelectLanguage: code => {
-			d(actions.changeLanguage(code));
-		},
-
-		onGoTo: slug => {
-			d(push(`/${slug}`));
-		}
-	};
-};
+const mapDispatch = (d, p) => ({
+	onGoTo: slug => d(push(`/${slug}`)),
+	onSelectLanguage: code => d(actions.changeLanguage(code)),
+});
 
 export default connect(mapState, mapDispatch)(Selectors);

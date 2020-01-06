@@ -62,6 +62,16 @@ function changeCountry(state = null, action) {
 	}
 }
 
+function changeDefaultLocation(state = null, action) {
+	switch (action.type) {
+		case actions.actionTypes.changeDefaultLocation:
+			return action.payload;
+
+		default:
+			return state;
+	}
+}
+
 function changeCountrySlug(state = null, action) {
 	switch (action.type) {
 		case actions.actionTypes.changeCountry:
@@ -205,6 +215,7 @@ export default {
 	showServiceMap: toggleServiceMap,
 
 	country: changeCountry,
+	defaultLocation: changeDefaultLocation,
 	category: selectCategory,
 	article: selectArticle,
 	language: changeLanguage,

@@ -7,7 +7,11 @@ import PropTypes from "prop-types";
 import { translate } from "react-i18next";
 
 // local
+import i18nHelpers from '../../helpers/i18n';
+import languages from './languages';
 import "./BottomNav.css";
+
+const NS = { ns: 'BottomNav' };
 
 class BottomNav extends Component {
 	static propTypes = {
@@ -15,19 +19,24 @@ class BottomNav extends Component {
 		onButtonClicked: PropTypes.func,
 		onGoToCategories: PropTypes.func,
 	};
+	
+	static contextTypes = {
+		config: PropTypes.object,
+	};
 
 	constructor(props) {
 		super();
 
 		this.state = {
 			selectedIndex: props.index,
-		};
-	}
+		};	
+	}	
 
-	static contextTypes = {
-		config: PropTypes.object,
-	};
+	componentDidMount() {
+		i18nHelpers.loadResource(languages, NS.ns);
+	}	
 
+	// TODO: move these props to local dispatch
 	select(selectedIndex = 0) {
 		const { onGoHome, onGoToCategories, onGoToSearch, onGoToServices, goToMap } = this.props;
 
@@ -68,14 +77,14 @@ class BottomNav extends Component {
 		return (
 			<Paper style={paperStyle} className="BottomNav">
 				<BottomNavigation showLabels={true} value={this.props.index} onChange={(e, i) => this.select(i)}>
-					<BottomNavigationButton className={this.props.index === 0 ? "Selected" : ""} icon={<Home />} label={<span className="BottomButton">{t("Home")}</span>} value={0} />
+					<BottomNavigationButton className={this.props.index === 0 ? "Selected" : ""} icon={<Home />} label={<span className="BottomButton">{t("menu.Home", NS)}</span>} value={0} />
 
 					{!hideArticles ? (
-						<BottomNavigationButton className={this.props.index === 1 ? "Selected" : ""} icon={<Assignment />} label={<span className="BottomButton">{t("Articles")}</span>} value={1} />
+						<BottomNavigationButton className={this.props.index === 1 ? "Selected" : ""} icon={<Assignment />} label={<span className="BottomButton">{t("menu.Articles", NS)}</span>} value={1} />
 					) : (<BottomNavigationButton disabled style={{display: 'none'}} />)}
 
 					{showServiceMap ? (
-						<BottomNavigationButton className={this.props.index === 2 ? "Selected" : ""} icon={<List />} label={<span className="BottomButton">{t("Services")}</span>} value={3} />
+						<BottomNavigationButton className={this.props.index === 2 ? "Selected" : ""} icon={<List />} label={<span className="BottomButton">{t("menu.Services", NS)}</span>} value={3} />
 					) : (<BottomNavigationButton disabled style={{display: 'none'}} />)}
 					
 				</BottomNavigation>

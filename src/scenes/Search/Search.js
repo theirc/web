@@ -7,8 +7,12 @@ import PropTypes from "prop-types";
 
 // local
 import servicesApi from "../../backend/servicesApi";
+import i18nHelpers from '../../helpers/i18n';
+import languages from './languages';
 import { SearchPage } from "../../components";
 import { Skeleton } from "../../scenes";
+
+const NS = { ns: 'Search' };
 
 class Search extends React.Component {
 	state = {
@@ -25,6 +29,8 @@ class Search extends React.Component {
 	};
 
 	componentDidMount() {
+		i18nHelpers.loadResource(languages, NS.ns);
+
 		if (this.props.location.search) {
 			this.search(this.props);
 		}
@@ -92,20 +98,8 @@ class Search extends React.Component {
 	}
 }
 
-const mapState = ({ country, router, language }, p) => {
-	return {
-		country,
-		location: router.location,
-		language,
-	};
-};
+const mapState = ({ country, router, language }, p) => ({ country, location: router.location, language });
 
-const mapDispatch = (d, p) => {
-	return {
-		onNavigate(url) {
-			d(push(url));
-		},
-	};
-};
+const mapDispatch = (d, p) => ({ onNavigate: (url) => d(push(url)) });
 
 export default connect(mapState, mapDispatch)(Search);

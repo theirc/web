@@ -17,6 +17,8 @@ import HeaderBar from "../../../components/HeaderBar/HeaderBar";
 import "../../../components/ActionsBar/ActionsBar.css";
 import "./ArticleDetailBody.css";
 
+const NS = { ns: 'ArticleDetail' };
+
 const moment = global.moment;
 const Remarkable = require("remarkable");
 const IG_URL = "https://instagr.am/p/";
@@ -83,6 +85,11 @@ class ArticleDetailBody extends Component {
 		}
 	}
 
+	componentDidMount() {
+		this.injectVideoPlaceholders();
+		this.replaceLinks();
+	}
+
 	componentDidUpdate() {
 		this.injectVideoPlaceholders();
 		this.replaceLinks();
@@ -121,11 +128,6 @@ class ArticleDetailBody extends Component {
 			var videoId = e.getAttribute('videoId');
 			ReactDOM.render(<InstagramEmbed className={"Instagram"} url={`${IG_URL}${videoId}`} />, e);
 		});
-	}
-
-	componentDidMount() {
-		this.injectVideoPlaceholders();
-		this.replaceLinks();
 	}
 
 	onCopyLink = () => {
@@ -196,7 +198,7 @@ class ArticleDetailBody extends Component {
 
 						<div href='#' className="social-btn" onClick={this.onCopyLink}>
 							{!this.state.copied ? <Link /> : <LibraryBooks />}
-							{this.state.copied && <span className='copied'>{t('Copied')}</span>}
+							{this.state.copied && <span className='copied'>{t('actions.Copied', NS)}</span>}
 						</div>
 					</div>
 				</div>
@@ -204,7 +206,7 @@ class ArticleDetailBody extends Component {
 				{contentType.sys.id === "video" && this.renderVideo()}
 
 				<article>
-					<span className='author'><span>{t("LAST_UPDATED")}</span> {moment(article.sys.updatedAt).format('YYYY.MM.DD')}</span>
+					<span className='author'><span>{t("actions.LAST_UPDATED", NS)}</span> {moment(article.sys.updatedAt).format('YYYY.MM.DD')}</span>
 					<div dangerouslySetInnerHTML={{ __html: html }} />
 				</article>
 			</div>
