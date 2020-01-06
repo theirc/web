@@ -102,16 +102,19 @@ module.exports = function(app) {
                 console.log(c.items[0].fields.options[category-1].fields.article_Detail[article-1]);
                 let id = c.items[0].fields.options[category-1].fields.article_Detail[article-1].sys.id;
                 cms.client
-                .getEntry(id, {
+                .getEntries({
+                    "sys.id": id,
                     locale: locale,
                 })
                 .then( a => {
-                    console.log(a.fields);
-                    //let category = a.fields.category.sys.id;
-                    // let entities = cms.client.parseEntries(a);
-                    // console.log("entities", entities);
+                    console.log("--------");
+                    let entities = cms.client.parseEntries(a);            
+                    let includes = a.includes.Entry.map( i => {return i.fields});
+                    let country = entities.items[0].fields.country.fields;
+                    let category = entities.items[0].fields.category.fields;
                     res.contentType("application/json");
-                    let article = { title: a.fields.title, sumary: a.fields.content.substr(0,200)+"...", link: "http://www.cuentanos.org"};
+                    let entry = a.items[0];
+                    let article = { title: entry.fields.title, sumary: entry.fields.content.substr(0,200)+"...", link: "http://www.cuentanos.org/"+country.slug+"/"+category.slug+"/"+entry.fields.slug};
                     res.send(article);
                 })
                 .catch(e => {
