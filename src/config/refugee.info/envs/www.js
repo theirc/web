@@ -1,15 +1,14 @@
 export default {
-	backendUrl: 'https://admin.cuentanos.org/e/production/v2',
+	backendUrl: 'https://admin.refugee.info/e/production/v2',
 	code: 'prod',
-	showLinkToAdministration: true,
 	thirdParty: {
-		contentful: {
-			accessToken: "98cd6321d5578bab8cb4c9bafe022f2bd73db5ffce296420d934008f9800fb80",
-			host: null,
-			space: 'e17qk44d7f2w'
-		},
 		analytics: {
-			gaTracker: 'UA-68574649-8'
-		}
+			gaTracker: 'UA-68574649-6'
+		},
+		contentful: {
+			accessToken: "0cd5c6bfefa4f7f33a98c487012e6f34c2031aee1ff2f6858b11be592ab349d9",
+			host: null,
+			space: 'ktglofo8nf88'
+		},
 	}
 };

@@ -1,27 +1,27 @@
-
 export default {
 	brand: {
 		images: {
-			favicon: '/images/favicons/cn-favicon-blk.png',
-			logo: '/images/logos/logo-cn-white.png',
-			logoBlack: '/images/logos/logo-cn-black.png',
-			thumbnail: '/images/logos/cn-thumbnail.png',
-		},
-		code: 'cn',
-		name: 'CuentaNos',
-		tabTitle: 'Bienvenidos a CuentaNos',
-		theme: 'generic',
-		url: 'cuentanos.org'
+			favicon: "/images/favicons/favicon.ico",
+			logo: "/images/logos/logo-ri-white.png",
+			logoBlack: "/images/logos/logo-ri-black.png",
+			thumbnail: "/images/logos/ri-thumbnail.png",
+			},
+		code: 'ri',
+		name: 'Refugee Info',
+		tabTitle: 'Refugee Info',
+		theme: 'irc',
+		url: 'refugee.info'
 	},
 	countries: {
-		'el-salvador': require('./countries/el-salvador').default,
-		'honduras': require('./countries/honduras').default,
+		'bulgaria': require('./countries/bulgaria').default,
+		'greece': require('./countries/greece').default,
+		'italy': require('./countries/italy').default,
+		'serbia': require('./countries/serbia').default,
 	},
 	env: null,
 	switches: {
-		cookieBanner: false,
+		cookieBanner: true,
 		disableCountrySelector: false,
-		disableLanguageSelector: true,
-		showDepartments: true,
+		disableLanguageSelector: false,
 	}
 };

@@ -1,4 +1,3 @@
-
 export default {
 	brand: {
 		code: 'cn',
