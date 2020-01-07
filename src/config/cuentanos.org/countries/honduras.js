@@ -1,11 +1,15 @@
 export default {
-	countryCode: '', 
-	customQuestionLink: '',
+	countryCode: '+504', 
+	customQuestionLink: [],
 	flag: '',
-	showArticles: true,
-	showServices: true,
 	languages: [["es", "Español"]],
 	questionLink: 'mailto: cuentanos.hn@rescue.org',
+	switches: {
+		showArticles: true,
+		showDepartments: true,
+		showLinkToAdministration: false,
+		showServices: true,
+	},
 	thirdParty: {
 		facebook: {
 			appId: '209295296327422',

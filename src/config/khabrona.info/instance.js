@@ -14,8 +14,6 @@ export default {
 		url: 'khabrona.info'
 	},
 	countries: {
-		'el-salvador': require('./countries/jordan').default,
-		'honduras': require('./countries/honduras').default,
 	},
 	env: null,
 	switches: {

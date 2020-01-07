@@ -1,13 +1,13 @@
 
 export default {
 	brand: {
+		code: 'cn',
 		images: {
 			favicon: '/images/favicons/cn-favicon-blk.png',
 			logo: '/images/logos/logo-cn-white.png',
 			logoBlack: '/images/logos/logo-cn-black.png',
 			thumbnail: '/images/logos/cn-thumbnail.png',
 		},
-		code: 'cn',
 		name: 'CuentaNos',
 		tabTitle: 'Bienvenidos a CuentaNos',
 		theme: 'generic',
@@ -22,6 +22,5 @@ export default {
 		cookieBanner: false,
 		disableCountrySelector: false,
 		disableLanguageSelector: true,
-		showDepartments: true,
 	}
 };

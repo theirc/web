@@ -1,11 +1,15 @@
 export default {
-	phoneCode: '+503', 
+	countryCode: '+503', 
 	customQuestionLink: [],
 	flag: '',
-	showArticles: true,
-	showServices: true,
 	languages: [["es", "Español"]],
 	questionLink: 'mailto: cuentanos.sv@rescue.org',
+	switches: {
+		showArticles: true,
+		showDepartments: true,
+		showLinkToAdministration: true,
+		showServices: true,
+	},
 	thirdParty: {
 		facebook: {
 			appId: '209295296327422',
