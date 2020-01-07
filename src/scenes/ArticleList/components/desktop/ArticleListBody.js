@@ -67,8 +67,14 @@ class ArticleListBody extends Component {
 				if(!a.fields) return null;
 
 				let image = '/placeholder.png';
-				a.fields.hero && (image = a.fields.hero.fields.file.url);
-				a.fields.gallery && (image = a.fields.gallery.fields.file.url);
+				
+				a.fields.hero &&
+				a.fields.hero.fields &&
+				(image = a.fields.hero.fields.file.url);
+				
+				a.fields.gallery &&
+				a.fields.gallery.fields &&
+				(image = a.fields.gallery.fields.file.url);
 
 				return (
 					<li key={a.sys.id} className='tile' onClick={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${a.fields.slug}?language=` + language)}>
