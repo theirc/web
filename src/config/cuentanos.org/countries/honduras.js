@@ -1,6 +1,5 @@
 export default {
 	countryCode: '+504', 
-	customQuestionLink: [],
 	flag: '',
 	languages: [["es", "Español"]],
 	questionLink: 'mailto: cuentanos.hn@rescue.org',

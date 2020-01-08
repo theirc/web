@@ -16,7 +16,7 @@ export default {
 	countries: {
 		'jordan': require('./countries/jordan').default,
 	},
-	env: null,
+	env: null, // dynamically loaded
 	switches: {
 		cookieBanner: false,
 		disableCountrySelector: true,

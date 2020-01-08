@@ -100,7 +100,6 @@ class Skeleton extends React.Component {
 		}
 
 		let showFooter = !hideFooter && country && language;
-		let logo = _.template(config.logo)({ language: language || "en" });
 
 		if (country && country.fields.slug === "serbia" && sessionStorage.getItem("serbia-alert") == null)
 			sessionStorage.setItem("serbia-alert", 0);
@@ -111,9 +110,6 @@ class Skeleton extends React.Component {
 			<I18nextProvider i18n={i18n}>
 				<div className="Skeleton">
 					<AppHeader
-						disableCountrySelector={!!config.disableCountrySelector}
-						disableLanguageSelector={!!config.disableLanguageSelector}
-						cookieBanner={config.cookieBanner}
 						country={country}
 						language={language}
 						onGoHome={onGoHome(country)}
@@ -123,8 +119,6 @@ class Skeleton extends React.Component {
 						onChangeCountry={onChangeLocation}
 						onChangeLanguage={onChangeLanguage.bind(this, router.location.pathname)}
 						headerColor={headerColor}
-						logo={logo}
-						logoBlack={config.logoBlack}
 						homePage={homePage}
 					/>
 					
@@ -134,15 +128,10 @@ class Skeleton extends React.Component {
 					
 					{showFooter && (
 						<Footer
-							questionLink={config.questionLink}
-							disableCountrySelector={!!config.disableCountrySelector}
-							disableLanguageSelector={!!config.disableLanguageSelector}
 							onChangeLocation={onChangeLocation}
 							onChangeLanguage={onChangeLanguage.bind(this, router.location.pathname)}
 							deviceType={deviceType}
-							showLinkToAdministration={!!config.showLinkToAdministration}
 							country={country}
-							customQuestionLink={config.customQuestionLink}
 							language={language}
 							hideShareButtons={hideShareButtons}
 						/>

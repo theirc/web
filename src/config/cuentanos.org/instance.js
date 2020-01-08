@@ -16,7 +16,7 @@ export default {
 		'el-salvador': require('./countries/el-salvador').default,
 		'honduras': require('./countries/honduras').default,
 	},
-	env: null,
+	env: null, // dynamically loaded
 	switches: {
 		cookieBanner: false,
 		disableCountrySelector: false,

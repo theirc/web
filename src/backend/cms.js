@@ -1,7 +1,5 @@
 import getSessionStorage from "../shared/sessionStorage";
-import instance from './settings';
 const config = require("./config");
-// const instance = window.location.hostname === 'localhost' ? require('../config/cuentanos.org/instance') : null;
 const contentful = require("contentful");
 let client = null;
 let siteConfig = null;
@@ -12,7 +10,6 @@ for (let key of Object.keys(config)) {
 		if (window.location.hostname.indexOf(key) > -1) {
 			siteConfig = config[key];
 			siteConfig.languageDictionary = Object.assign(config.languageDictionary, siteConfig.languageDictionary);
-			// instance.languageDictionary = siteConfig.languageDictionary;
 			
 			client = contentful.createClient({
 				...siteConfig,
@@ -20,8 +17,6 @@ for (let key of Object.keys(config)) {
 		}
 	}
 }
-
-console.log(instance);
 
 if (!client) {
 	console.log("No client. Loading RI as default");

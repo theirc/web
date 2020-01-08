@@ -1,9 +1,8 @@
 export default {
-	countryCode: '+503', 
-	customQuestionLink: ['https://www.facebook.com/Refugee.Info.Italy/'],
+	countryCode: '+39', 
 	flag: '',
 	languages: [["en", "English"]],
-	questionLink: 'https://m.me/refugee.info',
+	questionLink: 'https://www.facebook.com/Refugee.Info.Italy/',
 	switches: {
 		showArticles: true,
 		showDepartments: false,

@@ -1,6 +1,5 @@
 export default {
 	countryCode: '', 
-	customQuestionLink: [],
 	flag: '',
 	languages: [["en", "English"], ["ar", "العربيـة"]],
 	questionLink: 'mailto:jo-khabrona-info@mercycorps.org',

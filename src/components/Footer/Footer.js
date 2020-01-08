@@ -8,6 +8,7 @@ import PropTypes from "prop-types";
 
 // local
 import i18nHelpers from '../../helpers/i18n';
+import instance from '../../backend/settings';
 import languages from './languages';
 import "./Footer.css";
 
@@ -53,27 +54,19 @@ class Footer extends Component {
 	}
 
 	render() {
-		const { onChangeLocation, onChangeLanguage, disableCountrySelector, disableLanguageSelector, questionLink, t, showLinkToAdministration, country, customQuestionLink } = this.props;
+		const { onChangeLocation, onChangeLanguage, t, country } = this.props;
+		const { disableCountrySelector, disableLanguageSelector } = instance.switches;
+		const questionLink = country && country.fields ? instance.countries[country.fields.slug].questionLink : '';
+		const showLinkToAdministration = country && country.fields && instance.countries[country.fields.slug].switches.showLinkToAdministration;
+		const facebookPage = country && country.fields && instance.countries[country.fields.slug].thirdParty.facebook.page;
 		const year = moment().year();
-		let link = questionLink;
-
-		const { config } = this.context;
-
-		let configfbpage = (config.facebookPage || []).filter(c => c[0] === country.fields.slug);
-		const fblink = configfbpage[0] ? configfbpage[0][1] : '';
-
-		let result = (customQuestionLink || []).filter(c => c[0] === country.fields.slug);
-
-		if (result[0]) {
-			link = result[0][1];
-		}
 
 		return (
 			<footer className="Footer">
 				<div className="light">
 					<p>{t("light.Can't find specific information?", NS)}</p>
-					<a href={link}>
-						<h3>{link.includes('mailto: ') ? link.replace('mailto: ', '') : t("light.Ask us a question", NS)}</h3>
+					<a href={questionLink}>
+						<h3>{questionLink.includes('mailto: ') ? questionLink.replace('mailto: ', '') : t("light.Ask us a question", NS)}</h3>
 					</a>
 				</div>
 
@@ -97,8 +90,8 @@ class Footer extends Component {
 							</div>
 						)}
 
-						{fblink &&
-							<div className="button " onClick={() => window.open(fblink)}>
+						{facebookPage &&
+							<div className="button " onClick={() => window.open(facebookPage)}>
 								<div className="icon-container">
 									<i className="fa fa-facebook-f" style={{ fontSize: 24 }} />
 								</div>

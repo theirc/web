@@ -1,6 +1,5 @@
 export default {
-	countryCode: '', 
-	customQuestionLink: [],
+	countryCode: '+359', 
 	flag: '',
 	languages: [["ar", "العربيـة"], ["en", "English"], ["fa", "فارسی"], ["ur", "اردو"]],
 	questionLink: 'https://m.me/refugee.info',

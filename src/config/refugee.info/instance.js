@@ -5,7 +5,7 @@ export default {
 			logo: "/images/logos/logo-ri-white.png",
 			logoBlack: "/images/logos/logo-ri-black.png",
 			thumbnail: "/images/logos/ri-thumbnail.png",
-			},
+		},
 		code: 'ri',
 		name: 'Refugee Info',
 		tabTitle: 'Refugee Info',
@@ -18,7 +18,7 @@ export default {
 		'italy': require('./countries/italy').default,
 		'serbia': require('./countries/serbia').default,
 	},
-	env: null,
+	env: null, // dynamically loaded
 	switches: {
 		cookieBanner: true,
 		disableCountrySelector: false,

@@ -17,5 +17,4 @@ const loadInstanceSettings = () => {
 };
 
 let instance = loadInstanceSettings();
-
 export default instance;

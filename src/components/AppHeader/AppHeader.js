@@ -9,6 +9,7 @@ import { Close, Home, List, Assignment } from "material-ui-icons";
 
 // local
 import selectedMenuItem from "../../helpers/menu-items";
+import instance from '../../backend/settings';
 import i18nHelpers from '../../helpers/i18n';
 import languages from './languages';
 import "./AppHeader.css";
@@ -88,8 +89,6 @@ class AppHeader extends Component {
 
 	render() {
 		const {
-			disableCountrySelector,
-			disableLanguageSelector,
 			country,
 			headerColor,
 			homePage,
@@ -105,13 +104,15 @@ class AppHeader extends Component {
 
 		const { search, searchText } = this.state;
 		const backgroundDark = headerColor === 'light' ? false : true;
-		const logo = this.props.logo || "/logo.svg";
-		const logoBlack = this.props.logoBlack || logo;
+
 		const noop = () => {
 			console.log("noop");
 		};
 		const cookiePolicyLink = <a href="/greece/privacy/cookies" target="_blank" rel="noopener noreferrer">Cookie Policy</a>;
 		const privacyPolicyLink = <a href="/greece/privacy/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>;
+
+		const { cookieBanner, disableCountrySelector, disableLanguageSelector } = instance.switches;
+		const { logo, logoBlack } = instance.brand.images;
 
 		let isOnServices = window.location.href.includes("/services");
 		let isOnArticlesGreece = window.location.href.includes("/categories") || /(\/greece\/.*\/.*)/.test(window.location.href);
@@ -146,8 +147,6 @@ class AppHeader extends Component {
 										{showServiceMap && <span className={`app-bar-selectors top-menu ${selectedIndex === 2 ? "Selected" : ""}`} color="contrast" onClick={onGoToServices || noop}>
 											<List /><span className='menu-item'>{t("menu.Services", NS)}</span>
 										</span>}
-
-										{/* {!disableLanguageSelector && !disableCountrySelector && <div className="app-bar-separator" />} */}
 
 										<span className='selectors'>
 											{!disableCountrySelector && (
@@ -184,7 +183,7 @@ class AppHeader extends Component {
 					</form>
 				)}
 
-				{!this.state.prvalert && this.props.cookieBanner && (
+				{!this.state.prvalert && cookieBanner && (
 					<div className={this.state.prvalert ? 'hidden' : 'privacy-banner'}>
 						<div className='content'>
 							<span className="privacy-banner-separator"></span>

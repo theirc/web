@@ -1,6 +1,5 @@
 export default {
 	countryCode: '+502', 
-	customQuestionLink: [],
 	flag: '',
 	languages: [["es", "Español"]],
 	questionLink: '',
