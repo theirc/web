@@ -9,11 +9,11 @@ import reduxThunk from "redux-thunk";
 // local
 import reducers from "./reducers"; // Or wherever you keep your reducers
 import actions from "./actions";
-import c from "../../backend/cms";
+import instance from '../../backend/settings';
 import { analyticsMiddleware } from "../middleware";
 import ReactGA from "react-ga";
 
-ReactGA.initialize(c.siteConfig.gaTracker);
+ReactGA.initialize(instance.env.thirdParty.analytics.gaTracker);
 
 const window = global.window || {};
 let history;

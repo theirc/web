@@ -19,6 +19,12 @@ export default {
 		'serbia': require('./countries/serbia').default,
 	},
 	env: null, // dynamically loaded
+	envs: {
+		qa: require('./envs/qa').default,
+		staging: require('./envs/staging').default,
+		www: require('./envs/www').default
+	},
+	languages: [["ar", "العربيـة"], ["en", "English"], ["fa", "فارسی"], ["fr", "Français"], ["ur", "اردو"]],
 	switches: {
 		cookieBanner: true,
 		disableCountrySelector: false,

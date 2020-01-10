@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import moment from 'moment';
+import _ from 'lodash';
 
 // local
 import HeaderBar from "../../../../components/HeaderBar/HeaderBar";
@@ -68,13 +69,9 @@ class ArticleListBody extends Component {
 
 				let image = '/placeholder.png';
 				
-				a.fields.hero &&
-				a.fields.hero.fields &&
-				(image = a.fields.hero.fields.file.url);
+				_.has(a, 'fields.hero.fields.file') && (image = a.fields.hero.fields.file.url);
 				
-				a.fields.gallery &&
-				a.fields.gallery.fields &&
-				(image = a.fields.gallery.fields.file.url);
+				_.has(a, 'fields.gallery.fields.file') && (image = a.fields.gallery.fields.file.url);
 
 				return (
 					<li key={a.sys.id} className='tile' onClick={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${a.fields.slug}?language=` + language)}>
@@ -103,7 +100,7 @@ class ArticleListBody extends Component {
 		const showToggle = c => {
 			return (c.fields.subCategories && c.fields.subCategories.length) || (c.fields.articles && c.fields.articles.length && c.fields.type !== "News" && !c.fields.overview);
 		};
-		let showCategory = c => c && c.fields && !c.fields.hide && c.fields.slug && (c.fields.overview || c.fields.articles);
+		let showCategory = c => _.has(c, 'fields.slug') && !c.fields.hide && (c.fields.overview || c.fields.articles);
 		const overviewOrFirst = c => c.fields.overview || (c.fields.articles.length && c.fields.articles[0]);
 		const clk = (tab) => {   ///Needs refactor
 			//Add selected class if checked

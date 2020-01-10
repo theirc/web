@@ -1,6 +1,9 @@
-const loadInstanceSettings = () => {
-	let { instance, env } = require(`../config/localhost`).default;
+import instances from '../config';
 
+const loadInstanceSettings = () => {
+	let { instance, env } = require('../config/localhost').default;
+
+	
 	// load settings depending on the environment/instance
 	if(window.location.hostname !== 'localhost') {
 		let subdomain = window.location.hostname.split('.');
@@ -8,10 +11,9 @@ const loadInstanceSettings = () => {
 		instance = subdomain.join('.'); // e.g.: cuentanos.org
 	}
 	
-	let config = {
-		...require(`../config/${instance}/instance`).default, // load whole instance object
-		env: require(`../config/${instance}/envs/${env}`).default // load specific env (qa, staging, www)
-	};
+	let config = instances[instance];
+	config.env = config.envs[env];
+	console.log(config);
 
 	return config;
 };

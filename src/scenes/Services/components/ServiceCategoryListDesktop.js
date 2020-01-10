@@ -11,7 +11,9 @@ import PropTypes from "prop-types";
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
 import servicesApi from '../../../backend/servicesApi';
 import ServiceMapDesktop from "./ServiceMapDesktop";
+import instances from '../../../backend/settings';
 import routes from '../routes';
+
 import "../../../components/ActionsBar/ActionsBar.css";
 import "./ServiceHome.css";
 import "./ServiceCategoryList.css";
@@ -61,8 +63,9 @@ class ServiceCategoryListDesktop extends React.Component {
 			currentLocation = l.length > 0 ? l[0] : c;
 		}
 
+		const showDepartments = country && instances.countries[country.fields.slug].switches.showDepartments;
 		let municipalities = currentLocation.level === 3 ? regions.filter(r => r.parent === currentLocation.parent) : null;
-		let department = currentLocation.level === 3 ? (!config.showDepartments ? currentLocation.title : currentLocation.parent__name) :
+		let department = currentLocation.level === 3 ? (!showDepartments ? currentLocation.title : currentLocation.parent__name) :
 			(currentLocation.level === 2 ? currentLocation : currentLocation.title);
 
 		this.setState({
@@ -227,12 +230,13 @@ class ServiceCategoryListDesktop extends React.Component {
 
 	renderFilters = () => {
 		let { municipalities } = this.state;
-		let { t } = this.props;
+		let { country, t } = this.props;
 		const { config } = this.context;
 
 		let categoryName = this.state.category ? this.state.category.name : t('services.All Categories', NS);
 		let department = this.state.department.name ? this.state.department.name : this.state.department;
 		let municipality = this.state.municipality.name ? this.state.municipality.name : this.state.municipality;
+		const showDepartments = country && instances.countries[country.fields.slug].switches.showDepartments;
 
 		return (
 			<div className="ActionsBar">
@@ -241,7 +245,7 @@ class ServiceCategoryListDesktop extends React.Component {
 						<span>{department}</span><i className="material-icons">keyboard_arrow_down</i>
 					</div>
 
-					{municipalities && config.showDepartments && this.state.showMunicipalities &&
+					{municipalities && showDepartments && this.state.showMunicipalities &&
 						<div className="btn" onClick={() => { this.openFilters(FilterTypes.MUNICIPALITY) }}>
 							<span>{municipality}</span><i className="material-icons">keyboard_arrow_down</i>
 						</div>
@@ -349,6 +353,8 @@ class ServiceCategoryListDesktop extends React.Component {
 		let departments = regions.filter(r => r.slug === country.fields.slug);
 		departments.push(...regions.filter(r => r.parent === countryId));
 
+		const showDepartments = country && instances.countries[country.fields.slug].switches.showDepartments;
+
 		const availableServices = services.filter(s => !s.provider.vacancy);
 		let sortedAvailableServices = [];
 
@@ -371,10 +377,10 @@ class ServiceCategoryListDesktop extends React.Component {
 				}
 
 				{/* RENDER POPOVERS */}
-				{this.state.showFilter && this.state.filterType === FilterTypes.DEPARTMENT && departments && config.showDepartments &&
+				{this.state.showFilter && this.state.filterType === FilterTypes.DEPARTMENT && departments && showDepartments &&
 					this.renderFiltersPopover(t('services.Locations', NS), this.onSelectLocation, departments, this.renderDepartmentButton.bind(this), 'departments', FilterTypes.DEPARTMENT)
 				}
-				{this.state.showFilter && this.state.filterType === FilterTypes.DEPARTMENT && l3 && !config.showDepartments &&
+				{this.state.showFilter && this.state.filterType === FilterTypes.DEPARTMENT && l3 && !showDepartments &&
 					this.renderFiltersPopover(t('services.Locations', NS), this.onSelectLocation, l3, this.renderDepartmentButton.bind(this), 'departments', FilterTypes.DEPARTMENT)
 				}
 

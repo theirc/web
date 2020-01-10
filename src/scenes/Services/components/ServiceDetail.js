@@ -13,6 +13,7 @@ import PropTypes from "prop-types";
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
 import routes from '../routes';
 import "../../../components/ActionsBar/ActionsBar.css";
+import instance from '../../../backend/settings';
 import "./ServiceDetail.css";
 import "./ServiceHome.css";
 
@@ -209,8 +210,7 @@ class ServiceDetail extends React.Component {
 	render() {
 		const { service, relatedServices } = this.state;
 		const { country, goToService, language, t } = this.props;
-		const { config } = this.context;
-		const phoneCodes = config.countryPhoneCodes;
+		const countryCode = country && country.fields ? instance.countries[country.fields.slug].countryCode : '';
 		const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 		if (!service) {
@@ -280,9 +280,7 @@ class ServiceDetail extends React.Component {
 			return ci.index;
 		});
 		let subtitle = service.type ? service.type.name : _.first(service.types).name;
-		const currentCountry = phoneCodes.filter(pc => pc.country === country.fields.name);
-		let phoneNumberWithCode;
-		(currentCountry.length) ? (phoneNumberWithCode = currentCountry[0].code + service.phone_number) : (phoneNumberWithCode = service.phone_number);
+		let phoneNumberWithCode = countryCode + service.phone_number;
 
 		return (
 			<div className="ServiceDetail">

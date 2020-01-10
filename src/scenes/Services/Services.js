@@ -18,6 +18,7 @@ import routes from './routes';
 import actions from "../../shared/redux/actions";
 import servicesApi from "../../backend/servicesApi";
 import getSessionStorage from "../../shared/sessionStorage";
+import instances from '../../backend/settings';
 
 const NS = { ns: 'Services' };
 
@@ -313,7 +314,10 @@ class Services extends React.Component {
 		}
 
 		const goToLocations = (iscountrylist) => {
-			if (config.showDepartments && (!this.state.department || iscountrylist)) {
+			const { country } = this.props;
+			const showDepartments = country && instances.countries[country.fields.slug].switches.showDepartments;
+
+			if (showDepartments && (!this.state.department || iscountrylist)) {
 				goToDepartmentList(this.props.country);
 			} else {
 				goToLocationList(this.props.country);

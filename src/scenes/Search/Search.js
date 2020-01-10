@@ -50,8 +50,12 @@ class Search extends React.Component {
 		const qs = queryString.parse(location.search);
 		this.setState({ articles: [], services: [], searchingArticles: true, searchingServices: true, term: qs.q });
 		const { api, config } = this.context;
-		const languageDictionary = config.languageDictionary || {};
-
+		const languageDictionary = {
+			en: "en-US",
+			ar: "ar-001",
+			fa: "fa-AF",
+		};
+	
 		setTimeout(s => {
 			api.client
 				.getEntries({

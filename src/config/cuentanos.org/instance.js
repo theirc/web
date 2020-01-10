@@ -17,6 +17,12 @@ export default {
 		'honduras': require('./countries/honduras').default,
 	},
 	env: null, // dynamically loaded
+	envs: {
+		qa: require('./envs/qa').default,
+		staging: require('./envs/staging').default,
+		www: require('./envs/www').default
+	},
+	languages: [['es', 'Español']],
 	switches: {
 		cookieBanner: false,
 		disableCountrySelector: false,

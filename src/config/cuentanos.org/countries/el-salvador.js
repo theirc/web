@@ -1,7 +1,7 @@
 export default {
 	countryCode: '+503', 
 	flag: '',
-	languages: [["es", "Español"]],
+	languages: ['es'],
 	questionLink: 'mailto: cuentanos.sv@rescue.org',
 	switches: {
 		showArticles: true,

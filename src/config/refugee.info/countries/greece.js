@@ -1,7 +1,7 @@
 export default {
-	countryCode: '+30', 
+	countryCode: '', // +30 code was included in services already
 	flag: '',
-	languages: [["ar", "العربيـة"], ["en", "English"], ["fa", "فارسی"], ["fr", "Français"], ["ur", "اردو"]],
+	languages: ['ar', 'en', 'fa', 'fr', 'ur'],
 	questionLink: 'https://m.me/refugee.info',
 	switches: {
 		showArticles: true,

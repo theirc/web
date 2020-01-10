@@ -1,7 +1,7 @@
 export default {
 	countryCode: '+359', 
 	flag: '',
-	languages: [["ar", "العربيـة"], ["en", "English"], ["fa", "فارسی"], ["ur", "اردو"]],
+	languages: ['ar', 'en', 'fa', 'ur'],
 	questionLink: 'https://m.me/refugee.info',
 	switches: {
 		showArticles: false,

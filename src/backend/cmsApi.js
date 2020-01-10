@@ -7,7 +7,7 @@ import getSessionStorage from "../shared/sessionStorage";
 const contentful = require("contentful");
 
 function cmsApi(config) {
-	let languageDictionary = {
+	const languageDictionary = {
 		en: "en-US",
 		ar: "ar-001",
 		fa: "fa-AF",

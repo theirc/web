@@ -3,6 +3,7 @@ import React from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import tinycolor from "tinycolor2";
+import moment from 'moment';
 
 // local
 import cms from '../../../backend/cms';
@@ -89,6 +90,7 @@ class SearchPage extends React.Component {
 		const { country, language, onNavigate } = this.props;
 		let image = a.fields.hero ? a.fields.hero.fields.file.url : '/placeholder.png';
 
+		console.log(a)
 		return (
 			<li className='tile' key={a.sys.id} onClick={() => onNavigate(`/${country.fields.slug}/${a.fields.category.fields.slug}/${a.fields.slug}?language=${language}`)}>
 				<div className='img-viewport'>
@@ -96,7 +98,7 @@ class SearchPage extends React.Component {
 				</div>
 				<div className='text'>
 					{a.fields && <h2>{a.fields.title}</h2>}
-					<span className='author'>By <span>{cms.siteConfig.author}</span></span>
+					<span className='author'>{moment(a.sys.updatedAt).format('YYYY.MM.DD')}</span>
 				</div>
 			</li>)
 	}

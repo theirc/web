@@ -18,7 +18,6 @@ const less = require("less");
 const fs = require("fs");
 const nunjucks = require("nunjucks");
 const conf = require("../backend/config");
-const cms = require("../backend/cms").default;
 const servicesApi = require("../backend/servicesApi");
 const cmsApi = require("../backend/cmsApi").default;
 const ReactApp = require("../App").default;
@@ -28,9 +27,12 @@ const renderToString = require("react-dom/server").renderToString;
 const Provider = require("react-redux").Provider;
 const _ = require("lodash");
 const toMarkdown = require("to-markdown");
-let {
-	languageDictionary
-} = conf;
+
+let languageDictionary = {
+	en: "en-US",
+	ar: "ar-001",
+	fa: "fa-AF",
+};
 
 const app = feathers();
 app.configure(configuration());
@@ -264,8 +266,8 @@ app.get("/:country/:category/:article", function(req, res, err) {
             return req.headers.host.indexOf(k) > -1;
         })
     );
-    let context = {};
-    const {
+
+		const {
         country,
         category,
         article
@@ -282,12 +284,7 @@ app.get("/:country/:category/:article", function(req, res, err) {
 					return;
 				}
 
-				const {
-					accessToken,
-					space
-				} = conf[configKey];
-				languageDictionary = Object.assign(languageDictionary, conf[configKey]);
-				let cms = cmsApi(conf[configKey], languageDictionary);
+				let cms = cmsApi(conf[configKey]);
 				cms.client
 					.getEntries({
 						content_type: "article",

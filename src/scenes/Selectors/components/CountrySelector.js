@@ -6,6 +6,7 @@ import _ from "lodash";
 
 // local
 import getSessionStorage from "../../../shared/sessionStorage";
+// import instance from '../../../backend/settings';
 import "./CountrySelector.css";
 
 const NS = { ns: 'Selectors' };
@@ -25,14 +26,14 @@ class CountrySelector extends Component {
 		config: PropTypes.object,
 	};
 
-	filterCountry(config, countryList, currentLang) {
-		for (let i = 0; i < config.hideLangsPerCountry.length; i++) {
-			if (config.hideLangsPerCountry[i].langs.indexOf(currentLang) >= 0) {
-				return countryList.filter(l => l.slug !== config.hideLangsPerCountry[i].country);
-			}
-		}
-		return countryList;
-	}
+	// filterCountry(config, countryList, currentLang) {
+	// 	for (let i = 0; i < config.hideLangsPerCountry.length; i++) {
+	// 		if (config.hideLangsPerCountry[i].langs.indexOf(currentLang) >= 0) {
+	// 			return countryList.filter(l => l.slug !== config.hideLangsPerCountry[i].country);
+	// 		}
+	// 	}
+	// 	return countryList;
+	// }
 
 	render() {
 		const {
@@ -48,7 +49,9 @@ class CountrySelector extends Component {
 		let availableCountryList = countryList.filter(c => regionList.indexOf(c.fields.slug) > -1 && config.hideCountries.indexOf(c.fields.slug) === -1);
 
 		// SP-354 disable tigrinya and french from italy
-		availableCountryList = this.filterCountry(config, availableCountryList, language);
+		// console.log(availableCountryList)
+		// availableCountryList = this.filterCountry(config, availableCountryList, language);
+		// console.log(availableCountryList)
 
 		if (global.navigator && navigator.geolocation) {
 			countryList.push({

@@ -13,6 +13,7 @@ import { actions } from "../../shared/redux/store";
 import i18nHelpers from '../../helpers/i18n';
 import languages from './languages';
 import servicesApi from "../../backend/servicesApi";
+import instance from '../../backend/settings';
 import getSessionStorage from "../../shared/sessionStorage";
 
 const NS = { ns: 'Selectors' };
@@ -179,15 +180,11 @@ class Selectors extends Component {
 		console.log(l);
 	}
 
-	filterLangs(config) {
+	filterLangs() {
+		const { country } = this.props;
 		let currentCountry = sessionStorage.getItem('redirect');
 
-		for (let i = 0; i < config.hideLangsPerCountry.length; i++) {
-			if (currentCountry && currentCountry.indexOf(`/${config.hideLangsPerCountry[i].country}`) === 0) {
-				return config.languages.filter(l => config.hideLangsPerCountry[i].langs.indexOf(l[0]) < 0);
-			}
-		}
-		return null;
+		return currentCountry && country ? instance.countries[country.fields.slug].languages : null;
 	}
 
 	render() {
@@ -205,8 +202,8 @@ class Selectors extends Component {
 		} = this.props
 
 		// SP-354 disable tigrinya and french from italy
-		let languages = this.filterLangs(config);
-		!languages && (languages = config.languages);
+		let languages = this.filterLangs();
+		!languages && (languages = instance.languages);
 
 		switch (currentPage) {
 			case 1:

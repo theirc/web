@@ -13,6 +13,7 @@ import { actions } from "../../shared/redux/store";
 import { AppHeader, BottomNavContainer, Footer, WarningDialog } from "..";
 import i18n from "../../i18n"; // initialized i18next instance
 import getSessionStorage from "../../shared/sessionStorage";
+import instance from '../../backend/settings';
 import "./Skeleton.css";
 
 class Skeleton extends React.Component {
@@ -106,6 +107,8 @@ class Skeleton extends React.Component {
 
 		toggleServiceMap(country && country.fields && country.fields.slug !== 'italy' && country.fields.slug !== 'jordan');
 
+		const showDepartments = country && instance.countries[country.fields.slug].switches.showDepartments;
+
 		return (
 			<I18nextProvider i18n={i18n}>
 				<div className="Skeleton">
@@ -137,7 +140,7 @@ class Skeleton extends React.Component {
 						/>
 					)}
 
-					{country && language && <BottomNavContainer match={match} showMapButton={showMapButton} goToMap={goToMap} showDepartments={config.showDepartments} />}
+					{country && language && <BottomNavContainer match={match} showMapButton={showMapButton} goToMap={goToMap} showDepartments={showDepartments} />}
 				</div>
 			</I18nextProvider>
 		);

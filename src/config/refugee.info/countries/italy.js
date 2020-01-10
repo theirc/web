@@ -1,7 +1,7 @@
 export default {
 	countryCode: '+39', 
 	flag: '',
-	languages: [["en", "English"]],
+	languages: ['en'],
 	questionLink: 'https://www.facebook.com/Refugee.Info.Italy/',
 	switches: {
 		showArticles: true,
