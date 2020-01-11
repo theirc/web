@@ -84,12 +84,12 @@ class ServiceMapDesktop extends React.Component {
 		errorMessage: null,
 	};
 
-	map = null;
+  map = null;
 	clusters = null;
 	bounds = null;
 
 	componentDidMount() {
-		const L = window.Leaflet;
+	  /*
 		const map = L.citymaps.map("MapCanvas", null, {
 			scrollWheelZoom: true,
 			zoomControl: true,
@@ -97,39 +97,56 @@ class ServiceMapDesktop extends React.Component {
 			language: this.props.i18n.language,
 			worldCopyJump: true
 		});
+		*/
 
+    /*
 		let clusters = L.markerClusterGroup({
 			maxClusterRadius: 20, // in pixels. Decreasing this will create more, smaller clusters.
 			spiderfyDistanceMultiplier: 1.5,
 			spiderfyOnMaxZoom: true
 		});
 		map.addLayer(clusters);
+		*/
+
+	  const map = new global.google.maps.Map(document.getElementById('MapCanvas'), {
+	    minZoom: 3,
+	    maxZoom: 16
+	  });
 
 		this.setState({
 			loaded: true
 		});
-
+    
 		if (sessionStorage.serviceMapBounds) {
 			const b = sessionStorage.serviceMapBounds.split(",").map(c => parseFloat(c));
 			const zoom = sessionStorage.serviceMapZoom;
 
-			map.fitBounds([
-				[b[1], b[0]],
-				[b[3], b[2]]
-			]);
-			map.setZoom(zoom);
+			console.log("SESSION STORAGE", b);
 
-			setTimeout(() => {
-				map.invalidateSize();
-			}, 500);
+			map.fitBounds({
+				west : b[0],
+				north: b[1],
+				east : b[2],
+				south: b[3]
+			});
+			//map.setZoom(parseInt(zoom) || 8);
+			map.setCenter({
+			  lat: 40.74,
+			  lng: -74
+			});
+			map.setZoom(8);
+		} else {
+      map.setCenter({
+        lat: 39,
+        lng: 22
+      });
+      map.setZoom(7);
 		}
 
-		this.clusters = clusters;
-		this.map = map;
+	  this.map = map;
 	}
 
 	componentDidUpdate() {
-		const L = window.Leaflet;
 		const {
 			clusters
 		} = this;
@@ -138,9 +155,13 @@ class ServiceMapDesktop extends React.Component {
 			if (this.props.services.length) {
 				let locationServices = this.props.services.filter(s => s.location != null);
 
+				console.log("location services", locationServices);
+
 				const markers = locationServices.map((s, index) => {
 					let ll = s.location.coordinates.slice().reverse();
-					const mainType = s.type ? s.type : s.types[0];
+				  const mainType = s.type ? s.type : s.types[0];
+
+          /*
 					let markerDiv = ReactDOMServer.renderToString(<ServiceIcon idx={0} service={s} type={mainType} />);
 					let icon = L.divIcon({
 						html: markerDiv,
@@ -158,26 +179,29 @@ class ServiceMapDesktop extends React.Component {
 						closeButton: false
 					}).setContent(popupEl);
 					marker.bindPopup(popup);
+          */
+
+					let marker = new global.google.maps.Marker({
+					  position: { lat: ll[0], lng: ll[1] },
+					  map: this.map
+					});
 
 					return marker;
 				});
-				clusters.clearLayers();
-				clusters.addLayers(markers);
+
+		    //const clusters = new global.MarkerClusterer(this.map, markers);
+		    /*
 				if (!keepPreviousZoom) {
 					let group = new L.featureGroup(markers);
 					this.map.fitBounds(group.getBounds());
 				}
+				*/
 			} else {
 				console.warn("no services returned");
 			}
 		}
 	}
 
-	componentWillUnmount() {
-		// Cleaning up.
-		this.map.off();
-		this.map.remove();
-	}
 
 	render() {
 		const {
@@ -203,6 +227,11 @@ class ServiceMapDesktop extends React.Component {
 			</div>
 		);
 	}
+}
+
+
+global.initMap = function() {
+  console.log("INIT MAP");
 }
 
 export default translate()(ServiceMapDesktop);
