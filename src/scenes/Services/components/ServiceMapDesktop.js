@@ -40,6 +40,71 @@ class ServiceIcon extends React.Component {
 	}
 }
 
+
+
+
+function HtmlMarker(latlng, map, args) {
+	this.latlng = latlng;	
+	this.args = args;	
+	this.setMap(map);	
+}
+
+HtmlMarker.prototype = new global.google.maps.OverlayView();
+
+HtmlMarker.prototype.draw = function() {
+	
+	var self = this;
+	
+	var div = this.div;
+	
+	if (!div) {
+	
+		div = this.div = document.createElement('div');
+		
+		div.className = 'html-marker-icon';
+		
+		div.style.position = 'absolute';
+		div.style.cursor = 'pointer';
+
+		div.innerHTML = this.args.html;
+		
+		if (typeof(self.args.marker_id) !== 'undefined') {
+			div.dataset.marker_id = self.args.marker_id;
+		}
+		
+		global.google.maps.event.addDomListener(div, "click", function(event) {			
+			global.google.maps.event.trigger(self, "click");
+		});
+		
+		var panes = this.getPanes();
+		panes.overlayImage.appendChild(div);
+	}
+	
+	var point = this.getProjection().fromLatLngToDivPixel(this.latlng);
+	
+	if (point) {
+		div.style.left = point.x + 'px';
+		div.style.top = point.y + 'px';
+	}
+};
+
+HtmlMarker.prototype.remove = function() {
+	if (this.div) {
+		this.div.parentNode.removeChild(this.div);
+		this.div = null;
+	}	
+};
+
+HtmlMarker.prototype.getPosition = function() {
+	return this.latlng;	
+};
+
+
+
+
+
+
+
 class ServiceItem extends React.Component {
 	render() {
 		const { service, goToService } = this.props;
@@ -47,7 +112,7 @@ class ServiceItem extends React.Component {
 		const types = (service.types || []).filter(t => t.id !== mainType.id);
 
 		return (
-			<div key={service.id} className="Item" onClick={() => goToService(service.id)}>
+			<div key={service.id} className="ServiceItem" onClick={() => goToService(service.id)}>
 				<div className="Info">
 					<div className="Item-content title">
 						<h1>{service.name}</h1>
@@ -87,6 +152,7 @@ class ServiceMapDesktop extends React.Component {
   map = null;
 	clusters = null;
 	bounds = null;
+	infoWindow = null;
 
 	componentDidMount() {
 	  /*
@@ -120,8 +186,6 @@ class ServiceMapDesktop extends React.Component {
 		if (sessionStorage.serviceMapBounds) {
 			const b = sessionStorage.serviceMapBounds.split(",").map(c => parseFloat(c));
 			const zoom = sessionStorage.serviceMapZoom;
-
-			console.log("SESSION STORAGE", b);
 
 			map.fitBounds({
 				west : b[0],
@@ -158,38 +222,29 @@ class ServiceMapDesktop extends React.Component {
 				console.log("location services", locationServices);
 
 				const markers = locationServices.map((s, index) => {
-					let ll = s.location.coordinates.slice().reverse();
+					let ll = s.location.coordinates;
 				  const mainType = s.type ? s.type : s.types[0];
 
-          /*
 					let markerDiv = ReactDOMServer.renderToString(<ServiceIcon idx={0} service={s} type={mainType} />);
-					let icon = L.divIcon({
-						html: markerDiv,
-						iconAnchor: [20, 20],
-						popupAnchor: [0, -16],
-					});
-					let marker = L.marker(ll, {
-						title: s.name,
-						icon: icon
-					});
 
 					let popupEl = document.createElement("div");
 					ReactDOM.render(<ServiceItem service={s} {...this.props} />, popupEl);
-					let popup = L.popup({
-						closeButton: false
-					}).setContent(popupEl);
-					marker.bindPopup(popup);
-          */
 
-					let marker = new global.google.maps.Marker({
-					  position: { lat: ll[0], lng: ll[1] },
-					  map: this.map
+					let marker = new HtmlMarker(new global.google.maps.LatLng(ll[1], ll[0]), this.map, {
+					  html: markerDiv
 					});
+
+					marker.addListener('click', function() {
+					  this.infoWindow.setContent(popupEl);
+            this.infoWindow.open(this.map, marker);
+          });
 
 					return marker;
 				});
 
-		    //const clusters = new global.MarkerClusterer(this.map, markers);
+		    const clusters = new global.MarkerClusterer(this.map, markers, {
+          imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
+		    });
 		    /*
 				if (!keepPreviousZoom) {
 					let group = new L.featureGroup(markers);
