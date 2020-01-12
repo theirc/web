@@ -5,6 +5,8 @@ import ReactDOMServer from "react-dom/server";
 import { translate } from "react-i18next";
 
 // local
+import getSessionStorage from "../../../shared/sessionStorage";
+import HtmlMarker from "./HtmlMarker";
 import "./ServiceHome.css";
 
 var tinycolor = require("tinycolor2");
@@ -39,70 +41,6 @@ class ServiceIcon extends React.Component {
 			);
 	}
 }
-
-
-
-
-function HtmlMarker(latlng, map, args) {
-	this.latlng = latlng;	
-	this.args = args;	
-	this.setMap(map);	
-}
-
-HtmlMarker.prototype = new global.google.maps.OverlayView();
-
-HtmlMarker.prototype.draw = function() {
-	
-	var self = this;
-	
-	var div = this.div;
-	
-	if (!div) {
-	
-		div = this.div = document.createElement('div');
-		
-		div.className = 'html-marker-icon';
-		
-		div.style.position = 'absolute';
-		div.style.cursor = 'pointer';
-
-		div.innerHTML = this.args.html;
-		
-		if (typeof(self.args.marker_id) !== 'undefined') {
-			div.dataset.marker_id = self.args.marker_id;
-		}
-		
-		global.google.maps.event.addDomListener(div, "click", function(event) {			
-			global.google.maps.event.trigger(self, "click");
-		});
-		
-		var panes = this.getPanes();
-		panes.overlayImage.appendChild(div);
-	}
-	
-	var point = this.getProjection().fromLatLngToDivPixel(this.latlng);
-	
-	if (point) {
-		div.style.left = point.x + 'px';
-		div.style.top = point.y + 'px';
-	}
-};
-
-HtmlMarker.prototype.remove = function() {
-	if (this.div) {
-		this.div.parentNode.removeChild(this.div);
-		this.div = null;
-	}	
-};
-
-HtmlMarker.prototype.getPosition = function() {
-	return this.latlng;	
-};
-
-
-
-
-
 
 
 class ServiceItem extends React.Component {
@@ -155,25 +93,7 @@ class ServiceMapDesktop extends React.Component {
 	infoWindow = null;
 
 	componentDidMount() {
-	  /*
-		const map = L.citymaps.map("MapCanvas", null, {
-			scrollWheelZoom: true,
-			zoomControl: true,
-			// Citymaps will automatically select "global" if language is not supported or undefined.
-			language: this.props.i18n.language,
-			worldCopyJump: true
-		});
-		*/
-
-    /*
-		let clusters = L.markerClusterGroup({
-			maxClusterRadius: 20, // in pixels. Decreasing this will create more, smaller clusters.
-			spiderfyDistanceMultiplier: 1.5,
-			spiderfyOnMaxZoom: true
-		});
-		map.addLayer(clusters);
-		*/
-
+		const sessionStorage = getSessionStorage();
 	  const map = new global.google.maps.Map(document.getElementById('MapCanvas'), {
 	    minZoom: 3,
 	    maxZoom: 16,
@@ -190,7 +110,7 @@ class ServiceMapDesktop extends React.Component {
 
 		if (sessionStorage.serviceMapBounds) {
 			const b = sessionStorage.serviceMapBounds.split(",").map(c => parseFloat(c));
-			const zoom = sessionStorage.serviceMapZoom;
+			const zoom = parseInt(sessionStorage.serviceMapZoom, 10);
 
 			map.fitBounds({
 				west : b[0],
@@ -198,18 +118,7 @@ class ServiceMapDesktop extends React.Component {
 				east : b[2],
 				south: b[3]
 			});
-			//map.setZoom(parseInt(zoom) || 8);
-			map.setCenter({
-			  lat: 40.74,
-			  lng: -74
-			});
-			map.setZoom(8);
-		} else {
-      map.setCenter({
-        lat: 39,
-        lng: 22
-      });
-      map.setZoom(7);
+			map.setZoom(zoom);
 		}
 
     global.google.maps.event.addListener(map, 'click', () => {
@@ -222,9 +131,6 @@ class ServiceMapDesktop extends React.Component {
 	}
 
 	componentDidUpdate() {
-		const {
-			clusters
-		} = this;
 		let keepPreviousZoom = this.props.keepPreviousZoom;
 		if (this.state.loaded) {
 			if (this.props.services.length) {
@@ -255,15 +161,17 @@ class ServiceMapDesktop extends React.Component {
 					return marker;
 				});
 
-		    const clusters = new global.MarkerClusterer(this.map, markers, {
+		    new global.MarkerClusterer(this.map, markers, {
           imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
 		    });
-		    /*
-				if (!keepPreviousZoom) {
-					let group = new L.featureGroup(markers);
-					this.map.fitBounds(group.getBounds());
+
+				if (!keepPreviousZoom && markers.length) {
+          let bounds = new global.google.maps.LatLngBounds();
+          markers.forEach(m => {
+            bounds.extend(m.getPosition());
+          });
+          this.map.fitBounds(bounds);
 				}
-				*/
 			} else {
 				console.warn("no services returned");
 			}
