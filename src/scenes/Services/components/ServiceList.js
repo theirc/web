@@ -69,7 +69,7 @@ class ServiceList extends React.Component {
 		let subTypes = s.types.filter(t => t.id > 0 && t.id !== mainType.id);
 
 		return [
-			<li key={s.id} className="Item" onClick={() => goToService(s.id)}>
+			<li key={s.id} className="ServiceItem" onClick={() => goToService(s.id)}>
 				<div className="Icon" key={`${s.id}-0`}>
 					<i className={iconWithPrefix(mainType.vector_icon)} style={categoryStyle(mainType.color)} />
 				</div>

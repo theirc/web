@@ -112,7 +112,7 @@ class ServiceItem extends React.Component {
 		const types = (service.types || []).filter(t => t.id !== mainType.id);
 
 		return (
-			<div key={service.id} className="ServiceItem" onClick={() => goToService(service.id)}>
+			<div key={service.id} className="Item" onClick={() => goToService(service.id)}>
 				<div className="Info">
 					<div className="Item-content title">
 						<h1>{service.name}</h1>
@@ -176,13 +176,18 @@ class ServiceMapDesktop extends React.Component {
 
 	  const map = new global.google.maps.Map(document.getElementById('MapCanvas'), {
 	    minZoom: 3,
-	    maxZoom: 16
+	    maxZoom: 16,
+	    disableDefaultUI: true,
+	    zoomControl: true,
+	    zoomControlOptions: {
+        position: global.google.maps.ControlPosition.TOP_LEFT
+      }
 	  });
 
 		this.setState({
 			loaded: true
 		});
-    
+
 		if (sessionStorage.serviceMapBounds) {
 			const b = sessionStorage.serviceMapBounds.split(",").map(c => parseFloat(c));
 			const zoom = sessionStorage.serviceMapZoom;
@@ -207,6 +212,12 @@ class ServiceMapDesktop extends React.Component {
       map.setZoom(7);
 		}
 
+    global.google.maps.event.addListener(map, 'click', () => {
+      if (this.infoWindow) {
+        this.infoWindow.close();
+      }
+    });
+
 	  this.map = map;
 	}
 
@@ -218,8 +229,6 @@ class ServiceMapDesktop extends React.Component {
 		if (this.state.loaded) {
 			if (this.props.services.length) {
 				let locationServices = this.props.services.filter(s => s.location != null);
-
-				console.log("location services", locationServices);
 
 				const markers = locationServices.map((s, index) => {
 					let ll = s.location.coordinates;
@@ -234,9 +243,13 @@ class ServiceMapDesktop extends React.Component {
 					  html: markerDiv
 					});
 
-					marker.addListener('click', function() {
-					  this.infoWindow.setContent(popupEl);
-            this.infoWindow.open(this.map, marker);
+					marker.addListener('click', () => {
+					  setTimeout(() => {
+              this.infoWindow
+                ? this.infoWindow.setContent(popupEl)
+                : this.infoWindow = new global.google.maps.InfoWindow({ content: popupEl })
+              this.infoWindow.open(this.map, marker);
+            },1);
           });
 
 					return marker;

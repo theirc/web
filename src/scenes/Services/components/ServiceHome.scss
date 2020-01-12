@@ -341,8 +341,8 @@
 		display: flex;
 		flex: 1;
 		flex-basis: 100%;
+		margin: 5px;
 		min-height: 42px;
-		margin: 2px 0;
 
 		-webkit-touch-callout: none;
 		-webkit-user-select: none;
@@ -358,7 +358,6 @@
 
 		@media (min-width: $desktopBreakpoint) {
 			flex-basis: calc(50% - 10px);
-			margin:5px;
 		}
 		i.material-icons {
 			justify-self: center;
@@ -461,18 +460,27 @@
 
   .gm-style-iw-c {
     padding: 0;
+
+    button.gm-ui-hover-effect {
+      display: none !important;
+    }
   }
 	.gm-style-iw-d {
-	  overflow-x: hidden;
+	  overflow: hidden !important;
 	  width: 300px;
 	}
 
-  .ServiceItem {
-    border-bottom: 0;
+  .Item {
+    border: none;
     cursor: pointer;
     display:block !important;
     font-size: 14px;
+    margin: 0;
     width: 300px;
+
+		&:hover {
+			border: none;
+    }
 
     .Item-content {
       padding: 0 10px;
@@ -541,6 +549,8 @@
     box-shadow: 0 0 0 5px rgba(0,40,80,0.15);
     height: 40px !important;
     width: 40px !important;
+    margin-top: -20px;
+    margin-left: -20px;
 
     .Icon {
       font-size: 22px;
