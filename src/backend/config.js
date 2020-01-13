@@ -28,7 +28,7 @@ module.exports = {
 		showDepartments: false,
 		showLinkToAdministration: false,
 		hideCountries: ["bosnia"],
-		facebookPage: [["italy", "https://www.facebook.com/Refugee.Info.Italy/"], ["greece", "https://www.facebook.com/refugee.info"], ["serbia", "https://www.facebook.com/refugee.info"]],
+		// facebookPage: [["italy", "https://www.facebook.com/Refugee.Info.Italy/"], ["greece", "https://www.facebook.com/refugee.info"], ["serbia", "https://www.facebook.com/refugee.info"]],
 		hideLangsPerCountry: [{
 			country: 'italy',
 			langs: ['ar', 'ur', 'fa', 'fr'],
@@ -69,7 +69,7 @@ module.exports = {
 		showDepartments: false,
 		showLinkToAdministration: false,
 		hideCountries: ["bosnia"],
-		facebookPage: [["italy", "https://www.facebook.com/Refugee.Info.Italy/"], ["greece", "https://www.facebook.com/refugee.info"], ["serbia", "https://www.facebook.com/refugee.info"]],
+		// facebookPage: [["italy", "https://www.facebook.com/Refugee.Info.Italy/"], ["greece", "https://www.facebook.com/refugee.info"], ["serbia", "https://www.facebook.com/refugee.info"]],
 		hideLangsPerCountry: [{
 			country: 'italy',
 			langs: ['ar', 'ur', 'fa', 'fr'],
@@ -111,7 +111,7 @@ module.exports = {
 		showDepartments: false,
 		showLinkToAdministration: false,
 		hideCountries: ["bosnia"],
-		facebookPage: [["italy", "https://www.facebook.com/Refugee.Info.Italy/"], ["greece", "https://www.facebook.com/refugee.info"], ["serbia", "https://www.facebook.com/refugee.info"]],
+		// facebookPage: [["italy", "https://www.facebook.com/Refugee.Info.Italy/"], ["greece", "https://www.facebook.com/refugee.info"], ["serbia", "https://www.facebook.com/refugee.info"]],
 		hideLangsPerCountry: [{
 			country: 'italy',
 			langs: ['ar', 'ur', 'fa', 'fr'],
@@ -152,7 +152,7 @@ module.exports = {
 		showDepartments: false,
 		showLinkToAdministration: false,
 		hideLangsPerCountry: [],
-		facebookPage: [["jordan", "https://www.facebook.com/khabronainfo.mc.7"]],
+		// facebookPage: [["jordan", "https://www.facebook.com/khabronainfo.mc.7"]],
 	},	
 	"qa.khabrona.info": {
 		// files
@@ -179,7 +179,7 @@ module.exports = {
 		backendUrl: 'https://admin-qa.refugee.info/e/production/v2',
 		showLinkToAdministration: false,
 		hideLangsPerCountry: [],
-		facebookPage: [["jordan", "https://www.facebook.com/khabronainfo.mc.7"]],
+		// facebookPage: [["jordan", "https://www.facebook.com/khabronainfo.mc.7"]],
 	},	
 	"staging.khabrona.info": {
 		// files
@@ -206,7 +206,7 @@ module.exports = {
 		backendUrl: 'https://admin-staging.refugee.info/e/production/v2',
 		showLinkToAdministration: false,
 		hideLangsPerCountry: [],
-		facebookPage: [["jordan", "https://www.facebook.com/khabronainfo.mc.7"]],
+		// facebookPage: [["jordan", "https://www.facebook.com/khabronainfo.mc.7"]],
 	},	
 	"cuentanos.org": {
 		// files
@@ -241,7 +241,7 @@ module.exports = {
 			code: '+503',
 		  },
 		],
-		facebookPage: [["el-salvador", "https://www.facebook.com/Cu%C3%A9ntanos-2039927102928299/"]],
+		// facebookPage: [["el-salvador", "https://www.facebook.com/Cu%C3%A9ntanos-2039927102928299/"]],
 	},
 	"staging.cuentanos.org": {
 		// files
@@ -271,7 +271,7 @@ module.exports = {
 		hideLangsPerCountry: [],
 		hideCountries: [],
 		hideArticlesFor: ['guatemala'],
-		facebookPage: [["el-salvador", "https://www.facebook.com/Cu%C3%A9ntanos-2039927102928299/"]],
+		// facebookPage: [["el-salvador", "https://www.facebook.com/Cu%C3%A9ntanos-2039927102928299/"]],
 		countryPhoneCodes: [{
 			country: 'El Salvador',
 			code: '+503',
@@ -307,7 +307,7 @@ module.exports = {
 		hideLangsPerCountry: [],
 		hideCountries: [],
 		hideArticlesFor: ['guatemala'],
-		facebookPage: [["el-salvador", "https://www.facebook.com/Cu%C3%A9ntanos-2039927102928299/"]],
+		// facebookPage: [["el-salvador", "https://www.facebook.com/Cu%C3%A9ntanos-2039927102928299/"]],
 		countryPhoneCodes: [{
 			country: 'El Salvador',
 			code: '+503',
@@ -343,7 +343,7 @@ module.exports = {
 		hideLangsPerCountry: [],
 		hideCountries: [],
 		hideArticlesFor: ['guatemala'],
-		facebookPage: [["el-salvador", "https://www.facebook.com/Cu%C3%A9ntanos-2039927102928299/"]],
+		// facebookPage: [["el-salvador", "https://www.facebook.com/Cu%C3%A9ntanos-2039927102928299/"]],
 		countryPhoneCodes: [{
 			country: 'El Salvador',
 			code: '+503',
