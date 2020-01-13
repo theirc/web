@@ -9,8 +9,8 @@ const loadInstanceSettings = () => {
 	let { instance: domain, env } = require('../config/localhost').default;
 
 	// load settings depending on the environment/domain
-	if (window.location.hostname !== 'localhost') {
-		let subdomain = window.location.hostname.split('.');
+	if (global.window && (global.window.location.hostname !== 'localhost')) {
+		let subdomain = global.window.location.hostname.split('.');
 		env = subdomain.shift(); // e.g.: qa
 		domain = subdomain.join('.'); // e.g.: cuentanos.org
 	}
