@@ -7,9 +7,10 @@ import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
 
 // local
-import Router from "./router";
 import cmsApi from "./backend/cmsApi";
 import cms from "./backend/cms";
+import instance from './backend/settings';
+import Router from "./router";
 import "./App.css";
 
 
@@ -41,15 +42,16 @@ class ThemedApp extends Component {
 
 	render() {
 		const { direction, language } = this.props;
-		const organization = cms.siteConfig.theme;
+		const organization = instance.brand.theme;
+		const title = instance.brand.tabTitle;
+		const favicon = instance.brand.images.favicon;
 
 		return (
 			<MuiThemeProvider theme={theme}>
-				<span className={[organization, direction, `language-${language}`].join(" ")}>
+				<span className={`${organization} ${direction} language-${language}`}>
 					<Helmet>
-						<title>{cms.siteConfig.title}</title>
-						<link rel="shortcut icon" href={cms.siteConfig.favicon} />
-						<link rel="icon" href={cms.siteConfig.favicon} />
+						<title>{title}</title>
+						<link rel='shortcut icon' href={favicon} />
 					</Helmet>
 					
 					<Router />
