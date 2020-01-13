@@ -8,6 +8,8 @@ import HeaderBar from "../../../components/HeaderBar/HeaderBar";
 import "./ServiceHome.css";
 import "./ServiceCategoryList.css";
 
+const NS = { ns: 'Services' };
+
 class ServiceCategoryList extends React.Component {
 	state = {
 		categories: [],
@@ -69,7 +71,7 @@ class ServiceCategoryList extends React.Component {
 			return (
 				<div className="ServiceCategoryList">
 					<div className="Title">
-						<h1>{t("Service Categories")}</h1>
+						<h1>{t("services.Service Categories", NS)}</h1>
 					</div>
 					<div className="loader" />
 				</div>
@@ -80,17 +82,17 @@ class ServiceCategoryList extends React.Component {
 			return (
 				<div className="ServiceCategoryList">
 					<div className="Title">
-						<h1>{t("Service Categories")}</h1>
+						<h1>{t("services.Service Categories", NS)}</h1>
 					</div>
 					<div className="NoServices">
-						<h2>{t("No services found")}</h2>
+						<h2>{t("services.No services found", NS)}</h2>
 					</div>
 				</div>
 			);
 		}
 
 		return <div>
-			<HeaderBar key={"Header"} title={t("Service Categories").toUpperCase()} />
+			<HeaderBar key={"Header"} title={t("services.Service Categories", NS).toUpperCase()} />
 
 			<div key={"List"} className="ServiceCategoryList">
 				<ul>
@@ -98,7 +100,7 @@ class ServiceCategoryList extends React.Component {
 						<div>
 							<li key="title1">
 								<div className="container disabled">
-									<strong>{t("Services in") + " " + t(locationName)}</strong>
+									<strong>{t("services.Services in", NS) + " " + t(locationName)}</strong>
 								</div>
 							</li>
 							<hr className="line" />
@@ -109,7 +111,7 @@ class ServiceCategoryList extends React.Component {
 						<li key="locations">
 							<div className="container" onClick={goToLocationList}>
 								<i className="fa fa-globe" />
-								<strong>{t("Locations")}</strong>
+								<strong>{t("services.Locations", NS)}</strong>
 								<i className="material-icons">keyboard_arrow_right</i>
 							</div>
 						</li>
@@ -119,7 +121,7 @@ class ServiceCategoryList extends React.Component {
 						<li key="municipalidades">
 							<div className="container" onClick={goToLocationList}>
 								<i className="fa fa-globe" />
-								<strong>{t("Municipalidades")}</strong>
+								<strong>{t("services.Municipalidades", NS)}</strong>
 								<i className="material-icons">keyboard_arrow_right</i>
 							</div>
 						</li>
@@ -130,7 +132,7 @@ class ServiceCategoryList extends React.Component {
 					<li key="map">
 						<div className="container" onClick={goToMap}>
 							<i className="fa fa-map" />
-							<strong>{t("Map")}</strong>
+							<strong>{t("services.Map", NS)}</strong>
 							<i className="material-icons">keyboard_arrow_right</i>
 						</div>
 					</li>
@@ -140,7 +142,7 @@ class ServiceCategoryList extends React.Component {
 					<li key="all-services">
 						<div className="container" onClick={listAllServices}>
 							<i className="fa fa-list" />
-							<strong>{t("All Services")}</strong>
+							<strong>{t("services.All Services", NS)}</strong>
 							<i className="material-icons">keyboard_arrow_right</i>
 						</div>
 					</li>

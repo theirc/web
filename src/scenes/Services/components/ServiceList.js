@@ -1,11 +1,16 @@
 // libs
 import React from "react";
 import { translate } from "react-i18next";
+import { connect } from "react-redux";
+import { push } from "react-router-redux";
 import _ from "lodash";
 
 // local
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
+import routes from '../routes';
 import "./ServiceHome.css";
+
+const NS = { ns: 'Services' };
 
 var tinycolor = require("tinycolor2");
 class ServiceList extends React.Component {
@@ -43,7 +48,7 @@ class ServiceList extends React.Component {
 	}
 
 	renderService(s) {
-		const { goToService, measureDistance } = this.props;
+		const { country, goToService, language, measureDistance } = this.props;
 		const distance = measureDistance && s.location && measureDistance(s.location);
 
 		let iconWithPrefix = vector_icon => vector_icon.split("-")[0] + " " + vector_icon;
@@ -69,7 +74,7 @@ class ServiceList extends React.Component {
 		let subTypes = s.types.filter(t => t.id > 0 && t.id !== mainType.id);
 
 		return [
-			<li key={s.id} className="ServiceItem" onClick={() => goToService(s.id)}>
+			<li key={s.id} className="Item" onClick={() => goToService(country, language, s.id)}>
 				<div className="Icon" key={`${s.id}-0`}>
 					<i className={iconWithPrefix(mainType.vector_icon)} style={categoryStyle(mainType.color)} />
 				</div>
@@ -102,7 +107,7 @@ class ServiceList extends React.Component {
 		const { services, category, loaded, errorMessage, serviceType } = this.state;
 		const { t, nearby, showMap } = this.props;
 		let categoryName = serviceType.length !== 0 ? serviceType.name : "";
-		let titleName = categoryName ? categoryName : t("Services");
+		let titleName = categoryName ? categoryName : t("services.Services", NS);
 
 		// vacancy === false --> available
 		// vacancy === true  --> unavailable
@@ -116,7 +121,7 @@ class ServiceList extends React.Component {
 		if (!loaded) {
 			return (
 				<div className="ServiceList">
-					<HeaderBar title={nearby ? t("Nearby Services") : titleName} />
+					<HeaderBar title={nearby ? t("services.Nearby Services", NS) : titleName} />
 					<div className="loader" />
 				</div>
 			);
@@ -124,7 +129,7 @@ class ServiceList extends React.Component {
 
 		return (
 			<div className="ServiceList">
-				<HeaderBar title={nearby ? t("Nearby Services") : (category ? category.name : titleName)} />
+				<HeaderBar title={nearby ? t("services.Nearby Services", NS) : (category ? category.name : titleName)} />
 
 				{errorMessage && (
 					<div className="Error">
@@ -136,7 +141,7 @@ class ServiceList extends React.Component {
 				{services.length === 0 &&
 					!errorMessage && (
 						<div className="Error">
-							<em>{t("No services found")}</em>
+							<em>{t("services.No services found", NS)}</em>
 						</div>
 					)
 				}
@@ -150,7 +155,7 @@ class ServiceList extends React.Component {
 								</div>
 
 								<div className="Info" style={{ alignSelf: "center" }}>
-									<h1>{t("Service Map")}</h1>
+									<h1>{t("services.Service Map", NS)}</h1>
 								</div>
 
 								<i className="material-icons" />
@@ -179,4 +184,8 @@ class ServiceList extends React.Component {
 	}
 }
 
-export default translate()(ServiceList);
+const mapState = ({ country, language }, p) => ({ country, language });
+
+const mapDispatch = (d, p) => ({ goToService: (country, language, id) => d(push(routes.goToService(country, language, id))) });
+
+export default translate()(connect(mapState, mapDispatch)(ServiceList));

@@ -1,29 +1,7 @@
-import { Home, Article, Categories, CountryHome, CategoryHome, } from './scenes';
-
-
-export default [
-	{
-		path: '/',
-		exact: true,
-		component: Home
-	},
-	{
-		path: '/:country',
-		exact: true,
-		component: CountryHome,
-	},
-	{
-		exact: true,
-		path: '/:country/categories',
-		component: Categories
-	},
-	{
-		path: '/:country/:category',
-		exact: true,
-		component: CategoryHome,
-	},
-	{
-		path: '/:country/:category/:article',
-		component: Article
-	}
-]
+export default {
+	goToCategories: (country) => (`/${country}/categories`),
+	goHome: (country) => (`/${country}`),
+	goToSearch: (country) => (`/${country}/search`),
+	goToServices: (country) => (`/${country}/services/`),
+	goToDepartments: (country) => (`/${country}/services/`),
+};

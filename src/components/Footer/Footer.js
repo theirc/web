@@ -7,7 +7,12 @@ import * as clipboard from "clipboard-polyfill";
 import PropTypes from "prop-types";
 
 // local
+import i18nHelpers from '../../helpers/i18n';
+import languages from './languages';
 import "./Footer.css";
+
+const NS = { ns: 'Footer' };
+
 
 class Footer extends Component {
 	state = {
@@ -18,6 +23,10 @@ class Footer extends Component {
 		config: PropTypes.object,
 	};
 
+	componentDidMount() {
+		i18nHelpers.loadResource(languages, NS.ns);
+	}	
+	
 	onCopyLink = () => {
 		this.setState({ copied: true });
 		clipboard.writeText(document.location.href);
@@ -62,9 +71,9 @@ class Footer extends Component {
 		return (
 			<footer className="Footer">
 				<div className="light">
-					<p>{t("Can't find specific information?")}</p>
+					<p>{t("light.Can't find specific information?", NS)}</p>
 					<a href={link}>
-						<h3>{link.includes('mailto: ') ? link.replace('mailto: ', '') : t("Ask us a question")}</h3>
+						<h3>{link.includes('mailto: ') ? link.replace('mailto: ', '') : t("light.Ask us a question", NS)}</h3>
 					</a>
 				</div>
 
@@ -75,7 +84,7 @@ class Footer extends Component {
 								<div className="icon-container">
 									<MyLocation />
 								</div>
-								<span>{t("Change Location")}</span>
+								<span>{t("dark.Change Location", NS)}</span>
 							</div>
 						)}
 						{!disableLanguageSelector && (
@@ -84,7 +93,7 @@ class Footer extends Component {
 									<Translate />
 								</div>
 
-								<span>{t("Change Language")}</span>
+								<span>{t("dark.Change Language", NS)}</span>
 							</div>
 						)}
 
@@ -93,19 +102,19 @@ class Footer extends Component {
 								<div className="icon-container">
 									<i className="fa fa-facebook-f" style={{ fontSize: 24 }} />
 								</div>
-								<span>{t("Find us on Facebook")}</span>
+								<span>{t("dark.Find us on Facebook", NS)}</span>
 							</div>
 						}
 					</div>
 
 					<span className="padded Signpost" style={{ direction: "ltr" }}>
 						<span>
-							{t("Part of the ")}{" "}
+							{t("dark.Part of the ", NS)}{" "}
 							<a href="http://www.signpost.ngo" target="_blank" rel="noopener noreferrer">
 								{" "}
 								Signpost Project
-							</a>{" "}
-							&copy; {year} .
+							</a>
+							&nbsp;&copy; {year}.
 						</span>
 					</span>
 
@@ -116,10 +125,6 @@ class Footer extends Component {
 							</a>
 						</span>
 					)}
-					
-					<div style={{ display: "none" }} onClick={onChangeLanguage}>
-						<span>{t("Change Language")}</span>
-					</div>
 				</div>
 			</footer>
 		);

@@ -1,0 +1,21 @@
+@import "../Selectors.scss";
+
+.CountrySelector {
+	@include selectors();
+	.item {
+		cursor:pointer;
+	}
+	
+	.item-language {
+		color: #666;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: lighter;
+		margin: 17px auto;
+		text-decoration: underline;
+		
+		&:hover {
+			color: black;
+		}
+	}
+}

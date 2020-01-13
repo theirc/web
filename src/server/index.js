@@ -25,10 +25,6 @@ const ReactApp = require("../App").default;
 
 const React = require("react");
 const renderToString = require("react-dom/server").renderToString;
-const {
-	store,
-	history
-} = require("../shared/store");
 const Provider = require("react-redux").Provider;
 const _ = require("lodash");
 const toMarkdown = require("to-markdown");
@@ -176,6 +172,8 @@ app.get("/bulgaria/*", function (req, res, err) {
 	res.redirect(`/bulgaria`);
 })
 
+require('./twilio-routes.js')(app);
+
 app.get("/preview/:serviceId/", function (req, res, err) {
 	const selectedLanguage = parseLanguage(req);
 	const {
@@ -261,6 +259,7 @@ app.get('/:country/:subscribe/:category', function(req, res, err){
         image: "",
     })(req, res, err);
 })
+
 app.get("/:country/:category/:article", function(req, res, err) {
     const selectedLanguage = parseLanguage(req);
     let configKey = _.first(

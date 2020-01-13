@@ -16,6 +16,7 @@ class LocalDemo extends Component {
 	};
 	state = {
 		loaded: true,
+		done: false,
 	};
 
 	componentDidMount() {
@@ -29,7 +30,7 @@ class LocalDemo extends Component {
 	render() {
 		const { config } = this.context;
 		const { country, language, t } = this.props;
-		const { loaded } = this.state;
+		const { loaded, done } = this.state;
 		const startCache = () => {
 			this.setState({ loaded: false });
 			var demoConfig = {
@@ -66,7 +67,7 @@ class LocalDemo extends Component {
 					})
 					.then(res => {
 						sessionStorage.setItem(url.storeName, JSON.stringify(res));
-						return this.setState({ loaded: true });
+						return this.setState({ loaded: true, done: true });
 					})
 				return console.log(url);
 			})
@@ -91,8 +92,10 @@ class LocalDemo extends Component {
 				<HeaderBar title={t('Download data for offline use')} />
 				
 				<div className="content">
+					<h3>{t('Esta operación descargará los Informativos y ciertos Servicios en el navegador para su acceso sin conexión.')}</h3>
 					{loaded && <button onClick={startCache} className="downloadButton">{t('Click to download data')}</button>}
 					{!loaded && <div className="loader" />}
+					{done && <h3>La descarga ha finalizado exitosamente</h3>}
 				</div>
 
 			</div>

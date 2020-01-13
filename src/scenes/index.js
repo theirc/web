@@ -1,11 +1,9 @@
 import Home from "./Home/Home";
-import Article from "./Article/Article";
-import Categories from "./Categories/Categories";
+import ArticleDetail from "./ArticleDetail/ArticleDetail";
+import ArticleList from "./ArticleList/ArticleList";
 import CountryHome from "./CountryHome/CountryHome";
 import CategoryHome from "./CategoryHome/CategoryHome";
 import Skeleton from "../components/Skeleton/Skeleton";
-import CountrySelectorScene from "./CountrySelector/CountrySelectorScene";
-import LanguageSelectorScene from "./LanguageSelector/LanguageSelectorScene";
 import Services from "./Services/Services";
 import Search from "./Search/Search";
 import Selectors from "./Selectors/Selectors";
@@ -14,13 +12,11 @@ import DemoTool from "./DemoTool/DemoTool";
 
 export {
 	Home,
-	Article,
-	Categories,
+	ArticleDetail,
+	ArticleList,
 	CountryHome,
 	CategoryHome,
 	Skeleton,
-	CountrySelectorScene,
-	LanguageSelectorScene,
 	Search,
 	Services,
 	Selectors,
