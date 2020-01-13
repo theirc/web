@@ -10,6 +10,7 @@ import { Close, Home, List, Assignment } from "material-ui-icons";
 // local
 import selectedMenuItem from "../../helpers/menu-items";
 import i18nHelpers from '../../helpers/i18n';
+import instance from '../../backend/settings';
 import languages from './languages';
 import "./AppHeader.css";
 
@@ -184,7 +185,7 @@ class AppHeader extends Component {
 					</form>
 				)}
 
-				{!this.state.prvalert && this.props.cookieBanner && (
+				{!this.state.prvalert && instance.switches.cookieBanner && (
 					<div className={this.state.prvalert ? 'hidden' : 'privacy-banner'}>
 						<div className='content'>
 							<span className="privacy-banner-separator"></span>

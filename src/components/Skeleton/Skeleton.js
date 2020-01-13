@@ -113,7 +113,6 @@ class Skeleton extends React.Component {
 					<AppHeader
 						disableCountrySelector={!!config.disableCountrySelector}
 						disableLanguageSelector={!!config.disableLanguageSelector}
-						cookieBanner={config.cookieBanner}
 						country={country}
 						language={language}
 						onGoHome={onGoHome(country)}
