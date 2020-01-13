@@ -15,7 +15,7 @@ module.exports = {
 		// other
 		// theme: "irc",
 		author: 'Refugee Info',
-		siteCode: "RI",
+		// siteCode: "RI",
 		accessToken: "0cd5c6bfefa4f7f33a98c487012e6f34c2031aee1ff2f6858b11be592ab349d9",
 		space: "ktglofo8nf88",
 		languages: [["en", "English"], ["ar", "العربيـة"], ["ur", "اردو"], ["fa", "فارسی"], ["fr", "Français"]],
@@ -55,7 +55,7 @@ module.exports = {
 		// other
 		// theme: "irc",
 		author: 'Refugee Info',
-		siteCode: "RI",
+		// siteCode: "RI",
 		accessToken: "0cd5c6bfefa4f7f33a98c487012e6f34c2031aee1ff2f6858b11be592ab349d9",
 		space: "ktglofo8nf88",
 		languages: [["en", "English"], ["ar", "العربيـة"], ["ur", "اردو"], ["fa", "فارسی"], ["fr", "Français"]],
@@ -96,7 +96,7 @@ module.exports = {
 		// other
 		// theme: "irc",
 		author: 'Refugee Info',
-		siteCode: "RI",
+		// siteCode: "RI",
 		accessToken: "7597f6916d5773b57d016a39d7c06ea5c5cf4b213fe60f79893cd7487c29a215",
 		host: "preview.contentful.com",
 		space: "ktglofo8nf88",
@@ -138,7 +138,7 @@ module.exports = {
 		// other
 		// theme: "mc",
 		author: 'Khabrona Info',
-		siteCode: "KI",
+		// siteCode: "KI",
 		accessToken: "55bea7f7ed5d0e812aa1d48e378dd9a2edb8f9f78c17bd9d2ffa6a014ea3ee2b",
 		space: "l4oa58axtceh",
 		languages: [["en", "English"], ["ar", "العربيـة"]],
@@ -164,7 +164,7 @@ module.exports = {
 		// other
 		// theme: "mc",
 		author: 'Khabrona Info',
-		siteCode: "KI",
+		// siteCode: "KI",
 		accessToken: "55bea7f7ed5d0e812aa1d48e378dd9a2edb8f9f78c17bd9d2ffa6a014ea3ee2b",
 		space: "l4oa58axtceh",
 		languages: [["en", "English"], ["ar", "العربيـة"]],
@@ -191,7 +191,7 @@ module.exports = {
 		// other
 		// theme: "mc",
 		author: 'Khabrona Info',
-		siteCode: "KI",
+		// siteCode: "KI",
 		accessToken: "55bea7f7ed5d0e812aa1d48e378dd9a2edb8f9f78c17bd9d2ffa6a014ea3ee2b",
 		space: "l4oa58axtceh",
 		languages: [["en", "English"], ["ar", "العربيـة"]],
@@ -218,7 +218,7 @@ module.exports = {
 		// other
 		// theme: "generic",
 		author: 'CuentaNos',
-		siteCode: "CN",
+		// siteCode: "CN",
 		accessToken: "98cd6321d5578bab8cb4c9bafe022f2bd73db5ffce296420d934008f9800fb80",
 		space: "e17qk44d7f2w",
 		languages: [["es", "Español"]],
@@ -253,7 +253,7 @@ module.exports = {
 		// other
 		// theme: "generic",
 		author: 'CuentaNos',
-		siteCode: "CN",
+		// siteCode: "CN",
 		accessToken: "98cd6321d5578bab8cb4c9bafe022f2bd73db5ffce296420d934008f9800fb80",
 		space: "e17qk44d7f2w",
 		languages: [["es", "Español"]],
@@ -288,7 +288,7 @@ module.exports = {
 		// other
 		// theme: "generic",
 		author: 'CuentaNos',
-		siteCode: "CN",
+		// siteCode: "CN",
 		accessToken: "2a64ff636dd4e5b44bd21afcb7f8d77c5c238e3ebe387ec6047a0b9d5c6a704d",
 		host: "preview.contentful.com",
 		space: "e17qk44d7f2w",
@@ -324,7 +324,7 @@ module.exports = {
 		// other
 		// theme: "generic",
 		author: 'CuentaNos',
-		siteCode: "CN",
+		// siteCode: "CN",
 		accessToken: "2a64ff636dd4e5b44bd21afcb7f8d77c5c238e3ebe387ec6047a0b9d5c6a704d",
 		host: "preview.contentful.com",
 		space: "e17qk44d7f2w",
