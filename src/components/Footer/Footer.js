@@ -4,10 +4,11 @@ import moment from "moment";
 import { MyLocation, Translate } from "material-ui-icons";
 import { translate } from "react-i18next";
 import * as clipboard from "clipboard-polyfill";
-import PropTypes from "prop-types";
+import _ from 'lodash';
 
 // local
 import i18nHelpers from '../../helpers/i18n';
+import instance from '../../backend/settings';
 import languages from './languages';
 import "./Footer.css";
 
@@ -18,10 +19,6 @@ class Footer extends Component {
 	state = {
 		copied: false
 	}
-
-	static contextTypes = {
-		config: PropTypes.object,
-	};
 
 	componentDidMount() {
 		i18nHelpers.loadResource(languages, NS.ns);
@@ -57,10 +54,7 @@ class Footer extends Component {
 		const year = moment().year();
 		let link = questionLink;
 
-		const { config } = this.context;
-
-		let configfbpage = (config.facebookPage || []).filter(c => c[0] === country.fields.slug);
-		const fblink = configfbpage[0] ? configfbpage[0][1] : '';
+		const facebookPage = _.has(country, 'fields.slug') && instance.countries[country.fields.slug].thirdParty.facebook.page;
 
 		let result = (customQuestionLink || []).filter(c => c[0] === country.fields.slug);
 
@@ -97,8 +91,8 @@ class Footer extends Component {
 							</div>
 						)}
 
-						{fblink &&
-							<div className="button " onClick={() => window.open(fblink)}>
+						{facebookPage &&
+							<div className="button " onClick={() => window.open(facebookPage)}>
 								<div className="icon-container">
 									<i className="fa fa-facebook-f" style={{ fontSize: 24 }} />
 								</div>
