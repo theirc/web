@@ -3,9 +3,9 @@ import React from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import tinycolor from "tinycolor2";
+import moment from 'moment';
 
 // local
-import cms from '../../../backend/cms';
 import "./SearchPage.css";
 import "../../Services/components/ServiceCategoryList.css";
 import "../../ArticleList/components/desktop/ArticleListBody.css";
@@ -96,7 +96,7 @@ class SearchPage extends React.Component {
 				</div>
 				<div className='text'>
 					{a.fields && <h2>{a.fields.title}</h2>}
-					<span className='author'>By <span>{cms.siteConfig.author}</span></span>
+					<span className='author'>{moment(a.sys.updatedAt).format('YYYY.MM.DD')}</span>
 				</div>
 			</li>)
 	}
