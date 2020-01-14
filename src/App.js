@@ -32,7 +32,7 @@ class ThemedApp extends Component {
 
 	getChildContext() {
 		let config = cms.siteConfig;
-		let api = cmsApi(config, {});
+		let api = cmsApi();
 
 		return {
 			config,

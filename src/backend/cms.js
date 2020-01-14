@@ -1,18 +1,19 @@
 import getSessionStorage from "../shared/sessionStorage";
+import instance from '../backend/settings';
 
 const config = require("./config");
 const contentful = require("contentful");
+
 let client = null;
 let siteConfig = null;
 
+// TODO: check unused duplicated stuff here and in cmsApi.js
 for (let key of Object.keys(config)) {
 	if (global.window && global.window.location) {
 		if (window.location.hostname.indexOf(key) > -1) {
 			siteConfig = config[key];
 			siteConfig.languageDictionary = Object.assign(config.languageDictionary, siteConfig.languageDictionary);
-			client = contentful.createClient({
-				...siteConfig,
-			});
+			client = contentful.createClient(instance.env.thirdParty.contentful);
 		}
 	}
 }
@@ -20,9 +21,7 @@ for (let key of Object.keys(config)) {
 if (!client) {
 	console.log("No client. Loading RI as default");
 	siteConfig = config["refugee.info"];
-	client = contentful.createClient({
-		...siteConfig,
-	});
+	client = contentful.createClient(instance.env.thirdParty.contentful);
 }
 
 function listCountries(language = "en") {
