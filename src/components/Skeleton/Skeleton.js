@@ -111,7 +111,6 @@ class Skeleton extends React.Component {
 			<I18nextProvider i18n={i18n}>
 				<div className="Skeleton">
 					<AppHeader
-						disableCountrySelector={!!config.disableCountrySelector}
 						disableLanguageSelector={!!config.disableLanguageSelector}
 						country={country}
 						language={language}
@@ -134,7 +133,6 @@ class Skeleton extends React.Component {
 					{showFooter && (
 						<Footer
 							questionLink={config.questionLink}
-							disableCountrySelector={!!config.disableCountrySelector}
 							disableLanguageSelector={!!config.disableLanguageSelector}
 							onChangeLocation={onChangeLocation}
 							onChangeLanguage={onChangeLanguage.bind(this, router.location.pathname)}

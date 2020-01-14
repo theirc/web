@@ -89,7 +89,6 @@ class AppHeader extends Component {
 
 	render() {
 		const {
-			disableCountrySelector,
 			disableLanguageSelector,
 			country,
 			headerColor,
@@ -148,14 +147,12 @@ class AppHeader extends Component {
 											<List /><span className='menu-item'>{t("menu.Services", NS)}</span>
 										</span>}
 
-										{/* {!disableLanguageSelector && !disableCountrySelector && <div className="app-bar-separator" />} */}
-
 										<span className='selectors'>
-											{!disableCountrySelector && (
+											{!instance.switches.disableCountrySelector &&
 												<span className="country" color="contrast" onClick={onChangeCountry || noop}>
 													<img src={`/images/flags/${country.fields.slug}.png`} alt='' />
 												</span>
-											)}
+											}
 
 											{!disableLanguageSelector && (
 												<span className="lang" color="contrast" onClick={onChangeLanguage}>
