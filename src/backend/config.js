@@ -8,8 +8,8 @@ module.exports = {
 	"refugee.info": {
 		// files
 		// favicon: "/images/favicons/favicon.ico",
-		logo: "/images/logos/logo-ri-white.png",
-		logoBlack: "/images/logos/logo-ri-black.png",
+		// logo: "/images/logos/logo-ri-white.png",
+		// logoBlack: "/images/logos/logo-ri-black.png",
 		thumbnail: "/images/logos/ri-thumbnail.png",
 
 		// other
@@ -48,8 +48,8 @@ module.exports = {
 	"staging.refugee.info": {
 		// files
 		// favicon: "/images/favicons/favicon.ico",
-		logo: "/images/logos/logo-ri-white.png",
-		logoBlack: "/images/logos/logo-ri-black.png",
+		// logo: "/images/logos/logo-ri-white.png",
+		// logoBlack: "/images/logos/logo-ri-black.png",
 		thumbnail: "/images/logos/ri-thumbnail.png",
 
 		// other
@@ -89,8 +89,8 @@ module.exports = {
 	"qa.refugee.info": {
 		// files
 		// favicon: "/images/favicons/favicon.ico",
-		logo: "/images/logos/logo-ri-white.png",
-		logoBlack: "/images/logos/logo-ri-black.png",
+		// logo: "/images/logos/logo-ri-white.png",
+		// logoBlack: "/images/logos/logo-ri-black.png",
 		thumbnail: "/images/logos/ri-thumbnail.png",
 
 		// other
@@ -131,8 +131,8 @@ module.exports = {
 	"khabrona.info": {
 		// files
 		// favicon: "/images/favicons/ki-favicon.png",
-		logo: "/images/logos/logo-ki-white.png",
-		logoBlack: "/images/logos/logo-ki-black.png",
+		// logo: "/images/logos/logo-ki-white.png",
+		// logoBlack: "/images/logos/logo-ki-black.png",
 		thumbnail: "/images/logos/ki-thumbnail.png",
 
 		// other
@@ -157,8 +157,8 @@ module.exports = {
 	"qa.khabrona.info": {
 		// files
 		// favicon: "/images/favicons/ki-favicon.png",
-		logo: "/images/logos/logo-ki-white.png",
-		logoBlack: "/images/logos/logo-ki-black.png",
+		// logo: "/images/logos/logo-ki-white.png",
+		// logoBlack: "/images/logos/logo-ki-black.png",
 		thumbnail: "/images/logos/ki-thumbnail.png",
 
 		// other
@@ -184,8 +184,8 @@ module.exports = {
 	"staging.khabrona.info": {
 		// files
 		// favicon: "/images/favicons/ki-favicon.png",
-		logo: "/images/logos/logo-ki-white.png",
-		logoBlack: "/images/logos/logo-ki-black.png",
+		// logo: "/images/logos/logo-ki-white.png",
+		// logoBlack: "/images/logos/logo-ki-black.png",
 		thumbnail: "/images/logos/ki-thumbnail.png",
 
 		// other
@@ -211,8 +211,8 @@ module.exports = {
 	"cuentanos.org": {
 		// files
 		// favicon: "/images/favicons/cn-favicon-blk.png",
-		logo: "/images/logos/logo-cn-white.png",
-		logoBlack: "/images/logos/logo-cn-black.png",
+		// logo: "/images/logos/logo-cn-white.png",
+		// logoBlack: "/images/logos/logo-cn-black.png",
 		thumbnail: "/images/logos/cn-thumbnail.png",
 
 		// other
@@ -246,8 +246,8 @@ module.exports = {
 	"staging.cuentanos.org": {
 		// files
 		// favicon: "/images/favicons/cn-favicon-blk.png",
-		logo: "/images/logos/logo-cn-white.png",
-		logoBlack: "/images/logos/logo-cn-black.png",
+		// logo: "/images/logos/logo-cn-white.png",
+		// logoBlack: "/images/logos/logo-cn-black.png",
 		thumbnail: "/images/logos/cn-thumbnail.png",
 
 		// other
@@ -281,8 +281,8 @@ module.exports = {
 	"qa.cuentanos.org": {
 		// files
 		// favicon: "/images/favicons/cn-favicon-blk.png",
-		logo: "/images/logos/logo-cn-white.png",
-		logoBlack: "/images/logos/logo-cn-black.png",
+		// logo: "/images/logos/logo-cn-white.png",
+		// logoBlack: "/images/logos/logo-cn-black.png",
 		thumbnail: "/images/logos/cn-thumbnail.png",
 
 		// other
@@ -317,8 +317,8 @@ module.exports = {
 	"localhost": {
 		// files
 		// favicon: "/images/favicons/cn-favicon-blk.png",
-		logo: "/images/logos/logo-cn-white.png",
-		logoBlack: "/images/logos/logo-cn-black.png",
+		// logo: "/images/logos/logo-cn-white.png",
+		// logoBlack: "/images/logos/logo-cn-black.png",
 		thumbnail: "/images/logos/cn-thumbnail.png",
 
 		// other
