@@ -8,7 +8,6 @@ module.exports = {
 	"refugee.info": {
 		languages: [["en", "English"], ["ar", "العربيـة"], ["ur", "اردو"], ["fa", "فارسی"], ["fr", "Français"]],
 		appId: "708254579325899",
-		hideCountries: ["bosnia"],
 		hideLangsPerCountry: [{
 			country: 'italy',
 			langs: ['ar', 'ur', 'fa', 'fr'],
@@ -23,7 +22,6 @@ module.exports = {
 	"staging.refugee.info": {
 		languages: [["en", "English"], ["ar", "العربيـة"], ["ur", "اردو"], ["fa", "فارسی"], ["fr", "Français"]],
 		appId: "708254579325899",
-		hideCountries: ["bosnia"],
 		hideLangsPerCountry: [{
 			country: 'italy',
 			langs: ['ar', 'ur', 'fa', 'fr'],
@@ -38,7 +36,6 @@ module.exports = {
 	"qa.refugee.info": {
 		languages: [["en", "English"], ["ar", "العربيـة"], ["ur", "اردو"], ["fa", "فارسی"], ["fr", "Français"]],
 		appId: "708254579325899",
-		hideCountries: ["bosnia"],
 		hideLangsPerCountry: [{
 			country: 'italy',
 			langs: ['ar', 'ur', 'fa', 'fr'],
@@ -72,28 +69,24 @@ module.exports = {
 		languages: [["es", "Español"]],
 		appId: "209295296327422",
 		hideLangsPerCountry: [],
-		hideCountries: [],
 		hideArticlesFor: ['guatemala'],
 	},
 	"staging.cuentanos.org": {
 		languages: [["es", "Español"]],
 		appId: "209295296327422",
 		hideLangsPerCountry: [],
-		hideCountries: [],
 		hideArticlesFor: ['guatemala'],
 	},
 	"qa.cuentanos.org": {
 		languages: [["es", "Español"]],
 		appId: "209295296327422",
 		hideLangsPerCountry: [],
-		hideCountries: [],
 		hideArticlesFor: ['guatemala'],
 	},
 	"localhost": {
 		languages: [["es", "Español"]],
 		appId: "209295296327422",
 		hideLangsPerCountry: [],
-		hideCountries: [],
 		hideArticlesFor: ['guatemala'],
 	},
 };
