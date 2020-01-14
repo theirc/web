@@ -10,7 +10,7 @@ module.exports = {
 		// favicon: "/images/favicons/favicon.ico",
 		// logo: "/images/logos/logo-ri-white.png",
 		// logoBlack: "/images/logos/logo-ri-black.png",
-		thumbnail: "/images/logos/ri-thumbnail.png",
+		// thumbnail: "/images/logos/ri-thumbnail.png",
 
 		// other
 		// theme: "irc",
@@ -50,7 +50,7 @@ module.exports = {
 		// favicon: "/images/favicons/favicon.ico",
 		// logo: "/images/logos/logo-ri-white.png",
 		// logoBlack: "/images/logos/logo-ri-black.png",
-		thumbnail: "/images/logos/ri-thumbnail.png",
+		// thumbnail: "/images/logos/ri-thumbnail.png",
 
 		// other
 		// theme: "irc",
@@ -91,7 +91,7 @@ module.exports = {
 		// favicon: "/images/favicons/favicon.ico",
 		// logo: "/images/logos/logo-ri-white.png",
 		// logoBlack: "/images/logos/logo-ri-black.png",
-		thumbnail: "/images/logos/ri-thumbnail.png",
+		// thumbnail: "/images/logos/ri-thumbnail.png",
 
 		// other
 		// theme: "irc",
@@ -133,7 +133,7 @@ module.exports = {
 		// favicon: "/images/favicons/ki-favicon.png",
 		// logo: "/images/logos/logo-ki-white.png",
 		// logoBlack: "/images/logos/logo-ki-black.png",
-		thumbnail: "/images/logos/ki-thumbnail.png",
+		// thumbnail: "/images/logos/ki-thumbnail.png",
 
 		// other
 		// theme: "mc",
@@ -159,7 +159,7 @@ module.exports = {
 		// favicon: "/images/favicons/ki-favicon.png",
 		// logo: "/images/logos/logo-ki-white.png",
 		// logoBlack: "/images/logos/logo-ki-black.png",
-		thumbnail: "/images/logos/ki-thumbnail.png",
+		// thumbnail: "/images/logos/ki-thumbnail.png",
 
 		// other
 		// theme: "mc",
@@ -186,7 +186,7 @@ module.exports = {
 		// favicon: "/images/favicons/ki-favicon.png",
 		// logo: "/images/logos/logo-ki-white.png",
 		// logoBlack: "/images/logos/logo-ki-black.png",
-		thumbnail: "/images/logos/ki-thumbnail.png",
+		// thumbnail: "/images/logos/ki-thumbnail.png",
 
 		// other
 		// theme: "mc",
@@ -213,7 +213,7 @@ module.exports = {
 		// favicon: "/images/favicons/cn-favicon-blk.png",
 		// logo: "/images/logos/logo-cn-white.png",
 		// logoBlack: "/images/logos/logo-cn-black.png",
-		thumbnail: "/images/logos/cn-thumbnail.png",
+		// thumbnail: "/images/logos/cn-thumbnail.png",
 
 		// other
 		// theme: "generic",
@@ -248,7 +248,7 @@ module.exports = {
 		// favicon: "/images/favicons/cn-favicon-blk.png",
 		// logo: "/images/logos/logo-cn-white.png",
 		// logoBlack: "/images/logos/logo-cn-black.png",
-		thumbnail: "/images/logos/cn-thumbnail.png",
+		// thumbnail: "/images/logos/cn-thumbnail.png",
 
 		// other
 		// theme: "generic",
@@ -283,7 +283,7 @@ module.exports = {
 		// favicon: "/images/favicons/cn-favicon-blk.png",
 		// logo: "/images/logos/logo-cn-white.png",
 		// logoBlack: "/images/logos/logo-cn-black.png",
-		thumbnail: "/images/logos/cn-thumbnail.png",
+		// thumbnail: "/images/logos/cn-thumbnail.png",
 
 		// other
 		// theme: "generic",
@@ -319,7 +319,7 @@ module.exports = {
 		// favicon: "/images/favicons/cn-favicon-blk.png",
 		// logo: "/images/logos/logo-cn-white.png",
 		// logoBlack: "/images/logos/logo-cn-black.png",
-		thumbnail: "/images/logos/cn-thumbnail.png",
+		// thumbnail: "/images/logos/cn-thumbnail.png",
 
 		// other
 		// theme: "generic",

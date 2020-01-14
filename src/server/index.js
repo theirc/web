@@ -3,7 +3,7 @@ const compress = require("compression");
 const cors = require("cors");
 const helmet = require("helmet");
 const bodyParser = require("body-parser");
-
+const instance = require('../backend/settings').default; // TODO: check why require() needs to dereference the default
 const feathers = require("feathers");
 const configuration = require("feathers-configuration");
 const hooks = require("feathers-hooks");
@@ -12,25 +12,23 @@ const socketio = require("feathers-socketio");
 
 const handler = require("feathers-errors/handler");
 const notFound = require("feathers-errors/not-found");
-const mustacheExpress = require("mustache-express");
+// const mustacheExpress = require("mustache-express");
 const logger = require("winston");
-const less = require("less");
+// const less = require("less");
 const fs = require("fs");
 const nunjucks = require("nunjucks");
 const conf = require("../backend/config");
-const cms = require("../backend/cms").default;
+// const cms = require("../backend/cms").default;
 const servicesApi = require("../backend/servicesApi");
 const cmsApi = require("../backend/cmsApi").default;
-const ReactApp = require("../App").default;
+// const ReactApp = require("../App").default;
 
-const React = require("react");
-const renderToString = require("react-dom/server").renderToString;
-const Provider = require("react-redux").Provider;
+// const React = require("react");
+// const renderToString = require("react-dom/server").renderToString;
+// const Provider = require("react-redux").Provider;
 const _ = require("lodash");
 const toMarkdown = require("to-markdown");
-let {
-	languageDictionary
-} = conf;
+let { languageDictionary } = conf;
 
 const app = feathers();
 app.configure(configuration());
@@ -39,9 +37,7 @@ app.use(cors());
 app.use(helmet());
 app.use(compress());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-	extended: true
-}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Set up Plugins and providers
 app.configure(hooks());
@@ -81,9 +77,10 @@ var mainRequest = function (context) {
 			context = Object.assign(context || {}, {
 				appId: appId
 			});
-			context.title = context.title || conf[configKey].title;
-			context.image = context.image || conf[configKey]["thumbnail"];
-			// console.log(context, conf[configKey], configKey);
+
+			// console.log(instance, 'server', instance.brand);
+			context.title = context.title || instance.brand.tabTitle;
+			context.image = context.image || instance.brand.images.thumbnail;
 		}
 
 		fs.readFile(path.join(path.dirname(path.dirname(__dirname)), "build", "index.html"), (err, data) => {
