@@ -1,5 +1,5 @@
 export default {
-	countryCode: '+39', 
+	countryCode: '', 
 	flag: '',
 	languages: ['en'],
 	questionLink: 'https://www.facebook.com/Refugee.Info.Italy/',

@@ -50,26 +50,18 @@ class Footer extends Component {
 	}
 
 	render() {
-		const { onChangeLocation, onChangeLanguage, questionLink, t, country, customQuestionLink } = this.props;
-		const year = moment().year();
-		let link = questionLink;
-
+		const { country, onChangeLanguage, onChangeLocation, t } = this.props;
 		const facebookPage = _.has(country, 'fields.slug') && instance.countries[country.fields.slug].thirdParty.facebook.page;
-
-		let result = (customQuestionLink || []).filter(c => c[0] === country.fields.slug);
-
-		if (result[0]) {
-			link = result[0][1];
-		}
-
+		const questionLink = _.has(country, 'fields.slug') && instance.countries[country.fields.slug].questionLink;
 		const showLinkToAdministration = _.has(country, 'fields.slug') && instance.countries[country.fields.slug].switches.showLinkToAdministration;
+		const year = moment().year();
 
 		return (
 			<footer className="Footer">
 				<div className="light">
 					<p>{t("light.Can't find specific information?", NS)}</p>
-					<a href={link}>
-						<h3>{link.includes('mailto: ') ? link.replace('mailto: ', '') : t("light.Ask us a question", NS)}</h3>
+					<a href={questionLink}>
+						<h3>{questionLink.includes('mailto: ') ? questionLink.replace('mailto: ', '') : t("light.Ask us a question", NS)}</h3>
 					</a>
 				</div>
 
