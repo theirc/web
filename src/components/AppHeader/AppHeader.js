@@ -104,11 +104,9 @@ class AppHeader extends Component {
 
 		const { search, searchText } = this.state;
 		const backgroundDark = headerColor === 'light' ? false : true;
-		const logo = this.props.logo || "/logo.svg";
-		const logoBlack = this.props.logoBlack || logo;
-		const noop = () => {
-			console.log("noop");
-		};
+		const logo = instance.brand.images.logo || "/logo.svg";
+		const logoBlack = instance.brand.images.logoBlack || logo;
+		const noop = () => console.log("noop");
 		const cookiePolicyLink = <a href="/greece/privacy/cookies" target="_blank" rel="noopener noreferrer">Cookie Policy</a>;
 		const privacyPolicyLink = <a href="/greece/privacy/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>;
 

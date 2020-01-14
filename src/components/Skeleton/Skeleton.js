@@ -6,7 +6,6 @@ import { I18nextProvider } from "react-i18next";
 import { push } from "react-router-redux";
 import { withRouter } from "react-router-dom";
 import moment from "moment";
-import PropTypes from "prop-types";
 
 // local
 import { actions } from "../../shared/redux/store";
@@ -19,11 +18,6 @@ import "./Skeleton.css";
 class Skeleton extends React.Component {
 	state = {
 		errorMessage: null,
-	};
-
-	static contextTypes = {
-		config: PropTypes.object,
-		api: PropTypes.object,
 	};
 
 	componentDidMount() {
@@ -57,7 +51,6 @@ class Skeleton extends React.Component {
 		const { children, country, language, match, onGoHome, onGoToServices, onGoToCategories, onGoToSearch, onChangeLocation, onChangeLanguage, deviceType, router, hideFooter, removeErrorMessage, showMapButton, goToMap, headerColor } = this.props;
 		const { hideShareButtons, homePage, toggleServiceMap } = this.props;
 		const { errorMessage } = this.state;
-		const { config } = this.context;
 		const showDepartments = _.has(country, 'fields.slug') && instance.countries[country.fields.slug].switches.showDepartments;
 		let notifications = [];
 
@@ -102,7 +95,6 @@ class Skeleton extends React.Component {
 		}
 
 		let showFooter = !hideFooter && country && language;
-		let logo = _.template(config.logo)({ language: language || "en" });
 
 		if (country && country.fields.slug === "serbia" && sessionStorage.getItem("serbia-alert") == null)
 			sessionStorage.setItem("serbia-alert", 0);
@@ -122,8 +114,6 @@ class Skeleton extends React.Component {
 						onChangeCountry={onChangeLocation}
 						onChangeLanguage={onChangeLanguage.bind(this, router.location.pathname)}
 						headerColor={headerColor}
-						logo={logo}
-						logoBlack={config.logoBlack}
 						homePage={homePage}
 					/>
 					
