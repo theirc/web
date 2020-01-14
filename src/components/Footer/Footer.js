@@ -50,7 +50,7 @@ class Footer extends Component {
 	}
 
 	render() {
-		const { onChangeLocation, onChangeLanguage, disableLanguageSelector, questionLink, t, showLinkToAdministration, country, customQuestionLink } = this.props;
+		const { onChangeLocation, onChangeLanguage, questionLink, t, showLinkToAdministration, country, customQuestionLink } = this.props;
 		const year = moment().year();
 		let link = questionLink;
 
@@ -81,7 +81,7 @@ class Footer extends Component {
 								<span>{t("dark.Change Location", NS)}</span>
 							</div>
 						}
-						{!disableLanguageSelector && (
+						{!instance.switches.disableLanguageSelector &&
 							<div className="button " onClick={onChangeLanguage}>
 								<div className="icon-container">
 									<Translate />
@@ -89,7 +89,7 @@ class Footer extends Component {
 
 								<span>{t("dark.Change Language", NS)}</span>
 							</div>
-						)}
+						}
 
 						{facebookPage &&
 							<div className="button " onClick={() => window.open(facebookPage)}>
