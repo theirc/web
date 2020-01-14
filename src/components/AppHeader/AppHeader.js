@@ -89,7 +89,6 @@ class AppHeader extends Component {
 
 	render() {
 		const {
-			disableLanguageSelector,
 			country,
 			headerColor,
 			homePage,
@@ -154,11 +153,11 @@ class AppHeader extends Component {
 												</span>
 											}
 
-											{!disableLanguageSelector && (
+											{!instance.switches.disableLanguageSelector &&
 												<span className="lang" color="contrast" onClick={onChangeLanguage}>
 													{language || " "}
 												</span>
-											)}
+											}
 										</span>
 
 										<div className="app-bar-separator separator-searchIcon" />
