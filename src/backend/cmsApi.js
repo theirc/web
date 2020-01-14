@@ -3,19 +3,17 @@ import { Promise } from "es6-promise";
 
 // local
 import getSessionStorage from "../shared/sessionStorage";
-
+import instance from '../backend/settings';
 const contentful = require("contentful");
 
-function cmsApi(config) {
+function cmsApi() {
 	let languageDictionary = {
 		en: "en-US",
 		ar: "ar-001",
 		fa: "fa-AF",
 	};
 
-	let client = contentful.createClient({
-		...config,
-	});
+	let client = contentful.createClient(instance.env.thirdParty.contentful);
 
 	function listCountries(language = "en") {
 		return client.getEntries({
