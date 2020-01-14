@@ -50,7 +50,7 @@ class Footer extends Component {
 	}
 
 	render() {
-		const { onChangeLocation, onChangeLanguage, questionLink, t, showLinkToAdministration, country, customQuestionLink } = this.props;
+		const { onChangeLocation, onChangeLanguage, questionLink, t, country, customQuestionLink } = this.props;
 		const year = moment().year();
 		let link = questionLink;
 
@@ -61,6 +61,8 @@ class Footer extends Component {
 		if (result[0]) {
 			link = result[0][1];
 		}
+
+		const showLinkToAdministration = _.has(country, 'fields.slug') && instance.countries[country.fields.slug].switches.showLinkToAdministration;
 
 		return (
 			<footer className="Footer">
@@ -112,13 +114,13 @@ class Footer extends Component {
 						</span>
 					</span>
 
-					{showLinkToAdministration && (
+					{showLinkToAdministration &&
 						<span>
 							<a href="http://admin.cuentanos.org" target="blank" className="administration-button">
 								Administración
 							</a>
 						</span>
-					)}
+					}
 				</div>
 			</footer>
 		);
