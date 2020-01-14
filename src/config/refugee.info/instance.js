@@ -25,7 +25,7 @@ export default {
 		www: require('./envs/www').default
 	},
 	languages: [['ar', 'العربيـة'], ['en', 'English'], ['fa', 'فارسی'], ['fr', 'Français'], ['ur', 'اردو']],
-	switches: {
+	switches: { // TODO: change this to enable
 		cookieBanner: true,
 		disableCountrySelector: false,
 		disableLanguageSelector: false,

@@ -50,7 +50,7 @@ class Footer extends Component {
 	}
 
 	render() {
-		const { onChangeLocation, onChangeLanguage, disableCountrySelector, disableLanguageSelector, questionLink, t, showLinkToAdministration, country, customQuestionLink } = this.props;
+		const { onChangeLocation, onChangeLanguage, disableLanguageSelector, questionLink, t, showLinkToAdministration, country, customQuestionLink } = this.props;
 		const year = moment().year();
 		let link = questionLink;
 
@@ -73,14 +73,14 @@ class Footer extends Component {
 
 				<div className="dark">
 					<div className="button-container">
-						{!disableCountrySelector && (
-							<div className="button " onClick={onChangeLocation}>
+						{!instance.switches.disableCountrySelector &&
+							<div className="button" onClick={onChangeLocation}>
 								<div className="icon-container">
 									<MyLocation />
 								</div>
 								<span>{t("dark.Change Location", NS)}</span>
 							</div>
-						)}
+						}
 						{!disableLanguageSelector && (
 							<div className="button " onClick={onChangeLanguage}>
 								<div className="icon-container">

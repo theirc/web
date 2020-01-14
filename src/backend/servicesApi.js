@@ -1,5 +1,4 @@
 import getSessionStorage from "../shared/sessionStorage";
-import cms from "./cms";
 import instance from './settings';
 
 var request = require("superagent");
