@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { Route, Switch } from "react-router";
 import { push } from "react-router-redux";
 import measureDistance from "@turf/distance";
-import PropTypes from 'prop-types';
 import { Redirect } from 'react-router';
 import Promise from "bluebird";
 import _ from "lodash";
@@ -12,12 +11,13 @@ import _ from "lodash";
 // local
 import { ServiceMap, ServiceCategoryList, ServiceLocationList, ServiceList, ServiceDetail, ServiceDepartmentList, ServiceCategoryListDesktop } from "../../components";
 import { Skeleton } from "..";
+import actions from "../../shared/redux/actions";
+import getSessionStorage from "../../shared/sessionStorage";
 import i18nHelpers from '../../helpers/i18n';
+import instance from '../../backend/settings';
 import languages from './languages';
 import routes from './routes';
-import actions from "../../shared/redux/actions";
 import servicesApi from "../../backend/servicesApi";
-import getSessionStorage from "../../shared/sessionStorage";
 
 const NS = { ns: 'Services' };
 
@@ -37,10 +37,6 @@ class Services extends React.Component {
 		departmentId: null,
 		keepPreviousZoom: true,
 		isMobile: window.innerWidth <= 1000,
-	};
-
-	static contextTypes = {
-		config: PropTypes.object,
 	};
 
 	componentWillMount() {
@@ -293,8 +289,6 @@ class Services extends React.Component {
 
 		const { isMobile, countryDepartments, countryRegions, geolocation } = this.state;
 
-		const { config } = this.context;
-
 		const onSelectCategory = (c) => {
 			this.setState({ categoryName: c.name, category: c.id });
 			listServicesInCategory(this.props.country, c);
@@ -313,7 +307,10 @@ class Services extends React.Component {
 		}
 
 		const goToLocations = (iscountrylist) => {
-			if (config.showDepartments && (!this.state.department || iscountrylist)) {
+			const { country } = this.props;
+			const showDepartments = _.has(country, 'fields.slug') && instance.countries[country.fields.slug].switches.showDepartments;
+
+			if (showDepartments && (!this.state.department || iscountrylist)) {
 				goToDepartmentList(this.props.country);
 			} else {
 				goToLocationList(this.props.country);

@@ -3,9 +3,11 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { push } from "react-router-redux";
+import _ from 'lodash';
 
 // local
 import { BottomNav } from "../";
+import instance from '../../backend/settings';
 import routes from '../../routes';
 import selectedMenuItem from '../../helpers/menu-items';
 
@@ -35,13 +37,13 @@ class BottomNavContainer extends React.Component {
 	}
 
 	render() {
-		const { country, onGoToCategories, onGoHome, onGoToSearch, showMapButton, goToMap, showDepartments } = this.props;
+		const { country, onGoToCategories, onGoHome, onGoToSearch, showMapButton, goToMap } = this.props;
 
 		let { showServiceMap } = this.props;
 		let selectedIndex = selectedMenuItem();
 
 		country && country.fields && country.fields.slug === 'italy' && (showServiceMap = false);
-
+		const showDepartments = _.has(country, 'fields.slug') && instance.countries[country.fields.slug].switches.showDepartments;
 		// TODO: dereference country inside routes?
 		return (
 			<BottomNav

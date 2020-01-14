@@ -5,13 +5,13 @@ import { connect } from "react-redux";
 import { push } from "react-router-redux";
 import _ from "lodash";
 import tinycolor from "tinycolor2";
-import PropTypes from "prop-types";
 
 // local
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
+import instance from '../../../backend/settings';
+import routes from '../routes';
 import servicesApi from '../../../backend/servicesApi';
 import ServiceMapDesktop from "./ServiceMapDesktop";
-import routes from '../routes';
 import "../../../components/ActionsBar/ActionsBar.css";
 import "./ServiceHome.css";
 import "./ServiceCategoryList.css";
@@ -44,15 +44,11 @@ class ServiceCategoryListDesktop extends React.Component {
 		switchHover: false
 	};
 
-	static contextTypes = {
-		config: PropTypes.object,
-	};
-
 	componentDidMount() {
 		const { category, country, fetchCategories, fetchServices, location, regions, showFilter } = this.props;
 		let c = regions.filter(r => r.slug === country.fields.slug)[0]
 		const { categories } = this.state;
-		const { config } = this.context;
+		const showDepartments = _.has(country, 'fields.slug') && instance.countries[country.fields.slug].switches.showDepartments;
 
 		let currentLocation = c;
 
@@ -62,7 +58,7 @@ class ServiceCategoryListDesktop extends React.Component {
 		}
 
 		let municipalities = currentLocation.level === 3 ? regions.filter(r => r.parent === currentLocation.parent) : null;
-		let department = currentLocation.level === 3 ? (!config.showDepartments ? currentLocation.title : currentLocation.parent__name) :
+		let department = currentLocation.level === 3 ? (!showDepartments ? currentLocation.title : currentLocation.parent__name) :
 			(currentLocation.level === 2 ? currentLocation : currentLocation.title);
 
 		this.setState({
@@ -227,8 +223,8 @@ class ServiceCategoryListDesktop extends React.Component {
 
 	renderFilters = () => {
 		let { municipalities } = this.state;
-		let { t } = this.props;
-		const { config } = this.context;
+		let { country, t } = this.props;
+		const showDepartments = _.has(country, 'fields.slug') && instance.countries[country.fields.slug].switches.showDepartments;
 
 		let categoryName = this.state.category ? this.state.category.name : t('services.All Categories', NS);
 		let department = this.state.department.name ? this.state.department.name : this.state.department;
@@ -241,7 +237,7 @@ class ServiceCategoryListDesktop extends React.Component {
 						<span>{department}</span><i className="material-icons">keyboard_arrow_down</i>
 					</div>
 
-					{municipalities && config.showDepartments && this.state.showMunicipalities &&
+					{municipalities && showDepartments && this.state.showMunicipalities &&
 						<div className="btn" onClick={() => { this.openFilters(FilterTypes.MUNICIPALITY) }}>
 							<span>{municipality}</span><i className="material-icons">keyboard_arrow_down</i>
 						</div>
@@ -341,9 +337,9 @@ class ServiceCategoryListDesktop extends React.Component {
 	render() {
 		const { categories, loaded, services, showServices } = this.state;
 		const { t, regions, country } = this.props;
-		const { config } = this.context;
 		let countryId = regions.filter(r => r.slug === country.fields.slug)[0].id;
 		let l3 = regions.filter(r => r.slug === country.fields.slug || (r.parent === countryId && r.level === 3 && !r.hidden) || (!r.hidden && regions.filter(r => r.parent === countryId && r.level === 2).map(t => t.id).indexOf(r.parent) >= 0))
+		const showDepartments = _.has(country, 'fields.slug') && instance.countries[country.fields.slug].switches.showDepartments;
 
 		const municipalities = this.state.municipalities;
 		let departments = regions.filter(r => r.slug === country.fields.slug);
@@ -371,10 +367,10 @@ class ServiceCategoryListDesktop extends React.Component {
 				}
 
 				{/* RENDER POPOVERS */}
-				{this.state.showFilter && this.state.filterType === FilterTypes.DEPARTMENT && departments && config.showDepartments &&
+				{this.state.showFilter && this.state.filterType === FilterTypes.DEPARTMENT && departments && showDepartments &&
 					this.renderFiltersPopover(t('services.Locations', NS), this.onSelectLocation, departments, this.renderDepartmentButton.bind(this), 'departments', FilterTypes.DEPARTMENT)
 				}
-				{this.state.showFilter && this.state.filterType === FilterTypes.DEPARTMENT && l3 && !config.showDepartments &&
+				{this.state.showFilter && this.state.filterType === FilterTypes.DEPARTMENT && l3 && !showDepartments &&
 					this.renderFiltersPopover(t('services.Locations', NS), this.onSelectLocation, l3, this.renderDepartmentButton.bind(this), 'departments', FilterTypes.DEPARTMENT)
 				}
 

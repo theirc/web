@@ -12,6 +12,7 @@ import PropTypes from "prop-types";
 import { actions } from "../../shared/redux/store";
 import { AppHeader, BottomNavContainer, Footer, WarningDialog } from "..";
 import i18n from "../../i18n"; // initialized i18next instance
+import instance from '../../backend/settings';
 import getSessionStorage from "../../shared/sessionStorage";
 import "./Skeleton.css";
 
@@ -57,6 +58,7 @@ class Skeleton extends React.Component {
 		const { hideShareButtons, homePage, toggleServiceMap } = this.props;
 		const { errorMessage } = this.state;
 		const { config } = this.context;
+		const showDepartments = _.has(country, 'fields.slug') && instance.countries[country.fields.slug].switches.showDepartments;
 		let notifications = [];
 
 		const notificationType = n => {
@@ -131,18 +133,16 @@ class Skeleton extends React.Component {
 					
 					{showFooter && (
 						<Footer
-							questionLink={config.questionLink}
 							onChangeLocation={onChangeLocation}
 							onChangeLanguage={onChangeLanguage.bind(this, router.location.pathname)}
 							deviceType={deviceType}
 							country={country}
-							customQuestionLink={config.customQuestionLink}
 							language={language}
 							hideShareButtons={hideShareButtons}
 						/>
 					)}
 
-					{country && language && <BottomNavContainer match={match} showMapButton={showMapButton} goToMap={goToMap} showDepartments={config.showDepartments} />}
+					{country && language && <BottomNavContainer match={match} showMapButton={showMapButton} goToMap={goToMap} showDepartments={showDepartments} />}
 				</div>
 			</I18nextProvider>
 		);
