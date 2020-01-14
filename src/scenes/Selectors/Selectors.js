@@ -175,10 +175,6 @@ class Selectors extends Component {
 		this.selectCountry(first.slug);
 	}
 
-	logError(l) {
-		console.log(l);
-	}
-
 	filterLangs(config) {
 		let currentCountry = sessionStorage.getItem('redirect');
 

@@ -331,7 +331,6 @@ class ServiceMap extends React.Component {
 		const { loaded, errorMessage } = this.state;
 		let isOnline = navigator.onLine;
 
-		console.log(this.props);
 		return (
 			<div className="ServiceMap">
 				{errorMessage && (
