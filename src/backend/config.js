@@ -39,11 +39,11 @@ module.exports = {
 			country: 'serbia',
 			langs: ['fr'],
 		}],
-		countryPhoneCodes: [{
-			country: 'El Salvador',
-			code: '+503',
-		  },
-		],
+		// countryPhoneCodes: [{
+		// 	country: 'El Salvador',
+		// 	code: '+503',
+		//   },
+		// ],
 	},
 	"staging.refugee.info": {
 		// files
@@ -80,11 +80,11 @@ module.exports = {
 			country: 'serbia',
 			langs: ['fr'],
 		}],
-		countryPhoneCodes: [{
-			country: 'El Salvador',
-			code: '+503',
-		  },
-		],
+		// countryPhoneCodes: [{
+		// 	country: 'El Salvador',
+		// 	code: '+503',
+		//   },
+		// ],
 	},
 	"qa.refugee.info": {
 		// files
@@ -122,11 +122,11 @@ module.exports = {
 			country: 'serbia',
 			langs: ['fr'],
 		}],
-		countryPhoneCodes: [{
-			country: 'El Salvador',
-			code: '+503',
-		  },
-		],
+		// countryPhoneCodes: [{
+		// 	country: 'El Salvador',
+		// 	code: '+503',
+		//   },
+		// ],
 	},
 	"khabrona.info": {
 		// files
@@ -236,11 +236,11 @@ module.exports = {
 		hideLangsPerCountry: [],
 		hideCountries: [],
 		hideArticlesFor: ['guatemala'],
-		countryPhoneCodes: [{
-			country: 'El Salvador',
-			code: '+503',
-		  },
-		],
+		// countryPhoneCodes: [{
+		// 	country: 'El Salvador',
+		// 	code: '+503',
+		//   },
+		// ],
 		// facebookPage: [["el-salvador", "https://www.facebook.com/Cu%C3%A9ntanos-2039927102928299/"]],
 	},
 	"staging.cuentanos.org": {
@@ -272,11 +272,11 @@ module.exports = {
 		hideCountries: [],
 		hideArticlesFor: ['guatemala'],
 		// facebookPage: [["el-salvador", "https://www.facebook.com/Cu%C3%A9ntanos-2039927102928299/"]],
-		countryPhoneCodes: [{
-			country: 'El Salvador',
-			code: '+503',
-		  },
-		],
+		// countryPhoneCodes: [{
+		// 	country: 'El Salvador',
+		// 	code: '+503',
+		//   },
+		// ],
 	},
 	"qa.cuentanos.org": {
 		// files
@@ -308,11 +308,11 @@ module.exports = {
 		hideCountries: [],
 		hideArticlesFor: ['guatemala'],
 		// facebookPage: [["el-salvador", "https://www.facebook.com/Cu%C3%A9ntanos-2039927102928299/"]],
-		countryPhoneCodes: [{
-			country: 'El Salvador',
-			code: '+503',
-		  },
-		],
+		// countryPhoneCodes: [{
+		// 	country: 'El Salvador',
+		// 	code: '+503',
+		//   },
+		// ],
 	},
 	"localhost": {
 		// files
@@ -344,10 +344,10 @@ module.exports = {
 		hideCountries: [],
 		hideArticlesFor: ['guatemala'],
 		// facebookPage: [["el-salvador", "https://www.facebook.com/Cu%C3%A9ntanos-2039927102928299/"]],
-		countryPhoneCodes: [{
-			country: 'El Salvador',
-			code: '+503',
-		  },
-		],
+		// countryPhoneCodes: [{
+		// 	country: 'El Salvador',
+		// 	code: '+503',
+		//   },
+		// ],
 	},
 };
