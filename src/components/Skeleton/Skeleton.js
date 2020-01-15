@@ -51,7 +51,7 @@ class Skeleton extends React.Component {
 		const { children, country, language, match, onGoHome, onGoToServices, onGoToCategories, onGoToSearch, onChangeLocation, onChangeLanguage, deviceType, router, hideFooter, removeErrorMessage, showMapButton, goToMap, headerColor } = this.props;
 		const { hideShareButtons, homePage, toggleServiceMap } = this.props;
 		const { errorMessage } = this.state;
-		const showDepartments = _.has(country, 'fields.slug') && instance.countries[country.fields.slug].switches.showDepartments;
+		const showDepartments = _.has(country, 'fields.slug') && instance.countries[country.fields.slug] && instance.countries[country.fields.slug].switches.showDepartments;
 		let notifications = [];
 
 		const notificationType = n => {

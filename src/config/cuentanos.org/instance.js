@@ -16,6 +16,7 @@ export default {
 		'el-salvador': require('./countries/el-salvador').default,
 		'honduras': require('./countries/honduras').default,
 	},
+	defaultLanguage: 'es',
 	env: null, // dynamically loaded
 	envs: {
 		qa: require('./envs/qa').default,

@@ -11,6 +11,7 @@ import measureDistance from "@turf/distance";
 import { CountrySelector, LanguageSelector } from "../../components";
 import { actions } from "../../shared/redux/store";
 import i18nHelpers from '../../helpers/i18n';
+import instance from '../../backend/settings';
 import languages from './languages';
 import servicesApi from "../../backend/servicesApi";
 import getSessionStorage from "../../shared/sessionStorage";
@@ -29,7 +30,6 @@ class Selectors extends Component {
 	};
 
 	static contextTypes = {
-		config: PropTypes.object,
 		api: PropTypes.object,
 	};
 
@@ -38,23 +38,10 @@ class Selectors extends Component {
 	}	
 
 	componentWillMount() {
-		let {
-			language
-		} = this.props;
 		const sessionStorage = getSessionStorage();
+		let language = instance.languages.length === 1 ? instance.defaultLanguage : this.props.language;
 
-		const {
-			config
-		} = this.context;
-		const {
-			languages
-		} = config;
-
-		if (languages.length === 1) {
-			language = languages[0][0];
-		}
-
-		if (language && (!!sessionStorage.firstRequest || languages.length === 1)) {
+		if (language && (!!sessionStorage.firstRequest || instance.languages.length === 1)) {
 			this.selectLanguage(language, 0);
 		}
 	}
@@ -175,46 +162,30 @@ class Selectors extends Component {
 		this.selectCountry(first.slug);
 	}
 
-	filterLangs(config) {
+	filterLangs() {
 		let currentCountry = sessionStorage.getItem('redirect');
-
-		for (let i = 0; i < config.hideLangsPerCountry.length; i++) {
-			if (currentCountry && currentCountry.indexOf(`/${config.hideLangsPerCountry[i].country}`) === 0) {
-				return config.languages.filter(l => config.hideLangsPerCountry[i].langs.indexOf(l[0]) < 0);
-			}
-		}
-		return null;
+		return currentCountry ? instance.languages.filter(l => instance.countries[currentCountry.replace('/', '')].languages.includes(l[0])) : instance.languages;
 	}
 
 	render() {
 		const {
-			currentPage,
 			countryList,
+			currentPage,
+			loaded,
 			regionList,
-			loaded
 		} = this.state;
-		const {
-			config
-		} = this.context;
-		const {
-			language
-		} = this.props
-
-		// SP-354 disable tigrinya and french from italy
-		let languages = this.filterLangs(config);
-		!languages && (languages = config.languages);
-
+		const { language } = this.props
+		
+		let filteredlanguages = this.filterLangs();
 		switch (currentPage) {
 			case 1:
 				return (
-					// <Skeleton hideShareButtons={true}>
-						<LanguageSelector
-							languages={languages}
-							onSelectLanguage={l => {
-								this.selectLanguage(l);
-							}}
-						/>
-					// </Skeleton>
+					<LanguageSelector
+						languages={filteredlanguages}
+						onSelectLanguage={l => {
+							this.selectLanguage(l);
+						}}
+					/>
 				);
 
 			case 2:
@@ -231,17 +202,15 @@ class Selectors extends Component {
 					}
 
 					return (
-						// <Skeleton hideShareButtons={true}>
-							<CountrySelector
-								onGoTo={slug => {
-									this.selectCountry(slug);
-								}}
-								countryList={countryList.sort((a, b) => a.name ? a.name.localeCompare(b.name) : 0)}
-								regionList={regionList}
-								language={language}
-								backToLanguage={this.backToLanguage.bind(this)}
-							/>
-						// </Skeleton>
+						<CountrySelector
+							onGoTo={slug => {
+								this.selectCountry(slug);
+							}}
+							countryList={countryList.sort((a, b) => a.name ? a.name.localeCompare(b.name) : 0)}
+							regionList={regionList}
+							language={language}
+							backToLanguage={this.backToLanguage.bind(this)}
+						/>
 					);
 				}
 
@@ -259,7 +228,7 @@ class Selectors extends Component {
 	}
 }
 
-const mapState = ({ countryList, country, language }, p) => ({ language, country });
+const mapState = ({ country, language }, p) => ({ language, country });
 
 const mapDispatch = (d, p) => ({
 	onGoTo: slug => d(push(`/${slug}`)),
