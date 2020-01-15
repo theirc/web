@@ -16,13 +16,14 @@ export default {
 	countries: {
 		'jordan': require('./countries/jordan').default,
 	},
+	defaultLanguage: 'en',
 	env: null, // dynamically loaded
 	envs: {
 		qa: require('./envs/qa').default,
 		staging: require('./envs/staging').default,
 		www: require('./envs/www').default
 	},
-	languages: [['ar', 'العربيـة'], ['en', 'English']],
+	languages: [['en', 'English'], ['ar', 'العربيـة']], // English shows first in LanguageSelector
 	switches: {
 		cookieBanner: false,
 		disableCountrySelector: true,

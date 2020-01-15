@@ -1,7 +1,6 @@
 // libs
 import React, { Component } from "react";
 import { translate } from "react-i18next";
-import PropTypes from "prop-types";
 import _ from "lodash";
 
 // local
@@ -12,7 +11,6 @@ import "./CountrySelector.css";
 const NS = { ns: 'Selectors' };
 
 class CountrySelector extends Component {
-	static propTypes = {};
 
 	componentDidMount() {
 		if (global.window) {
@@ -22,17 +20,8 @@ class CountrySelector extends Component {
 		}
 	}
 
-	static contextTypes = {
-		config: PropTypes.object,
-	};
-
-	filterCountry(config, countryList, currentLang) {
-		for (let i = 0; i < config.hideLangsPerCountry.length; i++) {
-			if (config.hideLangsPerCountry[i].langs.indexOf(currentLang) >= 0) {
-				return countryList.filter(l => l.slug !== config.hideLangsPerCountry[i].country);
-			}
-		}
-		return countryList;
+	filterCountry(countryList, currentLang) {
+		return countryList.filter(l => instance.countries[l.slug] && instance.countries[l.slug].languages.includes(currentLang));
 	}
 
 	render() {
@@ -42,14 +31,13 @@ class CountrySelector extends Component {
 			language,
 			backToLanguage
 		} = this.props;
-		const { config } = this.context;
 		let disableLanguageSelector = instance.switches.disableLanguageSelector;
 		let countryList = this.props.countryList.map(_.identity);
 		let regionList = this.props.regionList.filter(r => r.languages_available.split(',').map(a => a.trim()).indexOf(language) > -1).map(r => r.slug);
 		let availableCountryList = countryList.filter(c => regionList.indexOf(c.fields.slug) > -1 && instance.countries[c.fields.slug]);
 
 		// SP-354 disable tigrinya and french from italy
-		availableCountryList = this.filterCountry(config, availableCountryList, language);
+		availableCountryList = this.filterCountry(availableCountryList, language);
 
 		if (global.navigator && navigator.geolocation) {
 			countryList.push({

@@ -8,85 +8,47 @@ module.exports = {
 	"refugee.info": {
 		languages: [["en", "English"], ["ar", "العربيـة"], ["ur", "اردو"], ["fa", "فارسی"], ["fr", "Français"]],
 		appId: "708254579325899",
-		hideLangsPerCountry: [{
-			country: 'italy',
-			langs: ['ar', 'ur', 'fa', 'fr'],
-		}, {
-			country: 'bulgaria',
-			langs: ['fr'],
-		}, {
-			country: 'serbia',
-			langs: ['fr'],
-		}],
 	},
 	"staging.refugee.info": {
 		languages: [["en", "English"], ["ar", "العربيـة"], ["ur", "اردو"], ["fa", "فارسی"], ["fr", "Français"]],
 		appId: "708254579325899",
-		hideLangsPerCountry: [{
-			country: 'italy',
-			langs: ['ar', 'ur', 'fa', 'fr'],
-		}, {
-			country: 'bulgaria',
-			langs: ['fr'],
-		}, {
-			country: 'serbia',
-			langs: ['fr'],
-		}],
 	},
 	"qa.refugee.info": {
 		languages: [["en", "English"], ["ar", "العربيـة"], ["ur", "اردو"], ["fa", "فارسی"], ["fr", "Français"]],
 		appId: "708254579325899",
-		hideLangsPerCountry: [{
-			country: 'italy',
-			langs: ['ar', 'ur', 'fa', 'fr'],
-		}, {
-			country: 'bulgaria',
-			langs: ['fr'],
-		}, {
-			country: 'serbia',
-			langs: ['fr'],
-		}],
 	},
 	"khabrona.info": {
 		languages: [["en", "English"], ["ar", "العربيـة"]],
 		hideServiceMap: true,
 		appId: "154471931830995",
-		hideLangsPerCountry: [],
 	},	
 	"qa.khabrona.info": {
 		languages: [["en", "English"], ["ar", "العربيـة"]],
 		hideServiceMap: true,
 		appId: "154471931830995",
-		hideLangsPerCountry: [],
 	},	
 	"staging.khabrona.info": {
 		languages: [["en", "English"], ["ar", "العربيـة"]],
 		hideServiceMap: true,
 		appId: "154471931830995",
-		hideLangsPerCountry: [],
 	},	
 	"cuentanos.org": {
 		languages: [["es", "Español"]],
 		appId: "209295296327422",
-		hideLangsPerCountry: [],
 		hideArticlesFor: ['guatemala'],
 	},
 	"staging.cuentanos.org": {
 		languages: [["es", "Español"]],
 		appId: "209295296327422",
-		hideLangsPerCountry: [],
 		hideArticlesFor: ['guatemala'],
 	},
 	"qa.cuentanos.org": {
 		languages: [["es", "Español"]],
 		appId: "209295296327422",
-		hideLangsPerCountry: [],
 		hideArticlesFor: ['guatemala'],
 	},
 	"localhost": {
-		languages: [["es", "Español"]],
-		appId: "209295296327422",
-		hideLangsPerCountry: [],
-		hideArticlesFor: ['guatemala'],
+		languages: [["en", "English"], ["ar", "العربيـة"], ["ur", "اردو"], ["fa", "فارسی"], ["fr", "Français"]],
+		appId: "708254579325899",
 	},
 };

@@ -18,13 +18,14 @@ export default {
 		'italy': require('./countries/italy').default,
 		'serbia': require('./countries/serbia').default,
 	},
+	defaultLanguage: 'en',
 	env: null, // dynamically loaded
 	envs: {
 		qa: require('./envs/qa').default,
 		staging: require('./envs/staging').default,
 		www: require('./envs/www').default
 	},
-	languages: [['ar', 'العربيـة'], ['en', 'English'], ['fa', 'فارسی'], ['fr', 'Français'], ['ur', 'اردو']],
+	languages: [['en', 'English'], ['ar', 'العربيـة'], ['fa', 'فارسی'], ['fr', 'Français'], ['ur', 'اردو']], // English shows first in LanguageSelector
 	switches: { // TODO: change this to enable
 		cookieBanner: true,
 		disableCountrySelector: false,
