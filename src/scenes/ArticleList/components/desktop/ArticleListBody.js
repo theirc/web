@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import moment from 'moment';
+import _ from 'lodash';
 
 // local
 import HeaderBar from "../../../../components/HeaderBar/HeaderBar";
@@ -37,8 +38,8 @@ class ArticleListBody extends Component {
 		if (!c.fields.categories && !c.fields.articles) {
 			let image = '/placeholder.png';
 			if (c.fields.overview) {
-				c.fields.overview.fields && c.fields.overview.fields.hero && (image = c.fields.overview.fields.hero.fields.file.url);
-				c.fields.overview.fields && c.fields.overview.fields.gallery && (image = c.fields.overview.fields.gallery.fields.file.url);
+				_.has(c, 'fields.overview.fields.hero.fields.file') && (image = c.fields.overview.fields.hero.fields.file.url);
+				_.has(c, 'fields.overview.fields.gallery.fields.file') && (image = c.fields.overview.fields.gallery.fields.file.url);
 			}
 
 			return (
@@ -67,8 +68,8 @@ class ArticleListBody extends Component {
 				if(!a.fields) return null;
 
 				let image = '/placeholder.png';
-				a.fields.hero && (image = a.fields.hero.fields.file.url);
-				a.fields.gallery && (image = a.fields.gallery.fields.file.url);
+				_.has(a, 'fields.hero.fields.file') && (image = a.fields.hero.fields.file.url);
+				_.has(a, 'fields.gallery.fields.file') && (image = a.fields.gallery.fields.file.url);
 
 				return (
 					<li key={a.sys.id} className='tile' onClick={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${a.fields.slug}?language=` + language)}>
