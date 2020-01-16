@@ -10,6 +10,10 @@ import "./ServiceCategoryList.css";
 
 const NS = { ns: 'Services' };
 
+/**
+ * @class
+ * @description 
+ */
 class ServiceCategoryList extends React.Component {
 	state = {
 		categories: [],

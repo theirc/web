@@ -8,6 +8,10 @@ import { translate } from "react-i18next";
 import { ArticleWidget, CategoryWidget, LocalGuideWidget, TopCategoriesWidget } from "../../../components";
 import "./HomeWidgetFactory.css";
 
+/**
+ * @class
+ * @description 
+ */
 class HomeWidget extends Component {
 
 	renderWidget(w) {
@@ -36,40 +40,22 @@ class HomeWidget extends Component {
 
 	renderLocalGuide(guideItems) {
 		const { country, onNavigate, language } = this.props;
-
-		/*jshint ignore:start*/
-		/*eslint-disable*/
 		return <LocalGuideWidget country={country} onNavigate={onNavigate} language={language} guideItems={guideItems} />;
-		/*eslint-enable*/
-		/*jshint ignore:end*/
 	}
 
 	renderTopCategories(categories) {
 		const { country, onNavigate, language } = this.props;
-
-		/*jshint ignore:start*/
-		/*eslint-disable*/
 		return <TopCategoriesWidget country={country} onNavigate={onNavigate} language={language} categories={categories} />;
-		/*eslint-enable*/
-		/*jshint ignore:end*/
 	}
 
 	renderArticle(article, category, showHero = true, showFullArticle = false) {
 		const { isHome, index, country, onNavigate, language } = this.props;
-		/*jshint ignore:start*/
-		/*eslint-disable*/
 		return <ArticleWidget isHome={isHome} index={index} country={country} onNavigate={onNavigate} article={article} language={language} category={category} showHero={showHero} showFullArticle={showFullArticle} />;
-		/*eslint-enable*/
-		/*jshint ignore:end*/
 	}
 
 	renderCategory(c) {
 		const { country, onNavigate, language } = this.props;
-		/*jshint ignore:start*/
-		/*eslint-disable*/
 		return <CategoryWidget country={country} onNavigate={onNavigate} language={language} c={c} />;
-		/*eslint-enable*/
-		/*jshint ignore:end*/
 	}
 
 	componentDidMount() {

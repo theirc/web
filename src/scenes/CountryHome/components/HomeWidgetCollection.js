@@ -4,6 +4,10 @@ import React, { Component } from "react";
 // local
 import "./HomeWidgetCollection.css";
 
+/**
+ * @class
+ * @description 
+ */
 export default class HomeWidgetCollection extends Component {
 	render() {
 		return (

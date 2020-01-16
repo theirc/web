@@ -21,6 +21,10 @@ import servicesApi from "../../backend/servicesApi";
 
 const NS = { ns: 'Services' };
 
+/**
+ * @class
+ * @description Messiest class in the whole project
+ */
 class Services extends React.Component {
 	state = {
 		countryRegions: null,

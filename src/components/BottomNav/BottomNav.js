@@ -13,6 +13,10 @@ import "./BottomNav.css";
 
 const NS = { ns: 'BottomNav' };
 
+/**
+ * @class
+ * @description 
+ */
 class BottomNav extends Component {
 	static propTypes = {
 		classes: PropTypes.object,

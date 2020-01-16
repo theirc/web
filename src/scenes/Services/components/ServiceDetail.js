@@ -24,6 +24,10 @@ const GMAPS_API_KEY = "AIzaSyAK54Ir69gNM--M_5dRa0fwVH8jxWnJREQ";
 const hotlinkTels = input => input; //input.replace(/\s(\+[1-9]{1}[0-9]{5,14})|00[0-9]{5,15}/g, `<a class="tel" href="tel:$1">$1</a>`);
 const moment = global.moment;
 
+/**
+ * @class
+ * @description 
+ */
 class ServiceDetail extends React.Component {
 	state = {
 		service: null,

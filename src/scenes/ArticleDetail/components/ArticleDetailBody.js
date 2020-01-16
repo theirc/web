@@ -28,6 +28,10 @@ const md = new Remarkable("full", {
 	breaks: true,
 });
 
+/**
+ * @class
+ * @description 
+ */
 class ArticleDetailBody extends Component {
 	state = {
 		copied: false

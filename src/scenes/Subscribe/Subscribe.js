@@ -9,6 +9,10 @@ import HeaderBar from "../../components/HeaderBar/HeaderBar";
 import { Skeleton } from "..";
 import "./Subscribe.css";
 
+/**
+ * @class
+ * @description 
+ */
 class Suscribe extends Component {
 
 	constructor(props) {

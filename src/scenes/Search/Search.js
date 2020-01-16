@@ -14,6 +14,10 @@ import { Skeleton } from "../../scenes";
 
 const NS = { ns: 'Search' };
 
+/**
+ * @class
+ * @description 
+ */
 class Search extends React.Component {
 	state = {
 		articles: [],

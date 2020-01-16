@@ -11,8 +11,12 @@ import routes from '../routes';
 import "./ServiceHome.css";
 
 const NS = { ns: 'Services' };
-
 var tinycolor = require("tinycolor2");
+
+/**
+ * @class
+ * @description 
+ */
 class ServiceList extends React.Component {
 	state = {
 		category: {},

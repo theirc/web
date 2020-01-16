@@ -12,20 +12,12 @@ const socketio = require("feathers-socketio");
 
 const handler = require("feathers-errors/handler");
 const notFound = require("feathers-errors/not-found");
-// const mustacheExpress = require("mustache-express");
 const logger = require("winston");
-// const less = require("less");
 const fs = require("fs");
 const nunjucks = require("nunjucks");
 const conf = require("../backend/config");
-// const cms = require("../backend/cms").default;
 const servicesApi = require("../backend/servicesApi");
 const cmsApi = require("../backend/cmsApi").default;
-// const ReactApp = require("../App").default;
-
-// const React = require("react");
-// const renderToString = require("react-dom/server").renderToString;
-// const Provider = require("react-redux").Provider;
 const _ = require("lodash");
 const toMarkdown = require("to-markdown");
 let { languageDictionary } = conf;
@@ -59,6 +51,10 @@ app.get("/config", (rq, res) => {
 	res.send(responseText);
 });
 
+/**
+ * @function
+ * @description 
+ */
 var mainRequest = function (context) {
 	return function (request, response, next) {
 		let hostname = request.hostname || request.headers.host;
@@ -96,6 +92,11 @@ var mainRequest = function (context) {
 		});
 	};
 };
+
+/**
+ * @function
+ * @description 
+ */
 const parseLanguage = function (req) {
 	let hostname = req.hostname || req.headers.host;
 	let configKey = _.first(
@@ -140,6 +141,10 @@ const markdownOptions = {
 	},],
 };
 
+/**
+ * @class
+ * @description 
+ */
 const getFirsLevel = (slug, selectedLanguage) => {
 	return servicesApi
 		.fetchRegions(selectedLanguage)

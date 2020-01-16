@@ -15,6 +15,10 @@ import instance from '../../backend/settings';
 import getSessionStorage from "../../shared/sessionStorage";
 import "./Skeleton.css";
 
+/**
+ * @class
+ * @description 
+ */
 class Skeleton extends React.Component {
 	state = {
 		errorMessage: null,

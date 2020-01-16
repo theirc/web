@@ -5,6 +5,10 @@ import { translate } from "react-i18next";
 // local
 import "./ArticleListOOD.css";
 
+/**
+ * @class
+ * @description OOD: short for Out Of Date, this could reuse ArticleList and ServiceList
+ */
 class ArticleListOOD extends React.Component {
 
 	render() {

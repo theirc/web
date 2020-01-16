@@ -1,7 +1,7 @@
 import instances from '../config';
 
 /**
- * @function loadInstanceSettings
+ * @function
  * @description Creates an object with instance/country/environment related settings.
  * @returns instance object
  */

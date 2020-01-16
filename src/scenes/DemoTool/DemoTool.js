@@ -9,6 +9,10 @@ import LocalDemo from "./components/LocalDemo";
 import getSessionStorage from "../../shared/sessionStorage";
 import Skeleton from '../../components/Skeleton/Skeleton';
 
+/**
+ * @class
+ * @description 
+ */
 class DemoTool extends React.Component {
 	constructor() {
 		super();

@@ -10,6 +10,10 @@ const generateKey = pre => {
 	return `${pre}_${new Date().getTime()}`;
 };
 
+/**
+ * @class
+ * @description 
+ */
 class HeaderBar extends Component {
 	static propTypes = {
 		subtitle: PropTypes.any,

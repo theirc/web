@@ -11,6 +11,10 @@ import "./ArticleListBody.css";
 
 const NS = { ns: 'ArticleList' };
 
+/**
+ * @class
+ * @description 
+ */
 class ArticleListBody extends Component {
 	state = {
 		selectedCategory: 0,
