@@ -9,6 +9,10 @@ import getSessionStorage from "../../../shared/sessionStorage";
 import instance from '../../../backend/settings';
 import "./LocalDemo.css";
 
+/**
+ * @class
+ * @description 
+ */
 class LocalDemo extends Component {
 	state = {
 		loaded: true,

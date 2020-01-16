@@ -18,6 +18,10 @@ import getSessionStorage from "../../shared/sessionStorage";
 
 const NS = { ns: 'Selectors' };
 
+/**
+ * @class
+ * @description 
+ */
 class Selectors extends Component {
 	state = {
 		currentPage: 1,

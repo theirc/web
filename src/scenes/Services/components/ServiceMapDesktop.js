@@ -30,6 +30,10 @@ let categoryStyle = color => {
 	};
 };
 
+/**
+ * @class
+ * @description 
+ */
 class ServiceIcon extends React.Component {
 	render() {
 		const { service, idx, type } = this.props;
@@ -43,6 +47,10 @@ class ServiceIcon extends React.Component {
 	}
 }
 
+/**
+ * @class
+ * @description 
+ */
 class ServiceItem extends React.Component {
 	render() {
 		const { country, goToService, language, service } = this.props;
@@ -81,6 +89,10 @@ class ServiceItem extends React.Component {
 	}
 }
 
+/**
+ * @class
+ * @description 
+ */
 class ServiceMapDesktop extends React.Component {
 	state = {
 		loaded: false,

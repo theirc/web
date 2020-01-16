@@ -1,5 +1,9 @@
 import i18n from "i18next";
 
+/**
+ * @function
+ * @description 
+ */
 const i18nHelpers = {
 	loadResource: (json, namespace) => {
 		for(let l in json)

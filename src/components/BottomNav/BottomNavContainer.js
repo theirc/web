@@ -11,6 +11,10 @@ import instance from '../../backend/settings';
 import routes from '../../routes';
 import selectedMenuItem from '../../helpers/menu-items';
 
+/**
+ * @class
+ * @description 
+ */
 class BottomNavContainer extends React.Component {
 	static propTypes = {
 		match: PropTypes.shape({

@@ -10,6 +10,10 @@ import "./CountrySelector.css";
 
 const NS = { ns: 'Selectors' };
 
+/**
+ * @class
+ * @description 
+ */
 class CountrySelector extends Component {
 
 	componentDidMount() {

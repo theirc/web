@@ -12,6 +12,10 @@ import { Skeleton } from "..";
 
 const NS = { ns: 'ArticleList' };
 
+/**
+ * @class
+ * @description 
+ */
 class ArticleList extends React.Component {
 	static propTypes = {
 		match: PropTypes.shape({

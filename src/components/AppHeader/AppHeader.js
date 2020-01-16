@@ -16,6 +16,10 @@ import "./AppHeader.css";
 
 const NS = { ns: 'AppHeader' };
 
+/**
+ * @class
+ * @description 
+ */
 class AppHeader extends Component {
 	
 	static propTypes = {

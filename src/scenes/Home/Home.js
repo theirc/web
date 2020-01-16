@@ -7,6 +7,10 @@ import PropTypes from 'prop-types';
 // local
 import { } from '../../components';
 
+/**
+ * @class
+ * @description 
+ */
 class Home extends React.Component {
 	static contextTypes = {
 		router: PropTypes.object

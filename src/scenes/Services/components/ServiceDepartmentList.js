@@ -9,6 +9,10 @@ import "./ServiceHome.css";
 
 const NS = { ns: 'Services' };
 
+/**
+ * @class
+ * @description 
+ */
 class ServiceDepartmentList extends React.Component {
 	state = {
 		regions: [],

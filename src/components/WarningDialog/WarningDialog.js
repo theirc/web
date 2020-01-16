@@ -15,6 +15,10 @@ const md = new Remarkable("full", {
 	breaks: true,
 });
 
+/**
+ * @class
+ * @description 
+ */
 export default class WarningDialog extends Component {
 	static propTypes = {
 		text: PropTypes.string,

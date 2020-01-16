@@ -25,26 +25,7 @@ ScrollToTop = withRouter(ScrollToTop);
 const ServicesWithCountry = withCountry(Services);
 
 class Router extends Component {
-	componentDidMount() {
-		if (global.window) {
-			if (global.window && global.window.document) {
-				setTimeout(() => {
-					const document = global.window.document;
-
-					var intro = document.querySelector(".intro");
-					var root = document.querySelector("#root");
-
-					if (intro) {
-						intro.remove();
-					}
-					root.className = "";
-				}, 500);
-			}
-		}
-	}
-
 	render() {
-		
 		return (
 			<ConnectedRouter history={history}>
 				<Placeholder>
@@ -62,10 +43,8 @@ class Router extends Component {
 						<Route path="/:country/:category" component={withCountry(withCategory(CategoryHome))} />
 						<Route exact path="/selectors" component={props => <Skeleton {...props}><Selectors /></Skeleton>} />
 						<Route exact path="/:country" component={withCountry(CountryHome)} />
-
 						<Route exact path="/" component={Home} />
 						<Route path="/direct/:article" component={withArticle(ArticleDetail)} />
-
 					</Switch>
 				</Placeholder>
 			</ConnectedRouter>

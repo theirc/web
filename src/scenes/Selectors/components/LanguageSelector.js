@@ -8,6 +8,10 @@ import getSessionStorage from "../../../shared/sessionStorage";
 
 const NS = { ns: 'Selectors' };
 
+/**
+ * @class
+ * @description 
+ */
 class LanguageSelector extends Component {
 	static propTypes = {};
 

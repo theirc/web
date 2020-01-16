@@ -25,6 +25,10 @@ const FilterTypes = {
 	CATEGORY: 3,
 };
 
+/**
+ * @class
+ * @description 
+ */
 class ServiceCategoryListDesktop extends React.Component {
 	state = {
 		categories: [],

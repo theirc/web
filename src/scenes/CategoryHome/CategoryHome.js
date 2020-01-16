@@ -16,6 +16,10 @@ const md = new Remarkable("full", {
 	breaks: true,
 });
 
+/**
+ * @class
+ * @description 
+ */
 class CategoryHome extends React.Component {
 	state = {};
 

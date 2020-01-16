@@ -17,6 +17,10 @@ import { Skeleton } from "..";
 const NS = { ns: 'ArticleDetail' };
 const Promise = require("bluebird");
 
+/**
+ * @class
+ * @description 
+ */
 class ArticleDetail extends React.Component {
 	static propTypes = {
 		match: PropTypes.shape({

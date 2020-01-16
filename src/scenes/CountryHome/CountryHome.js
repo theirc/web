@@ -13,6 +13,10 @@ import getSessionStorage from "../../shared/sessionStorage";
 
 const NS = { ns: 'CountryHome' };
 
+/**
+ * @class
+ * @description 
+ */
 class CountryHome extends React.Component {
 	constructor() {
 		super();

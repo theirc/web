@@ -14,7 +14,10 @@ import "./Footer.css";
 
 const NS = { ns: 'Footer' };
 
-
+/**
+ * @class
+ * @description 
+ */
 class Footer extends Component {
 	state = {
 		copied: false

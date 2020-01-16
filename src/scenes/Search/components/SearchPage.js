@@ -21,6 +21,10 @@ const md = new Remarkable("full", {
 	breaks: true,
 });
 
+/**
+ * @class
+ * @description 
+ */
 class SearchPage extends React.Component {
 	state = {
 		showFullServiceList: false,

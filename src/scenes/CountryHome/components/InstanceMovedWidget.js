@@ -7,6 +7,10 @@ import "./InstanceMovedWidget.css";
 
 const NS = { ns: 'CountryHome' };
 
+/**
+ * @class
+ * @description 
+ */
 class InstanceMovedWidget extends Component {
 
 	render() {

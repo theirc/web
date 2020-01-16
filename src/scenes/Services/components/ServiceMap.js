@@ -33,6 +33,10 @@ let categoryStyle = color => {
 	};
 };
 
+/**
+ * @class
+ * @description 
+ */
 class ServiceIcon extends React.Component {
 	render() {
 		let s = this.props.service;
@@ -47,6 +51,10 @@ class ServiceIcon extends React.Component {
 	}
 }
 
+/**
+ * @class
+ * @description 
+ */
 class ServiceItem extends React.Component {
 
 	render() {
@@ -88,6 +96,10 @@ class ServiceItem extends React.Component {
 	}
 }
 
+/**
+ * @class
+ * @description 
+ */
 class ServiceMap extends React.Component {
 	state = {
 		category: {},
