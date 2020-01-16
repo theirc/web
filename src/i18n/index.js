@@ -18,19 +18,19 @@ const options = {
 		escapeValue: false, // not needed for react!!
 	},
 	resources: i18nConfig,
-	saveMissing: true,
-	missingKeyHandler: function (lng, ns, key, fallbackValue) {
-		window.missingKey = window.missingKey || {};
-		window.missingKey[lng] = window.missingKey[lng] || [];
-		window.missingKey[lng].push(key);
-	},
+	// saveMissing: true,
+	// missingKeyHandler: function (lng, ns, key, fallbackValue) {
+	// 	window.missingKey = window.missingKey || {};
+	// 	window.missingKey[lng] = window.missingKey[lng] || [];
+	// 	window.missingKey[lng].push(key);
+	// },
 
 	// react i18next special options (optional)
 	react: {
-		wait: false,
-		bindI18n: "languageChanged loaded",
-		bindStore: "added removed",
-		nsMode: "default",
+		wait: true,
+		// bindI18n: "languageChanged loaded",
+		// bindStore: "added removed",
+		// nsMode: "default",
 	},
 };
 
