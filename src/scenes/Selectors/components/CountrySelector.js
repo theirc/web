@@ -25,6 +25,7 @@ class CountrySelector extends Component {
 	}
 
 	filterCountry(countryList, currentLang) {
+		// Filter out if the language is not found at country level
 		return countryList.filter(l => instance.countries[l.slug] && instance.countries[l.slug].languages.includes(currentLang));
 	}
 

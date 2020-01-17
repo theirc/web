@@ -1,5 +1,5 @@
-const conf = require("../backend/config");
 const _ = require("lodash");
+const instance = require('../backend/settings').default;
 
 module.exports = {
 	/**
@@ -7,20 +7,7 @@ module.exports = {
 	 * @description 
 	 */
 	parseLanguage(req) {
-		let hostname = req.hostname || req.headers.host;
-		let configKey = _.first(
-			Object.keys(conf).filter(k => {
-				return hostname.indexOf(k) > -1;
-			})
-		);
-		let possibleLanguages = ["en", "es"];
-
-		if (configKey) {
-			const {
-				languages
-			} = conf[configKey];
-			possibleLanguages = languages.map(l => l[0]);
-		}
+		let possibleLanguages = instance.languages.map(l => l[0]);
 		let selectedLanguage = "en";
 
 		if ("language" in req.query) {

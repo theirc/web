@@ -98,20 +98,7 @@ var mainRequest = function (context) {
  * @description 
  */
 const parseLanguage = function (req) {
-	let hostname = req.hostname || req.headers.host;
-	let configKey = _.first(
-		Object.keys(conf).filter(k => {
-			return hostname.indexOf(k) > -1;
-		})
-	);
-	let possibleLanguages = ["en", "es"];
-
-	if (configKey) {
-		const {
-			languages
-		} = conf[configKey];
-		possibleLanguages = languages.map(l => l[0]);
-	}
+	let possibleLanguages = instance.languages.map(l => l[0]);
 	let selectedLanguage = "en";
 
 	if ("language" in req.query) {
@@ -269,7 +256,6 @@ app.get("/:country/:category/:article", function(req, res, err) {
             return req.headers.host.indexOf(k) > -1;
         })
     );
-    let context = {};
     const {
         country,
         category,
@@ -287,12 +273,8 @@ app.get("/:country/:category/:article", function(req, res, err) {
 					return;
 				}
 
-				const {
-					accessToken,
-					space
-				} = conf[configKey];
 				languageDictionary = Object.assign(languageDictionary, conf[configKey]);
-				let cms = cmsApi(conf[configKey], languageDictionary);
+				let cms = cmsApi();
 				cms.client
 					.getEntries({
 						content_type: "article",

@@ -6,43 +6,33 @@ module.exports = {
 	},
 	
 	"refugee.info": {
-		languages: [["en", "English"], ["ar", "العربيـة"], ["ur", "اردو"], ["fa", "فارسی"], ["fr", "Français"]],
 		appId: "708254579325899",
 	},
 	"staging.refugee.info": {
-		languages: [["en", "English"], ["ar", "العربيـة"], ["ur", "اردو"], ["fa", "فارسی"], ["fr", "Français"]],
 		appId: "708254579325899",
 	},
 	"qa.refugee.info": {
-		languages: [["en", "English"], ["ar", "العربيـة"], ["ur", "اردو"], ["fa", "فارسی"], ["fr", "Français"]],
 		appId: "708254579325899",
 	},
 	"khabrona.info": {
-		languages: [["en", "English"], ["ar", "العربيـة"]],
 		appId: "154471931830995",
 	},	
 	"qa.khabrona.info": {
-		languages: [["en", "English"], ["ar", "العربيـة"]],
 		appId: "154471931830995",
 	},	
 	"staging.khabrona.info": {
-		languages: [["en", "English"], ["ar", "العربيـة"]],
 		appId: "154471931830995",
 	},	
 	"cuentanos.org": {
-		languages: [["es", "Español"]],
 		appId: "209295296327422",
 	},
 	"staging.cuentanos.org": {
-		languages: [["es", "Español"]],
 		appId: "209295296327422",
 	},
 	"qa.cuentanos.org": {
-		languages: [["es", "Español"]],
 		appId: "209295296327422",
 	},
 	"localhost": {
-		languages: [["en", "English"], ["ar", "العربيـة"]],
 		appId: "154471931830995",
 	},
 };
