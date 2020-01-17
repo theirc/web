@@ -1,6 +1,6 @@
 /**
  * @file
- * @description Initialization for i18n lib
+ * @description Initialization for i18n lib, resources are loaded dynamically in each component.
  */
 
 // libs
@@ -12,25 +12,15 @@ import i18nConfig from "./config.js";
 
 const options = {
 	fallbackLng: "en",
-	debug: false,
 
 	interpolation: {
 		escapeValue: false, // not needed for react!!
 	},
-	resources: i18nConfig,
-	// saveMissing: true,
-	// missingKeyHandler: function (lng, ns, key, fallbackValue) {
-	// 	window.missingKey = window.missingKey || {};
-	// 	window.missingKey[lng] = window.missingKey[lng] || [];
-	// 	window.missingKey[lng].push(key);
-	// },
+	resources: i18nConfig, // TODO: remove this once it's completely empty
 
 	// react i18next special options (optional)
 	react: {
 		wait: true,
-		// bindI18n: "languageChanged loaded",
-		// bindStore: "added removed",
-		// nsMode: "default",
 	},
 };
 

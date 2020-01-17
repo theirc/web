@@ -53,7 +53,7 @@ class Skeleton extends React.Component {
 
 	render() {
 		const { children, country, language, match, onGoHome, onGoToServices, onGoToCategories, onGoToSearch, onChangeLocation, onChangeLanguage, deviceType, router, hideFooter, removeErrorMessage, showMapButton, goToMap, headerColor } = this.props;
-		const { hideShareButtons, homePage, toggleServiceMap } = this.props;
+		const { hideShareButtons, homePage } = this.props;
 		const { errorMessage } = this.state;
 		const showDepartments = _.has(country, 'fields.slug') && instance.countries[country.fields.slug] && instance.countries[country.fields.slug].switches.showDepartments;
 		let notifications = [];
@@ -102,8 +102,6 @@ class Skeleton extends React.Component {
 
 		if (country && country.fields.slug === "serbia" && sessionStorage.getItem("serbia-alert") == null)
 			sessionStorage.setItem("serbia-alert", 0);
-
-		toggleServiceMap(country && country.fields && country.fields.slug !== 'italy' && country.fields.slug !== 'jordan');
 
 		return (
 			<I18nextProvider i18n={i18n}>
@@ -155,7 +153,6 @@ const mapState = ({ country, language, deviceType, router, errorMessage }, p) =>
 
 const mapDispatch = (d, p) => {
 	return {
-		toggleServiceMap: show => d(actions.toggleServiceMap(show)),
 		onGoHome: country => () => {
 			if (country) d(push(`/${country.fields.slug || ""}`));
 		},

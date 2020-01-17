@@ -2,7 +2,7 @@ import i18n from "i18next";
 
 /**
  * @function
- * @description 
+ * @description Helper to lazy load language files in components
  */
 const i18nHelpers = {
 	loadResource: (json, namespace) => {

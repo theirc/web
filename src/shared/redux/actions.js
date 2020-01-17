@@ -11,7 +11,6 @@ const actionTypes = {
 	selectCountryList: "SELECT_COUNTRY_LIST",
 	recordCoordinates: "RECORD_COORDINATES",
 	changeDeviceType: "CHANGE_DEVICE_TYPE",
-	toggleServiceMap: "TOGGLE_SERVICE_MAP",
 
 	toggleServiceGeolocation: "TOGGLE_SERVICE_GEOLOCATION",
 	loadingGeolocation: "LOADING_GEOLOCATION",
@@ -25,7 +24,6 @@ export default {
 	showErrorMessage: createAction(actionTypes.showErrorMessage),
 	errorGeolocation: createAction(actionTypes.errorGeolocation),
 	loadingGeolocation: createAction(actionTypes.loadingGeolocation),
-	toggleServiceMap: createAction(actionTypes.toggleServiceMap),
 	changeDeviceType: createAction(actionTypes.changeDeviceType),
 	changeOrganization: createAction(actionTypes.changeOrganization),
 	changeCountry: createAction(actionTypes.changeCountry),
