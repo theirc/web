@@ -27,11 +27,6 @@ class Search extends React.Component {
 		term: "",
 	};
 
-	static contextTypes = {
-		config: PropTypes.object,
-		api: PropTypes.object,
-	};
-
 	componentDidMount() {
 		i18nHelpers.loadResource(languages, NS.ns);
 
@@ -80,7 +75,6 @@ class Search extends React.Component {
 	render() {
 		const { searchingArticles, searchingServices, articles, services, term } = this.state;
 		const { onNavigate, country, language } = this.props;
-		const { config } = this.context;
 
 		return (
 			<Skeleton headerColor='light'>
