@@ -1,7 +1,6 @@
 import services from "../../backend";
 import actions from "./actions";
 import isMobile from "../isMobile";
-import cms from "../../backend/cms";
 import getSessionStorage from "../sessionStorage";
 import getLocalStorage from "../localStorage";
 import defaultLanguage from "../defaultLanguage";

@@ -3,7 +3,6 @@ import React from "react";
 import { connect } from "react-redux";
 import queryString from "query-string";
 import { push } from "react-router-redux";
-import PropTypes from "prop-types";
 
 // local
 import servicesApi from "../../backend/servicesApi";
