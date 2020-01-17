@@ -32,17 +32,14 @@ module.exports = {
 	"cuentanos.org": {
 		languages: [["es", "Español"]],
 		appId: "209295296327422",
-		hideArticlesFor: ['guatemala'],
 	},
 	"staging.cuentanos.org": {
 		languages: [["es", "Español"]],
 		appId: "209295296327422",
-		hideArticlesFor: ['guatemala'],
 	},
 	"qa.cuentanos.org": {
 		languages: [["es", "Español"]],
 		appId: "209295296327422",
-		hideArticlesFor: ['guatemala'],
 	},
 	"localhost": {
 		languages: [["en", "English"], ["ar", "العربيـة"]],
