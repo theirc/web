@@ -32,16 +32,6 @@ function changeDeviceType(state = device, action) {
 	}
 }
 
-function toggleServiceMap(state = !cms.siteConfig.hideServiceMap, action) {
-	switch (action.type) {
-		case actions.actionTypes.toggleServiceMap:
-			return action.payload;
-
-		default:
-			return state;
-	}
-}
-
 function changeOrganization(state = "irc", action) {
 	switch (action.type) {
 		case actions.actionTypes.changeOrganization:
@@ -212,7 +202,6 @@ export default {
 	errorMessage: errorMessage,
 
 	deviceType: changeDeviceType,
-	showServiceMap: toggleServiceMap,
 
 	country: changeCountry,
 	defaultLocation: changeDefaultLocation,

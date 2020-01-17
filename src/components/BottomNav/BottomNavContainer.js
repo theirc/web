@@ -42,16 +42,12 @@ class BottomNavContainer extends React.Component {
 
 	render() {
 		const { country, onGoToCategories, onGoHome, onGoToSearch, showMapButton, goToMap } = this.props;
-
-		let { showServiceMap } = this.props;
 		let selectedIndex = selectedMenuItem();
 
-		country && country.fields && country.fields.slug === 'italy' && (showServiceMap = false);
 		const showDepartments = _.has(country, 'fields.slug') && instance.countries[country.fields.slug].switches.showDepartments;
 		// TODO: dereference country inside routes?
 		return (
 			<BottomNav
-				showServiceMap={showServiceMap}
 				index={selectedIndex}
 				country={country && country.fields.slug}
 				onGoToCategories={onGoToCategories.bind(null, country.fields.slug)}
@@ -65,7 +61,7 @@ class BottomNavContainer extends React.Component {
 	}
 }
 
-const mapState = ({ category, country, showServiceMap, router }, p) => ({ category, country, showServiceMap, router });
+const mapState = ({ category, country, router }, p) => ({ category, country, router });
 
 const mapDispatch = (d, p) => ({
 	onGoToCategories: country => d(push(routes.goToCategories(country))),

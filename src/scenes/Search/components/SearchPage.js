@@ -4,6 +4,7 @@ import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import tinycolor from "tinycolor2";
 import moment from 'moment';
+import instance from '../../../backend/settings';
 
 // local
 import "./SearchPage.css";
@@ -117,7 +118,7 @@ class SearchPage extends React.Component {
 	}
 
 	render() {
-		const { articles, language, onNavigate, searchingArticles, searchingServices, services, showServiceMap, term, t } = this.props;
+		const { articles, country, language, onNavigate, searchingArticles, searchingServices, services, term, t } = this.props;
 		let servicesList = this.state.showFullServiceList ? services : services.slice().splice(0, 4);
 		let articleList = this.state.showFullBlogList ? articles : articles.slice().splice(0, 3);
 		const toggleServicelabel = this.state.showFullServiceList ? t('buttons.Show Less', NS) : t('buttons.Show More', NS);
@@ -132,7 +133,7 @@ class SearchPage extends React.Component {
 				</div>
 
 				<div className="results">
-					{showServiceMap &&
+					{instance.countries[country.fields.slug].switches.showServices &&
 						<div className='services-list'>
 							<h1>{t("list.Services", NS)}</h1>
 
@@ -216,6 +217,6 @@ class SearchPage extends React.Component {
 	}
 }
 
-const mapState = ({ showServiceMap }, p) => ({ showServiceMap });
+const mapState = ({ country }, p) => ({ country });
 
 export default translate()(connect(mapState)(SearchPage));

@@ -86,7 +86,6 @@ class Search extends React.Component {
 			<Skeleton headerColor='light'>
 				<div className="SkeletonContainer bg-gray" >
 					<SearchPage
-						hideServices={config.hideServiceMap}
 						country={country}
 						searchingArticles={searchingArticles}
 						searchingServices={searchingServices}

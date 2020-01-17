@@ -8,6 +8,7 @@ import { translate } from "react-i18next";
 
 // local
 import i18nHelpers from '../../helpers/i18n';
+import instance from '../../backend/settings';
 import languages from './languages';
 import "./BottomNav.css";
 
@@ -69,7 +70,7 @@ class BottomNav extends Component {
 	}
 
 	render() {
-		const { showServiceMap, country, t } = this.props;
+		const { country, t } = this.props;
 		const { config } = this.context;
 		let hideArticles = config.hideArticlesFor && config.hideArticlesFor.indexOf(country) > -1;
 		let paperStyle = {
@@ -87,7 +88,7 @@ class BottomNav extends Component {
 						<BottomNavigationButton className={this.props.index === 1 ? "Selected" : ""} icon={<Assignment />} label={<span className="BottomButton">{t("menu.Articles", NS)}</span>} value={1} />
 					) : (<BottomNavigationButton disabled style={{display: 'none'}} />)}
 
-					{showServiceMap ? (
+					{instance.countries[country].switches.showServices ? (
 						<BottomNavigationButton className={this.props.index === 2 ? "Selected" : ""} icon={<List />} label={<span className="BottomButton">{t("menu.Services", NS)}</span>} value={3} />
 					) : (<BottomNavigationButton disabled style={{display: 'none'}} />)}
 					

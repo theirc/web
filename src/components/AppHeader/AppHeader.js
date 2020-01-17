@@ -102,7 +102,6 @@ class AppHeader extends Component {
 			onGoHome,
 			onGoToCategories,
 			onGoToServices,
-			showServiceMap,
 			t,
 		} = this.props;
 
@@ -144,9 +143,11 @@ class AppHeader extends Component {
 											<Assignment /><span className='menu-item'>{t("menu.Articles", NS)}</span>
 										</span>
 
-										{showServiceMap && <span className={`app-bar-selectors top-menu ${selectedIndex === 2 ? "Selected" : ""}`} color="contrast" onClick={onGoToServices || noop}>
-											<List /><span className='menu-item'>{t("menu.Services", NS)}</span>
-										</span>}
+										{instance.countries[country.fields.slug].switches.showServices &&
+											<span className={`app-bar-selectors top-menu ${selectedIndex === 2 ? "Selected" : ""}`} color="contrast" onClick={onGoToServices || noop}>
+												<List /><span className='menu-item'>{t("menu.Services", NS)}</span>
+											</span>
+										}
 
 										<span className='selectors'>
 											{!instance.switches.disableCountrySelector &&
@@ -239,6 +240,4 @@ class AppHeader extends Component {
 	}
 }
 
-const mapStateToProps = ({ showServiceMap }, p) => ({ showServiceMap });
-
-export default translate()(connect(mapStateToProps)(AppHeader));
+export default translate()(AppHeader);
