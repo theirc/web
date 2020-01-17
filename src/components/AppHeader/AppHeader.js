@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import { Search } from "material-ui-icons";
 import Headroom from "react-headrooms";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import { translate, Interpolate } from "react-i18next";
 import { Close, Home, List, Assignment } from "material-ui-icons";
 
