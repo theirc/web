@@ -8,7 +8,6 @@ import { Helmet } from "react-helmet";
 
 // local
 import cmsApi from "./backend/cmsApi";
-import cms from "./backend/cms";
 import instance from './backend/settings';
 import Router from "./router";
 import "./App.css";
@@ -31,13 +30,8 @@ class ThemedApp extends Component {
 	};
 
 	getChildContext() {
-		let config = cms.siteConfig;
 		let api = cmsApi();
-
-		return {
-			config,
-			api,
-		};
+		return { api };
 	}
 
 	render() {
