@@ -14,6 +14,7 @@ import _ from 'lodash';
 // local
 import { history } from "../../../shared/redux/store";
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
+import instance from '../../../backend/settings';
 import "../../../components/ActionsBar/ActionsBar.css";
 import "./ArticleDetailBody.css";
 
@@ -102,7 +103,7 @@ class ArticleDetailBody extends Component {
 	renderVideo() {
 		const { article } = this.props;
 		const { url } = article.fields;
-		const APP_ID = this.context.config.appId;
+		const APP_ID = instance.thirdParty.facebook.appId;
 
 		if (/facebook.com/.test(url)) {
 			let videoId = url.replace(/.*facebook.com\/.*\/videos\/(.*)\/.*/, "$1");
@@ -116,7 +117,7 @@ class ArticleDetailBody extends Component {
 	}
 
 	injectVideoPlaceholders() {
-		const APP_ID = this.context.config.appId;
+		const APP_ID = instance.thirdParty.facebook.appId;
 
 		Array.from(document.getElementsByClassName('YouTubePlayer') || []).forEach(e => {
 			var videoId = e.getAttribute('videoId');

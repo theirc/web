@@ -11,7 +11,6 @@ export default {
 	},
 	thirdParty: {
 		facebook: {
-			appId: '708254579325899',
 			page: 'https://www.facebook.com/refugee.info'
 		}
 	}

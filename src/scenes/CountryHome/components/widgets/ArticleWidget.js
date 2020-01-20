@@ -6,6 +6,7 @@ import YouTube from "react-youtube";
 import PropTypes from 'prop-types';
 
 // local
+import instance from '../../../../backend/settings';
 import "./ArticleWidget.css";
 
 const NS = { ns: 'CountryHome' };
@@ -25,7 +26,7 @@ class ArticleWidget extends Component {
 
 	renderVideo(article) {
 		const { url } = article.fields;
-		const APP_ID = this.context.config.appId;
+		const APP_ID = instance.thirdParty.facebook.appId;
 
 		if (/facebook.com/.test(url)) {
 			let videoId = url.replace(/.*facebook.com\/.*\/videos\/(.*)\/.*/, "$1");
