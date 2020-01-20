@@ -30,5 +30,10 @@ export default {
 		cookieBanner: true,
 		disableCountrySelector: false,
 		disableLanguageSelector: false,
+	},
+	thirdParty: {
+		facebook: {
+			appId: "708254579325899",
+		}
 	}
 };

@@ -11,7 +11,6 @@ export default {
 	},
 	thirdParty: {
 		facebook: {
-			appId: '154471931830995',
 			page: 'https://www.facebook.com/khabronainfo.mc.7'
 		}
 	}

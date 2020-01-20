@@ -60,24 +60,12 @@ var mainRequest = function (context) {
 		let hostname = request.hostname || request.headers.host;
 		let protocol = request.protocol;
 		let originalUrl = request.originalUrl;
-		let configKey = _.first(
-			Object.keys(conf).filter(k => {
-				return hostname.indexOf(k) > -1;
-			})
-		);
 
-		if (configKey) {
-			const {
-				appId
-			} = conf[configKey];
-			context = Object.assign(context || {}, {
-				appId: appId
-			});
+		const { appId } = instance.thirdParty.facebook;
+		context = Object.assign(context || {}, { appId: appId });
 
-			// console.log(instance, 'server', instance.brand);
-			context.title = context.title || instance.brand.tabTitle;
-			context.image = context.image || instance.brand.images.thumbnail;
-		}
+		context.title = context.title || instance.brand.tabTitle;
+		context.image = context.image || instance.brand.images.thumbnail;
 
 		fs.readFile(path.join(path.dirname(path.dirname(__dirname)), "build", "index.html"), (err, data) => {
 			if (err) throw err;
@@ -273,7 +261,7 @@ app.get("/:country/:category/:article", function(req, res, err) {
 					return;
 				}
 
-				languageDictionary = Object.assign(languageDictionary, conf[configKey]);
+				languageDictionary = Object.assign(languageDictionary, conf[configKey]); // TODO: replace this config by the new instances
 				let cms = cmsApi();
 				cms.client
 					.getEntries({
