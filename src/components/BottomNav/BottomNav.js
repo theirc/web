@@ -35,32 +35,21 @@ class BottomNav extends Component {
 		i18nHelpers.loadResource(languages, NS.ns);
 	}	
 
-	// TODO: move these props to local dispatch
+	// TODO: refactor this
 	select(selectedIndex = 0) {
 		const { onGoHome, onGoToCategories, onGoToSearch, onGoToServices, goToMap } = this.props;
-
+		
+		const mappedGoTo = {
+			0: onGoHome,
+			1: onGoToCategories,
+			2: onGoToServices,
+			3: onGoToSearch,
+			4: goToMap
+		};
+		
 		this.setState({ selectedIndex });
-		if (selectedIndex === 0) {
-			if (onGoHome) {
-				return onGoHome();
-			}
-		} else if (selectedIndex === 1) {
-			if (onGoToCategories) {
-				return onGoToCategories();
-			}
-		} else if (selectedIndex === 2) {
-			if (onGoToSearch) {
-				return onGoToSearch();
-			}
-		} else if (selectedIndex === 3) {
-			if (onGoToServices) {
-				return onGoToServices();
-			}
-		} else if (selectedIndex === 4) {
-			if (goToMap) {
-				return goToMap();
-			}
-		}
+
+		return mappedGoTo[selectedIndex] && mappedGoTo[selectedIndex]();
 	}
 
 	render() {
@@ -81,7 +70,7 @@ class BottomNav extends Component {
 					) : (<BottomNavigationButton disabled style={{display: 'none'}} />)}
 
 					{instance.countries[country].switches.showServices ? (
-						<BottomNavigationButton className={this.props.index === 2 ? "Selected" : ""} icon={<List />} label={<span className="BottomButton">{t("menu.Services", NS)}</span>} value={3} />
+						<BottomNavigationButton className={this.props.index === 2 ? "Selected" : ""} icon={<List />} label={<span className="BottomButton">{t("menu.Services", NS)}</span>} value={2} />
 					) : (<BottomNavigationButton disabled style={{display: 'none'}} />)}
 					
 				</BottomNavigation>
