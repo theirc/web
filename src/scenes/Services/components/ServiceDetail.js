@@ -104,26 +104,6 @@ class ServiceDetail extends React.Component {
 		}
 	}
 
-	share() {
-		const { language } = this.props;
-
-		if (global.window) {
-			const { FB } = global.window;
-			let { href } = window.location;
-			href += (href.indexOf("?") > -1 ? "&" : "?") + "language=" + language;
-
-			if (FB) {
-				FB.ui(
-					{
-						method: "share",
-						href,
-					},
-					function (response) { }
-				);
-			}
-		}
-	}
-
 	componentDidMount() {
 		const { fetchService, fetchServicesInSameLocation } = this.props;
 		if (fetchService) {
