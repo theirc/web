@@ -5,9 +5,11 @@ import queryString from "query-string";
 import { push } from "react-router-redux";
 
 // local
+import config from '../../backend/config';
 import servicesApi from "../../backend/servicesApi";
 import i18nHelpers from '../../helpers/i18n';
 import languages from './languages';
+import cmsApi from '../../backend/cmsApi';
 import { SearchPage } from "../../components";
 import { Skeleton } from "../../scenes";
 
@@ -47,11 +49,10 @@ class Search extends React.Component {
 		const { location, country, language } = props;
 		const qs = queryString.parse(location.search);
 		this.setState({ articles: [], services: [], searchingArticles: true, searchingServices: true, term: qs.q });
-		const { api, config } = this.context;
 		const languageDictionary = config.languageDictionary || {};
 
 		setTimeout(s => {
-			api.client
+			cmsApi().client
 				.getEntries({
 					content_type: "article",
 					"fields.country.sys.id": country.sys.id,
