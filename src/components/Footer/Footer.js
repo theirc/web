@@ -33,25 +33,6 @@ class Footer extends Component {
 		setTimeout(() => this.setState({ copied: false }), 1500);
 	}
 
-	onShareOnFacebook = () => {
-		const { language } = this.props
-		if (global.window) {
-			const { FB } = global.window;
-			let { href } = window.location;
-			href += (href.indexOf("?") > -1 ? "&" : "?") + "language=" + language;
-
-			if (FB) {
-				FB.ui(
-					{
-						method: "share",
-						href,
-					},
-					function (response) { }
-				);
-			}
-		}
-	}
-
 	render() {
 		const { country, onChangeLanguage, onChangeLocation, t } = this.props;
 		const facebookPage = _.has(country, 'fields.slug') && instance.countries[country.fields.slug].thirdParty.facebook.page;
