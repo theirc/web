@@ -94,7 +94,7 @@ class ArticleDetail extends React.Component {
 			<Skeleton headerColor='light'>
 				<div className="SkeletonContainer">
 					<Placeholder>
-						<ArticleDetailBody key={"ArticleDetailBody"} direction={direction} category={category} other={other} article={article} loading={loading} onNavigate={onNavigate} />
+						<ArticleDetailBody key={"ArticleDetailBody"} direction={direction} category={category} language={language} other={other} article={article} loading={loading} onNavigate={onNavigate} />
 						<ArticleDetailFooter key={"ArticleDetailFooter"} onNavigateTo={onNavigateTo(category, country)} language={language} {...{ category, direction, previous, next, article, country }} />
 					</Placeholder>
 				</div>

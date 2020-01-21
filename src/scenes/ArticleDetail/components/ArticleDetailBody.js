@@ -15,6 +15,7 @@ import _ from 'lodash';
 import { history } from "../../../shared/redux/store";
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
 import instance from '../../../backend/settings';
+import fbHelper from '../../../helpers/facebook';
 import "../../../components/ActionsBar/ActionsBar.css";
 import "./ArticleDetailBody.css";
 
@@ -141,29 +142,8 @@ class ArticleDetailBody extends Component {
 		setTimeout(() => this.setState({ copied: false }), 1500);
 	}
 
-	onShareOnFacebook = () => {
-		const { language } = this.props
-
-		if (global.window) {
-			const { FB } = global.window;
-			let { href } = window.location;
-			console.log(FB, href)
-			href += (href.indexOf("?") > -1 ? "&" : "?") + "language=" + language;
-
-			if (FB) {
-				FB.ui(
-					{
-						method: "share",
-						href,
-					},
-					function (response) { }
-				);
-			}
-		}
-	}
-
 	render() {
-		const { article, category, loading, t } = this.props;
+		const { article, category, language, loading, t } = this.props;
 		const { title, content, hero, lead } = article.fields;
 		const { contentType } = article.sys;
 
@@ -199,7 +179,7 @@ class ArticleDetailBody extends Component {
 					</div>
 
 					<div className="social">
-						<div href='#' className="social-btn" onClick={this.onShareOnFacebook}><i className="fa fa-facebook-f" /></div>
+						<div href='#' className="social-btn" onClick={() => fbHelper.share(language)}><i className="fa fa-facebook-f" /></div>
 
 						<div href='#' className="social-btn" onClick={this.onCopyLink}>
 							{!this.state.copied ? <Link /> : <LibraryBooks />}

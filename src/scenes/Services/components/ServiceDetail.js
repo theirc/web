@@ -13,6 +13,7 @@ import PropTypes from "prop-types";
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
 import instance from '../../../backend/settings';
 import routes from '../routes';
+import fbHelpers from '../../../helpers/facebook';
 import "../../../components/ActionsBar/ActionsBar.css";
 import "./ServiceDetail.css";
 import "./ServiceHome.css";
@@ -82,46 +83,6 @@ class ServiceDetail extends React.Component {
 		clipboard.writeText(document.location.href);
 
 		setTimeout(() => this.setState({ copied: false }), 1500);
-	}
-
-	onShareOnFacebook = () => {
-		const { language } = this.props
-		if (global.window) {
-			const { FB } = global.window;
-			let { href } = window.location;
-
-			href += (href.indexOf("?") > -1 ? "&" : "?") + "language=" + language;
-
-			if (FB) {
-				FB.ui(
-					{
-						method: "share",
-						href,
-					},
-					function (response) { }
-				);
-			}
-		}
-	}
-
-	share() {
-		const { language } = this.props;
-
-		if (global.window) {
-			const { FB } = global.window;
-			let { href } = window.location;
-			href += (href.indexOf("?") > -1 ? "&" : "?") + "language=" + language;
-
-			if (FB) {
-				FB.ui(
-					{
-						method: "share",
-						href,
-					},
-					function (response) { }
-				);
-			}
-		}
 	}
 
 	componentDidMount() {
@@ -299,7 +260,7 @@ class ServiceDetail extends React.Component {
 				<div className='ActionsBar'>
 					<div className="left"></div>
 					<div className="social">
-						<div href='#' className="social-btn" onClick={this.onShareOnFacebook}><i className="fa fa-facebook-f" style={{ fontSize: 16 }} /></div>
+						<div href='#' className="social-btn" onClick={() => fbHelpers.share(language)}><i className="fa fa-facebook-f" style={{ fontSize: 16 }} /></div>
 
 						<div href='#' className="social-btn" onClick={this.onCopyLink}>
 							{!this.state.copied ? <Link /> : <LibraryBooks />}
