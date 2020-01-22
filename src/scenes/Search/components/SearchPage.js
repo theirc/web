@@ -179,7 +179,8 @@ class SearchPage extends React.Component {
 											onClick={() => onNavigate(`/${article.fields.country.fields.slug}/${article.fields.category.fields.slug}/${article.fields.slug}?language=${language}`)}
 										>
 											{article.fields.hero && <div className="Image" style={{ backgroundImage: `url('${article.fields.hero.fields.file.url}')` }} />}
-											<div className={`Text ${article.fields.hero ? 'TextWithImage' : ''}`}>
+											{!article.fields.hero && <div className="Image" style={{ backgroundImage: `url('/placeholder.png')` }} />}
+											<div className='Text TextWithImage'>
 												<h2> {article.fields.title}</h2>
 												<p dangerouslySetInnerHTML={{ __html: md.render(article.fields.lead) }} />
 											</div>
