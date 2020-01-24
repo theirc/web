@@ -10,6 +10,7 @@ import YouTube from "react-youtube";
 import InstagramEmbed from 'react-instagram-embed';
 import { translate } from "react-i18next";
 import { history } from "../../../shared/store";
+import _ from 'lodash';
 
 // local
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
@@ -161,6 +162,8 @@ class ArticlePage extends Component {
 		let html = md.render(content || lead);
 		html = html.replace(/(\+[0-9]{9,14}|00[0-9]{9,15})/g, `<a class="tel" href="tel:$1">$1</a>`);
 
+		let country = _.get(article, 'fields.country.fields.slug');
+
 		return (
 			<div ref={r => (this._ref = r)} className={["ArticlePage", loading ? "loading" : "loaded"].join(" ")}>
 				<Helmet>
@@ -183,7 +186,7 @@ class ArticlePage extends Component {
 
 				<div className='filter-bar'>
 					{article && article.fields.category &&
-						<button className='btn-filter' onClick={ history.goBack }>
+						<button className='btn-filter' onClick={() => country ? history.push(`/${country}/categories`) : history.goBack()}>
 							<i className="material-icons">keyboard_arrow_left</i>
 							<i className={article.fields.category.fields.iconClass || "material-icons"}>{article.fields.category.fields.iconText || ((!article.fields.category.fields.iconClass || article.fields.category.fields.iconClass === "material-icons") && "add")}</i>
 							<span>{article.fields.category.fields.name}</span>
