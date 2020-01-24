@@ -9,6 +9,7 @@ import measureDistance from "@turf/distance";
 
 // local
 import { CountrySelector, LanguageSelector, DetectLocationSelector } from "../../components";
+import Skeleton from '../../components/Skeleton/Skeleton';
 import { actions } from "../../shared/store";
 import servicesApi from "../../backend/servicesApi";
 import getSessionStorage from "../../shared/sessionStorage";
@@ -203,19 +204,23 @@ class Selectors extends Component {
 		switch (currentPage) {
 			case 1:
 				return (
-					// <Skeleton hideShareButtons={true}>
+					<Skeleton hideShareButtons={true}>
 						<LanguageSelector
 							languages={languages}
 							onSelectLanguage={l => {
 								this.selectLanguage(l);
 							}}
 						/>
-					// </Skeleton>
+					</Skeleton>
 				);
 
 			case 2:
 				if (!countryList) {
-					return <div className="LoaderContainer"><div className="loader" /></div>;
+					return (
+						<Skeleton hideShareButtons={true}>
+							<div className="LoaderContainer"><div className="loader" /></div>
+						</Skeleton>
+					)
 				}
 
 				if (countryList.length === 1) {
@@ -223,11 +228,15 @@ class Selectors extends Component {
 					return null;
 				} else {
 					if (!loaded) {
-						return <div className="LoaderContainer"><div className="loader" /></div>;
-					}
+						return (
+							<Skeleton hideShareButtons={true}>
+								<div className="LoaderContainer"><div className="loader" /></div>
+							</Skeleton>
+						)
+						}
 
 					return (
-						// <Skeleton hideShareButtons={true}>
+						<Skeleton hideShareButtons={true}>
 							<CountrySelector
 								onGoTo={slug => {
 									this.selectCountry(slug);
@@ -237,7 +246,7 @@ class Selectors extends Component {
 								language={language}
 								backToLanguage={this.backToLanguage.bind(this)}
 							/>
-						// </Skeleton>
+						</Skeleton>
 					);
 				}
 

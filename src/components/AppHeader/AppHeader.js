@@ -111,14 +111,14 @@ class AppHeader extends Component {
 		disclaimersLink = window.location.href.includes(disclaimersLink) ? '#' : disclaimersLink;
 
 		let selectedIndex = selectedMenuItem();
-
+		let path = window.location.pathname;
 		return (
 			<div className={backgroundDark ? 'AppHeader' : 'AppHeaderLight'}>
 
 				<Headroom tolerance={5} offset={200}>
 					<div className={[homePage ? "header-opacity" : "", backgroundDark ? 'app-bar' : 'app-bar-light', !(country && language) ? 'app-bar-black' : ''].join(" ")}>
 
-						<div className={["app-bar-container logo", !(country && language) ? "logo-centered" : ""].join(" ")} onClick={onGoHome || noop}>
+						<div className={["app-bar-container logo", !(country && language) ? "logo-centered" : ""].join(" ")} onClick={path.includes('selectors') ? noop : onGoHome || noop}>
 							<img onClick={onGoHome} src={backgroundDark ? logo : logoBlack} className="app-bar-logo" alt=" " />
 						</div>
 
