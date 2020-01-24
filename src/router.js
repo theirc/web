@@ -7,7 +7,6 @@ import { ConnectedRouter } from "react-router-redux";
 import { Home, Article, Categories, CountryHome, CategoryHome, Search, Services, Selectors, Subscribe } from "./scenes";
 import { DemoTool } from "./scenes";
 import { history } from "./shared/store";
-import { Skeleton } from "./scenes";
 import { withCountry, withCategory, withArticle } from "./shared/hoc";
 import Placeholder from "./shared/placeholder";
 
@@ -61,7 +60,7 @@ class Router extends Component {
 						<Route exact path="/:country/search" component={withCountry(Search)} />
 						<Route path="/:country/:category/:article" component={withCountry(withCategory(Article))} />
 						<Route path="/:country/:category" component={withCountry(withCategory(CategoryHome))} />
-						<Route exact path="/selectors" component={props => <Skeleton {...props}><Selectors /></Skeleton>} />
+						<Route exact path="/selectors" component={Selectors} />
 						<Route exact path="/:country" component={withCountry(CountryHome)} />
 						<Route exact path="/:country/demo" component={withCountry(DemoTool)} />
 
