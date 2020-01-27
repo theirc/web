@@ -7,6 +7,10 @@ import PropTypes from 'prop-types';
 // local
 import { } from '../../components';
 
+/**
+ * @class
+ * @description 
+ */
 class Home extends React.Component {
 	static contextTypes = {
 		router: PropTypes.object
@@ -28,17 +32,6 @@ class Home extends React.Component {
 	}
 }
 
-const mapState = ({ country }, p) => {
-	return {
-		country
-	};
-};
+const mapState = ({ country }, p) => ({ country });
 
-const mapDispatch = (d, p) => {
-	return {
-		onMount: () => {
-		}
-	};
-};
-
-export default connect(mapState, mapDispatch)(Home);
+export default connect(mapState)(Home);

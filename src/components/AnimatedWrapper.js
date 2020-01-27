@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import * as Animated from "animated";
 
+/**
+ * @class
+ * @description 
+ */
 const AnimatedWrapper = WrappedComponent => {
 	class _AnimatedWrapper extends Component {
 

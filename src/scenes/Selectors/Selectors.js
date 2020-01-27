@@ -8,12 +8,21 @@ import PropTypes from "prop-types";
 import measureDistance from "@turf/distance";
 
 // local
-import { CountrySelector, LanguageSelector, DetectLocationSelector } from "../../components";
+import { CountrySelector, LanguageSelector } from "../../components";
 import Skeleton from '../../components/Skeleton/Skeleton';
-import { actions } from "../../shared/store";
+import { actions } from "../../shared/redux/store";
+import i18nHelpers from '../../helpers/i18n';
+import instance from '../../backend/settings';
+import languages from './languages';
 import servicesApi from "../../backend/servicesApi";
 import getSessionStorage from "../../shared/sessionStorage";
 
+const NS = { ns: 'Selectors' };
+
+/**
+ * @class
+ * @description 
+ */
 class Selectors extends Component {
 	state = {
 		currentPage: 1,
@@ -26,28 +35,18 @@ class Selectors extends Component {
 	};
 
 	static contextTypes = {
-		config: PropTypes.object,
 		api: PropTypes.object,
 	};
 
+	componentDidMount() {
+		i18nHelpers.loadResource(languages, NS.ns);
+	}	
+
 	componentWillMount() {
-		let {
-			language
-		} = this.props;
 		const sessionStorage = getSessionStorage();
+		let language = instance.languages.length === 1 ? instance.defaultLanguage : this.props.language;
 
-		const {
-			config
-		} = this.context;
-		const {
-			languages
-		} = config;
-
-		if (languages.length === 1) {
-			language = languages[0][0];
-		}
-
-		if (language && (!!sessionStorage.firstRequest || languages.length === 1)) {
+		if (language && (!!sessionStorage.firstRequest || instance.languages.length === 1)) {
 			this.selectLanguage(language, 0);
 		}
 	}
@@ -168,45 +167,27 @@ class Selectors extends Component {
 		this.selectCountry(first.slug);
 	}
 
-	logError(l) {
-		console.log(l);
-	}
-
-	filterLangs(config) {
+	filterLangs() {
 		let currentCountry = sessionStorage.getItem('redirect');
-
-		for (let i = 0; i < config.hideLangsPerCountry.length; i++) {
-			if (currentCountry && currentCountry.indexOf(`/${config.hideLangsPerCountry[i].country}`) === 0) {
-				return config.languages.filter(l => config.hideLangsPerCountry[i].langs.indexOf(l[0]) < 0);
-			}
-		}
-		return null;
+		return currentCountry ? instance.languages.filter(l => instance.countries[currentCountry.replace('/', '')].languages.includes(l[0])) : instance.languages;
 	}
 
 	render() {
 		const {
-			currentPage,
 			countryList,
+			currentPage,
+			loaded,
 			regionList,
-			loaded
 		} = this.state;
-		const {
-			config
-		} = this.context;
-		const {
-			language
-		} = this.props
-
-		// SP-354 disable tigrinya and french from italy
-		let languages = this.filterLangs(config);
-		!languages && (languages = config.languages);
-
+		const { language } = this.props
+		
+		let filteredlanguages = this.filterLangs();
 		switch (currentPage) {
 			case 1:
 				return (
 					<Skeleton hideShareButtons={true}>
 						<LanguageSelector
-							languages={languages}
+							languages={filteredlanguages}
 							onSelectLanguage={l => {
 								this.selectLanguage(l);
 							}}
@@ -233,7 +214,7 @@ class Selectors extends Component {
 								<div className="LoaderContainer"><div className="loader" /></div>
 							</Skeleton>
 						)
-						}
+					}
 
 					return (
 						<Skeleton hideShareButtons={true}>
@@ -251,7 +232,9 @@ class Selectors extends Component {
 				}
 
 			case 3:
-				return <DetectLocationSelector onBackToList={() => this.setState({ currentPage: 2 })} onLocationFound={l => this.lookupCoordinates(l)} onLocationError={l => this.logError(l)} />;
+				console.log('DetectLocationSelector');
+				return null;
+				// return <DetectLocationSelector onBackToList={() => this.setState({ currentPage: 2 })} onLocationFound={l => this.lookupCoordinates(l)} onLocationError={l => this.logError(l)} />;
 
 			case -1:
 				return <Redirect to={this.state.redirect} />;
@@ -262,27 +245,11 @@ class Selectors extends Component {
 	}
 }
 
-const mapState = ({
-	countryList,
-	country,
-	language
-}, p) => {
-	return {
-		language,
-		country,
-	};
-};
+const mapState = ({ country, language }, p) => ({ language, country });
 
-const mapDispatch = (d, p) => {
-	return {
-		onSelectLanguage: code => {
-			d(actions.changeLanguage(code));
-		},
-
-		onGoTo: slug => {
-			d(push(`/${slug}`));
-		}
-	};
-};
+const mapDispatch = (d, p) => ({
+	onGoTo: slug => d(push(`/${slug}`)),
+	onSelectLanguage: code => d(actions.changeLanguage(code)),
+});
 
 export default connect(mapState, mapDispatch)(Selectors);

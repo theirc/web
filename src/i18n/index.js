@@ -1,3 +1,8 @@
+/**
+ * @file
+ * @description Initialization for i18n lib, resources are loaded dynamically in each component.
+ */
+
 // libs
 import i18n from "i18next";
 import { reactI18nextModule } from "react-i18next";
@@ -5,31 +10,20 @@ import { reactI18nextModule } from "react-i18next";
 // local
 import i18nConfig from "./config.js";
 
-i18n
-	//	.use(LanguageDetector)
-	.use(reactI18nextModule) // if not using I18nextProvider
-	.init({
-		fallbackLng: "en",
-		debug: false,
+const options = {
+	fallbackLng: "en",
 
-		interpolation: {
-			escapeValue: false, // not needed for react!!
-		},
-		resources: i18nConfig,
-		saveMissing: true,
-		missingKeyHandler: function (lng, ns, key, fallbackValue) {
-			window.missingKey = window.missingKey || {};
-			window.missingKey[lng] = window.missingKey[lng] || [];
-			window.missingKey[lng].push(key);
-		},
+	interpolation: {
+		escapeValue: false, // not needed for react!!
+	},
+	resources: i18nConfig, // TODO: remove this once it's completely empty
 
-		// react i18next special options (optional)
-		react: {
-			wait: false,
-			bindI18n: "languageChanged loaded",
-			bindStore: "added removed",
-			nsMode: "default",
-		},
-	});
+	// react i18next special options (optional)
+	react: {
+		wait: true,
+	},
+};
+
+i18n.use(reactI18nextModule).init(options);
 
 export default i18n;

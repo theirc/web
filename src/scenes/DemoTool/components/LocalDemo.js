@@ -3,19 +3,20 @@ import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { Helmet } from "react-helmet";
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
-import PropTypes from "prop-types";
 
 // local
-import "./LocalDemo.css";
 import getSessionStorage from "../../../shared/sessionStorage";
+import instance from '../../../backend/settings';
+import "./LocalDemo.css";
 
+/**
+ * @class
+ * @description 
+ */
 class LocalDemo extends Component {
-	static propTypes = {};
-	static contextTypes = {
-		config: PropTypes.object,
-	};
 	state = {
 		loaded: true,
+		done: false,
 	};
 
 	componentDidMount() {
@@ -27,13 +28,12 @@ class LocalDemo extends Component {
 	}
 
 	render() {
-		const { config } = this.context;
 		const { country, language, t } = this.props;
-		const { loaded } = this.state;
+		const { loaded, done } = this.state;
 		const startCache = () => {
 			this.setState({ loaded: false });
 			var demoConfig = {
-				"CN": {
+				"cn": {
 					urlsToStore: [
 						{ storeName: 'serviceList', url: 'https://admin.cuentanos.org/e/production/v2/services/searchlist/?filter=relatives&geographic_region=el-salvador&page=1&page_size=1000&type_numbers=' },
 						{ storeName: `${language}-${country.fields.slug}-service-categories`, url: 'https://admin.cuentanos.org/e/production/v2/service-types/?region=el-salvador' },
@@ -43,7 +43,7 @@ class LocalDemo extends Component {
 					buttonColor: 'greeen',
 					title: 'Descargar información para uso sin conexión'
 				},
-				"RI": {
+				"ri": {
 					urlsToStore: [
 						{ storeName: 'serviceList', url: `https://admin.refugee.info/e/production/v2/services/searchlist/?filter=relatives&geographic_region=${country.fields.slug}&page=1&page_size=1000&type_numbers=` },
 						{ storeName: `${language}-${country.fields.slug}-service-categories`, url: `https://admin.refugee.info/e/production/v2/service-types/?region=${country.fields.slug}` },
@@ -57,7 +57,7 @@ class LocalDemo extends Component {
 				}
 			};
 
-			let site = config.siteCode;
+			let site = instance.brand.code;
 			let urlsToStore = demoConfig[site].urlsToStore;
 			urlsToStore.map(url => {
 				fetch(url.url)
@@ -66,7 +66,7 @@ class LocalDemo extends Component {
 					})
 					.then(res => {
 						sessionStorage.setItem(url.storeName, JSON.stringify(res));
-						return this.setState({ loaded: true });
+						return this.setState({ loaded: true, done: true });
 					})
 				return console.log(url);
 			})
@@ -91,8 +91,10 @@ class LocalDemo extends Component {
 				<HeaderBar title={t('Download data for offline use')} />
 				
 				<div className="content">
+					<h3>{t('Esta operación descargará los Informativos y ciertos Servicios en el navegador para su acceso sin conexión.')}</h3>
 					{loaded && <button onClick={startCache} className="downloadButton">{t('Click to download data')}</button>}
 					{!loaded && <div className="loader" />}
+					{done && <h3>La descarga ha finalizado exitosamente</h3>}
 				</div>
 
 			</div>

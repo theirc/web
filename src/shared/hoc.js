@@ -5,10 +5,14 @@ import _ from "lodash";
 import PropTypes from "prop-types";
 
 // local
-import { actions } from "./store";
+import { actions } from "./redux/store";
 import servicesApi from "../backend/servicesApi";
-import { Skeleton } from "../scenes";
+import Skeleton from "../components/Skeleton/Skeleton";
 
+/**
+ * @function
+ * @description 
+ */
 export function withCountry(WrappedComponent) {
 	class CountrySwitcher extends Component {
 		state = {
@@ -106,6 +110,10 @@ export function withCountry(WrappedComponent) {
 	return CountrySwitcher;
 }
 
+/**
+ * @function
+ * @description 
+ */
 export function withCategory(WrappedComponent) {
 	class CategorySwitcher extends Component {
 		state = {
@@ -199,6 +207,10 @@ export function withCategory(WrappedComponent) {
 	return CategorySwitcher;
 }
 
+/**
+ * @function
+ * @description 
+ */
 export function withArticle(WrappedComponent) {
 	class ArticleSwitcher extends Component {
 		state = {

@@ -3,11 +3,18 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { push } from "react-router-redux";
+import _ from 'lodash';
 
 // local
 import { BottomNav } from "../";
+import instance from '../../backend/settings';
+import routes from '../../routes';
 import selectedMenuItem from '../../helpers/menu-items';
 
+/**
+ * @class
+ * @description 
+ */
 class BottomNavContainer extends React.Component {
 	static propTypes = {
 		match: PropTypes.shape({
@@ -34,16 +41,13 @@ class BottomNavContainer extends React.Component {
 	}
 
 	render() {
-		const { country, onGoToCategories, onGoHome, onGoToSearch, showMapButton, goToMap, showDepartments } = this.props;
-
-		let { showServiceMap } = this.props;
+		const { country, onGoToCategories, onGoHome, onGoToSearch, showMapButton, goToMap } = this.props;
 		let selectedIndex = selectedMenuItem();
 
-		country && country.fields && country.fields.slug === 'italy' && (showServiceMap = false);
-
+		const showDepartments = _.has(country, 'fields.slug') && instance.countries[country.fields.slug].switches.showDepartments;
+		// TODO: dereference country inside routes?
 		return (
 			<BottomNav
-				showServiceMap={showServiceMap}
 				index={selectedIndex}
 				country={country && country.fields.slug}
 				onGoToCategories={onGoToCategories.bind(null, country.fields.slug)}
@@ -57,33 +61,14 @@ class BottomNavContainer extends React.Component {
 	}
 }
 
-const mapState = ({ category, country, showServiceMap, router }, p) => {
-	return {
-		category,
-		country,
-		showServiceMap,
-		router,
-	};
-};
+const mapState = ({ category, country, router }, p) => ({ category, country, router });
 
-const mapDispatch = (d, p) => {
-	return {
-		onGoToCategories: country => {
-			d(push(`/${country}/categories`));
-		},
-		onGoHome: country => {
-			d(push(`/${country}`));
-		},
-		onGoToSearch: country => {
-			d(push(`/${country}/search`));
-		},
-		onGoToServices: country => {
-			d(push(`/${country}/services/`));
-		},
-		onGoToDepartments: country => {
-			d(push(`/${country}/services/`));
-		},
-	};
-};
+const mapDispatch = (d, p) => ({
+	onGoToCategories: country => d(push(routes.goToCategories(country))),
+	onGoHome: country => d(push(routes.goHome(country))),
+	onGoToSearch: country => d(push(routes.goToSearch(country))),
+	onGoToServices: country => d(push(routes.goToServices(country))),
+	onGoToDepartments: country => d(push(routes.goToDepartments(country))),
+});
 
 export default connect(mapState, mapDispatch)(BottomNavContainer);

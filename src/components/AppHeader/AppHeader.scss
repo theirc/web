@@ -101,6 +101,7 @@ Less me
 }
 
 .selectors {
+	align-items: center;
 	display: flex;
 	padding: 0 15px;
 
@@ -126,6 +127,8 @@ Less me
 	}
 	
 	.lang {
+		font-size: 14px;
+		font-weight: lighter;
 		text-transform: uppercase;
 
 		&:hover {
@@ -164,6 +167,8 @@ Less me
 		}
 
 		&.top-menu {
+			border-bottom: 3px solid;
+			border-bottom-color: transparent;
 			.menu-item {
 				font-weight: 100;
 				white-space: pre;
@@ -174,8 +179,8 @@ Less me
 			}
 
 			&.Selected {
-				border-bottom: 3px solid;
 				@include darken-brand-colors( "border-bottom-color", 10%);
+				font-size: 15px;
 
 				svg {
 					@include darken-brand-colors( "color", 10%);
@@ -188,7 +193,7 @@ Less me
 		}
 
 		svg {
-			margin-right: 10px;
+			margin: 0 10px;
 		}
 
 	}
@@ -202,16 +207,6 @@ Less me
 		display: none !important;
 	}
 }
-
-.rtl {
-	.app-bar-selectors {
-		svg {
-			margin-right: 0;
-			margin-left: 10px;
-		}
-	}
-}
-
 
 .app-bar-separator {
 	border-left-width: 1px;
@@ -527,6 +522,10 @@ Less me
 	
 			p {
 				white-space: pre-line;
+			}
+
+			.close-alert {
+				padding: 5px;
 			}
 		}
 	}

@@ -3,7 +3,7 @@ const compress = require("compression");
 const cors = require("cors");
 const helmet = require("helmet");
 const bodyParser = require("body-parser");
-
+const instance = require('../backend/settings').default; // TODO: check why require() needs to dereference the default
 const feathers = require("feathers");
 const configuration = require("feathers-configuration");
 const hooks = require("feathers-hooks");
@@ -12,29 +12,15 @@ const socketio = require("feathers-socketio");
 
 const handler = require("feathers-errors/handler");
 const notFound = require("feathers-errors/not-found");
-const mustacheExpress = require("mustache-express");
 const logger = require("winston");
-const less = require("less");
 const fs = require("fs");
 const nunjucks = require("nunjucks");
 const conf = require("../backend/config");
-const cms = require("../backend/cms").default;
 const servicesApi = require("../backend/servicesApi");
 const cmsApi = require("../backend/cmsApi").default;
-const ReactApp = require("../App").default;
-
-const React = require("react");
-const renderToString = require("react-dom/server").renderToString;
-const {
-	store,
-	history
-} = require("../shared/store");
-const Provider = require("react-redux").Provider;
 const _ = require("lodash");
 const toMarkdown = require("to-markdown");
-let {
-	languageDictionary
-} = conf;
+let { languageDictionary } = conf;
 
 const app = feathers();
 app.configure(configuration());
@@ -43,9 +29,7 @@ app.use(cors());
 app.use(helmet());
 app.use(compress());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-	extended: true
-}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Set up Plugins and providers
 app.configure(hooks());
@@ -67,28 +51,21 @@ app.get("/config", (rq, res) => {
 	res.send(responseText);
 });
 
+/**
+ * @function
+ * @description 
+ */
 var mainRequest = function (context) {
 	return function (request, response, next) {
 		let hostname = request.hostname || request.headers.host;
 		let protocol = request.protocol;
 		let originalUrl = request.originalUrl;
-		let configKey = _.first(
-			Object.keys(conf).filter(k => {
-				return hostname.indexOf(k) > -1;
-			})
-		);
 
-		if (configKey) {
-			const {
-				appId
-			} = conf[configKey];
-			context = Object.assign(context || {}, {
-				appId: appId
-			});
-			context.title = context.title || conf[configKey].title;
-			context.image = context.image || conf[configKey]["thumbnail"];
-			// console.log(context, conf[configKey], configKey);
-		}
+		const { appId } = instance.thirdParty.facebook;
+		context = Object.assign(context || {}, { appId: appId });
+
+		context.title = context.title || instance.brand.tabTitle;
+		context.image = context.image || instance.brand.images.thumbnail;
 
 		fs.readFile(path.join(path.dirname(path.dirname(__dirname)), "build", "index.html"), (err, data) => {
 			if (err) throw err;
@@ -103,21 +80,13 @@ var mainRequest = function (context) {
 		});
 	};
 };
-const parseLanguage = function (req) {
-	let hostname = req.hostname || req.headers.host;
-	let configKey = _.first(
-		Object.keys(conf).filter(k => {
-			return hostname.indexOf(k) > -1;
-		})
-	);
-	let possibleLanguages = ["en", "es"];
 
-	if (configKey) {
-		const {
-			languages
-		} = conf[configKey];
-		possibleLanguages = languages.map(l => l[0]);
-	}
+/**
+ * @function
+ * @description 
+ */
+const parseLanguage = function (req) {
+	let possibleLanguages = instance.languages.map(l => l[0]);
 	let selectedLanguage = "en";
 
 	if ("language" in req.query) {
@@ -147,6 +116,10 @@ const markdownOptions = {
 	},],
 };
 
+/**
+ * @class
+ * @description 
+ */
 const getFirsLevel = (slug, selectedLanguage) => {
 	return servicesApi
 		.fetchRegions(selectedLanguage)
@@ -175,6 +148,8 @@ app.use("/fonts", feathers.static("build/fonts"));
 app.get("/bulgaria/*", function (req, res, err) {
 	res.redirect(`/bulgaria`);
 })
+
+require('./twilio-routes.js')(app);
 
 app.get("/preview/:serviceId/", function (req, res, err) {
 	const selectedLanguage = parseLanguage(req);
@@ -261,6 +236,7 @@ app.get('/:country/subscribe/:category', function(req, res, err){
         image: "",
     })(req, res, err);
 })
+
 app.get("/:country/:category/:article", function(req, res, err) {
     const selectedLanguage = parseLanguage(req);
     let configKey = _.first(
@@ -268,7 +244,6 @@ app.get("/:country/:category/:article", function(req, res, err) {
             return req.headers.host.indexOf(k) > -1;
         })
     );
-    let context = {};
     const {
         country,
         category,
@@ -286,12 +261,8 @@ app.get("/:country/:category/:article", function(req, res, err) {
 					return;
 				}
 
-				const {
-					accessToken,
-					space
-				} = conf[configKey];
-				languageDictionary = Object.assign(languageDictionary, conf[configKey]);
-				let cms = cmsApi(conf[configKey], languageDictionary);
+				languageDictionary = Object.assign(languageDictionary, conf[configKey]); // TODO: replace this config by the new instances
+				let cms = cmsApi();
 				cms.client
 					.getEntries({
 						content_type: "article",

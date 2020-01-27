@@ -3,16 +3,24 @@ import React, { Component } from "react";
 import { Search } from "material-ui-icons";
 import Headroom from "react-headrooms";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import { translate, Interpolate } from "react-i18next";
 import { Close, Home, List, Assignment } from "material-ui-icons";
 
 // local
 import selectedMenuItem from "../../helpers/menu-items";
+import i18nHelpers from '../../helpers/i18n';
+import instance from '../../backend/settings';
+import languages from './languages';
 import "./AppHeader.css";
 
-class AppHeader extends Component {
+const NS = { ns: 'AppHeader' };
 
+/**
+ * @class
+ * @description 
+ */
+class AppHeader extends Component {
+	
 	static propTypes = {
 		onChangeCountry: PropTypes.func,
 		onGoToSearch: PropTypes.func,
@@ -22,7 +30,8 @@ class AppHeader extends Component {
 		onGoToServices: PropTypes.func,
 		onGoToCategories: PropTypes.func,
 	};
-
+	
+	
 	state = {
 		search: false,
 		prvalert: localStorage.getItem("privacy-policy"),
@@ -30,6 +39,10 @@ class AppHeader extends Component {
 		active: false,
 		serbiaAlert: sessionStorage.getItem("serbia-alert"),
 	};
+	
+	componentDidMount() {
+		i18nHelpers.loadResource(languages, NS.ns);
+	}
 
 	toggleClass() {
 		const { currentState } = this.state.active;
@@ -79,8 +92,6 @@ class AppHeader extends Component {
 
 	render() {
 		const {
-			disableCountrySelector,
-			disableLanguageSelector,
 			country,
 			headerColor,
 			homePage,
@@ -90,21 +101,18 @@ class AppHeader extends Component {
 			onGoHome,
 			onGoToCategories,
 			onGoToServices,
-			showServiceMap,
 			t,
 		} = this.props;
 
 		const { search, searchText } = this.state;
 		const backgroundDark = headerColor === 'light' ? false : true;
-		const logo = this.props.logo || "/logo.svg";
-		const logoBlack = this.props.logoBlack || logo;
-		const noop = () => {
-			console.log("noop");
-		};
+		const logo = instance.brand.images.logo || "/logo.svg";
+		const logoBlack = instance.brand.images.logoBlack || logo;
+		const noop = () => console.log("noop");
 		const cookiePolicyLink = <a href="/greece/privacy/cookies" target="_blank" rel="noopener noreferrer">Cookie Policy</a>;
 		const privacyPolicyLink = <a href="/greece/privacy/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>;
 
-		let isOnServices = window.location.href.includes("/services/");
+		let isOnServices = window.location.href.includes("/services");
 		let isOnArticlesGreece = window.location.href.includes("/categories") || /(\/greece\/.*\/.*)/.test(window.location.href);
 
 		let disclaimersLink = `/greece/refugee-info-greece-closed/refugee-info-stops-operating-in-greece?language=${language}`;
@@ -127,31 +135,31 @@ class AppHeader extends Component {
 								<div className="app-bar-container buttons">
 									<div className="app-bar-buttons">
 										<span className={`app-bar-selectors top-menu ${selectedIndex === 0 ? "Selected" : ""}`} color="contrast" onClick={onGoHome || noop}>
-											<Home /><span className='menu-item'>{t("Home")}</span>
+											<Home /><span className='menu-item'>{t("menu.Home", NS)}</span>
 										</span>
 
 										<span className={`app-bar-selectors top-menu ${selectedIndex === 1 ? "Selected" : ""}`} color="contrast" onClick={onGoToCategories || noop}>
-											<Assignment /><span className='menu-item'>{t("Articles")}</span>
+											<Assignment /><span className='menu-item'>{t("menu.Articles", NS)}</span>
 										</span>
 
-										{showServiceMap && <span className={`app-bar-selectors top-menu ${selectedIndex === 2 ? "Selected" : ""}`} color="contrast" onClick={onGoToServices || noop}>
-											<List /><span className='menu-item'>{t("Services")}</span>
-										</span>}
-
-										{/* {!disableLanguageSelector && !disableCountrySelector && <div className="app-bar-separator" />} */}
+										{instance.countries[country.fields.slug].switches.showServices &&
+											<span className={`app-bar-selectors top-menu ${selectedIndex === 2 ? "Selected" : ""}`} color="contrast" onClick={onGoToServices || noop}>
+												<List /><span className='menu-item'>{t("menu.Services", NS)}</span>
+											</span>
+										}
 
 										<span className='selectors'>
-											{!disableCountrySelector && (
+											{!instance.switches.disableCountrySelector &&
 												<span className="country" color="contrast" onClick={onChangeCountry || noop}>
 													<img src={`/images/flags/${country.fields.slug}.png`} alt='' />
 												</span>
-											)}
+											}
 
-											{!disableLanguageSelector && (
+											{!instance.switches.disableLanguageSelector &&
 												<span className="lang" color="contrast" onClick={onChangeLanguage}>
 													{language || " "}
 												</span>
-											)}
+											}
 										</span>
 
 										<div className="app-bar-separator separator-searchIcon" />
@@ -169,13 +177,13 @@ class AppHeader extends Component {
 
 				{search && (
 					<form onSubmit={this.handleSubmit.bind(this)} className="SearchBar">
-						<input autoComplete="off" autoFocus name="searchText" placeholder={t("Search")} type="text" value={searchText} onChange={this.handleInputChange.bind(this)} />
+						<input autoComplete="off" autoFocus name="searchText" placeholder={t("menu.Search", NS)} type="text" value={searchText} onChange={this.handleInputChange.bind(this)} />
 						{searchText && <i className="fa fa-times-circle" onClick={() => this.setState({ searchText: "" })} />}
 						<i className="fa fa-search" onClick={this.handleSubmit.bind(this)} />
 					</form>
 				)}
 
-				{!this.state.prvalert && this.props.cookieBanner && (
+				{!this.state.prvalert && instance.switches.cookieBanner && (
 					<div className={this.state.prvalert ? 'hidden' : 'privacy-banner'}>
 						<div className='content'>
 							<span className="privacy-banner-separator"></span>
@@ -194,7 +202,7 @@ class AppHeader extends Component {
 					<div className={this.state.serbiaAlert ? 'serbia-banner' : 'hidden'}>
 						<div className='banner-wrapper'>
 							<span className="serbia-banner-separator"></span>
-							<p>{t("SERBIA_BANNER")}</p>
+							<p>{t("banner.Serbia", NS)}</p>
 							<Close
 								className="close-alert"
 								color="contrast"
@@ -210,7 +218,7 @@ class AppHeader extends Component {
 						<div className='banner-wrapper'>
 							<span className="serbia-banner-separator"></span>
 							<a href={disclaimersLink}>
-								<p>{isOnServices ? t("GREECE_BANNER_SERVICES") : t('GREECE_BANNER_ARTICLES')}</p>
+								<p>{isOnServices ? t("banner.Greece.Services", NS) : t('banner.Greece.Articles', NS)}</p>
 							</a>
 						</div>
 					</div>
@@ -221,7 +229,7 @@ class AppHeader extends Component {
 						<div className='banner-wrapper'>
 							<span className="serbia-banner-separator"></span>
 							<a href={disclaimersLink}>
-								<p>{t('GREECE_BANNER_HP')}</p>
+								<p>{t('banner.Greece.Home', NS)}</p>
 							</a>
 						</div>
 					</div>
@@ -231,10 +239,4 @@ class AppHeader extends Component {
 	}
 }
 
-const mapStateToProps = ({ showServiceMap }, p) => {
-	return {
-		showServiceMap,
-	};
-};
-
-export default translate()(connect(mapStateToProps)(AppHeader));
+export default translate()(AppHeader);

@@ -1,22 +1,17 @@
 import getSessionStorage from "../shared/sessionStorage";
-import cms from "./cms";
+import instance from './settings';
 
 var request = require("superagent");
 var Promise = require("bluebird");
 var _ = require("lodash");
-var { siteConfig } = cms;
-var RI_URL = "https://admin.refugee.info/e/production/v2";
-if (siteConfig && siteConfig.backendUrl) {
-	RI_URL = siteConfig.backendUrl;
-}
+const BACKEND_URL = instance.env.backendUrl;
 
-//var RI_URL = "http://localhost:8000/e/production/v2";
 module.exports = {
 	fetchCategories(language, region) {
 		return new Promise((resolve, reject) => {
 			// Do not cache, categories order changes
 			request
-				.get(RI_URL + "/service-types/" + (region ? `?region=${region}` : ""))
+				.get(BACKEND_URL + "/service-types/" + (region ? `?region=${region}` : ""))
 				.set("Accept-Language", language)
 				.end((err, res) => {
 					if (err) {
@@ -36,7 +31,7 @@ module.exports = {
 				resolve(JSON.parse(sessionStorage[`${language}-regions`]));
 			} else {
 				request
-					.get(RI_URL + "/regions/?exclude_geometry=true")
+					.get(BACKEND_URL + "/regions/?exclude_geometry=true")
 					.set("Accept-Language", language)
 					.end((err, res) => {
 						if (err) {
@@ -63,7 +58,7 @@ module.exports = {
 				resolve(JSON.parse(sessionStorage[`${language}-countries`]));
 			} else {
 				request
-					.get(RI_URL + "/regions/?countries=true")
+					.get(BACKEND_URL + "/regions/?countries=true")
 					.set("Accept-Language", language)
 					.end((err, res) => {
 						if (err) {
@@ -92,7 +87,7 @@ module.exports = {
 				resolve(_.first(categories.filter(c => c.id === categoryId)));
 			} else {
 				request
-					.get(RI_URL + "/service-types/" + categoryId + "/")
+					.get(BACKEND_URL + "/service-types/" + categoryId + "/")
 					.set("Accept-Language", language)
 					.end((err, res) => {
 						if (err) {
@@ -145,7 +140,7 @@ module.exports = {
 
 				const headers = { 'Accept-Language': language };
 
-				fetch(RI_URL + requestUrl, { headers })
+				fetch(BACKEND_URL + requestUrl, { headers })
 					.then(res => res.json())
 					.then(response => {
 						let services = response
@@ -168,7 +163,7 @@ module.exports = {
 			var requestUrl = `/services/search/?filter=relatives&geographic_region=${country}&page=1&page_size=${pageSize}&near=${position.join(", ")}&near_km=${distance}`;
 
 			request
-				.get(RI_URL + requestUrl)
+				.get(BACKEND_URL + requestUrl)
 				.set("Accept-Language", language)
 				.end((err, res) => {
 					if (err) {
@@ -191,7 +186,7 @@ module.exports = {
 				resolve(_.first(service));
 			} else {
 				request
-					.get(RI_URL + "/services/search/?id=" + serviceId)
+					.get(BACKEND_URL + "/services/search/?id=" + serviceId)
 					.set("Accept-Language", language)
 					.end((err, res) => {
 						if (err) {
@@ -209,7 +204,7 @@ module.exports = {
 	fetchServicePreviewById(language, serviceId) {
 		return new Promise((resolve, reject) => {
 			request
-				.get(RI_URL + "/services/preview/?id=" + serviceId)
+				.get(BACKEND_URL + "/services/preview/?id=" + serviceId)
 				.set("Accept-Language", language)
 				.end((err, res) => {
 					if (err) {
@@ -227,7 +222,7 @@ module.exports = {
 		// get_same_coordinates_services
 		return new Promise((resolve, reject) => {
 			request
-				.get(RI_URL + "/services/" + serviceId + "/get_same_coordinates_services/")
+				.get(BACKEND_URL + "/services/" + serviceId + "/get_same_coordinates_services/")
 				.set("Accept-Language", language)
 				.end((err, res) => {
 					if (err) {

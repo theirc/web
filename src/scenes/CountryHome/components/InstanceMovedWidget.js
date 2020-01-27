@@ -5,6 +5,12 @@ import { translate } from "react-i18next";
 // local
 import "./InstanceMovedWidget.css";
 
+const NS = { ns: 'CountryHome' };
+
+/**
+ * @class
+ * @description 
+ */
 class InstanceMovedWidget extends Component {
 
 	render() {
@@ -13,13 +19,13 @@ class InstanceMovedWidget extends Component {
 		return (
 			<div className="InstanceMovedWidget">
 				<span></span>
-				<h1>{t("Instance moved Bulgaria banner")}</h1>
+				<h1>{t("banner.Instance moved Bulgaria banner", NS)}</h1>
 
 				<br /><br />
-				<h3>{t("Instance moved Bulgaria small")}</h3>
+				<h3>{t("banner.Instance moved Bulgaria small", NS)}</h3>
 				<br />
 
-				<a href={link} target="_blank" rel="noopener noreferrer">{t("Instance moved Bulgaria label")}</a>
+				<a href={link} target="_blank" rel="noopener noreferrer">{t("banner.Instance moved Bulgaria label", NS)}</a>
 			</div>
 		)
 	}
