@@ -138,9 +138,11 @@ class AppHeader extends Component {
 											<Home /><span className='menu-item'>{t("menu.Home", NS)}</span>
 										</span>
 
-										<span className={`app-bar-selectors top-menu ${selectedIndex === 1 ? "Selected" : ""}`} color="contrast" onClick={onGoToCategories || noop}>
-											<Assignment /><span className='menu-item'>{t("menu.Articles", NS)}</span>
-										</span>
+										{instance.countries[country.fields.slug].switches.showArticles &&
+											<span className={`app-bar-selectors top-menu ${selectedIndex === 1 ? "Selected" : ""}`} color="contrast" onClick={onGoToCategories || noop}>
+												<Assignment /><span className='menu-item'>{t("menu.Articles", NS)}</span>
+											</span>
+										}
 
 										{instance.countries[country.fields.slug].switches.showServices &&
 											<span className={`app-bar-selectors top-menu ${selectedIndex === 2 ? "Selected" : ""}`} color="contrast" onClick={onGoToServices || noop}>

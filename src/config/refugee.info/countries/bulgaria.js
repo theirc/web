@@ -4,7 +4,7 @@ export default {
 	languages: ['ar', 'en', 'fa', 'ur'],
 	questionLink: 'https://m.me/refugee.info',
 	switches: {
-		showArticles: false,
+		showArticles: true,
 		showDepartments: false,
 		showLinkToAdministration: false,
 		showServices: false,
