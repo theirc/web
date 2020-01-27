@@ -9,6 +9,7 @@ import measureDistance from "@turf/distance";
 
 // local
 import { CountrySelector, LanguageSelector } from "../../components";
+import Skeleton from '../../components/Skeleton/Skeleton';
 import { actions } from "../../shared/redux/store";
 import i18nHelpers from '../../helpers/i18n';
 import instance from '../../backend/settings';
@@ -184,17 +185,23 @@ class Selectors extends Component {
 		switch (currentPage) {
 			case 1:
 				return (
-					<LanguageSelector
-						languages={filteredlanguages}
-						onSelectLanguage={l => {
-							this.selectLanguage(l);
-						}}
-					/>
+					<Skeleton hideShareButtons={true}>
+						<LanguageSelector
+							languages={filteredlanguages}
+							onSelectLanguage={l => {
+								this.selectLanguage(l);
+							}}
+						/>
+					</Skeleton>
 				);
 
 			case 2:
 				if (!countryList) {
-					return <div className="LoaderContainer"><div className="loader" /></div>;
+					return (
+						<Skeleton hideShareButtons={true}>
+							<div className="LoaderContainer"><div className="loader" /></div>
+						</Skeleton>
+					)
 				}
 
 				if (countryList.length === 1) {
@@ -202,19 +209,25 @@ class Selectors extends Component {
 					return null;
 				} else {
 					if (!loaded) {
-						return <div className="LoaderContainer"><div className="loader" /></div>;
+						return (
+							<Skeleton hideShareButtons={true}>
+								<div className="LoaderContainer"><div className="loader" /></div>
+							</Skeleton>
+						)
 					}
 
 					return (
-						<CountrySelector
-							onGoTo={slug => {
-								this.selectCountry(slug);
-							}}
-							countryList={countryList.sort((a, b) => a.name ? a.name.localeCompare(b.name) : 0)}
-							regionList={regionList}
-							language={language}
-							backToLanguage={this.backToLanguage.bind(this)}
-						/>
+						<Skeleton hideShareButtons={true}>
+							<CountrySelector
+								onGoTo={slug => {
+									this.selectCountry(slug);
+								}}
+								countryList={countryList.sort((a, b) => a.name ? a.name.localeCompare(b.name) : 0)}
+								regionList={regionList}
+								language={language}
+								backToLanguage={this.backToLanguage.bind(this)}
+							/>
+						</Skeleton>
 					);
 				}
 

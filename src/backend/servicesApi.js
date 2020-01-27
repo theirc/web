@@ -38,12 +38,14 @@ module.exports = {
 							reject(err);
 							return;
 						}
+
 						try {
 							sessionStorage[`${language}-regions`] = JSON.stringify(res.body);
-							resolve(res.body);
 						} catch (e) {
 							console.log('Session storage is full. Request not cached.');
 						}
+
+						resolve(res.body);
 					});
 			}
 		});
@@ -63,12 +65,14 @@ module.exports = {
 							reject(err);
 							return;
 						}
+
 						try {
 							sessionStorage[`${language}-countries`] = JSON.stringify(res.body);
-							resolve(res.body);
 						} catch (e) {
 							console.log('Session storage is full. Request not cached.');
 						}
+						
+						resolve(res.body);
 					});
 			}
 		});

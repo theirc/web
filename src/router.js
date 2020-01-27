@@ -4,7 +4,7 @@ import { Redirect, Route, Switch, withRouter } from "react-router";
 import { ConnectedRouter } from "react-router-redux";
 
 // local
-import { ArticleDetail, ArticleList, CategoryHome, CountryHome, DemoTool, Home, Search, Selectors, Services, Skeleton, Subscribe } from "./scenes";
+import { ArticleDetail, ArticleList, CategoryHome, CountryHome, DemoTool, Home, Search, Selectors, Services, Subscribe } from "./scenes";
 import { history } from "./shared/redux/store";
 import { withCountry, withCategory, withArticle } from "./shared/hoc";
 import Placeholder from "./shared/placeholder";
@@ -41,7 +41,7 @@ class Router extends Component {
 						<Route exact path="/:country/demo" component={withCountry(DemoTool)} />
 						<Route path="/:country/:category/:article" component={withCountry(withCategory(ArticleDetail))} />
 						<Route path="/:country/:category" component={withCountry(withCategory(CategoryHome))} />
-						<Route exact path="/selectors" component={props => <Skeleton {...props}><Selectors /></Skeleton>} />
+						<Route exact path="/selectors" component={Selectors} />
 						<Route exact path="/:country" component={withCountry(CountryHome)} />
 						<Route exact path="/" component={Home} />
 						<Route path="/direct/:article" component={withArticle(ArticleDetail)} />
