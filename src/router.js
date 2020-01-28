@@ -31,6 +31,7 @@ class Router extends Component {
 				<Placeholder>
 					<ScrollToTop />
 					<Switch>
+						<Route exact path="/serbia/*" render={() => <Redirect to="/serbia" />} />
 						<Route exact path="/bulgaria/*" render={() => <Redirect to="/bulgaria" />} />
 						<Route exact path="/italy/services*" render={() => <Redirect to="/italy" />} />
 						<Route exact path="/jordan/services*" render={() => <Redirect to="/jordan" />} />
