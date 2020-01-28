@@ -18,7 +18,6 @@ class InstanceMovedWidget extends Component {
 		const { country, t } = this.props;
 		const partner = instance.countries[country.fields.slug].movedToPartner;
 
-		console.log(partner);
 		return (
 			<div className="InstanceMovedWidget">
 				<span></span>
