@@ -37,7 +37,7 @@ class AppHeader extends Component {
 		prvalert: localStorage.getItem("privacy-policy"),
 		searchText: "",
 		active: false,
-		serbiaAlert: sessionStorage.getItem("serbia-alert"),
+		serbiaAlert: sessionStorage.getItem("serbia-alert"), // TODO: remove this hardcoded stuff
 	};
 	
 	componentDidMount() {

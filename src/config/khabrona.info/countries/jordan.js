@@ -2,6 +2,7 @@ export default {
 	countryCode: '', 
 	flag: '',
 	languages: ['ar', 'en'],
+	movedToPartner: null,
 	questionLink: 'mailto:jo-khabrona-info@mercycorps.org',
 	switches: {
 		showArticles: true,
