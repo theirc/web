@@ -7,7 +7,8 @@ export default {
 					"Home": "لم يعد محتوى موقع دليل اللاجئ في اليونان (Refugee.Info) مُحدثاً.",
 					"Services": "لم تعد قائمة الخدمات المتوفرة في اليونان\nيُرجى ملاحظة أن المعلومات الخاصة بالخدمات المذكورة هنا جرى تحديثها في شهر تموز/ يوليو عام 2019 وقد لا تكون مواكبة لآخر التطورات بعد الآن.\nللحصول على معلومات حول الخدمات المتوفرة حالياً وكيفية الحصول عليها ننصحكم دائماً بالتواصل مع الجهة المُقدمة لهذه الخدمات بشكل مباشر."
 				},
-				"Serbia": "لم تعد قائمة الخدمات في صربيا مواكبة لآخر المستجدات.يُرجى الإنتباه إلى أن المعلومات المذكورة هنا تم تحديثها في شهر أيار/مايو من عام 2019 وقد لا تكون مطابقةً لآخر المستجدات.تواصل مع موفري الخدمات بشكل مباشر للحصول على معلومات بشأن الخدمات الحالية وكيفية الحصول عليها."
+				"Serbia": "لم تعد قائمة الخدمات في صربيا مواكبة لآخر المستجدات.يُرجى الإنتباه إلى أن المعلومات المذكورة هنا تم تحديثها في شهر أيار/مايو من عام 2019 وقد لا تكون مطابقةً لآخر المستجدات.تواصل مع موفري الخدمات بشكل مباشر للحصول على معلومات بشأن الخدمات الحالية وكيفية الحصول عليها.",
+				"Jordan": "تم اخر تحديث لمحتوى خبرونا في أغسطس 2019"
 			},
 			"menu": {
 				"Articles": "المقالات ",
@@ -25,7 +26,8 @@ export default {
 					"Home": "The Refugee.Info Greece content is no longer being updated.",
 					"Services": "The list of services for Greece is no longer being updated.\nPlease note that the service information shown here was last updated in July 2019 and may no longer be up-to-date.\nWe advise you to always contact the service provider directly for information about current services and how to access them."
 				},
-				"Serbia": "The service list for Serbia is no longer being updated. Please note that the service information shown here was last updated in May 2019 and may no longer be up-to-date. Contact the service provider directly for information about current services and how to access them."
+				"Serbia": "The service list for Serbia is no longer being updated. Please note that the service information shown here was last updated in May 2019 and may no longer be up-to-date. Contact the service provider directly for information about current services and how to access them.",
+				"Jordan": "Khabrona.info content was last updated in August 2019"
 			},
 			"menu": {
 				"Articles": "Articles",
@@ -43,7 +45,8 @@ export default {
 					"Home": "n/a",
 					"Services": "n/a"
 				},
-				"Serbia": "The service list for Serbia is no longer being updated. Please note that the service information shown here was last updated in May 2019 and may no longer be up-to-date. Contact the service provider directly for information about current services and how to access them."
+				"Serbia": "The service list for Serbia is no longer being updated. Please note that the service information shown here was last updated in May 2019 and may no longer be up-to-date. Contact the service provider directly for information about current services and how to access them.",
+				"Jordan": "n/a"
 			},
 			"menu": {
 				"Articles": "Informativos",
@@ -61,7 +64,8 @@ export default {
 					"Home": "محتوای وبسایت راهنمای پناهندگان برای یونان از این به بعد به‌روزرسانی نخواهد شد.",
 					"Services": "فهرست خدمات یونان از این به بعد به‌روزرسانی نخواهد شد.\nلطفا توجه داشته باشید که اطلاعاتی که اینجا نمایش داده می‌شود آخرین بار در جولای 2019 به‌روزرسانی شده و بعد از این به روز نخواهد شد.\nما به شما توصیه می‌کنیم که مستقیما با خود ارائه‌کنندگان خدمات تماس بگیرید تا درباره‌ی خدمات موجود آنها و نحوه‌ی دسترسی به آن خدمات اطلاعات کسب کنید."
 				},
-				"Serbia": "فهرست خدمات برای صربستان دیگر به روز نمی‌شود.لطفن توجه داشته باشید که اطلاعات خدماتی که در اینجا نمایش داده شده،‌آخرین بار در ماه می 2019 به‌روز شده بوده و ممکن است که دیگر به‌روز نشود.برای دریافت اطلاعات در مورد خدماتی که در حال حاضر ارائه می‌شود و نحوه‌ی دسترسی به آن‌ها، با ارائه‌دهنده‌ی این خدمات تماس بگیرید."
+				"Serbia": "فهرست خدمات برای صربستان دیگر به روز نمی‌شود.لطفن توجه داشته باشید که اطلاعات خدماتی که در اینجا نمایش داده شده،‌آخرین بار در ماه می 2019 به‌روز شده بوده و ممکن است که دیگر به‌روز نشود.برای دریافت اطلاعات در مورد خدماتی که در حال حاضر ارائه می‌شود و نحوه‌ی دسترسی به آن‌ها، با ارائه‌دهنده‌ی این خدمات تماس بگیرید.",
+				"Jordan": "n/a"
 			},
 			"menu": {
 				"Articles": "مقاله‌ها",
@@ -79,7 +83,8 @@ export default {
 					"Home": "Le contenu de Refugee.Info Grèce n’est plus mis à jour.",
 					"Services": "La liste des services pour la Grèce n’est plus mise à jour.\nVeuillez noter que les informations sur les services présentées ici ont été mises à jour pour la dernière fois en juillet 2019 et peuvent ne plus être à jour.\nNous vous conseillons de toujours contacter directement le fournisseur de services pour obtenir des informations sur les services actuels et sur la façon d'y accéder."
 				},
-				"Serbia": "The service list for Serbia is no longer being updated. Please note that the service information shown here was last updated in May 2019 and may no longer be up-to-date. Contact the service provider directly for information about current services and how to access them."
+				"Serbia": "The service list for Serbia is no longer being updated. Please note that the service information shown here was last updated in May 2019 and may no longer be up-to-date. Contact the service provider directly for information about current services and how to access them.",
+				"Jordan": "n/a"
 			},
 			"menu": {
 				"Articles": "Articles",
@@ -97,7 +102,8 @@ export default {
 					"Home": "ریفیوجی.انفو یونان کے مواد کو اب اپ ڈیٹ نہیں کیا جا رہا ہے۔",
 					"Services": "یونان کے لئے خدمات کی فہرست کو اب اپ ڈیٹ نہیں کیا جا رہا ہے۔\nبراہ کرم نوٹ کریں کہ یہاں دکھائی گئی خدمت کی معلومات کو آخری بار جولائی 2019 میں اپ ڈیٹ کیا گیا تھا اور اب یہ تازہ ترین نہیں ہوسکتی ہے۔\nہم آپ کو مشورہ دیتے ہیں کہ موجودہ خدمات اور ان تک رسائی حاصل کرنے کے طریقوں سے متعلق معلومات کے لئے ہمہ وقت فراہم کنندہ سے رابطہ کریں۔"
 				},
-				"Serbia": "سربیا کے لئے خدمات کی فہرست کو اپ ڈیٹ نہیں کیا جا رہا ہے۔براہِ مہربانی نوٹ فرمائیں کہ جو خدماتی معلومات یہاں پر دکھائی جا رہی ہیں یہ آخری دفعہ مئی 2019 میں اپ ڈیٹ ہوئی تھیں اور ہو سکتا ہے کہ یہ اپ ٹو ڈیٹ نہ ہوں۔ خدمات فراہم کرنےوالوں سے موجودہ خدمات اور ان تک کیسے رسائی ممکن ہے کی معلومات کے متعلق براہ راست ان سے خود رابطہ کریں۔"
+				"Serbia": "سربیا کے لئے خدمات کی فہرست کو اپ ڈیٹ نہیں کیا جا رہا ہے۔براہِ مہربانی نوٹ فرمائیں کہ جو خدماتی معلومات یہاں پر دکھائی جا رہی ہیں یہ آخری دفعہ مئی 2019 میں اپ ڈیٹ ہوئی تھیں اور ہو سکتا ہے کہ یہ اپ ٹو ڈیٹ نہ ہوں۔ خدمات فراہم کرنےوالوں سے موجودہ خدمات اور ان تک کیسے رسائی ممکن ہے کی معلومات کے متعلق براہ راست ان سے خود رابطہ کریں۔",
+				"Jordan": "n/a"
 			},
 			"menu": {
 				"Articles": "مضامین",

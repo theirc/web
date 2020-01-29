@@ -489,45 +489,6 @@ Less me
 			margin-left: 7px;
 		}
 	}
-	.serbia-banner{
-		background-color: #FCD735;
-		
-		.banner-wrapper {
-			align-items: stretch;
-			color: #292633;
-			display: flex;
-			flex: 1;
-			flex-direction: row;
-			font-size: 14px;
-			font-weight: bold;
-			height: auto;
-			max-width: 1024px;
-			margin: 0 auto;
-			padding: 16px;
-			position: relative;
-
-			span {
-				border-right: 1px solid black;
-				margin: 10px 15px 10px 5px;
-			}
-	
-			a {
-				text-decoration: none;
-				
-				&:hover {
-					text-decoration: underline;
-				}
-			}
-	
-			p {
-				white-space: pre-line;
-			}
-
-			.close-alert {
-				padding: 5px;
-			}
-		}
-	}
 }
 
 

@@ -7,6 +7,7 @@ import { translate, Interpolate } from "react-i18next";
 import { Close, Home, List, Assignment } from "material-ui-icons";
 
 // local
+import Alert from '../Alert/Alert';
 import selectedMenuItem from "../../helpers/menu-items";
 import i18nHelpers from '../../helpers/i18n';
 import instance from '../../backend/settings';
@@ -37,7 +38,6 @@ class AppHeader extends Component {
 		prvalert: localStorage.getItem("privacy-policy"),
 		searchText: "",
 		active: false,
-		serbiaAlert: sessionStorage.getItem("serbia-alert"), // TODO: remove this hardcoded stuff
 	};
 	
 	componentDidMount() {
@@ -70,11 +70,6 @@ class AppHeader extends Component {
 		this.setState({
 			[name]: value,
 		});
-	}
-
-	closeSerbiaBanner() {
-		sessionStorage.setItem("serbia-alert", 1);
-		this.setState({ serbiaAlert: 1 });
 	}
 
 	handleSubmit(event) {
@@ -122,7 +117,6 @@ class AppHeader extends Component {
 		let path = window.location.pathname;
 		return (
 			<div className={backgroundDark ? 'AppHeader' : 'AppHeaderLight'}>
-
 				<Headroom tolerance={5} offset={200}>
 					<div className={[homePage ? "header-opacity" : "", backgroundDark ? 'app-bar' : 'app-bar-light', !(country && language) ? 'app-bar-black' : ''].join(" ")}>
 
@@ -200,42 +194,17 @@ class AppHeader extends Component {
 					</div>
 				)}
 
-				{this.state.serbiaAlert === '0' && isOnServices && window.location.href.includes('/serbia/') && (
-					<div className={this.state.serbiaAlert ? 'serbia-banner' : 'hidden'}>
-						<div className='banner-wrapper'>
-							<span className="serbia-banner-separator"></span>
-							<p>{t("banner.Serbia", NS)}</p>
-							<Close
-								className="close-alert"
-								color="contrast"
-								size={36}
-								onClick={this.closeSerbiaBanner.bind(this)}
-							/>
-						</div>
-					</div>
-				)}
+				{(isOnServices || isOnArticlesGreece) && window.location.href.includes('/greece/') &&
+					<Alert link={disclaimersLink} message={isOnServices ? t("banner.Greece.Services", NS) : t('banner.Greece.Articles', NS)} />
+				}
 
-				{(isOnServices || isOnArticlesGreece) && window.location.href.includes('/greece/') && (
-					<div className='serbia-banner'>
-						<div className='banner-wrapper'>
-							<span className="serbia-banner-separator"></span>
-							<a href={disclaimersLink}>
-								<p>{isOnServices ? t("banner.Greece.Services", NS) : t('banner.Greece.Articles', NS)}</p>
-							</a>
-						</div>
-					</div>
-				)}
+				{!(isOnServices || isOnArticlesGreece) && window.location.href.includes('/greece') &&
+					<Alert link={disclaimersLink} message={t('banner.Greece.Home', NS)} />
+				}
 
-				{!(isOnServices || isOnArticlesGreece) && window.location.href.includes('/greece') && (
-					<div className='serbia-banner'>
-						<div className='banner-wrapper'>
-							<span className="serbia-banner-separator"></span>
-							<a href={disclaimersLink}>
-								<p>{t('banner.Greece.Home', NS)}</p>
-							</a>
-						</div>
-					</div>
-				)}
+				{window.location.href.includes('/jordan') &&
+					<Alert message={t('banner.Jordan', NS)} />
+				}
 			</div>
 		);
 	}

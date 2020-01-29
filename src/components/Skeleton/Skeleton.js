@@ -100,9 +100,6 @@ class Skeleton extends React.Component {
 
 		let showFooter = !hideFooter && country && language;
 
-		if (country && country.fields.slug === "serbia" && sessionStorage.getItem("serbia-alert") == null)
-			sessionStorage.setItem("serbia-alert", 0);
-
 		return (
 			<I18nextProvider i18n={i18n}>
 				<div className="Skeleton">
