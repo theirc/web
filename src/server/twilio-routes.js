@@ -17,6 +17,19 @@ module.exports = function (app) {
 	app.get("/twilio", (req, res) => {
 		res.status(200).json({ 'test': 'working' })
 	})
+	app.get("send-message-alert"), (req, res) => {
+		const sgMail = require('@sendgrid/mail');
+		sgMail.setApiKey(process.env.SENDGRID_KEY);
+		const msg = {
+		to: ['andresd.aguilar@gmail.com','cronosreloaded@gmail.com'],
+		from: 'noreply@signpost.ngo',
+		subject: 'New message in Flex!',
+		text: 'Tiene un nuevo mensaje en Flex',
+		html: '<strong>Tiene un nuevo mensaje en Flex</strong>',
+		};
+		sgMail.sendMultiple(msg);
+		res.status(200)
+	}
 	app.get("/get-phone-tree-home/:slug", (req, res, err) => {
 		const selectedLanguage = parseLanguage(req);
 		let configKey = _.first(
