@@ -5,9 +5,11 @@ import { Helmet } from "react-helmet";
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
 
 // local
+import i18nHelpers from '../../../helpers/i18n';
 import getSessionStorage from "../../../shared/sessionStorage";
 import instance from '../../../backend/settings';
 import "./LocalDemo.css";
+const NS = { ns: 'DemoTool' };
 
 /**
  * @class
@@ -31,6 +33,7 @@ class LocalDemo extends Component {
 		const { country, language, t } = this.props;
 		const { loaded, done } = this.state;
 		const startCache = () => {
+			console.log("start cache");
 			this.setState({ loaded: false });
 			var demoConfig = {
 				"cn": {
@@ -41,7 +44,6 @@ class LocalDemo extends Component {
 					],
 					services: [1501, 1833, 1694],
 					buttonColor: 'greeen',
-					title: 'Descargar información para uso sin conexión'
 				},
 				"ri": {
 					urlsToStore: [
@@ -53,10 +55,9 @@ class LocalDemo extends Component {
 
 					],
 					buttonColor: 'yellow',
-					title: 'Download data for offline use',
 				}
 			};
-
+		
 			let site = instance.brand.code;
 			let urlsToStore = demoConfig[site].urlsToStore;
 			urlsToStore.map(url => {
@@ -85,16 +86,16 @@ class LocalDemo extends Component {
 		return (
 			<div className="LocalDemo">
 				<Helmet>
-					<title>{t('Download data for offline use')}</title>
+					<title>{t('Download data for offline use', NS)}</title>
 				</Helmet>
 
-				<HeaderBar title={t('Download data for offline use')} />
+				<HeaderBar title={t('Download data for offline use', NS)} />
 				
 				<div className="content">
-					<h3>{t('Esta operación descargará los Informativos y ciertos Servicios en el navegador para su acceso sin conexión.')}</h3>
-					{loaded && <button onClick={startCache} className="downloadButton">{t('Click to download data')}</button>}
+					<h3>{t('Description', NS)}</h3>
+					{loaded && <button onClick={startCache} className="downloadButton">{t('Click to download data', NS)}</button>}
 					{!loaded && <div className="loader" />}
-					{done && <h3>La descarga ha finalizado exitosamente</h3>}
+					{done && <h3>{t('Download complete', NS)}</h3>}
 				</div>
 
 			</div>
