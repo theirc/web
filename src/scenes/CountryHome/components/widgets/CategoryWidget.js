@@ -1,5 +1,6 @@
 // libs
 import React, { Component } from "react";
+import { Link } from 'react-router-dom';
 import _ from "lodash";
 import { translate } from "react-i18next";
 
@@ -18,7 +19,7 @@ const md = new Remarkable("full", {
 
 class CategoryWidget extends Component {
 	render() {
-		const { country, onNavigate, t, c } = this.props;
+		const { country, t, c } = this.props;
 		let html = md.render(c.fields.description);
 		let article = c.fields.overview || _.first(c.fields.articles);
 
@@ -27,15 +28,7 @@ class CategoryWidget extends Component {
 				<h3>{c.fields.name}</h3>
 				<p dangerouslySetInnerHTML={{ __html: html }} />
 				<s className='Read-More'>
-					<a
-						href="#/"
-						onClick={() => {
-							onNavigate(`/${country.fields.slug}/${c.fields.slug}/${article.fields.slug}?language=en`);
-							return false;
-						}}
-					>
-						{t("global.Read More", NS)}
-					</a>
+					<Link to={`/${country.fields.slug}/${c.fields.slug}/${article.fields.slug}?language=en`}>{t("global.Read More", NS)}</Link>
 					<i className="material-icons">arrow_right</i>
 				</s>
 			</div>

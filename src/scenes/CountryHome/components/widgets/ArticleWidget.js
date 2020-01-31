@@ -1,5 +1,6 @@
 // libs
 import React, { Component } from "react";
+import { Link } from 'react-router-dom';
 import { translate } from "react-i18next";
 import FacebookPlayer from "react-facebook-player";
 import YouTube from "react-youtube";
@@ -84,20 +85,11 @@ class ArticleWidget extends Component {
 				
 				<p dangerouslySetInnerHTML={{ __html: md.render(content) }} />
 				
-				{!showFullArt && (
+				{!showFullArt &&
 					<s className="Read-More">
-						<a
-							href="#/"
-							onClick={() => {
-								onNavigate(`/${country.fields.slug}/${categorySlug}/${article.fields.slug}?language=${language}`);
-								return false;
-							}}
-						>
-							{t("global.Read More", NS)}
-						</a>
+						<Link to={`/${country.fields.slug}/${categorySlug}/${article.fields.slug}?language=${language}`}>{t("global.Read More", NS)}</Link>
 						<i className="material-icons">arrow_right</i>
 					</s>
-					)
 				}
 			</div>
 		);

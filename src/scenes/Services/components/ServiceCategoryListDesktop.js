@@ -3,6 +3,7 @@ import React from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
+// import { Link } from 'react-router-dom';
 import _ from "lodash";
 import tinycolor from "tinycolor2";
 
@@ -310,30 +311,34 @@ class ServiceCategoryListDesktop extends React.Component {
 
 		return [
 			<li key={service.id} className="Item" onClick={() => goToService(country, language, service.id)}>
-				<div className="Icon" key={`${service.id}-0`}>
-					<i className={iconWithPrefix(mainType.vector_icon)} style={categoryStyle(mainType.color)} />
-				</div>
-				<div className="Info">
-					<h1>{service.name}</h1>
+				{/* TODO: move Item to separate component with styles and stuff */}
+				{/* <Link className='Item--wrapper' to={`/${country.fields.slug}/services/${service.id}?language=${language}`}> */}
+					<div className="Icon" key={`${service.id}-0`}>
+						<i className={iconWithPrefix(mainType.vector_icon)} style={categoryStyle(mainType.color)} />
+					</div>
 
-					<h2>
-						{service.provider.name}{" "}
-						<span>
-							{fullAddress}
-							{distance && ` - ${distance}`}
-						</span>
+					<div className="Info">
+						<h1>{service.name}</h1>
 
-						<div className="Icons">
-							{subTypes.map((t, idx) => (
-								<div className="Icon" key={`${service.id}-${idx}`}>
-									<i className={iconWithPrefix(t.vector_icon)} style={categoryStyle(t.color)} />
-								</div>
-							))}
-						</div>
-					</h2>
-				</div>
+						<h2>
+							{service.provider.name}{" "}
+							<span>
+								{fullAddress}
+								{distance && ` - ${distance}`}
+							</span>
 
-				<i className="material-icons" />
+							<div className="Icons">
+								{subTypes.map((t, idx) => (
+									<div className="Icon" key={`${service.id}-${idx}`}>
+										<i className={iconWithPrefix(t.vector_icon)} style={categoryStyle(t.color)} />
+									</div>
+								))}
+							</div>
+						</h2>
+					</div>
+
+					<i className="material-icons" />
+				{/* </Link> */}
 			</li>,
 		];
 	}

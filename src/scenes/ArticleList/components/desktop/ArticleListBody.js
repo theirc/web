@@ -1,5 +1,6 @@
 // libs
 import React, { Component } from "react";
+import { Link } from 'react-router-dom';
 import { translate } from "react-i18next";
 import moment from 'moment';
 import _ from 'lodash';
@@ -35,7 +36,7 @@ class ArticleListBody extends Component {
 	};
 
 	renderTiles(c) {
-		let { country, language, onNavigate } = this.props;
+		let { country, language } = this.props;
 
 		if(!c.fields) { console.log('c.fields is null', c); return null;}
 
@@ -47,21 +48,22 @@ class ArticleListBody extends Component {
 			}
 
 			return (
-				<li key={c.sys.id} className='tile' onClick={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${c.fields.overview.fields.slug}?language=` + language)}>
-					<div className='img-viewport'>
-						<img src={image} alt='' />
-					</div>
-
-
-					<div className='text'>
-						<div className='category'>
-							<i className={c.fields.iconClass || "material-icons"}>{c.fields.iconText || ((!c.fields.iconClass || c.fields.iconClass === "material-icons") && "add")}</i>
-							<span>{c.fields.name}</span>
+				<li key={c.sys.id} className='tile'>
+					<Link to={`/${country.fields.slug}/${c.fields.slug}/${c.fields.overview.fields.slug}?language=${language}`}>
+						<div className='img-viewport'>
+							<img src={image} alt='' />
 						</div>
-						
-						{c.fields && <h2>{c.fields.name}</h2>}
-						<span className='author'>{moment(c.sys.updatedAt).format('YYYY.MM.DD')}</span>
-					</div>
+
+						<div className='text'>
+							<div className='category'>
+								<i className={c.fields.iconClass || "material-icons"}>{c.fields.iconText || ((!c.fields.iconClass || c.fields.iconClass === "material-icons") && "add")}</i>
+								<span>{c.fields.name}</span>
+							</div>
+							
+							{c.fields && <h2>{c.fields.name}</h2>}
+							<span className='author'>{moment(c.sys.updatedAt).format('YYYY.MM.DD')}</span>
+						</div>
+					</Link>
 				</li>
 			);
 		}
@@ -76,21 +78,23 @@ class ArticleListBody extends Component {
 				_.has(a, 'fields.gallery.fields.file') && (image = a.fields.gallery.fields.file.url);
 
 				return (
-					<li key={a.sys.id} className='tile' onClick={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${a.fields.slug}?language=` + language)}>
-						<div className='img-viewport'>
-							<img src={image} alt='' />
-						</div>
+					<li key={a.sys.id} className='tile'>
+						<Link to={`/${country.fields.slug}/${c.fields.slug}/${a.fields.slug}?language=${language}`}>
+							<div className='img-viewport'>
+								<img src={image} alt='' />
+							</div>
 
-						<div className='text'>
-							{a.fields.category &&
-							<div className='category'>
-								<i className={a.fields.category.fields.iconClass || "material-icons"}>{a.fields.category.fields.iconText || ((!a.fields.category.fields.iconClass || a.fields.category.fields.iconClass === "material-icons") && "add")}</i>
-								<span>{a.fields.category.fields.name}</span>
-							</div>}
+							<div className='text'>
+								{a.fields.category &&
+								<div className='category'>
+									<i className={a.fields.category.fields.iconClass || "material-icons"}>{a.fields.category.fields.iconText || ((!a.fields.category.fields.iconClass || a.fields.category.fields.iconClass === "material-icons") && "add")}</i>
+									<span>{a.fields.category.fields.name}</span>
+								</div>}
 
-							<h2>{a.fields.title}</h2>
-							<span className='author'>{moment(a.sys.updatedAt).format('YYYY.MM.DD')}</span>
-						</div>
+								<h2>{a.fields.title}</h2>
+								<span className='author'>{moment(a.sys.updatedAt).format('YYYY.MM.DD')}</span>
+							</div>
+						</Link>
 					</li>
 				)
 			});
