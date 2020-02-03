@@ -19,7 +19,7 @@
 
 		.Alert--separator {
 			border-right: 1px solid black;
-			margin: 10px 15px 10px 5px;
+			margin: 10px 5px;
 		}
 
 		a {
@@ -31,6 +31,8 @@
 		}
 
 		p {
+			margin-left: 15px;
+			margin-right: 15px;
 			white-space: pre-line;
 		}
 

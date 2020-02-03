@@ -203,7 +203,7 @@ class AppHeader extends Component {
 				}
 
 				{window.location.href.includes('/jordan') &&
-					<Alert message={t('banner.Jordan', NS)} />
+					<Alert message={t('banner.Jordan', NS)} fontColor='white'/>
 				}
 			</div>
 		);

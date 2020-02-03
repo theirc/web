@@ -8,7 +8,7 @@ export default {
 					"Services": "لم تعد قائمة الخدمات المتوفرة في اليونان\nيُرجى ملاحظة أن المعلومات الخاصة بالخدمات المذكورة هنا جرى تحديثها في شهر تموز/ يوليو عام 2019 وقد لا تكون مواكبة لآخر التطورات بعد الآن.\nللحصول على معلومات حول الخدمات المتوفرة حالياً وكيفية الحصول عليها ننصحكم دائماً بالتواصل مع الجهة المُقدمة لهذه الخدمات بشكل مباشر."
 				},
 				"Serbia": "لم تعد قائمة الخدمات في صربيا مواكبة لآخر المستجدات.يُرجى الإنتباه إلى أن المعلومات المذكورة هنا تم تحديثها في شهر أيار/مايو من عام 2019 وقد لا تكون مطابقةً لآخر المستجدات.تواصل مع موفري الخدمات بشكل مباشر للحصول على معلومات بشأن الخدمات الحالية وكيفية الحصول عليها.",
-				"Jordan": "تم اخر تحديث لمحتوى خبرونا في أغسطس 2019"
+				"Jordan": "تم اخر تحديث لمحتوى خبرونا في أغسطس 2019."
 			},
 			"menu": {
 				"Articles": "المقالات ",
@@ -27,7 +27,7 @@ export default {
 					"Services": "The list of services for Greece is no longer being updated.\nPlease note that the service information shown here was last updated in July 2019 and may no longer be up-to-date.\nWe advise you to always contact the service provider directly for information about current services and how to access them."
 				},
 				"Serbia": "The service list for Serbia is no longer being updated. Please note that the service information shown here was last updated in May 2019 and may no longer be up-to-date. Contact the service provider directly for information about current services and how to access them.",
-				"Jordan": "Khabrona.info content was last updated in August 2019"
+				"Jordan": "Khabrona.info content was last updated in August 2019."
 			},
 			"menu": {
 				"Articles": "Articles",
