@@ -42,18 +42,7 @@ Less me
 	align-items: flex-start;
 	justify-content: flex-start;
 	height: 50;
-
-	@media (max-width: $desktopBreakpoint) {
-		&.logo {
-			.rtl & {
-				padding-right: 18px;
-			}
-			.ltr & {
-				padding-left: 18px;
-			}
-		}		
-	}
-	
+	padding: 0 15px;	
 }
 
 .headerBackground{	
@@ -580,7 +569,8 @@ $color: #ffffff;
 .search-btn {
 	cursor: pointer;
 	opacity: 0.6;
-	padding: 0 15px;
+	padding-left: 15px;
+	padding-right: 0px;
 	width: 24px;
 
 	&:hover {
