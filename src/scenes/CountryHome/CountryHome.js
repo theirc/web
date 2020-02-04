@@ -7,6 +7,7 @@ import { push } from "react-router-redux";
 // local
 import { HomeWidget, HomeWidgetCollection, InstanceMovedWidget } from "../../components";
 import i18nHelpers from '../../helpers/i18n';
+import instance from '../../backend/settings';
 import languages from './languages';
 import Skeleton from '../../components/Skeleton/Skeleton';
 import getSessionStorage from "../../shared/sessionStorage";
@@ -21,11 +22,8 @@ class CountryHome extends React.Component {
 	constructor() {
 		super();
 		this.state = {};
-	}
-
-	componentDidMount() {
 		i18nHelpers.loadResource(languages, NS.ns);
-	}	
+	}
 
 	componentWillMount() {
 		if (global.window) {
@@ -40,22 +38,22 @@ class CountryHome extends React.Component {
 
 	render() {
 		const { country, onNavigate, direction, language } = this.props;
-		const instanceMoved = country.fields.slug === 'bulgaria';
 
 		if (!country || !country.fields.home) {
 			return null;
 		}
 
+		const movedToPartner = instance.countries[country.fields.slug].movedToPartner;
 		return (
 			<div className='CountryHome'>
 				<Skeleton hideShareButtons={true} homePage={true}>
-					{!instanceMoved &&
+					{!movedToPartner &&
 						<HomeWidgetCollection key={"HomeWidgetCollection"} className='HomeWidgetCollection'>
 							{country.fields.home.map(e => <HomeWidget direction={direction} onNavigate={onNavigate} language={language} country={country} content={e} key={e.sys.id} />)}
 						</HomeWidgetCollection>
 					}
-					{instanceMoved &&
-						<InstanceMovedWidget link="http://refugeelife.bg/" />
+					{movedToPartner &&
+						<InstanceMovedWidget country={country} />
 					}
 				</Skeleton>
 			</div>

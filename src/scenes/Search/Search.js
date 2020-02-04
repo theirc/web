@@ -28,9 +28,12 @@ class Search extends React.Component {
 		term: "",
 	};
 
-	componentDidMount() {
+	constructor() {
+		super();
 		i18nHelpers.loadResource(languages, NS.ns);
+	}
 
+	componentDidMount() {
 		if (this.props.location.search) {
 			this.search(this.props);
 		}

@@ -2,6 +2,7 @@ export default {
 	countryCode: '+502', 
 	flag: '',
 	languages: ['es'],
+	movedToPartner: null,
 	questionLink: '',
 	switches: {
 		showArticles: false,

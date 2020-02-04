@@ -106,7 +106,8 @@ module.exports = {
 		//If the region is a city, search for all the services in the city AND country wide services
 		let filter = ignoreRegions ? 'relatives' : "with-parents";
 
-		if (!ignoreRegions && sessionStorage[`${language}-regions`]) {
+		// if (!ignoreRegions && sessionStorage[`${language}-regions`]) {
+		if (!ignoreRegions) {
 			let regions = JSON.parse(sessionStorage[`${language}-regions`]);
 			let region = _.first(regions.filter(c => c.slug === country));
 			filter = region.level === 3 ? "with-parents" : "relatives";
@@ -126,18 +127,16 @@ module.exports = {
 				} else {
 					resolve(sl.services);
 				}
-
-
 			} else {
 				var requestUrl =
-					"/services/searchlist/?filter=" + filter + "&geographic_region=" +
-					country +
-					"&page=1&page_size=" +
-					pageSize +
-					"&type_numbers=" +
-					(categoryId || "") +
-					(searchTerm ? "&search=" + searchTerm : "");
-
+				"/services/searchlist/?filter=" + filter + "&geographic_region=" +
+				country +
+				"&page=1&page_size=" +
+				pageSize +
+				"&type_numbers=" +
+				(categoryId || "") +
+				(searchTerm ? "&search=" + searchTerm : "");
+				
 				const headers = { 'Accept-Language': language };
 
 				fetch(BACKEND_URL + requestUrl, { headers })

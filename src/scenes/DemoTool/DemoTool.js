@@ -5,9 +5,12 @@ import { connect } from "react-redux";
 import { push } from "react-router-redux";
 
 // local
+import i18nHelpers from '../../helpers/i18n';
 import LocalDemo from "./components/LocalDemo";
 import getSessionStorage from "../../shared/sessionStorage";
 import Skeleton from '../../components/Skeleton/Skeleton';
+import languages from './languages';
+const NS = { ns: 'DemoTool' };
 
 /**
  * @class
@@ -16,10 +19,12 @@ import Skeleton from '../../components/Skeleton/Skeleton';
 class DemoTool extends React.Component {
 	constructor() {
 		super();
-
 		this.state = {};
 	}
-
+	componentDidMount(){
+		i18nHelpers.loadResource(languages, NS.ns);
+	}
+	
 	componentWillMount() {
 		if (global.window) {
 			const sessionStorage = getSessionStorage();

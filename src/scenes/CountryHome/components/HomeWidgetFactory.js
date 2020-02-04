@@ -58,38 +58,6 @@ class HomeWidget extends Component {
 		return <CategoryWidget country={country} onNavigate={onNavigate} language={language} c={c} />;
 	}
 
-	componentDidMount() {
-		const { onNavigate } = this.props;
-
-		let hostname = "www.refugee.info";
-		if (global.location) {
-			hostname = global.location.hostname;
-		}
-
-		if (this._ref) {
-			let anchors = Array.from(this._ref.querySelectorAll("a"));
-			anchors = anchors.filter(a => a.href.indexOf("http") || a.hostname === hostname);
-
-			for (let anchor of anchors) {
-				let href = anchor.href + "";
-				if (href.indexOf("http") >= 0) {
-					href =
-						"/" +
-						href
-							.split("/")
-							.slice(3)
-							.join("/");
-				}
-				// eslint-disable-next-line
-				anchor.href = "#/";
-				anchor.onclick = () => {
-					onNavigate(href);
-					return false;
-				};
-			}
-		}
-	}
-
 	render() {
 		const { content } = this.props;
 		if (!content) {
@@ -119,8 +87,10 @@ class HomeWidget extends Component {
 			}
 
 			return (
-				rendered ? <div ref={r => (this._ref = r)} className={["HomeWidget", content.fields.highlighted ? "Highlighted" : "", `CT-${content.sys.contentType.sys.id}`].join(" ")}>
-					{rendered}</div> : null
+				rendered ?
+					<div className={["HomeWidget", content.fields.highlighted ? "Highlighted" : "", `CT-${content.sys.contentType.sys.id}`].join(" ")}>
+						{rendered}
+					</div> : null
 			);
 		} catch (e) {
 			console.log("Ignoring", e);

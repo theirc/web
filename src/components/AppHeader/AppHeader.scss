@@ -42,18 +42,7 @@ Less me
 	align-items: flex-start;
 	justify-content: flex-start;
 	height: 50;
-
-	@media (max-width: $desktopBreakpoint) {
-		&.logo {
-			.rtl & {
-				padding-right: 18px;
-			}
-			.ltr & {
-				padding-left: 18px;
-			}
-		}		
-	}
-	
+	padding: 0 15px;	
 }
 
 .headerBackground{	
@@ -114,9 +103,8 @@ Less me
 		align-items: center;
 		display: inherit;
 		
-		
 		img {
-			border: 1px solid #888;
+			border: 1px solid #333;
 			border-radius: 2px;
 			width: 28px;
 
@@ -490,45 +478,6 @@ Less me
 			margin-left: 7px;
 		}
 	}
-	.serbia-banner{
-		background-color: #FCD735;
-		
-		.banner-wrapper {
-			align-items: stretch;
-			color: #292633;
-			display: flex;
-			flex: 1;
-			flex-direction: row;
-			font-size: 14px;
-			font-weight: bold;
-			height: auto;
-			max-width: 1024px;
-			margin: 0 auto;
-			padding: 16px;
-			position: relative;
-
-			span {
-				border-right: 1px solid black;
-				margin: 10px 15px 10px 5px;
-			}
-	
-			a {
-				text-decoration: none;
-				
-				&:hover {
-					text-decoration: underline;
-				}
-			}
-	
-			p {
-				white-space: pre-line;
-			}
-
-			.close-alert {
-				padding: 5px;
-			}
-		}
-	}
 }
 
 
@@ -620,7 +569,8 @@ $color: #ffffff;
 .search-btn {
 	cursor: pointer;
 	opacity: 0.6;
-	padding: 0 15px;
+	padding-left: 15px;
+	padding-right: 0px;
 	width: 24px;
 
 	&:hover {

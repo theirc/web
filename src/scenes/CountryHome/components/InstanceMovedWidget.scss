@@ -12,10 +12,17 @@
 		h1 {
 			font-size: 30px;
 		}
+
+		.buttons {
+			display: flex;
+			justify-content: center;
+
+			a {
+				margin: 0 10px;
+			}
+		}
 	}
 
-	padding: 50px 20px;
-	text-align: center;
 	span {
 		background-image: url("/instance-moved.png");
 		background-size: contain;
@@ -24,6 +31,7 @@
 		width: 100px;
 		height: 100px;
 	}
+
 
 	a, .rtl a {
 		@include darken-brand-colors("background-color", 10%);
@@ -34,8 +42,8 @@
 		font-weight: bold;
 		height: 70px;
 		line-height: 70px !important;
-		margin: 0 auto;
-		max-width: 300px;
+		margin: 0 auto 10px;
+		width: 250px;
 		outline: none;
 		padding: 5px;
 		text-decoration: none;
@@ -55,4 +63,5 @@
 	h3 {
 		font-weight: normal;
 	}
+
 }

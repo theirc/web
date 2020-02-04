@@ -26,7 +26,8 @@ class ArticleList extends React.Component {
 		onMount: PropTypes.func.isRequired,
 	};
 
-	componentDidMount() {
+	constructor() {
+		super();
 		i18nHelpers.loadResource(languages, NS.ns);
 	}	
 

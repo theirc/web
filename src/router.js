@@ -31,6 +31,7 @@ class Router extends Component {
 				<Placeholder>
 					<ScrollToTop />
 					<Switch>
+						<Route exact path="/serbia/*" render={() => <Redirect to="/serbia" />} />
 						<Route exact path="/bulgaria/*" render={() => <Redirect to="/bulgaria" />} />
 						<Route exact path="/italy/services*" render={() => <Redirect to="/italy" />} />
 						<Route exact path="/jordan/services*" render={() => <Redirect to="/jordan" />} />
@@ -38,7 +39,7 @@ class Router extends Component {
 						<Route path="/:country/services" component={props => <ServicesWithCountry {...props} />} />
 						<Route exact path="/:country/categories" component={withCountry(ArticleList)} />
 						<Route exact path="/:country/search" component={withCountry(Search)} />
-						<Route exact path="/:country/demo" component={withCountry(DemoTool)} />
+						{/* <Route exact path="/:country/demo" component={withCountry(DemoTool)} /> */}
 						<Route path="/:country/:category/:article" component={withCountry(withCategory(ArticleDetail))} />
 						<Route path="/:country/:category" component={withCountry(withCategory(CategoryHome))} />
 						<Route exact path="/selectors" component={Selectors} />

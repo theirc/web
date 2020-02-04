@@ -27,11 +27,8 @@ class BottomNav extends Component {
 	
 	constructor(props) {
 		super();
-
 		this.state = { selectedIndex: props.index };
-	}	
 
-	componentDidMount() {
 		i18nHelpers.loadResource(languages, NS.ns);
 	}	
 

@@ -17,6 +17,10 @@ $dividerColor: darken($titleBackground, 50%);
 $colorMap: (irc: $accentIRC, nrc: $accentNRC, generic: $accentGreen, mc: $accentRed, pg: $accentPG, cuenta: $accentCuenta);
 $colorInverseMap: (irc: #000000, nrc: #ffffff, generic: #ffffff, mc: #ffffff, pg: #ffffff, cuenta: #ffffff);
 
+a {
+	text-decoration: none;
+}
+
 @mixin grayscale-brand-colors($prop) {
 	@each $org in map-keys($map: $colorMap) {
 		.#{$org} & {

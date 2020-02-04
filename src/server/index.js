@@ -64,8 +64,8 @@ var mainRequest = function (context) {
 		const { appId } = instance.thirdParty.facebook;
 		context = Object.assign(context || {}, { appId: appId });
 
-		context.title = context.title || instance.brand.tabTitle;
-		context.image = context.image || instance.brand.images.thumbnail;
+		context.title = instance.brand.tabTitle;
+		context.image = instance.brand.images.thumbnail;
 
 		fs.readFile(path.join(path.dirname(path.dirname(__dirname)), "build", "index.html"), (err, data) => {
 			if (err) throw err;
