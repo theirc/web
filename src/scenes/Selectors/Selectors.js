@@ -169,7 +169,7 @@ class Selectors extends Component {
 
 	filterLangs() {
 		let currentCountry = sessionStorage.getItem('redirect');
-		return currentCountry ? instance.languages.filter(l => instance.countries[currentCountry.replace('/', '')].languages.includes(l[0])) : instance.languages;
+		return currentCountry ? instance.languages.filter(l => instance.countries[currentCountry.split('/')[1]].languages.includes(l[0])) : instance.languages;
 	}
 
 	render() {
@@ -179,8 +179,8 @@ class Selectors extends Component {
 			loaded,
 			regionList,
 		} = this.state;
-		const { language } = this.props
-		
+		const { language } = this.props;
+
 		let filteredlanguages = this.filterLangs();
 		switch (currentPage) {
 			case 1:
