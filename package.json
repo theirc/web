@@ -1,6 +1,6 @@
 {
 	"name": "front.refugee.info",
-	"version": "2.0.0-2020-01-14",
+	"version": "2.1.0-2020-02-04",
 	"private": true,
 	"dependencies": {
 		"@sendgrid/mail": "^6.5.1",
