@@ -36,9 +36,7 @@ class ArticleDetail extends React.Component {
 	constructor() {
 		super();
 		this.state = { loading: false };
-	}
-
-	componentDidMount() {
+		
 		i18nHelpers.loadResource(languages, NS.ns);
 	}
 

@@ -22,11 +22,8 @@ class CountryHome extends React.Component {
 	constructor() {
 		super();
 		this.state = {};
-	}
-
-	componentDidMount() {
 		i18nHelpers.loadResource(languages, NS.ns);
-	}	
+	}
 
 	componentWillMount() {
 		if (global.window) {

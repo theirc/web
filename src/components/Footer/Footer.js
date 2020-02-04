@@ -23,7 +23,8 @@ class Footer extends Component {
 		copied: false
 	}
 
-	componentDidMount() {
+	constructor() {
+		super();
 		i18nHelpers.loadResource(languages, NS.ns);
 	}	
 	

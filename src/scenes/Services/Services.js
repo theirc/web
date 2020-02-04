@@ -43,6 +43,11 @@ class Services extends React.Component {
 		isMobile: window.innerWidth <= 1000,
 	};
 
+	constructor() {
+		super();
+		i18nHelpers.loadResource(languages, NS.ns);
+	}
+
 	componentWillMount() {
 		let { regions, country, changeDefaultLocation } = this.props;
 		let regionDictionary = _.fromPairs(regions.map(r => [r.id, r]));
@@ -66,8 +71,6 @@ class Services extends React.Component {
 	}
 	
 	componentDidMount() {
-		i18nHelpers.loadResource(languages, NS.ns);
-
 		window.addEventListener('resize', () => {
 			!this.state.isMobile && window.innerWidth <= 1000 && this.setState({ isMobile: true });
 			this.state.isMobile && window.innerWidth >= 1000 && this.setState({ isMobile: false });

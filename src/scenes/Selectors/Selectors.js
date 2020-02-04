@@ -38,7 +38,8 @@ class Selectors extends Component {
 		api: PropTypes.object,
 	};
 
-	componentDidMount() {
+	constructor() {
+		super();
 		i18nHelpers.loadResource(languages, NS.ns);
 	}	
 

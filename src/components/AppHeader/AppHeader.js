@@ -39,8 +39,9 @@ class AppHeader extends Component {
 		searchText: "",
 		active: false,
 	};
-	
-	componentDidMount() {
+
+	constructor() {
+		super();
 		i18nHelpers.loadResource(languages, NS.ns);
 	}
 
