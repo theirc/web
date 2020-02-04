@@ -43,7 +43,7 @@ class ThemedApp extends Component {
 		return (
 			<MuiThemeProvider theme={theme}>
 				<span className={`${organization} ${direction} language-${language}`}>
-					<Helmet>
+					<Helmet defer={false}>
 						<title>{title}</title>
 						<link rel='shortcut icon' href={favicon} />
 					</Helmet>
