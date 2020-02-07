@@ -87,7 +87,6 @@ var mainRequest = function (context) {
  */
 const parseLanguage = function (req) {
 	let possibleLanguages = instance.languages.map(l => l[0]);
-	console.log(instance, possibleLanguages, 'possibleLanguages')
 	let selectedLanguage = "en";
 
 	if ("language" in req.query) {
@@ -240,7 +239,7 @@ app.get('/:country/subscribe/:category', function(req, res, err){
 
 app.get("/:country/:category/:article", function(req, res, err) {
 		const selectedLanguage = parseLanguage(req);
-		console.log(selectedLanguage)
+
     let configKey = _.first(
         Object.keys(conf).filter(k => {
             return req.headers.host.indexOf(k) > -1;
@@ -280,19 +279,15 @@ app.get("/:country/:category/:article", function(req, res, err) {
 								include: 10,
 							})
 							.then(cc => {
-								console.log('fields 1', selectedLanguage, languageDictionary, country, c);
 								let match = _.first((c.items || []).filter(i => i.fields.country && i.fields.category && i.fields.country.fields && i.fields.category.fields)
 								.filter(i => i.fields.country.fields.slug === country && i.fields.category.fields.slug === category));
 								if (!match) {
 									let _cnt = _.first(cc.items);
-									console.log('fields 2', cc, _cnt);
 									let _cat = _.first((_cnt.fields.categories || []).filter(x => {
-										console.log('fields 3');
 										return x.fields && x.fields.slug === category;
 									}));
 
 									if (_cat) {
-										console.log('fields 4');
 										match = _.first((_cat.fields.articles || []).concat([_cat.fields.overview]).filter(x => x).filter(x => x.fields && x.fields.slug === article));
 									}
 								}
@@ -313,7 +308,6 @@ app.get("/:country/:category/:article", function(req, res, err) {
 											}
 										});
 								} else {
-									console.log('fields 5');
 									return mainRequest({
 										title: match.fields.title,
 										description: (match.fields.lead || "").replace(/&nbsp;/gi, " "),

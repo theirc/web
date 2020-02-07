@@ -10,16 +10,17 @@ const loadInstanceSettings = () => {
 
 	// load settings depending on the environment/domain
 	if (global.window && (global.window.location.hostname !== 'localhost')) {
+		console.log('Settings - hostname: ', global.window.location.hostname);
 		let subdomain = global.window.location.hostname.split('.');
 		env = subdomain.shift(); // e.g.: qa
 		domain = subdomain.join('.'); // e.g.: cuentanos.org
 	} else {
-		console.log('default instance', domain, env);
+		console.log('Settings - default instance: ', domain, env);
 	}
 
 	return { ...instances[domain], env: instances[domain].envs[env] };
 };
 
 let instance = loadInstanceSettings();
-// console.log(instance);
+console.log(instance.brand.name);
 export default instance; // TODO: change this to be named export
