@@ -13,6 +13,8 @@ const loadInstanceSettings = () => {
 		let subdomain = global.window.location.hostname.split('.');
 		env = subdomain.shift(); // e.g.: qa
 		domain = subdomain.join('.'); // e.g.: cuentanos.org
+	} else {
+		console.log('default instance', domain, env);
 	}
 
 	return { ...instances[domain], env: instances[domain].envs[env] };

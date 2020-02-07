@@ -87,7 +87,7 @@ var mainRequest = function (context) {
  */
 const parseLanguage = function (req) {
 	let possibleLanguages = instance.languages.map(l => l[0]);
-	console.log(possibleLanguages, 'possibleLanguages')
+	console.log(instance, possibleLanguages, 'possibleLanguages')
 	let selectedLanguage = "en";
 
 	if ("language" in req.query) {
