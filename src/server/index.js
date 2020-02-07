@@ -3,7 +3,6 @@ const compress = require("compression");
 const cors = require("cors");
 const helmet = require("helmet");
 const bodyParser = require("body-parser");
-const instance = require('../backend/settings').default; // TODO: check why require() needs to dereference the default
 const feathers = require("feathers");
 const configuration = require("feathers-configuration");
 const hooks = require("feathers-hooks");
@@ -21,6 +20,7 @@ const cmsApi = require("../backend/cmsApi").default;
 const _ = require("lodash");
 const toMarkdown = require("to-markdown");
 let { languageDictionary } = conf;
+let instance = {};
 
 const app = feathers();
 app.configure(configuration());
@@ -80,6 +80,13 @@ var mainRequest = function (context) {
 		});
 	};
 };
+
+const initInstance = (hostname) => {
+	instance = require('../backend/settings').default;
+	console.log('Setting up instance for hostname: ', hostname);
+	instance = instance.loader(hostname);
+	console.log(instance);
+}
 
 /**
  * @function
@@ -238,7 +245,10 @@ app.get('/:country/subscribe/:category', function(req, res, err){
 })
 
 app.get("/:country/:category/:article", function(req, res, err) {
-    const selectedLanguage = parseLanguage(req);
+		initInstance(req.headers.host);
+
+		const selectedLanguage = parseLanguage(req);
+
     let configKey = _.first(
         Object.keys(conf).filter(k => {
             return req.headers.host.indexOf(k) > -1;
@@ -262,7 +272,8 @@ app.get("/:country/:category/:article", function(req, res, err) {
 				}
 
 				languageDictionary = Object.assign(languageDictionary, conf[configKey]); // TODO: replace this config by the new instances
-				let cms = cmsApi();
+				console.log('LOCALE: ', languageDictionary[selectedLanguage] || selectedLanguage);
+				let cms = cmsApi(instance.env.thirdParty.contentful);
 				cms.client
 					.getEntries({
 						content_type: "article",
@@ -270,6 +281,7 @@ app.get("/:country/:category/:article", function(req, res, err) {
 						locale: languageDictionary[selectedLanguage] || selectedLanguage,
 					})
 					.then(c => {
+						console.log('STEP 1\n');
 						return cms.client
 							.getEntries({
 								content_type: "country",
@@ -279,20 +291,25 @@ app.get("/:country/:category/:article", function(req, res, err) {
 							})
 							.then(cc => {
 								let match = _.first((c.items || []).filter(i => i.fields.country && i.fields.category && i.fields.country.fields && i.fields.category.fields)
-									.filter(i => i.fields.country.fields.slug === country && i.fields.category.fields.slug === category));
+								.filter(i => i.fields.country.fields.slug === country && i.fields.category.fields.slug === category));
+
+								console.log('STEP 2\n');
+								
 								if (!match) {
 									let _cnt = _.first(cc.items);
 									let _cat = _.first((_cnt.fields.categories || []).filter(x => {
 										return x.fields && x.fields.slug === category;
 									}));
-
+									
 									if (_cat) {
+										console.log('STEP 3\n');
 										match = _.first((_cat.fields.articles || []).concat([_cat.fields.overview]).filter(x => x).filter(x => x.fields && x.fields.slug === article));
 									}
 								}
-
+								
 								// console.log("match" + match);
 								if (!match) {
+									console.log('STEP 4\n');
 									return cms.client
 										.getEntries({
 											content_type: "country",
@@ -307,7 +324,7 @@ app.get("/:country/:category/:article", function(req, res, err) {
 											}
 										});
 								} else {
-									// console.log("fields:" + match.fields);
+									console.log('STEP 5\n');
 									return mainRequest({
 										title: match.fields.title,
 										description: (match.fields.lead || "").replace(/&nbsp;/gi, " "),

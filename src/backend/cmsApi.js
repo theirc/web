@@ -6,14 +6,14 @@ import getSessionStorage from "../shared/sessionStorage";
 import instance from '../backend/settings';
 const contentful = require("contentful");
 
-function cmsApi() {
+function cmsApi(contentfulConfig = null) {
 	let languageDictionary = {
 		en: "en-US",
 		ar: "ar-001",
 		fa: "fa-AF",
 	};
 
-	let client = contentful.createClient(instance.env.thirdParty.contentful);
+	let client = contentful.createClient(contentfulConfig || instance.env.thirdParty.contentful);
 
 	function listCountries(language = "en") {
 		return client.getEntries({
