@@ -87,6 +87,7 @@ var mainRequest = function (context) {
  */
 const parseLanguage = function (req) {
 	let possibleLanguages = instance.languages.map(l => l[0]);
+	console.log(possibleLanguages, 'possibleLanguages')
 	let selectedLanguage = "en";
 
 	if ("language" in req.query) {
@@ -238,7 +239,8 @@ app.get('/:country/subscribe/:category', function(req, res, err){
 })
 
 app.get("/:country/:category/:article", function(req, res, err) {
-    const selectedLanguage = parseLanguage(req);
+		const selectedLanguage = parseLanguage(req);
+		console.log(selectedLanguage)
     let configKey = _.first(
         Object.keys(conf).filter(k => {
             return req.headers.host.indexOf(k) > -1;
