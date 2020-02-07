@@ -5,17 +5,17 @@ import instances from '../config';
  * @description Creates an object with instance/country/environment related settings.
  * @returns instance object
  */
-const loadInstanceSettings = (host = null) => {
+const loadInstanceSettings = (serverHost = null) => {
 	let { instance: domain, env } = require('../config/localhost').default;
 
 	// load settings depending on the environment/domain
-	if ((host && !host.includes('localhost')) || (global.window && (global.window.location.hostname !== 'localhost'))) {
-		console.log('Settings - hostname: ', host || global.window.location.hostname);
-		let subdomain = host ? host.split('.') : global.window.location.hostname.split('.');
+	if ((serverHost && !serverHost.includes('localhost')) || (global.window && (global.window.location.hostname !== 'localhost'))) {
+		let subdomain = serverHost ? serverHost.split('.') : global.window.location.hostname.split('.');
 		env = subdomain.shift(); // e.g.: qa
 		domain = subdomain.join('.'); // e.g.: cuentanos.org
+		console.log('Settings: ', domain, env);
 	} else {
-		console.log('Settings - default instance: ', domain, env);
+		console.log('Settings: [localhost.js] ', domain, env);
 	}
 
 	return { ...instances[domain], env: instances[domain].envs[env] };

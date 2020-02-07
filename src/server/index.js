@@ -248,7 +248,6 @@ app.get("/:country/:category/:article", function(req, res, err) {
 		initInstance(req.headers.host);
 
 		const selectedLanguage = parseLanguage(req);
-		console.log('SELECTED LANGUAGE\n', selectedLanguage)
 
     let configKey = _.first(
         Object.keys(conf).filter(k => {
@@ -273,7 +272,7 @@ app.get("/:country/:category/:article", function(req, res, err) {
 				}
 
 				languageDictionary = Object.assign(languageDictionary, conf[configKey]); // TODO: replace this config by the new instances
-				console.log('LOCALE\n', languageDictionary[selectedLanguage] || selectedLanguage);
+				console.log('LOCALE: ', languageDictionary[selectedLanguage] || selectedLanguage);
 				let cms = cmsApi(instance.env.thirdParty.contentful);
 				cms.client
 					.getEntries({
