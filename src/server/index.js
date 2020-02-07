@@ -56,6 +56,7 @@ app.get("/config", (rq, res) => {
  * @description 
  */
 var mainRequest = function (context) {
+	console.log(instance.brand.name);
 	return function (request, response, next) {
 		let hostname = request.hostname || request.headers.host;
 		let protocol = request.protocol;
