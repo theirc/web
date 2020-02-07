@@ -278,7 +278,7 @@ app.get("/:country/:category/:article", function(req, res, err) {
 								include: 10,
 							})
 							.then(cc => {
-								console.log('fields 1');
+								console.log('fields 1', languageDictionary[selectedLanguage] || selectedLanguage, country);
 								let match = _.first((c.items || []).filter(i => i.fields.country && i.fields.category && i.fields.country.fields && i.fields.category.fields)
 								.filter(i => i.fields.country.fields.slug === country && i.fields.category.fields.slug === category));
 								if (!match) {
