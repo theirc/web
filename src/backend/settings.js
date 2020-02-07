@@ -10,7 +10,7 @@ const loadInstanceSettings = (host = null) => {
 
 	// load settings depending on the environment/domain
 	if ((host && !host.includes('localhost')) || (global.window && (global.window.location.hostname !== 'localhost'))) {
-		console.log('Settings - hostname: ', global.window.location.hostname);
+		console.log('Settings - hostname: ', host || global.window.location.hostname);
 		let subdomain = host ? host.split('.') : global.window.location.hostname.split('.');
 		env = subdomain.shift(); // e.g.: qa
 		domain = subdomain.join('.'); // e.g.: cuentanos.org

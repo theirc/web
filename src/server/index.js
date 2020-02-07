@@ -83,6 +83,7 @@ var mainRequest = function (context) {
 
 const initInstance = (hostname) => {
 	instance = require('../backend/settings').default;
+	console.log('before loader', hostname);
 	instance = instance.loader(hostname);
 	console.log(instance);
 }
