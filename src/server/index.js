@@ -274,7 +274,7 @@ app.get("/:country/:category/:article", function(req, res, err) {
 
 				languageDictionary = Object.assign(languageDictionary, conf[configKey]); // TODO: replace this config by the new instances
 				console.log('LOCALE\n', languageDictionary[selectedLanguage] || selectedLanguage);
-				let cms = cmsApi();
+				let cms = cmsApi(instance.env.thirdParty.contentful);
 				cms.client
 					.getEntries({
 						content_type: "article",
