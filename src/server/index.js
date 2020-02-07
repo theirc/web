@@ -82,8 +82,9 @@ var mainRequest = function (context) {
 };
 
 const initInstance = (hostname) => {
-	global = { window: { location: { hostname }}};
 	instance = require('../backend/settings').default;
+	instance = instance.loader(hostname);
+	console.log(instance);
 }
 
 /**
@@ -244,7 +245,7 @@ app.get('/:country/subscribe/:category', function(req, res, err){
 
 app.get("/:country/:category/:article", function(req, res, err) {
 		initInstance(req.headers.host);
-		console.log(instance);
+
 		const selectedLanguage = parseLanguage(req);
 
     let configKey = _.first(
