@@ -22,5 +22,5 @@ const loadInstanceSettings = () => {
 };
 
 let instance = loadInstanceSettings();
-console.log(instance.brand.name);
+
 export default instance; // TODO: change this to be named export

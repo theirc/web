@@ -56,11 +56,11 @@ app.get("/config", (rq, res) => {
  * @description 
  */
 var mainRequest = function (context) {
-	console.log(instance.brand.name);
 	return function (request, response, next) {
 		let hostname = request.hostname || request.headers.host;
 		let protocol = request.protocol;
 		let originalUrl = request.originalUrl;
+		console.log(instance.brand.name, hostname);
 
 		const { appId } = instance.thirdParty.facebook;
 		context = Object.assign(context || {}, { appId: appId });
@@ -240,6 +240,7 @@ app.get('/:country/subscribe/:category', function(req, res, err){
 
 app.get("/:country/:category/:article", function(req, res, err) {
 		const selectedLanguage = parseLanguage(req);
+		console.log(req);
 
     let configKey = _.first(
         Object.keys(conf).filter(k => {
