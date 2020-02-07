@@ -61,6 +61,8 @@ var mainRequest = function (context) {
 		let protocol = request.protocol;
 		let originalUrl = request.originalUrl;
 
+		!instance && initInstance(hostname);
+
 		const { appId } = instance.thirdParty.facebook;
 		context = Object.assign(context || {}, { appId: appId });
 
