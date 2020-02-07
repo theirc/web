@@ -3,7 +3,6 @@ const compress = require("compression");
 const cors = require("cors");
 const helmet = require("helmet");
 const bodyParser = require("body-parser");
-const instance = require('../backend/settings').default; // TODO: check why require() needs to dereference the default
 const feathers = require("feathers");
 const configuration = require("feathers-configuration");
 const hooks = require("feathers-hooks");
@@ -81,6 +80,11 @@ var mainRequest = function (context) {
 		});
 	};
 };
+
+const initInstance = (hostname) => {
+	global = { window: { location: { hostname }}};
+	require('../backend/settings').default;
+}
 
 /**
  * @function
@@ -239,8 +243,8 @@ app.get('/:country/subscribe/:category', function(req, res, err){
 })
 
 app.get("/:country/:category/:article", function(req, res, err) {
+		initInstance(req.headers.host);
 		const selectedLanguage = parseLanguage(req);
-		console.log('HOSTTTTT', req.headers.host);
 
     let configKey = _.first(
         Object.keys(conf).filter(k => {
