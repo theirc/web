@@ -240,7 +240,7 @@ app.get('/:country/subscribe/:category', function(req, res, err){
 
 app.get("/:country/:category/:article", function(req, res, err) {
 		const selectedLanguage = parseLanguage(req);
-		console.log(req);
+		console.log('HOSTTTTT', req.headers.host);
 
     let configKey = _.first(
         Object.keys(conf).filter(k => {
