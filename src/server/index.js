@@ -20,7 +20,7 @@ const cmsApi = require("../backend/cmsApi").default;
 const _ = require("lodash");
 const toMarkdown = require("to-markdown");
 let { languageDictionary } = conf;
-let instance = {};
+let instance = null;
 
 const app = feathers();
 app.configure(configuration());
