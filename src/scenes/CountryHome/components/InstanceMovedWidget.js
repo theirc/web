@@ -3,23 +3,33 @@ import React, { Component } from "react";
 import { translate } from "react-i18next";
 
 // local
+import instance from '../../../backend/settings';
 import "./InstanceMovedWidget.css";
 
+const NS = { ns: 'CountryHome' };
+
+/**
+ * @class
+ * @description 
+ */
 class InstanceMovedWidget extends Component {
 
 	render() {
-		const { t, link } = this.props;
+		const { country, t } = this.props;
+		const partner = instance.countries[country.fields.slug].movedToPartner;
 
 		return (
 			<div className="InstanceMovedWidget">
 				<span></span>
-				<h1>{t("Instance moved Bulgaria banner")}</h1>
+				<h1>{t(partner.title, NS)}</h1>
 
 				<br /><br />
-				<h3>{t("Instance moved Bulgaria small")}</h3>
+				<h3>{t(partner.text, NS)}</h3>
 				<br />
-
-				<a href={link} target="_blank" rel="noopener noreferrer">{t("Instance moved Bulgaria label")}</a>
+				
+				<div className="buttons">
+					{partner.buttons.map(b => <a href={b.link} key={b.link} target="_blank" rel="noopener noreferrer">{t(b.label, NS)}</a>)}
+				</div>
 			</div>
 		)
 	}

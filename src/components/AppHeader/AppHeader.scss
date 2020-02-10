@@ -42,18 +42,7 @@ Less me
 	align-items: flex-start;
 	justify-content: flex-start;
 	height: 50;
-
-	@media (max-width: $desktopBreakpoint) {
-		&.logo {
-			.rtl & {
-				padding-right: 18px;
-			}
-			.ltr & {
-				padding-left: 18px;
-			}
-		}		
-	}
-	
+	padding: 0 15px;
 }
 
 .headerBackground{	
@@ -101,6 +90,7 @@ Less me
 }
 
 .selectors {
+	align-items: center;
 	display: flex;
 	padding: 0 15px;
 
@@ -113,9 +103,8 @@ Less me
 		align-items: center;
 		display: inherit;
 		
-		
 		img {
-			border: 1px solid #888;
+			border: 1px solid #333;
 			border-radius: 2px;
 			width: 28px;
 
@@ -126,6 +115,8 @@ Less me
 	}
 	
 	.lang {
+		font-size: 14px;
+		font-weight: lighter;
 		text-transform: uppercase;
 
 		&:hover {
@@ -164,6 +155,8 @@ Less me
 		}
 
 		&.top-menu {
+			border-bottom: 3px solid;
+			border-bottom-color: transparent;
 			.menu-item {
 				font-weight: 100;
 				white-space: pre;
@@ -174,8 +167,8 @@ Less me
 			}
 
 			&.Selected {
-				border-bottom: 3px solid;
 				@include darken-brand-colors( "border-bottom-color", 10%);
+				font-size: 15px;
 
 				svg {
 					@include darken-brand-colors( "color", 10%);
@@ -188,7 +181,7 @@ Less me
 		}
 
 		svg {
-			margin-right: 10px;
+			margin: 0 10px;
 		}
 
 	}
@@ -202,16 +195,6 @@ Less me
 		display: none !important;
 	}
 }
-
-.rtl {
-	.app-bar-selectors {
-		svg {
-			margin-right: 0;
-			margin-left: 10px;
-		}
-	}
-}
-
 
 .app-bar-separator {
 	border-left-width: 1px;
@@ -495,41 +478,6 @@ Less me
 			margin-left: 7px;
 		}
 	}
-	.serbia-banner{
-		background-color: #FCD735;
-		
-		.banner-wrapper {
-			align-items: stretch;
-			color: #292633;
-			display: flex;
-			flex: 1;
-			flex-direction: row;
-			font-size: 14px;
-			font-weight: bold;
-			height: auto;
-			max-width: 1024px;
-			margin: 0 auto;
-			padding: 16px;
-			position: relative;
-
-			span {
-				border-right: 1px solid black;
-				margin: 10px 15px 10px 5px;
-			}
-	
-			a {
-				text-decoration: none;
-				
-				&:hover {
-					text-decoration: underline;
-				}
-			}
-	
-			p {
-				white-space: pre-line;
-			}
-		}
-	}
 }
 
 
@@ -621,11 +569,18 @@ $color: #ffffff;
 .search-btn {
 	cursor: pointer;
 	opacity: 0.6;
-	padding: 0 15px;
 	width: 24px;
 
 	&:hover {
 		opacity: 1;
+	}
+
+	.rtl & {
+		padding-right: 18px;
+	}
+	
+	.ltr & {
+		padding-left: 18px;
 	}
 }
 

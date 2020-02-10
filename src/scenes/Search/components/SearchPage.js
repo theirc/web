@@ -3,12 +3,15 @@ import React from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import tinycolor from "tinycolor2";
+import moment from 'moment';
+import instance from '../../../backend/settings';
 
 // local
-import cms from '../../../backend/cms';
 import "./SearchPage.css";
 import "../../Services/components/ServiceCategoryList.css";
-import "../../Categories/components/CategoryList.css";
+import "../../ArticleList/components/desktop/ArticleListBody.css";
+
+const NS = { ns: 'Search' };
 
 const Remarkable = require("remarkable");
 
@@ -19,6 +22,10 @@ const md = new Remarkable("full", {
 	breaks: true,
 });
 
+/**
+ * @class
+ * @description 
+ */
 class SearchPage extends React.Component {
 	state = {
 		showFullServiceList: false,
@@ -94,7 +101,7 @@ class SearchPage extends React.Component {
 				</div>
 				<div className='text'>
 					{a.fields && <h2>{a.fields.title}</h2>}
-					<span className='author'>By <span>{cms.siteConfig.author}</span></span>
+					<span className='author'>{moment(a.sys.updatedAt).format('YYYY.MM.DD')}</span>
 				</div>
 			</li>)
 	}
@@ -111,24 +118,24 @@ class SearchPage extends React.Component {
 	}
 
 	render() {
-		const { articles, language, onNavigate, searchingArticles, searchingServices, services, showServiceMap, term, t } = this.props;
+		const { articles, country, language, onNavigate, searchingArticles, searchingServices, services, term, t } = this.props;
 		let servicesList = this.state.showFullServiceList ? services : services.slice().splice(0, 4);
 		let articleList = this.state.showFullBlogList ? articles : articles.slice().splice(0, 3);
-		const toggleServicelabel = this.state.showFullServiceList ? t('Show Less') : t('Show More');
-		const toggleArticleslabel = this.state.showFullBlogList ? t('Show Less') : t('Show More');
+		const toggleServicelabel = this.state.showFullServiceList ? t('buttons.Show Less', NS) : t('buttons.Show More', NS);
+		const toggleArticleslabel = this.state.showFullBlogList ? t('buttons.Show Less', NS) : t('buttons.Show More', NS);
 
 		return (
 			<div className="SearchPage">
 				<div className="Title">
 					<h1>
-						{t("Results for")}: "{term}"
+						{t("title.Results for", NS)}: "{term}"
 					</h1>
 				</div>
 
 				<div className="results">
-					{showServiceMap &&
+					{instance.countries[country.fields.slug].switches.showServices &&
 						<div className='services-list'>
-							<h1>{t("Services")}</h1>
+							<h1>{t("list.Services", NS)}</h1>
 
 							<hr />
 
@@ -146,7 +153,7 @@ class SearchPage extends React.Component {
 
 							{!searchingServices && services.length === 0 && (
 								<div className='no-results'>
-									<em>{t("No services found with the keywords used")}</em>
+									<em>{t("list.No services found with the keywords used", NS)}</em>
 								</div>
 							)
 							}
@@ -154,13 +161,13 @@ class SearchPage extends React.Component {
 					}
 
 					<div className='articles-list'>
-						<h1>{t("Articles")}</h1>
+						<h1>{t("list.Articles", NS)}</h1>
 						
 						<hr />
 
 						{searchingArticles && <div className="LoaderContainer"><div className="loader" /></div>}
 
-						<div className="CategoryList">
+						<div className="ArticleListBody">
 							<div className='tiles-desktop'>
 								<ul>
 									{articleList.map(c => this.renderTiles(c))}
@@ -168,7 +175,7 @@ class SearchPage extends React.Component {
 							</div>
 						</div>
 
-						<div className="CategoryList">
+						<div className="ArticleListBody">
 							<div className='tiles-mobile'>
 								{articleList.map((article, i) => {
 									return [
@@ -198,7 +205,7 @@ class SearchPage extends React.Component {
 
 						{!searchingArticles && articles.length === 0 && (
 							<div className='no-results'>
-								<em>{t("No articles found with the keywords used")}</em>
+								<em>{t("list.No articles found with the keywords used", NS)}</em>
 							</div>
 						)
 						}
@@ -211,10 +218,6 @@ class SearchPage extends React.Component {
 	}
 }
 
-const mapState = ({ showServiceMap }, p) => {
-	return {
-		showServiceMap
-	};
-};
+const mapState = ({ country }, p) => ({ country });
 
 export default translate()(connect(mapState)(SearchPage));

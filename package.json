@@ -1,8 +1,9 @@
 {
 	"name": "front.refugee.info",
-	"version": "1.0.9-2019-7-03",
+	"version": "2.1.0-2020-02-04",
 	"private": true,
 	"dependencies": {
+		"@sendgrid/mail": "^6.5.1",
 		"@turf/turf": "^4.7.3",
 		"animated": "^0.2.0",
 		"autoprefixer": "7.1.0",
@@ -57,7 +58,7 @@
 		"helmet": "^3.6.1",
 		"history": "^4.6.3",
 		"html-webpack-plugin": "2.28.0",
-		"i18next": "^10.0.7",
+		"i18next": "^19.0.2",
 		"i18next-browser-languagedetector": "^2.0.0",
 		"i18next-xhr-backend": "^1.4.3",
 		"jest": "20.0.4",

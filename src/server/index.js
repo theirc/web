@@ -3,7 +3,6 @@ const compress = require("compression");
 const cors = require("cors");
 const helmet = require("helmet");
 const bodyParser = require("body-parser");
-
 const feathers = require("feathers");
 const configuration = require("feathers-configuration");
 const hooks = require("feathers-hooks");
@@ -12,29 +11,16 @@ const socketio = require("feathers-socketio");
 
 const handler = require("feathers-errors/handler");
 const notFound = require("feathers-errors/not-found");
-const mustacheExpress = require("mustache-express");
 const logger = require("winston");
-const less = require("less");
 const fs = require("fs");
 const nunjucks = require("nunjucks");
 const conf = require("../backend/config");
-const cms = require("../backend/cms").default;
 const servicesApi = require("../backend/servicesApi");
 const cmsApi = require("../backend/cmsApi").default;
-const ReactApp = require("../App").default;
-
-const React = require("react");
-const renderToString = require("react-dom/server").renderToString;
-const {
-	store,
-	history
-} = require("../shared/store");
-const Provider = require("react-redux").Provider;
 const _ = require("lodash");
 const toMarkdown = require("to-markdown");
-let {
-	languageDictionary
-} = conf;
+let { languageDictionary } = conf;
+let instance = null;
 
 const app = feathers();
 app.configure(configuration());
@@ -43,9 +29,7 @@ app.use(cors());
 app.use(helmet());
 app.use(compress());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-	extended: true
-}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Set up Plugins and providers
 app.configure(hooks());
@@ -67,28 +51,23 @@ app.get("/config", (rq, res) => {
 	res.send(responseText);
 });
 
+/**
+ * @function
+ * @description 
+ */
 var mainRequest = function (context) {
 	return function (request, response, next) {
 		let hostname = request.hostname || request.headers.host;
 		let protocol = request.protocol;
 		let originalUrl = request.originalUrl;
-		let configKey = _.first(
-			Object.keys(conf).filter(k => {
-				return hostname.indexOf(k) > -1;
-			})
-		);
 
-		if (configKey) {
-			const {
-				appId
-			} = conf[configKey];
-			context = Object.assign(context || {}, {
-				appId: appId
-			});
-			context.title = context.title || conf[configKey].title;
-			context.image = context.image || conf[configKey]["thumbnail"];
-			// console.log(context, conf[configKey], configKey);
-		}
+		!instance && initInstance(hostname);
+
+		const { appId } = instance.thirdParty.facebook;
+		context = Object.assign(context || {}, { appId: appId });
+
+		context.title = instance.brand.tabTitle;
+		context.image = instance.brand.images.thumbnail;
 
 		fs.readFile(path.join(path.dirname(path.dirname(__dirname)), "build", "index.html"), (err, data) => {
 			if (err) throw err;
@@ -103,21 +82,20 @@ var mainRequest = function (context) {
 		});
 	};
 };
-const parseLanguage = function (req) {
-	let hostname = req.hostname || req.headers.host;
-	let configKey = _.first(
-		Object.keys(conf).filter(k => {
-			return hostname.indexOf(k) > -1;
-		})
-	);
-	let possibleLanguages = ["en", "es"];
 
-	if (configKey) {
-		const {
-			languages
-		} = conf[configKey];
-		possibleLanguages = languages.map(l => l[0]);
-	}
+const initInstance = (hostname) => {
+	instance = require('../backend/settings').default;
+	console.log('Setting up instance for hostname: ', hostname);
+	instance = instance.loader(hostname);
+	console.log(instance);
+}
+
+/**
+ * @function
+ * @description 
+ */
+const parseLanguage = function (req) {
+	let possibleLanguages = instance.languages.map(l => l[0]);
 	let selectedLanguage = "en";
 
 	if ("language" in req.query) {
@@ -147,6 +125,10 @@ const markdownOptions = {
 	},],
 };
 
+/**
+ * @class
+ * @description 
+ */
 const getFirsLevel = (slug, selectedLanguage) => {
 	return servicesApi
 		.fetchRegions(selectedLanguage)
@@ -175,6 +157,8 @@ app.use("/fonts", feathers.static("build/fonts"));
 app.get("/bulgaria/*", function (req, res, err) {
 	res.redirect(`/bulgaria`);
 })
+
+require('./twilio-routes.js')(app);
 
 app.get("/preview/:serviceId/", function (req, res, err) {
 	const selectedLanguage = parseLanguage(req);
@@ -261,14 +245,17 @@ app.get('/:country/subscribe/:category', function(req, res, err){
         image: "",
     })(req, res, err);
 })
+
 app.get("/:country/:category/:article", function(req, res, err) {
-    const selectedLanguage = parseLanguage(req);
+		initInstance(req.headers.host);
+
+		const selectedLanguage = parseLanguage(req);
+
     let configKey = _.first(
         Object.keys(conf).filter(k => {
             return req.headers.host.indexOf(k) > -1;
         })
     );
-    let context = {};
     const {
         country,
         category,
@@ -286,12 +273,9 @@ app.get("/:country/:category/:article", function(req, res, err) {
 					return;
 				}
 
-				const {
-					accessToken,
-					space
-				} = conf[configKey];
-				languageDictionary = Object.assign(languageDictionary, conf[configKey]);
-				let cms = cmsApi(conf[configKey], languageDictionary);
+				languageDictionary = Object.assign(languageDictionary, conf[configKey]); // TODO: replace this config by the new instances
+				console.log('LOCALE: ', languageDictionary[selectedLanguage] || selectedLanguage);
+				let cms = cmsApi(instance.env.thirdParty.contentful);
 				cms.client
 					.getEntries({
 						content_type: "article",
@@ -299,6 +283,7 @@ app.get("/:country/:category/:article", function(req, res, err) {
 						locale: languageDictionary[selectedLanguage] || selectedLanguage,
 					})
 					.then(c => {
+						console.log('STEP 1\n');
 						return cms.client
 							.getEntries({
 								content_type: "country",
@@ -308,20 +293,25 @@ app.get("/:country/:category/:article", function(req, res, err) {
 							})
 							.then(cc => {
 								let match = _.first((c.items || []).filter(i => i.fields.country && i.fields.category && i.fields.country.fields && i.fields.category.fields)
-									.filter(i => i.fields.country.fields.slug === country && i.fields.category.fields.slug === category));
+								.filter(i => i.fields.country.fields.slug === country && i.fields.category.fields.slug === category));
+
+								console.log('STEP 2\n');
+								
 								if (!match) {
 									let _cnt = _.first(cc.items);
 									let _cat = _.first((_cnt.fields.categories || []).filter(x => {
 										return x.fields && x.fields.slug === category;
 									}));
-
+									
 									if (_cat) {
+										console.log('STEP 3\n');
 										match = _.first((_cat.fields.articles || []).concat([_cat.fields.overview]).filter(x => x).filter(x => x.fields && x.fields.slug === article));
 									}
 								}
-
+								
 								// console.log("match" + match);
 								if (!match) {
+									console.log('STEP 4\n');
 									return cms.client
 										.getEntries({
 											content_type: "country",
@@ -336,7 +326,7 @@ app.get("/:country/:category/:article", function(req, res, err) {
 											}
 										});
 								} else {
-									// console.log("fields:" + match.fields);
+									console.log('STEP 5\n');
 									return mainRequest({
 										title: match.fields.title,
 										description: (match.fields.lead || "").replace(/&nbsp;/gi, " "),

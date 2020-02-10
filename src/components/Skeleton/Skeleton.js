@@ -6,23 +6,22 @@ import { I18nextProvider } from "react-i18next";
 import { push } from "react-router-redux";
 import { withRouter } from "react-router-dom";
 import moment from "moment";
-import PropTypes from "prop-types";
 
 // local
-import { actions } from "../../shared/store";
+import { actions } from "../../shared/redux/store";
 import { AppHeader, BottomNavContainer, Footer, WarningDialog } from "..";
 import i18n from "../../i18n"; // initialized i18next instance
+import instance from '../../backend/settings';
 import getSessionStorage from "../../shared/sessionStorage";
 import "./Skeleton.css";
 
+/**
+ * @class
+ * @description 
+ */
 class Skeleton extends React.Component {
 	state = {
 		errorMessage: null,
-	};
-
-	static contextTypes = {
-		config: PropTypes.object,
-		api: PropTypes.object,
 	};
 
 	componentDidMount() {
@@ -54,9 +53,9 @@ class Skeleton extends React.Component {
 
 	render() {
 		const { children, country, language, match, onGoHome, onGoToServices, onGoToCategories, onGoToSearch, onChangeLocation, onChangeLanguage, deviceType, router, hideFooter, removeErrorMessage, showMapButton, goToMap, headerColor } = this.props;
-		const { hideShareButtons, homePage, toggleServiceMap } = this.props;
+		const { hideShareButtons, homePage } = this.props;
 		const { errorMessage } = this.state;
-		const { config } = this.context;
+		const showDepartments = _.has(country, 'fields.slug') && instance.countries[country.fields.slug] && instance.countries[country.fields.slug].switches.showDepartments;
 		let notifications = [];
 
 		const notificationType = n => {
@@ -100,20 +99,11 @@ class Skeleton extends React.Component {
 		}
 
 		let showFooter = !hideFooter && country && language;
-		let logo = _.template(config.logo)({ language: language || "en" });
-
-		if (country && country.fields.slug === "serbia" && sessionStorage.getItem("serbia-alert") == null)
-			sessionStorage.setItem("serbia-alert", 0);
-
-		toggleServiceMap(country && country.fields && country.fields.slug !== 'italy' && country.fields.slug !== 'jordan');
 
 		return (
 			<I18nextProvider i18n={i18n}>
 				<div className="Skeleton">
 					<AppHeader
-						disableCountrySelector={!!config.disableCountrySelector}
-						disableLanguageSelector={!!config.disableLanguageSelector}
-						cookieBanner={config.cookieBanner}
 						country={country}
 						language={language}
 						onGoHome={onGoHome(country)}
@@ -123,8 +113,6 @@ class Skeleton extends React.Component {
 						onChangeCountry={onChangeLocation}
 						onChangeLanguage={onChangeLanguage.bind(this, router.location.pathname)}
 						headerColor={headerColor}
-						logo={logo}
-						logoBlack={config.logoBlack}
 						homePage={homePage}
 					/>
 					
@@ -134,21 +122,16 @@ class Skeleton extends React.Component {
 					
 					{showFooter && (
 						<Footer
-							questionLink={config.questionLink}
-							disableCountrySelector={!!config.disableCountrySelector}
-							disableLanguageSelector={!!config.disableLanguageSelector}
 							onChangeLocation={onChangeLocation}
 							onChangeLanguage={onChangeLanguage.bind(this, router.location.pathname)}
 							deviceType={deviceType}
-							showLinkToAdministration={!!config.showLinkToAdministration}
 							country={country}
-							customQuestionLink={config.customQuestionLink}
 							language={language}
 							hideShareButtons={hideShareButtons}
 						/>
 					)}
 
-					{country && language && <BottomNavContainer match={match} showMapButton={showMapButton} goToMap={goToMap} showDepartments={config.showDepartments} />}
+					{country && language && <BottomNavContainer match={match} showMapButton={showMapButton} goToMap={goToMap} showDepartments={showDepartments} />}
 				</div>
 			</I18nextProvider>
 		);
@@ -167,7 +150,6 @@ const mapState = ({ country, language, deviceType, router, errorMessage }, p) =>
 
 const mapDispatch = (d, p) => {
 	return {
-		toggleServiceMap: show => d(actions.toggleServiceMap(show)),
 		onGoHome: country => () => {
 			if (country) d(push(`/${country.fields.slug || ""}`));
 		},

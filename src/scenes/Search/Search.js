@@ -3,13 +3,22 @@ import React from "react";
 import { connect } from "react-redux";
 import queryString from "query-string";
 import { push } from "react-router-redux";
-import PropTypes from "prop-types";
 
 // local
+import config from '../../backend/config';
 import servicesApi from "../../backend/servicesApi";
+import i18nHelpers from '../../helpers/i18n';
+import languages from './languages';
+import cmsApi from '../../backend/cmsApi';
 import { SearchPage } from "../../components";
 import { Skeleton } from "../../scenes";
 
+const NS = { ns: 'Search' };
+
+/**
+ * @class
+ * @description 
+ */
 class Search extends React.Component {
 	state = {
 		articles: [],
@@ -19,10 +28,10 @@ class Search extends React.Component {
 		term: "",
 	};
 
-	static contextTypes = {
-		config: PropTypes.object,
-		api: PropTypes.object,
-	};
+	constructor() {
+		super();
+		i18nHelpers.loadResource(languages, NS.ns);
+	}
 
 	componentDidMount() {
 		if (this.props.location.search) {
@@ -43,11 +52,10 @@ class Search extends React.Component {
 		const { location, country, language } = props;
 		const qs = queryString.parse(location.search);
 		this.setState({ articles: [], services: [], searchingArticles: true, searchingServices: true, term: qs.q });
-		const { api, config } = this.context;
 		const languageDictionary = config.languageDictionary || {};
 
 		setTimeout(s => {
-			api.client
+			cmsApi().client
 				.getEntries({
 					content_type: "article",
 					"fields.country.sys.id": country.sys.id,
@@ -70,13 +78,11 @@ class Search extends React.Component {
 	render() {
 		const { searchingArticles, searchingServices, articles, services, term } = this.state;
 		const { onNavigate, country, language } = this.props;
-		const { config } = this.context;
 
 		return (
 			<Skeleton headerColor='light'>
 				<div className="SkeletonContainer bg-gray" >
 					<SearchPage
-						hideServices={config.hideServiceMap}
 						country={country}
 						searchingArticles={searchingArticles}
 						searchingServices={searchingServices}
@@ -92,20 +98,8 @@ class Search extends React.Component {
 	}
 }
 
-const mapState = ({ country, router, language }, p) => {
-	return {
-		country,
-		location: router.location,
-		language,
-	};
-};
+const mapState = ({ country, router, language }, p) => ({ country, location: router.location, language });
 
-const mapDispatch = (d, p) => {
-	return {
-		onNavigate(url) {
-			d(push(url));
-		},
-	};
-};
+const mapDispatch = (d, p) => ({ onNavigate: (url) => d(push(url)) });
 
 export default connect(mapState, mapDispatch)(Search);

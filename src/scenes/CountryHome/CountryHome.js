@@ -6,13 +6,23 @@ import { push } from "react-router-redux";
 
 // local
 import { HomeWidget, HomeWidgetCollection, InstanceMovedWidget } from "../../components";
+import i18nHelpers from '../../helpers/i18n';
+import instance from '../../backend/settings';
+import languages from './languages';
 import Skeleton from '../../components/Skeleton/Skeleton';
 import getSessionStorage from "../../shared/sessionStorage";
 
+const NS = { ns: 'CountryHome' };
+
+/**
+ * @class
+ * @description 
+ */
 class CountryHome extends React.Component {
 	constructor() {
 		super();
 		this.state = {};
+		i18nHelpers.loadResource(languages, NS.ns);
 	}
 
 	componentWillMount() {
@@ -28,22 +38,22 @@ class CountryHome extends React.Component {
 
 	render() {
 		const { country, onNavigate, direction, language } = this.props;
-		const instanceMoved = country.fields.slug === 'bulgaria';
 
 		if (!country || !country.fields.home) {
 			return null;
 		}
 
+		const movedToPartner = instance.countries[country.fields.slug].movedToPartner;
 		return (
 			<div className='CountryHome'>
 				<Skeleton hideShareButtons={true} homePage={true}>
-					{!instanceMoved &&
+					{!movedToPartner &&
 						<HomeWidgetCollection key={"HomeWidgetCollection"} className='HomeWidgetCollection'>
 							{country.fields.home.map(e => <HomeWidget direction={direction} onNavigate={onNavigate} language={language} country={country} content={e} key={e.sys.id} />)}
 						</HomeWidgetCollection>
 					}
-					{instanceMoved &&
-						<InstanceMovedWidget link="http://refugeelife.bg/" />
+					{movedToPartner &&
+						<InstanceMovedWidget country={country} />
 					}
 				</Skeleton>
 			</div>
@@ -51,21 +61,8 @@ class CountryHome extends React.Component {
 	}
 }
 
-const mapState = (s, p) => {
-	return {
-		articles: s.articles,
-		country: s.country,
-		direction: s.direction,
-		currentCoordinates: s.currentCoordinates,
-	};
-};
+const mapState = ({ country, direction }, p) => ({ country, direction });
 
-const mapDispatch = (d, p) => {
-	return {
-		onNavigate: path => {
-			d(push(path));
-		},
-	};
-};
+const mapDispatch = (d, p) => ({ onNavigate: path => (d(push(path))) });
 
 export default connect(mapState, mapDispatch)(CountryHome);

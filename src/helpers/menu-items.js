@@ -1,3 +1,4 @@
+// TODO: refactor this
 let selectedMenuItem = () => {
 	let pathParts = document.location.pathname.split('/');
 	let selectedIndex = 0;

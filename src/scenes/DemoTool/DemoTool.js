@@ -5,17 +5,26 @@ import { connect } from "react-redux";
 import { push } from "react-router-redux";
 
 // local
-import { LocalDemo } from "./components/LocalDemo";
+import i18nHelpers from '../../helpers/i18n';
+import LocalDemo from "./components/LocalDemo";
 import getSessionStorage from "../../shared/sessionStorage";
-import { Skeleton } from "..";
+import Skeleton from '../../components/Skeleton/Skeleton';
+import languages from './languages';
+const NS = { ns: 'DemoTool' };
 
+/**
+ * @class
+ * @description 
+ */
 class DemoTool extends React.Component {
 	constructor() {
 		super();
-
 		this.state = {};
 	}
-
+	componentDidMount(){
+		i18nHelpers.loadResource(languages, NS.ns);
+	}
+	
 	componentWillMount() {
 		if (global.window) {
 			const sessionStorage = getSessionStorage();
@@ -24,9 +33,6 @@ class DemoTool extends React.Component {
 				sessionStorage.firstRequest = moment().toString();
 			}
 		}
-
-		const { onMount } = this.props;
-		onMount();
 	}
 
 	render() {
@@ -46,24 +52,8 @@ class DemoTool extends React.Component {
 	}
 }
 
-const mapState = (s, p) => {
-	return {
-		language: s.language,
-		country: s.country,
-	};
-};
+const mapState = ({ country, language }, p) => ({ language, country });
 
-const mapDispatch = (d, p) => {
-	return {
-		onMount: () => { },
-		onLocationRequested: (coords, country) => {
-			if (country) {
-			}
-		},
-		onNavigate: path => {
-			d(push(path));
-		},
-	};
-};
+const mapDispatch = (d, p) => ({ onNavigate: path => (d(push(path))) });
 
 export default connect(mapState, mapDispatch)(DemoTool);

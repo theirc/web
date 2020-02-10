@@ -2,24 +2,20 @@
 import queryString from "query-string";
 
 // local
-import cms from "../backend/cms";
+import instance from '../backend/settings';
 import getLocalStorage from "./localStorage";
 
 const localStorage = getLocalStorage();
-let defaultLanguage = cms.siteConfig.languages[0][0];
+let defaultLanguage = instance.defaultLanguage;
 
 if (global.window && global.location && global.navigator) {
 	let parsed = queryString.parse(global.location.search);
 
-	// SP-354 disable tigrinya and french from italy
-	for (let i = 0; i < cms.siteConfig.hideLangsPerCountry.length; i++) {
-		if (global.location.href.indexOf(`/${cms.siteConfig.hideLangsPerCountry[i].country}`) > 0 &&
-			(cms.siteConfig.hideLangsPerCountry[i].langs.indexOf(parsed.language) >= 0 ||
-				cms.siteConfig.hideLangsPerCountry[i].langs.indexOf(localStorage.language) >= 0)) {
-			parsed.language = 'en';
-		}
-	}
-
+	// Choose the language by priority in this order:
+	// 1. Query string in url
+	// 2. Local storage through language var
+	// 3. Navigator settings
+	// 4. Navigator settings
 	if (parsed.language) {
 		defaultLanguage = parsed.language;
 		localStorage.language = defaultLanguage;
@@ -30,9 +26,20 @@ if (global.window && global.location && global.navigator) {
 	} else if (global.navigator.language) {
 		defaultLanguage = global.navigator.language.split("-")[0];
 	}
+	
+	// Get country from url if available
+	let country = global.window.location.pathname.split('/')[1].replace('?', '');
 
-	if (cms.siteConfig.languages.map(l => l[0]).indexOf(defaultLanguage) === -1) {
-		defaultLanguage = cms.siteConfig.languages[0][0];
+	// Check at instance level
+	let validLanguage = !!instance.languages.filter(l => l[0] === defaultLanguage).length;
+
+	// Check at country level only if country exists in url
+	instance.countries[country] && (validLanguage = instance.countries[country].languages.includes(defaultLanguage))
+
+	// Override with defaults if the language is not available at instance/country level
+	if (!validLanguage) {
+		defaultLanguage = instance.defaultLanguage;
+		localStorage.language = defaultLanguage;
 	}
 }
 

@@ -7,9 +7,9 @@ import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
 
 // local
-import Router from "./router";
 import cmsApi from "./backend/cmsApi";
-import cms from "./backend/cms";
+import instance from './backend/settings';
+import Router from "./router";
 import "./App.css";
 
 
@@ -30,26 +30,22 @@ class ThemedApp extends Component {
 	};
 
 	getChildContext() {
-		let config = cms.siteConfig;
-		let api = cmsApi(config, {});
-
-		return {
-			config,
-			api,
-		};
+		let api = cmsApi();
+		return { api };
 	}
 
 	render() {
 		const { direction, language } = this.props;
-		const organization = cms.siteConfig.theme;
+		const organization = instance.brand.theme;
+		const title = instance.brand.tabTitle;
+		const favicon = instance.brand.images.favicon;
 
 		return (
 			<MuiThemeProvider theme={theme}>
-				<span className={[organization, direction, `language-${language}`].join(" ")}>
-					<Helmet>
-						<title>{cms.siteConfig.title}</title>
-						<link rel="shortcut icon" href={cms.siteConfig.favicon} />
-						<link rel="icon" href={cms.siteConfig.favicon} />
+				<span className={`${organization} ${direction} language-${language}`}>
+					<Helmet defer={false}>
+						<title>{title}</title>
+						<link rel='shortcut icon' href={favicon} />
 					</Helmet>
 					
 					<Router />
@@ -59,11 +55,6 @@ class ThemedApp extends Component {
 	}
 }
 
-ThemedApp = connect(({ organization, direction, language }) => {
-	return {
-		direction,
-		language,
-	};
-})(ThemedApp);
+const mapState = ({ direction, language }) => ({ direction,	language });
 
-export default ThemedApp;
+export default connect(mapState)(ThemedApp);
