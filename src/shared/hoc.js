@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 // local
 import { actions } from "./redux/store";
 import servicesApi from "../backend/servicesApi";
+import instance from '../backend/settings';
 import Skeleton from "../components/Skeleton/Skeleton";
 
 /**
@@ -26,6 +27,7 @@ export function withCountry(WrappedComponent) {
 
 		componentWillMount() {
 			const {
+				history,
 				match,
 				onMount,
 				language,
@@ -34,6 +36,9 @@ export function withCountry(WrappedComponent) {
 			const {
 				api
 			} = this.context;
+
+			// country does not exist
+			!instance.countries[match.params.country] && history.push('/404');
 
 			api.loadCountry(match.params.country, language).then(c => {
 				return onMount(c).then(c => {
@@ -129,6 +134,7 @@ export function withCategory(WrappedComponent) {
 			const {
 				match,
 				country,
+				history,
 				onRender
 			} = this.props;
 
@@ -142,6 +148,10 @@ export function withCategory(WrappedComponent) {
 				this.setState({
 					category
 				});
+
+				// category does not exist
+				!category && history.push('/404');
+
 				onRender(category);
 			}
 		}
@@ -152,6 +162,7 @@ export function withCategory(WrappedComponent) {
 			} = this.props;
 			const {
 				country,
+				history,
 				match
 			} = nextProps;
 
@@ -164,16 +175,17 @@ export function withCategory(WrappedComponent) {
 				this.setState({
 					category
 				});
+				
+				// category does not exist
+				!category && history.push('/404');
+				
 				onRender(category);
 			}
 		}
 
 		render() {
 			let category = this.state.category || this.props.category;
-			let { match } = this.props;
-
-			if (!category) return null;
-
+			let { history, match } = this.props;
 			let articleItem = null;
 
 			if (category && (category.fields.articles || category.fields.overview) && match.params.article) {
@@ -181,6 +193,9 @@ export function withCategory(WrappedComponent) {
 					articleItem = category.fields.overview;
 				} else if (category.fields.articles) {
 					articleItem = _.first(category.fields.articles.filter(a => a && a.fields).filter(a => a.fields.slug === match.params.article));
+				} else {
+					// article does not exist
+					history.push('/404');
 				}
 			}
 
@@ -250,6 +265,7 @@ export function withArticle(WrappedComponent) {
 			if (articleItem) {
 				let category = articleItem.fields.category;
 				let country = articleItem.fields.country;
+
 				return <WrappedComponent {...{ category, country, countryItem: country, articleItem, ...this.props }} />;
 			}
 

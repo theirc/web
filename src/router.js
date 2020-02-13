@@ -4,7 +4,8 @@ import { Redirect, Route, Switch, withRouter } from "react-router";
 import { ConnectedRouter } from "react-router-redux";
 
 // local
-import { ArticleDetail, ArticleList, CategoryHome, CountryHome, DemoTool, Home, Search, Selectors, Services, Subscribe } from "./scenes";
+import { ArticleDetail, ArticleList, CategoryHome, CountryHome, DemoTool,
+	Home, NotFound, Search, Selectors, Services, Subscribe } from "./scenes";
 import { history } from "./shared/redux/store";
 import { withCountry, withCategory, withArticle } from "./shared/hoc";
 import Placeholder from "./shared/placeholder";
@@ -31,10 +32,14 @@ class Router extends Component {
 				<Placeholder>
 					<ScrollToTop />
 					<Switch>
-						<Route exact path="/serbia/*" render={() => <Redirect to="/serbia" />} />
+						{/* STATIC ROUTES */}
+						<Route exact path="/404" component={NotFound} />
 						<Route exact path="/bulgaria/*" render={() => <Redirect to="/bulgaria" />} />
 						<Route exact path="/italy/services*" render={() => <Redirect to="/italy" />} />
 						<Route exact path="/jordan/services*" render={() => <Redirect to="/jordan" />} />
+						<Route exact path="/serbia/*" render={() => <Redirect to="/serbia" />} />
+						<Route exact path="/selectors" component={Selectors} />
+						{/* DYNAMIC ROUTES */}
 						<Route exact path="/:country/subscribe/:category" component={withCountry(withCategory(Subscribe))} />
 						<Route path="/:country/services" component={props => <ServicesWithCountry {...props} />} />
 						<Route exact path="/:country/categories" component={withCountry(ArticleList)} />
@@ -42,10 +47,10 @@ class Router extends Component {
 						{/* <Route exact path="/:country/demo" component={withCountry(DemoTool)} /> */}
 						<Route path="/:country/:category/:article" component={withCountry(withCategory(ArticleDetail))} />
 						<Route path="/:country/:category" component={withCountry(withCategory(CategoryHome))} />
-						<Route exact path="/selectors" component={Selectors} />
 						<Route exact path="/:country" component={withCountry(CountryHome)} />
 						<Route exact path="/" component={Home} />
 						<Route path="/direct/:article" component={withArticle(ArticleDetail)} />
+						<Route component={NotFound} />
 					</Switch>
 				</Placeholder>
 			</ConnectedRouter>
