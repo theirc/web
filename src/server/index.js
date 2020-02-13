@@ -238,13 +238,13 @@ app.get("/:country/services/", function (req, res, err) {
 		}
 	});
 });
-app.get('/:country/subscribe/:category', function(req, res, err){
-    return mainRequest({
-        title: "Subscripción",
-        description: "Subscrición a notificaciones",
-        image: "",
-    })(req, res, err);
-})
+// app.get('/:country/subscribe/:category', function(req, res, err){
+//     return mainRequest({
+//         title: "Subscripción",
+//         description: "Subscrición a notificaciones",
+//         image: "",
+//     })(req, res, err);
+// })
 
 app.get("/:country/:category/:article", function(req, res, err) {
 		initInstance(req.headers.host);
