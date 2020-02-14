@@ -1,9 +1,15 @@
 // libs
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { translate } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
 // local
 import Skeleton from '../../components/Skeleton/Skeleton';
+import i18nHelpers from '../../helpers/i18n';
+import languages from './languages';
+import './NotFound.css';
+
+const NS = { ns: 'NotFound' };
 
 /**
  * @class
@@ -13,19 +19,24 @@ class NotFound extends React.Component {
 
 	constructor() {
 		super();
-		this.state = {};
+		i18nHelpers.loadResource(languages, NS.ns);
 	}
 
 	render() {
 		return (
 			<Skeleton hideFeatures>
-				<div style={{minHeight: 'calc(100vh)', textAlign: 'center'}}>
-					<br /><br /><br /><div>[404 page placeholder]</div><br /><br />
-					<Link to='/' style={{textDecoration: 'underline'}}>Go home</Link>
+				<div className='NotFound'>
+					<span></span>
+					<div className='content'>
+						<br /><br /><br />
+						<div className='message'>[404 page placeholder]</div>
+						<br /><br />
+						<Link to='/'>Go home</Link>
+					</div>
 				</div>
 			</Skeleton>
 		);
 	}
 }
 
-export default NotFound;
+export default translate()(NotFound);
