@@ -41,7 +41,8 @@ class Router extends Component {
 						<Route exact path="/:country/search" component={withCountry(Search)} />
 						{/* <Route exact path="/:country/demo" component={withCountry(DemoTool)} /> */}
 						<Route path="/:country/:category/:article" component={withCountry(withCategory(ArticleDetail))} />
-						<Route path="/:country/:category" component={withCountry(withCategory(CategoryHome))} />
+						{/* <Route path="/:country/:category" component={withCountry(withCategory(CategoryHome))} /> */}
+						<Route exact path="/:country/:category" component={withCountry(ArticleList)} />
 						<Route exact path="/selectors" component={Selectors} />
 						<Route exact path="/:country" component={withCountry(CountryHome)} />
 						<Route exact path="/" component={Home} />
