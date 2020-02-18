@@ -193,7 +193,7 @@ class ArticleListBody extends Component {
 						<li key={c.sys.id}>
 							{i > 0 && <hr className="line" />}
 
-							<input type="checkbox" className="tabs" name={"tab"} id={`tab-${c.fields.slug}`} onClick={() => {this.onChange(c); this.clk(c.fields.slug)}} />
+							<input type="checkbox" className="tabs" name={"tab"} id={`tab-${c.fields.slug}`} onClick={() => {this.clk(c.fields.slug)}} />
 
 							{showToggle(c) && [
 								<label key="a-1" htmlFor={`tab-${c.fields.slug}`} className="container">
