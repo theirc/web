@@ -9,7 +9,8 @@ import Promise from "bluebird";
 import _ from "lodash";
 
 // local
-import { ServiceMap, ServiceCategoryList, ServiceLocationList, ServiceList, ServiceDetail, ServiceDepartmentList, ServiceCategoryListDesktop } from "../../components";
+import { NotFound, ServiceMap, ServiceCategoryList, ServiceLocationList, ServiceList,
+	ServiceDetail, ServiceDepartmentList, ServiceCategoryListDesktop } from "../../components";
 import { Skeleton } from "..";
 import actions from "../../shared/redux/actions";
 import getSessionStorage from "../../shared/sessionStorage";
@@ -46,6 +47,7 @@ class Services extends React.Component {
 	constructor() {
 		super();
 		i18nHelpers.loadResource(languages, NS.ns);
+		console.log('Services.js constructor');
 	}
 
 	componentWillMount() {
@@ -347,8 +349,9 @@ class Services extends React.Component {
 			return this.state.locationName;
 		}
 
+		console.log('Services render()');
 		return (
-			<div>
+			<div className='Services'>
 				<Switch>
 					<Route
 						exact
@@ -712,6 +715,8 @@ class Services extends React.Component {
 const mapState = ({ country, language, regions }, p) => ({ country, language, regions });
 
 const mapDispatch = (d, p) => ({
+	changeCountry: (country) => d(actions.changeCountry(country)),
+	changeLanguage: (language) => d(actions.changeLanguage(language)),
 	changeDefaultLocation: (location) => d(actions.changeDefaultLocation(location)),
 	goToCategoryMap: (country, category) => d(push(routes.goToCategoryMap(country, category))),
 	goToLocation: (country, location) => d(push(routes.goToLocation(country, location))),

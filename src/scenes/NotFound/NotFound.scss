@@ -1,0 +1,28 @@
+@import "../../shared/includes.scss";
+
+.NotFound {
+	background-color: white;
+	min-height: 90vh;
+	padding: 50px 20px;
+	text-align: center;
+
+	span {
+		background-image: url("/instance-moved.png");
+		background-size: contain;
+		display: block;
+		margin: 0 auto 50px;
+		width: 100px;
+		height: 100px;
+	}
+
+	.content {
+		a {
+			text-decoration: underline;
+		}
+
+		.message {
+			font-size: 40px;
+		}
+	}
+
+}

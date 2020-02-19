@@ -52,7 +52,26 @@ class Skeleton extends React.Component {
 	}
 
 	render() {
-		const { children, country, language, match, onGoHome, onGoToServices, onGoToCategories, onGoToSearch, onChangeLocation, onChangeLanguage, deviceType, router, hideFooter, removeErrorMessage, showMapButton, goToMap, headerColor } = this.props;
+		const {
+			children,
+			country,
+			language,
+			match,
+			onGoHome,
+			onGoToServices,
+			onGoToCategories,
+			onGoToSearch,
+			onChangeLocation,
+			onChangeLanguage,
+			deviceType,
+			router,
+			hideFooter,
+			hideFeatures,
+			removeErrorMessage,
+			showMapButton,
+			goToMap,
+			headerColor
+		} = this.props;
 		const { hideShareButtons, homePage } = this.props;
 		const { errorMessage } = this.state;
 		const showDepartments = _.has(country, 'fields.slug') && instance.countries[country.fields.slug] && instance.countries[country.fields.slug].switches.showDepartments;
@@ -104,8 +123,8 @@ class Skeleton extends React.Component {
 			<I18nextProvider i18n={i18n}>
 				<div className="Skeleton">
 					<AppHeader
-						country={country}
-						language={language}
+						country={hideFeatures ? null : country}
+						language={hideFeatures ? null : language}
 						onGoHome={onGoHome(country)}
 						onGoToServices={onGoToServices(country)}
 						onGoToCategories={onGoToCategories(country)}
@@ -120,7 +139,7 @@ class Skeleton extends React.Component {
 
 					{children}
 					
-					{showFooter && (
+					{showFooter && !hideFeatures && (
 						<Footer
 							onChangeLocation={onChangeLocation}
 							onChangeLanguage={onChangeLanguage.bind(this, router.location.pathname)}
@@ -131,7 +150,7 @@ class Skeleton extends React.Component {
 						/>
 					)}
 
-					{country && language && <BottomNavContainer match={match} showMapButton={showMapButton} goToMap={goToMap} showDepartments={showDepartments} />}
+					{country && language && !hideFeatures && <BottomNavContainer match={match} showMapButton={showMapButton} goToMap={goToMap} showDepartments={showDepartments} />}
 				</div>
 			</I18nextProvider>
 		);

@@ -86,12 +86,13 @@ class ServiceDetail extends React.Component {
 	}
 
 	componentDidMount() {
-		const { fetchService, fetchServicesInSameLocation } = this.props;
+		const { fetchService, fetchServicesInSameLocation, history } = this.props;
 		if (fetchService) {
 			fetchService().then(service => {
+				// service does not exist
+				!service && history.push('/404');
 				this.setState({ service })
-			}
-			);
+			});
 		}
 
 		if (fetchServicesInSameLocation) {
