@@ -39,17 +39,20 @@ class Router extends Component {
 						<Route exact path="/jordan/services*" render={() => <Redirect to="/jordan" />} />
 						<Route exact path="/serbia/*" render={() => <Redirect to="/serbia" />} />
 						<Route exact path="/selectors" component={Selectors} />
-						{/* DYNAMIC ROUTES */}
+
+            {/* DYNAMIC ROUTES */}
 						<Route exact path="/:country/subscribe/:category" component={withCountry(withCategory(Subscribe))} />
 						<Route path="/:country/services" component={props => <ServicesWithCountry {...props} />} />
 						<Route exact path="/:country/categories" component={withCountry(ArticleList)} />
 						<Route exact path="/:country/search" component={withCountry(Search)} />
 						{/* <Route exact path="/:country/demo" component={withCountry(DemoTool)} /> */}
 						<Route path="/:country/:category/:article" component={withCountry(withCategory(ArticleDetail))} />
-						<Route path="/:country/:category" component={withCountry(withCategory(CategoryHome))} />
+						<Route exact path="/:country/:category" component={withCountry(ArticleList)} />
 						<Route exact path="/:country" component={withCountry(CountryHome)} />
 						<Route exact path="/" component={Home} />
 						<Route path="/direct/:article" component={withArticle(ArticleDetail)} />
+
+						{/* DEFAULTING 404 */}
 						<Route component={NotFound} />
 					</Switch>
 				</Placeholder>

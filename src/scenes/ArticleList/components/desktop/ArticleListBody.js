@@ -25,8 +25,45 @@ class ArticleListBody extends Component {
 		showCategoriesDD: false
 	};
 
+	componentDidMount() {
+		const { categories } = this.props;
+		let category = document.location.pathname.split('/')[2];
+		category !== 'categories' && this.clk(category, true);
+		let selectedCategory = category !== 'categories' && categories.filter(c => c.fields.slug === category);
+		selectedCategory && selectedCategory.length && this.setState({
+			selectedCategory: selectedCategory[0].sys.id,
+			selectedCategoryName: selectedCategory[0].fields.name,
+			selectedCategoryClassName: selectedCategory[0].fields.iconClass || 'material-icons',
+			selectedIconText: selectedCategory[0].fields.iconText || ((!selectedCategory[0].fields.iconClass || selectedCategory[0].fields.iconClass === "material-icons") && "add")
+		});
+	}
+
+	clk(tab, forceSelect=false) { ///Needs refactor
+		//Add selected class if checked
+		let selected = document.getElementById("tab-" + tab);
+		
+		let buttonTab = selected.parentElement;
+		if (selected.checked || forceSelect) {
+			forceSelect && (selected.checked = true);
+			buttonTab.classList.add("selected");
+		} else {
+			buttonTab.classList.remove("selected");
+		}
+		//Uncheck any other checked input
+		let chk = document.getElementsByClassName("tabs");
+		for (let i = 0; i < chk.length; i++) {
+			if (chk[i].id !== "tab-" + tab) {
+				chk[i].checked = false;
+				chk[i].parentElement.classList.remove("selected");
+			}
+		}
+	}
+
+
 	onChange = e => {
+		const {history, country} = this.props;
 		this.setState({ selectedCategory: e.sys.id, selectedIconText: e.fields.iconText, selectedCategoryClassName: e.fields.iconClass, selectedCategoryName: e.fields.name, showCategoriesDD: false });
+		e.sys.id ? history.push(`/${country.fields.slug}/${e.fields.slug}`) : history.push(`/${country.fields.slug}/categories`);
 	}
 
 	toggleDD = () => this.setState({ showCategoriesDD: !this.state.showCategoriesDD });
@@ -108,25 +145,7 @@ class ArticleListBody extends Component {
 		};
 		let showCategory = c => c && c.fields && !c.fields.hide && c.fields.slug && (c.fields.overview || c.fields.articles);
 		const overviewOrFirst = c => c.fields.overview || (c.fields.articles.length && c.fields.articles[0]);
-		const clk = (tab) => {   ///Needs refactor
-			//Add selected class if checked
-			let selected = document.getElementById("tab-" + tab);
-			let buttonTab = selected.parentElement;
-			if (selected.checked) {
-				buttonTab.classList.add("selected");
-			} else {
-				buttonTab.classList.remove("selected");
-			}
-			//Uncheck any other checked input
-			let chk = document.getElementsByClassName("tabs");
-			for (let i = 0; i < chk.length; i++) {
-				if (chk[i].id !== "tab-" + tab) {
-					chk[i].checked = false;
-					chk[i].parentElement.classList.remove("selected");
-				}
-			}
-		}
-
+		
 		return (
 			<div className="ArticleListBody">
 				{/* TODO: Translate this */}
@@ -148,7 +167,7 @@ class ArticleListBody extends Component {
 								<li value={0} className={!this.state.selectedCategory ? 'active' : ''} onClick={() => this.onChange({ sys: { id: 0 }, fields: { name: t('actions.All Articles', NS), iconClass: 'material-icons', iconText: 'assignment' } })}><i className='material-icons'>assignment</i><span>{t('actions.All Articles', NS)}</span></li>
 								{
 									(categories || []).filter(showCategory).map(e =>
-										<li key={e.sys.id} value={e.sys.id} className={e.sys.id === this.state.selectedCategory ? 'active' : ''} onClick={() => this.onChange(e)}>
+										<li key={e.sys.id} value={e.sys.id} className={e.sys.id === this.state.selectedCategory ? 'active' : ''} onClick={() => {this.onChange(e); this.clk(e.fields.slug, true)}}>
 											<i className={e.fields.iconClass || "material-icons"}>{e.fields.iconText || ((!e.fields.iconClass || e.fields.iconClass === "material-icons") && "add")}</i>
 											<span>{e.fields.name}</span>
 										</li>
@@ -174,10 +193,10 @@ class ArticleListBody extends Component {
 						<li key={c.sys.id}>
 							{i > 0 && <hr className="line" />}
 
-							<input type="checkbox" className="tabs" name={"tab"} id={`tab-${i}`} onClick={() => clk(i)} />
+							<input type="checkbox" className="tabs" name={"tab"} id={`tab-${c.fields.slug}`} onClick={() => {this.clk(c.fields.slug)}} />
 
 							{showToggle(c) && [
-								<label key="a-1" htmlFor={`tab-${i}`} className="container">
+								<label key="a-1" htmlFor={`tab-${c.fields.slug}`} className="container">
 									<i className={c.fields.iconClass || "material-icons"}>{c.fields.iconText || ((!c.fields.iconClass || c.fields.iconClass === "material-icons") && "add")}</i>
 									<span className="category-name">{c.fields && c.fields.name}</span>
 									<div className="up">

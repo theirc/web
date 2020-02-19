@@ -12,7 +12,7 @@ export default {
 	},
 	thirdParty: {
 		facebook: {
-			page: 'https://www.facebook.com/khabronainfo.mc.7'
+			page: 'https://www.facebook.com/khabrona.info1'
 		}
 	}
 };
