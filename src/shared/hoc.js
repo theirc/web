@@ -39,7 +39,8 @@ export function withCountry(WrappedComponent) {
 
 			// country does not exist
 			!instance.countries[match.params.country] && history.push('/404');
-
+			
+			instance.countries[match.params.country] &&
 			api.loadCountry(match.params.country, language).then(c => {
 				return onMount(c).then(c => {
 					servicesApi.fetchRegions(language).then((regionList) => {
@@ -187,19 +188,16 @@ export function withCategory(WrappedComponent) {
 			let category = this.state.category || this.props.category;
 			let { history, match } = this.props;
 			let articleItem = null;
-
 			if (category && (category.fields.articles || category.fields.overview) && match.params.article) {
 				if (category.fields.overview && category.fields.overview.fields.slug === match.params.article) {
 					articleItem = category.fields.overview;
 				} else if (category.fields.articles) {
 					articleItem = _.first(category.fields.articles.filter(a => a && a.fields).filter(a => a.fields.slug === match.params.article));
-				} else {
-					// article does not exist
-					history.push('/404');
 				}
 			}
 
-			return <WrappedComponent {...{ category, articleItem, ...this.props }} />;
+			let invalid = category && category.fields.slug === match.params.category && !articleItem;
+			return invalid ? (history.push('/404'), null) : <WrappedComponent {...{ category, articleItem, ...this.props }} />;
 		}
 	}
 

@@ -25,11 +25,18 @@ class ArticleListBody extends Component {
 		showCategoriesDD: false
 	};
 
+	componentWillMount() {
+		let category = decodeURIComponent(document.location.pathname.split('/')[2]);
+		category !== 'categories' && !this.props.categories.filter(c => _.get(c, 'fields.slug') === category).length && this.props.history.push('/404');
+	}
+	
 	componentDidMount() {
 		const { categories } = this.props;
 		let category = document.location.pathname.split('/')[2];
 		category !== 'categories' && this.clk(category, true);
-		let selectedCategory = category !== 'categories' && categories.filter(c => c.fields.slug === category);
+		
+		let selectedCategory = category !== 'categories' && categories.filter(c => _.get(c, 'fields.slug') === decodeURIComponent(category));
+		
 		selectedCategory && selectedCategory.length && this.setState({
 			selectedCategory: selectedCategory[0].sys.id,
 			selectedCategoryName: selectedCategory[0].fields.name,
@@ -40,19 +47,22 @@ class ArticleListBody extends Component {
 
 	clk(tab, forceSelect=false) { ///Needs refactor
 		//Add selected class if checked
-		let selected = document.getElementById("tab-" + tab);
-		
+		let selected = document.getElementById("tab-" + decodeURIComponent(tab));
+		if(!selected) return;
+
 		let buttonTab = selected.parentElement;
+
 		if (selected.checked || forceSelect) {
 			forceSelect && (selected.checked = true);
 			buttonTab.classList.add("selected");
 		} else {
 			buttonTab.classList.remove("selected");
 		}
+		
 		//Uncheck any other checked input
 		let chk = document.getElementsByClassName("tabs");
 		for (let i = 0; i < chk.length; i++) {
-			if (chk[i].id !== "tab-" + tab) {
+			if (chk[i].id !== "tab-" + decodeURIComponent(tab)) {
 				chk[i].checked = false;
 				chk[i].parentElement.classList.remove("selected");
 			}
@@ -145,7 +155,7 @@ class ArticleListBody extends Component {
 		};
 		let showCategory = c => c && c.fields && !c.fields.hide && c.fields.slug && (c.fields.overview || c.fields.articles);
 		const overviewOrFirst = c => c.fields.overview || (c.fields.articles.length && c.fields.articles[0]);
-		
+
 		return (
 			<div className="ArticleListBody">
 				{/* TODO: Translate this */}

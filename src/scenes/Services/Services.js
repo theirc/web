@@ -9,7 +9,7 @@ import Promise from "bluebird";
 import _ from "lodash";
 
 // local
-import { NotFound, ServiceMap, ServiceCategoryList, ServiceLocationList, ServiceList,
+import { ServiceMap, ServiceCategoryList, ServiceLocationList, ServiceList,
 	ServiceDetail, ServiceDepartmentList, ServiceCategoryListDesktop } from "../../components";
 import { Skeleton } from "..";
 import actions from "../../shared/redux/actions";
@@ -47,7 +47,6 @@ class Services extends React.Component {
 	constructor() {
 		super();
 		i18nHelpers.loadResource(languages, NS.ns);
-		console.log('Services.js constructor');
 	}
 
 	componentWillMount() {
@@ -349,7 +348,6 @@ class Services extends React.Component {
 			return this.state.locationName;
 		}
 
-		console.log('Services render()');
 		return (
 			<div className='Services'>
 				<Switch>
@@ -476,7 +474,6 @@ class Services extends React.Component {
 							</Skeleton>
 						)}
 					/>
-				</Switch>
 				<Route
 					exact
 					path={`${match.url}/by-category/:categoryId/map`}
@@ -707,6 +704,8 @@ class Services extends React.Component {
 						</Skeleton>
 					)}
 				/>
+				<Route component={() => <Redirect to={'/404'}/>} />
+			</Switch>
 			</div>
 		);
 	}

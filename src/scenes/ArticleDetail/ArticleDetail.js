@@ -48,11 +48,11 @@ class ArticleDetail extends React.Component {
 			});
 		}
 	}
-
+	
 	componentWillUpdate(nextProps, b) {
 		const articleChanged = this.props.match && nextProps.match && this.props.match.params.article !== nextProps.match.params.article;
 		const categoryChanged = this.props.category !== nextProps.category;
-
+		
 		if (articleChanged || categoryChanged) {
 			this.setState({ loading: true });
 			this.props.onMount(nextProps.category, nextProps.match.params.article).then(s => {
