@@ -338,7 +338,8 @@ app.get("/:country/:category/:article", function(req, res, err) {
 					})
 					.catch(e => {
 						console.log(e);
-						res.redirect(`/${country}/`);
+						// res.redirect(`/${country}/`);
+						res.redirect(`/404`);
 					});
 			});
 		}
