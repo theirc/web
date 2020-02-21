@@ -23,15 +23,16 @@ class NotFound extends React.Component {
 	}
 
 	render() {
+		const {t} = this.props;
+
 		return (
 			<Skeleton hideFeatures>
 				<div className='NotFound'>
-					<span></span>
+					<i className="fa fa-exclamation-triangle"></i>
 					<div className='content'>
-						<br /><br /><br />
-						<div className='message'>[404 page placeholder]</div>
-						<br /><br />
-						<Link to='/'>Go home</Link>
+						<div className='title'>{t('title', NS)}</div>
+						<div className='message'>{t('message', NS)}</div>
+						<Link to='/'>{t('button', NS)}</Link>
 					</div>
 				</div>
 			</Skeleton>
