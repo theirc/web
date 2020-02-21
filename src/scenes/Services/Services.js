@@ -9,7 +9,8 @@ import Promise from "bluebird";
 import _ from "lodash";
 
 // local
-import { ServiceMap, ServiceCategoryList, ServiceLocationList, ServiceList, ServiceDetail, ServiceDepartmentList, ServiceCategoryListDesktop } from "../../components";
+import { ServiceMap, ServiceCategoryList, ServiceLocationList, ServiceList,
+	ServiceDetail, ServiceDepartmentList, ServiceCategoryListDesktop } from "../../components";
 import { Skeleton } from "..";
 import actions from "../../shared/redux/actions";
 import getSessionStorage from "../../shared/sessionStorage";
@@ -348,7 +349,7 @@ class Services extends React.Component {
 		}
 
 		return (
-			<div>
+			<div className='Services'>
 				<Switch>
 					<Route
 						exact
@@ -473,7 +474,6 @@ class Services extends React.Component {
 							</Skeleton>
 						)}
 					/>
-				</Switch>
 				<Route
 					exact
 					path={`${match.url}/by-category/:categoryId/map`}
@@ -704,6 +704,8 @@ class Services extends React.Component {
 						</Skeleton>
 					)}
 				/>
+				<Route component={() => <Redirect to={'/404'}/>} />
+			</Switch>
 			</div>
 		);
 	}
@@ -712,6 +714,8 @@ class Services extends React.Component {
 const mapState = ({ country, language, regions }, p) => ({ country, language, regions });
 
 const mapDispatch = (d, p) => ({
+	changeCountry: (country) => d(actions.changeCountry(country)),
+	changeLanguage: (language) => d(actions.changeLanguage(language)),
 	changeDefaultLocation: (location) => d(actions.changeDefaultLocation(location)),
 	goToCategoryMap: (country, category) => d(push(routes.goToCategoryMap(country, category))),
 	goToLocation: (country, location) => d(push(routes.goToLocation(country, location))),

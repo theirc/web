@@ -1,0 +1,41 @@
+@import "../../shared/includes.scss";
+
+.NotFound {
+	background-color: white;
+	min-height: 90vh;
+	padding: 50px 20px;
+	text-align: center;
+
+	i {
+		@include darken-brand-colors("color", 10%);
+		font-size: 80px;
+		margin: 20px auto;
+	}
+
+	.content {
+		a {
+			@include darken-brand-colors("background-color", 10%);
+			border-radius: 5px;
+			@include brand-colors-inverse("color");
+			display: inline-block;
+			margin: 50px auto;
+			padding: 20px 40px;
+			
+			&:hover {
+				@include brand-colors("background-color");
+				text-decoration: underline;
+			}
+		}
+
+		.title {
+			font-size: 25px;
+			font-weight: bold;
+			margin: 20px auto;
+		}
+
+		.message {
+			white-space: pre-line;
+		}
+	}
+
+}

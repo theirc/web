@@ -46,12 +46,8 @@ function cmsApi(contentfulConfig = null) {
 						let entities = client.parseEntries(e);
 						let { items } = entities;
 
-						if (items.length === 0) {
-							if (global.location) {
-								global.document.location = "/";
-							} else {
-								throw Error("No Country Found");
-							}
+						if (items.length === 0 && !global.location) {
+							throw Error("No Country Found");
 						}
 
 						try {

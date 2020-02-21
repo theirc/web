@@ -37,14 +37,14 @@ class ArticleList extends React.Component {
 
 	render() {
 		const { country, onNavigate, language } = this.props;
-
+		
 		if (!country) {
 			return null;
 		}
 
 		return <Skeleton headerColor='light'>
 			<div className="SkeletonContainer ArticleList bg-gray">
-				<ArticleListBody categories={country.fields.categories} country={country} onNavigate={onNavigate} language={language} />
+				<ArticleListBody categories={country.fields.categories} country={country} onNavigate={onNavigate} language={language} {...this.props} />
 			</div>
 		</Skeleton>
 	}

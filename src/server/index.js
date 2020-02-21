@@ -320,7 +320,7 @@ app.get("/:country/:category/:article", function(req, res, err) {
 										})
 										.then(c => {
 											if (c.items.length > 0) {
-												res.redirect("/" + country);
+												res.redirect("/404");
 											} else {
 												res.redirect("/");
 											}
@@ -338,7 +338,8 @@ app.get("/:country/:category/:article", function(req, res, err) {
 					})
 					.catch(e => {
 						console.log(e);
-						res.redirect(`/${country}/`);
+						// res.redirect(`/${country}/`);
+						res.redirect(`/404`);
 					});
 			});
 		}

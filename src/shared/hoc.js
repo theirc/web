@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 // local
 import { actions } from "./redux/store";
 import servicesApi from "../backend/servicesApi";
+import instance from '../backend/settings';
 import Skeleton from "../components/Skeleton/Skeleton";
 
 /**
@@ -26,6 +27,7 @@ export function withCountry(WrappedComponent) {
 
 		componentWillMount() {
 			const {
+				history,
 				match,
 				onMount,
 				language,
@@ -35,6 +37,10 @@ export function withCountry(WrappedComponent) {
 				api
 			} = this.context;
 
+			// country does not exist
+			!instance.countries[match.params.country] && history.push('/404');
+			
+			instance.countries[match.params.country] &&
 			api.loadCountry(match.params.country, language).then(c => {
 				return onMount(c).then(c => {
 					servicesApi.fetchRegions(language).then((regionList) => {
@@ -129,6 +135,7 @@ export function withCategory(WrappedComponent) {
 			const {
 				match,
 				country,
+				history,
 				onRender
 			} = this.props;
 
@@ -142,6 +149,10 @@ export function withCategory(WrappedComponent) {
 				this.setState({
 					category
 				});
+
+				// category does not exist
+				!category && history.push('/404');
+
 				onRender(category);
 			}
 		}
@@ -152,6 +163,7 @@ export function withCategory(WrappedComponent) {
 			} = this.props;
 			const {
 				country,
+				history,
 				match
 			} = nextProps;
 
@@ -164,18 +176,18 @@ export function withCategory(WrappedComponent) {
 				this.setState({
 					category
 				});
+				
+				// category does not exist
+				!category && history.push('/404');
+				
 				onRender(category);
 			}
 		}
 
 		render() {
 			let category = this.state.category || this.props.category;
-			let { match } = this.props;
-
-			if (!category) return null;
-
+			let { history, match } = this.props;
 			let articleItem = null;
-
 			if (category && (category.fields.articles || category.fields.overview) && match.params.article) {
 				if (category.fields.overview && category.fields.overview.fields.slug === match.params.article) {
 					articleItem = category.fields.overview;
@@ -184,7 +196,8 @@ export function withCategory(WrappedComponent) {
 				}
 			}
 
-			return <WrappedComponent {...{ category, articleItem, ...this.props }} />;
+			let invalid = category && category.fields.slug === match.params.category && !articleItem;
+			return invalid ? (history.push('/404'), null) : <WrappedComponent {...{ category, articleItem, ...this.props }} />;
 		}
 	}
 
@@ -250,6 +263,7 @@ export function withArticle(WrappedComponent) {
 			if (articleItem) {
 				let category = articleItem.fields.category;
 				let country = articleItem.fields.country;
+
 				return <WrappedComponent {...{ category, country, countryItem: country, articleItem, ...this.props }} />;
 			}
 
