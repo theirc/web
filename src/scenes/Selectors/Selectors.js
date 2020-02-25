@@ -169,8 +169,11 @@ class Selectors extends Component {
 	}
 
 	filterLangs() {
-		let currentCountry = sessionStorage.getItem('redirect');
-		return currentCountry ? instance.languages.filter(l => instance.countries[currentCountry.split('/')[1]].languages.includes(l[0])) : instance.languages;
+		const currentCountry = sessionStorage.getItem('redirect');
+		const slug = currentCountry && currentCountry.split('/')[1];
+
+		// Preventing redirect with a corrupted value (country not found in instance.countries[])
+		return currentCountry && instance.countries[slug] ? instance.languages.filter(l => instance.countries[slug].languages.includes(l[0])) : instance.languages;
 	}
 
 	render() {
