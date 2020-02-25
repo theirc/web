@@ -24,6 +24,12 @@ class Skeleton extends React.Component {
 		errorMessage: null,
 	};
 
+	// When language is null, recover the previously set language
+	componentWillMount() {
+		const {language, location, changeLanguage} = this.props;
+		!location.pathname.includes('selectors') && !language && changeLanguage(instance.defaultLanguage);
+	}
+
 	componentDidMount() {
 		const { language, errorMessage } = this.props;
 		i18n.changeLanguage(language);
@@ -130,7 +136,7 @@ class Skeleton extends React.Component {
 						onGoToCategories={onGoToCategories(country)}
 						onGoToSearch={q => onGoToSearch(country, q)}
 						onChangeCountry={onChangeLocation}
-						onChangeLanguage={onChangeLanguage.bind(this, router.location.pathname)}
+						onChangeLanguage={onChangeLanguage.bind(this, router.location.pathname, language)}
 						headerColor={headerColor}
 						homePage={homePage}
 					/>
@@ -142,7 +148,7 @@ class Skeleton extends React.Component {
 					{showFooter && !hideFeatures && (
 						<Footer
 							onChangeLocation={onChangeLocation}
-							onChangeLanguage={onChangeLanguage.bind(this, router.location.pathname)}
+							onChangeLanguage={onChangeLanguage.bind(this, router.location.pathname, language)}
 							deviceType={deviceType}
 							country={country}
 							language={language}
@@ -185,14 +191,18 @@ const mapDispatch = (d, p) => {
 			d(actions.changeCountry(null));
 			d(push(`/selectors`));
 		},
-		onChangeLanguage: redirect => {
+		onChangeLanguage: (redirect, language) => {
 			const sessionStorage = getSessionStorage();
 			if (sessionStorage) {
 				sessionStorage.redirect = redirect;
 			}
+
+			// Save language in instance before setting it to null
+			instance.defaultLanguage = language;
 			d(actions.changeLanguage(null));
 			d(push(`/selectors`));
 		},
+		changeLanguage: language => d(actions.changeLanguage(language)),
 		removeErrorMessage() {
 			d(actions.showErrorMessage(null));
 		}
