@@ -152,6 +152,7 @@ class ArticleDetailBody extends Component {
 
 		let country = _.get(article, 'fields.country.fields.slug');
 
+		let categorySlug = document.location.pathname.split('/')[2];
 		return (
 			<div ref={r => (this._ref = r)} className={["ArticleDetailBody", loading ? "loading" : "loaded"].join(" ")}>
 				<Helmet>
@@ -161,18 +162,18 @@ class ArticleDetailBody extends Component {
 				<HeaderBar subtitle={(category.fields.articles || []).length > 1 && `${category.fields.name}:`} title={title} />
 
 				{_.has(hero, 'fields.file') &&
-						<div>
-							<div className="hero">
-								<img src={hero.fields.file.url} alt="" />
-							</div>
-							{hero.fields.description && <credit>{hero.fields.description}</credit>}
+					<div>
+						<div className="hero">
+							<img src={hero.fields.file.url} alt="" />
 						</div>
+						{hero.fields.description && <credit>{hero.fields.description}</credit>}
+					</div>
 				}
 
 				<div className='ActionsBar'>
 					<div className='left'>
 						{_.has(article, 'fields.category.fields') &&
-							<div className='btn' onClick={() => country ? history.push(`/${country}/categories`) : history.goBack()}>
+							<div className='btn' onClick={() => country ? history.push(`/${country}/${categorySlug}`) : history.goBack()}>
 								<i className="material-icons">keyboard_arrow_left</i>
 								<i className={article.fields.category.fields.iconClass || "material-icons"}>{article.fields.category.fields.iconText || ((!article.fields.category.fields.iconClass || article.fields.category.fields.iconClass === "material-icons") && "add")}</i>
 								<span>{article.fields.category.fields.name}</span>
