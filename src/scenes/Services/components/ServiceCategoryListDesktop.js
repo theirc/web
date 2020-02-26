@@ -220,7 +220,7 @@ class ServiceCategoryListDesktop extends React.Component {
 
 	renderMunicipalityButton(municipality, onSelect) {
 		return (
-			<button key={municipality.id} className={municipality.id === this.state.location.id ? "location-item-selected" : "location-item"} onClick={() => onSelect(municipality)}>
+			<button key={municipality.id} className={municipality.id === this.state.municipality.id ? "location-item-selected" : "location-item"} onClick={() => onSelect(municipality)}>
 				{municipality.level === 1 && <i className='fa fa-globe' />}<span>{municipality.name}</span>
 			</button>
 		);
@@ -384,7 +384,7 @@ class ServiceCategoryListDesktop extends React.Component {
 				}
 
 				{this.state.showFilter && this.state.filterType === FilterTypes.MUNICIPALITY && municipalities &&
-					this.renderFiltersPopover(t('services.Municipalidades', NS), this.onSelectMunicipality, municipalities, this.renderDepartmentButton.bind(this), 'municipalities', FilterTypes.MUNICIPALITIES)
+					this.renderFiltersPopover(t('services.Municipalidades', NS), this.onSelectMunicipality, municipalities, this.renderMunicipalityButton.bind(this), 'municipalities', FilterTypes.MUNICIPALITIES)
 				}
 
 				{this.state.showFilter && this.state.filterType === FilterTypes.CATEGORY && categories &&
