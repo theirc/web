@@ -121,8 +121,11 @@ class ServiceCategoryListDesktop extends React.Component {
 		this.setState({loadingMoreServices: true})
 		servicesApi.fetchAllServices(c.slug, language, category, null, 10, true, pageStart).then(
 			services => {
-				console.log(services.results);
-				this.setState({ loadingMoreServices: false, showMore: services.results.length === 10, services: [...this.state.services, ...services.results], pageStart });
+				this.setState({
+					loadingMoreServices: false,
+					showMore: services.results.length === 10,
+					services: [...this.state.services, ...services.results], 
+					pageStart });
 			}
 		)
 	}
