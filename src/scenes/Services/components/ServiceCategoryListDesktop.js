@@ -37,12 +37,14 @@ class ServiceCategoryListDesktop extends React.Component {
 		department: '',
 		filterType: null,
 		loaded: false,
+		loadingMoreServices: false,
 		location: {},
 		municipalities: null,
 		municipality: 'Municipalidades',
+		pageStart: 1,
 		services: [],
 		showFilter: true,
-		showAll: false,
+		showMore: true,
 		showMap: !!this.props.mapView,
 		showMunicipalities: false,
 		showServices: false,
@@ -111,13 +113,17 @@ class ServiceCategoryListDesktop extends React.Component {
 		return color;
 	}
 
-	onShowAll = () => {
+	onShowMore = () => {
 		const { category, country, language, regions } = this.props;
 		let c = regions.filter(r => r.slug === country.fields.slug)[0]
 
-		this.setState({ showAll: true });
-		servicesApi.fetchAllServices(c.slug, language, category, null, 2000, true).then(
-			services => this.setState({ services: services.results })
+		const pageStart = this.state.pageStart + 1;
+		this.setState({loadingMoreServices: true})
+		servicesApi.fetchAllServices(c.slug, language, category, null, 10, true, pageStart).then(
+			services => {
+				console.log(services.results);
+				this.setState({ loadingMoreServices: false, showMore: services.results.length === 10, services: [...this.state.services, ...services.results], pageStart });
+			}
 		)
 	}
 
@@ -394,16 +400,17 @@ class ServiceCategoryListDesktop extends React.Component {
 				{showServices && !this.state.showMap &&
 					<div className="ServiceList">
 						<div className="ServiceListContainer">
-							{sortedAvailableServices.map(this.renderServiceItem.bind(this))}
+							{availableServices.map(this.renderServiceItem.bind(this))}
 						</div>
 					</div>
 				}
 
-				{!this.state.showMap && !this.state.showAll && services.length <= 10 && window.location.href.includes('/services/all') &&
-					<div className='show-more'><button onClick={this.onShowAll}>{t('services.Show All', NS)}</button></div>
-				}
+				{!this.state.showMap && this.state.showMore && availableServices.length >= 10 &&
+				!this.state.loadingMoreServices && window.location.href.includes('/services/all') &&
+				<div className='show-more'><button onClick={this.onShowMore}>{t('services.Show More', NS)}</button></div>
+			}
 
-				{!this.state.showMap && this.state.showAll && services.length <= 10 &&
+				{!this.state.showMap && this.state.showMore && this.state.loadingMoreServices && availableServices.length >= 10 &&
 					<div className="loader" />
 				}
 
