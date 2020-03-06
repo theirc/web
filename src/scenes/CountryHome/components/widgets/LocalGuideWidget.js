@@ -26,23 +26,14 @@ class LocalGuideWidget extends Component {
 				<h3>{t("guide.Local Guide", NS)}</h3>
 
 				<div className="Container">
-					{guideItems.map(c => {
-						let image =
-							c.fields.backgroundImage && c.fields.backgroundImage.fields.file ? (
-								<img alt={c.fields.title} src={`${c.fields.backgroundImage.fields.file.url}?fm=jpg&fl=progressive`} />
-							) : (
-									<img alt={c.fields.title} src="https://upload.wikimedia.org/wikipedia/en/4/48/Blank.JPG" />
-							);
-
-						return (
-							<div key={c.sys.id} className="LocalGuideItem">
-								{image}
-								<Link className="Overlay" to={`${c.fields.url}?language=${language}`}>
-									{c.fields.title}
-								</Link>
-							</div>
-						);
-					})}
+				{guideItems.map(c => (
+					<div key={c.sys.id} className="LocalGuideItem">
+						<Link className="Overlay" to={`${c.fields.url}?language=${language}`}>
+							{c.fields.iconClass && <i className={c.fields.iconClass}></i>}
+							{c.fields.title}
+						</Link>
+					</div>
+				))}
 				</div>
 			</div>
 		);

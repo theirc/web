@@ -101,7 +101,7 @@ module.exports = {
 		});
 	},
 
-	fetchAllServices(country, language, categoryId, searchTerm, pageSize = 1000, ignoreRegions = false) {
+	fetchAllServices(country, language, categoryId, searchTerm, pageSize = 1000, ignoreRegions = false, pageStart = 1) {
 		//If the region is a country, search for all the services in any location from that country
 		//If the region is a city, search for all the services in the city AND country wide services
 		let filter = ignoreRegions ? 'relatives' : "with-parents";
@@ -131,8 +131,8 @@ module.exports = {
 				var requestUrl =
 				"/services/searchlist/?filter=" + filter + "&geographic_region=" +
 				country +
-				"&page=1&page_size=" +
-				pageSize +
+				"&page=" + pageStart +
+				"&page_size=" + pageSize +
 				"&type_numbers=" +
 				(categoryId || "") +
 				(searchTerm ? "&search=" + searchTerm : "");

@@ -37,12 +37,14 @@ class ServiceCategoryListDesktop extends React.Component {
 		department: '',
 		filterType: null,
 		loaded: false,
+		loadingMoreServices: false,
 		location: {},
 		municipalities: null,
 		municipality: 'Municipalidades',
+		pageStart: 1,
 		services: [],
 		showFilter: true,
-		showAll: false,
+		showMore: true,
 		showMap: !!this.props.mapView,
 		showMunicipalities: false,
 		showServices: false,
@@ -111,13 +113,20 @@ class ServiceCategoryListDesktop extends React.Component {
 		return color;
 	}
 
-	onShowAll = () => {
+	onShowMore = () => {
 		const { category, country, language, regions } = this.props;
 		let c = regions.filter(r => r.slug === country.fields.slug)[0]
 
-		this.setState({ showAll: true });
-		servicesApi.fetchAllServices(c.slug, language, category, null, 2000, true).then(
-			services => this.setState({ services: services.results })
+		const pageStart = this.state.pageStart + 1;
+		this.setState({loadingMoreServices: true})
+		servicesApi.fetchAllServices(c.slug, language, category, null, 10, true, pageStart).then(
+			services => {
+				this.setState({
+					loadingMoreServices: false,
+					showMore: services.results.length === 10,
+					services: [...this.state.services, ...services.results], 
+					pageStart });
+			}
 		)
 	}
 
@@ -220,7 +229,7 @@ class ServiceCategoryListDesktop extends React.Component {
 
 	renderMunicipalityButton(municipality, onSelect) {
 		return (
-			<button key={municipality.id} className={municipality.id === this.state.location.id ? "location-item-selected" : "location-item"} onClick={() => onSelect(municipality)}>
+			<button key={municipality.id} className={municipality.id === this.state.municipality.id ? "location-item-selected" : "location-item"} onClick={() => onSelect(municipality)}>
 				{municipality.level === 1 && <i className='fa fa-globe' />}<span>{municipality.name}</span>
 			</button>
 		);
@@ -384,7 +393,7 @@ class ServiceCategoryListDesktop extends React.Component {
 				}
 
 				{this.state.showFilter && this.state.filterType === FilterTypes.MUNICIPALITY && municipalities &&
-					this.renderFiltersPopover(t('services.Municipalidades', NS), this.onSelectMunicipality, municipalities, this.renderDepartmentButton.bind(this), 'municipalities', FilterTypes.MUNICIPALITIES)
+					this.renderFiltersPopover(t('services.Municipalidades', NS), this.onSelectMunicipality, municipalities, this.renderMunicipalityButton.bind(this), 'municipalities', FilterTypes.MUNICIPALITIES)
 				}
 
 				{this.state.showFilter && this.state.filterType === FilterTypes.CATEGORY && categories &&
@@ -394,16 +403,17 @@ class ServiceCategoryListDesktop extends React.Component {
 				{showServices && !this.state.showMap &&
 					<div className="ServiceList">
 						<div className="ServiceListContainer">
-							{sortedAvailableServices.map(this.renderServiceItem.bind(this))}
+							{availableServices.map(this.renderServiceItem.bind(this))}
 						</div>
 					</div>
 				}
 
-				{!this.state.showMap && !this.state.showAll && services.length <= 10 && window.location.href.includes('/services/all') &&
-					<div className='show-more'><button onClick={this.onShowAll}>{t('services.Show All', NS)}</button></div>
-				}
+				{!this.state.showMap && this.state.showMore && availableServices.length >= 10 &&
+				!this.state.loadingMoreServices && window.location.href.includes('/services/all') &&
+				<div className='show-more'><button onClick={this.onShowMore}>{t('services.Show More', NS)}</button></div>
+			}
 
-				{!this.state.showMap && this.state.showAll && services.length <= 10 &&
+				{!this.state.showMap && this.state.showMore && this.state.loadingMoreServices && availableServices.length >= 10 &&
 					<div className="loader" />
 				}
 

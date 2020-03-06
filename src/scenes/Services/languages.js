@@ -36,6 +36,7 @@ export default {
 				"Service Provider": "مقدّم الخدمة",
 				"Service Categories": "فئات الخدمات المختلفة",
 				"Show All": "عرض الكل",
+				"Show More": "أظهر المزيد",
 				"Visiting hours": "ساعات الزّيارة",
 				"Website": "الموقـع الإلكترونـي"
 			}
@@ -78,6 +79,7 @@ export default {
 				"Service Provider": "Service Provider",
 				"Service Categories": "Service Categories",
 				"Show All": "Show All",
+				"Show More": "Show More",
 				"Visiting hours": "Visiting hours",
 				"Website": "Website"
 			}
@@ -120,6 +122,7 @@ export default {
 				"Service Provider": "Organización",
 				"Service Categories": "Categorías de Servicios",
 				"Show All": "Mostrar Todos",
+				"Show More": "Mostrar Más",
 				"Visiting hours": "Horario de visita",
 				"Website": "Sitio web"
 			}
@@ -162,6 +165,7 @@ export default {
 				"Service Provider": "ارائه‌کننده خدمات",
 				"Service Categories": "طبقه‌بندی‌ خدمات",
 				"Show All": "نمایش همه",
+				"Show More": "بیشتر نشان بده، اطلاعات بیشتر",
 				"Visiting hours": "ساعات بازدید",
 				"Website": "وبسایت"
 			}
@@ -204,6 +208,7 @@ export default {
 				"Service Provider": "Fournisseur de services",
 				"Service Categories": "Catégories de services",
 				"Show All": "Montre tout",
+				"Show More": "Montre plus",
 				"Visiting hours": "Heures d'ouverture",
 				"Website": "Site Internet:"
 			}
@@ -246,6 +251,7 @@ export default {
 				"Service Provider": "خدمات مہیا کرنے والا",
 				"Service Categories": "خدمات کا زمرہ جات",
 				"Show All": "سارے دکھاو",
+				"Show More": "مزید دکھائیں",
 				"Visiting hours": "ملنے کے اوقات",
 				"Website": "ویب سائٹ"
 			}
