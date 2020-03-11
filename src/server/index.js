@@ -202,7 +202,7 @@ app.get("/:country/services/:serviceId/", function (req, res, err) {
 						image: s.image,
 					})(req, res, err);
 				})
-				.catch(e => res.redirect("/404"));
+				.catch(e => mainRequest({})(req, res, err));
 		});
 	} catch (e) {
 		mainRequest({
