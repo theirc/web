@@ -46,39 +46,32 @@
 
             &:nth-child(even) {
                 color: blue;
-                margin-left: 5px;
+                margin-left: 0;
                 margin-right: 0;
 
                 .rtl & {
-                    margin-right: 5px;
+                    margin-right: 0;
                     margin-left: 0;
                 }
             }
         }
-        .Overlay:hover,
-        .Overlay:active {
-            background-color: rgba(0, 0, 0, 0.4);
-        }
 
         .Overlay {
+					align-items: center;
+						background-color: #4b4b4b;
+						border: 1px solid #ddd;
+						border-radius: 5px;
+						color: white;
             cursor: pointer;
             display: flex;
-            position: relative;
-            top: -76px;
-            .rtl & {
-                top: -80px;
-            }
-            background-color: rgba(0, 0, 0, 0.7);
+            font-size: 14px;
             height: 72px;
             justify-content: center;
-            align-content: center;
-            align-items: center;
-            margin-bottom: -76px;
-            color: white;
-            font-size: 14px;
-            letter-spacing: 0;
-            line-height: 16px;
-            transition: background-color 1s ease-in-out;
+
+						.fa {
+							font-size: 20px;
+							padding: 10px;
+						}
 
             @media (min-width: $desktopBreakpoint) {
                 font-size: 16px;
