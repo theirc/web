@@ -113,6 +113,7 @@ class AppHeader extends Component {
 
 		let disclaimersLink = `/greece/refugee-info-greece-closed/refugee-info-stops-operating-in-greece?language=${language}`;
 		disclaimersLink = window.location.href.includes(disclaimersLink) ? '#' : disclaimersLink;
+		let covidLink = '/el-salvador/emergencia-por-coronavirus';
 
 		let selectedIndex = selectedMenuItem();
 		let path = window.location.pathname;
@@ -206,6 +207,11 @@ class AppHeader extends Component {
 				{window.location.href.includes('/jordan') &&
 					<Alert message={t('banner.Jordan', NS)} fontColor='white'/>
 				}
+				
+				{window.location.href.endsWith('/el-salvador') &&
+					<Alert link={covidLink} message={t('banner.ElSalvador', NS)} fontColor='white'/>
+				}
+
 			</div>
 		);
 	}
