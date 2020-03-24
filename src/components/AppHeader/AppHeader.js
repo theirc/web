@@ -212,6 +212,10 @@ class AppHeader extends Component {
 					<Alert link={covidLink} message={t('banner.ElSalvador', NS)} fontColor='white'/>
 				}
 
+				{window.location.href.endsWith('/italy') &&
+					<Alert link={covidLink} message={t('banner.Italy', NS)} fontColor='black'/>
+				}
+
 			</div>
 		);
 	}
