@@ -27,6 +27,7 @@
 			
 			&:hover {
 				text-decoration: underline;
+				@include brand-colors-inverse('color');
 			}
 		}
 
