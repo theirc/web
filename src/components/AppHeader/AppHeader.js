@@ -113,7 +113,7 @@ class AppHeader extends Component {
 
 		let disclaimersLink = `/greece/refugee-info-greece-closed/refugee-info-stops-operating-in-greece?language=${language}`;
 		disclaimersLink = window.location.href.includes(disclaimersLink) ? '#' : disclaimersLink;
-		let covidLink = '/el-salvador/emergencia-por-coronavirus/informacion-para-organizaciones-ante-emergencia-del-covid-19?language=es';
+		let covidLink = '/el-salvador/emergencia-por-coronavirus';
 
 		let selectedIndex = selectedMenuItem();
 		let path = window.location.pathname;
