@@ -209,7 +209,7 @@ class AppHeader extends Component {
 				}
 				
 				{window.location.href.endsWith('/el-salvador') &&
-					<Alert link={covidLink} message={t('banner.ElSalvador', NS)} fontColor='white'/>
+					<Alert link={covidLink} message={t('banner.ElSalvador', NS)} bgColor='#ffda1a' fontColor='black'/>
 				}
 
 			</div>

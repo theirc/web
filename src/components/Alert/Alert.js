@@ -12,10 +12,10 @@ import './Alert.css';
 class Alert extends Component {
 
 	render() {
-		const { fontColor, message, link, onClose } = this.props;
+		const { bgColor, fontColor, message, link, onClose } = this.props;
 
 		return (
-			<div className='Alert'>
+			<div className='Alert' style={{backgroundColor: bgColor || undefined}}>
 				<div className='Alert--wrapper'>
 					<span className='Alert--separator' style={{borderRightColor: fontColor || 'inherit'}}></span>
 					{link ? <a href={link}><p style={{color: fontColor || 'inherit'}}>{message}</p></a> : <p style={{color: fontColor || 'inherit'}}>{message}</p>}
