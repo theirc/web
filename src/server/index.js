@@ -61,13 +61,15 @@ var mainRequest = function (context) {
 		let protocol = request.protocol;
 		let originalUrl = request.originalUrl;
 
-		!instance && initInstance(hostname);
+		// !instance && initInstance(hostname);
+		initInstance(hostname);
 
 		const { appId } = instance.thirdParty.facebook;
 		context = Object.assign(context || {}, { appId: appId });
 
 		context.title = instance.brand.tabTitle;
 		context.image = instance.brand.images.thumbnail;
+		console.log(context);
 
 		fs.readFile(path.join(path.dirname(path.dirname(__dirname)), "build", "index.html"), (err, data) => {
 			if (err) throw err;
@@ -85,9 +87,9 @@ var mainRequest = function (context) {
 
 const initInstance = (hostname) => {
 	instance = require('../backend/settings').default;
-	console.log('Setting up instance for hostname: ', hostname);
+	// console.log('Setting up instance for hostname: ', hostname);
 	instance = instance.loader(hostname);
-	console.log(instance);
+	// console.log(instance);
 }
 
 /**

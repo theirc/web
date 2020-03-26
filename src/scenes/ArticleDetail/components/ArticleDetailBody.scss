@@ -2,7 +2,7 @@
 
 .ArticleDetailBody {
 	max-width: 1024px;
-	margin: 0 auto;
+	margin: 0 auto 20px;
 
 	&.loading {
 		opacity: 0.2;
@@ -75,6 +75,7 @@
 	}
 
 	.Facebook {
+		text-align: center;
 		width: 100%;
 	}
 
