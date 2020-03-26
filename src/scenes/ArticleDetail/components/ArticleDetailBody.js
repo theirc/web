@@ -127,7 +127,8 @@ class ArticleDetailBody extends Component {
 
 		Array.from(document.getElementsByClassName('FacebookPlayer') || []).forEach(e => {
 			var videoId = e.getAttribute('videoId');
-			ReactDOM.render(<FacebookPlayer className={"Facebook"} videoId={videoId} appId={APP_ID} />, e);
+			var width = e.getAttribute('width');
+			ReactDOM.render(<FacebookPlayer width={width || undefined} className={"Facebook"} videoId={videoId} appId={APP_ID} />, e);
 		});
 
 		Array.from(document.getElementsByClassName('InstagramPlayer') || []).forEach(e => {
