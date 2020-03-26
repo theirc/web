@@ -115,7 +115,7 @@ class AppHeader extends Component {
 		disclaimersLink = window.location.href.includes(disclaimersLink) ? '#' : disclaimersLink;
 		let covidLinkCnEs = '/el-salvador/emergencia-por-coronavirus';
 		let covidLinkCnHn = '/honduras/alertas';
-		let covidLinkRiIt = undefined;
+		let covidLinkRiIt = '/italy/coronavirus-emergency';
 
 		let selectedIndex = selectedMenuItem();
 		let path = window.location.pathname;
