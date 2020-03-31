@@ -28,6 +28,9 @@ class Suscribe extends Component {
 		codeSent: false,
 		code: '',
 		validated: false,
+		sendingCode: false,
+		showCodeError: false,
+		showPhoneError: false,
 	}
 
 	static propTypes = {
@@ -57,33 +60,55 @@ class Suscribe extends Component {
 	}
 
 	handleSubmit() {
-	
+		this.setState({sendingCode: true, showPhoneError: true});
 		const options = {
 			method: 'POST',
 			headers: {
 				'Accept': 'application/json',
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({phone: this.state.phone, categoryId: this.props.category.fields.slug, code: 0, active: false})
+			body: JSON.stringify({phone: this.state.phone, categorySlug: this.props.category.fields.slug})
 		}
-		fetch("https://admin-qa.cuentanos.org/v2/add-subscription/", options).then(response => {
-			console.log(response)
-		});
-	
-		this.setState({ codeSent: true });
+		fetch("https://signpost-crm-staging.azurewebsites.net/api/subscriptions/add-subscription", options).then((s) => {
+			console.log(s);
+			this.setState({sendingCode: false});
+			if (s.status == 200){
+				this.setState({ codeSent: true });
+			}else{
+				this.setState({ showPhoneError: true });
+			}
+			
+		})
+		
 	}
-
-	
 
 	handleSubmitCode() {
 		console.log("Submit code");
-		this.setState({ validated: true });
+		const options = {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({phone: this.state.phone, code: this.state.code})
+		}
+		fetch("https://signpost-crm-staging.azurewebsites.net/api/subscriptions/verify-code", options).then((s) => {
+			console.log(s);
+			if (s.status == 200){
+				this.setState({ validated: true, showCodeError: false });
+			}else{
+				this.setState({ validated: false, showCodeError: true });
+
+			}
+			
+
+		})
 	}
 
 	render() {
 		const title = "Subscribe";
 		const { category } = this.props;
-		
+		console.log("category:", category);
 		return (
 			<Skeleton headerColor='light'>
 				<div className="SkeletonContainer">
@@ -95,14 +120,16 @@ class Suscribe extends Component {
 						<HeaderBar subtitle={'Subscribe your phone number'} title={title} />
 
 						<div className="Subscribe-content">
-							<h4>Sign up to receive updates notifications for '{category.fields.name}'' straight to your cell phone via Whatsapp or SMS!
+							<h4>Sign up to receive updates notifications for '{category && category.fields.name}'' straight to your cell phone via Whatsapp or SMS!
 							</h4>
 							<h5>
 								This is a free service and only your standard text message rates will apply.
 									You can end these notifications at any time by replying "STOP" to any message
 							</h5>
-
-							{!this.state.codeSent && !this.validated &&
+							{this.sendingCode && 
+								<div>Sending verification code</div>
+							}
+							{!this.state.codeSent && !this.validated && !this.sendingCode &&
 								<div className="subscribe-form">
 									<label>Enter your phone number</label><br></br>
 									<input type="text" onChange={this.handleChange} className="subscribe-input" id="phoneNumber" value={this.state.phone} /><br></br>
@@ -115,6 +142,17 @@ class Suscribe extends Component {
 									<label>Le hemos enviado un código de confirmación. Por favor ingréselo debajo para verificar su número</label><br></br>
 									<input type="text" onChange={this.handleChangeCode} className="subscribe-input" id="code" value={this.state.code} /><br></br>
 									<button type="button" onClick={this.handleSubmitCode} className="subscribe-button" id="confirm">Verify</button>
+								</div>
+							}
+							
+							{this.state.showCodeError &&
+								<div>
+									<h4>El código ingresado no es válido</h4>
+								</div>
+							}
+							{this.state.showPhoneError &&
+								<div>
+									<h4>El número ingresado ya tiene una subscripción activa para esta categoría</h4>
 								</div>
 							}
 							{this.state.validated &&
