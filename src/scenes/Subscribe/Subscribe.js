@@ -3,17 +3,25 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
 import { translate } from "react-i18next";
+import { connect } from "react-redux";
 
 // local
 import HeaderBar from "../../components/HeaderBar/HeaderBar";
 import { Skeleton } from "..";
+import i18nHelpers from '../../helpers/i18n';
+import instance from '../../backend/settings';
+import languages from './languages';
+
 import "./Subscribe.css";
+
+
+const NS = { ns: 'Subscribe' };
 
 /**
  * @class
  * @description 
  */
-class Suscribe extends Component {
+class Subscribe extends Component {
 
 	constructor(props) {
 		super(props);
@@ -21,6 +29,7 @@ class Suscribe extends Component {
 		this.handleChangeCode = this.handleChangeCode.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleSubmitCode = this.handleSubmitCode.bind(this);
+		i18nHelpers.loadResource(languages, NS.ns);
 	}
 
 	state = {
@@ -175,4 +184,7 @@ class Suscribe extends Component {
 	}
 }
 
-export default translate()(Suscribe);
+const mapState = ({ country, language }, p) => ({ language, country});
+
+export default connect(mapState)(Subscribe);
+
