@@ -2,14 +2,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
-import { translate } from "react-i18next";
+import { Interpolate, translate } from "react-i18next";
 import { connect } from "react-redux";
 
 // local
 import HeaderBar from "../../components/HeaderBar/HeaderBar";
 import { Skeleton } from "..";
 import i18nHelpers from '../../helpers/i18n';
-import instance from '../../backend/settings';
 import languages from './languages';
 
 import "./Subscribe.css";
@@ -25,10 +24,10 @@ class Subscribe extends Component {
 
 	constructor(props) {
 		super(props);
-		this.handleChange = this.handleChange.bind(this);
-		this.handleChangeCode = this.handleChangeCode.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
-		this.handleSubmitCode = this.handleSubmitCode.bind(this);
+		this.handleSubscriptionChange = this.handleSubscriptionChange.bind(this);
+		this.handleVerificationChange = this.handleVerificationChange.bind(this);
+		this.handleSubscriptionSubmit = this.handleSubscriptionSubmit.bind(this);
+		this.handleVerificationSubmit = this.handleVerificationSubmit.bind(this);
 		i18nHelpers.loadResource(languages, NS.ns);
 	}
 
@@ -60,38 +59,38 @@ class Subscribe extends Component {
 		config: PropTypes.object,
 	};
 
-	handleChange(event) {
+	handleSubscriptionChange(event) {
 		this.setState({ phone: event.target.value })
 	}
 
-	handleChangeCode(event) {
+	handleVerificationChange(event) {
 		this.setState({ code: event.target.value })
 	}
 
-	handleSubmit() {
-		this.setState({sendingCode: true, showPhoneError: true});
+	handleSubscriptionSubmit() {
+		this.setState({ sendingCode: true });
 		const options = {
 			method: 'POST',
 			headers: {
 				'Accept': 'application/json',
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({phone: this.state.phone, categorySlug: this.props.category.fields.slug})
+			body: JSON.stringify({ phone: this.state.phone, categorySlug: this.props.category.fields.slug })
 		}
-		fetch("https://signpost-crm-staging.azurewebsites.net/api/subscriptions/add-subscription", options).then((s) => {
-			console.log(s);
-			this.setState({sendingCode: false});
-			if (s.status == 200){
+		fetch("https://signpost-crm-staging.azurewebsites.net/api/subscriptions/add-subscription", options).then(s => {
+			this.setState({ sendingCode: false });
+			if (s.status === 200) {
 				this.setState({ codeSent: true });
-			}else{
+			} else {
 				this.setState({ showPhoneError: true });
 			}
-			
-		})
-		
+
+			return s.json();
+		}).then(s => console.log(s));
+
 	}
 
-	handleSubmitCode() {
+	handleVerificationSubmit() {
 		console.log("Submit code");
 		const options = {
 			method: 'POST',
@@ -99,84 +98,77 @@ class Subscribe extends Component {
 				'Accept': 'application/json',
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({phone: this.state.phone, code: this.state.code})
+			body: JSON.stringify({ phone: this.state.phone, code: this.state.code })
 		}
 		fetch("https://signpost-crm-staging.azurewebsites.net/api/subscriptions/verify-code", options).then((s) => {
-			console.log(s);
-			if (s.status == 200){
+			console.log(s, s.body);
+			if (s.status === 200) {
 				this.setState({ validated: true, showCodeError: false });
-			}else{
+			} else {
 				this.setState({ validated: false, showCodeError: true });
-
 			}
-			
-
 		})
 	}
 
 	render() {
-		const title = "Subscribe";
-		const { category } = this.props;
-		console.log("category:", category);
+		const { category, t } = this.props;
+		// console.log("category:", category);
+
 		return (
 			<Skeleton headerColor='light'>
 				<div className="SkeletonContainer">
 					<div ref={r => (this._ref = r)} className={"Subscribe"}>
 						<Helmet>
-							<title>{title}</title>
+							<title>{t('title', NS)}</title>
 						</Helmet>
 
-						<HeaderBar subtitle={'Subscribe your phone number'} title={title} />
+						<HeaderBar subtitle={'Subscribe your phone number'} title={t('title', NS)} />
 
 						<div className="Subscribe-content">
-							<h4>Sign up to receive updates notifications for '{category && category.fields.name}'' straight to your cell phone via Whatsapp or SMS!
-							</h4>
-							<h5>
-								This is a free service and only your standard text message rates will apply.
-									You can end these notifications at any time by replying "STOP" to any message
-							</h5>
-							{this.sendingCode && 
-								<div>Sending verification code</div>
+							{/* <h4>Sign up to receive updates notifications for '{category && category.fields.name}'' straight to your cell phone via Whatsapp or SMS!
+							</h4> */}
+							<h4>{t('Subscribe:signUp', { category: category && category.fields.name })}</h4>
+							<p>{t('disclaimer', NS)}</p>
+
+							{this.sendingCode &&
+								<div>{t('sendingCode', NS)}</div>
 							}
+
 							{!this.state.codeSent && !this.validated && !this.sendingCode &&
 								<div className="subscribe-form">
-									<label>Enter your phone number</label><br></br>
-									<input type="text" onChange={this.handleChange} className="subscribe-input" id="phoneNumber" value={this.state.phone} /><br></br>
+									<div>{t('enterPhone', NS)}</div>
+									<input type="text" onChange={this.handleSubscriptionChange} className="subscribe-input" id="phoneNumber" value={this.state.phone} /><br></br>
 
-									<button type="button" onClick={this.handleSubmit} className="subscribe-button" id="confirm">Submit</button>
+									<div className='warning'>
+										{this.state.showPhoneError && t('phoneExists', NS)}
+										{this.state.showCodeError && t('invalid', NS)}
+									</div>
+
+									{this.state.validated &&
+										<div className="all-set">
+											<h3>{t('done', NS)}</h3>
+											<div>{t('registered', NS)}</div>
+										</div>
+									}
+
+									<button type="button" onClick={this.state.phone ? this.handleSubscriptionSubmit : undefined} className={`subscribe-button${this.state.phone ? '' : ' disabled'}`} id="confirm">{t('submit', NS)}</button>
 								</div>}
 
 							{this.state.codeSent && !this.state.validated &&
 								<div className="subscribe-form">
-									<label>Le hemos enviado un código de confirmación. Por favor ingréselo debajo para verificar su número</label><br></br>
-									<input type="text" onChange={this.handleChangeCode} className="subscribe-input" id="code" value={this.state.code} /><br></br>
-									<button type="button" onClick={this.handleSubmitCode} className="subscribe-button" id="confirm">Verify</button>
+									<label>{t('confirmationSent', NS)}</label><br></br>
+									<input type="text" onChange={this.handleVerificationChange} className="subscribe-input" id="code" value={this.state.code} /><br></br>
+
+									{this.state.showCodeError ?
+										<div className='warning'>{t('invalid', NS)}</div> :
+										<div className='warning'></div>
+									}
+
+									<button type="button" onClick={this.state.code ? this.handleVerificationSubmit : undefined} className={`subscribe-button${this.state.code ? '' : ' disabled'}`} id="confirm">{t('verify', NS)}</button>
 								</div>
 							}
-							
-							{this.state.showCodeError &&
-								<div>
-									<h4>El código ingresado no es válido</h4>
-								</div>
-							}
-							{this.state.showPhoneError &&
-								<div>
-									<h4>El número ingresado ya tiene una subscripción activa para esta categoría</h4>
-								</div>
-							}
-							{this.state.validated &&
-								<div className="all-set">
-									<h3>
-										Listo!
-							</h3>
-									<h4>
-										Su número de telefono ha quedado registrado y ahora recibirás notificaciones cuando haya nueva información disponible.
-							</h4>
-								</div>}
 
 						</div>
-
-
 					</div>
 				</div>
 			</Skeleton>
@@ -184,7 +176,7 @@ class Subscribe extends Component {
 	}
 }
 
-const mapState = ({ country, language }, p) => ({ language, country});
+const mapState = ({ country, language }, p) => ({ language, country });
 
-export default connect(mapState)(Subscribe);
+export default connect(mapState)(translate()(Subscribe));
 

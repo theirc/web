@@ -1,74 +1,98 @@
 export default {
 	"ar": {
 		"Subscribe": {
-			"country": {
-				"Detect My Location": "قم بتحديد موقعي",
-				"Where are you now?": "أين أنت الآن؟",
-				"Choose a different language": "اختر لغة مختلفة"
-			},
-			"language": {
-				"Choose your language": "اختر لغتك"
-			}
+			"title": "n/a",
+			"enterPhone": "n/a",
+			"disclaimer": "n/a",
+			"confirmationSent": "",
+			"phoneExists": "n/a",
+			"verify": "n/a",
+			"registered": "n/a",
+			"invalid": "n/a",
+			"sendingCode": "n/a",
+			"done": "n/a",
+			"signUp": "n/a",
+			"submit": "n/a"
 		}
 	},
 	"en": {
 		"Subscribe": {
-			"country": {
-				"Detect My Location": "Detect My Location",
-				"Where are you now?": "Where are you now?",
-				"Choose a different language": "Choose a different language"
-			},
-			"language": {
-				"Choose your language": "Choose your language"
-			}
+			"title": "n/a",
+			"enterPhone": "n/a",
+			"disclaimer": "This is a free service and only your standard text message rates will apply. You can end these notifications at any time by replying STOP to any message",
+			"confirmationSent": "",
+			"phoneExists": "n/a",
+			"verify": "n/a",
+			"registered": "n/a",
+			"invalid": "n/a",
+			"sendingCode": "Sending verification code",
+			"done": "n/a",
+			"signUp": "n/a",
+			"submit": "n/a"
 		}
 	},
 	"es": {
 		"Subscribe": {
-			"country": {
-				"Detect My Location": "Detectar mi ubicación",
-				"Where are you now?": "¿Donde esta usted ahora?",
-				"Choose a different language": "Seleccionar otro idioma"
-			},
-			"language": {
-				"Choose your language": "Elija su idioma"
-			}
+			"title": "Subscribe",
+			"enterPhone": "Ingrese su número de teléfono",
+			"disclaimer": "This is a free service and only your standard text message rates will apply. You can end these notifications at any time by replying STOP to any message",
+			"confirmationSent": "Le hemos enviado un código de confirmación. Por favor ingréselo debajo para verificar su número",
+			"phoneExists": "El número ingresado ya tiene una subscripción activa para esta categoría",
+			"verify": "Verificar",
+			"registered": "Su número de telefono ha quedado registrado y ahora recibirás notificaciones cuando haya nueva información disponible.",
+			"invalid": "El código ingresado no es válido",
+			"sendingCode": "Enviando código de verificación",
+			"done": "Listo!",
+			"signUp": "Sign up to receive updates notifications for {{category}} straight to your cell phone via Whatsapp or SMS!",
+			"submit": "Subscribir"
 		}
 	},
 	"fa": {
 		"Subscribe": {
-			"country": {
-				"Detect My Location": "تشخیص موقعیت من",
-				"Where are you now?": "کجا هستید؟",
-				"Choose a different language": "زبان دیگری را انتخاب کنید"
-			},
-			"language": {
-				"Choose your language": "زبان خود را انتخاب کنید"
-			}
+			"title": "n/a",
+			"enterPhone": "n/a",
+			"disclaimer": "n/a",
+			"confirmationSent": "",
+			"phoneExists": "n/a",
+			"verify": "n/a",
+			"registered": "n/a",
+			"invalid": "n/a",
+			"sendingCode": "n/a",
+			"done": "n/a",
+			"signUp": "n/a",
+			"submit": "n/a"
 		}
 	},
 	"fr": {
 		"Subscribe": {
-			"country": {
-				"Detect My Location": "Détecter ma position",
-				"Where are you now?": "Où êtes-vous maintenant?",
-				"Choose a different language": "Choisissez une autre langue"
-			},
-			"language": {
-				"Choose your language": "Choisissez votre langue"
-			}
+			"title": "n/a",
+			"enterPhone": "n/a",
+			"disclaimer": "n/a",
+			"confirmationSent": "",
+			"phoneExists": "n/a",
+			"verify": "n/a",
+			"registered": "n/a",
+			"invalid": "n/a",
+			"sendingCode": "n/a",
+			"done": "n/a",
+			"signUp": "n/a",
+			"submit": "n/a"
 		}
 	},
 	"ur": {
 		"Subscribe": {
-			"country": {
-				"Where are you now?": "آپ اس وقت کہاں ہیں؟",
-				"Detect My Location": "میرے مقام کا پتہ لگائیں",
-				"Choose a different language": "ایک مختلف زبان کا انتخاب کریں"
-			},
-			"language": {
-				"Choose your language": "اپنی زبان کا انتخاب کریں"
-			}
+			"title": "n/a",
+			"enterPhone": "n/a",
+			"disclaimer": "n/a",
+			"confirmationSent": "",
+			"phoneExists": "n/a",
+			"verify": "n/a",
+			"registered": "n/a",
+			"invalid": "n/a",
+			"sendingCode": "n/a",
+			"done": "n/a",
+			"signUp": "n/a",
+			"submit": "n/a"
 		}
 	}
 }

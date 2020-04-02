@@ -1,57 +1,100 @@
 @import "../../shared/includes.scss";
 
 .Subscribe {
-    h3 {
-        text-transform: uppercase;
-        width: 100%;
-        text-align: center;
-        font-size: 30px;
-        @media (max-width: $desktopBreakpoint) {
-            display: block;
-            font-size: 1.17em;
-            margin-block-start: 1em;
-            margin-block-end: 1em;
-            margin-inline-start: 0px;
-            margin-inline-end: 0px;
-            font-weight: bold;
-            text-align: left;
-        }
-    }
-    .ltr & {
-        s {
-            float: right;
-        }
-    }
-    .rtl & {
-        s {
-            float: left;
-        }
-    }
+	margin: 0 auto;
+	max-width: 1024px;
 
+	h3 {
+		text-transform: uppercase;
+		width: 100%;
+		text-align: center;
+		font-size: 30px;
+		@media (max-width: $desktopBreakpoint) {
+			display: block;
+			font-size: 1.17em;
+			margin-block-start: 1em;
+			margin-block-end: 1em;
+			margin-inline-start: 0px;
+			margin-inline-end: 0px;
+			font-weight: bold;
+			text-align: left;
+		}
+	}
+
+	.ltr & {
+		s {
+			float: right;
+		}
+	}
+
+	.rtl & {
+		s {
+			float: left;
+		}
+	}
+
+	.Subscribe-content {
+		border-top: 1px solid #ddd;
+		font-weight: 300;
+		padding-left: 16px;
+		padding-right: 16px;
+	}
 }
-.subscribe-form{
-    width: 100%;
-    text-align: center;
+
+.subscribe-form {
+	padding: 50px 0;
+	text-align: center;
+	width: 100%;
+
+	.warning {
+		color: red;
+		min-height: 30px;
+	}
 }
-.subscribe-input{
-    width: 200px;
-    font-size: 20px;
-    height: 30px;
-    line-height: 30px;
-    padding: 10px;
-    border-radius: 5px 5px 5px 5px;
-    border-style: ridge;
-    margin: 10px;
+
+.subscribe-input {
+	width: 200px;
+	font-size: 20px;
+	height: 30px;
+	line-height: 30px;
+	padding: 10px;
+	border-radius: 5px 5px 5px 5px;
+	border-style: ridge;
+	margin: 10px;
 }
-.subscribe-button{
-    background-color: #e8e8e8;
-    width: 220px;
-    font-size: 20px;
-    line-height: 20px;
-    cursor: pointer;
-    height: 40px;
+
+.subscribe-button {
+	@include darken-brand-colors("background-color", 10%);
+	@include brand-colors-inverse("color");
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 13px;
+	height: 41px;
+	padding: 0 40px;
+	text-align: center;
+	white-space: nowrap;
+	
+	&:hover {
+		@include brand-colors("background-color");
+		text-decoration: underline;
+	}
+	
+	&.disabled {
+		cursor: default;
+		opacity: 0.7;
+		
+		&:hover {
+			@include darken-brand-colors("background-color", 10%);
+			text-decoration: none;
+		}
+	}
 }
-.all-set{
-    text-align: center;
-    width:100%;
+
+.all-set {
+	background-color: #f0f0f0;
+	border: 1px solid #ddd;
+	color: #5e5e5e;
+	text-align: center;
+	width: 100%;
 }
