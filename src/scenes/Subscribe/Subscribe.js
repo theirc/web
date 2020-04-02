@@ -125,8 +125,6 @@ class Subscribe extends Component {
 						<HeaderBar subtitle={'Subscribe your phone number'} title={t('title', NS)} />
 
 						<div className="Subscribe-content">
-							{/* <h4>Sign up to receive updates notifications for '{category && category.fields.name}'' straight to your cell phone via Whatsapp or SMS!
-							</h4> */}
 							<h4>{t('Subscribe:signUp', { category: category && category.fields.name })}</h4>
 							<p>{t('disclaimer', NS)}</p>
 
@@ -159,10 +157,7 @@ class Subscribe extends Component {
 									<label>{t('confirmationSent', NS)}</label><br></br>
 									<input type="text" onChange={this.handleVerificationChange} className="subscribe-input" id="code" value={this.state.code} /><br></br>
 
-									{this.state.showCodeError ?
-										<div className='warning'>{t('invalid', NS)}</div> :
-										<div className='warning'></div>
-									}
+									<div className='warning'>{this.state.showCodeError && t('invalid', NS)}</div>
 
 									<button type="button" onClick={this.state.code ? this.handleVerificationSubmit : undefined} className={`subscribe-button${this.state.code ? '' : ' disabled'}`} id="confirm">{t('verify', NS)}</button>
 								</div>
