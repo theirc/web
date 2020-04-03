@@ -134,8 +134,8 @@ class Subscribe extends Component {
 
 							{!this.state.codeSent && !this.validated && !this.sendingCode &&
 								<div className="subscribe-form">
-									<div>{t('enterPhone', NS)}</div>
-									<input type="text" onChange={this.handleSubscriptionChange} className="subscribe-input" id="phoneNumber" value={this.state.phone} /><br></br>
+									<div className='label'>{t('enterPhone', NS)}</div>
+									<div><input type="text" onChange={this.handleSubscriptionChange} className="subscribe-input" id="phoneNumber" value={this.state.phone} /></div>
 
 									<div className='warning'>
 										{this.state.showPhoneError && t('phoneExists', NS)}
@@ -154,8 +154,8 @@ class Subscribe extends Component {
 
 							{this.state.codeSent && !this.state.validated &&
 								<div className="subscribe-form">
-									<label>{t('confirmationSent', NS)}</label><br></br>
-									<input type="text" onChange={this.handleVerificationChange} className="subscribe-input" id="code" value={this.state.code} /><br></br>
+									<div className='label'>{t('confirmationSent', NS)}</div>
+									<div><input type="text" onChange={this.handleVerificationChange} className="subscribe-input" id="code" value={this.state.code} /></div>
 
 									<div className='warning'>{this.state.showCodeError && t('invalid', NS)}</div>
 

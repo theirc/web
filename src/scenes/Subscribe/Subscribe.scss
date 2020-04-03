@@ -42,12 +42,22 @@
 }
 
 .subscribe-form {
-	padding: 50px 0;
+	background-color: #f0f0f0;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	color: #5e5e5e;
+	max-width: 500px;
+	margin: 20px auto;
+	padding: 10px;
 	text-align: center;
-	width: 100%;
+
+	.label {
+		padding: 10px 0;
+	}
 
 	.warning {
 		color: red;
+		font-size: 14px;
 		min-height: 30px;
 	}
 }
@@ -69,21 +79,22 @@
 	border: none;
 	border-radius: 5px;
 	cursor: pointer;
-	font-size: 13px;
+	font-size: 16px;
 	height: 41px;
+	margin: 10px 0;
 	padding: 0 40px;
 	text-align: center;
 	white-space: nowrap;
-	
+
 	&:hover {
 		@include brand-colors("background-color");
 		text-decoration: underline;
 	}
-	
+
 	&.disabled {
 		cursor: default;
 		opacity: 0.7;
-		
+
 		&:hover {
 			@include darken-brand-colors("background-color", 10%);
 			text-decoration: none;
