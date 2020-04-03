@@ -62,15 +62,34 @@
 	}
 }
 
+.verify-input {
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	font-size: 20px;
+	letter-spacing: 10px;
+	margin: 10px auto;
+	padding: 5px 10px 5px 22px;
+	height: 30px;
+	width: 93px;
+}
+
 .subscribe-input {
-	width: 200px;
 	font-size: 20px;
 	height: 30px;
-	line-height: 30px;
-	padding: 10px;
-	border-radius: 5px 5px 5px 5px;
-	border-style: ridge;
-	margin: 10px;
+	max-width: 265px;
+	// padding: 10px;
+	margin: 10px auto;
+
+	// overrides
+	.react-phone-number-input__icon {
+		border: unset;
+	}
+
+	.react-phone-number-input__input--style {
+		border: 1px solid #ddd;
+		border-radius: 5px;
+		padding: 5px 10px;
+	}
 }
 
 .subscribe-button {

@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
 import { Interpolate, translate } from "react-i18next";
+import PhoneInput from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
 import { connect } from "react-redux";
 
 // local
@@ -59,8 +61,9 @@ class Subscribe extends Component {
 		config: PropTypes.object,
 	};
 
-	handleSubscriptionChange(event) {
-		this.setState({ phone: event.target.value })
+	handleSubscriptionChange(phone) {
+		this.setState({ phone })
+		console.log(phone);
 	}
 
 	handleVerificationChange(event) {
@@ -135,7 +138,12 @@ class Subscribe extends Component {
 							{!this.state.codeSent && !this.validated && !this.sendingCode &&
 								<div className="subscribe-form">
 									<div className='label'>{t('enterPhone', NS)}</div>
-									<div><input type="text" onChange={this.handleSubscriptionChange} className="subscribe-input" id="phoneNumber" value={this.state.phone} /></div>
+									{/* <div><input type="text" onChange={this.handleSubscriptionChange} className="subscribe-input" id="phoneNumber" value={this.state.phone} /></div> */}
+									<PhoneInput className='subscribe-input'
+										country="SV"
+										value={this.state.phone}
+										maxLength={18}
+										onChange={phone => this.handleSubscriptionChange(phone) } />
 
 									<div className='warning'>
 										{this.state.showPhoneError && t('phoneExists', NS)}
@@ -155,7 +163,7 @@ class Subscribe extends Component {
 							{this.state.codeSent && !this.state.validated &&
 								<div className="subscribe-form">
 									<div className='label'>{t('confirmationSent', NS)}</div>
-									<div><input type="text" onChange={this.handleVerificationChange} className="subscribe-input" id="code" value={this.state.code} /></div>
+									<div><input type="text" onChange={this.handleVerificationChange} className="verify-input" id="code" value={this.state.code} maxLength={4}/></div>
 
 									<div className='warning'>{this.state.showCodeError && t('invalid', NS)}</div>
 
