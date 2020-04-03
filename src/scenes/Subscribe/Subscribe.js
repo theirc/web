@@ -62,8 +62,7 @@ class Subscribe extends Component {
 	};
 
 	handleSubscriptionChange(phone) {
-		this.setState({ phone })
-		console.log(phone);
+		this.setState({ phone });
 	}
 
 	handleVerificationChange(event) {
@@ -140,10 +139,10 @@ class Subscribe extends Component {
 									<div className='label'>{t('enterPhone', NS)}</div>
 									{/* <div><input type="text" onChange={this.handleSubscriptionChange} className="subscribe-input" id="phoneNumber" value={this.state.phone} /></div> */}
 									<PhoneInput className='subscribe-input'
-										country="SV"
-										value={this.state.phone}
 										maxLength={18}
-										onChange={phone => this.handleSubscriptionChange(phone) } />
+										value={this.state.phone}
+										onChange={phone => this.handleSubscriptionChange(phone) }
+									/>
 
 									<div className='warning'>
 										{this.state.showPhoneError && t('phoneExists', NS)}
