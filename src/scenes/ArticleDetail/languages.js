@@ -4,7 +4,8 @@ export default {
 			"actions": {
 				"Copied": "تم النسخ",
 				"LAST_UPDATED": "آخر تحديث لهذه الصفحة كان بتاريخ:"
-			}
+			},
+			"subscribe": "n/a"
 		}
 	},
 	"en": {
@@ -12,7 +13,8 @@ export default {
 			"actions": {
 				"Copied": "Copied",
 				"LAST_UPDATED": "Last update: "
-			}
+			},
+			"subscribe": "n/a"
 		}
 	},
 	"es": {
@@ -20,7 +22,8 @@ export default {
 			"actions": {
 				"Copied": "Copiado",
 				"LAST_UPDATED": "Última actualización: "
-			}
+			},
+			"subscribe": "Subscribir a ésta categoría"
 		}
 	},
 	"fa": {
@@ -28,7 +31,8 @@ export default {
 			"actions": {
 				"Copied": "کپی‌شده",
 				"LAST_UPDATED": "این صفحه آخرین بار در این تاریخ به‌روز شده:"
-			}
+			},
+			"subscribe": "n/a"
 		}
 	},
 	"fr": {
@@ -36,7 +40,8 @@ export default {
 			"actions": {
 				"Copied": "Copié",
 				"LAST_UPDATED": "Dernière mise à jour:"
-			}
+			},
+			"subscribe": "n/a"
 		}
 	},
 	"ur": {
@@ -44,7 +49,8 @@ export default {
 			"actions": {
 				"Copied": "کی ہوئی کاپی",
 				"LAST_UPDATED": "یہ صفحہ آخری دفعہ اپ ڈیٹ کیا گیا:"
-			}
+			},
+			"subscribe": "n/a"
 		}
 	}
 }

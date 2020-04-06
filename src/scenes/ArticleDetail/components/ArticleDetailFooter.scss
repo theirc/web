@@ -1,28 +1,40 @@
 @import "../../../shared/includes.scss";
 
 .ArticleDetailFooter {
-	background-color: $titleBackground;
-	border: 1px solid #ddd;
-	display: flex;
 	margin: 0 auto;
 	max-width: 1024px;
-	overflow: hidden;
-	padding: 5px 0;
 
-	@media (min-width: $desktopBreakpoint) {
-		border-radius: 5px;
+	.nav {
+		background-color: $titleBackground;
+		border: 1px solid #ddd;
+		display: flex;
+		overflow: hidden;
+		padding: 5px 0;
+
+		@media (min-width: $desktopBreakpoint) {
+			border-radius: 5px;
+		}
+	}
+	
+	.subscription {
+		text-align: center;
+		margin: 20px;
+
+		a {
+			text-decoration: underline;
+		}
 	}
 
-	hr {
-		padding: 0;
-		margin: auto;
-		border: 0;
-		border-top-width: 1px;
-		border-top-color: #ddd;
-		border-style: solid;
-		border-radius: 1px;
-		height: 0;
-	}
+	// hr {
+	// 	padding: 0;
+	// 	margin: auto;
+	// 	border: 0;
+	// 	border-top-width: 1px;
+	// 	border-top-color: #ddd;
+	// 	border-style: solid;
+	// 	border-radius: 1px;
+	// 	height: 0;
+	// }
 
 	.divider {
 		border-top-color: #ddd;
@@ -31,18 +43,18 @@
 	.icon {
 		padding: 0 10px;
 	}
-	.verticalHR {
-		border-left: 1px black solid;
-		width: 2px;
-		display: block;
-		height: 40px;
-		.ltr & {
-			margin-right: 20px;
-		}
-		.rtl & {
-			margin-left: 20px;
-		}
-	}
+	// .verticalHR {
+	// 	border-left: 1px black solid;
+	// 	width: 2px;
+	// 	display: block;
+	// 	height: 40px;
+	// 	.ltr & {
+	// 		margin-right: 20px;
+	// 	}
+	// 	.rtl & {
+	// 		margin-left: 20px;
+	// 	}
+	// }
 
 	.page-selector {
 		align-items: center;
@@ -91,32 +103,32 @@
 		}
 	}
 
-	.sharePage {
-		padding: 0px;
-	}
-	.sharePage > h1 {
-		padding: 0;
-		&:first-child {
-			flex: 1;
-			.ltr & {
-				padding-left: 20px;
-			}
-			.rtl & {
-				padding-right: 20px;
-			}
-		}
-	}
+	// .sharePage {
+	// 	padding: 0px;
+	// }
+	// .sharePage > h1 {
+	// 	padding: 0;
+	// 	&:first-child {
+	// 		flex: 1;
+	// 		.ltr & {
+	// 			padding-left: 20px;
+	// 		}
+	// 		.rtl & {
+	// 			padding-right: 20px;
+	// 		}
+	// 	}
+	// }
 
-	.sharePage .icon {
-		margin: 0px 5px 0px 5px;
+	// .sharePage .icon {
+	// 	margin: 0px 5px 0px 5px;
 
-		.ltr & {
-			margin-right: 20px;
-		}
-		.rtl & {
-			margin-left: 20px;
-		}
-	}
+	// 	.ltr & {
+	// 		margin-right: 20px;
+	// 	}
+	// 	.rtl & {
+	// 		margin-left: 20px;
+	// 	}
+	// }
 
 	.up {
 		display: none;
