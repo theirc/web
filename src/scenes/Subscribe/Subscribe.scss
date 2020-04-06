@@ -73,23 +73,25 @@
 	width: 93px;
 }
 
+#phone-wrapper {
+	label {
+		color: black;
+		font-size: 20px;
+	}
+}
+#country-code {
+	width: 40px;
+}
+#phone-number {
+	width: 135px;
+}
 .subscribe-input {
+	border: 1px solid #ddd;
+	border-radius: 5px;
 	font-size: 20px;
 	height: 30px;
-	max-width: 265px;
-	// padding: 10px;
-	margin: 10px auto;
-
-	// overrides
-	.react-phone-number-input__icon {
-		border: unset;
-	}
-
-	.react-phone-number-input__input--style {
-		border: 1px solid #ddd;
-		border-radius: 5px;
-		padding: 5px 10px;
-	}
+	margin: 10px 5px;
+	padding: 5px 10px;
 }
 
 .subscribe-button {

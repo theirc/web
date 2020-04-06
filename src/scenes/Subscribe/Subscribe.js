@@ -3,8 +3,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
 import { Interpolate, translate } from "react-i18next";
-import PhoneInput from 'react-phone-number-input';
-import 'react-phone-number-input/style.css';
 import { connect } from "react-redux";
 
 // local
@@ -26,7 +24,8 @@ class Subscribe extends Component {
 
 	constructor(props) {
 		super(props);
-		this.handleSubscriptionChange = this.handleSubscriptionChange.bind(this);
+		this.handlePhoneChange = this.handlePhoneChange.bind(this);
+		this.handleCountryCodeChange = this.handleCountryCodeChange.bind(this);
 		this.handleVerificationChange = this.handleVerificationChange.bind(this);
 		this.handleSubscriptionSubmit = this.handleSubscriptionSubmit.bind(this);
 		this.handleVerificationSubmit = this.handleVerificationSubmit.bind(this);
@@ -35,6 +34,7 @@ class Subscribe extends Component {
 
 	state = {
 		phone: '',
+		countryCode: 503,
 		codeSent: false,
 		code: '',
 		validated: false,
@@ -61,8 +61,12 @@ class Subscribe extends Component {
 		config: PropTypes.object,
 	};
 
-	handleSubscriptionChange(phone) {
-		this.setState({ phone });
+	handlePhoneChange(phone) {
+		this.setState({ phone: phone.target.value });
+	}
+
+	handleCountryCodeChange(countryCode) {
+		this.setState({ countryCode: countryCode.target.value });
 	}
 
 	handleVerificationChange(event) {
@@ -71,13 +75,15 @@ class Subscribe extends Component {
 
 	handleSubscriptionSubmit() {
 		this.setState({ sendingCode: true });
+
+		const phone = '+' + this.state.countryCode + this.state.phone;
 		const options = {
 			method: 'POST',
 			headers: {
 				'Accept': 'application/json',
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({ phone: this.state.phone, categorySlug: this.props.category.fields.slug })
+			body: JSON.stringify({ phone, categorySlug: this.props.category.fields.slug })
 		}
 		fetch("https://signpost-crm-staging.azurewebsites.net/api/subscriptions/add-subscription", options).then(s => {
 			this.setState({ sendingCode: false });
@@ -137,12 +143,18 @@ class Subscribe extends Component {
 							{!this.state.codeSent && !this.validated && !this.sendingCode &&
 								<div className="subscribe-form">
 									<div className='label'>{t('enterPhone', NS)}</div>
-									{/* <div><input type="text" onChange={this.handleSubscriptionChange} className="subscribe-input" id="phoneNumber" value={this.state.phone} /></div> */}
-									<PhoneInput className='subscribe-input'
-										maxLength={18}
-										value={this.state.phone}
-										onChange={phone => this.handleSubscriptionChange(phone) }
-									/>
+									{/* <div><input type="text" onChange={this.handlePhoneChange} className="subscribe-input" id="phoneNumber" value={this.state.phone} /></div> */}
+									<div id='phone-wrapper'>
+										<label>+</label>
+										<input id='country-code' className='subscribe-input' maxLength='3'
+											onChange={countryCode => this.handleCountryCodeChange(countryCode)}
+											value={this.state.countryCode}
+										/>
+										<input id='phone-number' className='subscribe-input' maxLength='11'
+											onChange={phone => this.handlePhoneChange(phone) }
+											value={this.state.phone}
+										/>
+									</div>
 
 									<div className='warning'>
 										{this.state.showPhoneError && t('phoneExists', NS)}
@@ -156,7 +168,7 @@ class Subscribe extends Component {
 										</div>
 									}
 
-									<button type="button" onClick={this.state.phone ? this.handleSubscriptionSubmit : undefined} className={`subscribe-button${this.state.phone ? '' : ' disabled'}`} id="confirm">{t('submit', NS)}</button>
+									<button type="button" onClick={this.state.phone && this.state.countryCode ? this.handleSubscriptionSubmit : undefined} className={`subscribe-button${this.state.phone ? '' : ' disabled'}`} id="confirm">{t('submit', NS)}</button>
 								</div>}
 
 							{this.state.codeSent && !this.state.validated &&
