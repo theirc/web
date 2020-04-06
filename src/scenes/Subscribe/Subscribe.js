@@ -62,11 +62,13 @@ class Subscribe extends Component {
 	};
 
 	handlePhoneChange(phone) {
-		this.setState({ phone: phone.target.value });
+		const digits = Number.isNaN(parseInt(phone.target.value, 10)) ? '' : parseInt(phone.target.value, 10);
+		this.setState({ phone: digits });
 	}
 
 	handleCountryCodeChange(countryCode) {
-		this.setState({ countryCode: countryCode.target.value });
+		const digits = Number.isNaN(parseInt(countryCode.target.value, 10)) ? '' : parseInt(countryCode.target.value, 10);
+		this.setState({ countryCode: digits });
 	}
 
 	handleVerificationChange(event) {
