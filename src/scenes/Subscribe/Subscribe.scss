@@ -4,23 +4,6 @@
 	margin: 0 auto;
 	max-width: 1024px;
 
-	h3 {
-		text-transform: uppercase;
-		width: 100%;
-		text-align: center;
-		font-size: 30px;
-		@media (max-width: $desktopBreakpoint) {
-			display: block;
-			font-size: 1.17em;
-			margin-block-start: 1em;
-			margin-block-end: 1em;
-			margin-inline-start: 0px;
-			margin-inline-end: 0px;
-			font-weight: bold;
-			text-align: left;
-		}
-	}
-
 	.ltr & {
 		s {
 			float: right;
@@ -46,6 +29,7 @@
 	border: 1px solid #ddd;
 	border-radius: 5px;
 	color: #5e5e5e;
+	min-height: 214px;
 	max-width: 500px;
 	margin: 20px auto;
 	padding: 10px;

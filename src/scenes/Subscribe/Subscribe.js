@@ -138,14 +138,10 @@ class Subscribe extends Component {
 							<h4>{t('Subscribe:signUp', { category: category && category.fields.name })}</h4>
 							<p>{t('disclaimer', NS)}</p>
 
-							{this.sendingCode &&
-								<div>{t('sendingCode', NS)}</div>
-							}
-
-							{!this.state.codeSent && !this.sendingCode &&
+							{!this.state.codeSent &&
 								<div className="subscribe-form">
-									<div className='label'>{t('enterPhone', NS)}</div>
-									{/* <div><input type="text" onChange={this.handlePhoneChange} className="subscribe-input" id="phoneNumber" value={this.state.phone} /></div> */}
+									<div className='label'>{!this.state.sendingCode ? t('enterPhone', NS) : t('sendingCode', NS)}</div>
+
 									<div id='phone-wrapper'>
 										<label>+</label>
 										<input id='country-code' className='subscribe-input' maxLength='3'
@@ -162,11 +158,15 @@ class Subscribe extends Component {
 										{this.state.showPhoneError && t('phoneExists', NS)}
 										{this.state.showCodeError && t('invalid', NS)}
 									</div>
+									
 
-									<button type="button" onClick={this.state.phone && this.state.countryCode ? this.handleSubscriptionSubmit : undefined} className={`subscribe-button${this.state.phone ? '' : ' disabled'}`} id="confirm">{t('submit', NS)}</button>
+									<button type="button" onClick={this.state.phone && this.state.countryCode ? this.handleSubscriptionSubmit : undefined}
+										className={`subscribe-button${this.state.phone && !this.state.sendingCode ? '' : ' disabled'}`} id="confirm">
+											{t('submit', NS)}
+									</button>
 								</div>
 							}
-
+							
 							{this.state.validated &&
 								<div className="subscribe-form">
 									<div className="all-set">
