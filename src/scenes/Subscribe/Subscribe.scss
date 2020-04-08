@@ -124,9 +124,10 @@
 }
 
 .all-set {
-	background-color: #f0f0f0;
-	border: 1px solid #ddd;
-	color: #5e5e5e;
-	text-align: center;
-	width: 100%;
+	padding: 10px;
+	
+	h4 {
+		margin: unset;
+		padding-bottom: 10px;
+	}
 }

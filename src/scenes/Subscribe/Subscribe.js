@@ -91,38 +91,38 @@ class Subscribe extends Component {
 			this.setState({ sendingCode: false });
 			if (s.status === 200) {
 				this.setState({ codeSent: true });
+				return s.json();
 			} else {
 				this.setState({ showPhoneError: true });
 			}
 
-			return s.json();
 		}).then(s => console.log(s));
 
 	}
 
 	handleVerificationSubmit() {
 		console.log("Submit code");
+		const phone = '+' + this.state.countryCode + this.state.phone;
 		const options = {
 			method: 'POST',
 			headers: {
 				'Accept': 'application/json',
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({ phone: this.state.phone, code: this.state.code })
+			body: JSON.stringify({ phone, code: this.state.code })
 		}
 		fetch("https://signpost-crm-staging.azurewebsites.net/api/subscriptions/verify-code", options).then((s) => {
-			console.log(s, s.body);
 			if (s.status === 200) {
 				this.setState({ validated: true, showCodeError: false });
 			} else {
 				this.setState({ validated: false, showCodeError: true });
 			}
-		})
+		});
 	}
 
 	render() {
 		const { category, t } = this.props;
-		// console.log("category:", category);
+		console.log("state:", this.state);
 
 		return (
 			<Skeleton headerColor='light'>
@@ -142,7 +142,7 @@ class Subscribe extends Component {
 								<div>{t('sendingCode', NS)}</div>
 							}
 
-							{!this.state.codeSent && !this.validated && !this.sendingCode &&
+							{!this.state.codeSent && !this.sendingCode &&
 								<div className="subscribe-form">
 									<div className='label'>{t('enterPhone', NS)}</div>
 									{/* <div><input type="text" onChange={this.handlePhoneChange} className="subscribe-input" id="phoneNumber" value={this.state.phone} /></div> */}
@@ -163,15 +163,18 @@ class Subscribe extends Component {
 										{this.state.showCodeError && t('invalid', NS)}
 									</div>
 
-									{this.state.validated &&
-										<div className="all-set">
-											<h3>{t('done', NS)}</h3>
-											<div>{t('registered', NS)}</div>
-										</div>
-									}
-
 									<button type="button" onClick={this.state.phone && this.state.countryCode ? this.handleSubscriptionSubmit : undefined} className={`subscribe-button${this.state.phone ? '' : ' disabled'}`} id="confirm">{t('submit', NS)}</button>
-								</div>}
+								</div>
+							}
+
+							{this.state.validated &&
+								<div className="subscribe-form">
+									<div className="all-set">
+										<h3>{t('done', NS)}</h3>
+										<div>{t('registered', NS)}</div>
+									</div>
+								</div>
+							}
 
 							{this.state.codeSent && !this.state.validated &&
 								<div className="subscribe-form">
