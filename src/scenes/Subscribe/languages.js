@@ -12,7 +12,12 @@ export default {
 			"sendingCode": "n/a",
 			"done": "n/a",
 			"signUp": "n/a",
-			"submit": "n/a"
+			"submit": "n/a",
+			"howItWorks": "n/a",
+			"step1": "n/a",
+			"step2": "n/a",
+			"step3": "n/a",
+			"step4": "n/a"
 		}
 	},
 	"en": {
@@ -25,15 +30,20 @@ export default {
 			"verify": "n/a",
 			"registered": "n/a",
 			"invalid": "n/a",
-			"sendingCode": "Sending verification code",
+			"sendingCode": "Sending verification code...",
 			"done": "n/a",
-			"signUp": "Sign up to receive updates notifications for {{category}} straight to your cell phone via Whatsapp or SMS!",
-			"submit": "n/a"
+			"signUp": "Sign up to receive updates notifications for {{category}} straight to your cell phone via Whatsapp!",
+			"submit": "n/a",
+			"howItWorks": "n/a",
+			"step1": "Subscribe with your Whasapp account phone number",
+			"step2": "Open WhatsApp in your phone and use the confirmation number to complete the subscription process",
+			"step3": "When we post a new informativo in X Category, you will receive a notification",
+			"step4": "Message back INFO to receive the informativo information and link"
 		}
 	},
 	"es": {
 		"Subscribe": {
-			"title": "Subscribe",
+			"title": "Subscripción",
 			"enterPhone": "Ingrese su número de teléfono",
 			"disclaimer": "Este es un servicio gratuito y solo se aplicarán las tarifas estándar de mensajes de texto. Puede cancelar estas notificaciones en cualquier momento respondiendo STOP a cualquier mensaje",
 			"confirmationSent": "Le hemos enviado un código de confirmación. Por favor ingréselo debajo para verificar su número de teléfono",
@@ -41,10 +51,15 @@ export default {
 			"verify": "Verificar",
 			"registered": "Su número de telefono ha quedado registrado y ahora recibirá notificaciones cuando haya nueva información disponible.",
 			"invalid": "El código ingresado no es válido",
-			"sendingCode": "Enviando código de verificación",
+			"sendingCode": "Enviando código de verificación...",
 			"done": "Listo!",
-			"signUp": "¡Regístrese para recibir notificaciones de actualizaciones para {{category}} directamente a su celular por Whatsapp o SMS!",
-			"submit": "Subscribir"
+			"signUp": "¡Regístrese para recibir notificaciones de actualizaciones para {{category}} directamente a su celular por Whatsapp!",
+			"submit": "Subscribir",
+			"howItWorks": "Cómo funciona",
+			"step1": "Subscribe with your Whasapp account phone number",
+			"step2": "Open WhatsApp in your phone and use the confirmation number to complete the subscription process",
+			"step3": "When we post a new informativo in X Category, you will receive a notification",
+			"step4": "Message back INFO to receive the informativo information and link"
 		}
 	},
 	"fa": {
@@ -60,7 +75,12 @@ export default {
 			"sendingCode": "n/a",
 			"done": "n/a",
 			"signUp": "n/a",
-			"submit": "n/a"
+			"submit": "n/a",
+			"howItWorks": "n/a",
+			"step1": "n/a",
+			"step2": "n/a",
+			"step3": "n/a",
+			"step4": "n/a"
 		}
 	},
 	"fr": {
@@ -76,7 +96,12 @@ export default {
 			"sendingCode": "n/a",
 			"done": "n/a",
 			"signUp": "n/a",
-			"submit": "n/a"
+			"submit": "n/a",
+			"howItWorks": "n/a",
+			"step1": "n/a",
+			"step2": "n/a",
+			"step3": "n/a",
+			"step4": "n/a"
 		}
 	},
 	"ur": {
@@ -92,7 +117,12 @@ export default {
 			"sendingCode": "n/a",
 			"done": "n/a",
 			"signUp": "n/a",
-			"submit": "n/a"
+			"submit": "n/a",
+			"howItWorks": "n/a",
+			"step1": "n/a",
+			"step2": "n/a",
+			"step3": "n/a",
+			"step4": "n/a"
 		}
 	}
 }
