@@ -56,10 +56,10 @@ export default {
 			"signUp": "¡Regístrese para recibir notificaciones de actualizaciones para {{category}} directamente a su celular por Whatsapp!",
 			"submit": "Subscribir",
 			"howItWorks": "Cómo funciona",
-			"step1": "Subscribe with your Whasapp account phone number",
-			"step2": "Open WhatsApp in your phone and use the confirmation number to complete the subscription process",
-			"step3": "When we post a new informativo in X Category, you will receive a notification",
-			"step4": "Message back INFO to receive the informativo information and link"
+			"step1": "Suscríbase con el número de teléfono de su cuenta de Whatsapp",
+			"step2": "Abra WhatsApp en su teléfono y use el código de confirmación para completar el proceso de suscripción",
+			"step3": "Cuando publiquemos un nuevo informativo, recibirá una notificación",
+			"step4": "Al recibir la notificación, responda INFO para obtener información actualizada"
 		}
 	},
 	"fa": {

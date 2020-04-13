@@ -14,10 +14,10 @@ import languages from './languages';
 import "./Subscribe.css";
 
 const NS = { ns: 'Subscribe' };
-const step1 = '/images/subscribe/step-1.png';
-const step2 = '/images/subscribe/step-2.png';
-const step3 = '/images/subscribe/step-3.png';
-const step4 = '/images/subscribe/step-4.png';
+const step1 = '/images/subscribe/step-1.jpeg';
+const step2 = '/images/subscribe/step-2.jpeg';
+const step3 = '/images/subscribe/step-3.jpeg';
+const step4 = '/images/subscribe/step-4.jpeg';
 
 /**
  * @class
