@@ -16,15 +16,6 @@
 		}
 	}
 	
-	.subscription {
-		text-align: center;
-		margin: 20px;
-
-		a {
-			text-decoration: underline;
-		}
-	}
-
 	// hr {
 	// 	padding: 0;
 	// 	margin: auto;
@@ -103,32 +94,27 @@
 		}
 	}
 
-	// .sharePage {
-	// 	padding: 0px;
-	// }
-	// .sharePage > h1 {
-	// 	padding: 0;
-	// 	&:first-child {
-	// 		flex: 1;
-	// 		.ltr & {
-	// 			padding-left: 20px;
-	// 		}
-	// 		.rtl & {
-	// 			padding-right: 20px;
-	// 		}
-	// 	}
-	// }
+	.subscription {
+    text-align: center;
 
-	// .sharePage .icon {
-	// 	margin: 0px 5px 0px 5px;
-
-	// 	.ltr & {
-	// 		margin-right: 20px;
-	// 	}
-	// 	.rtl & {
-	// 		margin-left: 20px;
-	// 	}
-	// }
+    a {
+        @include darken-brand-colors("background-color", 10%);
+        @include brand-colors-inverse( "color");
+        // border: none;
+				border-radius: 5px;
+				display: inline-block;
+        font-size: 13px;
+				margin: 20px 0;
+				width: auto;
+				padding: 20px;
+				text-decoration: none;
+        
+        &:hover {
+            @include brand-colors("background-color");
+            text-decoration: underline;
+        }
+    }
+}
 
 	.up {
 		display: none;

@@ -124,6 +124,11 @@
 		}
 
 		.how-it-works {
+			.title {
+				display: flex;
+				align-items: center;
+			}
+
 			h4 {
 				align-items: center;
 				display: flex;

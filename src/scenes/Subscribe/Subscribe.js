@@ -198,7 +198,10 @@ class Subscribe extends Component {
 							}
 
 							<div className='how-it-works'>
-								<h4 onClick={() => this.toggleHelp()}>{t('howItWorks', NS)}</h4>
+								<div className='title'>
+									<h4 onClick={() => this.toggleHelp()}>{t('howItWorks', NS)}</h4>
+									<i className="material-icons">{this.state.showHelp ? '' : 'keyboard_arrow_right'}</i>
+								</div>
 
 								{this.state.showHelp &&
 									<div className='how-it-works--wrapper'>
