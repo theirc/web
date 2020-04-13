@@ -16,17 +16,6 @@
 		}
 	}
 	
-	// hr {
-	// 	padding: 0;
-	// 	margin: auto;
-	// 	border: 0;
-	// 	border-top-width: 1px;
-	// 	border-top-color: #ddd;
-	// 	border-style: solid;
-	// 	border-radius: 1px;
-	// 	height: 0;
-	// }
-
 	.divider {
 		border-top-color: #ddd;
 		// border-top-color: darken($dividerColor, 20%);
@@ -34,18 +23,6 @@
 	.icon {
 		padding: 0 10px;
 	}
-	// .verticalHR {
-	// 	border-left: 1px black solid;
-	// 	width: 2px;
-	// 	display: block;
-	// 	height: 40px;
-	// 	.ltr & {
-	// 		margin-right: 20px;
-	// 	}
-	// 	.rtl & {
-	// 		margin-left: 20px;
-	// 	}
-	// }
 
 	.page-selector {
 		align-items: center;
