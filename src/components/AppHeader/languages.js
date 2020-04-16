@@ -10,7 +10,8 @@ export default {
 				"Serbia": "لم تعد قائمة الخدمات في صربيا مواكبة لآخر المستجدات.يُرجى الإنتباه إلى أن المعلومات المذكورة هنا تم تحديثها في شهر أيار/مايو من عام 2019 وقد لا تكون مطابقةً لآخر المستجدات.تواصل مع موفري الخدمات بشكل مباشر للحصول على معلومات بشأن الخدمات الحالية وكيفية الحصول عليها.",
 				"Jordan": "تم اخر تحديث لمحتوى خبرونا في أغسطس 2019.",
 				"ElSalvador": "n/a",
-				"Italy": "n/a"
+				"Italy": "n/a",
+				"Greece": "n/a"
 			},
 			"menu": {
 				"Articles": "المقالات ",
@@ -31,7 +32,8 @@ export default {
 				"Serbia": "The service list for Serbia is no longer being updated. Please note that the service information shown here was last updated in May 2019 and may no longer be up-to-date. Contact the service provider directly for information about current services and how to access them.",
 				"Jordan": "Khabrona.info content was last updated in August 2019.",
 				"ElSalvador": "n/a",
-				"Italy": "Information about COVID-19 and government emergency measures >"
+				"Italy": "Information about COVID-19 and government emergency measures >",
+				"Greece": "Information about COVID-19 >"
 			},
 			"menu": {
 				"Articles": "Articles",
@@ -52,7 +54,8 @@ export default {
 				"Serbia": "The service list for Serbia is no longer being updated. Please note that the service information shown here was last updated in May 2019 and may no longer be up-to-date. Contact the service provider directly for information about current services and how to access them.",
 				"Jordan": "n/a",
 				"ElSalvador": "Información sobre la emergencia por COVID-19 >",
-				"Italy": "n/a"
+				"Italy": "n/a",
+				"Greece": "n/a"
 			},
 			"menu": {
 				"Articles": "Informativos",
@@ -73,7 +76,8 @@ export default {
 				"Serbia": "فهرست خدمات برای صربستان دیگر به روز نمی‌شود.لطفن توجه داشته باشید که اطلاعات خدماتی که در اینجا نمایش داده شده،‌آخرین بار در ماه می 2019 به‌روز شده بوده و ممکن است که دیگر به‌روز نشود.برای دریافت اطلاعات در مورد خدماتی که در حال حاضر ارائه می‌شود و نحوه‌ی دسترسی به آن‌ها، با ارائه‌دهنده‌ی این خدمات تماس بگیرید.",
 				"Jordan": "n/a",
 				"ElSalvador": "n/a",
-				"Italy": "n/a"
+				"Italy": "n/a",
+				"Greece": "n/a"
 			},
 			"menu": {
 				"Articles": "مقاله‌ها",
@@ -94,7 +98,8 @@ export default {
 				"Serbia": "The service list for Serbia is no longer being updated. Please note that the service information shown here was last updated in May 2019 and may no longer be up-to-date. Contact the service provider directly for information about current services and how to access them.",
 				"Jordan": "n/a",
 				"ElSalvador": "n/a",
-				"Italy": "n/a"
+				"Italy": "n/a",
+				"Greece": "n/a"
 			},
 			"menu": {
 				"Articles": "Articles",
@@ -115,7 +120,8 @@ export default {
 				"Serbia": "سربیا کے لئے خدمات کی فہرست کو اپ ڈیٹ نہیں کیا جا رہا ہے۔براہِ مہربانی نوٹ فرمائیں کہ جو خدماتی معلومات یہاں پر دکھائی جا رہی ہیں یہ آخری دفعہ مئی 2019 میں اپ ڈیٹ ہوئی تھیں اور ہو سکتا ہے کہ یہ اپ ٹو ڈیٹ نہ ہوں۔ خدمات فراہم کرنےوالوں سے موجودہ خدمات اور ان تک کیسے رسائی ممکن ہے کی معلومات کے متعلق براہ راست ان سے خود رابطہ کریں۔",
 				"Jordan": "n/a",
 				"ElSalvador": "n/a",
-				"Italy": "n/a"
+				"Italy": "n/a",
+				"Greece": "n/a"
 			},
 			"menu": {
 				"Articles": "مضامین",

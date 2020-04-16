@@ -116,6 +116,7 @@ class AppHeader extends Component {
 		let covidLinkCnEs = '/el-salvador/emergencia-por-coronavirus';
 		let covidLinkCnHn = '/honduras/alertas';
 		let covidLinkRiIt = '/italy/coronavirus-emergency';
+		let covidLinkRiGr = '/greece/coronavirus-emergency-in-greece';
 
 		let selectedIndex = selectedMenuItem();
 		let path = window.location.pathname;
@@ -220,6 +221,10 @@ class AppHeader extends Component {
 
 				{window.location.href.endsWith('/italy') &&
 					<Alert link={covidLinkRiIt} message={t('banner.Italy', NS)} fontColor='black'/>
+				}
+
+				{window.location.href.endsWith('/greece') &&
+					<Alert link={covidLinkRiGr} message={t('banner.Greece', NS)} fontColor='black'/>
 				}
 
 			</div>
