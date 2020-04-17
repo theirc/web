@@ -198,12 +198,9 @@
 
 						.circle {
 							align-items: center;
-							@include brand-colors("background-color");
-							@include brand-colors-inverse("color");
-							border: 1px solid;
-							border-radius: 50px;
+							@include brand-colors("color");
 							display: flex;
-							font-size: 40px;
+							font-size: 70px;
 							font-weight: bold;
 							justify-content: center;
 							margin-bottom: 25px;
