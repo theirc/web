@@ -8,6 +8,8 @@ import { translate } from "react-i18next";
 // local
 import "./ArticleDetailFooter.css";
 
+const NS = { ns: 'ArticleDetail' };
+
 /**
  * @class
  * @description 
@@ -62,36 +64,36 @@ class ArticleDetailFooter extends Component {
 		}, 3000);
 	}
 
-	subscribe(article) {
-		const { onNavigateTo, category } = this.props;
-		onNavigateTo(`../subscribe/${category.fields.slug}`);
-	}
-
 	render() {
-		const { previous, next, onNavigateTo, direction } = this.props;
+		const { category, country, previous, next, onNavigateTo, direction, t } = this.props;
 		const rtl = direction === "rtl";
-
+		
 		return ((previous || next) &&
-			<div className="ArticleDetailFooter">
-				{previous && (
-					<div className="page-selector prev" onClick={() => onNavigateTo(previous.fields.slug)}>
-						{!rtl ? <NavigateBefore className="icon" /> : <NavigateNext className="icon" />}
+		<div className="ArticleDetailFooter">
+				<div className='nav'>
+					{previous && (
+						<div className="page-selector prev" onClick={() => onNavigateTo(previous.fields.slug)}>
+							{!rtl ? <NavigateBefore className="icon" /> : <NavigateNext className="icon" />}
 
-						<div className='caption'>
-							<h1>{previous.fields.title}</h1>
+							<div className='caption'>
+								<h1>{previous.fields.title}</h1>
+							</div>
 						</div>
-					</div>
-				)}
+					)}
 
-				{next && (
-					<div className="page-selector next" onClick={() => onNavigateTo(next.fields.slug)}>
-						<div className='caption'>
-							<h1>{next.fields.title}</h1>
+					{next && (
+						<div className="page-selector next" onClick={() => onNavigateTo(next.fields.slug)}>
+							<div className='caption'>
+								<h1>{next.fields.title}</h1>
+							</div>
+
+							{!rtl ? <NavigateNext className="icon" /> : <NavigateBefore className="icon" />}
 						</div>
-
-						{!rtl ? <NavigateNext className="icon" /> : <NavigateBefore className="icon" />}
-					</div>
-				)}
+					)}
+				</div>
+				{category.fields.slug === 'emergencia-por-coronavirus' &&
+					<div className='subscription'><a href={`/${country.fields.slug}/subscribe/${category.fields.slug}`}>{t('subscribe', NS)}</a></div>
+				}
 			</div>
 		);
 	}
