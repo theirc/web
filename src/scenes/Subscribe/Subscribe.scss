@@ -22,6 +22,10 @@
 		padding-left: 16px;
 		padding-right: 16px;
 
+		.subtitle {
+			font-size: 15px;
+		}
+
 		.subscribe-form {
 			background-color: #f0f0f0;
 			border: 1px solid #ddd;
@@ -29,7 +33,7 @@
 			color: #5e5e5e;
 			min-height: 214px;
 			max-width: 500px;
-			margin: 20px auto 50px;
+			margin: 50px auto;
 			padding: 10px;
 			text-align: center;
 
@@ -124,9 +128,16 @@
 		}
 
 		.how-it-works {
+			background-color: #f0f0f0;
+			border: 1px solid #ddd;
+			border-radius: 5px;
+			margin-bottom: 20px;
+			padding: 10px;
+
 			.title {
 				display: flex;
 				align-items: center;
+				padding-left: 15px;
 			}
 
 			h4 {

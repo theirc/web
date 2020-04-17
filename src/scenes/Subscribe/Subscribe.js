@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
-import { Interpolate, translate } from "react-i18next";
+import { translate } from "react-i18next";
 import { connect } from "react-redux";
 
 // local
@@ -109,7 +109,7 @@ class Subscribe extends Component {
 	}
 
 	handleVerificationSubmit() {
-		console.log("Submit code");
+		// console.log("Submit code");
 		const phone = '+' + this.state.countryCode + this.state.phone;
 		const options = {
 			method: 'POST',
@@ -130,7 +130,7 @@ class Subscribe extends Component {
 
 	render() {
 		const { category, t } = this.props;
-		console.log("state:", this.state);
+		// console.log("state:", this.state);
 
 		return (
 			<Skeleton headerColor='light'>
@@ -140,10 +140,10 @@ class Subscribe extends Component {
 							<title>{t('title', NS)}</title>
 						</Helmet>
 
-						<HeaderBar subtitle={'Subscribe your phone number'} title={t('title', NS)} />
+						<HeaderBar title={t('title', NS)} />
 
 						<div className="Subscribe-content">
-							<p>{t('Subscribe:signUp', { category: category && category.fields.name })}</p>
+							<p className="subtitle" dangerouslySetInnerHTML={{ __html: t('Subscribe:signUp', { category: category && category.fields.name }) }}></p>
 
 							{!this.state.codeSent &&
 								<div className="subscribe-form">
@@ -210,28 +210,28 @@ class Subscribe extends Component {
 												<div className="circle">1</div>
 												<div className="text">{t('step1', NS)}</div>
 											</div>
-											<div className='step--image'><img src={step1} /></div>
+											<div className='step--image'><img src={step1} alt='step-1' /></div>
 										</div>
 										<div className="step">
 											<div className='step--text'>
 												<div className="circle">2</div>
 												<div className="text">{t('step2', NS)}</div>
 											</div>
-											<div className='step--image'><img src={step2} /></div>
+											<div className='step--image'><img src={step2} alt='step-2' /></div>
 										</div>
 										<div className="step">
 											<div className='step--text'>
 												<div className="circle">3</div>
 												<div className="text">{t('step3', NS)}</div>
 											</div>
-											<div className='step--image'><img src={step3} /></div>
+											<div className='step--image'><img src={step3} alt='step-3' /></div>
 										</div>
 										<div className="step">
 											<div className='step--text'>
 												<div className="circle">4</div>
 												<div className="text">{t('step4', NS)}</div>
 											</div>
-											<div className='step--image'><img src={step4} /></div>
+											<div className='step--image'><img src={step4} alt='step-4' /></div>
 										</div>
 									</div>
 								}

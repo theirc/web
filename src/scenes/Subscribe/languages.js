@@ -43,9 +43,9 @@ export default {
 	},
 	"es": {
 		"Subscribe": {
-			"title": "Subscripción",
+			"title": "Subscripción a notificaciones de CuéntaNos",
 			"enterPhone": "Ingrese su número de teléfono",
-			"disclaimer": "Este es un servicio gratuito y solo se aplicarán las tarifas estándar de mensajes de texto. Puede cancelar estas notificaciones en cualquier momento respondiendo STOP a cualquier mensaje",
+			"disclaimer": "Este es un servicio gratuito y solo se aplicarán las tarifas estándar de datos para utilizar WhatsApp. Puede cancelar estas notificaciones en cualquier momento respondiendo STOP a cualquier mensaje.",
 			"confirmationSent": "Le hemos enviado un código de confirmación. Por favor ingréselo debajo para verificar su número de teléfono",
 			"phoneExists": "El número ingresado ya tiene una subscripción activa para esta categoría",
 			"verify": "Verificar",
@@ -53,9 +53,9 @@ export default {
 			"invalid": "El código ingresado no es válido",
 			"sendingCode": "Enviando código de verificación...",
 			"done": "Listo!",
-			"signUp": "¡Regístrese para recibir notificaciones de actualizaciones para {{category}} directamente a su celular por Whatsapp!",
+			"signUp": "¡Regístrese para recibir notificaciones de actualizaciones para <strong>{{category}}</strong> directamente a su celular por Whatsapp!",
 			"submit": "Subscribir",
-			"howItWorks": "Cómo funciona",
+			"howItWorks": "¿Cómo funciona?",
 			"step1": "Suscríbase con el número de teléfono de su cuenta de Whatsapp",
 			"step2": "Abra WhatsApp en su teléfono y use el código de confirmación para completar el proceso de suscripción",
 			"step3": "Cuando publiquemos un nuevo informativo, recibirá una notificación",
