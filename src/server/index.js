@@ -68,7 +68,7 @@ var mainRequest = function (context) {
 		context = Object.assign(context || {}, { appId: appId });
 
 		context.title = instance.brand.tabTitle;
-		context.image = instance.brand.images.thumbnail;
+		context.image = context.image ? context.image : instance.brand.images.thumbnail;
 		console.log(context);
 
 		fs.readFile(path.join(path.dirname(path.dirname(__dirname)), "build", "index.html"), (err, data) => {
