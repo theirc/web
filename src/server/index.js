@@ -69,7 +69,7 @@ var mainRequest = function (context) {
 
 		context.title = instance.brand.tabTitle;
 		context.image = context.image ? context.image : instance.brand.images.thumbnail;
-		console.log(context);
+		console.log('mainRequest');
 
 		fs.readFile(path.join(path.dirname(path.dirname(__dirname)), "build", "index.html"), (err, data) => {
 			if (err) throw err;
@@ -163,6 +163,8 @@ app.get("/bulgaria/*", function (req, res, err) {
 require('./twilio-routes.js')(app);
 
 app.get("/preview/:serviceId/", function (req, res, err) {
+	console.log('Service Details Preview');
+
 	const selectedLanguage = parseLanguage(req);
 	const {
 		serviceId
@@ -184,6 +186,7 @@ app.get("/preview/:serviceId/", function (req, res, err) {
 
 app.get("/:country/services/:serviceId/", function (req, res, err) {
 	const selectedLanguage = parseLanguage(req);
+	console.log('Service Details');
 	const {
 		country,
 		serviceId
@@ -204,9 +207,10 @@ app.get("/:country/services/:serviceId/", function (req, res, err) {
 						image: s.image,
 					})(req, res, err);
 				})
-				.catch(e => mainRequest({})(req, res, err));
+				.catch(e => {console.log('catch', e);return mainRequest({})(req, res, err)});
 		});
 	} catch (e) {
+		console.log(e);
 		mainRequest({
 			description: e.toString(),
 			image: ""
@@ -215,6 +219,8 @@ app.get("/:country/services/:serviceId/", function (req, res, err) {
 });
 
 app.get("/:country/services/", function (req, res, err) {
+	console.log('Service List');
+
 	const selectedLanguage = parseLanguage(req);
 	const {
 		country,
@@ -249,6 +255,8 @@ app.get('/:country/subscribe/:category', function(req, res, err){
 })
 
 app.get("/:country/:category/:article", function(req, res, err) {
+		console.log('Article Details');
+
 		initInstance(req.headers.host);
 
 		const selectedLanguage = parseLanguage(req);

@@ -177,10 +177,12 @@ module.exports = {
 	},
 
 	fetchServiceById(language, serviceId) {
+		console.log('fetchServiceById', BACKEND_URL);
 		return new Promise((resolve, reject) => {
-			let list = sessionStorage[`offline-services`] !== undefined ? JSON.parse(sessionStorage[`offline-services`]) : null;
+			const sessionStorage = getSessionStorage();
+			let list = (sessionStorage && sessionStorage[`offline-services`] !== undefined) ? JSON.parse(sessionStorage[`offline-services`]) : null;
 
-			if (!navigator.onLine && list && list.filter(s => { return s.id === serviceId }).length > 0) {
+			if (typeof window !== 'undefined' && !window.navigator.onLine && list && list.filter(s => { return s.id === serviceId }).length > 0) {
 				let service = list.services.results.filter(c => { return c.id === serviceId });
 				resolve(_.first(service));
 			} else {
