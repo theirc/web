@@ -3,31 +3,48 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
 import { translate } from "react-i18next";
+import { connect } from "react-redux";
 
 // local
 import HeaderBar from "../../components/HeaderBar/HeaderBar";
 import { Skeleton } from "..";
+import i18nHelpers from '../../helpers/i18n';
+import languages from './languages';
+
 import "./Subscribe.css";
+
+const NS = { ns: 'Subscribe' };
+const step1 = '/images/subscribe/step-1.jpeg';
+const step2 = '/images/subscribe/step-2.jpeg';
+const step3 = '/images/subscribe/step-3.jpeg';
+const step4 = '/images/subscribe/step-4.jpeg';
 
 /**
  * @class
  * @description 
  */
-class Suscribe extends Component {
+class Subscribe extends Component {
 
 	constructor(props) {
 		super(props);
-		this.handleChange = this.handleChange.bind(this);
-		this.handleChangeCode = this.handleChangeCode.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
-		this.handleSubmitCode = this.handleSubmitCode.bind(this);
+		this.handlePhoneChange = this.handlePhoneChange.bind(this);
+		this.handleCountryCodeChange = this.handleCountryCodeChange.bind(this);
+		this.handleVerificationChange = this.handleVerificationChange.bind(this);
+		this.handleSubscriptionSubmit = this.handleSubscriptionSubmit.bind(this);
+		this.handleVerificationSubmit = this.handleVerificationSubmit.bind(this);
+		i18nHelpers.loadResource(languages, NS.ns);
 	}
 
 	state = {
 		phone: '',
+		countryCode: 503,
 		codeSent: false,
 		code: '',
 		validated: false,
+		sendingCode: false,
+		showCodeError: false,
+		showHelp: false,
+		showPhoneError: false,
 	}
 
 	static propTypes = {
@@ -48,88 +65,178 @@ class Suscribe extends Component {
 		config: PropTypes.object,
 	};
 
-	handleChange(event) {
-		this.setState({ phone: event.target.value })
+	toggleHelp() {
+		this.setState({ showHelp: !this.state.showHelp })
 	}
 
-	handleChangeCode(event) {
+	handlePhoneChange(phone) {
+		const digits = Number.isNaN(parseInt(phone.target.value, 10)) ? '' : parseInt(phone.target.value, 10);
+		this.setState({ phone: digits });
+	}
+
+	handleCountryCodeChange(countryCode) {
+		const digits = Number.isNaN(parseInt(countryCode.target.value, 10)) ? '' : parseInt(countryCode.target.value, 10);
+		this.setState({ countryCode: digits });
+	}
+
+	handleVerificationChange(event) {
 		this.setState({ code: event.target.value })
 	}
 
-	handleSubmit() {
-	
+	handleSubscriptionSubmit() {
+		this.setState({ sendingCode: true });
+
+		const phone = '+' + this.state.countryCode + this.state.phone;
 		const options = {
 			method: 'POST',
 			headers: {
 				'Accept': 'application/json',
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({phone: this.state.phone, categoryId: this.props.category.fields.slug, code: 0, active: false})
+			body: JSON.stringify({ phone, categorySlug: this.props.category.fields.slug })
 		}
-		fetch("https://admin-qa.cuentanos.org/v2/add-subscription/", options).then(response => {
-			console.log(response)
-		});
-	
-		this.setState({ codeSent: true });
+		fetch("https://signpost-crm-staging.azurewebsites.net/api/subscriptions/add-subscription", options).then(s => {
+			this.setState({ sendingCode: false });
+			if (s.status === 200) {
+				this.setState({ codeSent: true });
+				return s.json();
+			} else {
+				this.setState({ showPhoneError: true });
+			}
+
+		}).then(s => console.log(s));
+
 	}
 
-	
-
-	handleSubmitCode() {
-		console.log("Submit code");
-		this.setState({ validated: true });
+	handleVerificationSubmit() {
+		// console.log("Submit code");
+		const phone = '+' + this.state.countryCode + this.state.phone;
+		const options = {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ phone, code: this.state.code })
+		}
+		fetch("https://signpost-crm-staging.azurewebsites.net/api/subscriptions/verify-code", options).then((s) => {
+			if (s.status === 200) {
+				this.setState({ validated: true, showCodeError: false });
+			} else {
+				this.setState({ validated: false, showCodeError: true });
+			}
+		});
 	}
 
 	render() {
-		const title = "Subscribe";
-		const { category } = this.props;
-		
+		const { category, t } = this.props;
+		// console.log("state:", this.state);
+
 		return (
 			<Skeleton headerColor='light'>
 				<div className="SkeletonContainer">
-					<div ref={r => (this._ref = r)} className={"Subscribe"}>
+					<div ref={r => (this._ref = r)} className="Subscribe">
 						<Helmet>
-							<title>{title}</title>
+							<title>{t('title', NS)}</title>
 						</Helmet>
 
-						<HeaderBar subtitle={'Subscribe your phone number'} title={title} />
+						<HeaderBar title={t('title', NS)} />
 
 						<div className="Subscribe-content">
-							<h4>Sign up to receive updates notifications for '{category.fields.name}'' straight to your cell phone via Whatsapp or SMS!
-							</h4>
-							<h5>
-								This is a free service and only your standard text message rates will apply.
-									You can end these notifications at any time by replying "STOP" to any message
-							</h5>
+							<p className="subtitle" dangerouslySetInnerHTML={{ __html: t('Subscribe:signUp', { category: category && category.fields.name }) }}></p>
 
-							{!this.state.codeSent && !this.validated &&
+							{!this.state.codeSent &&
 								<div className="subscribe-form">
-									<label>Enter your phone number</label><br></br>
-									<input type="text" onChange={this.handleChange} className="subscribe-input" id="phoneNumber" value={this.state.phone} /><br></br>
+									<div className='label'>{!this.state.sendingCode ? <strong>{t('enterPhone', NS)}</strong> : t('sendingCode', NS)}</div>
 
-									<button type="button" onClick={this.handleSubmit} className="subscribe-button" id="confirm">Submit</button>
-								</div>}
+									<div id='phone-wrapper'>
+										<label>+</label>
+										<input id='country-code' className='subscribe-input' maxLength='3'
+											onChange={countryCode => this.handleCountryCodeChange(countryCode)}
+											value={this.state.countryCode}
+										/>
+										<input id='phone-number' className='subscribe-input' maxLength='11'
+											onChange={phone => this.handlePhoneChange(phone)}
+											value={this.state.phone}
+										/>
+									</div>
+
+									<div className='warning'>
+										{this.state.showPhoneError && t('phoneExists', NS)}
+										{this.state.showCodeError && t('invalid', NS)}
+									</div>
+
+
+									<button type="button" onClick={this.state.phone && this.state.countryCode ? this.handleSubscriptionSubmit : undefined}
+										className={`subscribe-button${this.state.phone && !this.state.sendingCode ? '' : ' disabled'}`} id="confirm">
+										{t('submit', NS)}
+									</button>
+									<p>{t('disclaimer', NS)}</p>
+								</div>
+							}
+
+							{this.state.validated &&
+								<div className="subscribe-form">
+									<div className="all-set">
+										<h3>{t('done', NS)}</h3>
+										<div>{t('registered', NS)}</div>
+									</div>
+									<p>{t('disclaimer', NS)}</p>
+								</div>
+							}
 
 							{this.state.codeSent && !this.state.validated &&
 								<div className="subscribe-form">
-									<label>Le hemos enviado un código de confirmación. Por favor ingréselo debajo para verificar su número</label><br></br>
-									<input type="text" onChange={this.handleChangeCode} className="subscribe-input" id="code" value={this.state.code} /><br></br>
-									<button type="button" onClick={this.handleSubmitCode} className="subscribe-button" id="confirm">Verify</button>
+									<div className='label'>{t('confirmationSent', NS)}</div>
+									<div><input type="text" onChange={this.handleVerificationChange} className="verify-input" id="code" value={this.state.code} maxLength={4} /></div>
+
+									<div className='warning'>{this.state.showCodeError && t('invalid', NS)}</div>
+
+									<button type="button" onClick={this.state.code ? this.handleVerificationSubmit : undefined} className={`subscribe-button${this.state.code ? '' : ' disabled'}`} id="confirm">{t('verify', NS)}</button>
+									<p>{t('disclaimer', NS)}</p>
 								</div>
 							}
-							{this.state.validated &&
-								<div className="all-set">
-									<h3>
-										Listo!
-							</h3>
-									<h4>
-										Su número de telefono ha quedado registrado y ahora recibirás notificaciones cuando haya nueva información disponible.
-							</h4>
-								</div>}
 
+							<div className='how-it-works'>
+								<div className='title'>
+									<h4 onClick={() => this.toggleHelp()}>{t('howItWorks', NS)}</h4>
+									<i className="material-icons">{this.state.showHelp ? '' : 'keyboard_arrow_right'}</i>
+								</div>
+
+								{this.state.showHelp &&
+									<div className='how-it-works--wrapper'>
+										<div className="step">
+											<div className='step--text'>
+												<div className="circle">1</div>
+												<div className="text">{t('step1', NS)}</div>
+											</div>
+											<div className='step--image'><img src={step1} alt='step-1' /></div>
+										</div>
+										<div className="step">
+											<div className='step--text'>
+												<div className="circle">2</div>
+												<div className="text">{t('step2', NS)}</div>
+											</div>
+											<div className='step--image'><img src={step2} alt='step-2' /></div>
+										</div>
+										<div className="step">
+											<div className='step--text'>
+												<div className="circle">3</div>
+												<div className="text">{t('step3', NS)}</div>
+											</div>
+											<div className='step--image'><img src={step3} alt='step-3' /></div>
+										</div>
+										<div className="step">
+											<div className='step--text'>
+												<div className="circle">4</div>
+												<div className="text">{t('step4', NS)}</div>
+											</div>
+											<div className='step--image'><img src={step4} alt='step-4' /></div>
+										</div>
+									</div>
+								}
+							</div>
 						</div>
-
-
 					</div>
 				</div>
 			</Skeleton>
@@ -137,4 +244,7 @@ class Suscribe extends Component {
 	}
 }
 
-export default translate()(Suscribe);
+const mapState = ({ country, language }, p) => ({ language, country });
+
+export default connect(mapState)(translate()(Subscribe));
+
