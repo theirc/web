@@ -70,6 +70,12 @@ class ArticleDetailFooter extends Component {
 		
 		return ((previous || next) &&
 		<div className="ArticleDetailFooter">
+				{category.fields.slug === 'emergencia-por-coronavirus' &&
+					<div className='subscription'>
+						{t('subscribe-title', NS)}
+						<a href={`/${country.fields.slug}/subscribe/${category.fields.slug}`}>{t('subscribe', NS)}</a>
+					</div>
+				}
 				<div className='nav'>
 					{previous && (
 						<div className="page-selector prev" onClick={() => onNavigateTo(previous.fields.slug)}>
@@ -91,9 +97,6 @@ class ArticleDetailFooter extends Component {
 						</div>
 					)}
 				</div>
-				{category.fields.slug === 'emergencia-por-coronavirus' &&
-					<div className='subscription'><a href={`/${country.fields.slug}/subscribe/${category.fields.slug}`}>{t('subscribe', NS)}</a></div>
-				}
 			</div>
 		);
 	}
