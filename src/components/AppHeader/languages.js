@@ -6,7 +6,7 @@ export default {
 					"Articles": "لم يعد محتوى موقع دليل اللاجئ في اليونان (Refugee.Info) مُحدثاً.\nتم تحديث جميع المقالات حول اليونان الموجودة على موقع دليل اللاجئ في شهر آب/أغسطس عام 2019.\nقد لا تكون بعض المعلومات الموجودة هنا حديثة وربما طرأت تغييرات كبيرة على الإجراءات والخطوات المهمة.\nقبل إتخاذ أي إجراء ننصحكم بالتأكد من المعلومات المتوفرة هنا مع محامٍ أو منظمة قانونية.",
 					"Home": "لم يعد محتوى موقع دليل اللاجئ في اليونان (Refugee.Info) مُحدثاً.",
 					"Services": "لم تعد قائمة الخدمات المتوفرة في اليونان\nيُرجى ملاحظة أن المعلومات الخاصة بالخدمات المذكورة هنا جرى تحديثها في شهر تموز/ يوليو عام 2019 وقد لا تكون مواكبة لآخر التطورات بعد الآن.\nللحصول على معلومات حول الخدمات المتوفرة حالياً وكيفية الحصول عليها ننصحكم دائماً بالتواصل مع الجهة المُقدمة لهذه الخدمات بشكل مباشر.",
-					"Covid": "n/a"
+					"Covid": "معلومات حول فايروس كورونا المستجد و التدابير الحكومية الطارئة."
 				},
 				"Serbia": "لم تعد قائمة الخدمات في صربيا مواكبة لآخر المستجدات.يُرجى الإنتباه إلى أن المعلومات المذكورة هنا تم تحديثها في شهر أيار/مايو من عام 2019 وقد لا تكون مطابقةً لآخر المستجدات.تواصل مع موفري الخدمات بشكل مباشر للحصول على معلومات بشأن الخدمات الحالية وكيفية الحصول عليها.",
 				"Jordan": "تم اخر تحديث لمحتوى خبرونا في أغسطس 2019.",
@@ -72,7 +72,7 @@ export default {
 					"Articles": "محتوای وبسایت راهنمای پناهندگان برای یونان از این به بعد به‌روزرسانی نخواهد شد.\nتمام مطالبی مربوط به یونان که روی وبسایت راهنمای پناهندگان موجود است آخرین بار در آگوست 2019 به‌روزرسانی شده است.\nبرخی از اطلاعاتی که شما اینجا به آنها دسترسی دارید ممکن است به روزرسانی نشده و ممکن است روندها و رویه‌های به‌شدت تغییر کرده باشند.\nما به شما پیشنهاد می‌کنیم که قبل از اینکه هر اقدامی انجام دهید، اطلاعات موجود در اینجا را با یک وکیل یا یک NGO حقوقی چک کنید.",
 					"Home": "محتوای وبسایت راهنمای پناهندگان برای یونان از این به بعد به‌روزرسانی نخواهد شد.",
 					"Services": "فهرست خدمات یونان از این به بعد به‌روزرسانی نخواهد شد.\nلطفا توجه داشته باشید که اطلاعاتی که اینجا نمایش داده می‌شود آخرین بار در جولای 2019 به‌روزرسانی شده و بعد از این به روز نخواهد شد.\nما به شما توصیه می‌کنیم که مستقیما با خود ارائه‌کنندگان خدمات تماس بگیرید تا درباره‌ی خدمات موجود آنها و نحوه‌ی دسترسی به آن خدمات اطلاعات کسب کنید.",
-					"Covid": "n/a"
+					"Covid": "اطلاعات درباره COVID-19 و اقدامات اضطراری دولت¨"
 				},
 				"Serbia": "فهرست خدمات برای صربستان دیگر به روز نمی‌شود.لطفن توجه داشته باشید که اطلاعات خدماتی که در اینجا نمایش داده شده،‌آخرین بار در ماه می 2019 به‌روز شده بوده و ممکن است که دیگر به‌روز نشود.برای دریافت اطلاعات در مورد خدماتی که در حال حاضر ارائه می‌شود و نحوه‌ی دسترسی به آن‌ها، با ارائه‌دهنده‌ی این خدمات تماس بگیرید.",
 				"Jordan": "n/a",
@@ -94,7 +94,7 @@ export default {
 					"Articles": "Le contenu de Refugee.Info Grèce n’est plus mis à jour.\nTous les articles sur la Grèce disponibles sur le site internet Refugee.Info ont été mis à jour pour la dernière fois en août 2019.\nCertaines des informations que vous trouverez ici risquent de ne plus être à jour et des procédures et processus importants peuvent avoir changé de manière significative.\nAvant d’entreprendre des démarches, nous vous suggérons de vérifier les informations disponibles ici avec un avocat ou une ONG juridique.",
 					"Home": "Le contenu de Refugee.Info Grèce n’est plus mis à jour.",
 					"Services": "La liste des services pour la Grèce n’est plus mise à jour.\nVeuillez noter que les informations sur les services présentées ici ont été mises à jour pour la dernière fois en juillet 2019 et peuvent ne plus être à jour.\nNous vous conseillons de toujours contacter directement le fournisseur de services pour obtenir des informations sur les services actuels et sur la façon d'y accéder.",
-					"Covid": "n/a"
+					"Covid": "Informations sur COVID-19 et mesures d'urgence gouvernementales"
 				},
 				"Serbia": "The service list for Serbia is no longer being updated. Please note that the service information shown here was last updated in May 2019 and may no longer be up-to-date. Contact the service provider directly for information about current services and how to access them.",
 				"Jordan": "n/a",
