@@ -109,7 +109,7 @@ class AppHeader extends Component {
 		const privacyPolicyLink = <a href="/greece/privacy/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>;
 
 		let isOnServices = window.location.href.includes("/services");
-		let isOnArticlesGreece = window.location.href.includes("/categories") || /(\/greece\/.*\/.*)/.test(window.location.href);
+		let isOnArticlesGreece = window.location.href.includes("/categories") || /(\/greece\/.*(\/.)*)/.test(window.location.href);
 
 		let disclaimersLink = `/greece/refugee-info-greece-closed/refugee-info-stops-operating-in-greece?language=${language}`;
 		disclaimersLink = window.location.href.includes(disclaimersLink) ? '#' : disclaimersLink;
@@ -200,11 +200,14 @@ class AppHeader extends Component {
 				)}
 
 				{(isOnServices || isOnArticlesGreece) && window.location.href.includes('/greece/') &&
-					<Alert link={disclaimersLink} message={isOnServices ? t("banner.Greece.Services", NS) : t('banner.Greece.Articles', NS)} />
+					<Alert
+						link={covidLinkRiGr}
+						message={isOnServices ? t("banner.Greece.Services", NS) : t('banner.Greece.Articles', NS)}
+					/>
 				}
 
 				{!(isOnServices || isOnArticlesGreece) && window.location.href.includes('/greece') &&
-					<Alert link={disclaimersLink} message={t('banner.Greece.Home', NS)} />
+					<Alert link={covidLinkRiGr} message={t('banner.Greece.Home', NS)} />
 				}
 
 				{window.location.href.includes('/jordan') &&
