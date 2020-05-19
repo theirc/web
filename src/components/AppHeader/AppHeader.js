@@ -202,6 +202,7 @@ class AppHeader extends Component {
 				{(isOnServices || isOnArticlesGreece) && window.location.href.includes('/greece/') &&
 					<Alert
 						link={covidLinkRiGr}
+						header={isOnServices ? t('banner.Greece.ServicesHeader', NS) : t('banner.Greece.ArticlesHeader', NS)}
 						message={isOnServices ? t("banner.Greece.Services", NS) : t('banner.Greece.Articles', NS)}
 					/>
 				}
