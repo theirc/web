@@ -51,6 +51,8 @@ function cmsApi(contentfulConfig = null) {
 						}
 
 						try {
+							// remove unused session items
+							instance.languages.map(i => sessionStorage.removeItem(`${i[0]}-${slug}`));
 							sessionStorage[`${language}-${slug}`] = toStore;
 						} catch (e) {
 							console.log('Session storage is full. Request not cached.');

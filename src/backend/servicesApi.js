@@ -40,9 +40,11 @@ module.exports = {
 						}
 
 						try {
+							// remove unused session items
+							instance.languages.map(i => sessionStorage.removeItem(`${i[0]}-regions`));
 							sessionStorage[`${language}-regions`] = JSON.stringify(res.body);
 						} catch (e) {
-							console.log('Session storage is full. Request not cached.');
+							console.log('Session storage is full. Regions Request not cached.');
 						}
 
 						resolve(res.body);
@@ -67,9 +69,11 @@ module.exports = {
 						}
 
 						try {
+							// remove unused session items
+							instance.languages.map(i => sessionStorage.removeItem(`${i[0]}-countries`));
 							sessionStorage[`${language}-countries`] = JSON.stringify(res.body);
 						} catch (e) {
-							console.log('Session storage is full. Request not cached.');
+							console.log('Session storage is full. Countries Request not cached.');
 						}
 						
 						resolve(res.body);
@@ -113,7 +117,7 @@ module.exports = {
 			filter = region.level === 3 ? "with-parents" : "relatives";
 		}
 
-		return new Promise((resolve, reject) => {
+			return new Promise((resolve, reject) => {
 			let sl = sessionStorage[`serviceList`] !== undefined ? JSON.parse(sessionStorage[`serviceList`]) : null;
 
 			if (sl && sl.country === country && sl.language === language && sl.categoryId === categoryId && (sl.searchTerm === null || sl.searchTerm === undefined)) {
