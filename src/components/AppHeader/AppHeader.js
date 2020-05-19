@@ -108,11 +108,11 @@ class AppHeader extends Component {
 		const cookiePolicyLink = <a href="/greece/privacy/cookies" target="_blank" rel="noopener noreferrer">Cookie Policy</a>;
 		const privacyPolicyLink = <a href="/greece/privacy/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>;
 
-		// let isOnServices = window.location.href.includes("/services");
-		// let isOnArticlesGreece = window.location.href.includes("/categories") || /(\/greece\/.*\/.*)/.test(window.location.href);
+		let isOnServices = window.location.href.includes("/services");
+		let isOnArticlesGreece = window.location.href.includes("/categories") || /(\/greece\/.*(\/.)*)/.test(window.location.href);
 
-		// let disclaimersLink = `/greece/refugee-info-greece-closed/refugee-info-stops-operating-in-greece?language=${language}`;
-		// disclaimersLink = window.location.href.includes(disclaimersLink) ? '#' : disclaimersLink;
+		let disclaimersLink = `/greece/refugee-info-greece-closed/refugee-info-stops-operating-in-greece?language=${language}`;
+		disclaimersLink = window.location.href.includes(disclaimersLink) ? '#' : disclaimersLink;
 		let covidLinkCnEs = '/el-salvador/emergencia-por-coronavirus';
 		let covidLinkCnHn = '/honduras/alertas';
 		let covidLinkRiIt = '/italy/coronavirus-emergency';
@@ -199,13 +199,17 @@ class AppHeader extends Component {
 					</div>
 				)}
 
-				{/* {(isOnServices || isOnArticlesGreece) && window.location.href.includes('/greece/') &&
-					<Alert link={disclaimersLink} message={isOnServices ? t("banner.Greece.Services", NS) : t('banner.Greece.Articles', NS)} />
-				} */}
+				{(isOnServices || isOnArticlesGreece) && window.location.href.includes('/greece/') &&
+					<Alert
+						link={covidLinkRiGr}
+						header={isOnServices ? t('banner.Greece.ServicesHeader', NS) : t('banner.Greece.ArticlesHeader', NS)}
+						message={isOnServices ? t("banner.Greece.Services", NS) : t('banner.Greece.Articles', NS)}
+					/>
+				}
 
-				{/* {!(isOnServices || isOnArticlesGreece) && window.location.href.includes('/greece') &&
-					<Alert link={disclaimersLink} message={t('banner.Greece.Home', NS)} />
-				} */}
+				{!(isOnServices || isOnArticlesGreece) && window.location.href.includes('/greece') &&
+					<Alert link={covidLinkRiGr} message={t('banner.Greece.Home', NS)} />
+				}
 
 				{window.location.href.includes('/jordan') &&
 					<Alert message={t('banner.Jordan', NS)} fontColor='white'/>
@@ -223,9 +227,9 @@ class AppHeader extends Component {
 					<Alert link={covidLinkRiIt} message={t('banner.Italy', NS)} fontColor='black'/>
 				}
 
-				{window.location.href.endsWith('/greece') &&
-					<Alert link={covidLinkRiGr} message={t('banner.Greece.Home', NS)} fontColor='black'/>
-				}
+				{/* {window.location.href.endsWith('/greece') &&
+					<Alert link={covidLinkRiGr} message={t('banner.Greece.Covid', NS)} fontColor='black'/>
+				} */}
 
 			</div>
 		);

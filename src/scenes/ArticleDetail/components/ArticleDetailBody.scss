@@ -159,6 +159,10 @@
 			}
 		}
 
+		li a {
+			text-decoration: underline;
+		}
+
 		s:not(.Read-More) a {
 			@media (min-width: $desktopBreakpoint) {
 				&:before {

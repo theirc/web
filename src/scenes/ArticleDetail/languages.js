@@ -5,6 +5,7 @@ export default {
 				"Copied": "تم النسخ",
 				"LAST_UPDATED": "آخر تحديث لهذه الصفحة كان بتاريخ:"
 			},
+			"subscribe-title": "n/a",
 			"subscribe": "n/a"
 		}
 	},
@@ -14,6 +15,7 @@ export default {
 				"Copied": "Copied",
 				"LAST_UPDATED": "Last update: "
 			},
+			"subscribe-title": "n/a",
 			"subscribe": "n/a"
 		}
 	},
@@ -23,7 +25,8 @@ export default {
 				"Copied": "Copiado",
 				"LAST_UPDATED": "Última actualización: "
 			},
-			"subscribe": "Subscribir a ésta categoría"
+			"subscribe-title": "Quieres recibir notificaciones en WhatsApp sobre nuevas informaciones de la emergencia de coronavirus en El Salvador?",
+			"subscribe": "Subscribirse a notificaciones"
 		}
 	},
 	"fa": {
@@ -32,6 +35,7 @@ export default {
 				"Copied": "کپی‌شده",
 				"LAST_UPDATED": "این صفحه آخرین بار در این تاریخ به‌روز شده:"
 			},
+			"subscribe-title": "n/a",
 			"subscribe": "n/a"
 		}
 	},
@@ -41,6 +45,7 @@ export default {
 				"Copied": "Copié",
 				"LAST_UPDATED": "Dernière mise à jour:"
 			},
+			"subscribe-title": "n/a",
 			"subscribe": "n/a"
 		}
 	},
@@ -50,6 +55,7 @@ export default {
 				"Copied": "کی ہوئی کاپی",
 				"LAST_UPDATED": "یہ صفحہ آخری دفعہ اپ ڈیٹ کیا گیا:"
 			},
+			"subscribe-title": "n/a",
 			"subscribe": "n/a"
 		}
 	}
