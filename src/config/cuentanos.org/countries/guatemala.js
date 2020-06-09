@@ -5,10 +5,10 @@ export default {
 	movedToPartner: null,
 	questionLink: '',
 	switches: {
-		showArticles: false,
+		showArticles: true,
 		showDepartments: false,
 		showLinkToAdministration: false,
-		showServices: false,
+		showServices: true,
 	},
 	thirdParty: {
 		facebook: {

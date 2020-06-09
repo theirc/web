@@ -14,6 +14,7 @@ export default {
 	},
 	countries: {
 		'el-salvador': require('./countries/el-salvador').default,
+		'guatemala': require('./countries/guatemala').default,
 		'honduras': require('./countries/honduras').default,
 	},
 	defaultLanguage: 'es',
