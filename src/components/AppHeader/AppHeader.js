@@ -199,7 +199,7 @@ class AppHeader extends Component {
 					</div>
 				)}
 
-				{(isOnServices || isOnArticlesGreece) && window.location.href.includes('/greece/') &&
+				{/* {(isOnServices || isOnArticlesGreece) && window.location.href.includes('/greece/') &&
 					<Alert
 						link={covidLinkRiGr}
 						header={isOnServices ? t('banner.Greece.ServicesHeader', NS) : t('banner.Greece.ArticlesHeader', NS)}
@@ -209,7 +209,7 @@ class AppHeader extends Component {
 
 				{!(isOnServices || isOnArticlesGreece) && window.location.href.includes('/greece') &&
 					<Alert link={covidLinkRiGr} message={t('banner.Greece.Home', NS)} />
-				}
+				} */}
 
 				{window.location.href.includes('/jordan') &&
 					<Alert message={t('banner.Jordan', NS)} fontColor='white'/>
