@@ -31,8 +31,8 @@ class TopCategoriesWidget extends Component {
 
 				{categories.map(c => {
 					let article = articleFunc(c);
-					return (
-						<Link key={c.sys.id} className="TopCategory" to={`/${country.fields.slug}/${c.fields.slug}/${article.fields.slug}?language=${language}`}>
+					return (						
+						<Link key={c.sys.id} className="TopCategory" to={`/${country.fields.slug}/${c.fields.slug}?language=${language}`}>
 							<div className="icon">
 								<i className={c.fields.iconClass || "material-icons"}>{c.fields.iconText || ((!c.fields.iconClass || c.fields.iconClass === "material-icons") && "add")}</i>
 							</div>
