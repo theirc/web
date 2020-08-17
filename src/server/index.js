@@ -26,7 +26,10 @@ const app = feathers();
 app.configure(configuration());
 
 app.use(cors());
-app.use(helmet());
+app.use(helmet.frameguard({
+	action: 'ALLOW-FROM',
+	domain: '*.zendesk.com'
+ }));
 app.use(compress());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
