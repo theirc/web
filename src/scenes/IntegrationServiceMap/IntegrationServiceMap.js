@@ -20,7 +20,7 @@ import servicesApi from "../../backend/servicesApi";
 
 const NS = { ns: 'Services' };
 var serviceList = require('./data.json'); //with path
-console.log(serviceList.results);
+
 /**
  * @class
  * @description Messiest class in the whole project
@@ -47,7 +47,7 @@ class IntegrationServiceMap extends React.Component {
 	
 	render() {	
 		const { match } = this.props;
-		
+		console.log("Render embed map. URL:", match.url);
 		return (
 			<div className='Services'>
 				<Switch>

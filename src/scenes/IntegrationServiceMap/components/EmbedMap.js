@@ -4,13 +4,6 @@ import ReactDOMServer from "react-dom/server";
 import HtmlMarker from "./HtmlMarker";
 
 import './EmbedMap.css';
-import { LaptopWindows } from "material-ui-icons";
-
-const GMAPS_API_KEY = "AIzaSyCuAJxGZo3B0NzzLv6DVba2yO47IebNvBg";
-
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
-
-
 
 var tinycolor = require("tinycolor2");
 let iconWithPrefix = vector_icon => vector_icon.split("-")[0] + " " + vector_icon;
@@ -204,8 +197,7 @@ class EmbedMap extends React.Component {
 		/*
 			Very small tweak on the render. toggling the visibility so we can run the L.map on didMount
     */
-    console.log("Loaded:", loaded);
-    console.log("Map", window.google);
+    console.log("Loaded:", loaded);    
 
 		return (
 			<div className="ServiceMap">
