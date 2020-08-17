@@ -53,7 +53,7 @@ class IntegrationServiceMap extends React.Component {
 				<Switch>
 					<Route
 						exact
-						path={`${match.url}/`}
+						path={`${match.url}/all`}
 						component={props => (
 							<div>/
 								<EmbedMap services={serviceList.results}/>
@@ -65,7 +65,7 @@ class IntegrationServiceMap extends React.Component {
 					exact
 					path={`${match.url}/by-category/:categoryId/`}
 					component={props => (
-						<div>/by-category
+						<div>
 							<EmbedMap services={serviceList.results}/>
 						</div>
 					)}
@@ -75,7 +75,7 @@ class IntegrationServiceMap extends React.Component {
 					exact
 					path={`${match.url}/by-location/:location/`}
 					component={props => (
-						<div>/by-location
+						<div>
 							<EmbedMap services={serviceList.results}/></div>
 					)}
 				/>
