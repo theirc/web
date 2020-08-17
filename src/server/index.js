@@ -69,7 +69,7 @@ var mainRequest = function (context) {
 
 		context.title = instance.brand.tabTitle;
 		context.image = context.image ? context.image : instance.brand.images.thumbnail;
-		console.log('mainRequest');
+		console.log('mainRequest',originalUrl);
 
 		fs.readFile(path.join(path.dirname(path.dirname(__dirname)), "build", "index.html"), (err, data) => {
 			if (err) throw err;
