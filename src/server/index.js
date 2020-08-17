@@ -26,7 +26,7 @@ const app = feathers();
 app.configure(configuration());
 
 app.use(cors());
-app.use(helmet.frameguard({action: '*'}));
+app.use(helmet());
 app.use(compress());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
