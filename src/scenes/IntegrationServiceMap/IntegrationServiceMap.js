@@ -19,7 +19,8 @@ import instance from '../../backend/settings';
 import servicesApi from "../../backend/servicesApi";
 
 const NS = { ns: 'Services' };
-var serviceList = require('./data.json'); //with path
+//var serviceList = require('./data.json'); //with path
+
 
 /**
  * @class
@@ -32,6 +33,7 @@ class IntegrationServiceMap extends React.Component {
 		city: null,
 		category: null,
 		countryRegions: null,
+		serviceList: []
 	};
 
 	constructor() {
@@ -42,21 +44,59 @@ class IntegrationServiceMap extends React.Component {
 	componentWillMount() {
 		console.log("Will mount")
 	}
+
+	componentDidMount() {
+		let country = "colombia";
+		let language = "es";
+		let BACKEND_URL =  'https://admin.cuentanos.org/e/production/v2';
+		var requestUrl = "/services/searchlist/?&geographic_region=" + country + "&type_numbers=";
+		
+		const headers = { 'Accept-Language': language };
+		fetch("https://admin.cuentanos.org/e/production/v2/services/searchlist/?filter=relatives&geographic_region="+country+"&page=1&page_size=10&type_numbers=", {
+			"headers": {
+				"accept": "*/*",
+				"accept-language": "es",
+				"sec-fetch-dest": "empty",
+				"sec-fetch-mode": "cors",
+				"sec-fetch-site": "same-site"
+			},
+			"referrer": "https://www.cuentanos.org/el-salvador/services/all/",
+			"referrerPolicy": "no-referrer-when-downgrade",
+			"body": null,
+			"method": "GET",
+			"mode": "cors",
+			"credentials": "omit"
+		})
+			.then(res => res.json())
+			.then(response => {
+				let services = response;
+				console.log(services.results);
+				this.setState({serviceList: services.results});
+			})
+			.catch((err) => {
+				console.log("error", err);				
+				return;
+			});
+
+	}
 		
 	sessionStorage = getSessionStorage();
 	
 	render() {	
 		const { match } = this.props;
+		const { serviceList } = this.state;
 		console.log("Render embed map. URL:", match.url);
-		return (
+		return ( 
 			<div className='Services'>
+				{serviceList && serviceList.length > 0 && 
+	
 				<Switch>
 					<Route
 						exact
 						path={`${match.url}/all`}
 						component={props => (
 							<div>/
-								<EmbedMap services={serviceList.results}/>
+								<EmbedMap services={serviceList}/>
 							</div>
 							
 						)}
@@ -66,7 +106,7 @@ class IntegrationServiceMap extends React.Component {
 					path={`${match.url}/by-category/:categoryId/`}
 					component={props => (
 						<div>
-							<EmbedMap services={serviceList.results}/>
+							<EmbedMap services={serviceList}/>
 						</div>
 					)}
 				/>
@@ -76,19 +116,25 @@ class IntegrationServiceMap extends React.Component {
 					path={`${match.url}/by-location/:location/`}
 					component={props => (
 						<div>
-							<EmbedMap services={serviceList.results}/></div>
+							<EmbedMap services={serviceList}/></div>
 					)}
 				/>
 				<Route
 					exact
 					path={`${match.url}/by-category/:categoryId/location/:location`}
 					component={props => (							
-							<EmbedMap services={serviceList.results}/>
+							<EmbedMap services={serviceList}/>
 					)}
 				/>				
 				<Route component={() => <Redirect to={'/404'}/>} />
 			</Switch>
+			}
+			{!serviceList || serviceList.length === 0 &&
+				<div>Loading</div>
+			}
 			</div>
+			
+
 		);
 	}
 }

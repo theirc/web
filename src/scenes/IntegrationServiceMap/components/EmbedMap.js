@@ -5,6 +5,8 @@ import HtmlMarker from "./HtmlMarker";
 
 import './EmbedMap.css';
 
+const zdUrl = 'https://signpost-colombia.zendesk.com/hc/es-co/articles/';
+
 var tinycolor = require("tinycolor2");
 let iconWithPrefix = vector_icon => vector_icon.split("-")[0] + " " + vector_icon;
 let categoryStyle = color => {
@@ -49,15 +51,16 @@ class ServiceIcon extends React.Component {
  */
 class ServiceItem extends React.Component {
 	render() {
-		const { country, goToService, language, service } = this.props;
+		const { country, language, service } = this.props;
 		const mainType = service.type ? service.type : service.types[0];
 		const types = (service.types || []).filter(t => t.id !== mainType.id);
-
+		console.log(service);
+		let zdId = service.tags.length > 0 ? service.tags[0] : 0;
 		return (
-			<div key={service.id} className="Item" onClick={() => goToService(country, language, service.id)}>
+			<div key={service.id} className="Item">
 				<div className="Info">
 					<div className="Item-content title">
-						<h1>{service.name}</h1>
+						<a href={`${zdUrl+zdId}`} target="parent"><h1>{service.name}</h1></a>
 						<i className="material-icons" id="goToServiceIcon" />
 					</div>
 
@@ -142,6 +145,7 @@ class EmbedMap extends React.Component {
 	componentDidUpdate() {
 		let keepPreviousZoom = this.props.keepPreviousZoom;
 		if (this.state.loaded) {
+			console.log("Services:", this.props.services);
 			if (this.props.services.length) {
 				let locationServices = this.props.services.filter(s => s.location != null);
 
