@@ -42,7 +42,7 @@ class Router extends Component {
 						<Route exact path="/selectors" component={Selectors} />
 
 						{/* DYNAMIC ROUTES */}
-						<Route path="/:country/integration/services" component={props => <IntegrationServicesMapWithCountry {...props} />} />
+						<Route path="/:country/integration/services" component={props => <IntegrationServiceMap {...props} />} />
 						<Route exact path="/:country/subscribe/:category" component={withCountry(withCategory(Subscribe))} />
 						<Route path="/:country/services" component={props => <ServicesWithCountry {...props} />} />
 						<Route exact path="/:country/categories" component={withCountry(ArticleList)} />

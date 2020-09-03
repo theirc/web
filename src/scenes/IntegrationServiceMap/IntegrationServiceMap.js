@@ -95,7 +95,7 @@ class IntegrationServiceMap extends React.Component {
 						exact
 						path={`${match.url}/all`}
 						component={props => (
-							<div>/
+							<div>
 								<EmbedMap services={serviceList}/>
 							</div>
 							
