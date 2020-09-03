@@ -37,7 +37,7 @@ class ServiceIcon extends React.Component {
 		return type ? (
 			<div className="Icon" key={`${service.id}-${idx}`}>
         
-				<i className={iconWithPrefix(type.vector_icon)} style={categoryStyle(type.color)} />
+				<i className={iconWithPrefix(type.icon)} style={categoryStyle(type.color)} />
 			</div>
 		) : (
 				<div />
@@ -52,22 +52,21 @@ class ServiceIcon extends React.Component {
 class ServiceItem extends React.Component {
 	render() {
 		const { country, language, service } = this.props;
-		const mainType = service.type ? service.type : service.types[0];
-		const types = (service.types || []).filter(t => t.id !== mainType.id);
-		console.log(service);
-		let zdId = service.tags.length > 0 ? service.tags[0] : 0;
+		const types = service.serviceCategories;
+		console.log(service, types);
+		let zdId = service.zendeskId;
 		return (
 			<div key={service.id} className="Item">
 				<div className="Info">
 					<div className="Item-content title">
-						<a href={`${zdUrl+zdId}`} target="parent"><h1>{service.name}</h1></a>
+						<a href={`${zdUrl+service.zendeskId}`} target="parent"><h1>{service.data_i18n[0].name}</h1></a>
 						<i className="material-icons" id="goToServiceIcon" />
 					</div>
 
-					<h2 className="Item-content">{service.provider.name}{" "}</h2>
+					<h2 className="Item-content">{service.provider.data_i18n[0].name}{" "}</h2>
 
 					<address className="fullAddress Item-content">
-						{service.address}
+						{service.location}
 					</address>
 
 					{service.address_city &&
@@ -77,11 +76,8 @@ class ServiceItem extends React.Component {
 					}
 				</div>
 
-				<div className="Icons Item-content">
-					{mainType &&
-						<ServiceIcon key={`si-${mainType.idx}`} idx={0} isMainType={1} service={service} type={mainType} />
-					}
-					{types.map((t, idx) => t && <ServiceIcon key={`si-${idx}`} idx={idx} isMainType={0} service={service} type={t} />)}
+				<div className="Icons Item-content">					
+					{types.map((t, idx) => t && <ServiceIcon key={`si-${idx}`} idx={idx}  service={service} type={t} />)}
 				</div>
 			</div>
 		);
@@ -147,18 +143,16 @@ class EmbedMap extends React.Component {
 		if (this.state.loaded) {
 			console.log("Services:", this.props.services);
 			if (this.props.services.length) {
-				let locationServices = this.props.services.filter(s => s.location != null);
+				let locationServices = this.props.services.filter(s => parseFloat(s.latitude) != 0);
 
 				const markers = locationServices.map((s, index) => {
-					let ll = s.location.coordinates;
-				  const mainType = s.type ? s.type : s.types[0];
-
+					let mainType = s.serviceCategories[0];
 					let markerDiv = ReactDOMServer.renderToString(<ServiceIcon idx={0} service={s} type={mainType} />);
 
 					let popupEl = document.createElement("div");
 					ReactDOM.render(<ServiceItem service={s} {...this.props} />, popupEl);
 
-					let marker = new HtmlMarker(new global.google.maps.LatLng(ll[1], ll[0]), this.map, {
+					let marker = new HtmlMarker(new global.google.maps.LatLng(s.longitude, s.latitude), this.map, {
 					  html: markerDiv
 					});
 

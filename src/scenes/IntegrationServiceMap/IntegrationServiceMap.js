@@ -48,11 +48,11 @@ class IntegrationServiceMap extends React.Component {
 	componentDidMount() {
 		let country = "colombia";
 		let language = "es";
-		let BACKEND_URL =  'https://admin.cuentanos.org/e/production/v2';
+		let BACKEND_URL =  'https://signpost-cms-qa.azurewebsites.net/api/services/zd/';
 		var requestUrl = "/services/searchlist/?&geographic_region=" + country + "&type_numbers=";
 		
 		const headers = { 'Accept-Language': language };
-		fetch("https://admin.cuentanos.org/e/production/v2/services/searchlist/?filter=relatives&geographic_region="+country+"&page=1&page_size=10&type_numbers=", {
+		fetch(BACKEND_URL+country, {
 			"headers": {
 				"accept": "*/*",
 				"accept-language": "es",
@@ -70,8 +70,8 @@ class IntegrationServiceMap extends React.Component {
 			.then(res => res.json())
 			.then(response => {
 				let services = response;
-				console.log(services.results);
-				this.setState({serviceList: services.results});
+				console.log(services);
+				this.setState({serviceList: services});
 			})
 			.catch((err) => {
 				console.log("error", err);				
