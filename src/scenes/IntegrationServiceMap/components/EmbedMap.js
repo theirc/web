@@ -96,6 +96,8 @@ class EmbedMap extends React.Component {
 	infoWindow = null;
 
 	componentDidMount() {
+		console.log("Embed props:", this.props);
+
     let isMap = window.google;
     console.log(isMap);
 	  const map = new window.google.maps.Map(document.getElementById('MapCanvas'), {
@@ -141,10 +143,14 @@ class EmbedMap extends React.Component {
 	componentDidUpdate() {
 		let keepPreviousZoom = this.props.keepPreviousZoom;
 		if (this.state.loaded) {
-			console.log("Services:", this.props.services);
+			
 			if (this.props.services.length) {
 				let locationServices = this.props.services.filter(s => parseFloat(s.latitude) != 0);
-
+				window.s = locationServices;
+				if (this.props.match.params.location){
+					locationServices = locationServices.filter(s => s.region.slug === this.props.match.params.location);
+				}
+				console.log("new filtered list", locationServices);
 				const markers = locationServices.map((s, index) => {
 					let mainType = s.serviceCategories[0];
 					let markerDiv = ReactDOMServer.renderToString(<ServiceIcon idx={0} service={s} type={mainType} />);

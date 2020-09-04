@@ -86,6 +86,7 @@ class IntegrationServiceMap extends React.Component {
 		const { match } = this.props;
 		const { serviceList } = this.state;
 		console.log("Render embed map. URL:", match.url);
+		console.log("Match:",match);
 		return ( 
 			<div className='Services'>
 				{serviceList && serviceList.length > 0 && 
@@ -116,7 +117,7 @@ class IntegrationServiceMap extends React.Component {
 					path={`${match.url}/by-location/:location/`}
 					component={props => (
 						<div>
-							<EmbedMap services={serviceList}/></div>
+							<EmbedMap {...props} services={serviceList}/></div>
 					)}
 				/>
 				<Route
