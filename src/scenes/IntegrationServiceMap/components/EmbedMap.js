@@ -63,7 +63,7 @@ class ServiceItem extends React.Component {
 						<i className="material-icons" id="goToServiceIcon" />
 					</div>
 
-					<h2 className="Item-content">{service.provider.data_i18n[0].name}{" "}</h2>
+					<h2 className="Item-content">{service.provider && service.provider.data_i18n[0].name}{" "}</h2>
 
 					<address className="fullAddress Item-content">
 						{service.location}
@@ -102,7 +102,6 @@ class EmbedMap extends React.Component {
     console.log(isMap);
 	  const map = new window.google.maps.Map(document.getElementById('MapCanvas'), {
 	    minZoom: 3,
-      // maxZoom: 16,
       center: { lat: 4.6403306, lng: -74.0430238 },
       zoom: 8,
 	    disableDefaultUI: false,
@@ -147,7 +146,7 @@ class EmbedMap extends React.Component {
 			if (this.props.services.length) {
 				let locationServices = this.props.services.filter(s => parseFloat(s.latitude) != 0);
 				window.s = locationServices;
-				if (this.props.match.params.location){
+				if (this.props.match && this.props.match.params.location){
 					locationServices = locationServices.filter(s => s.region.slug === this.props.match.params.location);
 				}
 				console.log("new filtered list", locationServices);
@@ -158,7 +157,7 @@ class EmbedMap extends React.Component {
 					let popupEl = document.createElement("div");
 					ReactDOM.render(<ServiceItem service={s} {...this.props} />, popupEl);
 
-					let marker = new HtmlMarker(new global.google.maps.LatLng(s.longitude, s.latitude), this.map, {
+					let marker = new HtmlMarker(new global.google.maps.LatLng(s.latitude, s.longitude), this.map, {
 					  html: markerDiv
 					});
 
@@ -183,7 +182,8 @@ class EmbedMap extends React.Component {
           markers.forEach(m => {
             bounds.extend(m.getPosition());
           });
-          this.map.fitBounds(bounds);
+					this.map.fitBounds(bounds);
+					
 				}
 			} else {
 				console.warn("no services returned");
