@@ -1,5 +1,6 @@
 export default {
 	backendUrl: 'https://admin-qa.cuentanos.org/e/production/v2',
+	newBackendUrl: 'http://localhost:8080/api',
 	code: 'qa',
 	thirdParty: {
 		analytics: {

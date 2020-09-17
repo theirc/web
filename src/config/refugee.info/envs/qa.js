@@ -1,5 +1,6 @@
 export default {
 	backendUrl: 'https://admin-qa.refugee.info/e/production/v2',
+	newBackendUrl: 'http://localhost:8080/api',
 	code: 'qa',
 	thirdParty: {
 		analytics: {
@@ -12,3 +13,4 @@ export default {
 		},
 	}
 };
+

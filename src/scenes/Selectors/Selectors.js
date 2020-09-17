@@ -46,11 +46,12 @@ class Selectors extends Component {
 	componentWillMount() {
 		const sessionStorage = getSessionStorage();
 		let language = instance.languages.length === 1 ? instance.defaultLanguage : this.props.language;
-
+		console.log("Instance in Selectors:", instance);
 		if (language && (!!sessionStorage.firstRequest || instance.languages.length === 1)) {
 			this.selectLanguage(language, 0);
 		}
 	}
+	
 
 	selectLanguage(language, timeout = 200) {
 		const func = () => {
@@ -86,9 +87,11 @@ class Selectors extends Component {
 					this.selectCountry(country.fields.slug);
 				}
 			} else {
+				window.instance = instance;
+				let slug = Object.keys(instance.countries).length == 1 ? Object.keys(instance.countries)[0] : null				
 				servicesApi.fetchCountries(language).then((regionList) => {
 					api
-						.listCountries(language)
+						.listCountries(language, slug)
 						.then(e => e.items.map(a => ({
 							id: a.sys.id,
 							...a.fields,
@@ -184,7 +187,7 @@ class Selectors extends Component {
 			regionList,
 		} = this.state;
 		const { language } = this.props;
-
+		console.log("country list:", countryList);
 		let filteredlanguages = this.filterLangs();
 		switch (currentPage) {
 			case 1:

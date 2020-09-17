@@ -15,9 +15,16 @@ function cmsApi(contentfulConfig = null) {
 
 	let client = contentful.createClient(contentfulConfig || instance.env.thirdParty.contentful);
 
-	function listCountries(language = "en") {
+	function listCountries(language = "en", slug = null) {
+		if (slug){
+			return client.getEntries({
+				content_type: "country",
+				"fields.slug": slug,
+				locale: languageDictionary[language] || language,
+			});
+		}
 		return client.getEntries({
-			content_type: "country",
+			content_type: "country",			
 			locale: languageDictionary[language] || language,
 		});
 	}

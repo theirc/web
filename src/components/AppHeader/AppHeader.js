@@ -120,6 +120,7 @@ class AppHeader extends Component {
 
 		let selectedIndex = selectedMenuItem();
 		let path = window.location.pathname;
+		console.log("Instance:",instance);
 		return (
 			<div className={backgroundDark ? 'AppHeader' : 'AppHeaderLight'}>
 				<Headroom tolerance={5} offset={200}>

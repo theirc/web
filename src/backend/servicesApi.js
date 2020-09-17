@@ -5,6 +5,9 @@ var request = require("superagent");
 var Promise = require("bluebird");
 var _ = require("lodash");
 const BACKEND_URL = instance.env.backendUrl;
+const NEWBACKEND_URL = instance.env.newBackendUrl;
+
+console.log("New backend url", NEWBACKEND_URL);
 
 module.exports = {
 	fetchCategories(language, region) {
@@ -105,10 +108,36 @@ module.exports = {
 		});
 	},
 
+	fetchServices(country, region, city, categories, language){
+		let url = NEWBACKEND_URL + "/services/get-filtered-list";
+		let filter = {
+			country: null,
+			region: region,
+			city: city,
+			categories: categories,
+			language: language
+		}
+		
+		console.log("FILTER:", filter);
+		let body = JSON.stringify(filter);
+		var myHeaders = new Headers();
+		myHeaders.append("Content-Language", language);
+		let requestOptions = {
+			method: 'GET',
+			headers: myHeaders,
+			body: body,			
+		};
+		return fetch(url, requestOptions)
+		.then(res => res.text())
+		.then(result => console.log(result))
+	},
+
 	fetchAllServices(country, language, categoryId, searchTerm, pageSize = 1000, ignoreRegions = false, pageStart = 1) {
 		//If the region is a country, search for all the services in any location from that country
 		//If the region is a city, search for all the services in the city AND country wide services
+		
 		let filter = ignoreRegions ? 'relatives' : "with-parents";
+		
 
 		// if (!ignoreRegions && sessionStorage[`${language}-regions`]) {
 		if (!ignoreRegions) {
