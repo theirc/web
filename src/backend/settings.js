@@ -9,7 +9,7 @@ const loadInstanceSettings = (serverHost = null) => {
 	let { instance: domain, env } = require('../config/localhost').default;
 
 	// load settings depending on the environment/domain
-	if ((serverHost && !serverHost.includes('localhost')) || (global.window && (global.window.location.hostname !== 'localhost'))) {
+	if ((serverHost && !serverHost.includes('localhost') && !serverHost.includes("azurewebsites")) || (global.window && (global.window.location.hostname !== 'localhost' && !window.location.hostname.includes("azurewebsites") ))) {
 		let subdomain = serverHost ? serverHost.split('.') : global.window.location.hostname.split('.');
 		env = subdomain.shift(); // e.g.: qa
 		domain = subdomain.join('.'); // e.g.: cuentanos.org
