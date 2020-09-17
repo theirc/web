@@ -198,8 +198,7 @@ export function withCategory(WrappedComponent) {
 				} else if (category.fields.articles) {
 					articleItem = _.first(category.fields.articles.filter(a => a && a.fields).filter(a => a.fields.slug === match.params.article));
 				}
-			}
-
+			}			
 			let invalid = category && category.fields.slug === match.params.category && !articleItem;
 			console.log("invalid", invalid, category && category.fields.slug, match.params.category, articleItem);
 			//return invalid ? (history.push('/404'), null) : <WrappedComponent {...{ category, articleItem, ...this.props }} />;

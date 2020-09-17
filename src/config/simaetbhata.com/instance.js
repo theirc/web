@@ -5,7 +5,7 @@ export default {
 		images: {
 			favicon: '/images/favicons/iq-favicon.png',
 			logo: '/images/logos/logo-iq-white.png',
-			logoBlack: '/images/logos/logo-iq-white.png',
+			logoBlack: '/images/logos/logo-iq-black.png',
 			thumbnail: '/images/logos/iq-thumbnail.png',
 			},
 		name: 'Simaet Bhatha ',
