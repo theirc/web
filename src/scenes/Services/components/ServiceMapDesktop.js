@@ -9,6 +9,8 @@ import { push } from "react-router-redux";
 // local
 import routes from '../routes';
 import "./ServiceHome.css";
+import getSessionStorage from "../../../shared/sessionStorage";
+import HtmlMarker from "./HtmlMarker";
 
 var tinycolor = require("tinycolor2");
 let iconWithPrefix = vector_icon => vector_icon.split("-")[0] + " " + vector_icon;
@@ -104,94 +106,109 @@ class ServiceMapDesktop extends React.Component {
 	bounds = null;
 
 	componentDidMount() {
-		const L = window.Leaflet;
-		const map = L.citymaps.map("MapCanvas", null, {
-			scrollWheelZoom: true,
-			zoomControl: true,
-			// Citymaps will automatically select "global" if language is not supported or undefined.
-			language: this.props.i18n.language,
-			worldCopyJump: true
-		});
+		const {
+			defaultLocation,
+			services
+		} = this.props;
 
-		let clusters = L.markerClusterGroup({
-			maxClusterRadius: 20, // in pixels. Decreasing this will create more, smaller clusters.
-			spiderfyDistanceMultiplier: 1.5,
-			spiderfyOnMaxZoom: true
-		});
-		map.addLayer(clusters);
+		const sessionStorage = getSessionStorage();
 
-		this.setState({
-			loaded: true
-		});
+		if (navigator.onLine) {
+			let isMap = window.google;
+			console.log(isMap);
+			const map = new window.google.maps.Map(document.getElementById('MapCanvas'), {
+				minZoom: 3,
+				center: { lat: 4.6403306, lng: -74.0430238 },
+				zoom: 8,
+				disableDefaultUI: false,
+				zoomControl: true,
+				gestureHandling: "greedy",
+			});
 
-		if (sessionStorage.serviceMapBounds) {
-			const b = sessionStorage.serviceMapBounds.split(",").map(c => parseFloat(c));
-			const zoom = sessionStorage.serviceMapZoom;
+			this.setState({
+				loaded: true
+			});
 
-			map.fitBounds([
-				[b[1], b[0]],
-				[b[3], b[2]]
-			]);
-			map.setZoom(zoom);
-
-			setTimeout(() => {
-				map.invalidateSize();
-			}, 500);
+			if (sessionStorage.serviceMapBounds) {
+				const b = sessionStorage.serviceMapBounds.split(",").map(c => parseFloat(c));
+				const zoom = parseInt(sessionStorage.serviceMapZoom, 10);
+	
+				map.fitBounds({
+					west : b[0],
+					north: b[1],
+					east : b[2],
+					south: b[3]
+				});
+				map.setZoom(zoom);
+			}
+	
+			window.google.maps.event.addListener(map, 'click', () => {
+				if (this.infoWindow) {
+					this.infoWindow.close();
+				}
+			});
+			console.log("Did mount")
+			this.map = map;	
+				
 		}
-
-		this.clusters = clusters;
-		this.map = map;
 	}
 
 	componentDidUpdate() {
-		const L = window.Leaflet;
-		const {
-			clusters
-		} = this;
+		console.log("Did update")
 		let keepPreviousZoom = this.props.keepPreviousZoom;
+
 		if (this.state.loaded) {
 			if (this.props.services.length) {
+				console.log("services:", this.state.services);
+				
 				let locationServices = this.props.services.filter(s => s.location != null);
 
 				const markers = locationServices.map((s, index) => {
-					let ll = s.location.coordinates.slice().reverse();
+					let ll = s.location.coordinates.slice().reverse();					
+					console.log(ll);
 					const mainType = s.type ? s.type : s.types[0];
 					let markerDiv = ReactDOMServer.renderToString(<ServiceIcon idx={0} service={s} type={mainType} />);
-					let icon = L.divIcon({
-						html: markerDiv,
-						iconAnchor: [20, 20],
-						popupAnchor: [0, -16],
-					});
-					let marker = L.marker(ll, {
-						title: s.name,
-						icon: icon
-					});
-
+				
 					let popupEl = document.createElement("div");
 					ReactDOM.render(<ServiceItem service={s} {...this.props} />, popupEl);
-					let popup = L.popup({
-						closeButton: false
-					}).setContent(popupEl);
-					marker.bindPopup(popup);
 
+					let marker = new HtmlMarker(new global.google.maps.LatLng(ll[0], ll[1]), this.map, {
+					  html: markerDiv
+					});
+
+					marker.addListener('click', () => {
+					  setTimeout(() => {
+              this.infoWindow
+                ? this.infoWindow.setContent(popupEl)
+                : this.infoWindow = new global.google.maps.InfoWindow({ content: popupEl })
+              this.infoWindow.open(this.map, marker);
+            },1);
+					});
+										
 					return marker;
 				});
-				clusters.clearLayers();
-				clusters.addLayers(markers);
-				if (!keepPreviousZoom) {
-					let group = new L.featureGroup(markers);
-					this.map.fitBounds(group.getBounds());
-				}
-			} else {
-				console.warn("no services returned");
+				console.log("Markers done");
+
+				new window.MarkerClusterer(this.map, markers, {
+          imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
+		    });
+				window.markers = markers;
+				if (markers.length) {
+					let bounds = new global.google.maps.LatLngBounds();
+					markers.forEach(m => {
+						bounds.extend(m.getPosition());
+					});
+					console.log("Fit bounds", bounds)
+					this.map.fitBounds(bounds);
+				}					
 			}
 		}
 	}
 
 	componentWillUnmount() {
 		// Cleaning up.
-		this.map.off();
-		this.map.remove();
+		// this.map.off();
+		// this.map.remove();
 	}
 
 	render() {

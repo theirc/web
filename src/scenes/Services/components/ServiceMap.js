@@ -12,6 +12,7 @@ import { push } from "react-router-redux";
 import routes from '../routes';
 import getSessionStorage from "../../../shared/sessionStorage";
 import "./ServiceHome.css";
+import HtmlMarker from "./HtmlMarker";
 
 var tinycolor = require("tinycolor2");
 let iconWithPrefix = vector_icon => vector_icon.split("-")[0] + " " + vector_icon;
@@ -112,43 +113,8 @@ class ServiceMap extends React.Component {
 	clusters = null;
 	bounds = null;
 
-	findUsersPosition(def) {
-		/// Copied it over from the services Component because web apis are fair game in html component
-		/// NB: there are no rules against it that I know of, but I can be wrong.
-		/// - RR
-		return new Promise((res, rej) => {
-			// const rejectMe = () => rej({
-			// 	message: "Unable to determine position"
-			// });
-
-			if (!navigator.geolocation) {
-				res(def);
-			}
-
-			navigator.geolocation.getCurrentPosition(
-				p => {
-					const {
-						latitude,
-						longitude
-					} = p.coords;
-					if (latitude && longitude) {
-						res({
-							latitude,
-							longitude
-						});
-					} else {
-						res(def);
-					}
-				},
-				e => {
-					res(def);
-				}
-			);
-		});
-	}
-
 	componentDidMount() {
-		const L = window.Leaflet;
+		
 		const {
 			defaultLocation,
 			findServicesInLocation
@@ -162,69 +128,51 @@ class ServiceMap extends React.Component {
 			This way we can run updates on the content of the map
 		*/
 		if (navigator.onLine) {
-			const map = L.citymaps.map("MapCanvas", null, {
-				scrollWheelZoom: true,
+			let isMap = window.google;
+			console.log(isMap);
+			const map = new window.google.maps.Map(document.getElementById('MapCanvas'), {
+				minZoom: 3,
+				center: { lat: 4.6403306, lng: -74.0430238 },
+				zoom: 8,
+				disableDefaultUI: false,
 				zoomControl: true,
-				// Citymaps will automatically select "global" if language is not supported or undefined.
-				language: this.props.i18n.language,
-				worldCopyJump: true
+				gestureHandling: "greedy",
 			});
 
-			let clusters = L.markerClusterGroup({
-				maxClusterRadius: 20, // in pixels. Decreasing this will create more, smaller clusters.
-				spiderfyDistanceMultiplier: 1.5,
-				spiderfyOnMaxZoom: true
+			this.setState({
+				loaded: true
 			});
-			map.addLayer(clusters);
-			// var locate = L.control.locate();
-			// locate.addTo(map);
 
 			if (sessionStorage.serviceMapBounds) {
 				const b = sessionStorage.serviceMapBounds.split(",").map(c => parseFloat(c));
-				const zoom = sessionStorage.serviceMapZoom;
-
-				map.fitBounds([
-					[b[1], b[0]],
-					[b[3], b[2]]
-				]);
+				const zoom = parseInt(sessionStorage.serviceMapZoom, 10);
+	
+				map.fitBounds({
+					west : b[0],
+					north: b[1],
+					east : b[2],
+					south: b[3]
+				});
 				map.setZoom(zoom);
-
-				setTimeout(() => {
-					map.invalidateSize();
-				}, 500);
 			}
-
-			map.on("dragend", a => {
-				if (findServicesInLocation && this.state.services.length === 0) {
-					/*
-			This is the buggest change in the code: I changed the near to a bbox of the map.
-
-			Whenever the user moves the map, it will reload the data in the backend
-			*/
-					let bounds = a.target.getBounds();
-					let sw = bounds.getSouthWest();
-					let ne = bounds.getNorthEast();
-
-					if (sw.lat - ne.lat === 0 || sw.lng - ne.lng === 0) {
-						const b = sessionStorage.serviceMapBounds.split(",").map(c => parseFloat(c));
-						let p1 = L.latLng(b[1], b[0]);
-						let p2 = L.latLng(b[3], b[2]);
-						bounds = L.latLngBounds(p1, p2);
-						sw = bounds.getSouthWest();
-						ne = bounds.getNorthEast();
-					}
-
-					findServicesInLocation([sw.lng, sw.lat, ne.lng, ne.lat])
+	
+			window.google.maps.event.addListener(map, 'click', () => {
+				if (this.infoWindow) {
+					this.infoWindow.close();
+				}
+			});
+			console.log("Did mount")
+			findServicesInLocation([])
 						.then(({
 							services,
 							category
 						}) => {
+							console.log("Did mount loaded Services")
 							this.setState({
 								services,
 								category,
 								loaded: true
-							});
-							map.invalidateSize();
+							});							
 						})
 						.catch(c => this.setState({
 							errorMessage: c.message,
@@ -232,103 +180,61 @@ class ServiceMap extends React.Component {
 							loaded: true
 						}));
 					if (this.map) {
-						this.map.fitBounds(bounds);
+						//this.map.fitBounds(bounds);
 					}
-				}
-			});
-
-			map.on("moveend", function (e) {
-				var bounds = map.getBounds();
-				const sw = bounds.getSouthWest();
-				const ne = bounds.getNorthEast();
-
-				if (sw.lat - ne.lat !== 0 && sw.lng - ne.lng !== 0) {
-					sessionStorage.serviceMapBounds = bounds.toBBoxString();
-					sessionStorage.serviceMapZoom = map.getZoom();
-				}
-			});
-
-			/*
-				We try to get the user's position first, if that doesn't work, we use the key coordinate for the country
-				Then we make a circle of 100k radius around that point, get the box around it and call it the bounds for the screen.
-			*/
-			if (sessionStorage.serviceMapBounds) {
-				const b = sessionStorage.serviceMapBounds.split(",").map(c => parseFloat(c));
-				const zoom = sessionStorage.serviceMapZoom;
-
-				map.fitBounds([
-					[b[1], b[0]],
-					[b[3], b[2]]
-				]);
-				map.setZoom(zoom);
-				map.fire("dragend");
-			} else {
-				this.findUsersPosition(defaultLocation).then(l => {
-					var center = [l.longitude, l.latitude];
-					var radius = 100;
-					var options = {
-						units: "kilometers"
-					};
-					var c = circle(center, radius, null, null, options);
-					var b = bbox(c);
-					map.fitBounds([
-						[b[1], b[0]],
-						[b[3], b[2]]
-					]);
-					map.fire("dragend");
-				});
-			}
-
-			this.clusters = clusters;
-			this.map = map;
+	
+			this.map = map;		
 		}
 	}
 
-	componentDidUpdate() {
-		const L = window.Leaflet;
-		const {
-			// map,
-			clusters
-		} = this;
+	componentDidUpdate() {		
+		console.log("Did update")
 		let keepPreviousZoom = this.props.keepPreviousZoom;
 
 		if (this.state.loaded) {
 			if (this.state.services.length) {
+				console.log("services:", this.state.services);
+				
 				let locationServices = this.state.services.filter(s => s.location != null);
 
 				const markers = locationServices.map((s, index) => {
-					let ll = s.location.coordinates.slice().reverse();
+					let ll = s.location.coordinates.slice().reverse();					
+					console.log(ll);
 					const mainType = s.type ? s.type : s.types[0];
 					let markerDiv = ReactDOMServer.renderToString(<ServiceIcon idx={0} service={s} type={mainType} />);
-					let icon = L.divIcon({
-						html: markerDiv,
-						iconAnchor: [20, 20],
-						popupAnchor: [0, -16],
-					});
-					let marker = L.marker(ll, {
-						title: s.name,
-						icon: icon
-					});
-
+				
 					let popupEl = document.createElement("div");
 					ReactDOM.render(<ServiceItem service={s} {...this.props} />, popupEl);
-					let popup = L.popup({
-						closeButton: false
-					}).setContent(popupEl);
-					marker.bindPopup(popup);
 
+					let marker = new HtmlMarker(new global.google.maps.LatLng(ll[0], ll[1]), this.map, {
+					  html: markerDiv
+					});
+
+					marker.addListener('click', () => {
+					  setTimeout(() => {
+              this.infoWindow
+                ? this.infoWindow.setContent(popupEl)
+                : this.infoWindow = new global.google.maps.InfoWindow({ content: popupEl })
+              this.infoWindow.open(this.map, marker);
+            },1);
+					});
+										
 					return marker;
 				});
+				console.log("Markers done");
 
-				clusters.clearLayers();
-				clusters.addLayers(markers);
-
-				if (!keepPreviousZoom) {
-					let group = new L.featureGroup(markers);
-					this.map.fitBounds(group.getBounds());
-				}
-			} else {
-				console.warn("no services returned");
+				new window.MarkerClusterer(this.map, markers, {
+          imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
+		    });
+				window.markers = markers;
+				if (markers.length) {
+					let bounds = new global.google.maps.LatLngBounds();
+					markers.forEach(m => {
+						bounds.extend(m.getPosition());
+					});
+					console.log("Fit bounds", bounds)
+					this.map.fitBounds(bounds);
+				}					
 			}
 		}
 	}
