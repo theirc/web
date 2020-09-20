@@ -5,7 +5,7 @@ import { ConnectedRouter } from "react-router-redux";
 
 // local
 import { ArticleDetail, ArticleList, CountryHome, DemoTool,
-	Home, NotFound, Search, Selectors, Services, Subscribe } from "./scenes";
+	Home, NotFound, Search, Selectors, Services, Subscribe, IntegrationServiceMap } from "./scenes";
 import { history } from "./shared/redux/store";
 import { withCountry, withCategory, withArticle } from "./shared/hoc";
 import Placeholder from "./shared/placeholder";
@@ -24,6 +24,7 @@ class ScrollToTop extends Component {
 
 ScrollToTop = withRouter(ScrollToTop);
 const ServicesWithCountry = withCountry(Services);
+const IntegrationServicesMapWithCountry = withCountry(IntegrationServiceMap);
 
 class Router extends Component {
 	render() {
@@ -41,10 +42,11 @@ class Router extends Component {
 						<Route exact path="/selectors" component={Selectors} />
 
 						{/* DYNAMIC ROUTES */}
+						<Route path="/:country/integration/services" component={props => <IntegrationServiceMap {...props} />} />
 						<Route exact path="/:country/subscribe/:category" component={withCountry(withCategory(Subscribe))} />
 						<Route path="/:country/services" component={props => <ServicesWithCountry {...props} />} />
 						<Route exact path="/:country/categories" component={withCountry(ArticleList)} />
-						<Route exact path="/:country/search" component={withCountry(Search)} />
+						<Route exact path="/:country/search" component={withCountry(Search)} />					
 						{/* <Route exact path="/:country/demo" component={withCountry(DemoTool)} /> */}
 						<Route exact path="/:country/:category/:article" component={withCountry(withCategory(ArticleDetail))} />
 						<Route exact path="/:country/:category" component={withCountry(ArticleList)} />

@@ -10,6 +10,7 @@ import Search from "./Search/Search";
 import Selectors from "./Selectors/Selectors";
 import Subscribe from "./Subscribe/Subscribe";
 import DemoTool from "./DemoTool/DemoTool";
+import IntegrationServiceMap from "./IntegrationServiceMap/IntegrationServiceMap";
 
 export {
 	Home,
@@ -24,4 +25,5 @@ export {
 	Selectors,
 	DemoTool,
 	Subscribe,
+	IntegrationServiceMap
 };
