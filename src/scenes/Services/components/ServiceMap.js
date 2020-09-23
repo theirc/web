@@ -65,12 +65,12 @@ class ServiceItem extends React.Component {
 		const types = (service.types || []).filter(t => t.id !== mainType.id);
 
 		return (
-			<div key={service.id} className="Item" style={{"border": "none"}} onClick={() => goToService(country, language, service.id)}>
+			<div key={service.id} className="Item" style={{ "border": "none" }} onClick={() => goToService(country, language, service.id)}>
 				{mainType &&
 					<ServiceIcon key={`si-${mainType.idx}`} idx={0} isMainType={1} service={service} type={mainType} />
 				}
 
-				<div className="Info">
+				<div className="Info" style={{ 'fontSize': '120%' }}>
 					<div className="Item-content title">
 						<h1>{service.name}</h1>
 					</div>
