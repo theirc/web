@@ -40,7 +40,7 @@ class ServiceIcon extends React.Component {
 	render() {
 		const { service, idx, type } = this.props;
 		return type ? (
-			<div className="Icon" key={`${service.id}-${idx}`}>
+			<div className="Icon" key={`${service.id}-${idx}`} style={{ 'fontSize': '18px' }}>
 				<i className={iconWithPrefix(type.vector_icon)} style={categoryStyle(type.color)} />
 			</div>
 		) : (
