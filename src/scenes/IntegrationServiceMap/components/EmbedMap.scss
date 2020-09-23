@@ -13,10 +13,13 @@
 } 
 
 .Item-content{
-  .Icon{
+	address {
+		padding: 5px 0;
+	}
+
+	.Icon{
     display: flex;
     min-width: 20px;
     padding: 0 10px 15px 5px;
-  
   }
 } 

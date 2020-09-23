@@ -263,12 +263,12 @@ class ServiceCategoryListDesktop extends React.Component {
 
 					<div className="line" />
 
-					{/* CITYMAPS BUG */}
-					{/* <div id="services-list-map-toggle">
+					
+					<div id="services-list-map-toggle">
 						<input type="checkbox" className="switch bigswitch cn" checked={this.state.showMap} onMouseEnter={() => this.hoverMapSwitch(true)} onMouseLeave={() => this.hoverMapSwitch(false)} onChange={this.toggleMap} />
 						<div className={`toggle-btn ${this.state.switchHover ? 'hover' : ''}`}><div></div></div>
 						<span>{t('services.Map view', NS)}</span>
-					</div> */}
+					</div>
 				</div>
 			</div>
 		);

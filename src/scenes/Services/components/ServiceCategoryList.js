@@ -133,14 +133,14 @@ class ServiceCategoryList extends React.Component {
 
 					<hr className="line" />
 
-					{/* CITYMAPS BUG */}
-					{/* <li key="map">
+					
+					<li key="map">
 						<div className="container" onClick={goToMap}>
 							<i className="fa fa-map" />
 							<strong>{t("services.Map", NS)}</strong>
 							<i className="material-icons">keyboard_arrow_right</i>
 						</div>
-					</li> */}
+					</li>
 
 					<hr className="line" />
 

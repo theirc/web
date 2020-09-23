@@ -153,8 +153,8 @@ class ServiceList extends React.Component {
 				{sortedAvailableServices.length > 0 && (
 					<div className="ServiceListContainer">
 						<ul className="Items">
-							{/* CITYMAPS BUG */}
-							{/* <li className="Item service-map" onClick={showMap} style={{ flexBasis: "100%" }}>
+							
+							<li className="Item service-map" onClick={showMap} style={{ flexBasis: "100%" }}>
 								<div className="Icon">
 									<i className="fa fa-map" />
 								</div>
@@ -164,7 +164,7 @@ class ServiceList extends React.Component {
 								</div>
 
 								<i className="material-icons" />
-							</li> */}
+							</li>
 
 							{sortedAvailableServices.map(this.renderService.bind(this))}
 						</ul>

@@ -279,6 +279,29 @@
 
 .ServiceMapContainer {
 	z-index: 0;
+
+	.gm-style-iw {
+		left: 20px;
+		padding: 0 !important;
+
+		button.gm-ui-hover-effect {
+			right: 0 !important;
+			top: 0 !important;
+		}
+	}
+
+	.gm-style .gm-style-iw-d {
+		overflow: auto !important;
+
+		.arrow {
+			padding-left: 10px;
+		}
+	}
+
+	.gm-style .gm-style-iw-t::after {
+		left: 20px;
+		top: -1px;
+	}
 }
 
 .ServiceList,
