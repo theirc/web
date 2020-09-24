@@ -12,7 +12,7 @@ export default {
 	},
 	thirdParty: {
 		facebook: {
-			page: 'https://www.facebook.com/khabrona.info1'
+			page: 'https://www.facebook.com/simaetbhatha'
 		}
 	}
 };
