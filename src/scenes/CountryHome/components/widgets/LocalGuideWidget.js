@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import { translate } from "react-i18next";
+import _ from 'lodash';
 
 // local
 import "./LocalGuideWidget.css";
@@ -10,6 +11,7 @@ const NS = { ns: 'CountryHome' };
 
 class LocalGuideWidget extends Component {
 
+	
 	render() {
 		const { country, language, t, guideItems } = this.props;
 
@@ -29,8 +31,9 @@ class LocalGuideWidget extends Component {
 				{guideItems.map(c => (
 					<div key={c.sys.id} className="LocalGuideItem">
 						<Link className="Overlay" to={`${c.fields.url}?language=${language}`}>
-							{c.fields.iconClass && <i className={c.fields.iconClass}></i>}
-							{c.fields.title}
+							{_.has(c, 'fields.backgroundImage.fields.file.url') && <img src={c.fields.backgroundImage.fields.file.url} />}
+							<span style={{'position': 'absolute'}}>{c.fields.title}</span>
+							{/* {c.fields.iconClass && <i className={c.fields.iconClass}></i>} */}
 						</Link>
 					</div>
 				))}
