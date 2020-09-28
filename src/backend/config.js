@@ -23,6 +23,12 @@ module.exports = {
 	},
 	"qa.cuentanos.org": {
 	},
+	"simaetbhatha.com": {
+	},
+	"staging.simaetbhatha.com": {
+	},
+	"qa.simaetbhatha.com": {
+	},
 	"localhost": {
 	},
 };
