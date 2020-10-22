@@ -29,7 +29,7 @@ class HomeWidget extends Component {
 				return this.renderArticle(article, category, true, w.fields.showFullArticle);
 			}
 		} else if (w.fields.type === "Top Categories") {
-			let categories = Array.from(w.fields.related || []).filter(r => r.sys.contentType && r.sys.contentType.sys.id === "category");
+			let categories = Array.from(w.fields.related || []).filter(r => r.sys.contentType.sys.id === "category");
 			return this.renderTopCategories(categories);
 		} else if (w.fields.type === "Local Guide") {
 			let guideItems = Array.from(w.fields.related || []).filter(r => r.sys.contentType && r.sys.contentType.sys.id === "localGuideItem");
