@@ -1,7 +1,7 @@
 export default {
-	countryCode: '', 
+	countryCode: '',
 	flag: '',
-	languages: ['en'],
+	languages: ['en', 'fr'],
 	movedToPartner: null,
 	questionLink: 'https://www.facebook.com/Refugee.Info.Italy/',
 	switches: {
