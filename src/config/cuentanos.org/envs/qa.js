@@ -1,5 +1,6 @@
 export default {
-	backendUrl: 'https://admin-qa.cuentanos.org/e/production/v2',
+	//backendUrl: 'https://admin-qa.cuentanos.org/e/production/v2',
+	backendUrl: 'https://signpost-cms-qa.azurewebsites.net/api',
 	code: 'qa',
 	thirdParty: {
 		analytics: {
