@@ -32,7 +32,7 @@ const md = new Remarkable("full", {
 
 /**
  * @class
- * @description 
+ * @description
  */
 class ArticleDetailBody extends Component {
 	state = {
@@ -80,11 +80,13 @@ class ArticleDetailBody extends Component {
 						.split("/")
 						.slice(3)
 						.join("/");
-			}
+      } else {
+        // eslint-disable-next-line
+				anchor.href = "#";
+      }
 
-			// eslint-disable-next-line
-			anchor.href = "#";
-			anchor.onclick = () => {
+			anchor.onclick = (e) => {
+        e.preventDefault();
 				onNavigate(href);
 				return false;
 			};
@@ -144,12 +146,12 @@ class ArticleDetailBody extends Component {
 	}
 
 	render() {
-		const { article, category, language, loading, t } = this.props;
+    const { article, category, language, loading, t } = this.props;
 		const { title, content, hero, lead } = article.fields;
 		const { contentType } = article.sys;
 
 		let html = md.render(content || lead);
-		html = html.replace(/(\+[0-9]{9,14}|00[0-9]{9,15})/g, `<a class="tel" href="tel:$1">$1</a>`);
+    html = html.replace(/(\+[0-9]{9,14}|00[0-9]{9,15})/g, `<a class="tel" href="tel:$1">$1</a>`);
 
 		let country = _.get(article, 'fields.country.fields.slug');
 
@@ -200,7 +202,7 @@ class ArticleDetailBody extends Component {
 					<div dangerouslySetInnerHTML={{ __html: html }} />
 				</article>
 			</div>
-		);
+    );
 	}
 }
 

@@ -12,7 +12,7 @@ const NS = { ns: 'Selectors' };
 
 /**
  * @class
- * @description 
+ * @description
  */
 class CountrySelector extends Component {
 
@@ -41,7 +41,6 @@ class CountrySelector extends Component {
 		let regionList = this.props.regionList.filter(r => r.languages_available.split(',').map(a => a.trim()).indexOf(language) > -1).map(r => r.slug);
 		let availableCountryList = countryList.filter(c => regionList.indexOf(c.fields.slug) > -1 && instance.countries[c.fields.slug]);
 
-		// SP-354 disable tigrinya and french from italy
 		availableCountryList = this.filterCountry(availableCountryList, language);
 
 		if (global.navigator && navigator.geolocation) {
