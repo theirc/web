@@ -109,7 +109,7 @@ export default {
 				"Serbia": "The service list for Serbia is no longer being updated. Please note that the service information shown here was last updated in May 2019 and may no longer be up-to-date. Contact the service provider directly for information about current services and how to access them.",
 				"Jordan": "n/a",
 				"ElSalvador": "n/a",
-				"Italy": "n/a"
+				"Italy": "Informations sur COVID-19 et mesures d'urgence gouvernementales"
 			},
 			"menu": {
 				"Articles": "Articles",
