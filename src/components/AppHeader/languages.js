@@ -8,7 +8,7 @@ export default {
 					"Home": "محتوى Refugee.Info Greece غير محدث حاليًا. حتى الآن ، يمكنك العثور على معلومات صالحة حول COVID-19.",
 					"ServicesHeader": "محتوى Refugee.Info Greece غير محدث حاليًا.\nيرجى ملاحظة أن معلومات الخدمة هنا تم تحديثها آخر مرة في يوليو 2019 وقد تكون محدثة لفترة أطول. ننصحك بالاتصال دائمًا بمزود الخدمة مباشرة للحصول على معلومات حول الخدمات الحالية وكيفية الوصول إليها.\n",
 					"Services": "حتى الآن ، يمكنك العثور على معلومات صالحة حول COVID-19.",
-					"Covid": "معلومات حول فايروس كورونا المستجد و التدابير الحكومية الطارئة."
+					"Covid": "ملاحظة: نظرًا لإجراءات COVID-19 الأخيرة ، قد تكون بعض الخدمات قيد التعليق ويتم تحديث المعلومات بانتظام.."
 				},
 				"Serbia": "لم تعد قائمة الخدمات في صربيا مواكبة لآخر المستجدات.يُرجى الإنتباه إلى أن المعلومات المذكورة هنا تم تحديثها في شهر أيار/مايو من عام 2019 وقد لا تكون مطابقةً لآخر المستجدات.تواصل مع موفري الخدمات بشكل مباشر للحصول على معلومات بشأن الخدمات الحالية وكيفية الحصول عليها.",
 				"Jordan": "تم اخر تحديث لمحتوى خبرونا في أغسطس 2019.",
@@ -32,7 +32,7 @@ export default {
 					"Home": "The Refugee.Info Greece content is not currently up-to-date. As for now, you can find valid information about COVID-19.",
 					"ServicesHeader": "The Refugee.Info Greece content is not currently up-to-date.\nPlease note that the service information here was last updated in July 2019 and may longer be up-to-date. We advise you to always contact the service provider directly for information about current services and how to access them.\n",
 					"Services": "As for now, you can find valid information about COVID-19.",
-					"Covid": "Information about COVID-19 >"
+					"Covid": "Note: Due to the recent COVID-19 measures, some services might be under suspension and information is updated regularly."
 				},
 				"Serbia": "The service list for Serbia is no longer being updated. Please note that the service information shown here was last updated in May 2019 and may no longer be up-to-date. Contact the service provider directly for information about current services and how to access them.",
 				"Jordan": "Khabrona.info content was last updated in August 2019.",
@@ -80,7 +80,7 @@ export default {
 					"Home": "محتوای Refugee.Info Greece در حال حاضر به روز نیست. در حال حاضر ، می توانید اطلاعات معتبری درباره COVID-19 پیدا کنید.",
 					"ServicesHeader": "محتوای Refugee.Info Greece در حال حاضر به روز نیست.\nلطفاً توجه داشته باشید که اطلاعات خدمات در اینجا آخرین بار در ژوئیه 2019 به روز شده و ممکن است بیشتر به روز باشد. ما به شما توصیه می کنیم برای کسب اطلاعات در مورد خدمات فعلی و چگونگی دسترسی به آنها ، همیشه با ارائه دهنده خدمات تماس بگیرید.\n",
 					"Services": "در حال حاضر ، می توانید اطلاعات معتبری درباره COVID-19 پیدا کنید.",
-					"Covid": "اطلاعات درباره COVID-19 و اقدامات اضطراری دولت¨"
+					"Covid": "توجه: به دلیل اقدامات اخیر مربوط به کووید-۱۹، بعضی از خدمات در حالت تعلیق خواهد بود. اطلاعات مربوطه همواره به روز رسانی می شود"
 				},
 				"Serbia": "فهرست خدمات برای صربستان دیگر به روز نمی‌شود.لطفن توجه داشته باشید که اطلاعات خدماتی که در اینجا نمایش داده شده،‌آخرین بار در ماه می 2019 به‌روز شده بوده و ممکن است که دیگر به‌روز نشود.برای دریافت اطلاعات در مورد خدماتی که در حال حاضر ارائه می‌شود و نحوه‌ی دسترسی به آن‌ها، با ارائه‌دهنده‌ی این خدمات تماس بگیرید.",
 				"Jordan": "n/a",
@@ -104,7 +104,7 @@ export default {
 					"Home": "Le contenu de Refugee.Info Greece n'est pas à jour actuellement. Pour l'instant, vous pouvez trouver des informations à jour sur COVID-19.",
 					"ServicesHeader": "Le contenu de Refugee.Info Greece n'est pas à jour actuellement.\nVeuillez noter que les informations de service ici ont été mises à jour pour la dernière fois en juillet 2019 et peuvent être plus à jour. Nous vous conseillons de toujours contacter directement le fournisseur de services pour obtenir des informations sur les services actuels et comment y accéder.\n",
 					"Services": "Pour l'instant, vous pouvez trouver des informations valides sur COVID-19.",
-					"Covid": "Informations sur COVID-19 et mesures d'urgence gouvernementales"
+					"Covid": "Remarque: en raison des récentes mesures COVID-19, certains services peuvent être suspendus et les informations sont mises à jour régulièrement."
 				},
 				"Serbia": "The service list for Serbia is no longer being updated. Please note that the service information shown here was last updated in May 2019 and may no longer be up-to-date. Contact the service provider directly for information about current services and how to access them.",
 				"Jordan": "n/a",
@@ -128,7 +128,7 @@ export default {
 					"Home": "ریفیوجی ڈاٹ انفو یونان کا مواد فی الحال تازہ ترین نہیں ہے۔ ابھی تک ، آپ کوویڈ 19 کے بارے میں درست معلومات حاصل کرسکتے ہیں۔",
 					"ServicesHeader": "ریفیوجی ڈاٹ انفو یونان کا مواد فی الحال تازہ ترین نہیں ہے۔\nبراہ کرم نوٹ کریں کہ یہاں کی خدمت کی معلومات کو آخری بار جولائی 2019 میں اپ ڈیٹ کیا گیا تھا اور یہ اب تازہ ترین ہوسکتا ہے۔ ہم آپ کو مشورہ دیتے ہیں کہ موجودہ خدمات اور ان تک رسائی حاصل کرنے کے طریقوں سے متعلق معلومات کے لئے ہمہ وقت فراہم کنندہ سے رابطہ کریں۔\n",
 					"Services": "ابھی تک ، آپ کوویڈ 19 کے بارے میں درست معلومات حاصل کرسکتے ہیں۔",
-					"Covid": "n/a"
+					"Covid": "نوٹ: حالیہ COVID-19 اقدامات کی وجہ سے، کچھ خدمات معطل ہوسکتی ہیں اور معلومات کو باقاعدگی سے اپ ڈیٹ کیا جاتا ہے۔"
 				},
 				"Serbia": "سربیا کے لئے خدمات کی فہرست کو اپ ڈیٹ نہیں کیا جا رہا ہے۔براہِ مہربانی نوٹ فرمائیں کہ جو خدماتی معلومات یہاں پر دکھائی جا رہی ہیں یہ آخری دفعہ مئی 2019 میں اپ ڈیٹ ہوئی تھیں اور ہو سکتا ہے کہ یہ اپ ٹو ڈیٹ نہ ہوں۔ خدمات فراہم کرنےوالوں سے موجودہ خدمات اور ان تک کیسے رسائی ممکن ہے کی معلومات کے متعلق براہ راست ان سے خود رابطہ کریں۔",
 				"Jordan": "n/a",
