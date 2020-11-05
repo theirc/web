@@ -196,7 +196,7 @@ class ServiceDetail extends React.Component {
 				.locale(language);
 			return `${m.format("hh:mm")} ${m.hour() >= 12 ? t("services.pm", NS) : t("services.am", NS)}`;
 		};
-		const serviceProviderElement = s => <span className='providerName'>{s.provider.name}</span>;
+		const serviceProviderElement = s => <span className='providerName'>{s.name}</span>;
 
 		let point = service.location && _.reverse(_.clone(service.location.coordinates)).join(",");
 
@@ -226,22 +226,25 @@ class ServiceDetail extends React.Component {
 			});
 		};
 
+		let serviceT = service.data_i18n.filter(x => x.language === language)[0]
+		console.log('SERVICET ', serviceT)
 		// service translated fields
-		let serviceT = {
-			additional_info: service[`additional_info_${language}`],
-			address: service[`address_${language}`],
-			address_city: service[`address_city_${language}`],
-			address_floor: service[`address_floor_${language}`],
-			description: service[`description_${language}`],
-			languages_spoken: service[`languages_spoken_${language}`],
-			name: service[`name_${language}`],
-		};
+		// let serviceT = {
+		// 	additional_info: service[`additional_info_${language}`],
+		// 	address: service[`address_${language}`],
+		// 	address_city: service[`address_city_${language}`],
+		// 	address_floor: service[`address_floor_${language}`],
+		// 	description: service[`description_${language}`],
+		// 	languages_spoken: service[`languages_spoken_${language}`],
+		// 	name: service[`name_${language}`],
+		// };
+
 		//let fullAddress = [serviceT.address, serviceT.address_floor].filter(val => val).join(', ');
 
 		let sortedContactInformation = _.sortBy(service.contact_information || [], ci => {
 			return ci.index;
 		});
-		let subtitle = service.type ? service.type.name : _.first(service.types).name;
+		// let subtitle = service.type ? service.type.name : _.first(service.types).name;
 		let phoneNumberWithCode = countryCode + service.phone_number;
 
 		return (
@@ -250,11 +253,11 @@ class ServiceDetail extends React.Component {
 					<title>{serviceT.name}</title>
 				</Helmet>
 
-				<HeaderBar subtitle={`${subtitle}:`} title={serviceT.name} />
+				{/* <HeaderBar subtitle={`${subtitle}:`} title={serviceT.name} /> */}
 
 				{service.image &&
 					<div className="hero">
-						<div className="HeroImageContainer"><img src={service.image} alt={service.provider.name} /></div>
+						{/* <div className="HeroImageContainer"><img src={service.image} alt={service.provider.name} /></div> */}
 					</div>
 				}
 
@@ -275,22 +278,22 @@ class ServiceDetail extends React.Component {
 					<span className='author'><span>{t("services.LAST_UPDATED", NS)}</span> {moment(service.updated_at).format('YYYY.MM.DD')}</span>
 
 					<h2 className='provider'>
-						{t("services.Service Provider", NS)}:&nbsp;{serviceProviderElement(service)}
+						{/* {t("services.Service Provider", NS)}:&nbsp;{serviceProviderElement(service)} */}
 					</h2>
 
 					{/* <h2>{serviceT.name}</h2> */}
 					<p dangerouslySetInnerHTML={{ __html: hotlinkTels(serviceT.description) }} />
 
-					{serviceT.additional_info && <h3>{t("services.Additional Information", NS)}</h3>}
-					{serviceT.additional_info && <p dangerouslySetInnerHTML={{ __html: hotlinkTels(serviceT.additional_info) }} />}
+					{serviceT.additionalInformation && <h3>{t("services.Additional Information", NS)}</h3>}
+					{serviceT.additionalInformation && <p dangerouslySetInnerHTML={{ __html: hotlinkTels(serviceT.additionalInformation) }} />}
 
-					{serviceT.languages_spoken && <h3>{t("services.Languages Spoken", NS)}</h3>}
-					{serviceT.languages_spoken && <p dangerouslySetInnerHTML={{ __html: serviceT.languages_spoken }} />}
+					{/* {serviceT.languages_spoken && <h3>{t("services.Languages Spoken", NS)}</h3>}
+					{serviceT.languages_spoken && <p dangerouslySetInnerHTML={{ __html: serviceT.languages_spoken }} />} */}
 
-					{hasHours(service.opening_time) && (
+					{hasHours(service.serviceOpeningHours) && (
 						<span>
 							<h3>{t("services.Visiting hours", NS)}</h3>
-							<p>{service.opening_time["24/7"] && t("services.Open 24/7", NS)}</p>
+							<p>{service.isAlwaysOpen && t("services.Open 24/7", NS)}</p>
 							<div className="openingTable">
 								{!service.opening_time["24/7"] && (
 									<table>
@@ -300,18 +303,18 @@ class ServiceDetail extends React.Component {
 							</div>
 						</span>
 					)}
-					{serviceT.address_city && <h4>{t("services.Location", NS)}</h4>}
-					{serviceT.address_city && <p>{serviceT.address_city}</p>}
+					{/* {serviceT.address_city && <h4>{t("services.Location", NS)}</h4>}
+					{serviceT.address_city && <p>{serviceT.address_city}</p>} */}
 
 					{serviceT.address && <h3>{t("services.Address", NS)}</h3>}
 					{serviceT.address && <p>{serviceT.address}</p>}
-					{serviceT.address_floor && <p>{serviceT.address_floor}</p>}
+					{/* {serviceT.address_floor && <p>{serviceT.address_floor}</p>}
 
 					{service.address_in_country_language && <h3>{t("services.Address in Local Language", NS)}</h3>}
-					{service.address_in_country_language && <p>{service.address_in_country_language}</p>}
+					{service.address_in_country_language && <p>{service.address_in_country_language}</p>} */}
 
-					{service.cost_of_service && <h3>{t("services.Cost of service", NS)}</h3>}
-					{service.cost_of_service && <p>{service.cost_of_service}</p>}
+					{service.costOfService && <h3>{t("services.Cost of service", NS)}</h3>}
+					{service.costOfService && <p>{service.costOfService}</p>}
 
 					{point && (
 						<p>

@@ -8,11 +8,43 @@ const BACKEND_URL = instance.env.backendUrl;
 const INSTANCE_ID = instance.env.instanceId;
 
 module.exports = {
-	fetchCategories(language, region) {
+	fetchCategoriesByCountry(language, countryId) {
 		return new Promise((resolve, reject) => {
 			// Do not cache, categories order changes
 			request
-				.get(BACKEND_URL + "/service-categories/list/" + (region ? `?countryId=${region}` : ""))
+				.get(BACKEND_URL + `/service-categories/by-country/?countryId=${countryId}&language=${language}`)
+				.set("Accept-Language", language)
+				.end((err, res) => {
+					if (err) {
+						reject(err);
+						return;
+					}
+
+					resolve(res.body);
+				});
+		});
+	},
+	fetchCategoriesByRegion(language, regionId) {
+		return new Promise((resolve, reject) => {
+			// Do not cache, categories order changes
+			request
+				.get(BACKEND_URL + `/service-categories/by-region/?regionId=${regionId}&language=${language}`)
+				.set("Accept-Language", language)
+				.end((err, res) => {
+					if (err) {
+						reject(err);
+						return;
+					}
+
+					resolve(res.body);
+				});
+		});
+	},
+	fetchCategoriesByCity(language, cityId) {
+		return new Promise((resolve, reject) => {
+			// Do not cache, categories order changes
+			request
+				.get(BACKEND_URL + `/service-categories/by-city/?cityId=${cityId}&language=${language}`)
 				.set("Accept-Language", language)
 				.end((err, res) => {
 					if (err) {
@@ -46,6 +78,28 @@ module.exports = {
 							sessionStorage[`${language}-regions`] = JSON.stringify(res.body);
 						} catch (e) {
 							console.log('Session storage is full. Regions Request not cached.');
+						}
+
+						resolve(res.body);
+					});
+			}
+		});
+	},
+
+	fetchCities(regionId, language) {
+		return new Promise((resolve, reject) => {
+			const sessionStorage = getSessionStorage();
+
+			if (sessionStorage[`${language}-cities`]) {
+				resolve(JSON.parse(sessionStorage[`${language}-cities`]));
+			} else {
+				request
+					.get(BACKEND_URL + "/cities/list/?regionId=" + regionId)
+					.set("Accept-Language", language)
+					.end((err, res) => {
+						if (err) {
+							reject(err);
+							return;
 						}
 
 						resolve(res.body);
@@ -106,7 +160,7 @@ module.exports = {
 		});
 	},
 
-	fetchAllServices(countryId, language, categoryId, searchTerm, regionId, cityId, status, ignoreRegions = false) {
+	fetchAllServices(countryId, language, categoryId, regionId, cityId, searchTerm, status, ignoreRegions = false) {
 		//If the region is a country, search for all the services in any location from that country
 		//If the region is a city, search for all the services in the city AND country wide services
 		//let filter = ignoreRegions ? 'relatives' : "with-parents";
@@ -207,7 +261,7 @@ module.exports = {
 				resolve(_.first(service));
 			} else {
 				request
-					.get(BACKEND_URL + "/services/search/?id=" + serviceId)
+					.get(BACKEND_URL + "/services/" + serviceId)
 					.set("Accept-Language", language)
 					.end((err, res) => {
 						if (err) {
@@ -216,7 +270,7 @@ module.exports = {
 						}
 						let services = _.first(res.body);
 
-						resolve(services);
+						resolve(res.body);
 					});
 			}
 		});

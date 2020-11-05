@@ -23,6 +23,7 @@ class ServiceCategoryList extends React.Component {
 	componentDidMount() {
 		const { fetchCategories } = this.props;
 		const { categories } = this.state;
+		console.log('props mobile ', this.props);
 		if (fetchCategories && categories.length === 0) {
 			fetchCategories().then(categories => {
 				this.setState({ categories, loaded: true });
@@ -44,8 +45,8 @@ class ServiceCategoryList extends React.Component {
 		let { onSelectCategory } = this.props;
 		onSelectCategory = onSelectCategory || (() => console.log("noop"));
 
-		let { id, name, vector_icon } = c;
-		let iconPrefix = vector_icon.split("-")[0];
+		let { id, name, icon } = c;
+		let iconPrefix = icon && icon.split("-")[0];
 
 		let color = this.fixColor(c.color);
 		color = tinycolor(color)
@@ -60,7 +61,7 @@ class ServiceCategoryList extends React.Component {
 			<li key={id}>
 				<hr className="line" />
 				<div className="container" onClick={() => { setTimeout(() => onSelectCategory(c), 300) }}>
-					<i className={`${iconPrefix} ${vector_icon}`} style={style} />
+					<i className={`${iconPrefix} ${icon}`} style={style} />
 					<span>{name}</span>
 				</div>
 			</li>
