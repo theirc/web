@@ -53,11 +53,9 @@ class ServiceCategoryListDesktop extends React.Component {
 	};
 
 	componentDidMount() {
-		console.log('PROOPS ', this.props);
 		const { category, country, cities, fetchCategories, fetchCategoriesByCity, fetchCategoriesByRegion, 
 			fetchServices, location, regions, showFilter } = this.props;
 		let c = regions.filter(r => r.country.slug === country.fields.slug)[0]
-		console.log('C ', c);
 		const { categories } = this.state;
 		// const showDepartments = _.has(country, 'fields.slug') && instance.countries[country.fields.slug].switches.showDepartments;
 
@@ -65,11 +63,10 @@ class ServiceCategoryListDesktop extends React.Component {
 		let ci = '';
 
 		if (location) {
-			console.log('location ', location);
-			let tempL = regions.filter(r => r.name === location);
+			let tempL = regions.filter(r => r.slug === location);
 			l = tempL.length > 0 ? tempL[0] : '';
 			if (!l && cities && cities.length > 0) {
-				let tempCi = cities.filter(c => c.name === location);
+				let tempCi = cities.filter(c => c.slug === location);
 				ci = tempCi.length > 0 ? tempCi[0] : '';
 				// tempL = regions.filter(r => r.name ===)
 			}
@@ -107,7 +104,6 @@ class ServiceCategoryListDesktop extends React.Component {
 				}
 			})
 		} else if (fetchCategories && categories.length === 0) {
-			console.log('c ', c);
 			fetchCategories(c.country.id).then(categories => {
 				this.setState({ categories, loaded: true });
 				if (category) {
@@ -122,18 +118,15 @@ class ServiceCategoryListDesktop extends React.Component {
 		const regionId = !l ? '' : l.id;
 		const cityId = !ci ? '' : ci.id;
 
-		console.log('ESTO ', regionId, cityId);
-
 		if (!showFilter) {
 			fetchServices(c.country.id, category, regionId, cityId).then(
 				services => {
+					let orderedServices = _.orderBy(services, ["region.name", "name"], [ "asc", "asc"]);
 					let servicesFiltered = [];
-					for(let x = 0; x < 10 && x < services.length; x++) {
-						servicesFiltered.push(services[x])
+					for(let x = 0; x < 10 && x < orderedServices.length; x++) {
+						servicesFiltered.push(orderedServices[x])
 					}
-					console.log('services ', services);
-					console.log('servicesFiltered ', servicesFiltered);
-					this.setState({ services, showServices: true, servicesRendered: servicesFiltered, serviceCount: servicesFiltered.length });
+					this.setState({ services: orderedServices, showServices: true, servicesRendered: servicesFiltered, serviceCount: servicesFiltered.length });
 				}
 			)
 		}
@@ -173,10 +166,6 @@ class ServiceCategoryListDesktop extends React.Component {
 	onSelectLocation = element => {
 		const { fetchCategoriesByRegion, fetchCitiesByRegion } = this.props;
 
-		console.log('props ', this.props);
-
-		console.log('categories ', this.state.categories);
-
 		this.setState({ location: element, region: element, city: '' });
 		// this.municipalidadesFilter(element);
 
@@ -188,8 +177,6 @@ class ServiceCategoryListDesktop extends React.Component {
 	onSelectMunicipality = element => {
 		const { fetchCategoriesByCity } = this.props;
 
-		console.log('muni element ', element);
-
 		this.setState({ location: element, city: element });
 
 		fetchCategoriesByCity(element.id).then(categories => this.setState({ categories: categories, showServices: true }));
@@ -200,7 +187,6 @@ class ServiceCategoryListDesktop extends React.Component {
 	}
 
 	showServices = (mapState = null) => {
-		console.log('ESTA ENTRANDO ACA');
 		const { goTo } = this.props;
 
 		let showMap = mapState != null ? mapState : this.state.showMap;
@@ -223,7 +209,6 @@ class ServiceCategoryListDesktop extends React.Component {
 
 		let currentLocation = this.state.location.level === 3 ? regions.filter(r => r.id === this.state.location.parent)[0] : this.state.location;
 
-		console.log('entra aca y hace curentLocation ', currentLocation);
 		this.setState({ location: currentLocation })
 	}
 
@@ -359,7 +344,6 @@ class ServiceCategoryListDesktop extends React.Component {
 		let fullAddress = [service.address, service.address_city].filter(val => val).join(", ");
 		let mainType = service.serviceCategories ? service.serviceCategories[0] : '';
 		let subTypes = service.serviceCategories.length > 1 ? [...service.serviceCategories.shift()] : '';
-		console.log('subtypes ', subTypes);
 
 		return [
 			<li key={service.id} className="Item" onClick={() => goToService(country, language, service.id)}>
@@ -399,7 +383,6 @@ class ServiceCategoryListDesktop extends React.Component {
 		const { categories, loaded, showServices, servicesRendered } = this.state;
 		const { t, regions, country } = this.props;
 		let regionsRender = regions.filter(r => r.country && r.country.slug === country.fields.slug);
-		console.log('REGIONS RENDER ', regionsRender);
 		regionsRender.unshift(regionsRender[0].country)
 		// let l3 = regions.filter(r => r.country.name === country.fields.name || (r.country.id === countryId && (r.level && r.level === 3) && !r.isHidden) || (!r.isHidden && regions.filter(r => r.country.id === countryId && (r.level && r.level === 2)).map(t => t.id).indexOf(r.country.id) >= 0))
 		// const showDepartments = _.has(country, 'fields.slug') && instance.countries[country.fields.slug].switches.showDepartments;

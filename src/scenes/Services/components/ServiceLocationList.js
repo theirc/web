@@ -27,17 +27,18 @@ class ServiceCategoryList extends React.Component {
 		const {
 			id,
 			name,
-			level,
-			title
+			country,
+			title,
+			slug
 		} = c;
 		let locationName = title ? title : name;
 
 		return (
-			<li key={id}>
+			<li key={`${id}-${slug}`}>
 				<hr className="line" />
 
 				<div className="container" onClick={() => setTimeout(() => openLocation(c, name), 300)}>
-					<i className={`fa fa-${level > 1 ? 'building' : 'globe'}`} />
+					<i className='fa fa-building' />
 					<strong>{locationName}</strong>
 				</div>
 			</li>
@@ -60,23 +61,23 @@ class ServiceCategoryList extends React.Component {
 			);
 		}
 
-		let sortedRegions = [];
-		if (department) {
-			sortedRegions = _.filter(allRegions, ['parent', departmentId]);
-		} else {
-			sortedRegions = _.sortBy(allRegions || [], c => {
-				if (c.level === 1) {
-					return c.name;
-				}
-			});
-		}
+		// let sortedRegions = [];
+		// if (department) {
+		// 	sortedRegions = _.filter(allRegions, ['parent', departmentId]);
+		// } else {
+		// 	sortedRegions = _.sortBy(allRegions || [], c => {
+		// 		if (!c.country) {
+		// 			return c.name;
+		// 		}
+		// 	});
+		// }
 		let title = department ? t("services.Locations in", NS) + " " + departmentName : t("services.Locations", NS);
 
 		return [
 			<HeaderBar key={"Header"} title={title.toUpperCase()} />,
 			<div key={"List"} className="ServiceCategoryList">
 				<ul>
-					{sortedRegions.map(c => this.renderRegion(c))}
+					{allRegions.map(c => this.renderRegion(c))}
 				</ul>
 			</div>
 		];

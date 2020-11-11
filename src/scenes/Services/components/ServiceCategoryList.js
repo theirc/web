@@ -23,7 +23,6 @@ class ServiceCategoryList extends React.Component {
 	componentDidMount() {
 		const { fetchCategories } = this.props;
 		const { categories } = this.state;
-		console.log('props mobile ', this.props);
 		if (fetchCategories && categories.length === 0) {
 			fetchCategories().then(categories => {
 				this.setState({ categories, loaded: true });
@@ -43,7 +42,6 @@ class ServiceCategoryList extends React.Component {
 	renderCategory(c) {
 
 		let { onSelectCategory } = this.props;
-		onSelectCategory = onSelectCategory || (() => console.log("noop"));
 
 		let { id, name, icon } = c;
 		let iconPrefix = icon && icon.split("-")[0];

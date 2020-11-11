@@ -26,10 +26,11 @@ class ServiceDepartmentList extends React.Component {
 		const {
 			id,
 			name,
+			slug
 		} = c;
 
 		return (
-			<li key={id}>
+			<li key={`${id}-${slug}`}>
 				<hr className="line" />
 				<div className="container" onClick={() => setTimeout(() => onOpenDepartment(c.id, c.slug, name), 300)}>
 					{name}

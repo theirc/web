@@ -227,7 +227,6 @@ class ServiceDetail extends React.Component {
 		};
 
 		let serviceT = service.data_i18n.filter(x => x.language === language)[0]
-		console.log('SERVICET ', serviceT)
 		// service translated fields
 		// let serviceT = {
 		// 	additional_info: service[`additional_info_${language}`],
@@ -290,7 +289,7 @@ class ServiceDetail extends React.Component {
 					{/* {serviceT.languages_spoken && <h3>{t("services.Languages Spoken", NS)}</h3>}
 					{serviceT.languages_spoken && <p dangerouslySetInnerHTML={{ __html: serviceT.languages_spoken }} />} */}
 
-					{hasHours(service.serviceOpeningHours) && (
+					{/* {hasHours(service.serviceOpeningHours) && (
 						<span>
 							<h3>{t("services.Visiting hours", NS)}</h3>
 							<p>{service.isAlwaysOpen && t("services.Open 24/7", NS)}</p>
@@ -302,7 +301,7 @@ class ServiceDetail extends React.Component {
 								)}
 							</div>
 						</span>
-					)}
+					)} */}
 					{/* {serviceT.address_city && <h4>{t("services.Location", NS)}</h4>}
 					{serviceT.address_city && <p>{serviceT.address_city}</p>} */}
 
