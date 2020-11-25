@@ -160,19 +160,7 @@ module.exports = {
 		});
 	},
 
-	fetchAllServices(countryId, language, categoryId, regionId, cityId, searchTerm, status, ignoreRegions = false) {
-		//If the region is a country, search for all the services in any location from that country
-		//If the region is a city, search for all the services in the city AND country wide services
-		//let filter = ignoreRegions ? 'relatives' : "with-parents";
-		console.log('FETCH ALL SERVICES');
-		console.log(countryId, ', ', language, ', ', categoryId, ', ', searchTerm );
-
-		// if (!ignoreRegions && sessionStorage[`${language}-regions`]) {
-		if (!ignoreRegions) {
-			let regions = JSON.parse(sessionStorage[`${language}-regions`]);
-			let region = _.first(regions.filter(c => c.country.id === countryId));
-			//filter = region.level === 3 ? "with-parents" : "relatives";
-		}
+	fetchAllServices(countryId, language, categoryId, regionId, cityId, searchTerm, status) {
 
 			return new Promise((resolve, reject) => {
 			let sl = sessionStorage[`serviceList`] !== undefined ? JSON.parse(sessionStorage[`serviceList`]) : null;
@@ -211,42 +199,8 @@ module.exports = {
 
 						resolve(res.body);
 					});
-
-				// fetch(BACKEND_URL + requestUrl, { headers })
-				// 	.then(res => {res.json();})
-				// 	.then(data => {
-				// 		console.log(data);
-				// 		let services = data
-
-				// 		resolve(services);
-				// 	})
-				// 	.catch((err) => {
-				// 		console.log("error", err);
-				// 		reject(err);
-				// 		return;
-				// 	});
-
 			}
 
-		});
-	},
-
-	fetchAllServicesNearby(country, language, position = [], distance = 5, pageSize = 50) {
-		return new Promise((resolve, reject) => {
-			var requestUrl = `/services/search/?filter=relatives&geographic_region=${country}&page=1&page_size=${pageSize}&near=${position.join(", ")}&near_km=${distance}`;
-
-			request
-				.get(BACKEND_URL + requestUrl)
-				.set("Accept-Language", language)
-				.end((err, res) => {
-					if (err) {
-						reject(err);
-						return;
-					}
-					let services = res.body;
-
-					resolve(services);
-				});
 		});
 	},
 
@@ -268,7 +222,6 @@ module.exports = {
 							reject(err);
 							return;
 						}
-						let services = _.first(res.body);
 
 						resolve(res.body);
 					});
@@ -291,23 +244,5 @@ module.exports = {
 					resolve(services);
 				});
 		});
-	},
-
-	fetchServicesInSameLocation(language, serviceId) {
-		// get_same_coordinates_services
-		return new Promise((resolve, reject) => {
-			request
-				.get(BACKEND_URL + "/services/" + serviceId + "/get_same_coordinates_services/")
-				.set("Accept-Language", language)
-				.end((err, res) => {
-					if (err) {
-						reject(err);
-						return;
-					}
-					let services = res.body.results.filter(r => r.id !== serviceId);
-
-					resolve(services);
-				});
-		});
-	},
+	}
 };

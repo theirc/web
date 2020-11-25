@@ -8,7 +8,9 @@ import './EmbedMap.css';
 const zdUrl = 'https://signpost-colombia.zendesk.com/hc/es-co/articles/';
 
 var tinycolor = require("tinycolor2");
-let iconWithPrefix = vector_icon => vector_icon.split("-")[0] + " " + vector_icon;
+let iconWithPrefix = vector_icon => vector_icon.indexOf('icon') > -1 ? 
+								vector_icon.split('-')[0]+' '+vector_icon : 
+								`fa fa-${vector_icon}`;
 let categoryStyle = color => {
 	if (!color) {
 		color = "#000";

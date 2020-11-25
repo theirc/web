@@ -44,7 +44,9 @@ class ServiceCategoryList extends React.Component {
 		let { onSelectCategory } = this.props;
 
 		let { id, name, icon } = c;
-		let iconPrefix = icon && icon.split("-")[0];
+		let iconWithPrefix = vector_icon => (vector_icon && vector_icon.indexOf('icon') > -1) ? 
+								vector_icon.split('-')[0]+' '+vector_icon : 
+								`fa fa-${vector_icon}`;
 
 		let color = this.fixColor(c.color);
 		color = tinycolor(color)
@@ -59,7 +61,7 @@ class ServiceCategoryList extends React.Component {
 			<li key={id}>
 				<hr className="line" />
 				<div className="container" onClick={() => { setTimeout(() => onSelectCategory(c), 300) }}>
-					<i className={`${iconPrefix} ${icon}`} style={style} />
+					<i className={iconWithPrefix(icon)} style={style} />
 					<span>{name}</span>
 				</div>
 			</li>

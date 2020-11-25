@@ -55,7 +55,7 @@ class Services extends React.Component {
 
 	componentWillMount() {
 		let { regions, country, changeDefaultLocation } = this.props;
-		let countryRegions = regions.filter(c => c.country.slug === country.fields.slug);
+		let countryRegions = regions.filter(r => r.country && r.country.slug === country.fields.slug && r.isActive);
 		countryRegions.unshift(countryRegions[0].country)
 
 		this.setState({ countryRegions });
@@ -159,77 +159,12 @@ class Services extends React.Component {
 		const orderByDistance = c => (sortingByLocationEnabled && geolocation ? _.sortBy(c, s => this.measureDistance(geolocation, language, true)(s.location)) : _.identity(c));
 		return servicesApi
 			.fetchAllServices(countryId, language, categoryId, regionId, cityId)
-			// .then(s => {console.log('ESE ', s);orderByDistance(s)})
-			.then(services => ({ services, category: null }));
-	}
-
-	fetchAllServicesNearby() {
-		const { country, language } = this.props;
-		const { fetchingLocation, errorWithGeolocation, geolocation } = this.state;
-
-		if (errorWithGeolocation) {
-			return Promise.reject({
-				message: "We cannot determine your location",
-			});
-		} else if (!fetchingLocation && !geolocation) {
-			this.setState({ fetchingLocation: true });
-			this.findUsersPosition()
-				.then(pos => {
-					this.setState({ fetchingLocation: false, geolocation: pos });
-				})
-				.catch(e => {
-					this.setState({ errorWithGeolocation: true });
-				});
-
-			return new Promise(() => { });
-		}
-
-		if (fetchingLocation) {
-			return new Promise(() => { });
-		} else if (!geolocation) {
-			return Promise.reject({
-				message: "We cannot determine your location",
-			});
-		}
-
-		const { latitude, longitude } = geolocation;
-		const orderByDistance = c => (geolocation ? _.sortBy(c, s => this.measureDistance(geolocation, language, true)(s.location)) : _.identity(c));
-
-		return servicesApi
-			.fetchAllServicesNearby(country.fields.slug, language, [longitude, latitude])
-			.then(s => orderByDistance(s.results))
-			.then(services => ({ services, category: null }));
-	}
-
-	fetchServicesWithin(bbox, category = null) {
-		const { country, language } = this.props;
-		return servicesApi
-			.fetchAllServices(country.fields.slug, language, category, null)
-			.then(s => s.results)
-			.then(services => ({ services, category: category }));
-	}
-
-	fetchServicesWithinCategoryLocation(bbox, location = null, category = null) {
-		const { country, language } = this.props;
-
-		return servicesApi
-			.fetchAllServices(location || country.fields.slug, language, category, null)
-			.then(s => s.results)
-			.then(services => ({ services, category: null }));
-	}
-
-	fetchServicesWithinLocation(bbox, location = null) {
-		const { country, language } = this.props;
-
-		return servicesApi
-			.fetchAllServices(location || country.fields.slug, language, null, null)
-			.then(s => s.results)
-			.then(services => ({ services, category: null }));
+			.then(services => ({ services: services.filter(service => service.status === "current"), category: null }));
 	}
 
 	serviceTypes() {
 		const { language, country, regions } = this.props;
-		const { location, regionId, cityId } = this.state;
+		const { regionId, cityId } = this.state;
 		const countryId = (regions.find(r => r.country.slug === country.fields.slug)).country.id;
 
 		if (regionId && !cityId) {
@@ -358,7 +293,7 @@ class Services extends React.Component {
 									{isMobile &&
 										<ServiceMap
 											{...props}
-											findServicesInLocation={bbox => this.fetchServicesWithinLocation(bbox, props.match.params.location)}
+											findServicesInLocation={() => this.fetchAllInLocation(country.fields.slug)}
 											keepPreviousZoom={this.state.keepPreviousZoom}
 										/>
 									}
@@ -366,6 +301,9 @@ class Services extends React.Component {
 										<ServiceCategoryListDesktop
 											{...props}
 											fetchCategories={(countryId) => servicesApi.fetchCategoriesByCountry(language, countryId)}
+											fetchCategoriesByRegion={(regionId) => servicesApi.fetchCategoriesByRegion(language, regionId)}
+											fetchCategoriesByCity={(cityId) => servicesApi.fetchCategoriesByCity(language, cityId)}
+											fetchCitiesByRegion={(regionId) => servicesApi.fetchCities(regionId, language)}
 											fetchServices={(countryId, category, regionId, cityId) => servicesApi.fetchAllServices(countryId, language, category, regionId, cityId)}
 											goTo={(location, category, mapview, cities) => {this.goTo(location, category, mapview); this.setState({cities})}}
 											mapView={true}
@@ -453,7 +391,7 @@ class Services extends React.Component {
 									<ServiceDetail
 										{...props}
 										fetchService={() => servicesApi.fetchServicePreviewById(language, props.match.params.serviceId)}
-										fetchServicesInSameLocation={() => servicesApi.fetchServicesInSameLocation(language, props.match.params.serviceId)}
+										// fetchServicesInSameLocation={() => servicesApi.fetchServicesInSameLocation(language, props.match.params.serviceId)}
 									/>
 								</div>
 							</Skeleton>
@@ -468,7 +406,7 @@ class Services extends React.Component {
 									<ServiceDetail
 										{...props}
 										fetchService={() => servicesApi.fetchServiceById(language, props.match.params.serviceId)}
-										fetchServicesInSameLocation={() => servicesApi.fetchServicesInSameLocation(language, props.match.params.serviceId)}
+										// fetchServicesInSameLocation={() => servicesApi.fetchServicesInSameLocation(language, props.match.params.serviceId)}
 									/>
 								</div>
 							</Skeleton>
@@ -483,7 +421,7 @@ class Services extends React.Component {
 								{isMobile &&
 									<ServiceMap
 										{...props}
-										findServicesInLocation={bbox => this.fetchServicesWithin(bbox, props.match.params.categoryId)}
+										findServicesInLocation={() => this.fetchAllInLocation(this.getLocation(), props.match.params.categoryId)}
 									/>
 								}
 								{!isMobile &&
@@ -612,7 +550,7 @@ class Services extends React.Component {
 								{isMobile &&
 									<ServiceMap
 										{...props}
-										findServicesInLocation={bbox => this.fetchServicesWithinCategoryLocation(bbox, props.match.params.location, props.match.params.categoryId)}
+										findServicesInLocation={() => this.fetchAllInLocation(props.match.params.location, props.match.params.categoryId)}
 										keepPreviousZoom={this.state.keepPreviousZoom}
 									/>
 								}
@@ -676,7 +614,7 @@ class Services extends React.Component {
 								{isMobile &&
 									<ServiceMap
 										{...props}
-										findServicesInLocation={bbox => this.fetchServicesWithinLocation(bbox, props.match.params.location)}
+										findServicesInLocation={() => this.fetchAllInLocation(props.match.params.location)}
 										keepPreviousZoom={this.state.keepPreviousZoom}
 									/>
 								}

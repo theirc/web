@@ -41,7 +41,9 @@ class SearchPage extends React.Component {
 		const { onNavigate, language, measureDistance, country } = this.props;
 		const distance = measureDistance && service.location && measureDistance(service.location);
 
-		let iconWithPrefix = vector_icon => vector_icon.split("-")[0] + " " + vector_icon;
+		let iconWithPrefix = vector_icon => vector_icon.indexOf('icon') > -1 ? 
+								vector_icon.split('-')[0]+' '+vector_icon : 
+								`fa fa-${vector_icon}`;
 		let categoryStyle = color => {
 			if (!color) {
 				color = "#000";
@@ -64,7 +66,7 @@ class SearchPage extends React.Component {
 		return [
 			<li key={service.id} className="Item" onClick={() => onNavigate(`/${country.fields.slug}/services/${service.id}?language=${language}`)}>
 				<div className="Icon" key={`${service.id}-0`}>
-					<i className={iconWithPrefix(mainType.vector_icon)} style={categoryStyle(mainType.color)} />
+					<i className={iconWithPrefix(mainType.icon)} style={categoryStyle(mainType.color)} />
 				</div>
 
 				<div className="Info">
@@ -79,7 +81,7 @@ class SearchPage extends React.Component {
 						<div className="Icons">
 							{subTypes.map((t, idx) => (
 								<div className="Icon" key={`${service.id}-${idx}`}>
-									<i className={iconWithPrefix(t.vector_icon)} style={categoryStyle(t.color)} />
+									<i className={iconWithPrefix(t.icon)} style={categoryStyle(t.color)} />
 								</div>
 							))}
 						</div>
@@ -119,8 +121,8 @@ class SearchPage extends React.Component {
 
 	render() {
 		const { articles, country, language, onNavigate, searchingArticles, searchingServices, services, term, t } = this.props;
-		let servicesList = this.state.showFullServiceList ? services : services.slice().splice(0, 4);
-		let articleList = this.state.showFullBlogList ? articles : articles.slice().splice(0, 3);
+		let servicesList = (this.state.showFullServiceList && services) ? services : (services ? services.slice().splice(0, 4): []);
+		let articleList = (this.state.showFullBlogList && articles) ? articles : (articles ? articles.slice().splice(0, 3) : []);
 		const toggleServicelabel = this.state.showFullServiceList ? t('buttons.Show Less', NS) : t('buttons.Show More', NS);
 		const toggleArticleslabel = this.state.showFullBlogList ? t('buttons.Show Less', NS) : t('buttons.Show More', NS);
 
@@ -147,11 +149,11 @@ class SearchPage extends React.Component {
 								</div>
 							</div>
 
-							{!searchingServices && services.length > 0 &&
+							{!searchingServices && services && services.length > 0 &&
 								<div className="show-action"><button className="show-more" onClick={this.toggleServices}>{toggleServicelabel}</button></div>
 							}
 
-							{!searchingServices && services.length === 0 && (
+							{!searchingServices && services &&  services.length === 0 && (
 								<div className='no-results'>
 									<em>{t("list.No services found with the keywords used", NS)}</em>
 								</div>
@@ -197,13 +199,13 @@ class SearchPage extends React.Component {
 							</div>
 						</div>
 
-						{!searchingArticles && articles.length > 0 &&
+						{!searchingArticles && articles &&  articles.length > 0 &&
 							<div className="show-action">
 								<button className="show-more" onClick={this.toggleArticles}>{toggleArticleslabel}</button>
 							</div>
 						}
 
-						{!searchingArticles && articles.length === 0 && (
+						{!searchingArticles && articles &&  articles.length === 0 && (
 							<div className='no-results'>
 								<em>{t("list.No articles found with the keywords used", NS)}</em>
 							</div>
