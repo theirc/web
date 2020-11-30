@@ -60,18 +60,7 @@ class ServiceCategoryList extends React.Component {
 				</div>
 			);
 		}
-
-		// let sortedRegions = [];
-		// if (department) {
-		// 	sortedRegions = _.filter(allRegions, ['parent', departmentId]);
-		// } else {
-		// 	sortedRegions = _.sortBy(allRegions || [], c => {
-		// 		if (!c.country) {
-		// 			return c.name;
-		// 		}
-		// 	});
-		// }
-		let title = department ? t("services.Locations in", NS) + " " + departmentName : t("services.Locations", NS);
+		let title = department ? `${t("services.Locations in", NS)} ${departmentName}` : t("services.Locations", NS);
 
 		return [
 			<HeaderBar key={"Header"} title={title.toUpperCase()} />,

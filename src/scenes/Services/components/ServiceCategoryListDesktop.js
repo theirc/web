@@ -53,11 +53,10 @@ class ServiceCategoryListDesktop extends React.Component {
 	};
 
 	componentDidMount() {
-		const { category, country, cities, fetchCategories, fetchCategoriesByCity, fetchCategoriesByRegion, 
+		const { category, country, cities, fetchCategories, fetchCategoriesByCity, fetchCategoriesByRegion,
 			fetchServices, location, regions, showFilter } = this.props;
 		let c = regions.filter(r => r.country.slug === country.fields.slug)[0]
 		const { categories } = this.state;
-		// const showDepartments = _.has(country, 'fields.slug') && instance.countries[country.fields.slug].switches.showDepartments;
 
 		let l = '';
 		let ci = '';
@@ -68,11 +67,10 @@ class ServiceCategoryListDesktop extends React.Component {
 			if (!l && cities && cities.length > 0) {
 				let tempCi = cities.filter(c => c.slug === location);
 				ci = tempCi.length > 0 ? tempCi[0] : '';
-				// tempL = regions.filter(r => r.name ===)
 			}
 		}
 
-		let department = ci ? ci : ( l ? l : c.country);
+		let department = ci ? ci : (l ? l : c.country);
 
 		this.setState({
 			loaded: true,
@@ -93,7 +91,7 @@ class ServiceCategoryListDesktop extends React.Component {
 					}
 				}
 			})
-		} else if(l && categories.length === 0) {
+		} else if (l && categories.length === 0) {
 			fetchCategoriesByRegion(l.id).then(categories => {
 				this.setState({ categories, loaded: true });
 				if (category) {
@@ -122,9 +120,9 @@ class ServiceCategoryListDesktop extends React.Component {
 			fetchServices(c.country.id, category, regionId, cityId).then(
 				services => {
 					const activeServices = services.filter(service => service.status === "current");
-					const orderedServices = _.orderBy(activeServices, ["region.name", "name"], [ "asc", "asc"]);
+					const orderedServices = _.orderBy(activeServices, ["region.name", "name"], ["asc", "asc"]);
 					let servicesFiltered = [];
-					for(let x = 0; x < 10 && x < orderedServices.length; x++) {
+					for (let x = 0; x < 10 && x < orderedServices.length; x++) {
 						servicesFiltered.push(orderedServices[x])
 					}
 					this.setState({ services: orderedServices, showServices: true, servicesRendered: servicesFiltered, serviceCount: servicesFiltered.length });
@@ -148,11 +146,11 @@ class ServiceCategoryListDesktop extends React.Component {
 	}
 
 	onShowMore = () => {
-		this.setState({loadingMoreServices: true});
+		this.setState({ loadingMoreServices: true });
 		const { services, serviceCount } = this.state;
 
 		const servicesFiltered = [];
-		for(let x = serviceCount - 1; servicesFiltered.length < 10 && x < services.length; x++) {
+		for (let x = serviceCount - 1; servicesFiltered.length < 10 && x < services.length; x++) {
 			servicesFiltered.push(services[x])
 		}
 
@@ -169,7 +167,7 @@ class ServiceCategoryListDesktop extends React.Component {
 
 		this.setState({ location: element, region: element, city: '' });
 
-		fetchCitiesByRegion(element.id).then(cities => this.setState({cities: cities.filter(city => city.isActive), showMunicipalities: true}))
+		fetchCitiesByRegion(element.id).then(cities => this.setState({ cities: cities.filter(city => city.isActive), showMunicipalities: true }))
 
 		fetchCategoriesByRegion(element.id).then(categories => this.setState({ categories, showServices: true }));
 	}
@@ -228,10 +226,10 @@ class ServiceCategoryListDesktop extends React.Component {
 		if (!icon) {
 			return false;
 		}
-		
-		let iconWithPrefix = vector_icon => vector_icon.indexOf('icon') > -1 ? 
-								vector_icon.split('-')[0]+' '+vector_icon : 
-								`fa fa-${vector_icon}`;
+
+		let iconWithPrefix = vector_icon => vector_icon.indexOf('icon') > -1 ?
+			`${vector_icon.split('-')[0]} ${vector_icon}` :
+			`fa fa-${vector_icon}`;
 
 		let color = this.fixColor(category.color);
 		color = tinycolor(color).saturate(30).toHexString();
@@ -250,10 +248,10 @@ class ServiceCategoryListDesktop extends React.Component {
 	}
 
 	renderDepartmentButton(department, onSelect) {
-		const {country} = this.props;
+		const { country } = this.props;
 		return (
 			<button key={`${department.id}-${department.slug}`} className={department.slug === this.state.location.slug ? "location-item-selected" : "location-item"} onClick={() => onSelect(department)}>
-				{department.slug === country.fields.slug  && <i className='fa fa-globe' />}<span>{department.name}</span>
+				{department.slug === country.fields.slug && <i className='fa fa-globe' />}<span>{department.name}</span>
 			</button>
 		);
 	}
@@ -328,9 +326,9 @@ class ServiceCategoryListDesktop extends React.Component {
 		const { country, goToService, language, measureDistance } = this.props;
 		const distance = measureDistance && service.location && measureDistance(service.location);
 
-		let iconWithPrefix = vector_icon => vector_icon.indexOf('icon') > -1 ? 
-								vector_icon.split('-')[0]+' '+vector_icon : 
-								`fa fa-${vector_icon}`;
+		let iconWithPrefix = vector_icon => vector_icon.indexOf('icon') > -1 ?
+			`${vector_icon.split('-')[0]} ${vector_icon}` :
+			`fa fa-${vector_icon}`;
 		let categoryStyle = color => {
 			if (!color) {
 				color = "#000";
@@ -354,31 +352,31 @@ class ServiceCategoryListDesktop extends React.Component {
 			<li key={service.id} className="Item" onClick={() => goToService(country, language, service.id)}>
 				{/* TODO: move Item to separate component with styles and stuff */}
 				{/* <Link className='Item--wrapper' to={`/${country.fields.slug}/services/${service.id}?language=${language}`}> */}
-					{mainType && <div className="Icon" key={`${service.id}-0`}>
-						<i className={iconWithPrefix(mainType.icon)} style={categoryStyle(mainType.color)} />
-					</div>}
+				{mainType && <div className="Icon" key={`${service.id}-0`}>
+					<i className={iconWithPrefix(mainType.icon)} style={categoryStyle(mainType.color)} />
+				</div>}
 
-					<div className="Info">
-						<h1>{service.name}</h1>
+				<div className="Info">
+					<h1>{service.name}</h1>
 
-						<h2>
-							{service.provider && service.provider.name}{" "}
-							<span>
-								{fullAddress}
-								{distance && ` - ${distance}`}
-							</span>
+					<h2>
+						{service.provider && service.provider.name}{" "}
+						<span>
+							{fullAddress}
+							{distance && ` - ${distance}`}
+						</span>
 
-							<div className="Icons">
-								{subTypes.length > 0 && subTypes.map((t, idx) => (
-									<div className="Icon" key={`${service.id}-${idx}`}>
-										<i className={iconWithPrefix(t.icon)} style={categoryStyle(t.color)} />
-									</div>
-								))}
-							</div>
-						</h2>
-					</div>
+						<div className="Icons">
+							{subTypes.length > 0 && subTypes.map((t, idx) => (
+								<div className="Icon" key={`${service.id}-${idx}`}>
+									<i className={iconWithPrefix(t.icon)} style={categoryStyle(t.color)} />
+								</div>
+							))}
+						</div>
+					</h2>
+				</div>
 
-					<i className="material-icons" />
+				<i className="material-icons" />
 				{/* </Link> */}
 			</li>,
 		];
@@ -431,9 +429,9 @@ class ServiceCategoryListDesktop extends React.Component {
 				}
 
 				{!this.state.showMap && this.state.showMore && servicesRendered.length >= 10 &&
-				!this.state.loadingMoreServices &&
-				<div className='show-more'><button onClick={this.onShowMore}>{t('services.Show More', NS)}</button></div>
-			}
+					!this.state.loadingMoreServices &&
+					<div className='show-more'><button onClick={this.onShowMore}>{t('services.Show More', NS)}</button></div>
+				}
 
 				{!this.state.showMap && this.state.showMore && this.state.loadingMoreServices && servicesRendered.length >= 10 &&
 					<div className="loader" />
