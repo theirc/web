@@ -42,10 +42,11 @@ class ServiceCategoryList extends React.Component {
 	renderCategory(c) {
 
 		let { onSelectCategory } = this.props;
-		onSelectCategory = onSelectCategory || (() => console.log("noop"));
 
-		let { id, name, vector_icon } = c;
-		let iconPrefix = vector_icon.split("-")[0];
+		let { id, name, icon } = c;
+		let iconWithPrefix = vector_icon => (vector_icon && vector_icon.indexOf('icon') > -1) ?
+								`${vector_icon.split('-')[0]} ${vector_icon}` : 
+								`fa fa-${vector_icon}`;
 
 		let color = this.fixColor(c.color);
 		color = tinycolor(color)
@@ -60,7 +61,7 @@ class ServiceCategoryList extends React.Component {
 			<li key={id}>
 				<hr className="line" />
 				<div className="container" onClick={() => { setTimeout(() => onSelectCategory(c), 300) }}>
-					<i className={`${iconPrefix} ${vector_icon}`} style={style} />
+					<i className={iconWithPrefix(icon)} style={style} />
 					<span>{name}</span>
 				</div>
 			</li>
@@ -104,7 +105,7 @@ class ServiceCategoryList extends React.Component {
 						<div>
 							<li key="title1">
 								<div className="container disabled">
-									<strong>{t("services.Services in", NS) + " " + t(locationName)}</strong>
+									<strong>{`${t("services.Services in", NS)} ${t(locationName)}`}</strong>
 								</div>
 							</li>
 							<hr className="line" />

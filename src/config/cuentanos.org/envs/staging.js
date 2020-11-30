@@ -1,5 +1,6 @@
 export default {
-	backendUrl: 'https://admin-staging.cuentanos.org/e/production/v2',
+	backendUrl: 'https://signpost-cms-staging.azurewebsites.net/api',
+	instanceId: '13',
 	code: 'staging',
 	thirdParty: {
 		analytics: {

@@ -34,15 +34,16 @@ class ServiceCategoryListDesktop extends React.Component {
 	state = {
 		categories: [],
 		category: null,
-		department: '',
+		region: '',
 		filterType: null,
 		loaded: false,
 		loadingMoreServices: false,
 		location: {},
-		municipalities: null,
-		municipality: 'Municipalidades',
-		pageStart: 1,
+		cities: null,
+		city: '',
+		serviceCount: 0,
 		services: [],
+		servicesRendered: [],
 		showFilter: true,
 		showMore: true,
 		showMap: !!this.props.mapView,
@@ -52,36 +53,56 @@ class ServiceCategoryListDesktop extends React.Component {
 	};
 
 	componentDidMount() {
-		const { category, country, fetchCategories, fetchServices, location, regions, showFilter } = this.props;
-		let c = regions.filter(r => r.slug === country.fields.slug)[0]
+		const { category, country, cities, fetchCategories, fetchCategoriesByCity, fetchCategoriesByRegion,
+			fetchServices, location, regions, showFilter } = this.props;
+		let c = regions.filter(r => r.country.slug === country.fields.slug)[0]
 		const { categories } = this.state;
-		const showDepartments = _.has(country, 'fields.slug') && instance.countries[country.fields.slug].switches.showDepartments;
 
-		let currentLocation = c;
+		let l = '';
+		let ci = '';
 
 		if (location) {
-			let l = regions.filter(r => r.slug === location);
-			currentLocation = l.length > 0 ? l[0] : c;
+			let tempL = regions.filter(r => r.slug === location);
+			l = tempL.length > 0 ? tempL[0] : '';
+			if (!l && cities && cities.length > 0) {
+				let tempCi = cities.filter(c => c.slug === location);
+				ci = tempCi.length > 0 ? tempCi[0] : '';
+			}
 		}
 
-		let municipalities = currentLocation.level === 3 ? regions.filter(r => r.parent === currentLocation.parent) : null;
-		let department = currentLocation.level === 3 ? (!showDepartments ? currentLocation.title : currentLocation.parent__name) :
-			(currentLocation.level === 2 ? currentLocation : currentLocation.title);
+		let department = ci ? ci : (l ? l : c.country);
 
 		this.setState({
 			loaded: true,
-			location: currentLocation,
-			department: department,
-			municipality: currentLocation.level === 3 ? currentLocation : this.state.municipality,
-			municipalities: municipalities,
+			location: department,
+			region: !l ? c.country.name : l,
 			showFilter: showFilter,
-			showMunicipalities: !!municipalities,
+			cities,
+			city: ci
 		});
 
-		!municipalities && this.municipalidadesFilter(currentLocation);
-
-		if (fetchCategories && categories.length === 0) {
-			fetchCategories().then(categories => {
+		if (ci && categories.length === 0) {
+			fetchCategoriesByCity(ci.id).then(categories => {
+				this.setState({ categories, loaded: true });
+				if (category) {
+					let cat = categories.filter(c => c.id === parseInt(category, 10))[0];
+					if (cat) {
+						this.setState({ category: cat });
+					}
+				}
+			})
+		} else if (l && categories.length === 0) {
+			fetchCategoriesByRegion(l.id).then(categories => {
+				this.setState({ categories, loaded: true });
+				if (category) {
+					let cat = categories.filter(c => c.id === parseInt(category, 10))[0];
+					if (cat) {
+						this.setState({ category: cat });
+					}
+				}
+			})
+		} else if (fetchCategories && categories.length === 0) {
+			fetchCategories(c.country.id).then(categories => {
 				this.setState({ categories, loaded: true });
 				if (category) {
 					let cat = categories.filter(c => c.id === parseInt(category, 10))[0];
@@ -92,9 +113,20 @@ class ServiceCategoryListDesktop extends React.Component {
 			});
 		}
 
+		const regionId = !l ? '' : l.id;
+		const cityId = !ci ? '' : ci.id;
+
 		if (!showFilter) {
-			fetchServices(currentLocation.slug, category).then(
-				services => this.setState({ services: services.results, showServices: true })
+			fetchServices(c.country.id, category, regionId, cityId).then(
+				services => {
+					const activeServices = services.filter(service => service.status === "current");
+					const orderedServices = _.orderBy(activeServices, ["region.name", "name"], ["asc", "asc"]);
+					let servicesFiltered = [];
+					for (let x = 0; x < 10 && x < orderedServices.length; x++) {
+						servicesFiltered.push(orderedServices[x])
+					}
+					this.setState({ services: orderedServices, showServices: true, servicesRendered: servicesFiltered, serviceCount: servicesFiltered.length });
+				}
 			)
 		}
 
@@ -114,37 +146,38 @@ class ServiceCategoryListDesktop extends React.Component {
 	}
 
 	onShowMore = () => {
-		const { category, country, language, regions } = this.props;
-		let c = regions.filter(r => r.slug === country.fields.slug)[0]
+		this.setState({ loadingMoreServices: true });
+		const { services, serviceCount } = this.state;
 
-		const pageStart = this.state.pageStart + 1;
-		this.setState({loadingMoreServices: true})
-		servicesApi.fetchAllServices(c.slug, language, category, null, 10, true, pageStart).then(
-			services => {
-				this.setState({
-					loadingMoreServices: false,
-					showMore: services.results.length === 10,
-					services: [...this.state.services, ...services.results], 
-					pageStart });
-			}
-		)
+		const servicesFiltered = [];
+		for (let x = serviceCount - 1; servicesFiltered.length < 10 && x < services.length; x++) {
+			servicesFiltered.push(services[x])
+		}
+
+		this.setState({
+			loadingMoreServices: false,
+			showMore: servicesFiltered.length === 10,
+			servicesRendered: [...this.state.servicesRendered, ...servicesFiltered],
+			serviceCount: this.state.servicesRendered.length
+		})
 	}
 
 	onSelectLocation = element => {
-		const { fetchCategoriesByLocation } = this.props;
+		const { fetchCategoriesByRegion, fetchCitiesByRegion } = this.props;
 
-		this.setState({ location: element, department: element });
-		this.municipalidadesFilter(element);
+		this.setState({ location: element, region: element, city: '' });
 
-		fetchCategoriesByLocation(element.slug).then(categories => this.setState({ categories: categories, showServices: true }));
+		fetchCitiesByRegion(element.id).then(cities => this.setState({ cities: cities.filter(city => city.isActive), showMunicipalities: true }))
+
+		fetchCategoriesByRegion(element.id).then(categories => this.setState({ categories, showServices: true }));
 	}
 
 	onSelectMunicipality = element => {
-		const { fetchCategoriesByLocation } = this.props;
+		const { fetchCategoriesByCity } = this.props;
 
-		this.setState({ location: element, municipality: element });
+		this.setState({ location: element, city: element });
 
-		fetchCategoriesByLocation(element.slug).then(categories => this.setState({ categories: categories, showServices: true }));
+		fetchCategoriesByCity(element.id).then(categories => this.setState({ categories: categories, showServices: true }));
 	}
 
 	onSelectCategory = element => {
@@ -156,7 +189,7 @@ class ServiceCategoryListDesktop extends React.Component {
 
 		let showMap = mapState != null ? mapState : this.state.showMap;
 		this.setState({ showMap, showServices: true });
-		goTo(this.state.location, this.state.category, showMap);
+		goTo(this.state.location, this.state.category, showMap, this.state.cities);
 	}
 
 	closeFilters = () => {
@@ -173,19 +206,8 @@ class ServiceCategoryListDesktop extends React.Component {
 		const { regions } = this.props;
 
 		let currentLocation = this.state.location.level === 3 ? regions.filter(r => r.id === this.state.location.parent)[0] : this.state.location;
+
 		this.setState({ location: currentLocation })
-	}
-
-	municipalidadesFilter = (location = null) => {
-
-		const { regions } = this.props;
-		const department = location ? location : this.state.location;
-		if (department.level === 2) {
-			const municipalities = regions.filter(r => r.parent === department.id);
-			this.setState({ municipalities: municipalities, department: department, showMunicipalities: true })
-		} else {
-			this.setState({ showMunicipalities: false })
-		}
 	}
 
 	renderLoader = () => (
@@ -200,8 +222,14 @@ class ServiceCategoryListDesktop extends React.Component {
 	);
 
 	renderCategoryButton(category, onSelect) {
-		let { vector_icon } = category;
-		let iconPrefix = vector_icon.split("-")[0];
+		let { icon } = category;
+		if (!icon) {
+			return false;
+		}
+
+		let iconWithPrefix = vector_icon => vector_icon.indexOf('icon') > -1 ?
+			`${vector_icon.split('-')[0]} ${vector_icon}` :
+			`fa fa-${vector_icon}`;
 
 		let color = this.fixColor(category.color);
 		color = tinycolor(color).saturate(30).toHexString();
@@ -213,47 +241,47 @@ class ServiceCategoryListDesktop extends React.Component {
 		const buttonClass = this.state.category && category.id === this.state.category.id ? "location-item-selected" : "location-item";
 		return (
 			<button key={category.id} className={buttonClass} onClick={() => onSelect(category)}>
-				<i className={`${iconPrefix} ${vector_icon}`} style={style} />
+				<i className={iconWithPrefix(icon)} style={style} />
 				<span>{category.name}</span>
 			</button>
 		);
 	}
 
 	renderDepartmentButton(department, onSelect) {
+		const { country } = this.props;
 		return (
-			<button key={department.id} className={department.id === this.state.location.id ? "location-item-selected" : "location-item"} onClick={() => onSelect(department)}>
-				{department.level === 1 && <i className='fa fa-globe' />}<span>{department.name}</span>
+			<button key={`${department.id}-${department.slug}`} className={department.slug === this.state.location.slug ? "location-item-selected" : "location-item"} onClick={() => onSelect(department)}>
+				{department.slug === country.fields.slug && <i className='fa fa-globe' />}<span>{department.name}</span>
 			</button>
 		);
 	}
 
-	renderMunicipalityButton(municipality, onSelect) {
+	renderMunicipalityButton(city, onSelect) {
 		return (
-			<button key={municipality.id} className={municipality.id === this.state.municipality.id ? "location-item-selected" : "location-item"} onClick={() => onSelect(municipality)}>
-				{municipality.level === 1 && <i className='fa fa-globe' />}<span>{municipality.name}</span>
+			<button key={city.id} className={city.id === this.state.city.id ? "location-item-selected" : "location-item"} onClick={() => onSelect(city)}>
+				{city.level === 1 && <i className='fa fa-globe' />}<span>{city.name}</span>
 			</button>
 		);
 	}
 
 	renderFilters = () => {
-		let { municipalities } = this.state;
-		let { country, t } = this.props;
-		const showDepartments = _.has(country, 'fields.slug') && instance.countries[country.fields.slug].switches.showDepartments;
+		let { cities } = this.state;
+		let { t } = this.props;
 
 		let categoryName = this.state.category ? this.state.category.name : t('services.All Categories', NS);
-		let department = this.state.department.name ? this.state.department.name : this.state.department;
-		let municipality = this.state.municipality.name ? this.state.municipality.name : this.state.municipality;
+		let region = this.state.region.name ? this.state.region.name : this.state.region;
+		let city = this.state.city.name ? this.state.city.name : this.state.city;
 
 		return (
 			<div className="ActionsBar">
 				<div className="left">
-					<div id="btn-Locations" className="btn" onClick={() => { this.departamentosFilter(); this.openFilters(FilterTypes.DEPARTMENT) }}>
-						<span>{department}</span><i className="material-icons">keyboard_arrow_down</i>
+					<div id="btn-Locations" className="btn" onClick={() => { this.openFilters(FilterTypes.DEPARTMENT) }}>
+						<span>{region}</span><i className="material-icons">keyboard_arrow_down</i>
 					</div>
 
-					{municipalities && showDepartments && this.state.showMunicipalities &&
+					{cities &&
 						<div className="btn" onClick={() => { this.openFilters(FilterTypes.MUNICIPALITY) }}>
-							<span>{municipality}</span><i className="material-icons">keyboard_arrow_down</i>
+							<span>{city}</span><i className="material-icons">keyboard_arrow_down</i>
 						</div>
 					}
 
@@ -289,7 +317,7 @@ class ServiceCategoryListDesktop extends React.Component {
 					{list.map(l => renderer(l, onSelect))}
 				</div>
 
-				<div className='filter'><button onClick={() => { this.closeFilters(); this.showServices(); filterType === FilterTypes.DEPARTMENT && this.municipalidadesFilter(); }}>{t('services.Filter', NS)}</button></div>
+				<div className='filter'><button onClick={() => { this.closeFilters(); this.showServices() }}>{t('services.Filter', NS)}</button></div>
 			</div>
 		);
 	}
@@ -298,7 +326,9 @@ class ServiceCategoryListDesktop extends React.Component {
 		const { country, goToService, language, measureDistance } = this.props;
 		const distance = measureDistance && service.location && measureDistance(service.location);
 
-		let iconWithPrefix = vector_icon => vector_icon.split("-")[0] + " " + vector_icon;
+		let iconWithPrefix = vector_icon => vector_icon.indexOf('icon') > -1 ?
+			`${vector_icon.split('-')[0]} ${vector_icon}` :
+			`fa fa-${vector_icon}`;
 		let categoryStyle = color => {
 			if (!color) {
 				color = "#000";
@@ -315,60 +345,50 @@ class ServiceCategoryListDesktop extends React.Component {
 		};
 
 		let fullAddress = [service.address, service.address_city].filter(val => val).join(", ");
-		let mainType = service.type ? service.type : service.types[0];
-		let subTypes = service.types.filter(t => t.id > 0 && t.id !== mainType.id);
+		let mainType = service.serviceCategories ? service.serviceCategories[0] : '';
+		let subTypes = service.serviceCategories.length > 1 ? service.serviceCategories.filter(c => c.id !== mainType.id) : '';
 
 		return [
 			<li key={service.id} className="Item" onClick={() => goToService(country, language, service.id)}>
 				{/* TODO: move Item to separate component with styles and stuff */}
 				{/* <Link className='Item--wrapper' to={`/${country.fields.slug}/services/${service.id}?language=${language}`}> */}
-					<div className="Icon" key={`${service.id}-0`}>
-						<i className={iconWithPrefix(mainType.vector_icon)} style={categoryStyle(mainType.color)} />
-					</div>
+				{mainType && <div className="Icon" key={`${service.id}-0`}>
+					<i className={iconWithPrefix(mainType.icon)} style={categoryStyle(mainType.color)} />
+				</div>}
 
-					<div className="Info">
-						<h1>{service.name}</h1>
+				<div className="Info">
+					<h1>{service.name}</h1>
 
-						<h2>
-							{service.provider.name}{" "}
-							<span>
-								{fullAddress}
-								{distance && ` - ${distance}`}
-							</span>
+					<h2>
+						{service.provider && service.provider.name}{" "}
+						<span>
+							{fullAddress}
+							{distance && ` - ${distance}`}
+						</span>
 
-							<div className="Icons">
-								{subTypes.map((t, idx) => (
-									<div className="Icon" key={`${service.id}-${idx}`}>
-										<i className={iconWithPrefix(t.vector_icon)} style={categoryStyle(t.color)} />
-									</div>
-								))}
-							</div>
-						</h2>
-					</div>
+						<div className="Icons">
+							{subTypes.length > 0 && subTypes.map((t, idx) => (
+								<div className="Icon" key={`${service.id}-${idx}`}>
+									<i className={iconWithPrefix(t.icon)} style={categoryStyle(t.color)} />
+								</div>
+							))}
+						</div>
+					</h2>
+				</div>
 
-					<i className="material-icons" />
+				<i className="material-icons" />
 				{/* </Link> */}
 			</li>,
 		];
 	}
 
 	render() {
-		const { categories, loaded, services, showServices } = this.state;
+		const { categories, loaded, showServices, servicesRendered } = this.state;
 		const { t, regions, country } = this.props;
-		let countryId = regions.filter(r => r.slug === country.fields.slug)[0].id;
-		let l3 = regions.filter(r => r.slug === country.fields.slug || (r.parent === countryId && r.level === 3 && !r.hidden) || (!r.hidden && regions.filter(r => r.parent === countryId && r.level === 2).map(t => t.id).indexOf(r.parent) >= 0))
-		const showDepartments = _.has(country, 'fields.slug') && instance.countries[country.fields.slug].switches.showDepartments;
+		let regionsRender = regions.filter(r => r.country && r.country.slug === country.fields.slug && r.isActive);
+		regionsRender.unshift(regionsRender[0].country)
 
-		const municipalities = this.state.municipalities;
-		let departments = regions.filter(r => r.slug === country.fields.slug);
-		departments.push(...regions.filter(r => r.parent === countryId));
-
-		const availableServices = services.filter(s => !s.provider.vacancy);
-		let sortedAvailableServices = [];
-
-		if (availableServices) {
-			sortedAvailableServices = _.orderBy(availableServices, ["region.level", "region.name", "name"], ["desc", "asc", "asc"]);
-		}
+		const cities = this.state.cities;
 
 		!loaded && this.renderLoader();
 
@@ -385,15 +405,15 @@ class ServiceCategoryListDesktop extends React.Component {
 				}
 
 				{/* RENDER POPOVERS */}
-				{this.state.showFilter && this.state.filterType === FilterTypes.DEPARTMENT && departments && showDepartments &&
-					this.renderFiltersPopover(t('services.Locations', NS), this.onSelectLocation, departments, this.renderDepartmentButton.bind(this), 'departments', FilterTypes.DEPARTMENT)
+				{this.state.showFilter && this.state.filterType === FilterTypes.DEPARTMENT && regionsRender &&
+					this.renderFiltersPopover(t('services.Locations', NS), this.onSelectLocation, regionsRender, this.renderDepartmentButton.bind(this), 'departments', FilterTypes.DEPARTMENT)
 				}
-				{this.state.showFilter && this.state.filterType === FilterTypes.DEPARTMENT && l3 && !showDepartments &&
+				{/* {this.state.showFilter && this.state.filterType === FilterTypes.DEPARTMENT && l3 && !showDepartments &&
 					this.renderFiltersPopover(t('services.Locations', NS), this.onSelectLocation, l3, this.renderDepartmentButton.bind(this), 'departments', FilterTypes.DEPARTMENT)
-				}
+				} */}
 
-				{this.state.showFilter && this.state.filterType === FilterTypes.MUNICIPALITY && municipalities &&
-					this.renderFiltersPopover(t('services.Municipalidades', NS), this.onSelectMunicipality, municipalities, this.renderMunicipalityButton.bind(this), 'municipalities', FilterTypes.MUNICIPALITIES)
+				{this.state.showFilter && this.state.filterType === FilterTypes.MUNICIPALITY && cities &&
+					this.renderFiltersPopover(t('services.Municipalidades', NS), this.onSelectMunicipality, cities, this.renderMunicipalityButton.bind(this), 'municipalities', FilterTypes.MUNICIPALITIES)
 				}
 
 				{this.state.showFilter && this.state.filterType === FilterTypes.CATEGORY && categories &&
@@ -403,17 +423,17 @@ class ServiceCategoryListDesktop extends React.Component {
 				{showServices && !this.state.showMap &&
 					<div className="ServiceList">
 						<div className="ServiceListContainer">
-							{availableServices.map(this.renderServiceItem.bind(this))}
+							{servicesRendered.map(this.renderServiceItem.bind(this))}
 						</div>
 					</div>
 				}
 
-				{!this.state.showMap && this.state.showMore && availableServices.length >= 10 &&
-				!this.state.loadingMoreServices && window.location.href.includes('/services/all') &&
-				<div className='show-more'><button onClick={this.onShowMore}>{t('services.Show More', NS)}</button></div>
-			}
+				{!this.state.showMap && this.state.showMore && servicesRendered.length >= 10 &&
+					!this.state.loadingMoreServices &&
+					<div className='show-more'><button onClick={this.onShowMore}>{t('services.Show More', NS)}</button></div>
+				}
 
-				{!this.state.showMap && this.state.showMore && this.state.loadingMoreServices && availableServices.length >= 10 &&
+				{!this.state.showMap && this.state.showMore && this.state.loadingMoreServices && servicesRendered.length >= 10 &&
 					<div className="loader" />
 				}
 

@@ -80,13 +80,13 @@ class ArticleDetailBody extends Component {
 						.split("/")
 						.slice(3)
 						.join("/");
-      } else {
-        // eslint-disable-next-line
+			} else {
+				// eslint-disable-next-line
 				anchor.href = "#";
-      }
+			}
 
 			anchor.onclick = (e) => {
-        e.preventDefault();
+				e.preventDefault();
 				onNavigate(href);
 				return false;
 			};
@@ -146,12 +146,32 @@ class ArticleDetailBody extends Component {
 	}
 
 	render() {
-    const { article, category, language, loading, t } = this.props;
+		const { article, category, language, loading, t } = this.props;
 		const { title, content, hero, lead } = article.fields;
 		const { contentType } = article.sys;
+		const url = encodeURIComponent(window.location.href);
+		let lang = ''
+
+		switch (language) {
+			case 'en':
+				lang = 'en_uk';
+				break;
+			case 'ar':
+				lang = 'ar_ar';
+				break;
+			case 'fr':
+				lang = 'fr_be';
+				break;
+			case 'ur':
+				lang = 'ur_pk';
+				break;
+			default:
+				lang = '';
+				break;
+		}
 
 		let html = md.render(content || lead);
-    html = html.replace(/(\+[0-9]{9,14}|00[0-9]{9,15})/g, `<a class="tel" href="tel:$1">$1</a>`);
+		html = html.replace(/(\+[0-9]{9,14}|00[0-9]{9,15})/g, `<a class="tel" href="tel:$1">$1</a>`);
 
 		let country = _.get(article, 'fields.country.fields.slug');
 
@@ -182,7 +202,7 @@ class ArticleDetailBody extends Component {
 								<span>{article.fields.category.fields.name}</span>
 							</div>
 						}
-						{!_.has(article, 'fields.category.fields') && <span style={{visibility: 'hidden'}}></span>}
+						{!_.has(article, 'fields.category.fields') && <span style={{ visibility: 'hidden' }}></span>}
 					</div>
 
 					<div className="social">
@@ -198,11 +218,21 @@ class ArticleDetailBody extends Component {
 				{contentType.sys.id === "video" && this.renderVideo()}
 
 				<article>
-					<span className='author'><span>{t("actions.LAST_UPDATED", NS)}</span> {moment(article.sys.updatedAt).format('YYYY.MM.DD')}</span>
-					<div dangerouslySetInnerHTML={{ __html: html }} />
+					{instance.brand.url === "refugee.info" && lang.length > 0 &&
+						<div id="readspeaker_button1" className="rs_skip rsbtn rs_preserve">
+							<a rel="nofollow" className="rsbtn_play" accessKey="L" title="ReadSpeaker webReader إستمع إلى هذه الصفحةِ مستخدماً" href={`//app-eu.readspeaker.com/cgi-bin/rsent?customerid=11950&amp;lang=${lang}&amp;readid=maincontent&amp;url=${url}`}>
+								<span className="rsbtn_left rsimg rspart"><span className="rsbtn_text"><span>Listen</span></span></span>
+								<span className="rsbtn_right rsimg rsplay rspart"></span>
+							</a>
+						</div>
+					}
+					<div id="maincontent">
+						<span className='author'><span>{t("actions.LAST_UPDATED", NS)}</span> {moment(article.sys.updatedAt).format('YYYY.MM.DD')}</span>
+						<div dangerouslySetInnerHTML={{ __html: html }} />
+					</div>
 				</article>
 			</div>
-    );
+		);
 	}
 }
 

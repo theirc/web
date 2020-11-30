@@ -15,7 +15,9 @@ import "./ServiceHome.css";
 import HtmlMarker from "./HtmlMarker";
 
 var tinycolor = require("tinycolor2");
-let iconWithPrefix = vector_icon => vector_icon.split("-")[0] + " " + vector_icon;
+let iconWithPrefix = vector_icon => vector_icon.indexOf('icon') > -1 ?
+	`${vector_icon.split('-')[0]} ${vector_icon}` :
+	`fa fa-${vector_icon}`;
 let categoryStyle = color => {
 	if (!color) {
 		color = "#000";
@@ -46,7 +48,7 @@ class ServiceIcon extends React.Component {
 
 		return type ? (
 			<div className="Icon" key={`${s.id}-${idx}`} style={{ 'fontSize': '18px' }}>
-				<i className={iconWithPrefix(type.vector_icon)} style={categoryStyle(type.color)} />
+				<i className={iconWithPrefix(type.icon)} style={categoryStyle(type.color)} />
 			</div>
 		) : <div />;
 	}
@@ -60,9 +62,9 @@ class ServiceItem extends React.Component {
 
 	render() {
 		const { country, goToService, language, service } = this.props;
-		const mainType = service.type ? service.type : service.types[0];
+		const mainType = service.serviceCategories ? service.serviceCategories[0] : '';
 
-		const types = (service.types || []).filter(t => t.id !== mainType.id);
+		const types = (service.serviceCategories || []).filter(t => t.id !== mainType.id);
 
 		return (
 			<div key={service.id} className="Item" style={{ "border": "none" }} onClick={() => goToService(country, language, service.id)}>
@@ -76,7 +78,7 @@ class ServiceItem extends React.Component {
 					</div>
 
 					<h2 className="Item-content">
-						{service.provider.name}{" "}
+						{service.provider ? service.provider.name : ''}{" "}
 
 						<address className="fullAddress Item-content">
 							{service.address}
@@ -198,18 +200,16 @@ class ServiceMap extends React.Component {
 			if (this.state.services.length) {
 				console.log("services:", this.state.services);
 
-				let locationServices = this.state.services.filter(s => s.location != null);
+				let locationServices = this.state.services.filter(s => s.latitude != null && s.longitude != null && s.status === "current");
 
 				const markers = locationServices.map((s, index) => {
-					let ll = s.location.coordinates.slice().reverse();
-					console.log(ll);
-					const mainType = s.type ? s.type : s.types[0];
+					const mainType = s.serviceCategories ? s.serviceCategories[0] : '';
 					let markerDiv = ReactDOMServer.renderToString(<ServiceIcon idx={0} service={s} type={mainType} />);
 
 					let popupEl = document.createElement("div");
 					ReactDOM.render(<ServiceItem service={s} {...this.props} />, popupEl);
 
-					let marker = new HtmlMarker(new global.google.maps.LatLng(ll[0], ll[1]), this.map, {
+					let marker = new HtmlMarker(new global.google.maps.LatLng(s.latitude, s.longitude), this.map, {
 						html: markerDiv
 					});
 
@@ -243,9 +243,6 @@ class ServiceMap extends React.Component {
 	}
 
 	componentWillUnmount() {
-		// Cleaning up.
-		this.map.off();
-		this.map.remove();
 	}
 
 	render() {

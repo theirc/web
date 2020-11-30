@@ -67,7 +67,7 @@ class Search extends React.Component {
 					this.setState({ articles: [], searchingArticles: false });
 				});
 			servicesApi
-				.fetchAllServices(country.fields.slug, language, null, qs.q, 20)
+				.fetchAllServices(country.fields.slug, language, null, null, null, qs.q)
 				.then(response => this.setState({ services: response.results, searchingServices: false }))
 				.catch(e => {
 					this.setState({ services: [], searchingServices: false });
