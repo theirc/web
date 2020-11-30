@@ -15,9 +15,9 @@ import "./ServiceHome.css";
 import HtmlMarker from "./HtmlMarker";
 
 var tinycolor = require("tinycolor2");
-let iconWithPrefix = vector_icon => vector_icon.indexOf('icon') > -1 ? 
-								vector_icon.split('-')[0]+' '+vector_icon : 
-								`fa fa-${vector_icon}`;
+let iconWithPrefix = vector_icon => vector_icon.indexOf('icon') > -1 ?
+	`${vector_icon.split('-')[0]} ${vector_icon}` :
+	`fa fa-${vector_icon}`;
 let categoryStyle = color => {
 	if (!color) {
 		color = "#000";
@@ -243,9 +243,6 @@ class ServiceMap extends React.Component {
 	}
 
 	componentWillUnmount() {
-		// Cleaning up.
-		// this.map.off();
-		// this.map.remove();
 	}
 
 	render() {

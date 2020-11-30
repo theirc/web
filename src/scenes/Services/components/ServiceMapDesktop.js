@@ -13,9 +13,9 @@ import getSessionStorage from "../../../shared/sessionStorage";
 import HtmlMarker from "./HtmlMarker";
 
 var tinycolor = require("tinycolor2");
-let iconWithPrefix = vector_icon => vector_icon.indexOf('icon') > -1 ? 
-								vector_icon.split('-')[0]+' '+vector_icon : 
-								`fa fa-${vector_icon}`;
+let iconWithPrefix = vector_icon => vector_icon.indexOf('icon') > -1 ?
+	`${vector_icon.split('-')[0]} ${vector_icon}` :
+	`fa fa-${vector_icon}`;
 let categoryStyle = color => {
 	if (!color) {
 		color = "#000";
@@ -62,7 +62,7 @@ class ServiceItem extends React.Component {
 		const types = (service.serviceCategories || []).filter(t => t.id !== mainType.id);
 
 		return (
-			<div key={service.id} className="Item" style={{"border": "none"}} onClick={() => goToService(country, language, service.id)}>
+			<div key={service.id} className="Item" style={{ "border": "none" }} onClick={() => goToService(country, language, service.id)}>
 				{mainType &&
 					<ServiceIcon key={`si-${mainType.idx}`} idx={0} isMainType={1} service={service} type={mainType} />
 				}
@@ -210,9 +210,6 @@ class ServiceMapDesktop extends React.Component {
 	}
 
 	componentWillUnmount() {
-		// Cleaning up.
-		// this.map.off();
-		// this.map.remove();
 	}
 
 	render() {

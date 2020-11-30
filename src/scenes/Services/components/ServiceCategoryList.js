@@ -44,8 +44,8 @@ class ServiceCategoryList extends React.Component {
 		let { onSelectCategory } = this.props;
 
 		let { id, name, icon } = c;
-		let iconWithPrefix = vector_icon => (vector_icon && vector_icon.indexOf('icon') > -1) ? 
-								vector_icon.split('-')[0]+' '+vector_icon : 
+		let iconWithPrefix = vector_icon => (vector_icon && vector_icon.indexOf('icon') > -1) ?
+								`${vector_icon.split('-')[0]} ${vector_icon}` : 
 								`fa fa-${vector_icon}`;
 
 		let color = this.fixColor(c.color);
@@ -105,7 +105,7 @@ class ServiceCategoryList extends React.Component {
 						<div>
 							<li key="title1">
 								<div className="container disabled">
-									<strong>{t("services.Services in", NS) + " " + t(locationName)}</strong>
+									<strong>{`${t("services.Services in", NS)} ${t(locationName)}`}</strong>
 								</div>
 							</li>
 							<hr className="line" />
