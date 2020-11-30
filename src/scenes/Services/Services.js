@@ -249,7 +249,6 @@ class Services extends React.Component {
 
 		const goToLocations = (iscountrylist) => {
 			const { country } = this.props;
-			// const showDepartments = _.has(country, 'fields.slug') && instance.countries[country.fields.slug].switches.showDepartments;
 			
 			if (!this.state.region || iscountrylist) {
 				goToDepartmentList(this.props.country);
@@ -392,7 +391,6 @@ class Services extends React.Component {
 										{...props}
 										instance = {instance}
 										fetchService={() => servicesApi.fetchServicePreviewById(language, props.match.params.serviceId)}
-										// fetchServicesInSameLocation={() => servicesApi.fetchServicesInSameLocation(language, props.match.params.serviceId)}
 									/>
 								</div>
 							</Skeleton>
@@ -408,7 +406,6 @@ class Services extends React.Component {
 										{...props}
 										instance = {instance}
 										fetchService={() => servicesApi.fetchServiceById(language, props.match.params.serviceId)}
-										// fetchServicesInSameLocation={() => servicesApi.fetchServicesInSameLocation(language, props.match.params.serviceId)}
 									/>
 								</div>
 							</Skeleton>
