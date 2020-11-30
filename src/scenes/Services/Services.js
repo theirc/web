@@ -390,6 +390,7 @@ class Services extends React.Component {
 								<div className="SkeletonContainer">
 									<ServiceDetail
 										{...props}
+										instance = {instance}
 										fetchService={() => servicesApi.fetchServicePreviewById(language, props.match.params.serviceId)}
 										// fetchServicesInSameLocation={() => servicesApi.fetchServicesInSameLocation(language, props.match.params.serviceId)}
 									/>
@@ -405,6 +406,7 @@ class Services extends React.Component {
 								<div className="SkeletonContainer">
 									<ServiceDetail
 										{...props}
+										instance = {instance}
 										fetchService={() => servicesApi.fetchServiceById(language, props.match.params.serviceId)}
 										// fetchServicesInSameLocation={() => servicesApi.fetchServicesInSameLocation(language, props.match.params.serviceId)}
 									/>

@@ -171,7 +171,7 @@ class ServiceDetail extends React.Component {
 
 	render() {
 		const { service, relatedServices } = this.state;
-		const { country, goToService, language, t } = this.props;
+		const { country, goToService, language, t, instance } = this.props;
 		const countryCode = _.has(country, 'fields.slug') && instance.countries[country.fields.slug].countryCode;
 		const weekDays = [
 			{ id: 1, name: "Monday" },
@@ -181,7 +181,7 @@ class ServiceDetail extends React.Component {
 			{ id: 5, name: "Friday" },
 			{ id: 6, name: "Saturday" },
 			{ id: 7, name: "Sunday" },
-		  ];
+		];
 
 		if (!service) {
 			return (
@@ -237,53 +237,81 @@ class ServiceDetail extends React.Component {
 		let sortedContactInformation = _.sortBy(service.contact_information || [], ci => {
 			return ci.index;
 		});
-		let subtitle = ( service.serviceCategories && service.serviceCategories.length > 0) ? _.first(service.serviceCategories).name : '';
+		let subtitle = (service.serviceCategories && service.serviceCategories.length > 0) ? _.first(service.serviceCategories).name : '';
 		let phoneNumberWithCode = countryCode + service.phone_number;
+		const url = encodeURIComponent(window.location.href);
+		let lang = '';
+		switch (language) {
+			case 'en':
+				lang = 'en_uk';
+				break;
+			case 'ar':
+				lang = 'ar_ar';
+				break;
+			case 'fr':
+				lang = 'fr_be';
+				break;
+			case 'ur':
+				lang = 'ur_pk';
+				break;
+			default:
+				lang = '';
+				break;
+		}
 
 		return (
-			<div className="ServiceDetail">
-				<Helmet>
-					<title>{serviceT.name}</title>
-				</Helmet>
-
-				<HeaderBar subtitle={`${subtitle}:`} title={serviceT.name} />
-
-				{service.image &&
-					<div className="hero">
-						<div className="HeroImageContainer"><img src={service.image} alt={service.name} /></div>
+			<div>
+				{instance.brand.url === "refugee.info" && lang.length > 0 &&
+					<div id="readspeaker_button1" className="rs_skip rsbtn rs_preserve">
+						<a rel="nofollow" className="rsbtn_play" accessKey="L" title="ReadSpeaker webReader إستمع إلى هذه الصفحةِ مستخدماً" href={`//app-eu.readspeaker.com/cgi-bin/rsent?customerid=11950&amp;lang=${lang}&amp;readid=ServiceDetail&amp;url=${url}`}>
+							<span className="rsbtn_left rsimg rspart"><span className="rsbtn_text"><span>Listen</span></span></span>
+							<span className="rsbtn_right rsimg rsplay rspart"></span>
+						</a>
 					</div>
 				}
+				<div className="ServiceDetail" id="ServiceDetail">
+					<Helmet>
+						<title>{serviceT.name}</title>
+					</Helmet>
 
-				<div className='ActionsBar'>
-					<div className="left"></div>
-					<div className="social">
-						<div href='#' className="social-btn" onClick={() => fbHelpers.share(language)}><i className="fa fa-facebook-f" style={{ fontSize: 16 }} /></div>
+					<HeaderBar subtitle={`${subtitle}:`} title={serviceT.name} />
 
-						<div href='#' className="social-btn" onClick={this.onCopyLink}>
-							{!this.state.copied ? <Link /> : <LibraryBooks />}
-							{this.state.copied && <span className='copied'>{t('services.Copied', NS)}</span>}
+					{service.image &&
+						<div className="hero">
+							<div className="HeroImageContainer"><img src={service.image} alt={service.name} /></div>
 						</div>
+					}
 
+					<div className='ActionsBar'>
+						<div className="left"></div>
+						<div className="social">
+							<div href='#' className="social-btn" onClick={() => fbHelpers.share(language)}><i className="fa fa-facebook-f" style={{ fontSize: 16 }} /></div>
+
+							<div href='#' className="social-btn" onClick={this.onCopyLink}>
+								{!this.state.copied ? <Link /> : <LibraryBooks />}
+								{this.state.copied && <span className='copied'>{t('services.Copied', NS)}</span>}
+							</div>
+
+						</div>
 					</div>
-				</div>
 
-				<article>
-					<span className='author'><span>{t("services.LAST_UPDATED", NS)}</span> {moment(service.updated_at).format('YYYY.MM.DD')}</span>
+					<article>
+						<span className='author'><span>{t("services.LAST_UPDATED", NS)}</span> {moment(service.updated_at).format('YYYY.MM.DD')}</span>
 
-					{service.provider && <h2 className='provider'>
-						{t("services.Service Provider", NS)}:&nbsp;{serviceProviderElement(service.provider)}
-					</h2>}
+						{service.provider && <h2 className='provider'>
+							{t("services.Service Provider", NS)}:&nbsp;{serviceProviderElement(service.provider)}
+						</h2>}
 
-					<h2>{serviceT.name}</h2>
-					<p dangerouslySetInnerHTML={{ __html: hotlinkTels(serviceT.description) }} />
+						<h2>{serviceT.name}</h2>
+						<p dangerouslySetInnerHTML={{ __html: hotlinkTels(serviceT.description) }} />
 
-					{serviceT.additionalInformation && <h3>{t("services.Additional Information", NS)}</h3>}
-					{serviceT.additionalInformation && <p dangerouslySetInnerHTML={{ __html: hotlinkTels(serviceT.additionalInformation) }} />}
+						{serviceT.additionalInformation && <h3>{t("services.Additional Information", NS)}</h3>}
+						{serviceT.additionalInformation && <p dangerouslySetInnerHTML={{ __html: hotlinkTels(serviceT.additionalInformation) }} />}
 
-					{/* {serviceT.languages_spoken && <h3>{t("services.Languages Spoken", NS)}</h3>}
+						{/* {serviceT.languages_spoken && <h3>{t("services.Languages Spoken", NS)}</h3>}
 					{serviceT.languages_spoken && <p dangerouslySetInnerHTML={{ __html: serviceT.languages_spoken }} />} */}
 
-					{/* {hasHours(service) && (
+						{/* {hasHours(service) && (
 						<span>
 							<h3>{t("services.Visiting hours", NS)}</h3>
 							<p>{service.isAlwaysOpen && t("services.Open 24/7", NS)}</p>
@@ -296,152 +324,153 @@ class ServiceDetail extends React.Component {
 							</div>
 						</span>
 					)} */}
-					{/* {serviceT.address_city && <h4>{t("services.Location", NS)}</h4>}
+						{/* {serviceT.address_city && <h4>{t("services.Location", NS)}</h4>}
 					{serviceT.address_city && <p>{serviceT.address_city}</p>} */}
 
-					{serviceT.address && <h3>{t("services.Address", NS)}</h3>}
-					{serviceT.address && <p>{serviceT.address}</p>}
-					{/* {serviceT.address_floor && <p>{serviceT.address_floor}</p>}
+						{serviceT.address && <h3>{t("services.Address", NS)}</h3>}
+						{serviceT.address && <p>{serviceT.address}</p>}
+						{/* {serviceT.address_floor && <p>{serviceT.address_floor}</p>}
 
 					{service.address_in_country_language && <h3>{t("services.Address in Local Language", NS)}</h3>}
 					{service.address_in_country_language && <p>{service.address_in_country_language}</p>} */}
 
-					{service.costOfService && <h3>{t("services.Cost of service", NS)}</h3>}
-					{service.costOfService && <p>{service.costOfService}</p>}
+						{service.costOfService && <h3>{t("services.Cost of service", NS)}</h3>}
+						{service.costOfService && <p>{service.costOfService}</p>}
 
-					{service.latitude && service.longitude && (
-						<p>
-							<img
-								className="MapCursor"
-								alt={serviceT.name}
-								onClick={() => window.open(`https://www.google.com/maps/search/?api=1&query=${service.latitude},${service.longitude}`)}
-								src={`https://maps.googleapis.com/maps/api/staticmap?center=${service.latitude},${service.longitude}&zoom=16&size=600x300&maptype=roadmap&markers=${service.latitude},${service.longitude}&key=${GMAPS_API_KEY}`}
-							/>
-						</p>
-					)}
-
-				</article>
-
-				{this.state.showOtherServices ? (
-					<div className="footer">
 						{service.latitude && service.longitude && (
-							<div className="Selector" onClick={() => window.open(`https://www.google.com/maps/search/?api=1&query=${service.latitude},${service.longitude}`)}>
-								<span className='icon-placeholder'>
-									<i className="MenuIcon fa fa-map" aria-hidden="true" />
-								</span>
-
-								<h1>{t("services.Get directions", NS)}</h1>
-							</div>
+							<p>
+								<img
+									className="MapCursor"
+									alt={serviceT.name}
+									onClick={() => window.open(`https://www.google.com/maps/search/?api=1&query=${service.latitude},${service.longitude}`)}
+									src={`https://maps.googleapis.com/maps/api/staticmap?center=${service.latitude},${service.longitude}&zoom=16&size=600x300&maptype=roadmap&markers=${service.latitude},${service.longitude}&key=${GMAPS_API_KEY}`}
+								/>
+							</p>
 						)}
 
-						{service.phone && (
-							<div className="Selector" onClick={() => window.open(`tel:${service.phone}`)}>
-								<span className='icon-placeholder'>
-									<i className="MenuIcon fa fa-phone" aria-hidden="true" />
-								</span>
+					</article>
 
-								<h1>
-									{t("services.Call", NS)}:
-									<a className="phoneFormat" href={`tel:${service.phone}`} >{service.phone}</a>
-								</h1>
-							</div>
-						)}
-
-						{service.email && (
-							<div className="Selector" onClick={() => window.open(`mailto:${service.email}`)}>
-								<span className='icon-placeholder'>
-									<i className="MenuIcon fa fa-envelope-o" aria-hidden="true" />
-								</span>
-
-								<h1>
-									<span style={{ display: 'inline-block', overflow: 'hidden' }}>{t('services.Email', NS)}:&nbsp;</span>
-									<div className='field' style={{
-										display: 'inline-block', direction: 'ltr',
-										overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
-									}}>
-										{service.email}
-									</div>
-								</h1>
-							</div>
-						)}
-
-						{service.website && (
-							<div className="Selector" onClick={() => window.open(`${toUrl(service.website)}`)}>
-								<span className='icon-placeholder'>
-									<i className="MenuIcon fa fa-external-link" aria-hidden="true" />
-								</span>
-
-								<h1>
-									<span style={{ display: 'inline-block', overflow: 'hidden' }}>{t('services.Website', NS)}:&nbsp;</span>
-									<div className='field' style={{
-										display: 'inline-block', direction: 'ltr',
-										overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
-									}}>
-										{service.website}
-									</div>
-								</h1>
-							</div>
-						)}
-
-						{service.facebook && (
-							<div className="Selector" onClick={() => window.open(`${toUrl(service.facebook)}`)}>
-								<span className='icon-placeholder'><i className="MenuIcon fa fa-facebook-f" aria-hidden="true" /></span>
-
-								<h1>
-									<span style={{ display: 'inline-block', overflow: 'hidden' }}>{t('Facebook')}:&nbsp;</span>
-									<div className='field' style={{
-										display: 'inline-block', direction: 'ltr',
-										overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
-									}}>
-										{service.facebook}
-									</div>
-								</h1>
-							</div>
-						)}
-
-						{service.contact_information && sortedContactInformation.map(ci => this.renderContactInformation(ci, callAux))}
-
-						{(relatedServices || []).length > 0 && (
-							<div className="Selector" onClick={() => this.showServices()}>
-								<span className='icon-placeholder'>
-									<i className="MenuIcon fa fa-angle-right" aria-hidden="true" />
-								</span>
-								<h1>{t("services.OTHER_SERVICES", NS)}</h1>
-							</div>)
-						}
-					</div>)
-					: (
-						<div>
-							<div className="footer">
-								<div className="Selector">
-									<h1 className="RelatedServicesTitle">{t("services.OTHER_SERVICES", NS)}:</h1>
-								</div>
-
-								{relatedServices.map(r => (
-									<div key={r.id} onClick={() => goToService(country, language, r.id)}>
-										<div className="Selector related">
-											<span className='icon-placeholder'>
-												<i className="MenuIcon fa fa-angle-right" aria-hidden="true" />
-											</span>
-											<h1 href="#/" ><div style={{
-												display: 'inline-block', direction: 'ltr', overflow: 'hidden',
-												whiteSpace: 'nowrap', textOverflow: 'ellipsis'
-											}}>{r.name}</div></h1>
-										</div>
-									</div>
-								))
-								}
-
-								<div className="Selector back" onClick={() => this.showServices()}>
+					{this.state.showOtherServices ? (
+						<div className="footer">
+							{service.latitude && service.longitude && (
+								<div className="Selector" onClick={() => window.open(`https://www.google.com/maps/search/?api=1&query=${service.latitude},${service.longitude}`)}>
 									<span className='icon-placeholder'>
-										<i className="MenuIcon fa fa-angle-left" aria-hidden="true" />
+										<i className="MenuIcon fa fa-map" aria-hidden="true" />
 									</span>
 
-									<h1>{t("services.Back", NS)}</h1>
+									<h1>{t("services.Get directions", NS)}</h1>
+								</div>
+							)}
+
+							{service.phone && (
+								<div className="Selector" onClick={() => window.open(`tel:${service.phone}`)}>
+									<span className='icon-placeholder'>
+										<i className="MenuIcon fa fa-phone" aria-hidden="true" />
+									</span>
+
+									<h1>
+										{t("services.Call", NS)}:
+									<a className="phoneFormat" href={`tel:${service.phone}`} >{service.phone}</a>
+									</h1>
+								</div>
+							)}
+
+							{service.email && (
+								<div className="Selector" onClick={() => window.open(`mailto:${service.email}`)}>
+									<span className='icon-placeholder'>
+										<i className="MenuIcon fa fa-envelope-o" aria-hidden="true" />
+									</span>
+
+									<h1>
+										<span style={{ display: 'inline-block', overflow: 'hidden' }}>{t('services.Email', NS)}:&nbsp;</span>
+										<div className='field' style={{
+											display: 'inline-block', direction: 'ltr',
+											overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
+										}}>
+											{service.email}
+										</div>
+									</h1>
+								</div>
+							)}
+
+							{service.website && (
+								<div className="Selector" onClick={() => window.open(`${toUrl(service.website)}`)}>
+									<span className='icon-placeholder'>
+										<i className="MenuIcon fa fa-external-link" aria-hidden="true" />
+									</span>
+
+									<h1>
+										<span style={{ display: 'inline-block', overflow: 'hidden' }}>{t('services.Website', NS)}:&nbsp;</span>
+										<div className='field' style={{
+											display: 'inline-block', direction: 'ltr',
+											overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
+										}}>
+											{service.website}
+										</div>
+									</h1>
+								</div>
+							)}
+
+							{service.facebook && (
+								<div className="Selector" onClick={() => window.open(`${toUrl(service.facebook)}`)}>
+									<span className='icon-placeholder'><i className="MenuIcon fa fa-facebook-f" aria-hidden="true" /></span>
+
+									<h1>
+										<span style={{ display: 'inline-block', overflow: 'hidden' }}>{t('Facebook')}:&nbsp;</span>
+										<div className='field' style={{
+											display: 'inline-block', direction: 'ltr',
+											overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
+										}}>
+											{service.facebook}
+										</div>
+									</h1>
+								</div>
+							)}
+
+							{service.contact_information && sortedContactInformation.map(ci => this.renderContactInformation(ci, callAux))}
+
+							{(relatedServices || []).length > 0 && (
+								<div className="Selector" onClick={() => this.showServices()}>
+									<span className='icon-placeholder'>
+										<i className="MenuIcon fa fa-angle-right" aria-hidden="true" />
+									</span>
+									<h1>{t("services.OTHER_SERVICES", NS)}</h1>
+								</div>)
+							}
+						</div>)
+						: (
+							<div>
+								<div className="footer">
+									<div className="Selector">
+										<h1 className="RelatedServicesTitle">{t("services.OTHER_SERVICES", NS)}:</h1>
+									</div>
+
+									{relatedServices.map(r => (
+										<div key={r.id} onClick={() => goToService(country, language, r.id)}>
+											<div className="Selector related">
+												<span className='icon-placeholder'>
+													<i className="MenuIcon fa fa-angle-right" aria-hidden="true" />
+												</span>
+												<h1 href="#/" ><div style={{
+													display: 'inline-block', direction: 'ltr', overflow: 'hidden',
+													whiteSpace: 'nowrap', textOverflow: 'ellipsis'
+												}}>{r.name}</div></h1>
+											</div>
+										</div>
+									))
+									}
+
+									<div className="Selector back" onClick={() => this.showServices()}>
+										<span className='icon-placeholder'>
+											<i className="MenuIcon fa fa-angle-left" aria-hidden="true" />
+										</span>
+
+										<h1>{t("services.Back", NS)}</h1>
+									</div>
 								</div>
 							</div>
-						</div>
-					)}
+						)}
+				</div>
 			</div>
 		);
 	}
