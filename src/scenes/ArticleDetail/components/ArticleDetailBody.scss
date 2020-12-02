@@ -14,13 +14,16 @@
 	}
 	u {
 		text-decoration: none;
-		color: blue !important;
 	}
 
 	a:hover {
 		text-decoration: none;
 		border-bottom: 2px black solid;
 		@include brand-colors("border-bottom-color");
+	}
+
+	a {
+		color: blue !important
 	}
 
 	.HeaderBar {
@@ -157,13 +160,11 @@
 
 			a {
 				text-decoration: underline;
-				color: blue !important;
 			}
 		}
 
 		li a {
 			text-decoration: underline;
-			color: blue !important;
 		}
 
 		s:not(.Read-More) a {
