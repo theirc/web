@@ -14,6 +14,7 @@
 	}
 	u {
 		text-decoration: none;
+		color: blue !important;
 	}
 
 	a:hover {
@@ -156,11 +157,13 @@
 
 			a {
 				text-decoration: underline;
+				color: blue !important;
 			}
 		}
 
 		li a {
 			text-decoration: underline;
+			color: blue !important;
 		}
 
 		s:not(.Read-More) a {
@@ -172,6 +175,7 @@
 					height: 6px;
 					margin-right: 5px;
 					width: 2px;
+					color: blue !important;
 				}
 			}
 		}

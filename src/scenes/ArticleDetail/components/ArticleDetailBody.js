@@ -96,11 +96,22 @@ class ArticleDetailBody extends Component {
 	componentDidMount() {
 		this.injectVideoPlaceholders();
 		this.replaceLinks();
+		const ReadSpeaker = window.ReadSpeaker;
+		const rspkr = window.rspkr;
+		ReadSpeaker.init();
+		ReadSpeaker.q(function () { rspkr.ui.addClickEvents(); });
 	}
-
+	
+	
 	componentDidUpdate() {
 		this.injectVideoPlaceholders();
 		this.replaceLinks();
+	}
+	
+	componentWillUnmount() {
+		const ReadSpeaker = window.ReadSpeaker;
+		const rspkr = window.rspkr;
+		ReadSpeaker.q(function() {if (rspkr.ui.getActivePlayer()) {rspkr.ui.getActivePlayer().close();}});
 	}
 
 	renderVideo() {
