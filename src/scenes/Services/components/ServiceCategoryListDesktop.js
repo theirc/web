@@ -53,8 +53,8 @@ class ServiceCategoryListDesktop extends React.Component {
 	};
 
 	componentDidMount() {
-		const { category, country, cities, fetchCategories, fetchCategoriesByCity, fetchCategoriesByRegion,
-			fetchServices, location, regions, showFilter } = this.props;
+		const { category, country, cities, fetchCategories, fetchCitiesByRegion, fetchCategoriesByCity, fetchCategoriesByRegion,
+			fetchServices, location, regions, showFilter, t } = this.props;
 		let c = regions.filter(r => r.country.slug === country.fields.slug)[0]
 		const { categories } = this.state;
 
@@ -78,38 +78,33 @@ class ServiceCategoryListDesktop extends React.Component {
 			region: !l ? c.country.name : l,
 			showFilter: showFilter,
 			cities,
-			city: ci
+			city: ci.length > 0 ? ci : t("services.Municipalidades", NS)
 		});
 
 		if (ci && categories.length === 0) {
 			fetchCategoriesByCity(ci.id).then(categories => {
-				this.setState({ categories, loaded: true });
+				let cat;
 				if (category) {
-					let cat = categories.filter(c => c.id === parseInt(category, 10))[0];
-					if (cat) {
-						this.setState({ category: cat });
-					}
+					cat = categories.filter(c => c.id === parseInt(category, 10))[0];
 				}
+				cat ? this.setState({ categories, category: cat, loaded: true }) : this.setState({ categories, loaded: true });
 			})
 		} else if (l && categories.length === 0) {
+			fetchCitiesByRegion(l.id).then(cities => this.setState({ cities: cities.filter(city => city.isActive), showMunicipalities: true }))
 			fetchCategoriesByRegion(l.id).then(categories => {
-				this.setState({ categories, loaded: true });
+				let cat;
 				if (category) {
-					let cat = categories.filter(c => c.id === parseInt(category, 10))[0];
-					if (cat) {
-						this.setState({ category: cat });
-					}
+					cat = categories.filter(c => c.id === parseInt(category, 10))[0];
 				}
+				cat ? this.setState({ categories, category: cat, loaded: true }) : this.setState({ categories, loaded: true });
 			})
 		} else if (fetchCategories && categories.length === 0) {
 			fetchCategories(c.country.id).then(categories => {
-				this.setState({ categories, loaded: true });
+				let cat;
 				if (category) {
-					let cat = categories.filter(c => c.id === parseInt(category, 10))[0];
-					if (cat) {
-						this.setState({ category: cat });
-					}
+					cat = categories.filter(c => c.id === parseInt(category, 10))[0];
 				}
+				cat ? this.setState({ categories, category: cat, loaded: true }) : this.setState({ categories, loaded: true });
 			});
 		}
 
@@ -163,9 +158,9 @@ class ServiceCategoryListDesktop extends React.Component {
 	}
 
 	onSelectLocation = element => {
-		const { fetchCategoriesByRegion, fetchCitiesByRegion } = this.props;
+		const { fetchCategoriesByRegion, fetchCitiesByRegion, t } = this.props;
 
-		this.setState({ location: element, region: element, city: '' });
+		this.setState({ location: element, region: element, city: t("services.Municipalidades", NS) });
 
 		fetchCitiesByRegion(element.id).then(cities => this.setState({ cities: cities.filter(city => city.isActive), showMunicipalities: true }))
 
