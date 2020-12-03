@@ -191,14 +191,6 @@ class ArticleDetailBody extends Component {
 			<div ref={r => (this._ref = r)} className={["ArticleDetailBody", loading ? "loading" : "loaded"].join(" ")}>
 				<Helmet>
 					<title>{title}</title>
-					
-					{/* <!-- Facebook Meta Tags --> */}
-					<meta property="og:url" content={window.location.href} />
-					<meta property="og:type" content="website" />
-					<meta property="og:title" content={title} />
-					<meta property="og:description" content={window.location.href} />
-					<meta property="fb:app_id" content="708254579325899" />
-					<meta property="og:image" content={hero.fields.file.url} />
 				</Helmet>
 
 				<HeaderBar subtitle={(category.fields.articles || []).length > 1 && `${category.fields.name}:`} title={title} />
