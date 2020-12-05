@@ -121,7 +121,6 @@ class ServiceMapDesktop extends React.Component {
 
 		if (navigator.onLine) {
 			let isMap = window.google;
-			console.log(isMap);
 			const map = new window.google.maps.Map(document.getElementById('MapCanvas'), {
 				minZoom: 3,
 				center: { lat: 4.6403306, lng: -74.0430238 },
@@ -153,19 +152,15 @@ class ServiceMapDesktop extends React.Component {
 					this.infoWindow.close();
 				}
 			});
-			console.log("Did mount")
 			this.map = map;
 
 		}
 	}
 
 	componentDidUpdate() {
-		console.log("Did update")
-		let keepPreviousZoom = this.props.keepPreviousZoom;
 
 		if (this.state.loaded) {
 			if (this.props.services.length) {
-				console.log("services:", this.state.services);
 
 				let locationServices = this.props.services.filter(s => s.latitude != null && s.longitude != null && s.status === "current");
 
@@ -191,7 +186,6 @@ class ServiceMapDesktop extends React.Component {
 
 					return marker;
 				});
-				console.log("Markers done");
 
 				new window.MarkerClusterer(this.map, markers, {
 					imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
@@ -202,7 +196,6 @@ class ServiceMapDesktop extends React.Component {
 					markers.forEach(m => {
 						bounds.extend(m.getPosition());
 					});
-					console.log("Fit bounds", bounds)
 					this.map.fitBounds(bounds);
 				}
 			}

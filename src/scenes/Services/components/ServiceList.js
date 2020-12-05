@@ -115,8 +115,6 @@ class ServiceList extends React.Component {
 		let categoryName = serviceType.length !== 0 ? serviceType.name : "";
 		let titleName = categoryName ? categoryName : t("services.Services", NS);
 
-		// vacancy === false --> available
-		// vacancy === true  --> unavailable 
 		let sortedAvailableServices = [];
 
 		if (services) {

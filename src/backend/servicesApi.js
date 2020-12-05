@@ -10,23 +10,35 @@ const INSTANCE_ID = instance.env.instanceId;
 module.exports = {
 	fetchCategoriesByCountry(language, countryId) {
 		return new Promise((resolve, reject) => {
-			// Do not cache, categories order changes
-			request
-				.get(BACKEND_URL + `/service-categories/by-country/?countryId=${countryId}&language=${language}`)
-				.set("Accept-Language", language)
-				.end((err, res) => {
-					if (err) {
-						reject(err);
-						return;
-					}
+			const sessionStorage = getSessionStorage();
+			const servicesStored = sessionStorage[`${language}-serviceList`] && (_.first(JSON.parse(sessionStorage[`${language}-serviceList`])).countryId === countryId)
+			if (sessionStorage[`${language}-categoriesList`] && servicesStored) {
+				resolve(JSON.parse(sessionStorage[`${language}-categoriesList`]));
+			} else {
+				request
+					.get(BACKEND_URL + `/service-categories/by-country/?countryId=${countryId}&language=${language}`)
+					.set("Accept-Language", language)
+					.end((err, res) => {
+						if (err) {
+							reject(err);
+							return;
+						}
 
-					resolve(res.body);
-				});
+						try {
+							// remove unused session items
+							instance.languages.map(i => sessionStorage.removeItem(`${i[0]}-categoriesList`));
+							sessionStorage[`${language}-categoriesList`] = JSON.stringify(res.body);
+						} catch (e) {
+							console.log('Session storage is full. Categories Request not cached.');
+						}
+
+						resolve(res.body);
+					});
+			}
 		});
 	},
 	fetchCategoriesByRegion(language, regionId) {
 		return new Promise((resolve, reject) => {
-			// Do not cache, categories order changes
 			request
 				.get(BACKEND_URL + `/service-categories/by-region/?regionId=${regionId}&language=${language}`)
 				.set("Accept-Language", language)
@@ -42,7 +54,6 @@ module.exports = {
 	},
 	fetchCategoriesByCity(language, cityId) {
 		return new Promise((resolve, reject) => {
-			// Do not cache, categories order changes
 			request
 				.get(BACKEND_URL + `/service-categories/by-city/?cityId=${cityId}&language=${language}`)
 				.set("Accept-Language", language)
@@ -88,23 +99,17 @@ module.exports = {
 
 	fetchCities(regionId, language) {
 		return new Promise((resolve, reject) => {
-			const sessionStorage = getSessionStorage();
+			request
+				.get(BACKEND_URL + "/cities/list/?regionId=" + regionId)
+				.set("Accept-Language", language)
+				.end((err, res) => {
+					if (err) {
+						reject(err);
+						return;
+					}
 
-			if (sessionStorage[`${language}-cities`]) {
-				resolve(JSON.parse(sessionStorage[`${language}-cities`]));
-			} else {
-				request
-					.get(BACKEND_URL + "/cities/list/?regionId=" + regionId)
-					.set("Accept-Language", language)
-					.end((err, res) => {
-						if (err) {
-							reject(err);
-							return;
-						}
-
-						resolve(res.body);
-					});
-			}
+					resolve(res.body);
+				});
 		});
 	},
 
@@ -130,7 +135,7 @@ module.exports = {
 						} catch (e) {
 							console.log('Session storage is full. Countries Request not cached.');
 						}
-						
+
 						resolve(res.body);
 					});
 			}
@@ -138,55 +143,36 @@ module.exports = {
 	},
 
 	fetchCategoryById(language, categoryId) {
-
 		return new Promise((resolve, reject) => {
-			const sessionStorage = getSessionStorage();
-			if (sessionStorage[`${language}-service-categories`]) {
-				let categories = JSON.parse(sessionStorage[`${language}-service-categories`]);
-				resolve(_.first(categories.filter(c => c.id === categoryId)));
-			} else {
-				request
-					.get(BACKEND_URL + "/service-types/" + categoryId + "/")
-					.set("Accept-Language", language)
-					.end((err, res) => {
-						if (err) {
-							reject(err);
-							return;
-						}
+			request
+				.get(BACKEND_URL + "/service-types/" + categoryId + "/")
+				.set("Accept-Language", language)
+				.end((err, res) => {
+					if (err) {
+						reject(err);
+						return;
+					}
 
-						resolve(res.body);
-					});
-			}
+					resolve(res.body);
+				});
 		});
 	},
 
 	fetchAllServices(countryId, language, categoryId, regionId, cityId, searchTerm, status) {
-
-			return new Promise((resolve, reject) => {
-			let sl = sessionStorage[`serviceList`] !== undefined ? JSON.parse(sessionStorage[`serviceList`]) : null;
-
-			if (sl && sl.country === countryId && sl.language === language && sl.categoryId === categoryId && (sl.searchTerm === null || sl.searchTerm === undefined)) {
-				if (sl.categoryId == null && sl.services.results && categoryId) {
-					window.serviceList = sl.services.results;
-					let list = sl.services.results && sl.services.results.filter(s => {
-						return (s.type && s.type.id === categoryId) || (s.types && s.types.filter(t => { return t.id === categoryId }).length > 0)
-					});
-					sl.services.results = list;
-					resolve(sl.services);
-				} else {
-					resolve(sl.services);
-				}
+		return new Promise((resolve, reject) => {
+			const sessionStorage = getSessionStorage();
+			const servicesStored = sessionStorage[`${language}-serviceList`] && (_.first(JSON.parse(sessionStorage[`${language}-serviceList`])).countryId === countryId)
+			if (servicesStored) {
+				resolve(JSON.parse(sessionStorage[`${language}-serviceList`]));
 			} else {
 				var requestUrl =
-				"/services/list/?countryId=" + (countryId || "") +
-				(searchTerm ? `&search=${searchTerm}` : "") +
-				(categoryId ? `&serviceCategories=${categoryId}` : "") + 
-				(regionId ? `&regionId=${regionId}` : "") +
-				(cityId ? `&cityId=${cityId}` : "") +
-				(status ? `&status=${status}` : "") +
-				"&language=" + (language || "");
-				
-				const headers = { 'Accept-Language': language };
+					"/services/list/?countryId=" + (countryId || "") +
+					(searchTerm ? `&search=${searchTerm}` : "") +
+					(categoryId ? `&serviceCategories=${categoryId}` : "") +
+					(regionId ? `&regionId=${regionId}` : "") +
+					(cityId ? `&cityId=${cityId}` : "") +
+					(status ? `&status=${status}` : "") +
+					"&language=" + (language || "");
 
 				request
 					.get(BACKEND_URL + requestUrl)
@@ -197,35 +183,33 @@ module.exports = {
 							return;
 						}
 
-						resolve(res.body);
-					});
-			}
-
-		});
-	},
-
-	fetchServiceById(language, serviceId) {
-		console.log('fetchServiceById', BACKEND_URL);
-		return new Promise((resolve, reject) => {
-			const sessionStorage = getSessionStorage();
-			let list = (sessionStorage && sessionStorage[`offline-services`] !== undefined) ? JSON.parse(sessionStorage[`offline-services`]) : null;
-
-			if (typeof window !== 'undefined' && !window.navigator.onLine && list && list.filter(s => { return s.id === serviceId }).length > 0) {
-				let service = list.services.results.filter(c => { return c.id === serviceId });
-				resolve(_.first(service));
-			} else {
-				request
-					.get(BACKEND_URL + "/services/" + serviceId)
-					.set("Accept-Language", language)
-					.end((err, res) => {
-						if (err) {
-							reject(err);
-							return;
+						try {
+							// remove unused session items
+							instance.languages.map(i => sessionStorage.removeItem(`${i[0]}-serviceList`));
+							sessionStorage[`${language}-serviceList`] = JSON.stringify(res.body);
+						} catch (e) {
+							console.log('Session storage is full. Services Request not cached.');
 						}
 
 						resolve(res.body);
 					});
 			}
+		});
+	},
+
+	fetchServiceById(language, serviceId) {
+		return new Promise((resolve, reject) => {
+			request
+				.get(BACKEND_URL + "/services/" + serviceId)
+				.set("Accept-Language", language)
+				.end((err, res) => {
+					if (err) {
+						reject(err);
+						return;
+					}
+
+					resolve(res.body);
+				});
 		});
 	},
 

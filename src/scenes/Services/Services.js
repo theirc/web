@@ -6,7 +6,6 @@ import { push } from "react-router-redux";
 import measureDistance from "@turf/distance";
 import { Redirect } from 'react-router';
 import Promise from "bluebird";
-import _ from "lodash";
 
 // local
 import { ServiceMap, ServiceCategoryList, ServiceLocationList, ServiceList,
@@ -133,7 +132,7 @@ class Services extends React.Component {
 	fetchAllInLocation(location, categoryId = null) {
 		const { language, showErrorMessage, regions } = this.props;
 		const { sortingByLocationEnabled, errorWithGeolocation, fetchingLocation, geolocation, regionId, cityId } = this.state;
-		const country = this.props.regions.find(r => r.country.slug === location);
+		const country = regions.find(r => r.country.slug === location);
 		const countryId = country ? country.country.id : '';
 
 		if (!errorWithGeolocation) {
@@ -156,7 +155,6 @@ class Services extends React.Component {
 			}
 		}
 
-		const orderByDistance = c => (sortingByLocationEnabled && geolocation ? _.sortBy(c, s => this.measureDistance(geolocation, language, true)(s.location)) : _.identity(c));
 		return servicesApi
 			.fetchAllServices(countryId, language, categoryId, regionId, cityId)
 			.then(services => ({ services: services.filter(service => service.status === "current"), category: null }));
@@ -251,9 +249,9 @@ class Services extends React.Component {
 			const { country } = this.props;
 			
 			if (!this.state.region || iscountrylist) {
-				goToDepartmentList(this.props.country);
+				goToDepartmentList(country);
 			} else {
-				goToLocationList(this.props.country);
+				goToLocationList(country);
 			}
 		}
 
@@ -269,15 +267,6 @@ class Services extends React.Component {
 		const onGoToLocationMap = (location) => {
 			this.setState({ keepPreviousZoom: false });
 			goToLocationMap(this.props.country, location);
-		}
-
-		const getLocationName = (slug) => {
-			const { regions } = this.props;
-			if (!this.state.locationName) {
-				var loc = regions.filter(x => x.slug === slug);
-				return loc.length > 0 ? loc[0].name : "";
-			}
-			return this.state.locationName;
 		}
 
 		return (

@@ -9,9 +9,7 @@ import tinycolor from "tinycolor2";
 
 // local
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
-import instance from '../../../backend/settings';
 import routes from '../routes';
-import servicesApi from '../../../backend/servicesApi';
 import ServiceMapDesktop from "./ServiceMapDesktop";
 import "../../../components/ActionsBar/ActionsBar.css";
 import "./ServiceHome.css";
@@ -345,8 +343,6 @@ class ServiceCategoryListDesktop extends React.Component {
 
 		return [
 			<li key={service.id} className="Item" onClick={() => goToService(country, language, service.id)}>
-				{/* TODO: move Item to separate component with styles and stuff */}
-				{/* <Link className='Item--wrapper' to={`/${country.fields.slug}/services/${service.id}?language=${language}`}> */}
 				{mainType && <div className="Icon" key={`${service.id}-0`}>
 					<i className={iconWithPrefix(mainType.icon)} style={categoryStyle(mainType.color)} />
 				</div>}
@@ -372,7 +368,6 @@ class ServiceCategoryListDesktop extends React.Component {
 				</div>
 
 				<i className="material-icons" />
-				{/* </Link> */}
 			</li>,
 		];
 	}
@@ -399,14 +394,10 @@ class ServiceCategoryListDesktop extends React.Component {
 					<ServiceMapDesktop services={this.state.services} />
 				}
 
-				{/* RENDER POPOVERS */}
 				{this.state.showFilter && this.state.filterType === FilterTypes.DEPARTMENT && regionsRender &&
 					this.renderFiltersPopover(t('services.Locations', NS), this.onSelectLocation, regionsRender, this.renderDepartmentButton.bind(this), 'departments', FilterTypes.DEPARTMENT)
 				}
-				{/* {this.state.showFilter && this.state.filterType === FilterTypes.DEPARTMENT && l3 && !showDepartments &&
-					this.renderFiltersPopover(t('services.Locations', NS), this.onSelectLocation, l3, this.renderDepartmentButton.bind(this), 'departments', FilterTypes.DEPARTMENT)
-				} */}
-
+				
 				{this.state.showFilter && this.state.filterType === FilterTypes.MUNICIPALITY && cities &&
 					this.renderFiltersPopover(t('services.Municipalidades', NS), this.onSelectMunicipality, cities, this.renderMunicipalityButton.bind(this), 'municipalities', FilterTypes.MUNICIPALITIES)
 				}
