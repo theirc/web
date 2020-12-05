@@ -285,9 +285,9 @@ class ServiceCategoryListDesktop extends React.Component {
 					<div className="line" />
 
 					<div id="services-list-map-toggle">
-						<input type="checkbox" className="switch bigswitch cn" checked={this.state.showMap} onMouseEnter={() => this.hoverMapSwitch(true)} onMouseLeave={() => this.hoverMapSwitch(false)} onChange={this.toggleMap} />
+						<input type="checkbox" id="map-view-toggle" className="switch bigswitch cn" checked={this.state.showMap} onMouseEnter={() => this.hoverMapSwitch(true)} onMouseLeave={() => this.hoverMapSwitch(false)} onChange={this.toggleMap} />
 						<div className={`toggle-btn ${this.state.switchHover ? 'hover' : ''}`}><div></div></div>
-						<span>{t('services.Map view', NS)}</span>
+						<label htmlFor="map-view-toggle">{t('services.Map view', NS)}</label>
 					</div>
 				</div>
 			</div>
