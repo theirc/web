@@ -3,8 +3,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import ReactDOMServer from "react-dom/server";
 import { translate } from "react-i18next";
-import circle from "@turf/circle";
-import bbox from "@turf/bbox";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
 
@@ -134,7 +132,6 @@ class ServiceMap extends React.Component {
 		*/
 		if (navigator.onLine) {
 			let isMap = window.google;
-			console.log(isMap);
 			const map = new window.google.maps.Map(document.getElementById('MapCanvas'), {
 				minZoom: 3,
 				center: { lat: 4.6403306, lng: -74.0430238 },
@@ -166,13 +163,11 @@ class ServiceMap extends React.Component {
 					this.infoWindow.close();
 				}
 			});
-			console.log("Did mount")
 			findServicesInLocation([])
 				.then(({
 					services,
 					category
 				}) => {
-					console.log("Did mount loaded Services")
 					this.setState({
 						services,
 						category,
@@ -184,21 +179,15 @@ class ServiceMap extends React.Component {
 					category: null,
 					loaded: true
 				}));
-			if (this.map) {
-				//this.map.fitBounds(bounds);
-			}
 
 			this.map = map;
 		}
 	}
 
 	componentDidUpdate() {
-		console.log("Did update")
-		let keepPreviousZoom = this.props.keepPreviousZoom;
 
 		if (this.state.loaded) {
 			if (this.state.services.length) {
-				console.log("services:", this.state.services);
 
 				let locationServices = this.state.services.filter(s => s.latitude != null && s.longitude != null && s.status === "current");
 
@@ -224,7 +213,6 @@ class ServiceMap extends React.Component {
 
 					return marker;
 				});
-				console.log("Markers done");
 
 				new window.MarkerClusterer(this.map, markers, {
 					imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
@@ -235,7 +223,6 @@ class ServiceMap extends React.Component {
 					markers.forEach(m => {
 						bounds.extend(m.getPosition());
 					});
-					console.log("Fit bounds", bounds)
 					this.map.fitBounds(bounds);
 				}
 			}

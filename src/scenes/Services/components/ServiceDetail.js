@@ -11,7 +11,6 @@ import PropTypes from "prop-types";
 
 // local
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
-import instance from '../../../backend/settings';
 import routes from '../routes';
 import fbHelpers from '../../../helpers/facebook';
 import "../../../components/ActionsBar/ActionsBar.css";
@@ -22,7 +21,7 @@ const NS = { ns: 'Services' };
 
 //temp API Key from Andres Aguilar
 const GMAPS_API_KEY = "AIzaSyAK54Ir69gNM--M_5dRa0fwVH8jxWnJREQ";
-const hotlinkTels = input => input; //input.replace(/\s(\+[1-9]{1}[0-9]{5,14})|00[0-9]{5,15}/g, `<a class="tel" href="tel:$1">$1</a>`);
+const hotlinkTels = input => input; 
 const moment = global.moment;
 
 /**
@@ -89,7 +88,6 @@ class ServiceDetail extends React.Component {
 		const { fetchService, fetchServicesInSameLocation, history } = this.props;
 		if (fetchService) {
 			fetchService().then(service => {
-				// service does not exist
 				!service && history.push('/404');
 				this.setState({ service })
 			});
