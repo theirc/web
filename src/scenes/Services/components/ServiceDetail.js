@@ -184,7 +184,6 @@ class ServiceDetail extends React.Component {
 		if (!service) {
 			return (
 				<div className="ServiceList">
-					<HeaderBar title={t("services.Service Detail", NS)} />
 					<div className="loader" />
 				</div>
 			);
