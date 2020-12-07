@@ -10,19 +10,19 @@ const INSTANCE_ID = instance.env.instanceId;
 module.exports = {
 	fetchCategoriesByCountry(language, countryId) {
 		return new Promise((resolve, reject) => {
-			
-				request
-					.get(BACKEND_URL + `/service-categories/by-country/?countryId=${countryId}&language=${language}`)
-					.set("Accept-Language", language)
-					.end((err, res) => {
-						if (err) {
-							reject(err);
-							return;
-						}
 
-						resolve(res.body);
-					});
-			});
+			request
+				.get(BACKEND_URL + `/service-categories/by-country/?countryId=${countryId}&language=${language}`)
+				.set("Accept-Language", language)
+				.end((err, res) => {
+					if (err) {
+						reject(err);
+						return;
+					}
+
+					resolve(res.body);
+				});
+		});
 	},
 	fetchCategoriesByRegion(language, regionId) {
 		return new Promise((resolve, reject) => {
@@ -172,7 +172,10 @@ module.exports = {
 
 						try {
 							// remove unused session items
-							instance.languages.map(i => sessionStorage.removeItem(`${i[0]}-serviceList`) && sessionStorage.removeItem(`${i[0]}-serviceRequest`));
+							instance.languages.map(i => {
+								sessionStorage.removeItem(`${i[0]}-serviceList`);
+								sessionStorage.removeItem(`${i[0]}-serviceRequest`);
+							});
 							sessionStorage[`${language}-serviceList`] = JSON.stringify(res.body);
 							sessionStorage[`${language}-serviceRequest`] = requestUrl;
 						} catch (e) {
