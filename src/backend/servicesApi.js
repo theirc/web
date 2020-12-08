@@ -156,8 +156,10 @@ module.exports = {
 			"&language=" + (language || "");
 		return new Promise((resolve, reject) => {
 			const sessionStorage = getSessionStorage();
-			const servicesStored = sessionStorage[`${language}-serviceList`] && (_.first(JSON.parse(sessionStorage[`${language}-serviceList`])).countryId === countryId)
-			const servicesFetched = sessionStorage[`${language}-serviceRequest`] && sessionStorage[`${language}-serviceRequest`] === requestUrl;
+			const servicesStored = sessionStorage[`${language}-serviceList`] &&
+				(_.first(JSON.parse(sessionStorage[`${language}-serviceList`])).countryId === countryId)
+			const servicesFetched = sessionStorage[`${language}-serviceRequest`] &&
+				sessionStorage[`${language}-serviceRequest`] === requestUrl;
 			if (servicesStored && servicesFetched) {
 				resolve(_.orderBy(JSON.parse(sessionStorage[`${language}-serviceList`]), ['providerId']));
 			} else {
