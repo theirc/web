@@ -184,6 +184,7 @@ class ServiceDetail extends React.Component {
 		if (!service) {
 			return (
 				<div className="ServiceList">
+					<div>TEST TEST</div>
 					<div className="loader" />
 				</div>
 			);
