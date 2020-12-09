@@ -4,6 +4,7 @@ $accentRed: #e60000;
 $accentNRC: #ff7602;
 $accentPG: #59c2ed;
 $accentCuenta: #29991f;
+$accentRi: #FFB45A;
 
 $smBreakpoint: 800px;
 $desktopBreakpoint: 1000px;
@@ -14,8 +15,8 @@ $bigDesktopPaddingWidth: 4vw;
 $titleBackground: #f0f0f0;
 $dividerColor: darken($titleBackground, 50%);
 
-$colorMap: (irc: $accentIRC, nrc: $accentNRC, generic: $accentGreen, mc: $accentRed, pg: $accentPG, cuenta: $accentCuenta);
-$colorInverseMap: (irc: #000000, nrc: #ffffff, generic: #ffffff, mc: #ffffff, pg: #ffffff, cuenta: #ffffff);
+$colorMap: (irc: $accentIRC, nrc: $accentNRC, generic: $accentGreen, mc: $accentRed, pg: $accentPG, cuenta: $accentCuenta, ri: $accentRi);
+$colorInverseMap: (irc: #000000, nrc: #ffffff, generic: #ffffff, mc: #ffffff, pg: #ffffff, cuenta: #ffffff, ri: #ffffff);
 
 a {
 	text-decoration: none;
