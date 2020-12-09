@@ -66,9 +66,8 @@ class ArticleDetail extends React.Component {
 		const { articleItem, direction } = this.props;
 		const { category, country, onNavigateTo, onNavigate, language } = this.props;
 		
-		const categoryId = category && category.sys.id;
-		const categorySlug  = category && category.fields.slug;
-		console.log(categoryId, categorySlug);
+		// const categoryId = category && category.sys.id;
+		// const categorySlug  = category && category.fields.slug;
 		let article = articleItem;
 
 		if (!article || !category) return null;
