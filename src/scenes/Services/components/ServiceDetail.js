@@ -21,7 +21,7 @@ const NS = { ns: 'Services' };
 
 //temp API Key from Andres Aguilar
 const GMAPS_API_KEY = "AIzaSyAK54Ir69gNM--M_5dRa0fwVH8jxWnJREQ";
-const hotlinkTels = input => input; 
+const hotlinkTels = input => input;
 const moment = global.moment;
 
 /**
@@ -238,6 +238,7 @@ class ServiceDetail extends React.Component {
 		let subtitle = (service.serviceCategories && service.serviceCategories.length > 0) ? _.first(service.serviceCategories).name : '';
 		let phoneNumberWithCode = countryCode + service.phone_number;
 		const url = encodeURIComponent(window.location.href);
+		
 		let lang = '';
 		switch (language) {
 			case 'en':
@@ -251,6 +252,9 @@ class ServiceDetail extends React.Component {
 				break;
 			case 'ur':
 				lang = 'ur_pk';
+				break;
+			case 'fa':
+				lang = 'fa_ir';
 				break;
 			default:
 				lang = '';
