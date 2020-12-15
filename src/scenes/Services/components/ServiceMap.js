@@ -189,7 +189,7 @@ class ServiceMap extends React.Component {
 		if (this.state.loaded) {
 			if (this.state.services.length) {
 
-				let locationServices = this.state.services.filter(s => s.latitude != null && s.longitude != null && s.status === "current");
+				let locationServices = this.state.services.filter(s => s.latitude != null && s.longitude != null && s.status === "public");
 
 				const markers = locationServices.map((s, index) => {
 					const mainType = s.serviceCategories ? s.serviceCategories[0] : '';
