@@ -157,7 +157,7 @@ class Services extends React.Component {
 
 		return servicesApi
 			.fetchAllServices(countryId, language, categoryId, regionId, cityId)
-			.then(services => ({ services: services.filter(service => service.status === "current"), category: null }));
+			.then(services => ({ services: services.filter(service => service.status === "public"), category: null }));
 	}
 
 	serviceTypes() {

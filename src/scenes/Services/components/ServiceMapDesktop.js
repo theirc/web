@@ -162,7 +162,7 @@ class ServiceMapDesktop extends React.Component {
 		if (this.state.loaded) {
 			if (this.props.services.length) {
 
-				let locationServices = this.props.services.filter(s => s.latitude != null && s.longitude != null && s.status === "current");
+				let locationServices = this.props.services.filter(s => s.latitude != null && s.longitude != null && s.status === "public");
 
 				const markers = locationServices.map((s, index) => {
 					const mainType = s.serviceCategories ? s.serviceCategories[0] : '';
