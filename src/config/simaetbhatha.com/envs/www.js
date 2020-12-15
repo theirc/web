@@ -1,5 +1,6 @@
 export default {
 	backendUrl: 'https://admin.refugee.info/e/production/v2',
+	instanceId: '18',
 	code: 'prod',
 	thirdParty: {
 		analytics: {
