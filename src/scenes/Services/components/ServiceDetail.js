@@ -262,14 +262,6 @@ class ServiceDetail extends React.Component {
 
 		return (
 			<div>
-				{instance.brand.url === "refugee.info" && lang.length > 0 &&
-					<div id="readspeaker_button1" className="rs_skip rsbtn rs_preserve">
-						<a rel="nofollow" className="rsbtn_play" accessKey="L" title="ReadSpeaker webReader إستمع إلى هذه الصفحةِ مستخدماً" href={`//app-eu.readspeaker.com/cgi-bin/rsent?customerid=11950&amp;lang=${lang}&amp;readid=ServiceDetail&amp;url=${url}`}>
-							<span className="rsbtn_left rsimg rspart"><span className="rsbtn_text"><span>Listen</span></span></span>
-							<span className="rsbtn_right rsimg rsplay rspart"></span>
-						</a>
-					</div>
-				}
 				<div className="ServiceDetail" id="ServiceDetail">
 					<Helmet>
 						<title>{serviceT.name}</title>
@@ -296,6 +288,14 @@ class ServiceDetail extends React.Component {
 						</div>
 					</div>
 
+					{instance.brand.url === "refugee.info" && lang.length > 0 &&
+					<div id="readspeaker_button1" className="rs_skip rsbtn rs_preserve">
+						<a rel="nofollow" className="rsbtn_play" accessKey="L" title="ReadSpeaker webReader إستمع إلى هذه الصفحةِ مستخدماً" href={`//app-eu.readspeaker.com/cgi-bin/rsent?customerid=11950&amp;lang=${lang}&amp;readid=ServiceDetail&amp;url=${url}`}>
+							<span className="rsbtn_left rsimg rspart"><span className="rsbtn_text"><span>Listen</span></span></span>
+							<span className="rsbtn_right rsimg rsplay rspart"></span>
+						</a>
+					</div>
+				}
 					<article>
 						<span className='author'><span>{t("services.LAST_UPDATED", NS)}</span> {moment(service.updated_at).format('YYYY.MM.DD')}</span>
 
