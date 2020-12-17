@@ -54,6 +54,10 @@ class ServiceList extends React.Component {
 	renderService(s) {
 		const { country, goToService, language, measureDistance } = this.props;
 		const distance = measureDistance && s.location && measureDistance(s.location);
+		const serviceT = s.data_i18n && s.data_i18n.filter(x => x.language === language)[0];
+		const providerT = s.provider.data_i18n.filter(p => p.language === language)[0];
+		const serviceInfo = serviceT ? serviceT : s;
+		const providerInfo = providerT ? providerT : s.provider;
 
 		let iconWithPrefix = vector_icon => vector_icon.indexOf('icon') > -1 ?
 			`${vector_icon.split('-')[0]} ${vector_icon}` :
@@ -75,7 +79,7 @@ class ServiceList extends React.Component {
 				borderColor: tinycolor(color).darken(10),
 			};
 		};
-		let fullAddress = [s.address, s.address_city].filter(val => val).join(", ");
+		let fullAddress = [serviceInfo.address, serviceInfo.address_city].filter(val => val).join(", ");
 		let mainType = s.type ? s.type : s.serviceCategories[0];
 		let subTypes = s.serviceCategories.filter(t => t.id > 0 && t.id !== mainType.id);
 
@@ -86,10 +90,10 @@ class ServiceList extends React.Component {
 				</div>
 
 				<div className="Info">
-					<h1>{s.name}</h1>
+					<h1>{serviceInfo.name}</h1>
 
 					<h2>
-						{s.provider ? s.provider.name : ''}{" "}
+						{providerInfo ? providerInfo.name : ''}{" "}
 						<span>
 							{fullAddress}
 							{distance && ` - ${distance}`}

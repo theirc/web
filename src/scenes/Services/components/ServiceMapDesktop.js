@@ -58,6 +58,10 @@ class ServiceIcon extends React.Component {
 class ServiceItem extends React.Component {
 	render() {
 		const { country, goToService, language, service } = this.props;
+		const serviceT = service.data_i18n && service.data_i18n.filter(x => x.language === language)[0];
+		const providerT = service.provider.data_i18n.filter(p => p.language === language)[0];
+		const serviceInfo = serviceT ? serviceT : service;
+		const providerInfo = providerT ? providerT : service.provider;
 		const mainType = service.serviceCategories ? service.serviceCategories[0] : '';
 		const types = (service.serviceCategories || []).filter(t => t.id !== mainType.id);
 
@@ -69,14 +73,14 @@ class ServiceItem extends React.Component {
 
 				<div className="Info" style={{ 'fontSize': '120%' }}>
 					<div className="Item-content title">
-						<h1>{service.name}</h1>
+						<h1>{serviceInfo.name}</h1>
 					</div>
 
 					<h2 className="Item-content">
-						{service.provider ? service.provider.name : ''}{" "}
+						{providerInfo ? providerInfo.name : ''}{" "}
 
 						<address className="fullAddress Item-content">
-							{service.address}
+							{serviceInfo.address}
 						</address>
 
 						{service.address_city &&

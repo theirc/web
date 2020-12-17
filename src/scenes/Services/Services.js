@@ -314,6 +314,7 @@ class Services extends React.Component {
 									{isMobile &&
 										<ServiceList
 											{...props}
+											language={language}
 											measureDistance={this.measureDistance(geolocation, language)}
 											servicesByType={() => this.fetchAllInLocation(country.fields.slug)}
 											showMap={() => goToMap(country)}
