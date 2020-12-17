@@ -266,11 +266,14 @@ class ServiceCategoryListDesktop extends React.Component {
 
 	renderFilters = () => {
 		let { cities } = this.state;
-		let { t } = this.props;
+		let { t, language } = this.props;
 
 		let categoryName = this.state.category ? this.state.category.name : t('services.All Categories', NS);
-		let region = this.state.region.name ? this.state.region.name : this.state.region;
-		let city = this.state.city.name ? this.state.city.name : this.state.city;
+		let region = this.state.region.name ? 
+			(this.state.region.data_i18n.filter(x => x.language === language)[0] ? 
+			this.state.region.data_i18n.filter(x => x.language === language)[0].name : this.state.region.name) : this.state.region;
+		let city = this.state.city.name ? 
+			(this.state.city[`name_${language}`] ? this.state.city[`name_${language}`] : this.state.city.name) : this.state.city;
 
 		return (
 			<div className="ActionsBar">
@@ -387,6 +390,7 @@ class ServiceCategoryListDesktop extends React.Component {
 		const { categories, loaded, showServices, servicesRendered } = this.state;
 		const { t, regions, country } = this.props;
 		let regionsRender = regions.filter(r => r.country && r.country.slug === country.fields.slug && r.isActive);
+		regionsRender[0].country.name = country.fields.name
 		regionsRender.unshift(regionsRender[0].country)
 
 		const cities = this.state.cities;
