@@ -20,7 +20,8 @@ class ServiceCategoryList extends React.Component {
 
 	renderRegion(c) {
 		let {
-			openLocation
+			openLocation,
+			language
 		} = this.props;
 		openLocation = openLocation || (() => console.log("noop"));
 
@@ -30,7 +31,10 @@ class ServiceCategoryList extends React.Component {
 			title,
 			slug
 		} = c;
-		let locationName = title ? title : name;
+		
+		const cName = c[`name_${language}`] ? c[`name_${language}`] : name;
+
+		let locationName = title ? title : cName;
 
 		return (
 			<li key={`${id}-${slug}`}>

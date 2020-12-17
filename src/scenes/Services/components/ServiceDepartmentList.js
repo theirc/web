@@ -20,20 +20,23 @@ class ServiceDepartmentList extends React.Component {
 
 	renderRegion(c) {
 		let {
-			onOpenDepartment
+			onOpenDepartment,
+			language
 		} = this.props;
-
+		
+		const departmentT = c.data_i18n && c.data_i18n.filter(x => x.language === language)[0];
+		const departmentInfo = departmentT ? departmentT : c;
+		
 		const {
 			id,
-			name,
 			slug
 		} = c;
 
 		return (
 			<li key={`${id}-${slug}`}>
 				<hr className="line" />
-				<div className="container" onClick={() => setTimeout(() => onOpenDepartment(c.id, c.slug, name), 300)}>
-					{name}
+				<div className="container" onClick={() => setTimeout(() => onOpenDepartment(c.id, c.slug, departmentInfo.name), 300)}>
+					{departmentInfo.name}
 					<div className="right">
 						<i className="material-icons">keyboard_arrow_right</i>
 					</div>

@@ -41,9 +41,11 @@ class ServiceCategoryList extends React.Component {
 
 	renderCategory(c) {
 
-		let { onSelectCategory } = this.props;
-
+		let { onSelectCategory, language } = this.props;
 		let { id, name, icon } = c;
+
+		const categoryName = c[`name_${language}`] ? c[`name_${language}`] : name;
+
 		let iconWithPrefix = vector_icon => (vector_icon && vector_icon.indexOf('icon') > -1) ?
 								`${vector_icon.split('-')[0]} ${vector_icon}` : 
 								`fa fa-${vector_icon}`;
@@ -62,7 +64,7 @@ class ServiceCategoryList extends React.Component {
 				<hr className="line" />
 				<div className="container" onClick={() => { setTimeout(() => onSelectCategory(c), 300) }}>
 					<i className={iconWithPrefix(icon)} style={style} />
-					<span>{name}</span>
+					<span>{categoryName}</span>
 				</div>
 			</li>
 		);

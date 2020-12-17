@@ -87,7 +87,7 @@ module.exports = {
 	fetchCities(regionId, language) {
 		return new Promise((resolve, reject) => {
 			request
-				.get(BACKEND_URL + "/cities/list/?regionId=" + regionId)
+				.get(BACKEND_URL + `/cities/list/?regionId=${regionId}&language=${language}`)
 				.set("Accept-Language", language)
 				.end((err, res) => {
 					if (err) {

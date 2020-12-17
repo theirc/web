@@ -215,6 +215,9 @@ class ServiceCategoryListDesktop extends React.Component {
 	);
 
 	renderCategoryButton(category, onSelect) {
+		const { language }= this.props;
+		const categoryName = category[`name_${language}`] ? category[`name_${language}`] : category.name;
+		
 		let { icon } = category;
 		if (!icon) {
 			return false;
@@ -235,24 +238,28 @@ class ServiceCategoryListDesktop extends React.Component {
 		return (
 			<button key={category.id} className={buttonClass} onClick={() => onSelect(category)}>
 				<i className={iconWithPrefix(icon)} style={style} />
-				<span>{category.name}</span>
+				<span>{categoryName}</span>
 			</button>
 		);
 	}
 
 	renderDepartmentButton(department, onSelect) {
-		const { country } = this.props;
+		const { country, language } = this.props;
+		const departmentT = department.data_i18n && department.data_i18n.filter(x => x.language === language)[0];
+		const departmentInfo = departmentT ? departmentT : department;
 		return (
 			<button key={`${department.id}-${department.slug}`} className={department.slug === this.state.location.slug ? "location-item-selected" : "location-item"} onClick={() => onSelect(department)}>
-				{department.slug === country.fields.slug && <i className='fa fa-globe' />}<span>{department.name}</span>
+				{department.slug === country.fields.slug && <i className='fa fa-globe' />}<span>{departmentInfo.name}</span>
 			</button>
 		);
 	}
 
 	renderMunicipalityButton(city, onSelect) {
+		const { language } = this.props;
+		const cityName = city[`name_${language}`] ? city[`name_${language}`] : city.name;
 		return (
 			<button key={city.id} className={city.id === this.state.city.id ? "location-item-selected" : "location-item"} onClick={() => onSelect(city)}>
-				{city.level === 1 && <i className='fa fa-globe' />}<span>{city.name}</span>
+				{city.level === 1 && <i className='fa fa-globe' />}<span>{cityName}</span>
 			</button>
 		);
 	}
@@ -318,6 +325,10 @@ class ServiceCategoryListDesktop extends React.Component {
 	renderServiceItem(service) {
 		const { country, goToService, language, measureDistance } = this.props;
 		const distance = measureDistance && service.location && measureDistance(service.location);
+		const serviceT = service.data_i18n && service.data_i18n.filter(x => x.language === language)[0];
+		const providerT = service.provider.data_i18n.filter(p => p.language === language)[0];
+		const serviceInfo = serviceT ? serviceT : service;
+		const providerInfo = providerT ? providerT : service.provider;
 
 		let iconWithPrefix = vector_icon => vector_icon.indexOf('icon') > -1 ?
 			`${vector_icon.split('-')[0]} ${vector_icon}` :
@@ -337,7 +348,7 @@ class ServiceCategoryListDesktop extends React.Component {
 			};
 		};
 
-		let fullAddress = [service.address, service.address_city].filter(val => val).join(", ");
+		let fullAddress = [serviceInfo.address, serviceInfo.address_city].filter(val => val).join(", ");
 		let mainType = service.serviceCategories ? service.serviceCategories[0] : '';
 		let subTypes = service.serviceCategories.length > 1 ? service.serviceCategories.filter(c => c.id !== mainType.id) : '';
 
@@ -348,10 +359,10 @@ class ServiceCategoryListDesktop extends React.Component {
 				</div>}
 
 				<div className="Info">
-					<h1>{service.name}</h1>
+					<h1>{serviceInfo.name}</h1>
 
 					<h2>
-						{service.provider && service.provider.name}{" "}
+						{providerInfo && providerInfo.name}{" "}
 						<span>
 							{fullAddress}
 							{distance && ` - ${distance}`}
