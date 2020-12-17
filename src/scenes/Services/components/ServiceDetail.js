@@ -229,7 +229,9 @@ class ServiceDetail extends React.Component {
 			});
 		};
 
-		let serviceT = service.data_i18n.filter(x => x.language === language)[0]
+		const serviceT = service.data_i18n.filter(x => x.language === language)[0]
+		const providerT = service.provider.data_i18n.filter(x => x.language === language)[0]
+		const providerInfo = providerT ? providerT : service.provider;
 
 		let sortedContactInformation = _.sortBy(service.contact_information || [], ci => {
 			return ci.index;
@@ -299,8 +301,8 @@ class ServiceDetail extends React.Component {
 					<article>
 						<span className='author'><span>{t("services.LAST_UPDATED", NS)}</span> {moment(service.updated_at).format('YYYY.MM.DD')}</span>
 
-						{service.provider && <h2 className='provider'>
-							{t("services.Service Provider", NS)}:&nbsp;{serviceProviderElement(service.provider)}
+						{providerInfo && <h2 className='provider'>
+							{t("services.Service Provider", NS)}:&nbsp;{serviceProviderElement(providerInfo)}
 						</h2>}
 
 						<h2>{serviceT.name}</h2>
