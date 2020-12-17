@@ -239,10 +239,13 @@ class Services extends React.Component {
 		}
 
 		const onOpenDepartment = (id, department, name, location) => {
+			const { language } = this.props
 			let cities;
-			servicesApi.fetchCities(id)
+			servicesApi.fetchCities(id, language)
 				.then(city => cities = city)
-				.then(() => { this.setState({ regionId: id, locationName: name, regionName: name, region: department, location: department, cities, cityId: null, cityName: null, city: null })});
+				.then(() => { 
+					this.setState({ regionId: id, locationName: name, regionName: name, region: department, location: department, cities, cityId: null, cityName: null, city: null })
+				});
 		}
 
 		const goToLocations = (iscountrylist) => {
@@ -339,6 +342,7 @@ class Services extends React.Component {
 								<div className="SkeletonContainer">
 									<ServiceLocationList
 										{...props}
+										language={language}
 										allRegions={cities}
 										department={this.state.region}
 										departmentId={this.state.regionId}
@@ -360,6 +364,7 @@ class Services extends React.Component {
 								<div className="SkeletonContainer">
 									<ServiceDepartmentList
 										{...props}
+										language={language}
 										allRegions={countryRegions}
 										onOpenDepartment={(id, department, name) => {
 											onOpenDepartment(id, department, name);
@@ -470,6 +475,7 @@ class Services extends React.Component {
 							<div className="SkeletonContainer">
 								{isMobile &&
 									<ServiceCategoryList
+										language={language}
 										fetchCategories={() => this.serviceTypes()}
 										onSelectCategory={onSelectCategory}
 										listAllServices={() => listAllServicesinLocation(country, props.match.params.location)}
@@ -632,6 +638,7 @@ class Services extends React.Component {
 							<div className="SkeletonContainer">
 								{isMobile &&
 									<ServiceCategoryList
+										language={language}
 										fetchCategories={() => this.serviceTypes()}
 										onSelectCategory={onSelectCategory}
 										listAllServices={() => listAllServices(country)}
