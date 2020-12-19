@@ -270,7 +270,7 @@ class ServiceCategoryListDesktop extends React.Component {
 
 		let categoryName = this.state.category ? this.state.category.name : t('services.All Categories', NS);
 		let region = this.state.region.name ? 
-			(this.state.region.data_i18n.filter(x => x.language === language)[0] ? 
+			(this.state.region.data_i18n && this.state.region.data_i18n.filter(x => x.language === language)[0] ? 
 			this.state.region.data_i18n.filter(x => x.language === language)[0].name : this.state.region.name) : this.state.region;
 		let city = this.state.city.name ? 
 			(this.state.city[`name_${language}`] ? this.state.city[`name_${language}`] : this.state.city.name) : this.state.city;
@@ -329,7 +329,7 @@ class ServiceCategoryListDesktop extends React.Component {
 		const { country, goToService, language, measureDistance } = this.props;
 		const distance = measureDistance && service.location && measureDistance(service.location);
 		const serviceT = service.data_i18n && service.data_i18n.filter(x => x.language === language)[0];
-		const providerT = service.provider.data_i18n.filter(p => p.language === language)[0];
+		const providerT = service.provider && service.provider.data_i18n.filter(p => p.language === language)[0];
 		const serviceInfo = serviceT ? serviceT : service;
 		const providerInfo = providerT ? providerT : service.provider;
 
