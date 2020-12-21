@@ -150,6 +150,27 @@ class ArticleDetailBody extends Component {
 		const { title, content, hero, lead } = article.fields;
 		const { contentType } = article.sys;
 
+		const url = encodeURIComponent(window.location.href);
+		let lang = ''
+
+		switch (language) {
+			case 'en':
+				lang = 'en_uk';
+				break;
+			case 'ar':
+				lang = 'ar_ar';
+				break;
+			case 'fr':
+				lang = 'fr_be';
+				break;
+			case 'fa':
+				lang = 'fa_ir';
+				break;
+			default:
+				lang = '';
+				break;
+		}
+
 		let html = md.render(content || lead);
     html = html.replace(/(\+[0-9]{9,14}|00[0-9]{9,15})/g, `<a class="tel" href="tel:$1">$1</a>`);
 
@@ -157,7 +178,7 @@ class ArticleDetailBody extends Component {
 
 		let categorySlug = document.location.pathname.split('/')[2];
 		return (
-			<div ref={r => (this._ref = r)} className={["ArticleDetailBody", loading ? "loading" : "loaded"].join(" ")}>
+			<div ref={r => (this._ref = r)} id="articleDetailBody" className={["ArticleDetailBody", loading ? "loading" : "loaded"].join(" ")}>
 				<Helmet>
 					<title>{title}</title>
 				</Helmet>
@@ -198,6 +219,14 @@ class ArticleDetailBody extends Component {
 				{contentType.sys.id === "video" && this.renderVideo()}
 
 				<article>
+				{instance.brand.url === "refugee.info" && lang.length > 0 &&
+						<div id="readspeaker_button1" className="rs_skip rsbtn rs_preserve">
+							<a rel="nofollow" className="rsbtn_play" accessKey="L" title="ReadSpeaker webReader إستمع إلى هذه الصفحةِ مستخدماً" href={`//app-eu.readspeaker.com/cgi-bin/rsent?customerid=11950&amp;lang=${lang}&amp;readid=articleDetailBody&amp;url=${url}`}>
+								<span className="rsbtn_left rsimg rspart"><span className="rsbtn_text"><span>Listen</span></span></span>
+								<span className="rsbtn_right rsimg rsplay rspart"></span>
+							</a>
+						</div>
+					}
 					<span className='author'><span>{t("actions.LAST_UPDATED", NS)}</span> {moment(article.sys.updatedAt).format('YYYY.MM.DD')}</span>
 					<div dangerouslySetInnerHTML={{ __html: html }} />
 				</article>

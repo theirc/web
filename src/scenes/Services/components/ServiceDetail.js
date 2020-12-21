@@ -243,9 +243,29 @@ class ServiceDetail extends React.Component {
 		});
 		let subtitle = service.type ? service.type.name : _.first(service.types).name;
 		let phoneNumberWithCode = countryCode + service.phone_number;
+		const url = encodeURIComponent(window.location.href);
+		
+		let lang = '';
+		switch (language) {
+			case 'en':
+				lang = 'en_uk';
+				break;
+			case 'ar':
+				lang = 'ar_ar';
+				break;
+			case 'fr':
+				lang = 'fr_be';
+				break;
+			case 'fa':
+				lang = 'fa_ir';
+				break;
+			default:
+				lang = '';
+				break;
+		}
 
 		return (
-			<div className="ServiceDetail">
+			<div className="ServiceDetail" id="ServiceDetail">
 				<Helmet>
 					<title>{serviceT.name}</title>
 				</Helmet>
@@ -270,6 +290,15 @@ class ServiceDetail extends React.Component {
 
 					</div>
 				</div>
+
+				{instance.brand.url === "refugee.info" && lang.length > 0 &&
+					<div id="readspeaker_button1" className="rs_skip rsbtn rs_preserve">
+						<a rel="nofollow" className="rsbtn_play" accessKey="L" title="ReadSpeaker webReader إستمع إلى هذه الصفحةِ مستخدماً" href={`//app-eu.readspeaker.com/cgi-bin/rsent?customerid=11950&amp;lang=${lang}&amp;readid=ServiceDetail&amp;url=${url}`}>
+							<span className="rsbtn_left rsimg rspart"><span className="rsbtn_text"><span>Listen</span></span></span>
+							<span className="rsbtn_right rsimg rsplay rspart"></span>
+						</a>
+					</div> 
+				}
 
 				<article>
 					<span className='author'><span>{t("services.LAST_UPDATED", NS)}</span> {moment(service.updated_at).format('YYYY.MM.DD')}</span>
