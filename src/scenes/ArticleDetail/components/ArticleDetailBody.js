@@ -173,9 +173,6 @@ class ArticleDetailBody extends Component {
 			case 'fr':
 				lang = 'fr_be';
 				break;
-			case 'ur':
-				lang = 'ur_pk';
-				break;
 			case 'fa':
 				lang = 'fa_ir';
 				break;
