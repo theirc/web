@@ -1,5 +1,5 @@
 export default {
-	backendUrl: 'https://admin.refugee.info/e/production/v2',
+	backendUrl: 'https://signpost-cms.azurewebsites.net/api',
 	instanceId: '18',
 	code: 'prod',
 	thirdParty: {

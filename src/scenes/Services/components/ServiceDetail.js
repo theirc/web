@@ -98,6 +98,12 @@ class ServiceDetail extends React.Component {
 		}
 	}
 
+	componentWillUnmount() {
+		const ReadSpeaker = window.ReadSpeaker;
+		const rspkr = window.rspkr;
+		ReadSpeaker.q(function () { if (rspkr.ui.getActivePlayer()) { rspkr.ui.getActivePlayer().close(); } });
+	}
+
 	renderContactInformation(ci, callAux) {
 		let { text, type } = ci;
 		let typography;
