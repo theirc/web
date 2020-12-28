@@ -55,7 +55,7 @@ class ServiceList extends React.Component {
 		const { country, goToService, language, measureDistance } = this.props;
 		const distance = measureDistance && s.location && measureDistance(s.location);
 		const serviceT = s.data_i18n && s.data_i18n.filter(x => x.language === language)[0];
-		const providerT = s.provider.data_i18n.filter(p => p.language === language)[0];
+		const providerT = (s.provider && s.provider.data_i18n) && s.provider.data_i18n.filter(p => p.language === language)[0];
 		const serviceInfo = serviceT ? serviceT : s;
 		const providerInfo = providerT ? providerT : s.provider;
 

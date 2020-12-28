@@ -61,7 +61,7 @@ class ServiceItem extends React.Component {
 	render() {
 		const { country, goToService, language, service } = this.props;
 		const serviceT = service.data_i18n && service.data_i18n.filter(x => x.language === language)[0];
-		const providerT = service.provider.data_i18n.filter(p => p.language === language)[0];
+		const providerT = (service.provider && service.provider.data_i18n) && service.provider.data_i18n.filter(p => p.language === language)[0];
 		const serviceInfo = serviceT ? serviceT : service;
 		const providerInfo = providerT ? providerT : service.provider;
 		const mainType = service.serviceCategories ? service.serviceCategories[0] : '';
