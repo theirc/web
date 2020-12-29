@@ -237,7 +237,7 @@ class ServiceDetail extends React.Component {
 
 		const serviceT = service.data_i18n.filter(x => x.language === language)[0]
 		const providerT = service.provider.data_i18n.filter(x => x.language === language)[0]
-		const providerInfo = providerT ? providerT : service.provider;
+		const providerInfo = (providerT && providerT.name) ? providerT : service.provider;
 
 		let sortedContactInformation = _.sortBy(service.contact_information || [], ci => {
 			return ci.index;

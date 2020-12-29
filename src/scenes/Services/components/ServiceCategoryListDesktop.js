@@ -329,7 +329,7 @@ class ServiceCategoryListDesktop extends React.Component {
 		const serviceT = service.data_i18n && service.data_i18n.filter(x => x.language === language)[0];
 		const providerT = (service.provider && service.provider.data_i18n) && service.provider.data_i18n.filter(p => p.language === language)[0];
 		const serviceInfo = serviceT ? serviceT : service;
-		const providerInfo = providerT ? providerT : service.provider;
+		const providerInfo = (providerT && providerT.name) ? providerT : service.provider;
 
 		let iconWithPrefix = vector_icon => vector_icon.indexOf('icon') > -1 ?
 			`${vector_icon.split('-')[0]} ${vector_icon}` :
