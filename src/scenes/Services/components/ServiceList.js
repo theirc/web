@@ -119,11 +119,6 @@ class ServiceList extends React.Component {
 		let categoryName = serviceType.length !== 0 ? serviceType.name : "";
 		let titleName = categoryName ? categoryName : t("services.Services", NS);
 
-		let sortedAvailableServices = [];
-
-		if (services) {
-			sortedAvailableServices = _.orderBy(services, ["region.name", "name"], ["asc", "asc"]);
-		}
 		if (!loaded) {
 			return (
 				<div className="ServiceList">
@@ -152,7 +147,7 @@ class ServiceList extends React.Component {
 					)
 				}
 
-				{sortedAvailableServices.length > 0 && (
+				{services.length > 0 && (
 					<div className="ServiceListContainer">
 						<ul className="Items">
 							<li className="Item service-map" onClick={showMap} style={{ flexBasis: "100%" }}>
@@ -167,7 +162,7 @@ class ServiceList extends React.Component {
 								<i className="material-icons" />
 							</li>
 
-							{sortedAvailableServices.map(this.renderService.bind(this))}
+							{services.map(this.renderService.bind(this))}
 						</ul>
 					</div>
 				)}
