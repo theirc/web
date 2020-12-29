@@ -311,8 +311,8 @@ class ServiceDetail extends React.Component {
 						<h2>{serviceT.name}</h2>
 						<p dangerouslySetInnerHTML={{ __html: hotlinkTels(serviceT.description) }} />
 
-						{serviceT.additionalInformation && <h3>{t("services.Additional Information", NS)}</h3>}
-						{serviceT.additionalInformation && <p dangerouslySetInnerHTML={{ __html: hotlinkTels(serviceT.additionalInformation) }} />}
+						{/* {serviceT.additionalInformation && <h3>{t("services.Additional Information", NS)}</h3>}
+						{serviceT.additionalInformation && <p dangerouslySetInnerHTML={{ __html: hotlinkTels(serviceT.additionalInformation) }} />} */}
 
 						{/* {serviceT.languages_spoken && <h3>{t("services.Languages Spoken", NS)}</h3>}
 					{serviceT.languages_spoken && <p dangerouslySetInnerHTML={{ __html: serviceT.languages_spoken }} />} */}
