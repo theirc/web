@@ -161,7 +161,7 @@ module.exports = {
 			const servicesFetched = sessionStorage[`${language}-serviceRequest`] &&
 				sessionStorage[`${language}-serviceRequest`] === requestUrl;
 			if (servicesStored && servicesFetched) {
-				resolve(_.orderBy(JSON.parse(sessionStorage[`${language}-serviceList`]), ['providerId']));
+				resolve(JSON.parse(sessionStorage[`${language}-serviceList`]));
 			} else {
 				request
 					.get(BACKEND_URL + requestUrl)
@@ -172,19 +172,23 @@ module.exports = {
 							return;
 						}
 
+						const orderedServices = _.sortBy(res.body, o => {
+							if (o.provider) return o.provider.name.toLowerCase()
+						}).filter(service => service.status === "public")
+
 						try {
 							// remove unused session items
 							instance.languages.map(i => {
 								sessionStorage.removeItem(`${i[0]}-serviceList`);
 								sessionStorage.removeItem(`${i[0]}-serviceRequest`);
 							});
-							sessionStorage[`${language}-serviceList`] = JSON.stringify(res.body);
+							sessionStorage[`${language}-serviceList`] = JSON.stringify(orderedServices);
 							sessionStorage[`${language}-serviceRequest`] = requestUrl;
 						} catch (e) {
 							console.log('Session storage is full. Services Request not cached.');
 						}
 
-						resolve(_.orderBy(res.body, ['providerId']));
+						resolve(orderedServices);
 					});
 			}
 		});
