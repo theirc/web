@@ -112,8 +112,6 @@ class ServiceCategoryListDesktop extends React.Component {
 		if (!showFilter) {
 			fetchServices(c.country.id, category, regionId, cityId).then(
 				services => {
-					// const activeServices = services.filter(service => service.status === "public");
-					// const orderedServices = _.orderBy(activeServices, ["region.name", "name"], ["asc", "asc"]);
 					let servicesFiltered = [];
 					for (let x = 0; x < 10 && x < services.length; x++) {
 						servicesFiltered.push(services[x])
