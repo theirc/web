@@ -476,7 +476,6 @@ class Services extends React.Component {
 							<div className="SkeletonContainer">
 								{isMobile &&
 									<ServiceCategoryList
-										language={language}
 										fetchCategories={() => this.serviceTypes()}
 										onSelectCategory={onSelectCategory}
 										listAllServices={() => listAllServicesinLocation(country, props.match.params.location)}
@@ -639,7 +638,6 @@ class Services extends React.Component {
 							<div className="SkeletonContainer">
 								{isMobile &&
 									<ServiceCategoryList
-										language={language}
 										fetchCategories={() => this.serviceTypes()}
 										onSelectCategory={onSelectCategory}
 										listAllServices={() => listAllServices(country)}

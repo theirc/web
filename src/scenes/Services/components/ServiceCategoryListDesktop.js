@@ -213,10 +213,10 @@ class ServiceCategoryListDesktop extends React.Component {
 	);
 
 	renderCategoryButton(category, onSelect) {
-		const { language }= this.props;
-		const categoryName = category[`name_${language}`] ? category[`name_${language}`] : category.name;
+		let { icon, name, translatedName } = category;
+
+		const categoryName = translatedName ? translatedName : name;
 		
-		let { icon } = category;
 		if (!icon) {
 			return false;
 		}

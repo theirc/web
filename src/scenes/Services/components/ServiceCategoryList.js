@@ -41,10 +41,10 @@ class ServiceCategoryList extends React.Component {
 
 	renderCategory(c) {
 
-		let { onSelectCategory, language } = this.props;
-		let { id, name, icon } = c;
+		let { onSelectCategory } = this.props;
+		let { id, name, icon, translatedName } = c;
 
-		const categoryName = c[`name_${language}`] ? c[`name_${language}`] : name;
+		const categoryName = translatedName ? translatedName : name;
 
 		let iconWithPrefix = vector_icon => (vector_icon && vector_icon.indexOf('icon') > -1) ?
 								`${vector_icon.split('-')[0]} ${vector_icon}` : 
