@@ -12,7 +12,7 @@ module.exports = {
 		return new Promise((resolve, reject) => {
 
 			request
-				.get(BACKEND_URL + `/service-categories/by-country/?countryId=${countryId}&language=${language}`)
+				.get(BACKEND_URL + `/service-categories/by-country/?countryId=${countryId}&language=${language}&hasService=1`)
 				.set("Accept-Language", language)
 				.end((err, res) => {
 					if (err) {
@@ -27,7 +27,7 @@ module.exports = {
 	fetchCategoriesByRegion(language, regionId) {
 		return new Promise((resolve, reject) => {
 			request
-				.get(BACKEND_URL + `/service-categories/by-region/?regionId=${regionId}&language=${language}`)
+				.get(BACKEND_URL + `/service-categories/by-region/?regionId=${regionId}&language=${language}&hasService=1`)
 				.set("Accept-Language", language)
 				.end((err, res) => {
 					if (err) {
@@ -42,7 +42,7 @@ module.exports = {
 	fetchCategoriesByCity(language, cityId) {
 		return new Promise((resolve, reject) => {
 			request
-				.get(BACKEND_URL + `/service-categories/by-city/?cityId=${cityId}&language=${language}`)
+				.get(BACKEND_URL + `/service-categories/by-city/?cityId=${cityId}&language=${language}&hasService=1`)
 				.set("Accept-Language", language)
 				.end((err, res) => {
 					if (err) {
@@ -54,33 +54,31 @@ module.exports = {
 				});
 		});
 	},
-	fetchRegions(language) {
+	fetchRegions(language, countrySlug) {
 		return new Promise((resolve, reject) => {
 			const sessionStorage = getSessionStorage();
+			const country = JSON.parse(sessionStorage[`${language}-countries`]).filter(c => c.slug === countrySlug)[0]
+			var requestUrl = 
+			"/regions/list/" + (country ? `?countryId=${country.id}&language=${language}&hasService=1` : "");
+			request
+				.get(BACKEND_URL + requestUrl)
+				.set("Accept-Language", language)
+				.end((err, res) => {
+					if (err) {
+						reject(err);
+						return;
+					}
 
-			if (sessionStorage[`${language}-regions`]) {
-				resolve(JSON.parse(sessionStorage[`${language}-regions`]));
-			} else {
-				request
-					.get(BACKEND_URL + "/regions/list/")
-					.set("Accept-Language", language)
-					.end((err, res) => {
-						if (err) {
-							reject(err);
-							return;
-						}
+					try {
+						// remove unused session items
+						instance.languages.map(i => sessionStorage.removeItem(`${i[0]}-regions`));
+						sessionStorage[`${language}-regions`] = JSON.stringify(res.body);
+					} catch (e) {
+						console.log('Session storage is full. Regions Request not cached.');
+					}
 
-						try {
-							// remove unused session items
-							instance.languages.map(i => sessionStorage.removeItem(`${i[0]}-regions`));
-							sessionStorage[`${language}-regions`] = JSON.stringify(res.body);
-						} catch (e) {
-							console.log('Session storage is full. Regions Request not cached.');
-						}
-
-						resolve(res.body);
-					});
-			}
+					resolve(res.body);
+				});
 		});
 	},
 
