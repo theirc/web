@@ -195,41 +195,40 @@ class ServiceDetail extends React.Component {
 			);
 		}
 
-		const firstOrDefault = a => _.first(a) || {};
 		const toUrl = u => (u.indexOf("http") === -1 ? `http://${u}` : u);
-		// const hasHours = o => {
-		// 	return o.isAlwaysOpen || weekDays.map(w => o.serviceOpeningHours[w.id].map(h => !!(h.open || h.close)).indexOf(true) > -1).indexOf(true) > -1;
-		// };
-		const callAux = t("services.Call", NS);
-		const amPmTime = time => {
-			const m = moment(moment(`2001-01-01 ${time}`).toJSON())
-				.locale(false)
-				.locale(language);
-			return `${m.format("hh:mm")} ${m.hour() >= 12 ? t("services.pm", NS) : t("services.am", NS)}`;
+		const hasHours = o => {
+			return o.isAlwaysOpen || o.serviceOpeningHours.length > 0;
 		};
+		const callAux = t("services.Call", NS);
+		// const timeValidation = time => {
+		// 	const m = moment(moment(`2001-01-01 ${time}`).toJSON())
+		// 		.locale(false)
+		// 		.locale(language);
+		// 	console.log(m.hour())
+		// 	return true;
+		// };
 		const serviceProviderElement = s => <span className='providerName'>{s.name}</span>;
 
-		const showTimeTable = service => {
+		const showTimeTable = openingHours => {
 			return weekDays.map((w, i) => {
-				if (!firstOrDefault(service.opening_time[w.toLowerCase()]).open) {
+				let hours = openingHours.filter(h => h.day === w.id)
+				if (!hours || hours.length <= 0) {
 					return (
-						<tr key={`tr-${i}`}>
-							<td className="week">{t(w)}</td>
+						<tr key={`tr-${w.name}-${i}`}>
+							<td className="week">{t(w.name)}</td>
 							<td colSpan="3">{t("services.Closed", NS)}</td>
 						</tr>
 					);
 				}
 
-				return service.opening_time[w.toLowerCase()].map((o, oi) => (
-					<tr key={`tr-${i}-${oi}`}>
-						{oi === 0 && (
-							<td rowSpan={service.opening_time[w.toLowerCase()].length} className="week">
-								{t(w)}
-							</td>
-						)}
-						<td key={`open-${i}-${oi}`}>{amPmTime(service.opening_time[w.toLowerCase()][oi].open)}</td>
+				return hours.map((h) => (
+					<tr key={`tr-${h.id}`}>
+						<td rowSpan='1' className="week">
+							{t(w.name)}
+						</td>
+						<td>{h.open}</td>
 						<td>-</td>
-						<td key={`close-${i}-${oi}`}>{amPmTime(service.opening_time[w.toLowerCase()][oi].close)}</td>
+						<td>{h.close}</td>
 					</tr>
 				));
 			});
@@ -317,19 +316,19 @@ class ServiceDetail extends React.Component {
 						{/* {serviceT.languages_spoken && <h3>{t("services.Languages Spoken", NS)}</h3>}
 					{serviceT.languages_spoken && <p dangerouslySetInnerHTML={{ __html: serviceT.languages_spoken }} />} */}
 
-						{/* {hasHours(service) && (
+						{hasHours(service) && (
 						<span>
 							<h3>{t("services.Visiting hours", NS)}</h3>
 							<p>{service.isAlwaysOpen && t("services.Open 24/7", NS)}</p>
 							<div className="openingTable">
-								{!service.opening_time["24/7"] && (
+								{!service.isAlwaysOpen && (
 									<table>
-										<tbody>{showTimeTable(service)}</tbody>
+										<tbody>{showTimeTable(service.serviceOpeningHours)}</tbody>
 									</table>
 								)}
 							</div>
 						</span>
-					)} */}
+					)}
 						{/* {serviceT.address_city && <h4>{t("services.Location", NS)}</h4>}
 					{serviceT.address_city && <p>{serviceT.address_city}</p>} */}
 
