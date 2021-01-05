@@ -181,27 +181,6 @@ class ArticleDetailBody extends Component {
 				break;
 		}
 
-		const url = encodeURIComponent(window.location.href);
-		let lang = ''
-
-		switch (language) {
-			case 'en':
-				lang = 'en_uk';
-				break;
-			case 'ar':
-				lang = 'ar_ar';
-				break;
-			case 'fr':
-				lang = 'fr_be';
-				break;
-			case 'fa':
-				lang = 'fa_ir';
-				break;
-			default:
-				lang = '';
-				break;
-		}
-
 		let html = md.render(content || lead);
 		html = html.replace(/(\+[0-9]{9,14}|00[0-9]{9,15})/g, `<a class="tel" href="tel:$1">$1</a>`);
 
