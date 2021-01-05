@@ -54,8 +54,14 @@ class ServiceList extends React.Component {
 	renderService(s) {
 		const { country, goToService, language, measureDistance } = this.props;
 		const distance = measureDistance && s.location && measureDistance(s.location);
+		const serviceT = s.data_i18n && s.data_i18n.filter(x => x.language === language)[0];
+		const providerT = (s.provider && s.provider.data_i18n) && s.provider.data_i18n.filter(p => p.language === language)[0];
+		const serviceInfo = serviceT ? serviceT : s;
+		const providerInfo = providerT ? providerT : s.provider;
 
-		let iconWithPrefix = vector_icon => vector_icon.split("-")[0] + " " + vector_icon;
+		let iconWithPrefix = vector_icon => vector_icon.indexOf('icon') > -1 ?
+			`${vector_icon.split('-')[0]} ${vector_icon}` :
+			`fa fa-${vector_icon}`;
 		let categoryStyle = color => {
 			if (!color) {
 				color = "#000";
@@ -73,21 +79,21 @@ class ServiceList extends React.Component {
 				borderColor: tinycolor(color).darken(10),
 			};
 		};
-		let fullAddress = [s.address, s.address_city].filter(val => val).join(", ");
-		let mainType = s.type ? s.type : s.types[0];
-		let subTypes = s.types.filter(t => t.id > 0 && t.id !== mainType.id);
+		let fullAddress = [serviceInfo.address, serviceInfo.address_city].filter(val => val).join(", ");
+		let mainType = s.type ? s.type : s.serviceCategories[0];
+		let subTypes = s.serviceCategories.filter(t => t.id > 0 && t.id !== mainType.id);
 
 		return [
 			<li key={s.id} className="Item" onClick={() => goToService(country, language, s.id)}>
 				<div className="Icon" key={`${s.id}-0`}>
-					<i className={iconWithPrefix(mainType.vector_icon)} style={categoryStyle(mainType.color)} />
+					<i className={iconWithPrefix(mainType.icon)} style={categoryStyle(mainType.color)} />
 				</div>
 
 				<div className="Info">
-					<h1>{s.name}</h1>
+					<h1>{serviceInfo.name}</h1>
 
 					<h2>
-						{s.provider.name}{" "}
+						{providerInfo ? providerInfo.name : ''}{" "}
 						<span>
 							{fullAddress}
 							{distance && ` - ${distance}`}
@@ -95,7 +101,7 @@ class ServiceList extends React.Component {
 						<div className="Icons">
 							{subTypes.map((t, idx) => (
 								<div className="Icon" key={`${s.id}-${idx}`}>
-									<i className={iconWithPrefix(t.vector_icon)} style={categoryStyle(t.color)} />
+									<i className={iconWithPrefix(t.icon)} style={categoryStyle(t.color)} />
 								</div>
 							))}
 						</div>
@@ -113,15 +119,6 @@ class ServiceList extends React.Component {
 		let categoryName = serviceType.length !== 0 ? serviceType.name : "";
 		let titleName = categoryName ? categoryName : t("services.Services", NS);
 
-		// vacancy === false --> available
-		// vacancy === true  --> unavailable
-		const availableServices = services.filter(s => !s.provider.vacancy);
-		let sortedAvailableServices = [];
-
-		if (availableServices) {
-			sortedAvailableServices = _.orderBy(availableServices, ["region.level", "region.name", "name"], ["desc", "asc", "asc"]);
-		}
-		const unavailableServices = services.filter(s => s.provider.vacancy);
 		if (!loaded) {
 			return (
 				<div className="ServiceList">
@@ -150,7 +147,7 @@ class ServiceList extends React.Component {
 					)
 				}
 
-				{sortedAvailableServices.length > 0 && (
+				{services.length > 0 && (
 					<div className="ServiceListContainer">
 						<ul className="Items">
 							
@@ -166,24 +163,10 @@ class ServiceList extends React.Component {
 								<i className="material-icons" />
 							</li>
 
-							{sortedAvailableServices.map(this.renderService.bind(this))}
+							{services.map(this.renderService.bind(this))}
 						</ul>
 					</div>
 				)}
-
-
-				{unavailableServices.length > 0 && (
-					<div className="ServiceListContainer Unavailable">
-						<ul className="Items">
-							<li style={{ flexBasis: "100%" }}>
-								<h1>Currently unavailable:</h1>
-							</li>
-
-							{unavailableServices.map(this.renderService.bind(this))}
-						</ul>
-					</div>
-				)
-				}
 			</div>
 		);
 	}

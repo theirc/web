@@ -13,7 +13,9 @@ import getSessionStorage from "../../../shared/sessionStorage";
 import HtmlMarker from "./HtmlMarker";
 
 var tinycolor = require("tinycolor2");
-let iconWithPrefix = vector_icon => vector_icon.split("-")[0] + " " + vector_icon;
+let iconWithPrefix = vector_icon => vector_icon.indexOf('icon') > -1 ?
+	`${vector_icon.split('-')[0]} ${vector_icon}` :
+	`fa fa-${vector_icon}`;
 let categoryStyle = color => {
 	if (!color) {
 		color = "#000";
@@ -41,7 +43,7 @@ class ServiceIcon extends React.Component {
 		const { service, idx, type } = this.props;
 		return type ? (
 			<div className="Icon" key={`${service.id}-${idx}`} style={{ 'fontSize': '18px' }}>
-				<i className={iconWithPrefix(type.vector_icon)} style={categoryStyle(type.color)} />
+				<i className={iconWithPrefix(type.icon)} style={categoryStyle(type.color)} />
 			</div>
 		) : (
 				<div />
@@ -56,25 +58,29 @@ class ServiceIcon extends React.Component {
 class ServiceItem extends React.Component {
 	render() {
 		const { country, goToService, language, service } = this.props;
-		const mainType = service.type ? service.type : service.types[0];
-		const types = (service.types || []).filter(t => t.id !== mainType.id);
+		const serviceT = service.data_i18n && service.data_i18n.filter(x => x.language === language)[0];
+		const providerT = (service.provider && service.provider.data_i18n) && service.provider.data_i18n.filter(p => p.language === language)[0];
+		const serviceInfo = serviceT ? serviceT : service;
+		const providerInfo = providerT ? providerT : service.provider;
+		const mainType = service.serviceCategories ? service.serviceCategories[0] : '';
+		const types = (service.serviceCategories || []).filter(t => t.id !== mainType.id);
 
 		return (
-			<div key={service.id} className="Item" style={{"border": "none"}} onClick={() => goToService(country, language, service.id)}>
+			<div key={service.id} className="Item" style={{ "border": "none" }} onClick={() => goToService(country, language, service.id)}>
 				{mainType &&
 					<ServiceIcon key={`si-${mainType.idx}`} idx={0} isMainType={1} service={service} type={mainType} />
 				}
 
 				<div className="Info" style={{ 'fontSize': '120%' }}>
 					<div className="Item-content title">
-						<h1>{service.name}</h1>
+						<h1>{serviceInfo.name}</h1>
 					</div>
 
 					<h2 className="Item-content">
-						{service.provider.name}{" "}
+						{providerInfo ? providerInfo.name : ''}{" "}
 
 						<address className="fullAddress Item-content">
-							{service.address}
+							{serviceInfo.address}
 						</address>
 
 						{service.address_city &&
@@ -119,7 +125,6 @@ class ServiceMapDesktop extends React.Component {
 
 		if (navigator.onLine) {
 			let isMap = window.google;
-			console.log(isMap);
 			const map = new window.google.maps.Map(document.getElementById('MapCanvas'), {
 				minZoom: 3,
 				center: { lat: 4.6403306, lng: -74.0430238 },
@@ -151,32 +156,26 @@ class ServiceMapDesktop extends React.Component {
 					this.infoWindow.close();
 				}
 			});
-			console.log("Did mount")
 			this.map = map;
 
 		}
 	}
 
 	componentDidUpdate() {
-		console.log("Did update")
-		let keepPreviousZoom = this.props.keepPreviousZoom;
 
 		if (this.state.loaded) {
 			if (this.props.services.length) {
-				console.log("services:", this.state.services);
 
-				let locationServices = this.props.services.filter(s => s.location != null);
+				let locationServices = this.props.services.filter(s => s.latitude != null && s.longitude != null && s.status === "public");
 
 				const markers = locationServices.map((s, index) => {
-					let ll = s.location.coordinates.slice().reverse();
-					console.log(ll);
-					const mainType = s.type ? s.type : s.types[0];
+					const mainType = s.serviceCategories ? s.serviceCategories[0] : '';
 					let markerDiv = ReactDOMServer.renderToString(<ServiceIcon idx={0} service={s} type={mainType} />);
 
 					let popupEl = document.createElement("div");
 					ReactDOM.render(<ServiceItem service={s} {...this.props} />, popupEl);
 
-					let marker = new HtmlMarker(new global.google.maps.LatLng(ll[0], ll[1]), this.map, {
+					let marker = new HtmlMarker(new global.google.maps.LatLng(s.latitude, s.longitude), this.map, {
 						html: markerDiv
 					});
 
@@ -191,7 +190,6 @@ class ServiceMapDesktop extends React.Component {
 
 					return marker;
 				});
-				console.log("Markers done");
 
 				new window.MarkerClusterer(this.map, markers, {
 					imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
@@ -202,7 +200,6 @@ class ServiceMapDesktop extends React.Component {
 					markers.forEach(m => {
 						bounds.extend(m.getPosition());
 					});
-					console.log("Fit bounds", bounds)
 					this.map.fitBounds(bounds);
 				}
 			}
@@ -210,9 +207,6 @@ class ServiceMapDesktop extends React.Component {
 	}
 
 	componentWillUnmount() {
-		// Cleaning up.
-		// this.map.off();
-		// this.map.remove();
 	}
 
 	render() {

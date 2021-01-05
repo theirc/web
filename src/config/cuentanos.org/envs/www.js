@@ -1,5 +1,6 @@
 export default {
-	backendUrl: 'https://admin.cuentanos.org/e/production/v2',
+	backendUrl: 'https://signpost-cms.azurewebsites.net/api',
+	instanceId: '13',
 	code: 'prod',
 	thirdParty: {
 		analytics: {

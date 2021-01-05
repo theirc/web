@@ -1,5 +1,6 @@
 export default {
-	backendUrl: 'https://admin-qa.refugee.info/e/production/v2',
+	backendUrl: 'https://signpost-cms-qa.azurewebsites.net/api',
+	instanceId: '15',
 	code: 'qa',
 	thirdParty: {
 		analytics: {

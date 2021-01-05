@@ -126,7 +126,7 @@ class AppHeader extends Component {
 					<div className={[homePage ? "header-opacity" : "", backgroundDark ? 'app-bar' : 'app-bar-light', !(country && language) ? 'app-bar-black' : ''].join(" ")}>
 
 						<div className={["app-bar-container logo", !(country && language) ? "logo-centered" : ""].join(" ")} onClick={path.includes('selectors') ? noop : onGoHome || noop}>
-							<img onClick={onGoHome} src={backgroundDark ? logo : logoBlack} className="app-bar-logo" alt=" " />
+							<img onClick={onGoHome} src={backgroundDark ? logo : logoBlack} className="app-bar-logo" alt="bar-logo" />
 						</div>
 
 						{country && language &&

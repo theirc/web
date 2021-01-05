@@ -1,5 +1,6 @@
 export default {
-	backendUrl: 'https://admin-staging.refugee.info/e/production/v2',
+	backendUrl: 'https://signpost-cms-staging.azurewebsites.net/api',
+	instanceId: '15',
 	code: 'staging',
 	thirdParty: {
 		analytics: {

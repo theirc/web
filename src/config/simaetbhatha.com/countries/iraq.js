@@ -8,7 +8,7 @@ export default {
 		showArticles: true,
 		showDepartments: false,
 		showLinkToAdministration: false,
-		showServices: false,
+		showServices: true,
 	},
 	thirdParty: {
 		facebook: {
