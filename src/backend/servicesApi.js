@@ -58,8 +58,10 @@ module.exports = {
 		return new Promise((resolve, reject) => {
 			const sessionStorage = getSessionStorage();
 			const country = JSON.parse(sessionStorage[`${language}-countries`]).filter(c => c.slug === countrySlug)[0]
+			// var requestUrl = 
+			// "/regions/list/" + (country ? `?countryId=${country.id}&language=${language}&hasService=1` : "");
 			var requestUrl = 
-			"/regions/list/" + (country ? `?countryId=${country.id}&language=${language}&hasService=1` : "");
+			"/regions/list/";
 			request
 				.get(BACKEND_URL + requestUrl)
 				.set("Accept-Language", language)
