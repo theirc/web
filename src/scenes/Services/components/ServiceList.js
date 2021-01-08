@@ -79,7 +79,6 @@ class ServiceList extends React.Component {
 				borderColor: tinycolor(color).darken(10),
 			};
 		};
-		let fullAddress = [serviceInfo.address, serviceInfo.address_city].filter(val => val).join(", ");
 		let mainType = s.type ? s.type : s.serviceCategories[0];
 		let subTypes = s.serviceCategories.filter(t => t.id > 0 && t.id !== mainType.id);
 
@@ -95,7 +94,7 @@ class ServiceList extends React.Component {
 					<h2>
 						{providerInfo ? providerInfo.name : ''}{" "}
 						<span>
-							{fullAddress}
+							{serviceInfo.address}
 							{distance && ` - ${distance}`}
 						</span>
 						<div className="Icons">

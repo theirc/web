@@ -310,12 +310,6 @@ class ServiceDetail extends React.Component {
 						<h2>{serviceT.name}</h2>
 						<p dangerouslySetInnerHTML={{ __html: hotlinkTels(serviceT.description) }} />
 
-						{/* {serviceT.additionalInformation && <h3>{t("services.Additional Information", NS)}</h3>}
-						{serviceT.additionalInformation && <p dangerouslySetInnerHTML={{ __html: hotlinkTels(serviceT.additionalInformation) }} />} */}
-
-						{/* {serviceT.languages_spoken && <h3>{t("services.Languages Spoken", NS)}</h3>}
-					{serviceT.languages_spoken && <p dangerouslySetInnerHTML={{ __html: serviceT.languages_spoken }} />} */}
-
 						{hasHours(service) && (
 						<span>
 							<h3>{t("services.Visiting hours", NS)}</h3>
@@ -329,15 +323,6 @@ class ServiceDetail extends React.Component {
 							</div>
 						</span>
 					)}
-						{/* {serviceT.address_city && <h4>{t("services.Location", NS)}</h4>}
-					{serviceT.address_city && <p>{serviceT.address_city}</p>} */}
-
-						{serviceT.address && <h3>{t("services.Address", NS)}</h3>}
-						{serviceT.address && <p>{serviceT.address}</p>}
-						{/* {serviceT.address_floor && <p>{serviceT.address_floor}</p>}
-
-					{service.address_in_country_language && <h3>{t("services.Address in Local Language", NS)}</h3>}
-					{service.address_in_country_language && <p>{service.address_in_country_language}</p>} */}
 
 						{service.costOfService && <h3>{t("services.Cost of service", NS)}</h3>}
 						{service.costOfService && <p>{service.costOfService}</p>}
