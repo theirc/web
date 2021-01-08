@@ -76,7 +76,7 @@ class ServiceCategoryListDesktop extends React.Component {
 			region: !l ? c.country.name : l,
 			showFilter: showFilter,
 			cities,
-			city: ci.length > 0 ? ci : t("services.Municipalidades", NS)
+			city: ci ? ci : t("services.Municipalidades", NS)
 		});
 
 		if (ci && categories.length === 0) {

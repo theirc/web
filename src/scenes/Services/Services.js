@@ -299,6 +299,7 @@ class Services extends React.Component {
 											goTo={(location, category, mapview, cities) => {this.goTo(location, category, mapview); this.setState({cities})}}
 											mapView={true}
 											measureDistance={this.measureDistance(geolocation, language)}
+											cities={this.state.cities}
 										/>
 									}
 								</div>
@@ -329,6 +330,7 @@ class Services extends React.Component {
 											fetchServices={(countryId, category, regionId, cityId) => servicesApi.fetchAllServices(countryId, language, category, regionId, cityId)} /* TODO: Fix number of services */
 											goTo={(location, category, mapview, cities) => {this.goTo(location, category, mapview); this.setState({cities})}}
 											measureDistance={this.measureDistance(geolocation, language)}
+											cities={this.state.cities}
 										/>
 									}
 								</div>
@@ -430,6 +432,7 @@ class Services extends React.Component {
 										goTo={(location, category, mapview, cities) => {this.goTo(location, category, mapview); this.setState({cities})}}
 										mapView={true}
 										measureDistance={this.measureDistance(geolocation, language)}
+										cities={this.state.cities}
 									/>
 								}
 							</div>
@@ -462,6 +465,7 @@ class Services extends React.Component {
 										fetchServices={(countryId, category, regionId, cityId) => servicesApi.fetchAllServices(countryId, language, category, regionId, cityId)}
 										goTo={(location, category, mapview, cities) => {this.goTo(location, category, mapview); this.setState({cities})}}
 										measureDistance={this.measureDistance(geolocation, language)}
+										cities={this.state.cities}
 									/>
 								}
 							</div>
@@ -529,6 +533,7 @@ class Services extends React.Component {
 										goTo={(location, category, mapview, cities) => {this.goTo(location, category, mapview); this.setState({cities})}}
 										location={props.match.params.location}
 										measureDistance={this.measureDistance(geolocation, language)}
+										cities={this.state.cities}
 									/>
 								}
 							</div>
@@ -561,6 +566,7 @@ class Services extends React.Component {
 										location={props.match.params.location}
 										mapView={true}
 										measureDistance={this.measureDistance(geolocation, language)}
+										cities={this.state.cities}
 									/>
 								}
 							</div>
@@ -624,6 +630,7 @@ class Services extends React.Component {
 										location={props.match.params.location}
 										mapView={true}
 										measureDistance={this.measureDistance(geolocation, language)}
+										cities={this.state.cities}
 									/>
 								}
 							</div>
