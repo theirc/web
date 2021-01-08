@@ -173,9 +173,11 @@ module.exports = {
 							return;
 						}
 
-						const orderedServices = _.sortBy(res.body, o => {
+						const filteredServices = res.body.filter(service => service.status === "public")
+
+						const orderedServices = _.sortBy(filteredServices, o => {
 							if (o.provider) return o.provider.name.toLowerCase()
-						}).filter(service => service.status === "public")
+						})
 
 						try {
 							// remove unused session items
