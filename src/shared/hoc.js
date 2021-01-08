@@ -121,8 +121,6 @@ export function withCountry(WrappedComponent) {
  * @description 
  */
 export function withCategory(WrappedComponent) {
-
-	console.log("with category");
 	class CategorySwitcher extends Component {
 		state = {
 			category: null,
@@ -140,7 +138,6 @@ export function withCategory(WrappedComponent) {
 				history,
 				onRender
 			} = this.props;
-			console.log("params:",match.params.category);
 
 			if (country) {
 				const category = _.first(
@@ -152,7 +149,6 @@ export function withCategory(WrappedComponent) {
 				this.setState({
 					category
 				});
-				console.log("Category", category, this.state.category);
 				// category does not exist
 				//!category && history.push('/404');
 
@@ -201,7 +197,6 @@ export function withCategory(WrappedComponent) {
 			}
 
 			let invalid = category && category.fields.slug === match.params.category && !articleItem;
-			console.log("invalid", invalid, category && category.fields.slug, match.params.category, articleItem);
 			//return invalid ? (history.push('/404'), null) : <WrappedComponent {...{ category, articleItem, ...this.props }} />;
 			return <WrappedComponent {...{ category, articleItem, ...this.props }} />;
 		}

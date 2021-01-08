@@ -349,7 +349,6 @@ class ServiceCategoryListDesktop extends React.Component {
 			};
 		};
 
-		let fullAddress = [serviceInfo.address, serviceInfo.address_city].filter(val => val).join(", ");
 		let mainType = service.serviceCategories ? service.serviceCategories[0] : '';
 		let subTypes = service.serviceCategories.length > 1 ? service.serviceCategories.filter(c => c.id !== mainType.id) : '';
 
@@ -365,7 +364,7 @@ class ServiceCategoryListDesktop extends React.Component {
 					<h2>
 						{providerInfo && providerInfo.name}{" "}
 						<span>
-							{fullAddress}
+							{serviceInfo.address}
 							{distance && ` - ${distance}`}
 						</span>
 
