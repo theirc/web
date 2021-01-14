@@ -105,8 +105,10 @@ class AppHeader extends Component {
 		const logo = instance.brand.images.logo || "/logo.svg";
 		const logoBlack = instance.brand.images.logoBlack || logo;
 		const noop = () => console.log("noop");
-		const cookiePolicyLink = <a href="/greece/privacy/cookies" target="_blank" rel="noopener noreferrer">Cookie Policy</a>;
-		const privacyPolicyLink = <a href="/greece/privacy/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>;
+		const cookiePolicyLinkGreece = <a href="/greece/privacy/cookies" target="_blank" rel="noopener noreferrer">Cookie Policy</a>;
+		const privacyPolicyLinkGreece = <a href="/greece/privacy/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>;
+		const cookiePolicyLinkIraq = <a href="/iraq/privacy/cookies" target="_blank" rel="noopener noreferrer">Cookie Policy</a>;
+		const privacyPolicyLinkIraq = <a href="/iraq/privacy/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>;
 
 		let isOnServices = window.location.href.includes("/services");
 		let isOnArticlesGreece = window.location.href.includes("/categories") || /(\/greece\/.*(\/.)*)/.test(window.location.href);
@@ -120,6 +122,8 @@ class AppHeader extends Component {
 
 		let selectedIndex = selectedMenuItem();
 		let path = window.location.pathname;
+
+		console.log('EEEE ', instance);
 		return (
 			<div className={backgroundDark ? 'AppHeader' : 'AppHeaderLight'}>
 				<Headroom tolerance={5} offset={200}>
@@ -188,7 +192,7 @@ class AppHeader extends Component {
 					<div className={this.state.prvalert ? 'hidden' : 'privacy-banner'}>
 						<div className='content'>
 							<span className="privacy-banner-separator"></span>
-							<Interpolate i18nKey="COOKIES_BANNER" cookiePolicy={cookiePolicyLink} privacyPolicy={privacyPolicyLink} />
+							<Interpolate i18nKey="COOKIES_BANNER" cookiePolicy={instance.brand.code === 'ri' ? cookiePolicyLinkGreece : cookiePolicyLinkIraq} privacyPolicy={instance.brand.code === 'ri' ? privacyPolicyLinkGreece : privacyPolicyLinkIraq} />
 						</div>
 						<Close
 							className="close-alert"
