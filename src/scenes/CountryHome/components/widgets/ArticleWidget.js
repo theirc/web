@@ -67,8 +67,10 @@ class ArticleWidget extends Component {
 			return `<a href="${tokens[idx].href}?language=${language}" ${tokens[idx].title}>`;
 		}
 
+		const langLTR = ['ur', 'fa', 'ar'].indexOf(language) > -1;
+
 		return (
-			<div className="Article ArticleWidget Home" key={article.sys.id}>
+			<div className={`Article ArticleWidget Home ${langLTR ? 'asd' : 'efg'}`} key={article.sys.id}>
 				{hero &&
 					hero.fields &&
 					hero.fields.file &&
@@ -79,18 +81,22 @@ class ArticleWidget extends Component {
 					)
 				}
 
+				<div className={`${!showFullArticle ? 'welcome-container' : ''} ${langLTR ? 'welcome-container-ltr' : ''}`}>
 				{showFullArt ? <h1>{article.fields.title}</h1> : <h1 onClick={() => onNavigate(`/${country.fields.slug}/${categorySlug}/${article.fields.slug}`)}>{article.fields.title}</h1>}
 
 				{contentType.sys.id === "video" && this.renderVideo(article)}
+
 				
 				<p dangerouslySetInnerHTML={{ __html: md.render(content) }} />
 				
 				{!showFullArt &&
 					<s className="Read-More">
 						<Link to={`/${country.fields.slug}/${categorySlug}/${article.fields.slug}?language=${language}`}>{t("global.Read More", NS)}</Link>
-						<i className="material-icons">arrow_right</i>
+						{/* <i className="material-icons">arrow_right</i> */}
 					</s>
 				}
+				</div>
+
 			</div>
 		);
 	}

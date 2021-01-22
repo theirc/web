@@ -9,6 +9,7 @@
 	}
 
 	&.Highlighted {
+		padding: 20px 0;
 		h1 {
 			font-size: 24px !important;
 			margin-top: 30px;
@@ -22,8 +23,8 @@
 
 	.hero {
 		// align-items: flex-start !important;
-		margin-right: -20px;
-		margin-left: -20px;
+		// margin-right: -20px;
+		// margin-left: -20px;
 		margin-top: -20px;
 		max-height: 440px;
 		overflow: hidden;
@@ -49,10 +50,13 @@
 	@media (min-width: $desktopBreakpoint) {
 		& {
 			flex-basis: calc(50% - 40px);
+			width: 100%;
 		}
 		&.Highlighted {
 			// margin-top: 64px;
 			flex-basis: 100%;
+			max-width: unset;
+			padding: 20px 0px;
 		}
 		& .hero {
 			max-height: 440px;
@@ -64,6 +68,7 @@
 			flex-basis: unset;
 			margin-bottom: 30px;
 			width: 100%;
+			max-width: 1024px;
 
 			.Article.Home > h1 {
 				margin-bottom: 25px;
@@ -87,7 +92,7 @@
 		}
 	}
 	.TopCategory {
-		width:33%;
+		width:45%;
 		display: inline-block;
 		flex-direction: row;
 		align-items: center;
@@ -101,7 +106,8 @@
 		padding-bottom: 16px;
 		height: 130px;
 		text-align: center;
-
+		background: #FFFFFF;
+		border-top: solid 6px #71D1A7;
 		&:hover {
 			span {
 				text-decoration: underline;
@@ -115,10 +121,14 @@
 
 		@media (max-width: $desktopBreakpoint) {
 			display: flex;
-			max-width: max-content;
 			height: auto;
 			text-align: left;
 			width: 100%;
+			margin: 3% 0;
+		}
+
+		@media (min-width: $desktopBreakpoint) {
+			margin: 1% 2%;
 		}
 
 		& .icon {
@@ -156,12 +166,15 @@
 }
 .CT-widget{
 	flex-basis: calc(100% - 40px);
+	@media (min-width: $desktopBreakpoint) {
+		max-width: 1024px;
+	}
 }
 .title-line{
 	@include brand-colors( "border-color");
 	border-top: 2px solid;
 	width: 50px;
-	margin-left: calc(50% - 25px);
+	// margin-left: calc(50% - 25px);
 	margin-bottom: 30px;
 	@media (max-width: $desktopBreakpoint) {
 		display: none;

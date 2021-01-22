@@ -1,84 +1,239 @@
 @import "../../../../shared/includes.scss";
 .Article {
-    .Facebook {
-        width: 100%;
-    }
+  @media (min-width: $desktopBreakpoint) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .Facebook {
+    width: 100%;
+  }
 
-    .YouTube {
-        width: 100%;
-    }
-    h3 {
-        text-transform: uppercase;
-    }
+  .YouTube {
+    width: 100%;
+  }
+  h3 {
+    text-transform: uppercase;
+  }
+  .welcome-container {
+    display: flex;
+    background: white;
+    padding: 0 4%;
     p {
-        margin-top: 0;
-        font-weight: 300;
-        line-height: 1.6;
-        opacity: 1;
-        u {
-            text-decoration: none;
-        }
-    p:hover{opacity: 0.85;}
-    }
-
-    .hero {
-        position: relative;
-        display: flex;
-        align-items: center;
+      p:nth-of-type(2) {
+        display: grid;
         justify-content: center;
-    }
-
-    .hero > img {
-        width: 100%;
-    }
-    .hero .overlay {
-        @media (min-width: $desktopBreakpoint) {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: block;
-            opacity: 0.5;
-            background-color: #000000;
+        grid-template-columns: 25% 50%;
+        grid-template-rows: 30% 40%;
+        position: relative;
+        bottom: 11%;
+        background: #f3f3f6;
+        align-items: center;
+        padding: 10px;
+        // width: 100%;
+        a:nth-of-type(1) {
+          grid-row-start: 1;
+          grid-row-end: none;
         }
-    }
-
-    .pos,
-    .neg {
-        display: none;
-        visibility: hidden;
-        height: 0;
-        width: 0;
-        margin: 0;
-        padding: 0;
-    }
-    .pos + ul,
-    .neg + ul {
-        padding: 0;
-
-        li {
-            list-style: none;
-
-            &::before {
-                font-family: "FontAwesome";
-            }
+        a:nth-of-type(2) {
+          width: 100%;
+          color: #fff;
+          background-color: #007bff;
+          border-color: #007bff;
+          border: 1px solid transparent;
+          font-size: 1rem;
+          line-height: 1.5;
+          border-radius: .25rem;
+          box-sizing: border-box;
+          justify-content: center;
+          display: flex;
         }
-    }
-    .pos + ul {
-        li {
-            &::before {
-                content: "\f00c ";
-                color: green;
-            }
+      }
+      p:nth-of-type(3) {
+        display: grid;
+        justify-content: center;
+        grid-template-columns: 25% 50%;
+        grid-template-rows: 40% 50%;
+        margin-left: 20px;
+        align-items: center;
+        background: #f3f3f6;
+        padding: 10px;
+        a:nth-of-type(1) {
+          grid-row-start: 1;
+          grid-row-end: none;
         }
-    }
-    .neg + ul {
-        li {
-            &::before {
-                content: "\f00d ";
-                color: red;
-            }
+        a:nth-of-type(2) {
+          width: 100%;
+          color: #fff;
+          background-color: #007bff;
+          border-color: #007bff;
+          border: 1px solid transparent;
+          font-size: 1rem;
+          line-height: 1.5;
+          border-radius: .25rem;
+          box-sizing: border-box;
+          justify-content: center;
+          display: flex;
         }
+      }
     }
+    @media (max-width: $desktopBreakpoint) {
+      flex-flow: column;
+      margin: 0 4%;
+      flex-wrap: wrap;
+      justify-content: center;
+      p {
+        p:nth-of-type(2) {
+          grid-template-columns: 25% 70%;
+          grid-template-rows: 30% 40% 30%;
+          margin-left: unset;
+          a:nth-of-type(1) {
+            grid-row-start: 1;
+            grid-row-end: 3;
+          }
+          a:nth-of-type(2) {
+            grid-row-start: 3;
+            grid-column-end: 3;
+            grid-column-start: 1;
+          }
+        }
+        p:nth-of-type(3) {
+          grid-template-columns: 25% 70%;
+          grid-template-rows: 30% 40% 30%;
+          margin-left: unset;
+          a:nth-of-type(1) {
+            grid-row-start: 1;
+            grid-row-end: 3;
+          }
+          a:nth-of-type(2) {
+            grid-row-start: 3;
+            grid-column-end: 3;
+            grid-column-start: 1;
+          }
+        }
+      }
+    }
+    @media (min-width: $desktopBreakpoint) {
+      &-ltr {
+        p:first-child {
+          left: 100%;
+          right: unset !important;
+        }
+      }
+      box-sizing: border-box;
+      max-width: 1024px;
+      position: relative;
+      bottom: 90px;
+      display: grid;
+      grid-template-columns: 50% 50%;
+      grid-template-rows: 40% 40% 20%;
+      p {
+        grid-row-start: 1;
+        grid-row-end: 4;
+        grid-column-start: 2;
+        img {
+          width: 70px;
+        }
+        p:first-child {
+          position: relative;
+          top: 40%;
+          right: 100%;
+        }
+      }
+    }
+  }
+  p {
+    margin-top: 0;
+    font-weight: 300;
+    line-height: 1.6;
+    opacity: 1;
+    u {
+      text-decoration: none;
+    }
+    p:hover {
+      opacity: 0.85;
+    }
+  }
+
+  .hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    .heroImage {
+      @media (min-width: $desktopBreakpoint) {
+        position: relative;
+        top: 137px;
+      }
+    }
+  }
+
+  .hero > img {
+    width: 100%;
+  }
+  .hero .overlay {
+    @media (min-width: $desktopBreakpoint) {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      opacity: 0.5;
+      background-color: #000000;
+    }
+  }
+
+  .pos,
+  .neg {
+    display: none;
+    visibility: hidden;
+    height: 0;
+    width: 0;
+    margin: 0;
+    padding: 0;
+  }
+  .pos + ul,
+  .neg + ul {
+    padding: 0;
+
+    li {
+      list-style: none;
+
+      &::before {
+        font-family: "FontAwesome";
+      }
+    }
+  }
+  .pos + ul {
+    li {
+      &::before {
+        content: "\f00c ";
+        color: green;
+      }
+    }
+  }
+  .neg + ul {
+    li {
+      &::before {
+        content: "\f00d ";
+        color: red;
+      }
+    }
+  }
+
+  .Read-More {
+    align-self: center;
+    text-decoration: underline;
+    margin-bottom: 20px;
+    @media (min-width: $desktopBreakpoint) {
+      grid-row-start: 3;
+      position: relative;
+      // margin-bottom: 0;
+      align-self: flex-end;
+      // width: 15%;
+      height: fit-content;
+    }
+  }
 }
