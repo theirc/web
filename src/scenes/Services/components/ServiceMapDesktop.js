@@ -118,7 +118,8 @@ class ServiceMapDesktop extends React.Component {
 	componentDidMount() {
 		const {
 			defaultLocation,
-			services
+			services,
+			country
 		} = this.props;
 
 		const sessionStorage = getSessionStorage();
@@ -127,7 +128,7 @@ class ServiceMapDesktop extends React.Component {
 			let isMap = window.google;
 			const map = new window.google.maps.Map(document.getElementById('MapCanvas'), {
 				minZoom: 3,
-				center: { lat: 4.6403306, lng: -74.0430238 },
+				center: { lat: country.fields.coordinates.lat, lng: country.fields.coordinates.lon },
 				zoom: 8,
 				disableDefaultUI: false,
 				zoomControl: true,
