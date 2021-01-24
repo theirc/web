@@ -92,8 +92,10 @@ Less me
 .selectors {
 	align-items: center;
 	display: flex;
-	padding: 0 15px;
-
+	padding: 0;
+    background: gray;
+    height: 36px;
+    border-radius: 2px;
 	span {
 		cursor: pointer;
 		padding: 0 10px;
@@ -300,7 +302,9 @@ Less me
 			position: absolute;
 			opacity: 0.5;
 			top: 64px;
-			width: 100%;
+			width: -moz-available;
+			width: -webkit-fill-available;
+			width: fill-available;
 			z-index: 1;
 
 			input {
@@ -569,7 +573,13 @@ $color: #ffffff;
 .search-btn {
 	cursor: pointer;
 	opacity: 0.6;
-	width: 24px;
+	width: 32px !important;
+	height: 32px !important;
+	padding: 2px;
+    margin-left: 18px;
+    background-color: gray;
+	border-radius: 2px;
+	font-size: 32px;
 
 	&:hover {
 		opacity: 1;
@@ -579,9 +589,9 @@ $color: #ffffff;
 		padding-right: 18px;
 	}
 	
-	.ltr & {
-		padding-left: 18px;
-	}
+	// .ltr & {
+	// 	padding-left: 18px;
+	// }
 }
 
 .SearchButton {
@@ -650,4 +660,8 @@ $color: #ffffff;
 
 .SearchButton svg {
 	display: none;
+}
+
+.fa-times:before {
+	margin-left: 3px;
 }
