@@ -1,82 +1,94 @@
 @import "../../../../shared/includes.scss";
 
 .LocalGuide {
-    .ltr & {
-        s {
-            float: right;
-        }
+  .ltr & {
+    s {
+      float: right;
     }
-    .rtl & {
-        s {
-            float: left;
-        }
+  }
+  .rtl & {
+    s {
+      float: left;
     }
-    .Container {
-        display: flex;
-        flex-wrap: wrap;
+  }
+  .Container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+
+    .LocalGuideItem {
+      display: block;
+      flex-basis: calc(50% - 5px);
+      margin-bottom: 5px;
+      margin-right: 10px;
+      .rtl & {
+        margin-left: 10px;
+        margin-right: 0;
+      }
+      text-align: center;
+      justify-content: center;
+
+      img {
+        height: 72px;
         width: 100%;
+        object-fit: cover;
+      }
+      &:nth-child(odd) {
+        color: red;
+        margin-right: 5px;
+        margin-left: 0;
 
-        .LocalGuideItem {
-            display: block;
-            flex-basis: calc(50% - 5px);
-            margin-bottom: 5px;
-            margin-right: 10px;
-            .rtl & {
-                margin-left: 10px;
-                margin-right: 0;
-            }
-            text-align: center;
-            justify-content: center;
-
-            img {
-                height: 72px;
-                width: 100%;
-                object-fit: cover;
-            }
-            &:nth-child(odd) {
-                color: red;
-                margin-right: 5px;
-                margin-left: 0;
-
-                .rtl & {
-                    margin-left: 5px;
-                    margin-right: 0;
-                }
-            }
-
-            &:nth-child(even) {
-                color: blue;
-                margin-left: 0;
-                margin-right: 0;
-
-                .rtl & {
-                    margin-right: 0;
-                    margin-left: 0;
-                }
-            }
+        .rtl & {
+          margin-left: 5px;
+          margin-right: 0;
         }
+      }
 
-        .Overlay {
-					align-items: center;
-						background-color: #4b4b4b;
-						border: 1px solid #ddd;
-						border-radius: 5px;
-						color: white;
-            cursor: pointer;
-            display: flex;
-            font-size: 14px;
-            height: 72px;
-						justify-content: center;
-						overflow: hidden;
+      &:nth-child(even) {
+        color: blue;
+        margin-left: 0;
+        margin-right: 0;
 
-						.fa {
-							font-size: 20px;
-							padding: 10px;
-						}
-
-            @media (min-width: $desktopBreakpoint) {
-                font-size: 16px;
-            }
+        .rtl & {
+          margin-right: 0;
+          margin-left: 0;
         }
+      }
     }
+
+    .Overlay {
+      align-items: center;
+      background-color: #4b4b4b;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      color: white;
+      cursor: pointer;
+      display: flex;
+      font-size: 14px;
+      height: 72px;
+      justify-content: center;
+      overflow: hidden;
+
+      .fa {
+        font-size: 20px;
+        padding: 10px;
+      }
+
+      @media (min-width: $desktopBreakpoint) {
+        font-size: 16px;
+      }
+    }
+  }
+  .read-more-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .Read-More {
+      text-decoration: underline;
+      a {
+        font-size: 18px;
+        font-weight: 900;
+      }
+    }
+  }
 }
