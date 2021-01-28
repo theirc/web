@@ -244,7 +244,7 @@ class ServiceCategoryListDesktop extends React.Component {
 	renderDepartmentButton(department, onSelect) {
 		const { country, language } = this.props;
 		const departmentT = department.data_i18n && department.data_i18n.filter(x => x.language === language)[0];
-		const departmentInfo = departmentT ? departmentT : department;
+		const departmentInfo = (departmentT && departmentT.name.length > 0) ? departmentT : department;
 		return (
 			<button key={`${department.id}-${department.slug}`} className={department.slug === this.state.location.slug ? "location-item-selected" : "location-item"} onClick={() => onSelect(department)}>
 				{department.slug === country.fields.slug && <i className='fa fa-globe' />}<span>{departmentInfo.name}</span>
