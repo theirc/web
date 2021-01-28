@@ -12,15 +12,17 @@
     }
   }
   .Container {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
     width: 100%;
-
+    grid-template-columns: 100%;
+    @media (min-width: $desktopBreakpoint) {
+      grid-template-columns: 48% 48%;
+      grid-column-gap: 4%;
+    }
     .LocalGuideItem {
       display: block;
       flex-basis: calc(50% - 5px);
-      margin-bottom: 5px;
-      margin-right: 10px;
+      margin-bottom: 15px;
       .rtl & {
         margin-left: 10px;
         margin-right: 0;
@@ -33,25 +35,11 @@
         width: 100%;
         object-fit: cover;
       }
-      &:nth-child(odd) {
-        color: red;
-        margin-right: 5px;
-        margin-left: 0;
-
-        .rtl & {
-          margin-left: 5px;
-          margin-right: 0;
-        }
-      }
-
-      &:nth-child(even) {
-        color: blue;
-        margin-left: 0;
-        margin-right: 0;
-
-        .rtl & {
-          margin-right: 0;
-          margin-left: 0;
+      @media (min-width: $desktopBreakpoint) {
+        margin-bottom: 25px;
+        &.item-0 {
+          grid-column-start: 1;
+          grid-column-end: 3;
         }
       }
     }
@@ -86,6 +74,7 @@
     .Read-More {
       text-decoration: underline;
       a {
+        cursor: pointer;
         font-size: 18px;
         font-weight: 900;
       }

@@ -10,8 +10,35 @@ import "./LocalGuideWidget.css";
 const NS = { ns: "CountryHome" };
 
 class LocalGuideWidget extends Component {
+  state = {
+    guideItemsRendered: [],
+    showMore: false,
+  };
+
+  componentDidMount() {
+    const { guideItems } = this.props;
+    let guideItemsRendered = [];
+
+    if (guideItems.length > 3) {
+      guideItemsRendered = guideItems.slice(0, 3);
+      this.setState({
+        guideItemsRendered,
+        showMore: true,
+      });
+    }
+  }
+
+  handleRenderMoreItems = () => {
+    const { guideItems } = this.props;
+    let { guideItemsRendered } = this.state;
+    let tmpGuideItems = guideItemsRendered.concat(guideItems.slice(3));
+    guideItemsRendered = tmpGuideItems;
+    this.setState({ guideItemsRendered, showMore: false });
+  };
+
   render() {
-    const { country, language, t, guideItems } = this.props;
+    const { country, language, t } = this.props;
+    const { guideItemsRendered, showMore } = this.state;
 
     /*jshint ignore:start*/
     /*eslint-disable*/
@@ -23,8 +50,8 @@ class LocalGuideWidget extends Component {
         </div>
 
         <div className="Container">
-          {guideItems.map((c) => (
-            <div key={c.sys.id} className="LocalGuideItem">
+          {guideItemsRendered.map((c, i) => (
+            <div key={c.sys.id} className={`LocalGuideItem item-${i}`}>
               <Link
                 className="Overlay"
                 to={`${c.fields.url}?language=${language}`}
@@ -40,9 +67,18 @@ class LocalGuideWidget extends Component {
         </div>
         <div className="read-more-container">
           <s className="Read-More">
-            <Link to={`/${country.fields.slug}/services`}>
-              {t("global.See More", NS)}
-            </Link>
+            {showMore && (
+              <s className="Read-More">
+                <a onClick={() => this.handleRenderMoreItems()}>
+                  {t("global.See More", NS)}
+                </a>
+              </s>
+            )}
+            {!showMore && (
+              <Link to={`/${country.fields.slug}/services`}>
+                {t("global.See More", NS)}
+              </Link>
+            )}
           </s>
         </div>
       </div>
