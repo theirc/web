@@ -12,6 +12,7 @@ const NS = { ns: "CountryHome" };
 class LocalGuideWidget extends Component {
   state = {
     guideItemsRendered: [],
+    lastItem: false,
     showMore: false,
   };
 
@@ -20,9 +21,11 @@ class LocalGuideWidget extends Component {
     let guideItemsRendered = [];
 
     if (guideItems.length > 3) {
+      let lastItem = guideItems.length % 2 === 0;
       guideItemsRendered = guideItems.slice(0, 3);
       this.setState({
         guideItemsRendered,
+        lastItem,
         showMore: true,
       });
     }
@@ -37,8 +40,8 @@ class LocalGuideWidget extends Component {
   };
 
   render() {
-    const { country, language, t } = this.props;
-    const { guideItemsRendered, showMore } = this.state;
+    const { country, language, t, guideItems } = this.props;
+    const { guideItemsRendered, lastItem, showMore } = this.state;
 
     /*jshint ignore:start*/
     /*eslint-disable*/
@@ -51,17 +54,28 @@ class LocalGuideWidget extends Component {
 
         <div className="Container">
           {guideItemsRendered.map((c, i) => (
-            <div key={c.sys.id} className={`LocalGuideItem item-${i}`}>
-              <Link
-                className="Overlay"
-                to={`${c.fields.url}?language=${language}`}
-              >
+            <div
+              key={c.sys.id}
+              className={`LocalGuideItem item-${i} ${
+                lastItem && i == guideItems.length - 1 ? "last-item" : ""
+              }`}
+            >
+              <div className="Overlay">
                 {_.has(c, "fields.backgroundImage.fields.file.url") && (
                   <img src={c.fields.backgroundImage.fields.file.url} />
                 )}
-                <span style={{ position: "absolute" }}>{c.fields.title}</span>
+                <div className="text-container">
+                  <h1 className="title">{c.fields.title}</h1>
+                  <span className="description">{c.fields.description}</span>
+                  <Link
+                    className="see-more-article"
+                    to={`${c.fields.url}?language=${language}`}
+                  >
+                    {t("global.See More", NS)}
+                  </Link>
+                </div>
                 {/* {c.fields.iconClass && <i className={c.fields.iconClass}></i>} */}
-              </Link>
+              </div>
             </div>
           ))}
         </div>
