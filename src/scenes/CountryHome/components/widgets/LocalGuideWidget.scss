@@ -1,5 +1,25 @@
 @import "../../../../shared/includes.scss";
 
+@mixin lastItem {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  margin-bottom: 35px;
+  .Overlay {
+    justify-content: flex-start;
+    img {
+      height: 25rem;
+      width: 70%;
+    }
+    .text-container {
+      position: absolute;
+      top: 37%;
+      left: 64%;
+      background: #7fb685;
+      padding: 20px 20px 30px 20px;
+    }
+  }
+}
+
 .LocalGuide {
   .ltr & {
     s {
@@ -22,7 +42,7 @@
     .LocalGuideItem {
       display: block;
       flex-basis: calc(50% - 5px);
-      margin-bottom: 15px;
+      margin-bottom: 5rem;
       .rtl & {
         margin-left: 10px;
         margin-right: 0;
@@ -31,31 +51,60 @@
       justify-content: center;
 
       img {
-        height: 72px;
+        height: 14rem;
         width: 100%;
         object-fit: cover;
+        border-radius: 5px;
+      }
+
+      .text-container {
+        position: absolute;
+        background: #ffffff;
+        padding: 10px 15px 20px 15px;
+        top: 60%;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        .title {
+          font-size: 26px;
+        }
+        .description {
+          font-weight: 300;
+          text-align: left;
+          margin-bottom: 1rem;
+        }
+        .see-more-article{
+          font-weight: 600;
+          text-decoration: underline;
+        }
+      }
+
+      &.item-0 {
+        .text-container {
+          background: #7fb685;
+        }
       }
       @media (min-width: $desktopBreakpoint) {
-        margin-bottom: 25px;
+        margin-bottom: 22%;
+        .text-container{
+          top: 74%;
+        }
         &.item-0 {
-          grid-column-start: 1;
-          grid-column-end: 3;
+          @include lastItem();
+        }
+        &.last-item {
+          @include lastItem();
         }
       }
     }
 
     .Overlay {
+      position: relative;
       align-items: center;
-      background-color: #4b4b4b;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      color: white;
-      cursor: pointer;
       display: flex;
       font-size: 14px;
-      height: 72px;
       justify-content: center;
-      overflow: hidden;
 
       .fa {
         font-size: 20px;

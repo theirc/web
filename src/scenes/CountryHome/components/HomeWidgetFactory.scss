@@ -157,7 +157,7 @@
       //	padding-left: 5px;
 
       .ltr & {
-        padding-right: 10px;
+        padding-left: 15px;
       }
       .rtl & {
         padding-left: 10px;
@@ -178,6 +178,7 @@
 .top-container {
   display: flex;
   align-items: center;
+  margin-bottom: 3%;
   .title-line {
     @include brand-colors("border-color");
     border-left: 8px solid;
