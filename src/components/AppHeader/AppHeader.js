@@ -178,11 +178,13 @@ class AppHeader extends Component {
 				</Headroom>
 
 				{search && (
-					<form onSubmit={this.handleSubmit.bind(this)} className="SearchBar">
-						<input autoComplete="off" autoFocus name="searchText" placeholder={t("menu.Search", NS)} type="text" value={searchText} onChange={this.handleInputChange.bind(this)} />
-						{searchText && <i className="fa fa-times-circle" onClick={() => this.setState({ searchText: "" })} />}
-						<i className="fa fa-search" onClick={this.handleSubmit.bind(this)} />
-					</form>
+					<div className="search-bar-container">
+						<form onSubmit={this.handleSubmit.bind(this)} className="SearchBar">
+							<input autoComplete="off" autoFocus name="searchText" placeholder={t("menu.Search", NS)} type="text" value={searchText} onChange={this.handleInputChange.bind(this)} />
+							{searchText && <i className="fa fa-times-circle" onClick={() => this.setState({ searchText: "" })} />}
+							<i className="fa fa-search" onClick={this.handleSubmit.bind(this)} />
+						</form>
+					</div>
 				)}
 
 				{!this.state.prvalert && instance.switches.cookieBanner && (

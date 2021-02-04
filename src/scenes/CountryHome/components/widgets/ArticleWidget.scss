@@ -1,5 +1,6 @@
 @import "../../../../shared/includes.scss";
 .Article {
+  position: relative;
   @media (min-width: $desktopBreakpoint) {
     display: flex;
     flex-wrap: wrap;
@@ -122,8 +123,8 @@
       }
       box-sizing: border-box;
       max-width: 1024px;
-      position: relative;
-      bottom: 90px;
+      position: absolute;
+      top: 70%;
       display: grid;
       grid-template-columns: 50% 50%;
       grid-template-rows: 40% 40% 20%;

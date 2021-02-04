@@ -303,144 +303,149 @@ Less me
 }
 
 .AppHeader {
-	.SearchBar {
+	.search-bar-container {
+		display: flex;
+		justify-content: center;
 		background-color: #ffffff;
-		height: 30px;
-		padding: 8px 16px;
-		position: relative;
-		
-		@media (min-width: $desktopBreakpoint) {
-			width: -moz-available;
-			width: -webkit-fill-available;
-			width: fill-available;
-			z-index: 1;
-
-			input {
-				color: #000000;
-
-				&::placeholder {
-					color: #000000;
-				}
-			}
-		}
-		input {
-			-webkit-appearance: none;
-			line-height: 25px;
-			font-size: 18px;
+		.SearchBar {
+			background-color: #ffffff;
+			height: 30px;
+			padding: 8px 16px;
+			position: relative;
 			width: 100%;
-			box-sizing: border-box;
-			border: 0;
-			background-color: inherit;
-			border-bottom: 1px #ddd solid;
-			color: #000000;
-			padding: 0;
-		}
-		input:focus {
-			outline: none;
-		}
-		.fa-times-circle {
-			margin-inline-start: -33px;
-			margin: 5px 5px;
-			top: 2px;
-
-			.ltr & {
-				right: 55px;
-			}
-			.rtl & {
-				left: 55px;
-			}
-		}
-		.fa-search {
-			margin: 5px 5px;
-			padding-left: 8px;
-			top: 2px;
-
-			.ltr & {
-				right: 5px;
-				@media (min-width: $desktopBreakpoint) {
-					right: 30px;
+			@media (min-width: $desktopBreakpoint) {
+				max-width: 1024px;
+				z-index: 1;
+				input {
+					color: #000000;
+	
+					&::placeholder {
+						color: #000000;
+					}
 				}
 			}
-			.rtl & {
-				left: 5px;
-				@media (min-width: $desktopBreakpoint) {
-					left: 30px;
+			input {
+				-webkit-appearance: none;
+				line-height: 25px;
+				font-size: 18px;
+				width: 100%;
+				box-sizing: border-box;
+				border: 0;
+				background-color: inherit;
+				border-bottom: 1px #ddd solid;
+				color: #000000;
+				padding: 0;
+			}
+			input:focus {
+				outline: none;
+			}
+			.fa-times-circle {
+				margin-inline-start: -33px;
+				margin: 5px 5px;
+				top: 2px;
+	
+				.ltr & {
+					right: 55px;
+				}
+				.rtl & {
+					left: 55px;
 				}
 			}
-		}
-		.fa {
-			color: #000000;
-			width: 25px;
-			font-size: 20px;
-			position: absolute;
+			.fa-search {
+				margin: 5px 5px;
+				padding-left: 8px;
+				top: 2px;
+				cursor: pointer;
+				.ltr & {
+					right: 5px;
+					@media (min-width: $desktopBreakpoint) {
+						right: 30px;
+					}
+				}
+				.rtl & {
+					left: 5px;
+					@media (min-width: $desktopBreakpoint) {
+						left: 30px;
+					}
+				}
+			}
+			.fa {
+				color: #000000;
+				width: 25px;
+				font-size: 20px;
+				position: absolute;
+			}
 		}
 	}
 }
 .AppHeaderLight {
-	.SearchBar {
-		background-color: white;
-		height: 30px;
-		padding: 8px 16px;
-		position: relative;
-
-		@media (min-width: $desktopBreakpoint) {
-			width: -moz-available;
-			width: -webkit-fill-available;
-			width: fill-available;
-			z-index: 1;
-		}
-
-		input {
-			-webkit-appearance: none;
-			line-height: 25px;
-			font-size: 18px;
+	.search-bar-container {
+		display: flex;
+		justify-content: center;
+		background-color: #ffffff;
+		.SearchBar {
+			background-color: white;
+			height: 30px;
+			padding: 8px 16px;
+			position: relative;
 			width: 100%;
-			box-sizing: border-box;
-			border: 0;
-			background-color: inherit;
-			border-bottom: 1px #ddd solid;
-			color: black;
-			padding: 0;
-		}
-
-		input:focus {
-			outline: none;
-		}
-		.fa-times-circle {
-			margin-inline-start: -33px;
-			margin: 5px 5px;
-			top: 2px;
-
-			.ltr & {
-				right: 55px;
+			@media (min-width: $desktopBreakpoint) {
+				max-width: 1024px;
+				z-index: 1;
 			}
-			.rtl & {
-				left: 55px;
+	
+			input {
+				-webkit-appearance: none;
+				line-height: 25px;
+				font-size: 18px;
+				width: 100%;
+				box-sizing: border-box;
+				border: 0;
+				background-color: inherit;
+				border-bottom: 1px #ddd solid;
+				color: black;
+				padding: 0;
 			}
-		}
-		.fa-search {
-			margin: 5px 5px;
-			padding-left: 8px;
-			top: 2px;
-			
-			.ltr & {
-				right: 5px;
-				@media (min-width: $desktopBreakpoint) {
-					right: 30px;
+	
+			input:focus {
+				outline: none;
+			}
+			.fa-times-circle {
+				margin-inline-start: -33px;
+				margin: 5px 5px;
+				top: 2px;
+	
+				.ltr & {
+					right: 55px;
+				}
+				.rtl & {
+					left: 55px;
 				}
 			}
-			.rtl & {
-				left: 5px;
-				@media (min-width: $desktopBreakpoint) {
-					left: 30px;
+			.fa-search {
+				margin: 5px 5px;
+				padding-left: 8px;
+				top: 2px;
+				cursor: pointer;
+				.ltr & {
+					right: 5px;
+					@media (min-width: $desktopBreakpoint) {
+						right: 30px;
+					}
+				}
+				.rtl & {
+					left: 5px;
+					@media (min-width: $desktopBreakpoint) {
+						left: 30px;
+					}
 				}
 			}
-		}
-		.fa {
-			color: rgb(36, 36, 36);
-			width: 25px;
-			font-size: 20px;
-			position: absolute;
+			.fa {
+				color: rgb(36, 36, 36);
+				width: 25px;
+				font-size: 20px;
+				position: absolute;
+			}
 		}
 	}
 }
