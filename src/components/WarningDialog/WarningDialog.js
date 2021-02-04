@@ -71,12 +71,14 @@ export default class WarningDialog extends Component {
 
 		return (
 			<div className={[containerClassName, (hiding && "warning--hiding") || ""].join(" ")}>
+				<div className="warning-wrapper">
 				<div className="warning-dialog-container-inner" dangerouslySetInnerHTML={{ __html: html }} />
 				{dismissable && (
 					<div className="warning-dialog-close" onClick={() => this.hide()}>
 						<Close />
 					</div>
 				)}
+				</div>
 			</div>
 		);
 	}
