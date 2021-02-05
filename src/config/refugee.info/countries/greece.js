@@ -12,7 +12,8 @@ export default {
 	},
 	thirdParty: {
 		facebook: {
-			page: 'https://www.facebook.com/refugee.info'
+			page: 'https://www.facebook.com/refugee.info',
+			messenger: 'https://m.me/refugee.info'
 		}
 	}
 };
