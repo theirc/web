@@ -5,8 +5,8 @@
   grid-column-end: 3;
   margin-bottom: 35px;
   .Overlay {
-    justify-content: flex-start;
     img {
+      margin-right: auto;
       height: 25rem;
       width: 70%;
     }
@@ -42,7 +42,7 @@
     .LocalGuideItem {
       display: block;
       flex-basis: calc(50% - 5px);
-      margin-bottom: 5rem;
+      margin-bottom: -1rem;
       .rtl & {
         margin-left: 10px;
         margin-right: 0;
@@ -58,10 +58,10 @@
       }
 
       .text-container {
-        position: absolute;
+        position: relative;
         background: #ffffff;
         padding: 10px 15px 20px 15px;
-        top: 60%;
+        top: -4rem;
         border-radius: 5px;
         display: flex;
         flex-direction: column;
@@ -86,9 +86,9 @@
         }
       }
       @media (min-width: $desktopBreakpoint) {
-        margin-bottom: 22%;
+        margin-bottom: -6%;
         .text-container{
-          top: 74%;
+          top: -4rem;
         }
         &.item-0 {
           @include lastItem();
@@ -105,7 +105,7 @@
       display: flex;
       font-size: 14px;
       justify-content: center;
-
+      flex-direction: column;
       .fa {
         font-size: 20px;
         padding: 10px;

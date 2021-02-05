@@ -11,10 +11,7 @@
 
   &.Highlighted {
     padding: 20px 0;
-    h1 {
-      font-size: 24px !important;
-      margin-top: 30px;
-    }
+    margin-bottom: -3rem;
   }
   .Article.Home {
     h1 {
@@ -58,7 +55,6 @@
       flex-basis: 100%;
       max-width: unset;
       padding: 20px 0px;
-      margin-bottom: 7rem;
     }
     & .hero {
       max-height: 440px;
