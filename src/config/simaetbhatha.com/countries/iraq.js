@@ -12,7 +12,8 @@ export default {
 	},
 	thirdParty: {
 		facebook: {
-			page: 'https://www.facebook.com/simaetbhatha'
+			page: 'https://www.facebook.com/simaetbhatha',
+			messenger: 'https://m.me/simaetbhatha'
 		}
 	}
 };

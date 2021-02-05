@@ -42,6 +42,10 @@ class ArticleWidget extends Component {
 
 	render() {
 		const { country, onNavigate, t, article, category, showHero, showFullArticle, language } = this.props;
+		console.log(instance.countries[country.fields.slug].thirdParty.facebook.messenger);
+		
+		// <a href={instance.countries[country.fields.slug].thirdParty.facebook.messenger} target="blank">PROBANDO</a>
+
 		if (!article) {
 			// Anti pattern, but saves 1 or more ifs.
 			return null;
@@ -71,6 +75,7 @@ class ArticleWidget extends Component {
 
 		return (
 			<div className={`Article ArticleWidget Home ${langLTR ? 'asd' : 'efg'}`} key={article.sys.id}>
+				<div className="text-container">
 				{hero &&
 					hero.fields &&
 					hero.fields.file &&
@@ -95,6 +100,20 @@ class ArticleWidget extends Component {
 						{/* <i className="material-icons">arrow_right</i> */}
 					</s>
 				}
+				</div>
+
+				</div>
+				<div className="social-media-container">
+					<div className="whatsapp-container">
+						<i class="fa fa-whatsapp" />
+						<span></span>
+						<button></button>
+					</div>
+					<div className="facebook-container">
+						<i className="fa fa-facebook-messenger" />
+						<span></span>
+						<button></button>
+					</div>
 				</div>
 
 			</div>
