@@ -9,6 +9,7 @@
   background-color: #f3f3f6;
   padding: 5%;
   box-sizing: border-box;
+  border-radius: 5px;
   .icon-container {
     grid-row-start: 1;
     grid-row-end: 4;
@@ -79,6 +80,7 @@
     text-transform: uppercase;
   }
   .text-container {
+    border-radius: 5px;
     @media (max-width: $desktopBreakpoint) {
       display: flex;
       flex-direction: column;
