@@ -418,10 +418,18 @@ class ServiceCategoryListDesktop extends React.Component {
 					this.renderFiltersPopover(t('services.Service Categories', NS), this.onSelectCategory, categories, this.renderCategoryButton.bind(this), 'categories', FilterTypes.CATEGORY)
 				}
 
-				{showServices && !this.state.showMap &&
+				{showServices && !this.state.showMap && !!servicesRendered.length &&
 					<div className="ServiceList">
 						<div className="ServiceListContainer">
 							{servicesRendered.map(this.renderServiceItem.bind(this))}
+						</div>
+					</div>
+				}
+
+				{showServices && !this.state.showMap && !servicesRendered.length &&
+					<div className="ServiceList">
+						<div className="ServiceListContainer">
+							{t("services.No services found", NS)}
 						</div>
 					</div>
 				}
