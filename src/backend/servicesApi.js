@@ -157,7 +157,7 @@ module.exports = {
 			"&language=" + (language || "");
 		return new Promise((resolve, reject) => {
 			const sessionStorage = getSessionStorage();
-			const servicesStored = sessionStorage[`${language}-serviceList`] &&
+			const servicesStored = sessionStorage[`${language}-serviceList`] && !!JSON.parse(sessionStorage[`${language}-serviceList`]).length &&
 				(_.first(JSON.parse(sessionStorage[`${language}-serviceList`])).countryId === countryId)
 			const servicesFetched = sessionStorage[`${language}-serviceRequest`] &&
 				sessionStorage[`${language}-serviceRequest`] === requestUrl;

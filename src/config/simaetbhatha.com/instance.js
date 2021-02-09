@@ -25,7 +25,7 @@ export default {
 	},
 	languages: [['en', 'English'], ['ar', 'العربيـة']], // English shows first in LanguageSelector
 	switches: {
-		cookieBanner: false,
+		cookieBanner: true,
 		disableCountrySelector: true,
 		disableLanguageSelector: false,
 	},
