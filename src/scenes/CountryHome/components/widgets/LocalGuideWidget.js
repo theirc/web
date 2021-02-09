@@ -72,7 +72,7 @@ class LocalGuideWidget extends Component {
                 )}
                 <div className="text-container">
                   <h1 className="title">{c.fields.title}</h1>
-                  <span className="description">{c.fields.description}</span>
+                  <span className="description">{typeof c.fields.description === 'string' ? c.fields.description : c.fields.description.content[0].content[0].value}</span>
                   <Link
                     className="see-more-article"
                     to={`${c.fields.url}?language=${language}`}
