@@ -105,6 +105,14 @@
       h1 {
         font-size: 39px;
       }
+      p {
+        p:nth-child(3) {
+          display: none;
+        }
+        p:nth-child(2) {
+          display: none;
+        }
+      }
     }
     .social-media-container {
       display: flex;
@@ -143,16 +151,12 @@
   }
 
   .hero {
-    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
     .heroImage {
-      @media (min-width: $desktopBreakpoint) {
-        position: relative;
-        top: 137px;
-      }
+      object-fit: cover;
     }
   }
 

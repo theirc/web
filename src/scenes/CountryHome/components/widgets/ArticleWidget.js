@@ -148,15 +148,12 @@ class ArticleWidget extends Component {
           {!showFullArt && (whatsapp || facebook) && (
             <div className="social-media-container">
               {whatsapp && (
-                <div className={`whatsapp-containerr ${!facebook ? 'only' : ''}`}>
+                <div className={`whatsapp-container ${!facebook ? 'only' : ''}`}>
                   <div className="icon-container">
                     <i className="fa fa-whatsapp" />
                   </div>
                   <h1>WhatsApp</h1>
-                  <span>
-                    Visit our page and use the chat to get your questions
-                    answered
-                  </span>
+                  <span>{t("social.Whatsapp", NS)}</span>
                   <a target="blank" href={whatsapp}>
                     WHATSAPP
                   </a>
@@ -168,10 +165,7 @@ class ArticleWidget extends Component {
                     <i className="fa fa-facebook" />
                   </div>
                   <h1>Facebook Messenger</h1>
-                  <span>
-                    Visit our page and use the chat to get your questions
-                    answered
-                  </span>
+                  <span>{t("social.Facebook", NS)}</span>
                   <a target="blank" href={facebook}>
                     FACEBOOK
                   </a>
