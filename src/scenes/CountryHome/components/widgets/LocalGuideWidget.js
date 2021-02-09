@@ -33,6 +33,7 @@ class LocalGuideWidget extends Component {
 						<Link className="Overlay" to={`${c.fields.url}?language=${language}`}>
 							{/* {_.has(c, 'fields.backgroundImage.fields.file.url') && <img src={c.fields.backgroundImage.fields.file.url} />} */}
 							<span style={{'position': 'absolute'}}>{c.fields.title}</span>
+              
 							{/* {c.fields.iconClass && <i className={c.fields.iconClass}></i>} */}
 						</Link>
 					</div>
