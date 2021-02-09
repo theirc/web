@@ -20,8 +20,6 @@ class LocalGuideWidget extends Component {
     const { guideItems } = this.props;
     let guideItemsRendered = [];
 
-    console.log('guideItems ', guideItems);
-
     if (guideItems.length > 3) {
       let lastItem = guideItems.length % 2 === 0;
       guideItemsRendered = guideItems.slice(0, 3);
