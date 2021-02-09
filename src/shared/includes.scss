@@ -17,6 +17,7 @@ $dividerColor: darken($titleBackground, 50%);
 
 $colorMap: (irc: $accentIRC, nrc: $accentNRC, generic: $accentGreen, mc: $accentRed, pg: $accentPG, cuenta: $accentCuenta, ri: $accentRi);
 $colorInverseMap: (irc: #000000, nrc: #ffffff, generic: #ffffff, mc: #ffffff, pg: #ffffff, cuenta: #ffffff, ri: #ffffff);
+$textColorMap: (irc: #ffffff, nrc: #000000, generic: #000000, mc: #000000, pg: #000000, cuenta: #000000, ri: #000000);
 
 a {
 	text-decoration: none;
@@ -57,6 +58,14 @@ a {
 	@each $org in map-keys($map: $colorInverseMap) {
 		.#{$org} &  {
 			#{$prop}: map-get($map: $colorInverseMap, $key: $org);
+		}
+	}
+}
+
+@mixin brand-colors-text($prop) {
+	@each $org in map-keys($map: $textColorMap) {
+		.#{$org} &  {
+			#{$prop}: map-get($map: $textColorMap, $key: $org);
 		}
 	}
 }
