@@ -63,8 +63,8 @@
 
 		}
 		p {
-			color: white;
-
+			@include brand-colors-text("color");
+			// color: white;
 		}
 		&,
 		a {

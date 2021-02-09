@@ -42,8 +42,12 @@ class TopCategoriesWidget extends Component {
                         "add")}
                   </i>
                 </div>
-                <h1 className="TopCategory-title">{c.fields.name}</h1>
-                <span className="TopCategory-description">{c.fields.description}</span>
+                <div className="text-container">
+                  <h1 className="TopCategory-title">{c.fields.name}</h1>
+                  <span className="TopCategory-description">
+                    {c.fields.description}
+                  </span>
+                </div>
               </Link>
             );
           })}
