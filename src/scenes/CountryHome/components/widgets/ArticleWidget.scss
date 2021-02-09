@@ -68,6 +68,12 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    .Read-More-lead {
+      display: flex;
+    }
+    .Read-More-secondary {
+      display: none;
+    }
   }
   .Facebook {
     width: 100%;
@@ -86,8 +92,17 @@
       flex-direction: column;
       margin: 0px 20px;
       padding: 20px;
-      .Read-More {
-        margin-bottom: 20px;
+      .Read-More-lead {
+        display: none;
+        // margin-bottom: 20px;
+      }
+      .Read-More-secondary {
+        display: flex;
+        align-self: center;
+        margin-top: 20px;
+        a {
+          font-weight: 600;
+        }
       }
     }
     max-width: 1024px;
@@ -122,13 +137,13 @@
       .facebook-container {
         @include socialMedia();
         &.only {
-          height: unset
+          height: unset;
         }
       }
       .whatsapp-container {
         @include socialMedia();
         &.only {
-          height: unset
+          height: unset;
         }
         margin-bottom: 1rem;
         .fa-whatsapp {
@@ -215,6 +230,11 @@
   }
 
   .Read-More {
-    text-decoration: underline;
+    &-lead {
+      text-decoration: underline;
+    }
+    &-secondary {
+      text-decoration: underline;
+    }
   }
 }

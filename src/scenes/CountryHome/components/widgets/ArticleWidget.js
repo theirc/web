@@ -135,7 +135,7 @@ class ArticleWidget extends Component {
             <p dangerouslySetInnerHTML={{ __html: md.render(content) }} />
 
             {!showFullArt && (
-              <s className="Read-More">
+              <s className="Read-More-lead">
                 <Link
                   to={`/${country.fields.slug}/${categorySlug}/${article.fields.slug}?language=${language}`}
                 >
@@ -173,6 +173,16 @@ class ArticleWidget extends Component {
               )}
             </div>
           )}
+          {!showFullArt && (
+              <s className="Read-More-secondary">
+                <Link
+                  to={`/${country.fields.slug}/${categorySlug}/${article.fields.slug}?language=${language}`}
+                >
+                  {t("global.Read More", NS)}
+                </Link>
+                {/* <i className="material-icons">arrow_right</i> */}
+              </s>
+            )}
         </div>
       </div>
     );
