@@ -43,15 +43,15 @@ class Footer extends Component {
 
 		return (
 			<footer className="Footer">
-				<div className="light">
+				{/* <div className="light">
 					<p>{t("light.Can't find specific information?", NS)}</p>
 					<a href={questionLink}>
 						<h3>{questionLink.includes('mailto: ') ? questionLink.replace('mailto: ', '') : t("light.Ask us a question", NS)}</h3>
 					</a>
-				</div>
+				</div> */}
 
 				<div className="dark">
-					<div className="button-container">
+					{/* <div className="button-container">
 						{!instance.switches.disableCountrySelector &&
 							<div className="button" onClick={onChangeLocation}>
 								<div className="icon-container">
@@ -78,7 +78,7 @@ class Footer extends Component {
 								<span>{t("dark.Find us on Facebook", NS)}</span>
 							</div>
 						}
-					</div>
+					</div> */}
 
 					<span className="padded Signpost" style={{ direction: "ltr" }}>
 						<span>
@@ -98,6 +98,12 @@ class Footer extends Component {
 							</a>
 						</span>
 					}
+				</div>
+				<div className="light">
+					<p>{t("light.Can't find specific information?", NS)}</p>
+					<a href={questionLink}>
+						<h3>{questionLink.includes('mailto: ') ? questionLink.replace('mailto: ', '') : t("light.Ask us a question", NS)}</h3>
+					</a>
 				</div>
 			</footer>
 		);
