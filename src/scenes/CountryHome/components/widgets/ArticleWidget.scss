@@ -1,84 +1,220 @@
 @import "../../../../shared/includes.scss";
+@mixin socialMedia {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 25% 75%;
+  grid-template-rows: 30% 40% 30%;
+  background-color: #f3f3f6;
+  padding: 5%;
+  box-sizing: border-box;
+  border-radius: 5px;
+  .icon-container {
+    grid-row-start: 1;
+    grid-row-end: 4;
+    display: flex;
+    align-items: center;
+    i {
+      color: blue;
+      background-color: white;
+      font-size: 5rem;
+      padding: 15%;
+      border-radius: 50%;
+    }
+  }
+  h1 {
+    margin: 0;
+  }
+  span {
+    align-self: center;
+    font-size: 14px;
+  }
+  a {
+    width: 100%;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    border: 1px solid transparent;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    box-sizing: border-box;
+    justify-content: center;
+    display: flex;
+    height: 100%;
+    align-items: center;
+  }
+  @media (max-width: $desktopBreakpoint) {
+    .icon-container {
+      grid-row-end: 3;
+      justify-content: center;
+      margin-bottom: 16px;
+      i {
+        font-size: 3rem;
+        padding: 10%;
+      }
+    }
+    a {
+      grid-column-start: 1;
+      grid-column-end: 3;
+    }
+  }
+}
+
 .Article {
-    .Facebook {
-        width: 100%;
-    }
+  position: relative;
+  @media (min-width: $desktopBreakpoint) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .Facebook {
+    width: 100%;
+  }
 
-    .YouTube {
-        width: 100%;
+  .YouTube {
+    width: 100%;
+  }
+  h3 {
+    text-transform: uppercase;
+  }
+  .text-container {
+    border-radius: 5px;
+    @media (max-width: $desktopBreakpoint) {
+      display: flex;
+      flex-direction: column;
+      margin: 0px 20px;
+      padding: 20px;
+      .Read-More {
+        margin-bottom: 20px;
+      }
     }
-    h3 {
-        text-transform: uppercase;
-    }
-    p {
-        margin-top: 0;
-        font-weight: 300;
-        line-height: 1.6;
-        opacity: 1;
-        u {
-            text-decoration: none;
+    max-width: 1024px;
+    display: grid;
+    grid-template-columns: 49% 49%;
+    grid-column-gap: 2%;
+    background: white;
+    padding: 1.5% 2%;
+    box-sizing: border-box;
+    position: relative;
+    bottom: 6rem;
+    .welcome-container {
+      display: flex;
+      flex-direction: column;
+      h1 {
+        font-size: 39px;
+      }
+      p {
+        p:nth-child(3) {
+          display: none;
         }
-    p:hover{opacity: 0.85;}
-    }
-
-    .hero {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .hero > img {
-        width: 100%;
-    }
-    .hero .overlay {
-        @media (min-width: $desktopBreakpoint) {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: block;
-            opacity: 0.5;
-            background-color: #000000;
+        p:nth-child(2) {
+          display: none;
         }
+      }
     }
-
-    .pos,
-    .neg {
-        display: none;
-        visibility: hidden;
-        height: 0;
-        width: 0;
-        margin: 0;
-        padding: 0;
-    }
-    .pos + ul,
-    .neg + ul {
-        padding: 0;
-
-        li {
-            list-style: none;
-
-            &::before {
-                font-family: "FontAwesome";
-            }
+    .social-media-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      .facebook-container {
+        @include socialMedia();
+        &.only {
+          height: unset
         }
-    }
-    .pos + ul {
-        li {
-            &::before {
-                content: "\f00c ";
-                color: green;
-            }
+      }
+      .whatsapp-container {
+        @include socialMedia();
+        &.only {
+          height: unset
         }
-    }
-    .neg + ul {
-        li {
-            &::before {
-                content: "\f00d ";
-                color: red;
-            }
+        margin-bottom: 1rem;
+        .fa-whatsapp {
+          color: #39bf28 !important;
         }
+      }
     }
+  }
+  p {
+    margin-top: 0;
+    font-weight: 300;
+    line-height: 1.6;
+    opacity: 1;
+    u {
+      text-decoration: none;
+    }
+    p:hover {
+      opacity: 0.85;
+    }
+  }
+
+  .hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    .heroImage {
+      object-fit: cover;
+    }
+  }
+
+  .hero > img {
+    width: 100%;
+  }
+  .hero .overlay {
+    @media (min-width: $desktopBreakpoint) {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      opacity: 0.5;
+      background-color: #000000;
+    }
+  }
+
+  .pos,
+  .neg {
+    display: none;
+    visibility: hidden;
+    height: 0;
+    width: 0;
+    margin: 0;
+    padding: 0;
+  }
+  .pos + ul,
+  .neg + ul {
+    padding: 0;
+
+    li {
+      list-style: none;
+
+      &::before {
+        font-family: "FontAwesome";
+      }
+    }
+  }
+  .pos + ul {
+    li {
+      &::before {
+        content: "\f00c ";
+        color: green;
+      }
+    }
+  }
+  .neg + ul {
+    li {
+      &::before {
+        content: "\f00d ";
+        color: red;
+      }
+    }
+  }
+
+  .Read-More {
+    text-decoration: underline;
+  }
 }

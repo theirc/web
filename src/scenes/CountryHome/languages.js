@@ -19,6 +19,10 @@ export default {
 			},
 			"top": {
 				"Top Categories": "أهم الفئات"
+			},
+			"social": {
+				"Whatsapp": "قم بزيارة صفحتنا واستخدم الدردشة للحصول على إجابات لأسئلتك",
+				"Facebook": "قم بزيارة صفحتنا واستخدم الدردشة للحصول على إجابات لأسئلتك"
 			}
 		}
 	},
@@ -42,6 +46,10 @@ export default {
 			},
 			"top": {
 				"Top Categories": "Top Categories"
+			},
+			"social": {
+				"Whatsapp": "Visit our page and use the chat to get your questions answered",
+				"Facebook": "Visit our page and use the chat to get your questions answered"
 			}
 		}
 	},
@@ -65,6 +73,10 @@ export default {
 			},
 			"top": {
 				"Top Categories": "Categorías"
+			},
+			"social": {
+				"Whatsapp": "Visite nuestra página y utilice el chat para obtener respuestas a sus preguntas",
+				"Facebook": "Visite nuestra página y utilice el chat para obtener respuestas a sus preguntas"
 			}
 		}
 	},

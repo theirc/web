@@ -1,32 +1,57 @@
 @import "../../../../shared/includes.scss";
 .TopCategories {
-    h3 {
-        font-size: 25px;
-        margin: 0 auto 25px;
-        text-align: center;
-        text-transform: uppercase;
-        width: 80%;
+  h3 {
+    font-size: 25px;
+    // margin: 0 auto 25px;
+    // text-align: center;
+    text-transform: uppercase;
+    // width: 80%;
 
-        @media (max-width: $desktopBreakpoint) {
-            display: block;
-            font-size: 1.17em;
-            margin-block-start: 1em;
-            margin-block-end: 1em;
-            margin-inline-start: 0px;
-            margin-inline-end: 0px;
-            font-weight: bold;
-            text-align: left;
-        }
+    @media (max-width: $desktopBreakpoint) {
+      display: block;
+      font-size: 1.17em;
+      margin-block-start: 1em;
+      margin-block-end: 1em;
+      margin-inline-start: 0px;
+      margin-inline-end: 0px;
+      font-weight: bold;
+      text-align: left;
     }
-    .ltr & {
-        s {
-            float: right;
-        }
+  }
+  .ltr & {
+    s {
+      float: right;
     }
-    .rtl & {
-        s {
-            float: left;
-        }
+  }
+  .rtl & {
+    s {
+      float: left;
     }
-
+  }
+  .categories-container {
+      @media (min-width: $desktopBreakpoint) {
+          display: grid;
+          grid-template-columns: 48% 48%;
+          grid-column-gap: 4%;
+      }
+      .TopCategory {
+        display: grid;
+        grid-template-columns: 10% 80% 10%;
+        border-radius: 5px;
+        @media (min-width: $desktopBreakpoint) {
+          grid-template-columns: 20% 70% 10%;
+        }
+        .icon {
+          grid-column-start: 1;
+        }
+        &-title {
+          text-align: left;
+          text-decoration: underline;
+        }
+        &-description {
+          text-align: left;
+          grid-column-start: 2;
+        }
+      }
+  }
 }

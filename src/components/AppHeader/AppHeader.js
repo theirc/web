@@ -129,7 +129,7 @@ class AppHeader extends Component {
 					<div className={[homePage ? "header-opacity" : "", backgroundDark ? 'app-bar' : 'app-bar-light', !(country && language) ? 'app-bar-black' : ''].join(" ")}>
 
 						<div className={["app-bar-container logo", !(country && language) ? "logo-centered" : ""].join(" ")} onClick={path.includes('selectors') ? noop : onGoHome || noop}>
-							<img onClick={onGoHome} src={backgroundDark ? logo : logoBlack} className="app-bar-logo" alt="bar-logo" />
+							<img onClick={onGoHome} src={backgroundDark ? logoBlack : logoBlack} className="app-bar-logo" alt="bar-logo" />
 						</div>
 
 						{country && language &&
@@ -166,8 +166,6 @@ class AppHeader extends Component {
 											}
 										</span>
 
-										<div className="app-bar-separator separator-searchIcon" />
-
 										{!search && <Search className='search-btn' onClick={this.toggleSearch.bind(this)} />}
 
 										{search && <i className="fa fa-times search-btn" onClick={this.toggleSearch.bind(this)} />}
@@ -180,11 +178,13 @@ class AppHeader extends Component {
 				</Headroom>
 
 				{search && (
-					<form onSubmit={this.handleSubmit.bind(this)} className="SearchBar">
-						<input autoComplete="off" autoFocus name="searchText" placeholder={t("menu.Search", NS)} type="text" value={searchText} onChange={this.handleInputChange.bind(this)} />
-						{searchText && <i className="fa fa-times-circle" onClick={() => this.setState({ searchText: "" })} />}
-						<i className="fa fa-search" onClick={this.handleSubmit.bind(this)} />
-					</form>
+					<div className="search-bar-container">
+						<form onSubmit={this.handleSubmit.bind(this)} className="SearchBar">
+							<input autoComplete="off" autoFocus name="searchText" placeholder={t("menu.Search", NS)} type="text" value={searchText} onChange={this.handleInputChange.bind(this)} />
+							{searchText && <i className="fa fa-times-circle" onClick={() => this.setState({ searchText: "" })} />}
+							<i className="fa fa-search" onClick={this.handleSubmit.bind(this)} />
+						</form>
+					</div>
 				)}
 
 				{!this.state.prvalert && instance.switches.cookieBanner && (
@@ -214,7 +214,7 @@ class AppHeader extends Component {
 					<Alert link={covidLinkRiGr} message={t('banner.Greece.Home', NS)} />
 				} */}
 
-				{window.location.href.includes('/jordan') &&
+				{/* {window.location.href.includes('/jordan') &&
 					<Alert message={t('banner.Jordan', NS)} fontColor='white'/>
 				}
 				
@@ -232,7 +232,7 @@ class AppHeader extends Component {
 
 				{(window.location.href.endsWith('/greece') || window.location.href.includes('/greece/services'))  &&
 					<Alert link='' message={t('banner.Greece.Covid', NS)} fontColor='black'/>
-				}
+				} */}
 
 			</div>
 		);
