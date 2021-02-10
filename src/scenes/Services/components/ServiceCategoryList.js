@@ -136,6 +136,7 @@ class ServiceCategoryList extends React.Component {
 
 					<hr className="line" />
 
+					
 					<li key="map">
 						<div className="container" onClick={goToMap}>
 							<i className="fa fa-map" />
