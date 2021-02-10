@@ -147,42 +147,50 @@ class ArticleWidget extends Component {
           </div>
           {!showFullArt && (whatsapp || facebook) && (
             <div className="social-media-container">
-              {whatsapp && (
-                <div className={`whatsapp-container ${!facebook ? 'only' : ''}`}>
+              {!whatsapp && (
+                <div
+                  className={`whatsapp-container ${!facebook ? "only" : ""}`}
+                >
                   <div className="icon-container">
-                    <i className="fa fa-whatsapp" />
+                    <div className="icon-background">
+                      <i className="fa fa-whatsapp" />
+                    </div>
                   </div>
                   <h1>WhatsApp</h1>
                   <span>{t("social.Whatsapp", NS)}</span>
                   <a target="blank" href={whatsapp}>
-                    WHATSAPP
+                    Whatsapp
                   </a>
                 </div>
               )}
               {facebook && (
-                <div className={`facebook-container ${!whatsapp ? 'only' : ''}`}>
+                <div
+                  className={`facebook-container ${!whatsapp ? "only" : ""}`}
+                >
                   <div className="icon-container">
-                    <i className="fa fa-facebook" />
+                    <div className="icon-background">
+                      <i className="fa fa-facebook" />
+                    </div>
                   </div>
                   <h1>Facebook Messenger</h1>
                   <span>{t("social.Facebook", NS)}</span>
                   <a target="blank" href={facebook}>
-                    FACEBOOK
+                    Facebook
                   </a>
                 </div>
               )}
             </div>
           )}
           {!showFullArt && (
-              <s className="Read-More-secondary">
-                <Link
-                  to={`/${country.fields.slug}/${categorySlug}/${article.fields.slug}?language=${language}`}
-                >
-                  {t("global.Read More", NS)}
-                </Link>
-                {/* <i className="material-icons">arrow_right</i> */}
-              </s>
-            )}
+            <s className="Read-More-secondary">
+              <Link
+                to={`/${country.fields.slug}/${categorySlug}/${article.fields.slug}?language=${language}`}
+              >
+                {t("global.Read More", NS)}
+              </Link>
+              {/* <i className="material-icons">arrow_right</i> */}
+            </s>
+          )}
         </div>
       </div>
     );
