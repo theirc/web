@@ -28,7 +28,7 @@ class HomeWidget extends Component {
 				let article = category.fields.overview || _.first(category.fields.articles);
 				return this.renderArticle(article, category, true, w.fields.showFullArticle);
 			}
-		} else if (w.fields.type === "Top Categories") {
+		} else if (w.fields.type === "Top Categories" & w.fields.title !== "Lo más nuevo") { //TODO: IMPROVE CONDITION - TITLE SHOULD NOT BE A CONDITION
 			let categories = Array.from(w.fields.related || []).filter(r => r.sys.contentType && r.sys.contentType.sys.id === "category");
 			return this.renderTopCategories(categories);
 		} else if (w.fields.type === "Local Guide") {
