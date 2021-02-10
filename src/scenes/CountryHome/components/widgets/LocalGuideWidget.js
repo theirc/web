@@ -30,7 +30,7 @@ class LocalGuideWidget extends Component {
       });
     } else {
       this.setState({
-        guideItems: guideItemsRendered
+        guideItemsRendered: guideItems
       })
     }
   }

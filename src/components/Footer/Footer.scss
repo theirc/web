@@ -57,20 +57,35 @@
 			padding: 10px 10px 57px 10px;
 			box-sizing: border-box;
 			justify-content: space-evenly;
+			p {
+				margin-right: unset;
+			}
 		}
 		h3 {
 			margin:10px;
 
 		}
 		p {
-			@include brand-colors-text("color");
-			// color: white;
+			// @include brand-colors-text("color");
+			margin-right: 20px;
+			color: white;
 		}
 		&,
 		a {
 			@include brand-colors( "color");
-			@include brand-colors-inverse( "background-color");
+			background-color: black
+			// @include brand-colors-inverse( "background-color");
 
+		}
+		.link-container {
+			a {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			i {
+				font-size: 1.2em;
+			}
 		}
 	}
 

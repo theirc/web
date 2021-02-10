@@ -64,8 +64,11 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
+        text-align: left;
+        max-width: 400px;
         .title {
           font-size: 26px;
+          text-transform: none;
         }
         .description {
           font-weight: 300;
@@ -87,6 +90,7 @@
         margin-bottom: -6%;
         .text-container{
           top: -4rem;
+          max-width: 326px
         }
         &.item-0 {
           @include lastItem();

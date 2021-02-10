@@ -309,7 +309,7 @@ Less me
 		.SearchBar {
 			background-color: #ffffff;
 			height: 30px;
-			padding: 8px 16px;
+			padding: 16px 16px 8px 16px;
 			position: relative;
 			width: 100%;
 			@media (min-width: $desktopBreakpoint) {
@@ -332,7 +332,7 @@ Less me
 				border: 0;
 				background-color: inherit;
 				border-bottom: 1px #ddd solid;
-				color: #000000;
+				color: #333;
 				padding: 0;
 			}
 			input:focus {
@@ -341,7 +341,7 @@ Less me
 			.fa-times-circle {
 				margin-inline-start: -33px;
 				margin: 5px 5px;
-				top: 2px;
+				top: 13px;
 	
 				.ltr & {
 					right: 55px;
@@ -353,7 +353,7 @@ Less me
 			.fa-search {
 				margin: 5px 5px;
 				padding-left: 8px;
-				top: 2px;
+				top: 13px;
 				cursor: pointer;
 				.ltr & {
 					right: 5px;
@@ -590,7 +590,10 @@ $color: #ffffff;
 	padding: 2px;
     margin-left: 18px;
 	border-radius: 2px;
-	font-size: 32px;
+	font-size: 27px;
+	display: flex;
+    justify-content: center;
+    align-items: center;
 
 	&:hover {
 		opacity: 1;

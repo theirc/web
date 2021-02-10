@@ -18,6 +18,8 @@
     padding-right: 10%;
     .icon-background {
       width: 80%;
+      height: 80%;
+      align-items: center;
       background-color: white;
       border-radius: 50%;
       display: flex;
@@ -25,7 +27,7 @@
       padding: 8px;
       i {
         color: blue;
-        font-size: 5rem;
+        font-size: 3.5rem;
       }
     }
   }
