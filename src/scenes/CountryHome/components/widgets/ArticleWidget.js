@@ -147,7 +147,7 @@ class ArticleWidget extends Component {
           </div>
           {!showFullArt && (whatsapp || facebook) && (
             <div className="social-media-container">
-              {!whatsapp && (
+              {whatsapp && (
                 <div
                   className={`whatsapp-container ${!facebook ? "only" : ""}`}
                 >
