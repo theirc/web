@@ -364,7 +364,7 @@ class ServiceCategoryListDesktop extends React.Component {
 					<h2>
 						{providerInfo && providerInfo.name}{" "}
 						<span>
-							{serviceInfo.address}
+							{serviceInfo.address.length > 0 ? serviceInfo.address : service.location}
 							{distance && ` - ${distance}`}
 						</span>
 

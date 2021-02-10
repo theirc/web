@@ -5,26 +5,33 @@
   display: grid;
   justify-content: center;
   grid-template-columns: 25% 75%;
-  grid-template-rows: 30% 40% 30%;
+  grid-template-rows: 20% 53% 27%;
   background-color: #f3f3f6;
   padding: 5%;
   box-sizing: border-box;
-  border-radius: 5px;
   .icon-container {
     grid-row-start: 1;
     grid-row-end: 4;
     display: flex;
     align-items: center;
-    i {
-      color: blue;
+    justify-content: center;
+    padding-right: 10%;
+    .icon-background {
+      width: 80%;
       background-color: white;
-      font-size: 5rem;
-      padding: 15%;
       border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      padding: 8px;
+      i {
+        color: blue;
+        font-size: 5rem;
+      }
     }
   }
   h1 {
     margin: 0;
+    text-transform: none;
   }
   span {
     align-self: center;
@@ -38,7 +45,6 @@
     border: 1px solid transparent;
     font-size: 1rem;
     line-height: 1.5;
-    border-radius: 0.25rem;
     box-sizing: border-box;
     justify-content: center;
     display: flex;
@@ -50,9 +56,11 @@
       grid-row-end: 3;
       justify-content: center;
       margin-bottom: 16px;
-      i {
-        font-size: 3rem;
-        padding: 10%;
+      .icon-background {
+        width: 50%;
+        i {
+          font-size: 3rem;
+        }
       }
     }
     a {
@@ -86,7 +94,6 @@
     text-transform: uppercase;
   }
   .text-container {
-    border-radius: 5px;
     @media (max-width: $desktopBreakpoint) {
       display: flex;
       flex-direction: column;
@@ -119,6 +126,7 @@
       flex-direction: column;
       h1 {
         font-size: 39px;
+        text-transform: none;
       }
       p {
         p:nth-child(3) {
@@ -172,6 +180,7 @@
     width: 100%;
     .heroImage {
       object-fit: cover;
+      align-self: baseline;
     }
   }
 

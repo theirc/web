@@ -37,7 +37,6 @@
       .TopCategory {
         display: grid;
         grid-template-columns: 10% 80% 10%;
-        border-radius: 5px;
         text-align: left;
         @media (min-width: $desktopBreakpoint) {
           grid-template-columns: 20% 70% 10%;

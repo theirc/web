@@ -57,12 +57,11 @@
       padding: 0;
     }
     & .hero {
-      max-height: 440px;
+      max-height: 485px;
     }
 
     &.CT-article {
       border: 1px solid #ddd;
-      border-radius: 5px;
       flex-basis: unset;
       margin-bottom: 30px;
       width: 100%;
@@ -72,7 +71,7 @@
         margin-bottom: 25px;
       }
 
-      .Article.Home > p {
+      .Article.Home > div > div > p {
         column-count: 2;
         column-gap: 50px;
         margin-bottom: unset;
@@ -137,24 +136,18 @@
 
     & .icon {
       color: #555;
-      width: 30px;
+      // width: 30px;
       display: flex;
       flex-direction: row;
       align-items: center;
       display: inline-block;
       justify-content: center;
       font-size: 120%;
+      justify-self: center;
       @media (min-width: $desktopBreakpoint) {
         width: 100%;
         text-align: center;
         font-size: 50px;
-      }
-
-      //	padding-right: 5px;
-      //	padding-left: 5px;
-
-      .ltr & {
-        padding-left: 15px;
       }
       .rtl & {
         padding-left: 10px;
