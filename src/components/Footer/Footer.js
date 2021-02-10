@@ -101,10 +101,12 @@ class Footer extends Component {
 				</div>
 				<div className="light">
 					<p>{t("light.Can't find specific information?", NS)}</p>
+					<div className="link-container">
 					<i class="fa fa-question-circle"></i>
 					<a href={questionLink}>
 						<h3>{questionLink.includes('mailto: ') ? questionLink.replace('mailto: ', '') : t("light.Ask us a question", NS)}</h3>
 					</a>
+					</div>
 				</div>
 			</footer>
 		);
