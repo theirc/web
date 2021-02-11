@@ -46,13 +46,14 @@ class LocalGuideWidget extends Component {
   render() {
     const { country, language, t, guideItems } = this.props;
     const { guideItemsRendered, lastItem, showMore } = this.state;
+    const langRTL = ["ur", "fa", "ar"].indexOf(language) > -1;
 
     /*jshint ignore:start*/
     /*eslint-disable*/
     return (
       <div className="LocalGuide LocalGuideWidget">
         <div className="top-container">
-          <div className="title-line"></div>
+          <div className={`title-line ${langRTL ? "rtl" : "ltr"}`}></div>
           <h3>{t("guide.Local Guide", NS)}</h3>
         </div>
 
