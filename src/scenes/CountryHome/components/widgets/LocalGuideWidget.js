@@ -61,8 +61,8 @@ class LocalGuideWidget extends Component {
             <div
               key={c.sys.id}
               className={`LocalGuideItem item-${i} ${
-                lastItem && i == guideItems.length - 1 ? "last-item" : ""
-              }`}
+                lastItem && i === guideItems.length - 1 ? "last-item" : ""
+              } ${guideItems.length !== 2 && i === 0 ? "first-item" : ""}`}
             >
               <div className="Overlay">
                 {_.has(c, "fields.backgroundImage.fields.file.url") && (

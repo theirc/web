@@ -15,7 +15,7 @@
       top: 37%;
       left: 64%;
       background: #7fb685;
-      padding: 20px 20px 30px 20px;
+      padding: 20px 30px 30px 30px;
     }
   }
 }
@@ -59,7 +59,7 @@
       .text-container {
         position: relative;
         background: #ffffff;
-        padding: 10px 15px 20px 15px;
+        padding: 10px 25px 20px 25px;
         top: -4rem;
         display: flex;
         flex-direction: column;
@@ -81,7 +81,7 @@
         }
       }
 
-      &.item-0 {
+      &.first-item {
         .text-container {
           background: #7fb685;
         }
@@ -92,7 +92,7 @@
           top: -4rem;
           max-width: 326px
         }
-        &.item-0 {
+        &.first-item {
           @include lastItem();
         }
         &.last-item {

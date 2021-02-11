@@ -58,7 +58,7 @@
 			box-sizing: border-box;
 			justify-content: space-evenly;
 			p {
-				margin-right: unset;
+				margin: unset!important;
 			}
 		}
 		h3 {
@@ -67,7 +67,7 @@
 		}
 		p {
 			// @include brand-colors-text("color");
-			margin-right: 20px;
+			margin: 0 20px;
 			color: white;
 		}
 		&,
