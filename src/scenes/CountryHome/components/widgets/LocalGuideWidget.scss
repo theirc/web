@@ -14,8 +14,11 @@
       position: absolute;
       top: 37%;
       left: 64%;
-      background: #7fb685;
+      @include brand-colors-lg("background-color");
       padding: 20px 30px 30px 30px;
+      .see-more-article {
+        color: black;
+      }
     }
   }
 }

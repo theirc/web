@@ -47,6 +47,7 @@
         display: grid;
         grid-template-columns: 10% 80% 10%;
         text-align: left;
+        color: black;
         @media (min-width: $desktopBreakpoint) {
           grid-template-columns: 20% 70% 10%;
           grid-template-rows: 0;
@@ -57,6 +58,7 @@
         &-title {
           text-align: left;
           text-decoration: underline;
+          text-transform: none!important;
         }
         &-description {
           text-align: left;

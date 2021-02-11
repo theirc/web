@@ -32,6 +32,7 @@
     font-weight: 500;
     text-decoration: none;
     text-transform: none;
+    @include brand-colors-link(color);
 
     &:hover {
       text-decoration: underline;
@@ -109,7 +110,7 @@
     height: 130px;
     text-align: center;
     background: #ffffff;
-    @include brand-colors("border-color");
+    @include brand-colors-border("border-color");
     border-top: solid 6px;
     &:hover {
       span {
@@ -169,7 +170,7 @@
   align-items: center;
   margin-bottom: 3%;
   .title-line {
-    @include brand-colors("border-color");
+    @include brand-colors-border("border-color");
     border-left: 8px solid;
     height: 50px;
     margin-right: 20px;
