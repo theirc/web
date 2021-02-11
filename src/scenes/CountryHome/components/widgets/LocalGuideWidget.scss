@@ -21,6 +21,22 @@
 }
 
 .LocalGuide {
+  .top-container {
+    .title-line {
+      &.rtl {
+        margin-right: 0;
+        margin-left: 20px;
+      }
+      &.ltr {
+        margin-left: 0;
+        margin-right: 20px;
+      }
+    }
+    h3 {
+      font-size: 25px;
+      text-transform: none;
+    }
+  }
   .ltr & {
     s {
       float: right;
@@ -75,7 +91,7 @@
           text-align: left;
           margin-bottom: 1rem;
         }
-        .see-more-article{
+        .see-more-article {
           font-weight: 600;
           text-decoration: underline;
         }
@@ -88,9 +104,9 @@
       }
       @media (min-width: $desktopBreakpoint) {
         margin-bottom: -6%;
-        .text-container{
+        .text-container {
           top: -4rem;
-          max-width: 326px
+          max-width: 326px;
         }
         &.first-item {
           @include lastItem();
