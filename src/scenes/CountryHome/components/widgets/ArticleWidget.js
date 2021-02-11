@@ -96,10 +96,7 @@ class ArticleWidget extends Component {
     const langRTL = ["ur", "fa", "ar"].indexOf(language) > -1;
 
     return (
-      <div
-        className={`Article ArticleWidget Home`}
-        key={article.sys.id}
-      >
+      <div className={`Article ArticleWidget Home`} key={article.sys.id}>
         {hero && hero.fields && hero.fields.file && showHero && (
           <div className="hero">
             <img
@@ -111,9 +108,7 @@ class ArticleWidget extends Component {
         )}
 
         <div className={`${!showFullArticle ? "text-container" : ""}`}>
-          <div
-            className={`${!showFullArticle ? "welcome-container" : ""}`}
-          >
+          <div className={`${!showFullArticle ? "welcome-container" : ""}`}>
             {showFullArt ? (
               <h1>{article.fields.title}</h1>
             ) : (
@@ -145,7 +140,7 @@ class ArticleWidget extends Component {
           </div>
           {!showFullArt && (whatsapp || facebook) && (
             <div className="social-media-container">
-              {whatsapp && (
+              {!whatsapp && (
                 <div
                   className={`whatsapp-container ${!facebook ? "only" : ""}`}
                 >
@@ -157,7 +152,7 @@ class ArticleWidget extends Component {
                   <h1>WhatsApp</h1>
                   <span>{t("social.Whatsapp", NS)}</span>
                   <a target="blank" href={whatsapp}>
-                    Whatsapp
+                    {t("social.Whatsapp Button", NS)}
                   </a>
                 </div>
               )}
@@ -173,7 +168,7 @@ class ArticleWidget extends Component {
                   <h1>Facebook Messenger</h1>
                   <span>{t("social.Facebook", NS)}</span>
                   <a target="blank" href={facebook}>
-                    Facebook
+                    {t("social.Facebook Button", NS)}
                   </a>
                 </div>
               )}

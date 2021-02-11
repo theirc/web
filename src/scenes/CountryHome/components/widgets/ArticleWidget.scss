@@ -5,10 +5,11 @@
   display: grid;
   justify-content: center;
   grid-template-columns: 25% 75%;
-  grid-template-rows: 20% 53% 27%;
+  grid-template-rows: 20% 50% 30%;
   background-color: #f3f3f6;
   padding: 5%;
   box-sizing: border-box;
+  min-height: 175px;
   .icon-container {
     grid-row-start: 1;
     grid-row-end: 4;
@@ -26,7 +27,6 @@
       height: 80%;
       align-items: center;
       background-color: white;
-      border-radius: 50%;
       display: flex;
       justify-content: center;
       padding: 8px;
@@ -47,8 +47,8 @@
   a {
     width: 100%;
     color: #fff;
-    background-color: #007bff;
-    border-color: #007bff;
+    @include brand-colors-button("background-color");
+    @include brand-colors-button("border-color");
     border: 1px solid transparent;
     font-size: 1rem;
     line-height: 1.5;
@@ -177,6 +177,9 @@
     }
     p:hover {
       opacity: 0.85;
+    }
+    a {
+      color: black!important;
     }
   }
 

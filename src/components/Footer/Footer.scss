@@ -24,7 +24,7 @@
 
 	.Signpost {
 		a {
-			@include brand-colors("color");
+			color: black;
 			opacity: 1;
 			.rtl & {
 				flex: 1;
@@ -72,13 +72,13 @@
 		}
 		&,
 		a {
-			@include brand-colors( "color");
-			background-color: black
-			// @include brand-colors-inverse( "background-color");
+			// @include brand-colors( "color");
+			@include brand-colors-footer( "background-color");
 
 		}
 		.link-container {
 			a {
+				color: white;
 				display: flex;
 				align-items: center;
 				justify-content: center;
@@ -115,9 +115,6 @@
 			&.Signpost {
 				span {
 					color: black;
-					a {
-						font-weight: 600;
-					}
 				}
 			}
 

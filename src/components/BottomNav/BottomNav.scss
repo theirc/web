@@ -3,18 +3,36 @@
 .BottomNav {
   box-shadow: 0px 1px 8px 0px !important;
 
-  .rtl & span {
-    font-size: 12px;
+  .general-container {
+    display: flex;
+    justify-content: space-evenly;
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 1% 0;
+      margin-bottom: 1%;
+      cursor: pointer;
+      &.Selected {
+        border-bottom: 3px solid; 
+        @include brand-colors-bottom-nav-border("border-bottom-color");
+      }
+      .BottomButton {
+        font-size: 14px;
+        margin-top: 2px;
+        @include brand-colors-bottom-nav-links("color");
+      }
+    }
   }
 
   .Selected {
     .rtl & {
       font-family: "Cairo", sans-serif;
     }
-    @include darken-brand-colors( "color", 5%);
   }
 
-  .Selected > span > span {
+  .Selected > span {
     .rtl & {
       font-family: "Cairo", sans-serif;
     }
@@ -22,19 +40,7 @@
     font-weight: 700;
   }
 
-  & > div > button > span > svg {
-    .rtl & {
-      -moz-transform: scaleX(-1);
-      -o-transform: scaleX(-1);
-      -webkit-transform: scaleX(-1);
-      transform: scaleX(-1);
-      filter: FlipH;
-      -ms-filter:  "FlipH";
-    }
-  }
-
   .BottomButton {
-
     .rtl & {
       font-family: "Cairo", "Roboto", sans-serif;
     }
@@ -44,7 +50,6 @@
     }
 
     .language-ti & {
-
       font-family: "EthiopicHiwua", sans-serif;
     }
 
@@ -57,5 +62,4 @@
   @media (min-width: $desktopBreakpoint) {
     display: none;
   }
-
 }
