@@ -93,11 +93,11 @@ class ArticleWidget extends Component {
       return `<a href="${tokens[idx].href}?language=${language}" ${tokens[idx].title}>`;
     };
 
-    const langLTR = ["ur", "fa", "ar"].indexOf(language) > -1;
+    const langRTL = ["ur", "fa", "ar"].indexOf(language) > -1;
 
     return (
       <div
-        className={`Article ArticleWidget Home ${langLTR ? "asd" : "efg"}`}
+        className={`Article ArticleWidget Home`}
         key={article.sys.id}
       >
         {hero && hero.fields && hero.fields.file && showHero && (
@@ -112,9 +112,7 @@ class ArticleWidget extends Component {
 
         <div className={`${!showFullArticle ? "text-container" : ""}`}>
           <div
-            className={`${!showFullArticle ? "welcome-container" : ""} ${
-              langLTR ? "welcome-container-ltr" : ""
-            }`}
+            className={`${!showFullArticle ? "welcome-container" : ""}`}
           >
             {showFullArt ? (
               <h1>{article.fields.title}</h1>
@@ -151,7 +149,7 @@ class ArticleWidget extends Component {
                 <div
                   className={`whatsapp-container ${!facebook ? "only" : ""}`}
                 >
-                  <div className="icon-container">
+                  <div className={`icon-container ${langRTL ? "rtl" : "ltr"}`}>
                     <div className="icon-background">
                       <i className="fa fa-whatsapp" />
                     </div>
@@ -167,7 +165,7 @@ class ArticleWidget extends Component {
                 <div
                   className={`facebook-container ${!whatsapp ? "only" : ""}`}
                 >
-                  <div className="icon-container">
+                  <div className={`icon-container ${langRTL ? "rtl" : "ltr"}`}>
                     <div className="icon-background">
                       <i className="fa fa-facebook" />
                     </div>
