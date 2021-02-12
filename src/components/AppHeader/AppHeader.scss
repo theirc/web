@@ -354,8 +354,13 @@ Less me
       .fa-search {
         margin: 5px 5px;
         padding-left: 8px;
-        top: 13px;
         cursor: pointer;
+        @media (min-width: $desktopBreakpoint) {
+          top: 13px;
+        }
+        @media (max-width: $desktopBreakpoint) {
+          top: 18px;
+        }
         .ltr & {
           right: 5px;
           @media (min-width: $desktopBreakpoint) {
@@ -372,8 +377,13 @@ Less me
       .fa {
         color: #000000;
         width: 25px;
-        font-size: 20px;
         position: absolute;
+        @media (min-width: $desktopBreakpoint) {
+          font-size: 20px;
+        }
+        @media (max-width: $desktopBreakpoint) {
+          font-size: 15px;
+        }
       }
     }
   }
@@ -430,6 +440,12 @@ Less me
         padding-left: 8px;
         top: 2px;
         cursor: pointer;
+        @media (min-width: $desktopBreakpoint) {
+          top: 13px;
+        }
+        @media (max-width: $desktopBreakpoint) {
+          top: 16px;
+        }
         .ltr & {
           right: 5px;
           @media (min-width: $desktopBreakpoint) {
@@ -446,8 +462,13 @@ Less me
       .fa {
         color: rgb(36, 36, 36);
         width: 25px;
-        font-size: 20px;
         position: absolute;
+        @media (min-width: $desktopBreakpoint) {
+          font-size: 20px;
+        }
+        @media (max-width: $desktopBreakpoint) {
+          font-size: 15px;
+        }
       }
     }
   }
@@ -591,12 +612,19 @@ $color: #ffffff;
 .search-btn {
   cursor: pointer;
   opacity: 0.6;
-  width: 32px !important;
-  height: 32px !important;
+  @media (min-width: $desktopBreakpoint) {
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 27px !important;
+  }
+  @media (max-width: $desktopBreakpoint) {
+    width: 20px!important;
+    height: 20px!important;
+    font-size: 20px!important;
+  }
   padding: 2px;
   margin-left: 18px;
   border-radius: 2px;
-  font-size: 27px !important;
   display: flex;
   justify-content: center;
   align-items: center;

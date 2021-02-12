@@ -4,24 +4,25 @@
   height: 100%;
   display: grid;
   justify-content: center;
-  grid-template-columns: 25% 75%;
-  grid-template-rows: 20% 50% 30%;
+  grid-template-columns: 23% 73%;
+  column-gap: 4%;
   background-color: #f3f3f6;
   padding: 5%;
   box-sizing: border-box;
   min-height: 175px;
+  &.rtl {
+    grid-template-rows: 19% 49% 28%;
+    row-gap: 4%;
+  }
+  &.ltr {
+    grid-template-rows: 20% 50% 30%;
+  }
   .icon-container {
     grid-row-start: 1;
     grid-row-end: 4;
     display: flex;
     align-items: center;
     justify-content: center;
-    &.ltr {
-      padding-right: 10%;
-    }
-    &.rtl {
-      padding-left: 10%;
-    }
     .icon-background {
       width: 80%;
       height: 80%;
@@ -57,6 +58,7 @@
     display: flex;
     height: 100%;
     align-items: center;
+    border-radius: 5px;
   }
   @media (max-width: $desktopBreakpoint) {
     .icon-container {
@@ -66,9 +68,15 @@
       .icon-background {
         width: 50%;
         i {
-          font-size: 3rem;
+          font-size: 2rem;
         }
       }
+    }
+    .social-title {
+      font-size: 1em;
+    }
+    .social-text {
+      font-size: 13px;
     }
     a {
       grid-column-start: 1;
@@ -106,9 +114,9 @@
       flex-direction: column;
       margin: 0px 20px;
       padding: 20px;
+      bottom: 3rem;
       .Read-More-lead {
         display: none;
-        // margin-bottom: 20px;
       }
       .Read-More-secondary {
         display: flex;
@@ -131,6 +139,15 @@
     .welcome-container {
       display: flex;
       flex-direction: column;
+      margin: 30px 0;
+      @media (max-width: $desktopBreakpoint) {
+        h1 {
+          font-size: 30px !important;
+        }
+        p {
+          font-size: 14px;
+        }
+      }
       h1 {
         font-size: 39px;
         text-transform: none;
@@ -179,7 +196,7 @@
       opacity: 0.85;
     }
     a {
-      color: black!important;
+      color: black !important;
     }
   }
 
@@ -251,8 +268,17 @@
   .Read-More {
     &-lead {
       text-decoration: underline;
+      margin: 26px 0;
     }
     &-secondary {
+      text-decoration: underline;
+    }
+  }
+}
+
+.faq {
+  @media (max-width: $desktopBreakpoint) {
+    p {
       text-decoration: underline;
     }
   }
