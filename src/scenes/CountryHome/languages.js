@@ -108,8 +108,8 @@ export default {
 				"Top Categories": "طبقه‌بندی‌های برتر"
 			},
 			"social": {
-				"Whatsapp": "Visit our page and use the chat to get your questions answered",
-				"Facebook": "Visit our page and use the chat to get your questions answered",
+				"Whatsapp": "به صفحه ما مراجعه کنید و از چت برای پاسخگویی به سوالات خود استفاده کنید",
+				"Facebook": "به صفحه ما مراجعه کنید و از چت برای پاسخگویی به سوالات خود استفاده کنید",
 				"Facebook Button": "به فیس بوک برو",
 				"Whatsapp Button": "به WhatsApp بروید"
 			}
@@ -137,8 +137,8 @@ export default {
 				"Top Categories": "Top Catégories"
 			},
 			"social": {
-				"Whatsapp": "Visit our page and use the chat to get your questions answered",
-				"Facebook": "Visit our page and use the chat to get your questions answered",
+				"Whatsapp": "Visitez notre page et utilisez le chat pour obtenir des réponses à vos questions",
+				"Facebook": "Visitez notre page et utilisez le chat pour obtenir des réponses à vos questions",
 				"Facebook Button": "Aller sur Facebook",
 				"Whatsapp Button": "Allez sur WhatsApp"
 			}
@@ -166,8 +166,8 @@ export default {
 				"Top Categories": " اوپری زمرہ جات"
 			},
 			"social": {
-				"Whatsapp": "Visit our page and use the chat to get your questions answered",
-				"Facebook": "Visit our page and use the chat to get your questions answered",
+				"Whatsapp": "ہمارے صفحے پر جائیں اور اپنے سوالات کے جوابات حاصل کرنے کے لئے چیٹ کا استعمال کریں",
+				"Facebook": "ہمارے صفحے پر جائیں اور اپنے سوالات کے جوابات حاصل کرنے کے لئے چیٹ کا استعمال کریں",
 				"Facebook Button": "فیس بک پر جائیں",
 				"Whatsapp Button": "به فیس بوک برو"
 			}
