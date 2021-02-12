@@ -174,8 +174,5 @@
     border-left: 8px solid;
     height: 50px;
     margin-right: 20px;
-    @media (max-width: $desktopBreakpoint) {
-      display: none;
-    }
   }
 }

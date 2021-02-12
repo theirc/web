@@ -125,7 +125,7 @@ class ArticleWidget extends Component {
 
             {contentType.sys.id === "video" && this.renderVideo(article)}
 
-            <p dangerouslySetInnerHTML={{ __html: md.render(content) }} />
+            <p className={`${showFullArt ? "faq" : "header"}`} dangerouslySetInnerHTML={{ __html: md.render(content) }} />
 
             {!showFullArt && (
               <s className="Read-More-lead">
@@ -142,15 +142,15 @@ class ArticleWidget extends Component {
             <div className="social-media-container">
               {!whatsapp && (
                 <div
-                  className={`whatsapp-container ${!facebook ? "only" : ""}`}
+                  className={`whatsapp-container ${!facebook ? "only" : ""} ${langRTL ? "rtl" : "ltr"}`}
                 >
-                  <div className={`icon-container ${langRTL ? "rtl" : "ltr"}`}>
+                  <div className="icon-container">
                     <div className="icon-background">
                       <i className="fa fa-whatsapp" />
                     </div>
                   </div>
-                  <h1>WhatsApp</h1>
-                  <span>{t("social.Whatsapp", NS)}</span>
+                  <h1 className="social-title">WhatsApp</h1>
+                  <span className="social-text">{t("social.Whatsapp", NS)}</span>
                   <a target="blank" href={whatsapp}>
                     {t("social.Whatsapp Button", NS)}
                   </a>
@@ -158,15 +158,15 @@ class ArticleWidget extends Component {
               )}
               {facebook && (
                 <div
-                  className={`facebook-container ${!whatsapp ? "only" : ""}`}
+                  className={`facebook-container ${!whatsapp ? "only" : ""} ${langRTL ? "rtl" : "ltr"}`}
                 >
-                  <div className={`icon-container ${langRTL ? "rtl" : "ltr"}`}>
+                  <div className="icon-container">
                     <div className="icon-background">
                       <i className="fa fa-facebook" />
                     </div>
                   </div>
-                  <h1>Facebook Messenger</h1>
-                  <span>{t("social.Facebook", NS)}</span>
+                  <h1 className="social-title">Facebook Messenger</h1>
+                  <span className="social-text">{t("social.Facebook", NS)}</span>
                   <a target="blank" href={facebook}>
                     {t("social.Facebook Button", NS)}
                   </a>
