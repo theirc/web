@@ -13,9 +13,15 @@
   &.rtl {
     grid-template-rows: 19% 49% 28%;
     row-gap: 4%;
+    .social-title {
+      align-self: flex-start;
+    }
   }
   &.ltr {
     grid-template-rows: 20% 50% 30%;
+    .social-title {
+      align-self: flex-end;
+    }
   }
   .icon-container {
     grid-row-start: 1;
@@ -39,7 +45,6 @@
   h1 {
     margin: 0;
     text-transform: none;
-    align-self: flex-end;
   }
   span {
     align-self: center;
@@ -179,7 +184,7 @@
         }
         margin-bottom: 1rem;
         .fa-whatsapp {
-          color: #25D366 !important;
+          color: #25d366 !important;
         }
       }
     }
