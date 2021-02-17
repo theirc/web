@@ -27,12 +27,11 @@
       width: 80%;
       height: 80%;
       align-items: center;
-      background-color: white;
       display: flex;
       justify-content: center;
       padding: 8px;
       i {
-        color: blue;
+        color: #3b5998;
         font-size: 3.5rem;
       }
     }
@@ -40,6 +39,7 @@
   h1 {
     margin: 0;
     text-transform: none;
+    align-self: flex-end;
   }
   span {
     align-self: center;
@@ -179,7 +179,7 @@
         }
         margin-bottom: 1rem;
         .fa-whatsapp {
-          color: #39bf28 !important;
+          color: #25D366 !important;
         }
       }
     }
