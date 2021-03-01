@@ -179,7 +179,7 @@
 		width:100%;
 
 		.show-more {
-			@include darken-brand-colors("background-color", 10%);
+			@include brand-colors("background-color");
 			@include brand-colors-inverse("color");
 			border: none;
 			border-radius: 5px;
