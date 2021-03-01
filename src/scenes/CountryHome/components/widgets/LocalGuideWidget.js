@@ -30,7 +30,7 @@ class LocalGuideWidget extends Component {
       });
     } else {
       this.setState({
-        guideItems: guideItemsRendered
+        guideItemsRendered: guideItems
       })
     }
   }
@@ -46,13 +46,14 @@ class LocalGuideWidget extends Component {
   render() {
     const { country, language, t, guideItems } = this.props;
     const { guideItemsRendered, lastItem, showMore } = this.state;
+    const langRTL = ["ur", "fa", "ar"].indexOf(language) > -1;
 
     /*jshint ignore:start*/
     /*eslint-disable*/
     return (
       <div className="LocalGuide LocalGuideWidget">
         <div className="top-container">
-          <div className="title-line"></div>
+          <div className={`title-line ${langRTL ? "rtl" : "ltr"}`}></div>
           <h3>{t("guide.Local Guide", NS)}</h3>
         </div>
 
@@ -61,8 +62,8 @@ class LocalGuideWidget extends Component {
             <div
               key={c.sys.id}
               className={`LocalGuideItem item-${i} ${
-                lastItem && i == guideItems.length - 1 ? "last-item" : ""
-              }`}
+                lastItem && i === guideItems.length - 1 ? "last-item" : ""
+              } ${guideItems.length !== 2 && i === 0 ? "first-item" : ""}`}
             >
               <div className="Overlay">
                 {_.has(c, "fields.backgroundImage.fields.file.url") && (

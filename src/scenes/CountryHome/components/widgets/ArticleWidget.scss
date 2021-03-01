@@ -4,28 +4,41 @@
   height: 100%;
   display: grid;
   justify-content: center;
-  grid-template-columns: 25% 75%;
-  grid-template-rows: 20% 53% 27%;
+  grid-template-columns: 23% 73%;
+  column-gap: 4%;
   background-color: #f3f3f6;
   padding: 5%;
   box-sizing: border-box;
+  min-height: 175px;
+  &.rtl {
+    grid-template-rows: 19% 49% 28%;
+    row-gap: 4%;
+    .social-title {
+      align-self: flex-start;
+    }
+  }
+  &.ltr {
+    grid-template-rows: 20% 50% 30%;
+    .social-title {
+      align-self: flex-end;
+    }
+  }
   .icon-container {
     grid-row-start: 1;
     grid-row-end: 4;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-right: 10%;
     .icon-background {
       width: 80%;
-      background-color: white;
-      border-radius: 50%;
+      height: 80%;
+      align-items: center;
       display: flex;
       justify-content: center;
       padding: 8px;
       i {
-        color: blue;
-        font-size: 5rem;
+        color: #3b5998;
+        font-size: 3.5rem;
       }
     }
   }
@@ -40,8 +53,8 @@
   a {
     width: 100%;
     color: #fff;
-    background-color: #007bff;
-    border-color: #007bff;
+    @include brand-colors-button("background-color");
+    @include brand-colors-button("border-color");
     border: 1px solid transparent;
     font-size: 1rem;
     line-height: 1.5;
@@ -50,6 +63,7 @@
     display: flex;
     height: 100%;
     align-items: center;
+    border-radius: 5px;
   }
   @media (max-width: $desktopBreakpoint) {
     .icon-container {
@@ -59,9 +73,15 @@
       .icon-background {
         width: 50%;
         i {
-          font-size: 3rem;
+          font-size: 2rem;
         }
       }
+    }
+    .social-title {
+      font-size: 1em;
+    }
+    .social-text {
+      font-size: 13px;
     }
     a {
       grid-column-start: 1;
@@ -99,9 +119,9 @@
       flex-direction: column;
       margin: 0px 20px;
       padding: 20px;
+      bottom: 3rem;
       .Read-More-lead {
         display: none;
-        // margin-bottom: 20px;
       }
       .Read-More-secondary {
         display: flex;
@@ -124,6 +144,16 @@
     .welcome-container {
       display: flex;
       flex-direction: column;
+      margin: 30px 0;
+      @media (max-width: $desktopBreakpoint) {
+        margin: 0 0 30px 0;
+        h1 {
+          font-size: 30px !important;
+        }
+        p {
+          font-size: 14px;
+        }
+      }
       h1 {
         font-size: 39px;
         text-transform: none;
@@ -155,10 +185,13 @@
         }
         margin-bottom: 1rem;
         .fa-whatsapp {
-          color: #39bf28 !important;
+          color: #25d366 !important;
         }
       }
     }
+  }
+  .faq-container {
+    width: 100%;
   }
   p {
     margin-top: 0;
@@ -170,6 +203,9 @@
     }
     p:hover {
       opacity: 0.85;
+    }
+    a {
+      color: black !important;
     }
   }
 
@@ -241,9 +277,16 @@
   .Read-More {
     &-lead {
       text-decoration: underline;
+      margin: 26px 0;
     }
     &-secondary {
       text-decoration: underline;
     }
+  }
+}
+
+.faq {
+  p {
+    text-decoration: underline;
   }
 }

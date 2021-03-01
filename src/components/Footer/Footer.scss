@@ -24,7 +24,7 @@
 
 	.Signpost {
 		a {
-			@include brand-colors("color");
+			color: black;
 			opacity: 1;
 			.rtl & {
 				flex: 1;
@@ -56,21 +56,45 @@
 			min-height: 140px;
 			padding: 10px 10px 57px 10px;
 			box-sizing: border-box;
-			justify-content: space-evenly;
+			justify-content: space-between;
+			p {
+				margin: unset!important;
+				font-size: 10px!important;
+			}
+			.link-container {
+				i {
+					font-size: 0.9em;
+				}
+				h3 {
+					font-size: 0.9em;
+				}
+			}
 		}
 		h3 {
 			margin:10px;
 
 		}
 		p {
-			@include brand-colors-text("color");
-			// color: white;
+			margin: 0 20px;
+			color: white;
+			font-size: 14px
 		}
 		&,
 		a {
-			@include brand-colors( "color");
-			@include brand-colors-inverse( "background-color");
+			// @include brand-colors( "color");
+			@include brand-colors-footer( "background-color");
 
+		}
+		.link-container {
+			a {
+				color: white;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			i {
+				font-size: 1.2em;
+			}
 		}
 	}
 
@@ -100,9 +124,6 @@
 			&.Signpost {
 				span {
 					color: black;
-					a {
-						font-weight: 600;
-					}
 				}
 			}
 
@@ -120,7 +141,7 @@
 				line-height: normal;
 				letter-spacing: normal;
 				text-align: center;
-				color: #ffffff;
+				color: black;
 				color: var(--white);
 			}
 		}

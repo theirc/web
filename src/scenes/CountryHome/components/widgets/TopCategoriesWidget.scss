@@ -1,11 +1,20 @@
 @import "../../../../shared/includes.scss";
 .TopCategories {
+  .top-container{
+    .title-line {
+      &.rtl {
+        margin-right: 0;
+        margin-left: 20px;
+      }
+      &.ltr {
+        margin-left: 0;
+        margin-right: 20px;
+      }
+    }
+  }
   h3 {
     font-size: 25px;
-    // margin: 0 auto 25px;
-    // text-align: center;
-    text-transform: uppercase;
-    // width: 80%;
+    text-transform: none;
 
     @media (max-width: $desktopBreakpoint) {
       display: block;
@@ -36,18 +45,21 @@
       }
       .TopCategory {
         display: grid;
-        grid-template-columns: 10% 80% 10%;
+        grid-template-columns: 20% 78% 2%;
         text-align: left;
+        color: black;
         @media (min-width: $desktopBreakpoint) {
           grid-template-columns: 20% 70% 10%;
           grid-template-rows: 0;
         }
         .icon {
           grid-column-start: 1;
+          display: flex;
         }
         &-title {
           text-align: left;
           text-decoration: underline;
+          text-transform: none!important;
         }
         &-description {
           text-align: left;

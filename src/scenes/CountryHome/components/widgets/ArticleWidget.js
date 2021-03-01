@@ -93,13 +93,10 @@ class ArticleWidget extends Component {
       return `<a href="${tokens[idx].href}?language=${language}" ${tokens[idx].title}>`;
     };
 
-    const langLTR = ["ur", "fa", "ar"].indexOf(language) > -1;
+    const langRTL = ["ur", "fa", "ar"].indexOf(language) > -1;
 
     return (
-      <div
-        className={`Article ArticleWidget Home ${langLTR ? "asd" : "efg"}`}
-        key={article.sys.id}
-      >
+      <div className={`Article ArticleWidget Home`} key={article.sys.id}>
         {hero && hero.fields && hero.fields.file && showHero && (
           <div className="hero">
             <img
@@ -110,12 +107,8 @@ class ArticleWidget extends Component {
           </div>
         )}
 
-        <div className={`${!showFullArticle ? "text-container" : ""}`}>
-          <div
-            className={`${!showFullArticle ? "welcome-container" : ""} ${
-              langLTR ? "welcome-container-ltr" : ""
-            }`}
-          >
+        <div className={`${!showFullArticle ? "text-container" : "faq-container"}`}>
+          <div className={`${!showFullArticle ? "welcome-container" : ""}`}>
             {showFullArt ? (
               <h1>{article.fields.title}</h1>
             ) : (
@@ -132,7 +125,7 @@ class ArticleWidget extends Component {
 
             {contentType.sys.id === "video" && this.renderVideo(article)}
 
-            <p dangerouslySetInnerHTML={{ __html: md.render(content) }} />
+            <p className={`${showFullArt ? "faq" : "header"}`} dangerouslySetInnerHTML={{ __html: md.render(content) }} />
 
             {!showFullArt && (
               <s className="Read-More-lead">
@@ -149,33 +142,33 @@ class ArticleWidget extends Component {
             <div className="social-media-container">
               {whatsapp && (
                 <div
-                  className={`whatsapp-container ${!facebook ? "only" : ""}`}
+                  className={`whatsapp-container ${!facebook ? "only" : ""} ${langRTL ? "rtl" : "ltr"}`}
                 >
                   <div className="icon-container">
                     <div className="icon-background">
                       <i className="fa fa-whatsapp" />
                     </div>
                   </div>
-                  <h1>WhatsApp</h1>
-                  <span>{t("social.Whatsapp", NS)}</span>
+                  <h1 className="social-title">WhatsApp</h1>
+                  <span className="social-text">{t("social.Whatsapp", NS)}</span>
                   <a target="blank" href={whatsapp}>
-                    Whatsapp
+                    {t("social.Whatsapp Button", NS)}
                   </a>
                 </div>
               )}
               {facebook && (
                 <div
-                  className={`facebook-container ${!whatsapp ? "only" : ""}`}
+                  className={`facebook-container ${!whatsapp ? "only" : ""} ${langRTL ? "rtl" : "ltr"}`}
                 >
                   <div className="icon-container">
                     <div className="icon-background">
                       <i className="fa fa-facebook" />
                     </div>
                   </div>
-                  <h1>Facebook Messenger</h1>
-                  <span>{t("social.Facebook", NS)}</span>
+                  <h1 className="social-title">Facebook Messenger</h1>
+                  <span className="social-text">{t("social.Facebook", NS)}</span>
                   <a target="blank" href={facebook}>
-                    Facebook
+                    {t("social.Facebook Button", NS)}
                   </a>
                 </div>
               )}

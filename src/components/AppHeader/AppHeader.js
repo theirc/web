@@ -4,7 +4,7 @@ import { Search } from "material-ui-icons";
 import Headroom from "react-headrooms";
 import PropTypes from "prop-types";
 import { translate, Interpolate } from "react-i18next";
-import { Close, Home, List, Assignment } from "material-ui-icons";
+import { Close } from "material-ui-icons";
 
 // local
 import Alert from '../Alert/Alert';
@@ -122,6 +122,8 @@ class AppHeader extends Component {
 
 		let selectedIndex = selectedMenuItem();
 		let path = window.location.pathname;
+		const langRTL = ["ur", "fa", "ar"].indexOf(language) > -1;
+		
 
 		return (
 			<div className={backgroundDark ? 'AppHeader' : 'AppHeaderLight'}>
@@ -136,19 +138,19 @@ class AppHeader extends Component {
 							(
 								<div className="app-bar-container buttons">
 									<div className="app-bar-buttons">
-										<span className={`app-bar-selectors top-menu ${selectedIndex === 0 ? "Selected" : ""}`} color="contrast" onClick={onGoHome || noop}>
-											<Home /><span className='menu-item'>{t("menu.Home", NS)}</span>
+										<span className={`app-bar-selectors top-menu ${langRTL ? "rtl" : "ltr"} ${selectedIndex === 0 ? "Selected" : ""}`} color="contrast" onClick={onGoHome || noop}>
+										<i className="fa fa-home" /><span className='menu-item'>{t("menu.Home", NS)}</span>
 										</span>
 
 										{instance.countries[country.fields.slug].switches.showArticles &&
-											<span className={`app-bar-selectors top-menu ${selectedIndex === 1 ? "Selected" : ""}`} color="contrast" onClick={onGoToCategories || noop}>
-												<Assignment /><span className='menu-item'>{t("menu.Articles", NS)}</span>
+											<span className={`app-bar-selectors top-menu ${langRTL ? "rtl" : "ltr"} ${selectedIndex === 1 ? "Selected" : ""}`} color="contrast" onClick={onGoToCategories || noop}>
+												<i className="fa fa-file" /><span className='menu-item'>{t("menu.Articles", NS)}</span>
 											</span>
 										}
 
 										{instance.countries[country.fields.slug].switches.showServices &&
-											<span className={`app-bar-selectors top-menu ${selectedIndex === 2 ? "Selected" : ""}`} color="contrast" onClick={onGoToServices || noop}>
-												<List /><span className='menu-item'>{t("menu.Services", NS)}</span>
+											<span className={`app-bar-selectors top-menu ${langRTL ? "rtl" : "ltr"} ${selectedIndex === 2 ? "Selected" : ""}`} color="contrast" onClick={onGoToServices || noop}>
+												<i className="fa fa-map-marker"></i><span className='menu-item'>{t("menu.Services", NS)}</span>
 											</span>
 										}
 

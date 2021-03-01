@@ -14,13 +14,15 @@ class TopCategoriesWidget extends Component {
     let articleFunc = (category) =>
       category.fields.overview || _.first(category.fields.articles);
     const { country, t, categories, language } = this.props;
+    const langRTL = ["ur", "fa", "ar"].indexOf(language) > -1;
+    
     /*jshint ignore:start*/
     /*eslint-disable*/
 
     return (
       <div className="TopCategories TopCategoriesWidget">
         <div className="top-container">
-          <div className="title-line"></div>
+          <div className={`title-line ${langRTL ? "rtl" : "ltr"}`}></div>
 
           <h3>{t("top.Top Categories", NS)}</h3>
         </div>
