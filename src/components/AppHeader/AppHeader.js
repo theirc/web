@@ -191,7 +191,10 @@ class AppHeader extends Component {
 					<div className={this.state.prvalert ? 'hidden' : 'privacy-banner'}>
 						<div className='content'>
 							<span className="privacy-banner-separator"></span>
-							<Interpolate i18nKey="COOKIES_BANNER" cookiePolicy={instance.brand.code === 'ri' ? cookiePolicyLinkGreece : cookiePolicyLinkIraq} privacyPolicy={instance.brand.code === 'ri' ? privacyPolicyLinkGreece : privacyPolicyLinkIraq} />
+							{instance.brand.code === 'ri' ? 
+								<Interpolate i18nKey="COOKIES_BANNER" cookiePolicy={cookiePolicyLinkGreece} privacyPolicy={privacyPolicyLinkGreece} /> : 
+								<Interpolate i18nKey="COOKIES_BANNER_IRAQ" cookiePolicy={cookiePolicyLinkIraq} privacyPolicy={privacyPolicyLinkIraq} />
+							}
 						</div>
 						<Close
 							className="close-alert"
