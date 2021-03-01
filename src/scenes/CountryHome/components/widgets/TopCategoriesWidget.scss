@@ -54,6 +54,7 @@
         }
         .icon {
           grid-column-start: 1;
+          display: flex;
         }
         &-title {
           text-align: left;
