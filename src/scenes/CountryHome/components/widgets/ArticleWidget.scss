@@ -146,6 +146,7 @@
       flex-direction: column;
       margin: 30px 0;
       @media (max-width: $desktopBreakpoint) {
+        margin: 0 0 30px 0;
         h1 {
           font-size: 30px !important;
         }
@@ -188,6 +189,9 @@
         }
       }
     }
+  }
+  .faq-container {
+    width: 100%;
   }
   p {
     margin-top: 0;
@@ -282,9 +286,7 @@
 }
 
 .faq {
-  @media (max-width: $desktopBreakpoint) {
-    p {
-      text-decoration: underline;
-    }
+  p {
+    text-decoration: underline;
   }
 }

@@ -107,7 +107,7 @@ class ArticleWidget extends Component {
           </div>
         )}
 
-        <div className={`${!showFullArticle ? "text-container" : ""}`}>
+        <div className={`${!showFullArticle ? "text-container" : "faq-container"}`}>
           <div className={`${!showFullArticle ? "welcome-container" : ""}`}>
             {showFullArt ? (
               <h1>{article.fields.title}</h1>
@@ -140,7 +140,7 @@ class ArticleWidget extends Component {
           </div>
           {!showFullArt && (whatsapp || facebook) && (
             <div className="social-media-container">
-              {!whatsapp && (
+              {whatsapp && (
                 <div
                   className={`whatsapp-container ${!facebook ? "only" : ""} ${langRTL ? "rtl" : "ltr"}`}
                 >
