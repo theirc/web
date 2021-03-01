@@ -105,54 +105,81 @@ class ServiceDetail extends React.Component {
 	}
 
 	renderContactInformation(ci, callAux) {
-		let { text, type } = ci;
+		let { value, type } = ci;
 		let typography;
 		let action;
 		let typeText;
 		let textClass = 'noPhoneFormat';
+		const toUrl = u => (u.indexOf("http") === -1 ? `http://${u}` : u);
 
 		switch (type) {
 			case "whatsapp":
 				typography = "MenuIcon fa fa-whatsapp";
-				action = `whatsapp://send?phone=${text}`;
+				action = `whatsapp://send?phone=${value}`;
 				typeText = "Whatsapp: ";
 				break;
 
 			case "skype":
 				typography = "MenuIcon fa fa-skype";
-				action = `skype:${text}?chat`;
+				action = `skype:${value}?chat`;
 				typeText = "Skype: ";
 				break;
 
 			case "facebook_messenger":
 				typography = "MenuIcon fa fa-facebook";
-				action = `http://m.me/${text}`;
-				typeText = "Facebook Messenger: ";
+				action = `${toUrl(value)}`;
+				typeText = "Facebook: ";
 				break;
 
 			case "viber":
 				typography = "MenuIcon fa fa-phone";
-				action = `viber://add?number=${text}`;
+				action = `viber://add?number=${value}`;
 				typeText = "Viber: ";
 				break;
 
 			case "phone":
 				typography = "MenuIcon fa fa-phone";
-				action = `tel:${text}`;
+				action = `tel:${value}`;
 				typeText = callAux + ":";
+				textClass = 'phoneFormat';
+				break;
+			
+			case "telegram":
+				typography = "MenuIcon fa fa-telegram";
+				action = `tel:${value}`;
+				typeText = "Telegram: ";
 				textClass = 'phoneFormat';
 				break;
 
 			case "email":
 				typography = "MenuIcon fa fa-envelope-o";
-				action = `mailto:${text}`;
+				action = `mailto:${value}`;
 				typeText = "Email: ";
 				break;
 
 			case "instagram":
 				typography = "MenuIcon fa fa-envelope-o";
-				action = `https://www.instagram.com/${text}`;
+				action = `${toUrl(value)}`;
 				typeText = "Instagram: ";
+				break;
+
+			case "twitter":
+				typography = "MenuIcon fa fa-twitter";
+				action = `${toUrl(value)}`;
+				typeText = "Twitter: ";
+				break;
+
+			case "signal":
+				typography = "MenuIcon fa fa-phone";
+				action = `tel:${value}`;
+				typeText = "Signal: ";
+				textClass = 'phoneFormat';
+				break;
+
+			case "website":
+				typography = "MenuIcon fa fa-external-link";
+				action = `${toUrl(value)}`;
+				typeText = "Website: ";
 				break;
 
 			default:
@@ -165,9 +192,11 @@ class ServiceDetail extends React.Component {
 				</span>
 
 				<h1>
-					<div className="ContactInformation">
-						{typeText}<a href={action} className={textClass}>{text}</a>
-					</div>
+					<span style={{ display: 'inline-block', overflow: 'hidden' }}>{typeText}</span>
+					<div className="field" style={{
+						display: 'inline-block', direction: 'ltr', marginLeft: '5px',
+						overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
+					}}>{value}</div>
 				</h1>
 			</div>
 		)
@@ -195,7 +224,6 @@ class ServiceDetail extends React.Component {
 			);
 		}
 
-		const toUrl = u => (u.indexOf("http") === -1 ? `http://${u}` : u);
 		const hasHours = o => {
 			return o.isAlwaysOpen || o.serviceOpeningHours.length > 0;
 		};
@@ -238,7 +266,7 @@ class ServiceDetail extends React.Component {
 		const providerT = service.provider.data_i18n.filter(x => x.language === language)[0]
 		const providerInfo = (providerT && providerT.name) ? providerT : service.provider;
 
-		let sortedContactInformation = _.sortBy(service.contact_information || [], ci => {
+		let sortedContactInformation = _.sortBy(service.serviceContactInformations || [], ci => {
 			return ci.index;
 		});
 		let subtitle = (service.serviceCategories && service.serviceCategories.length > 0) ? _.first(service.serviceCategories).name : '';
@@ -326,72 +354,7 @@ class ServiceDetail extends React.Component {
 								</div>
 							)}
 
-							{service.phone && (
-								<div className="Selector" onClick={() => window.open(`tel:${service.phone}`)}>
-									<span className='icon-placeholder'>
-										<i className="MenuIcon fa fa-phone" aria-hidden="true" />
-									</span>
-
-									<h1>
-										{t("services.Call", NS)}:
-									<a className="phoneFormat" href={`tel:${service.phone}`} >{service.phone}</a>
-									</h1>
-								</div>
-							)}
-
-							{service.email && (
-								<div className="Selector" onClick={() => window.open(`mailto:${service.email}`)}>
-									<span className='icon-placeholder'>
-										<i className="MenuIcon fa fa-envelope-o" aria-hidden="true" />
-									</span>
-
-									<h1>
-										<span style={{ display: 'inline-block', overflow: 'hidden' }}>{t('services.Email', NS)}:&nbsp;</span>
-										<div className='field' style={{
-											display: 'inline-block', direction: 'ltr',
-											overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
-										}}>
-											{service.email}
-										</div>
-									</h1>
-								</div>
-							)}
-
-							{service.website && (
-								<div className="Selector" onClick={() => window.open(`${toUrl(service.website)}`)}>
-									<span className='icon-placeholder'>
-										<i className="MenuIcon fa fa-external-link" aria-hidden="true" />
-									</span>
-
-									<h1>
-										<span style={{ display: 'inline-block', overflow: 'hidden' }}>{t('services.Website', NS)}:&nbsp;</span>
-										<div className='field' style={{
-											display: 'inline-block', direction: 'ltr',
-											overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
-										}}>
-											{service.website}
-										</div>
-									</h1>
-								</div>
-							)}
-
-							{service.facebook && (
-								<div className="Selector" onClick={() => window.open(`${toUrl(service.facebook)}`)}>
-									<span className='icon-placeholder'><i className="MenuIcon fa fa-facebook-f" aria-hidden="true" /></span>
-
-									<h1>
-										<span style={{ display: 'inline-block', overflow: 'hidden' }}>{t('Facebook')}:&nbsp;</span>
-										<div className='field' style={{
-											display: 'inline-block', direction: 'ltr',
-											overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
-										}}>
-											{service.facebook}
-										</div>
-									</h1>
-								</div>
-							)}
-
-							{service.contact_information && sortedContactInformation.map(ci => this.renderContactInformation(ci, callAux))}
+							{service.serviceContactInformations && sortedContactInformation.map(ci => this.renderContactInformation(ci, callAux))}
 
 							{(relatedServices || []).length > 0 && (
 								<div className="Selector" onClick={() => this.showServices()}>
