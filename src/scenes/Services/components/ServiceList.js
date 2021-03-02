@@ -149,6 +149,7 @@ class ServiceList extends React.Component {
 				{services.length > 0 && (
 					<div className="ServiceListContainer">
 						<ul className="Items">
+							
 							<li className="Item service-map" onClick={showMap} style={{ flexBasis: "100%" }}>
 								<div className="Icon">
 									<i className="fa fa-map" />
