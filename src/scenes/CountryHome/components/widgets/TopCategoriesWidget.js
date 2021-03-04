@@ -6,6 +6,7 @@ import { translate } from "react-i18next";
 
 // local
 import "./TopCategoriesWidget.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const NS = { ns: "CountryHome" };
 
@@ -15,10 +16,11 @@ class TopCategoriesWidget extends Component {
       category.fields.overview || _.first(category.fields.articles);
     const { country, t, categories, language } = this.props;
     const langRTL = ["ur", "fa", "ar"].indexOf(language) > -1;
+
     
     /*jshint ignore:start*/
     /*eslint-disable*/
-
+    
     return (
       <div className="TopCategories TopCategoriesWidget">
         <div className="top-container">
@@ -29,6 +31,7 @@ class TopCategoriesWidget extends Component {
 
         <div className="categories-container">
           {categories.map((c) => {
+            let categoryIcon = c.fields.iconClass.replace('fa fa-','');
             let article = articleFunc(c);
             return (
               <Link
@@ -37,12 +40,7 @@ class TopCategoriesWidget extends Component {
                 to={`/${country.fields.slug}/${c.fields.slug}?language=${language}`}
               >
                 <div className="icon">
-                  <i className={c.fields.iconClass || "material-icons"}>
-                    {c.fields.iconText ||
-                      ((!c.fields.iconClass ||
-                        c.fields.iconClass === "material-icons") &&
-                        "add")}
-                  </i>
+                  <FontAwesomeIcon icon={categoryIcon} />
                 </div>
                 <div className="text-container">
                   <h1 className="TopCategory-title">{c.fields.name}</h1>

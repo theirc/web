@@ -1,6 +1,5 @@
 // libs
 import React, { Component } from "react";
-import { Paper } from "material-ui";
 import PropTypes from "prop-types";
 import { translate } from "react-i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -49,10 +48,11 @@ class BottomNav extends Component {
       position: "fixed",
       bottom: 0,
       width: "100%",
+      background: "white"
     };
 
     return (
-      <Paper style={paperStyle} className="BottomNav">
+      <div style={paperStyle} className="BottomNav">
         <div className="general-container">
           <span
             className={`button-container ${this.props.index === 0 ? "Selected" : ""}`}
@@ -85,7 +85,7 @@ class BottomNav extends Component {
             </span>
           )}
         </div>
-      </Paper>
+      </div>
     );
   }
 }

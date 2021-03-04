@@ -4,7 +4,6 @@ import { translate } from "react-i18next";
 import _ from "lodash";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
-import { LibraryBooks, Link } from "material-ui-icons";
 import * as clipboard from "clipboard-polyfill";
 import { Helmet } from "react-helmet";
 import PropTypes from "prop-types";
@@ -16,6 +15,9 @@ import fbHelpers from '../../../helpers/facebook';
 import "../../../components/ActionsBar/ActionsBar.css";
 import "./ServiceDetail.css";
 import "./ServiceHome.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCopy } from "@fortawesome/pro-regular-svg-icons";
+import { faFacebookF, faViber, faWhatsapp, faSkype, faTelegramPlane, faInstagram, faTwitter } from "@fortawesome/free-brands-svg-icons";
 
 const NS = { ns: 'Services' };
 
@@ -105,7 +107,7 @@ class ServiceDetail extends React.Component {
 	}
 
 	renderContactInformation(ci, callAux) {
-		let { value, type } = ci;
+		let { value, type, id } = ci;
 		let typography;
 		let action;
 		let typeText;
@@ -114,70 +116,70 @@ class ServiceDetail extends React.Component {
 
 		switch (type) {
 			case "whatsapp":
-				typography = "MenuIcon fa fa-whatsapp";
+				typography = faWhatsapp;
 				action = `whatsapp://send?phone=${value}`;
 				typeText = "Whatsapp: ";
 				break;
 
 			case "skype":
-				typography = "MenuIcon fa fa-skype";
+				typography = faSkype;
 				action = `skype:${value}?chat`;
 				typeText = "Skype: ";
 				break;
 
 			case "facebook_messenger":
-				typography = "MenuIcon fa fa-facebook";
+				typography = faFacebookF;
 				action = `${toUrl(value)}`;
 				typeText = "Facebook: ";
 				break;
 
 			case "viber":
-				typography = "MenuIcon fa fa-phone";
+				typography = faViber;
 				action = `viber://add?number=${value}`;
 				typeText = "Viber: ";
 				break;
 
 			case "phone":
-				typography = "MenuIcon fa fa-phone";
+				typography = "phone";
 				action = `tel:${value}`;
 				typeText = callAux + ":";
 				textClass = 'phoneFormat';
 				break;
 			
 			case "telegram":
-				typography = "MenuIcon fa fa-telegram";
+				typography = faTelegramPlane;
 				action = `tel:${value}`;
 				typeText = "Telegram: ";
 				textClass = 'phoneFormat';
 				break;
 
 			case "email":
-				typography = "MenuIcon fa fa-envelope-o";
+				typography = "envelope";
 				action = `mailto:${value}`;
 				typeText = "Email: ";
 				break;
 
 			case "instagram":
-				typography = "MenuIcon fa fa-envelope-o";
+				typography = faInstagram;
 				action = `${toUrl(value)}`;
 				typeText = "Instagram: ";
 				break;
 
 			case "twitter":
-				typography = "MenuIcon fa fa-twitter";
+				typography = faTwitter;
 				action = `${toUrl(value)}`;
 				typeText = "Twitter: ";
 				break;
 
 			case "signal":
-				typography = "MenuIcon fa fa-phone";
+				typography = "phone";
 				action = `tel:${value}`;
 				typeText = "Signal: ";
 				textClass = 'phoneFormat';
 				break;
 
 			case "website":
-				typography = "MenuIcon fa fa-external-link";
+				typography = "external-link-alt";
 				action = `${toUrl(value)}`;
 				typeText = "Website: ";
 				break;
@@ -186,9 +188,9 @@ class ServiceDetail extends React.Component {
 				break;
 		}
 		return (
-			<div className="Selector" onClick={() => window.open(action)}>
+			<div className="Selector" onClick={() => window.open(action)} key={id}>
 				<span className='icon-placeholder'>
-					<i className={typography} aria-hidden="true" />
+					<FontAwesomeIcon className="MenuIcon" icon={typography} />
 				</span>
 
 				<h1>
@@ -293,10 +295,10 @@ class ServiceDetail extends React.Component {
 					<div className='ActionsBar'>
 						<div className="left"></div>
 						<div className="social">
-							<div href='#' className="social-btn" onClick={() => fbHelpers.share(language)}><i className="fa fa-facebook-f" style={{ fontSize: 16 }} /></div>
+							<div href='#' className="social-btn" onClick={() => fbHelpers.share(language)}><FontAwesomeIcon icon={faFacebookF} /></div>
 
 							<div href='#' className="social-btn" onClick={this.onCopyLink}>
-								{!this.state.copied ? <Link /> : <LibraryBooks />}
+								{!this.state.copied ? <FontAwesomeIcon icon="link" /> : <FontAwesomeIcon icon={faCopy} />}
 								{this.state.copied && <span className='copied'>{t('services.Copied', NS)}</span>}
 							</div>
 
@@ -347,7 +349,7 @@ class ServiceDetail extends React.Component {
 							{service.latitude && service.longitude && (
 								<div className="Selector" onClick={() => window.open(`https://www.google.com/maps/search/?api=1&query=${service.latitude},${service.longitude}`)}>
 									<span className='icon-placeholder'>
-										<i className="MenuIcon fa fa-map" aria-hidden="true" />
+										<FontAwesomeIcon icon="map-marker-alt" className="MenuIcon" />
 									</span>
 
 									<h1>{t("services.Get directions", NS)}</h1>
@@ -359,7 +361,7 @@ class ServiceDetail extends React.Component {
 							{(relatedServices || []).length > 0 && (
 								<div className="Selector" onClick={() => this.showServices()}>
 									<span className='icon-placeholder'>
-										<i className="MenuIcon fa fa-angle-right" aria-hidden="true" />
+										<FontAwesomeIcon icon="angle-right" className="MenuIcon" />
 									</span>
 									<h1>{t("services.OTHER_SERVICES", NS)}</h1>
 								</div>)
@@ -376,7 +378,7 @@ class ServiceDetail extends React.Component {
 										<div key={r.id} onClick={() => goToService(country, language, r.id)}>
 											<div className="Selector related">
 												<span className='icon-placeholder'>
-													<i className="MenuIcon fa fa-angle-right" aria-hidden="true" />
+													<FontAwesomeIcon icon="angle-right" className="MenuIcon" />
 												</span>
 												<h1 href="#/" ><div style={{
 													display: 'inline-block', direction: 'ltr', overflow: 'hidden',
@@ -389,7 +391,7 @@ class ServiceDetail extends React.Component {
 
 									<div className="Selector back" onClick={() => this.showServices()}>
 										<span className='icon-placeholder'>
-											<i className="MenuIcon fa fa-angle-left" aria-hidden="true" />
+											<FontAwesomeIcon icon="angle-left" className="MenuIcon" />
 										</span>
 
 										<h1>{t("services.Back", NS)}</h1>

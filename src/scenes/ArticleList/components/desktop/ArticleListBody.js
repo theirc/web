@@ -9,6 +9,7 @@ import _ from 'lodash';
 import HeaderBar from "../../../../components/HeaderBar/HeaderBar";
 import "../../../../components/ActionsBar/ActionsBar.css";
 import "./ArticleListBody.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const NS = { ns: 'ArticleList' };
 
@@ -210,10 +211,10 @@ class ArticleListBody extends Component {
 									<i className={c.fields.iconClass || "material-icons"}>{c.fields.iconText || ((!c.fields.iconClass || c.fields.iconClass === "material-icons") && "add")}</i>
 									<span className="category-name">{c.fields && c.fields.name}</span>
 									<div className="up">
-										<i className="material-icons">keyboard_arrow_up</i>
+										<FontAwesomeIcon icon="chevron-up" />
 									</div>
 									<div className="down">
-										<i className="material-icons">keyboard_arrow_down</i>
+										<FontAwesomeIcon icon="chevron-down" />
 									</div>
 								</label>,
 								c.fields.categories && (

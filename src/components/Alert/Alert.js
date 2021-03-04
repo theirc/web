@@ -1,6 +1,6 @@
 // libs
 import React, { Component } from 'react';
-import { Close } from 'material-ui-icons';
+// import { Close } from 'material-ui-icons';
 
 // local
 import './Alert.css';
@@ -22,7 +22,7 @@ class Alert extends Component {
 						{header && <p>{header}</p>}
 						{link ? <a href={link}><p style={{color: fontColor || 'inherit'}}>{message}</p></a> : <p style={{color: fontColor || 'inherit'}}>{message}</p>}
 					</div>
-					{onClose && <Close className='Alert--close' color='contrast' size={36} onClick={onClose}/>}
+					{/* {onClose && <Close className='Alert--close' color='contrast' size={36} onClick={onClose}/>} */}
 				</div>
 			</div>
 		);

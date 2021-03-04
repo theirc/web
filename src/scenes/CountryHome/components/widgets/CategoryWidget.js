@@ -6,6 +6,7 @@ import { translate } from "react-i18next";
 
 // local
 import "./CategoryWidget.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const NS = { ns: 'CountryHome' };
 
@@ -29,7 +30,7 @@ class CategoryWidget extends Component {
 				<p dangerouslySetInnerHTML={{ __html: html }} />
 				<s className='Read-More'>
 					<Link to={`/${country.fields.slug}/${c.fields.slug}/${article.fields.slug}?language=en`}>{t("global.Read More", NS)}</Link>
-					<i className="material-icons">arrow_right</i>
+					<FontAwesomeIcon icon="arrow-right" />
 				</s>
 			</div>
 		)

@@ -1,7 +1,7 @@
 // libs
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Close } from "material-ui-icons";
+// import { Close } from "material-ui-icons";
 
 // local
 import "./WarningDialog.css";
@@ -75,7 +75,7 @@ export default class WarningDialog extends Component {
 				<div className="warning-dialog-container-inner" dangerouslySetInnerHTML={{ __html: html }} />
 				{dismissable && (
 					<div className="warning-dialog-close" onClick={() => this.hide()}>
-						<Close />
+						{/* <Close /> */}
 					</div>
 				)}
 				</div>
