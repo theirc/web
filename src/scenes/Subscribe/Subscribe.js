@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
+import 'lazysizes'
 
 // local
 import HeaderBar from "../../components/HeaderBar/HeaderBar";
@@ -210,28 +211,28 @@ class Subscribe extends Component {
 												<div className="circle">1</div>
 												<div className="text">{t('step1', NS)}</div>
 											</div>
-											<div className='step--image'><img src={step1} alt='step-1' /></div>
+											<div className='step--image'><img data-src={step1} alt='step-1' className="lazyload" /></div>
 										</div>
 										<div className="step">
 											<div className='step--text'>
 												<div className="circle">2</div>
 												<div className="text">{t('step2', NS)}</div>
 											</div>
-											<div className='step--image'><img src={step2} alt='step-2' /></div>
+											<div className='step--image'><img data-src={step2} alt='step-2' className="lazyload" /></div>
 										</div>
 										<div className="step">
 											<div className='step--text'>
 												<div className="circle">3</div>
 												<div className="text">{t('step3', NS)}</div>
 											</div>
-											<div className='step--image'><img src={step3} alt='step-3' /></div>
+											<div className='step--image'><img data-src={step3} alt='step-3' className="lazyload" /></div>
 										</div>
 										<div className="step">
 											<div className='step--text'>
 												<div className="circle">4</div>
 												<div className="text">{t('step4', NS)}</div>
 											</div>
-											<div className='step--image'><img src={step4} alt='step-4' /></div>
+											<div className='step--image'><img data-src={step4} alt='step-4' className="lazyload" /></div>
 										</div>
 									</div>
 								}

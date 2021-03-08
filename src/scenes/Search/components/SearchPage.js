@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import tinycolor from "tinycolor2";
 import moment from 'moment';
 import instance from '../../../backend/settings';
+import 'lazysizes'
 
 // local
 import "./SearchPage.css";
@@ -99,7 +100,7 @@ class SearchPage extends React.Component {
 		return (
 			<li className='tile' key={a.sys.id} onClick={() => onNavigate(`/${country.fields.slug}/${a.fields.category.fields.slug}/${a.fields.slug}?language=${language}`)}>
 				<div className='img-viewport'>
-					<img src={image} alt='' />
+					<img data-src={image} alt='hero-image-search-page' className="lazyload" />
 				</div>
 				<div className='text'>
 					{a.fields && <h2>{a.fields.title}</h2>}
