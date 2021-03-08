@@ -1,7 +1,6 @@
 // libs
 import React, { Component } from "react";
 import moment from "moment";
-import _ from "lodash";
 import { translate } from "react-i18next";
 
 // local
@@ -17,15 +16,17 @@ class HomeWidget extends Component {
 	renderWidget(w) {
 
 		if (w.fields.type === "Latest Article of Category") {
-			let category = _.first(w.fields.related);
+			let category = w.fields.related[0];
 			if (category) {
-				let article = _.last(_.sortBy(category.fields.articles, a => moment(a.sys.updatedAt).unix()));
+				let article = category.fields.articles.sort(function(a,b){
+					return moment(b.sys.updatedAt).unix() - moment(a.sys.updatedAt).unix();
+				  }).pop();
 				return this.renderArticle(article, category);
 			}
 		} else if (w.fields.type === "First Article of Category") {
-			let category = _.first(w.fields.related);
+			let category = w.fields.related[0];
 			if (category) {
-				let article = category.fields.overview || _.first(category.fields.articles);
+				let article = category.fields.overview || category.fields.articles[0];
 				return this.renderArticle(article, category, true, w.fields.showFullArticle);
 			}
 		} else if (w.fields.type === "Top Categories" & w.fields.title !== "Lo más nuevo") { //TODO: IMPROVE CONDITION - TITLE SHOULD NOT BE A CONDITION

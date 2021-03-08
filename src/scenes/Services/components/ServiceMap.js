@@ -5,6 +5,7 @@ import ReactDOMServer from "react-dom/server";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 // local
 import routes from '../routes';
@@ -46,7 +47,7 @@ class ServiceIcon extends React.Component {
 
 		return type ? (
 			<div className="Icon" key={`${s.id}-${idx}`} style={{ 'fontSize': '18px' }}>
-				<i className={iconWithPrefix(type.icon)} style={categoryStyle(type.color)} />
+				<i className={type.icon} style={categoryStyle(type.color)} />
 			</div>
 		) : <div />;
 	}
@@ -98,7 +99,7 @@ class ServiceItem extends React.Component {
 					</h2>
 				</div>
 
-				<i className="material-icons arrow" id="goToServiceIcon" />
+				<FontAwesomeIcon icon="angle-right" className="arrow" />
 			</div>
 		);
 	}

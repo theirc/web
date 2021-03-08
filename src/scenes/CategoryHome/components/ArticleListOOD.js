@@ -1,6 +1,7 @@
 // libs
 import React from "react";
 import { translate } from "react-i18next";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // local
 import "./ArticleListOOD.css";
@@ -39,7 +40,7 @@ class ArticleListOOD extends React.Component {
 
 								<s className="Read-More">
 									<a href="#/">Read More</a>
-									<i className="material-icons">arrow_right</i>
+									<FontAwesomeIcon icon="arrow-right" />
 								</s>
 							</div>,
 						];

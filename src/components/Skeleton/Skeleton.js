@@ -1,6 +1,5 @@
 // libs
 import React from "react";
-import _ from "lodash";
 import { connect } from "react-redux";
 import { I18nextProvider } from "react-i18next";
 import { push } from "react-router-redux";
@@ -80,7 +79,7 @@ class Skeleton extends React.Component {
 		} = this.props;
 		const { hideShareButtons, homePage } = this.props;
 		const { errorMessage } = this.state;
-		const showDepartments = _.has(country, 'fields.slug') && instance.countries[country.fields.slug] && instance.countries[country.fields.slug].switches.showDepartments;
+		const showDepartments = !!(country && country.fields && country.fields.slug)  && instance.countries[country.fields.slug] && instance.countries[country.fields.slug].switches.showDepartments;
 		let notifications = [];
 
 		const notificationType = n => {

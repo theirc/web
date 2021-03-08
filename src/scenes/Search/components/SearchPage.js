@@ -66,7 +66,7 @@ class SearchPage extends React.Component {
 		return [
 			<li key={service.id} className="Item" onClick={() => onNavigate(`/${country.fields.slug}/services/${service.id}?language=${language}`)}>
 				<div className="Icon" key={`${service.id}-0`}>
-					<i className={iconWithPrefix(mainType.icon)} style={categoryStyle(mainType.color)} />
+					<i className={mainType.icon} style={categoryStyle(mainType.color)} />
 				</div>
 
 				<div className="Info">
@@ -81,13 +81,13 @@ class SearchPage extends React.Component {
 						<div className="Icons">
 							{subTypes.map((t, idx) => (
 								<div className="Icon" key={`${service.id}-${idx}`}>
-									<i className={iconWithPrefix(t.icon)} style={categoryStyle(t.color)} />
+									<i className={t.icon} style={categoryStyle(t.color)} />
 								</div>
 							))}
 						</div>
 					</h2>
 				</div>
-				<i className="material-icons" />
+				{/* <i className="material-icons" /> */}
 			</li>,
 		];
 	}

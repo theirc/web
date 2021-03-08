@@ -3,7 +3,6 @@ import React from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
-import _ from "lodash";
 
 // local
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
@@ -85,7 +84,7 @@ class ServiceList extends React.Component {
 		return [
 			<li key={s.id} className="Item" onClick={() => goToService(country, language, s.id)}>
 				<div className="Icon" key={`${s.id}-0`}>
-					<i className={iconWithPrefix(mainType.icon)} style={categoryStyle(mainType.color)} />
+					<i className={mainType.icon} style={categoryStyle(mainType.color)} />
 				</div>
 
 				<div className="Info">
@@ -100,7 +99,7 @@ class ServiceList extends React.Component {
 						<div className="Icons">
 							{subTypes.map((t, idx) => (
 								<div className="Icon" key={`${s.id}-${idx}`}>
-									<i className={iconWithPrefix(t.icon)} style={categoryStyle(t.color)} />
+									<i className={t.icon} style={categoryStyle(t.color)} />
 								</div>
 							))}
 						</div>

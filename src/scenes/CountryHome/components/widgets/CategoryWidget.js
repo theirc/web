@@ -1,11 +1,11 @@
 // libs
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
-import _ from "lodash";
 import { translate } from "react-i18next";
 
 // local
 import "./CategoryWidget.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const NS = { ns: 'CountryHome' };
 
@@ -21,7 +21,7 @@ class CategoryWidget extends Component {
 	render() {
 		const { country, t, c } = this.props;
 		let html = md.render(c.fields.description);
-		let article = c.fields.overview || _.first(c.fields.articles);
+		let article = c.fields.overview || c.fields.articles[0];
 
 		return (
 			<div className="Category CategoryWidget">
@@ -29,7 +29,7 @@ class CategoryWidget extends Component {
 				<p dangerouslySetInnerHTML={{ __html: html }} />
 				<s className='Read-More'>
 					<Link to={`/${country.fields.slug}/${c.fields.slug}/${article.fields.slug}?language=en`}>{t("global.Read More", NS)}</Link>
-					<i className="material-icons">arrow_right</i>
+					<FontAwesomeIcon icon="arrow-right" />
 				</s>
 			</div>
 		)

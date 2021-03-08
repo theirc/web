@@ -36,7 +36,7 @@
       display: flex;
       justify-content: center;
       padding: 8px;
-      i {
+      svg {
         color: #3b5998;
         font-size: 3.5rem;
       }
@@ -72,7 +72,7 @@
       margin-bottom: 16px;
       .icon-background {
         width: 50%;
-        i {
+        svg {
           font-size: 2rem;
         }
       }

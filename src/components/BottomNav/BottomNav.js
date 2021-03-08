@@ -1,8 +1,13 @@
 // libs
 import React, { Component } from "react";
-import { Paper } from "material-ui";
 import PropTypes from "prop-types";
 import { translate } from "react-i18next";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faFileAlt,
+  faMapMarkerAlt,
+  faHome,
+} from "@fortawesome/pro-light-svg-icons";
 
 // local
 import i18nHelpers from "../../helpers/i18n";
@@ -43,17 +48,18 @@ class BottomNav extends Component {
       position: "fixed",
       bottom: 0,
       width: "100%",
+      background: "white"
     };
 
     return (
-      <Paper style={paperStyle} className="BottomNav">
+      <div style={paperStyle} className="BottomNav">
         <div className="general-container">
           <span
             className={`button-container ${this.props.index === 0 ? "Selected" : ""}`}
             color="contrast"
             onClick={onGoHome}
           >
-            <i className="fa fa-home" />
+            <FontAwesomeIcon icon={faHome} />
             <span className="BottomButton">{t("menu.Home", NS)}</span>
           </span>
 
@@ -63,7 +69,7 @@ class BottomNav extends Component {
               color="contrast"
               onClick={onGoToCategories}
             >
-              <i className="fa fa-file" />
+              <FontAwesomeIcon icon={faFileAlt} />
               <span className="BottomButton">{t("menu.Articles", NS)}</span>
             </span>
           )}
@@ -74,12 +80,12 @@ class BottomNav extends Component {
               color="contrast"
               onClick={onGoToServices}
             >
-              <i className="fa fa-map-marker"></i>
+              <FontAwesomeIcon icon={faMapMarkerAlt} />
               <span className="BottomButton">{t("menu.Services", NS)}</span>
             </span>
           )}
         </div>
-      </Paper>
+      </div>
     );
   }
 }

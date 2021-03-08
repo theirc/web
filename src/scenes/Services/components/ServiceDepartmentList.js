@@ -1,6 +1,5 @@
 // libs
 import React from "react";
-import _ from "lodash";
 import { translate } from "react-i18next";
 
 // local
@@ -59,9 +58,7 @@ class ServiceDepartmentList extends React.Component {
 			);
 		}
 
-		let sortedRegions = _.sortBy(allRegions || [], c => {
-			return c.name;
-		});
+		let sortedRegions = allRegions.sort((a, b) => a.name.localeCompare(b.name));
 
 		return [
 			<HeaderBar key={"Header"} title={t("services.Locations", NS).toUpperCase()} />,

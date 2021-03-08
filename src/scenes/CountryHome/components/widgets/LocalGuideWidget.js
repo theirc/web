@@ -2,7 +2,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { translate } from "react-i18next";
-import _ from "lodash";
 
 // local
 import "./LocalGuideWidget.css";
@@ -60,13 +59,14 @@ class LocalGuideWidget extends Component {
         <div className="Container">
           {guideItemsRendered.map((c, i) => (
             <div
-              key={c.sys.id}
-              className={`LocalGuideItem item-${i} ${
-                lastItem && i === guideItems.length - 1 ? "last-item" : ""
-              } ${guideItems.length !== 2 && i === 0 ? "first-item" : ""}`}
+            key={c.sys.id}
+            className={`LocalGuideItem item-${i} ${
+              lastItem && i === guideItems.length - 1 ? "last-item" : ""
+            } ${guideItems.length !== 2 && i === 0 ? "first-item" : ""}`}
             >
               <div className="Overlay">
-                {_.has(c, "fields.backgroundImage.fields.file.url") && (
+                {c.fields && c.fields.backgroundImage && c.fields.backgroundImage.fields 
+                && c.fields.backgroundImage.fields.file && c.fields.backgroundImage.fields.file.url && (
                   <img src={c.fields.backgroundImage.fields.file.url} />
                 )}
                 <div className="text-container">

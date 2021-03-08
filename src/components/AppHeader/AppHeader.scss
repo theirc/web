@@ -173,16 +173,16 @@ Less me
       }
     }
 
-    i {
+    svg {
       font-size: 24px;
     }
     &.rtl {
-      i {
+      svg {
         margin-left: 10px;
       }
     }
     &.ltr {
-      i {
+      svg {
         margin-right: 10px;
       }
     }
@@ -612,13 +612,13 @@ $color: #ffffff;
   cursor: pointer;
   opacity: 0.6;
   @media (min-width: $desktopBreakpoint) {
-    width: 32px !important;
-    height: 32px !important;
+    width: 26px !important;
+    height: 26px !important;
     font-size: 27px !important;
   }
   @media (max-width: $desktopBreakpoint) {
-    width: 20px!important;
-    height: 20px!important;
+    width: 16px!important;
+    height: 16px!important;
     font-size: 20px!important;
   }
   padding: 2px;
@@ -711,4 +711,13 @@ $color: #ffffff;
 
 .fa-times:before {
   margin-left: 3px;
+}
+
+.search-bar-inner-icon {
+  position: absolute;
+}
+
+.close-alert {
+  height: 24px;
+  width: 24px!important;
 }

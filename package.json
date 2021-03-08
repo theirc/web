@@ -3,6 +3,13 @@
 	"version": "2.1.0-2020-02-04",
 	"private": true,
 	"dependencies": {
+		"@fortawesome/fontawesome-pro": "^5.15.2",
+		"@fortawesome/fontawesome-svg-core": "^1.2.34",
+		"@fortawesome/free-brands-svg-icons": "^5.15.2",
+		"@fortawesome/pro-light-svg-icons": "^5.15.2",
+		"@fortawesome/pro-regular-svg-icons": "^5.15.2",
+		"@fortawesome/pro-solid-svg-icons": "^5.15.2",
+		"@fortawesome/react-fontawesome": "^0.1.14",
 		"@sendgrid/mail": "^6.5.1",
 		"@turf/turf": "^4.7.3",
 		"animated": "^0.2.0",
@@ -64,7 +71,6 @@
 		"jest": "20.0.4",
 		"js-htmlencode": "^0.3.0",
 		"less": "^2.7.2",
-		"lodash": "^4.17.20",
 		"material-ui": "1.0.0-beta.13",
 		"material-ui-icons": "1.0.0-beta.14",
 		"moment": "^2.29.1",
@@ -181,5 +187,6 @@
 		"assets": [
 			"./assets/fonts/"
 		]
-	}
+	},
+	"devDependencies": {}
 }
