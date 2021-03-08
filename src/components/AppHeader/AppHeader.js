@@ -12,6 +12,7 @@ import {
 import Headroom from "react-headrooms";
 import PropTypes from "prop-types";
 import { translate, Interpolate } from "react-i18next";
+import 'lazysizes'
 
 // local
 import Alert from "../Alert/Alert";
@@ -180,8 +181,8 @@ class AppHeader extends Component {
             >
               <img
                 onClick={onGoHome}
-                src={!(country && language) ? logo : logoBlack}
-                className="app-bar-logo"
+                data-src={!(country && language) ? logo : logoBlack}
+                className="app-bar-logo lazyload"
                 alt="bar-logo"
               />
             </div>
@@ -240,8 +241,9 @@ class AppHeader extends Component {
                         onClick={onChangeCountry || noop}
                       >
                         <img
-                          src={`/images/flags/${country.fields.slug}.png`}
-                          alt=""
+                          data-src={`/images/flags/${country.fields.slug}.png`}
+                          alt="country-flag"
+                          className="lazyload"
                         />
                       </span>
                     )}

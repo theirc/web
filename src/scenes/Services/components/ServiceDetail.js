@@ -6,6 +6,7 @@ import { push } from "react-router-redux";
 import * as clipboard from "clipboard-polyfill";
 import { Helmet } from "react-helmet";
 import PropTypes from "prop-types";
+import 'lazysizes'
 
 // local
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
@@ -286,7 +287,7 @@ class ServiceDetail extends React.Component {
 
 					{service.image &&
 						<div className="hero">
-							<div className="HeroImageContainer"><img src={service.image} alt={service.name} /></div>
+							<div className="HeroImageContainer"><img data-src={service.image} alt={service.name} className="lazyload" /></div>
 						</div>
 					}
 

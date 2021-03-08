@@ -8,6 +8,7 @@ import FacebookPlayer from "react-facebook-player";
 import YouTube from "react-youtube";
 import InstagramEmbed from 'react-instagram-embed';
 import { translate } from "react-i18next";
+import 'lazysizes'
 
 // local
 import { history } from "../../../shared/redux/store";
@@ -200,7 +201,7 @@ class ArticleDetailBody extends Component {
 				{hero && hero.fields && hero.fields.file &&
 					<div>
 						<div className="hero">
-							<img src={hero.fields.file.url} alt="" />
+							<img data-src={hero.fields.file.url} alt="hero-image" className="lazyload" />
 						</div>
 						{hero.fields.description && <credit>{hero.fields.description}</credit>}
 					</div>

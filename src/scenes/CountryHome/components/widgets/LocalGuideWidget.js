@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { translate } from "react-i18next";
+import 'lazysizes'
 
 // local
 import "./LocalGuideWidget.css";
@@ -67,7 +68,7 @@ class LocalGuideWidget extends Component {
               <div className="Overlay">
                 {c.fields && c.fields.backgroundImage && c.fields.backgroundImage.fields 
                 && c.fields.backgroundImage.fields.file && c.fields.backgroundImage.fields.file.url && (
-                  <img src={c.fields.backgroundImage.fields.file.url} />
+                  <img data-src={c.fields.backgroundImage.fields.file.url} alt="local-guide-hero-image" className="lazyload" />
                 )}
                 <div className="text-container">
                   <h1 className="title">{c.fields.title}</h1>

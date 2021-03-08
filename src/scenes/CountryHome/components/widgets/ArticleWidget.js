@@ -7,6 +7,7 @@ import YouTube from "react-youtube";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebookF, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
+import 'lazysizes'
 
 // local
 import instance from "../../../../backend/settings";
@@ -102,9 +103,9 @@ class ArticleWidget extends Component {
         {hero && hero.fields && hero.fields.file && showHero && (
           <div className="hero">
             <img
-              className="heroImage"
-              src={article.fields.hero.fields.file.url}
-              alt=""
+              className="heroImage lazyload"
+              data-src={article.fields.hero.fields.file.url}
+              alt="hero-image"
             />
           </div>
         )}

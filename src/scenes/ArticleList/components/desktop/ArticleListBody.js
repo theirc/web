@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { translate } from "react-i18next";
 import moment from "moment";
+import 'lazysizes'
 
 // local
 import HeaderBar from "../../../../components/HeaderBar/HeaderBar";
@@ -140,7 +141,7 @@ class ArticleListBody extends Component {
             to={`/${country.fields.slug}/${c.fields.slug}/${c.fields.overview.fields.slug}?language=${language}`}
           >
             <div className="img-viewport">
-              <img src={image} alt="" />
+              <img data-src={image} alt="category-hero-image" className="lazyload" />
             </div>
 
             <div className="text">
@@ -186,7 +187,7 @@ class ArticleListBody extends Component {
               to={`/${country.fields.slug}/${c.fields.slug}/${a.fields.slug}?language=${language}`}
             >
               <div className="img-viewport">
-                <img src={image} alt="" />
+                <img data-src={image} alt="article-hero-image" className="lazyload" />
               </div>
 
               <div className="text">
