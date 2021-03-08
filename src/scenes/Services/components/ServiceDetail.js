@@ -1,7 +1,6 @@
 // libs
 import React from "react";
 import { translate } from "react-i18next";
-import _ from "lodash";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
 import * as clipboard from "clipboard-polyfill";
@@ -207,7 +206,7 @@ class ServiceDetail extends React.Component {
 	render() {
 		const { service, relatedServices } = this.state;
 		const { country, goToService, language, t, instance } = this.props;
-		const countryCode = _.has(country, 'fields.slug') && instance.countries[country.fields.slug].countryCode;
+		const countryCode = country.fields && country.fields.slug && instance.countries[country.fields.slug].countryCode;
 		const weekDays = [
 			{ id: 1, name: "Monday" },
 			{ id: 2, name: "Tuesday" },
@@ -268,10 +267,9 @@ class ServiceDetail extends React.Component {
 		const providerT = service.provider.data_i18n.filter(x => x.language === language)[0]
 		const providerInfo = (providerT && providerT.name) ? providerT : service.provider;
 
-		let sortedContactInformation = _.sortBy(service.serviceContactInformations || [], ci => {
-			return ci.index;
-		});
-		let subtitle = (service.serviceCategories && service.serviceCategories.length > 0) ? _.first(service.serviceCategories).name : '';
+		let sortedContactInformation = service.serviceContactInformations
+
+		let subtitle = (service.serviceCategories && service.serviceCategories.length > 0) ? service.serviceCategories[0].name : '';
 		let phoneNumberWithCode = countryCode + service.phone_number;
 		const url = encodeURIComponent(window.location.href);
 		

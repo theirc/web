@@ -8,7 +8,6 @@ import FacebookPlayer from "react-facebook-player";
 import YouTube from "react-youtube";
 import InstagramEmbed from 'react-instagram-embed';
 import { translate } from "react-i18next";
-import _ from 'lodash';
 
 // local
 import { history } from "../../../shared/redux/store";
@@ -186,7 +185,7 @@ class ArticleDetailBody extends Component {
 		let html = md.render(content || lead);
 		html = html.replace(/(\+[0-9]{9,14}|00[0-9]{9,15})/g, `<a class="tel" href="tel:$1">$1</a>`);
 
-		let country = _.get(article, 'fields.country.fields.slug');
+		let country = article.fields.country.fields.slug;
 
 		let categorySlug = document.location.pathname.split('/')[2];
 		let categoryIcon = article.fields.category.fields.iconClass.replace('fa fa-','');
@@ -198,7 +197,7 @@ class ArticleDetailBody extends Component {
 
 				<HeaderBar subtitle={(category.fields.articles || []).length > 1 && `${category.fields.name}:`} title={title} />
 
-				{_.has(hero, 'fields.file') &&
+				{hero && hero.fields && hero.fields.file &&
 					<div>
 						<div className="hero">
 							<img src={hero.fields.file.url} alt="" />
@@ -209,14 +208,14 @@ class ArticleDetailBody extends Component {
 
 				<div className='ActionsBar'>
 					<div className='left'>
-						{_.has(article, 'fields.category.fields') &&
+						{article && article.fields && article.fields.category && article.fields.category.fields && 
 							<div className='btn' onClick={() => country ? history.push(`/${country}/${categorySlug}`) : history.goBack()}>
 								<FontAwesomeIcon icon="chevron-left" className="arrow-left" />
 								<FontAwesomeIcon icon={categoryIcon} />
 								<span>{article.fields.category.fields.name}</span>
 							</div>
 						}
-						{!_.has(article, 'fields.category.fields') && <span style={{ visibility: 'hidden' }}></span>}
+						{!(article && article.fields && article.fields.category && article.fields.category.fields) && <span style={{ visibility: 'hidden' }}></span>}
 					</div>
 
 					<div className="social">

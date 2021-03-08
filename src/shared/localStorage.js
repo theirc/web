@@ -1,5 +1,3 @@
-import _ from "lodash";
-
 function lsTest() {
 	var test = "test";
 	try {
@@ -19,7 +17,7 @@ export default function getLocalStorage() {
 					return target[name];
 				},
 				set: function (target, name, value) {
-					target[name] = _.isObjectLike(value) ? JSON.stringify(value) : _.toString(value);
+					target[name] = (typeof value === 'object' && value !== null) ? JSON.stringify(value) : String(value);
 					return target[name];
 				},
 			};

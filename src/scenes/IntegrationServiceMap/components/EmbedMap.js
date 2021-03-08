@@ -39,7 +39,7 @@ class ServiceIcon extends React.Component {
 		return type ? (
 			<div className="Icon" key={`${service.id}-${idx}`}>
         
-				<i className={iconWithPrefix(type.icon)} style={categoryStyle(type.color)} />
+				<i className={type.icon} style={categoryStyle(type.color)} />
 			</div>
 		) : (
 				<div />
@@ -62,7 +62,7 @@ class ServiceItem extends React.Component {
 				<div className="Info">
 					<div className="Item-content title">
 						<a href={`${zdUrl+service.zendeskId}`} target="parent"><h1>{service.data_i18n[0].name}</h1></a>
-						<i className="material-icons" id="goToServiceIcon" />
+						{/* <i className="material-icons" id="goToServiceIcon" /> */}
 					</div>
 
 					<h2 className="Item-content">{service.provider && service.provider.data_i18n[0].name}{" "}</h2>

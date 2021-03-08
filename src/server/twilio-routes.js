@@ -1,5 +1,4 @@
 const parseLanguage = require('./common.js').parseLanguage;
-const _ = require("lodash");
 const conf = require("../backend/config");
 const cmsApi = require("../backend/cmsApi").default;
 
@@ -32,11 +31,10 @@ module.exports = function (app) {
 	}
 	app.get("/get-phone-tree-home/:slug", (req, res, err) => {
 		const selectedLanguage = parseLanguage(req);
-		let configKey = _.first(
+		let configKey = 
 			Object.keys(conf).filter(k => {
 				return req.headers.host.indexOf(k) > -1;
-			})
-		);
+			})[0];
 		const {
 			slug,
 		} = req.params;
@@ -63,11 +61,10 @@ module.exports = function (app) {
 	});
 	app.get("/get-phone-tree-moderator/:slug", (req, res, err) => {
 		const selectedLanguage = parseLanguage(req);
-		let configKey = _.first(
+		let configKey = 
 			Object.keys(conf).filter(k => {
 				return req.headers.host.indexOf(k) > -1;
-			})
-		);
+			})[0];
 		const {
 			slug,
 		} = req.params;
@@ -101,11 +98,10 @@ module.exports = function (app) {
 		} = req.params;
 
 		const selectedLanguage = parseLanguage(req);
-		let configKey = _.first(
+		let configKey = 
 			Object.keys(conf).filter(k => {
 				return req.headers.host.indexOf(k) > -1;
-			})
-		);
+			})[0];
 
 		languageDictionary = Object.assign(languageDictionary, conf[configKey]);
 		let cms = cmsApi(conf[configKey], languageDictionary);
@@ -130,11 +126,10 @@ module.exports = function (app) {
 	})
 	app.get("/get-article/:slug/:category/:article", (req, res, err) => {
 		const selectedLanguage = parseLanguage(req);
-		let configKey = _.first(
+		let configKey =
 			Object.keys(conf).filter(k => {
 				return req.headers.host.indexOf(k) > -1;
-			})
-		);
+			})[0];
 		const {
 			slug,
 			category,

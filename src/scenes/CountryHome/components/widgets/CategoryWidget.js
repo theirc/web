@@ -1,7 +1,6 @@
 // libs
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
-import _ from "lodash";
 import { translate } from "react-i18next";
 
 // local
@@ -22,7 +21,7 @@ class CategoryWidget extends Component {
 	render() {
 		const { country, t, c } = this.props;
 		let html = md.render(c.fields.description);
-		let article = c.fields.overview || _.first(c.fields.articles);
+		let article = c.fields.overview || c.fields.articles[0];
 
 		return (
 			<div className="Category CategoryWidget">

@@ -1,7 +1,6 @@
 // libs
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import _ from "lodash";
 import { translate } from "react-i18next";
 
 // local
@@ -13,7 +12,7 @@ const NS = { ns: "CountryHome" };
 class TopCategoriesWidget extends Component {
   render() {
     let articleFunc = (category) =>
-      category.fields.overview || _.first(category.fields.articles);
+      category.fields.overview || category.fields.articles[0];
     const { country, t, categories, language } = this.props;
     const langRTL = ["ur", "fa", "ar"].indexOf(language) > -1;
 

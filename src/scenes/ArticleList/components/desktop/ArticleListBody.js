@@ -1,9 +1,8 @@
 // libs
 import React, { Component } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { translate } from "react-i18next";
-import moment from 'moment';
-import _ from 'lodash';
+import moment from "moment";
 
 // local
 import HeaderBar from "../../../../components/HeaderBar/HeaderBar";
@@ -11,259 +10,444 @@ import "../../../../components/ActionsBar/ActionsBar.css";
 import "./ArticleListBody.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const NS = { ns: 'ArticleList' };
+const NS = { ns: "ArticleList" };
 
 /**
  * @class
- * @description 
+ * @description
  */
 class ArticleListBody extends Component {
-	state = {
-		selectedCategory: 0,
-		selectedCategoryClassName: 'material-icons',
-		selectedCategoryName: '',
-		selectedIconText: 'assignment',
-		showCategoriesDD: false
-	};
+  state = {
+    selectedCategory: 0,
+    selectedCategoryClassName: "material-icons",
+    selectedCategoryName: "",
+    selectedIconText: "assignment",
+    showCategoriesDD: false,
+  };
 
-	componentWillMount() {
-		let category = decodeURIComponent(document.location.pathname.split('/')[2]);
-		category !== 'categories' && !this.props.categories.filter(c => _.get(c, 'fields.slug') === category).length && this.props.history.push('/404');
-	}
-	
-	componentDidMount() {
-		const { categories } = this.props;
-		let category = document.location.pathname.split('/')[2];
-		category !== 'categories' && this.clk(category, true);
-		
-		let selectedCategory = category !== 'categories' && categories.filter(c => _.get(c, 'fields.slug') === decodeURIComponent(category));
-		
-		selectedCategory && selectedCategory.length && this.setState({
-			selectedCategory: selectedCategory[0].sys.id,
-			selectedCategoryName: selectedCategory[0].fields.name,
-			selectedCategoryClassName: selectedCategory[0].fields.iconClass || 'material-icons',
-			selectedIconText: selectedCategory[0].fields.iconText || ((!selectedCategory[0].fields.iconClass || selectedCategory[0].fields.iconClass === "material-icons") && "add")
-		});
-	}
+  componentWillMount() {
+    let category = decodeURIComponent(document.location.pathname.split("/")[2]);
+    category !== "categories" &&
+      !this.props.categories.filter(
+        (c) => c.fields && c.fields.slug === category
+      ).length &&
+      this.props.history.push("/404");
+  }
 
-	clk(tab, forceSelect=false) { ///Needs refactor
-		//Add selected class if checked
-		let selected = document.getElementById("tab-" + decodeURIComponent(tab));
-		if(!selected) return;
+  componentDidMount() {
+    const { categories } = this.props;
+    let category = document.location.pathname.split("/")[2];
+    category !== "categories" && this.clk(category, true);
 
-		let buttonTab = selected.parentElement;
+    let selectedCategory =
+      category !== "categories" &&
+      categories.filter(
+        (c) => c.fields && c.fields.slug === decodeURIComponent(category)
+      );
 
-		if (selected.checked || forceSelect) {
-			forceSelect && (selected.checked = true);
-			buttonTab.classList.add("selected");
-		} else {
-			buttonTab.classList.remove("selected");
-		}
-		
-		//Uncheck any other checked input
-		let chk = document.getElementsByClassName("tabs");
-		for (let i = 0; i < chk.length; i++) {
-			if (chk[i].id !== "tab-" + decodeURIComponent(tab)) {
-				chk[i].checked = false;
-				chk[i].parentElement.classList.remove("selected");
-			}
-		}
-	}
+    selectedCategory &&
+      selectedCategory.length &&
+      this.setState({
+        selectedCategory: selectedCategory[0].sys.id,
+        selectedCategoryName: selectedCategory[0].fields.name,
+        selectedCategoryClassName:
+          selectedCategory[0].fields.iconClass || "material-icons",
+        selectedIconText:
+          selectedCategory[0].fields.iconText ||
+          ((!selectedCategory[0].fields.iconClass ||
+            selectedCategory[0].fields.iconClass === "material-icons") &&
+            "add"),
+      });
+  }
 
+  clk(tab, forceSelect = false) {
+    ///Needs refactor
+    //Add selected class if checked
+    let selected = document.getElementById("tab-" + decodeURIComponent(tab));
+    if (!selected) return;
 
-	onChange = e => {
-		const {history, country} = this.props;
-		this.setState({ selectedCategory: e.sys.id, selectedIconText: e.fields.iconText, selectedCategoryClassName: e.fields.iconClass, selectedCategoryName: e.fields.name, showCategoriesDD: false });
-		e.sys.id ? history.push(`/${country.fields.slug}/${e.fields.slug}`) : history.push(`/${country.fields.slug}/categories`);
-	}
+    let buttonTab = selected.parentElement;
 
-	toggleDD = () => this.setState({ showCategoriesDD: !this.state.showCategoriesDD });
+    if (selected.checked || forceSelect) {
+      forceSelect && (selected.checked = true);
+      buttonTab.classList.add("selected");
+    } else {
+      buttonTab.classList.remove("selected");
+    }
 
-	handleWindowSizeChange = () => {
-		this.setState({ width: window.innerWidth });
-	};
+    //Uncheck any other checked input
+    let chk = document.getElementsByClassName("tabs");
+    for (let i = 0; i < chk.length; i++) {
+      if (chk[i].id !== "tab-" + decodeURIComponent(tab)) {
+        chk[i].checked = false;
+        chk[i].parentElement.classList.remove("selected");
+      }
+    }
+  }
 
-	renderTiles(c) {
-		let { country, language } = this.props;
+  onChange = (e) => {
+    const { history, country } = this.props;
+    console.log("DDD ", e);
+    this.setState({
+      selectedCategory: e.sys.id,
+      selectedIconText: e.fields.iconText,
+      selectedCategoryClassName: e.fields.iconClass,
+      selectedCategoryName: e.fields.name,
+      showCategoriesDD: false,
+    });
+    e.sys.id
+      ? history.push(`/${country.fields.slug}/${e.fields.slug}`)
+      : history.push(`/${country.fields.slug}/categories`);
+  };
 
-		if(!c.fields) { console.log('c.fields is null', c); return null;}
+  toggleDD = () =>
+    this.setState({ showCategoriesDD: !this.state.showCategoriesDD });
 
-		if (!c.fields.categories && !c.fields.articles) {
-			let image = '/placeholder.png';
-			if (c.fields.overview) {
-				_.has(c, 'fields.overview.fields.hero.fields.file') && (image = c.fields.overview.fields.hero.fields.file.url);
-				_.has(c, 'fields.overview.fields.gallery.fields.file') && (image = c.fields.overview.fields.gallery.fields.file.url);
-			}
+  handleWindowSizeChange = () => {
+    this.setState({ width: window.innerWidth });
+  };
 
-			return (
-				<li key={c.sys.id} className='tile'>
-					<Link to={`/${country.fields.slug}/${c.fields.slug}/${c.fields.overview.fields.slug}?language=${language}`}>
-						<div className='img-viewport'>
-							<img src={image} alt='' />
-						</div>
+  renderTiles(c) {
+    let { country, language } = this.props;
 
-						<div className='text'>
-							<div className='category'>
-								<i className={c.fields.iconClass || "material-icons"}>{c.fields.iconText || ((!c.fields.iconClass || c.fields.iconClass === "material-icons") && "add")}</i>
-								<span>{c.fields.name}</span>
-							</div>
-							
-							{c.fields && <h2>{c.fields.name}</h2>}
-							<span className='author'>{moment(c.sys.updatedAt).format('YYYY.MM.DD')}</span>
-						</div>
-					</Link>
-				</li>
-			);
-		}
+    if (!c.fields) {
+      console.log("c.fields is null", c);
+      return null;
+    }
 
-		if (c.fields.articles) {
-			return c.fields.articles.map(a => {
+    if (!c.fields.categories && !c.fields.articles) {
+      let image = "/placeholder.png";
+      if (c.fields.overview) {
+        console.log("EEE ", c.fields.asd.asd.asd !== undefined);
+        c.fields &&
+          c.fields.overview &&
+          c.fields.overview.fields &&
+          c.fields.overview.fields.hero &&
+          c.fields.overview.fields.hero.fields &&
+          c.fields.overview.fields.hero.fields.file &&
+          (image = c.fields.overview.fields.hero.fields.file.url);
+        c.fields.overview &&
+          c.fields.overview.fields &&
+          c.fields.overview.fields.gallery &&
+          c.fields.overview.fields.gallery.fields &&
+          c.fields.overview.fields.gallery.fields.file &&
+          (image = c.fields.overview.fields.gallery.fields.file.url);
+      }
 
-				if(!a.fields) return null;
+      return (
+        <li key={c.sys.id} className="tile">
+          <Link
+            to={`/${country.fields.slug}/${c.fields.slug}/${c.fields.overview.fields.slug}?language=${language}`}
+          >
+            <div className="img-viewport">
+              <img src={image} alt="" />
+            </div>
 
-				let image = '/placeholder.png';
-				_.has(a, 'fields.hero.fields.file') && (image = a.fields.hero.fields.file.url);
-				_.has(a, 'fields.gallery.fields.file') && (image = a.fields.gallery.fields.file.url);
+            <div className="text">
+              <div className="category">
+                <i className={c.fields.iconClass || "material-icons"}>
+                  {c.fields.iconText ||
+                    ((!c.fields.iconClass ||
+                      c.fields.iconClass === "material-icons") &&
+                      "add")}
+                </i>
+                <span>{c.fields.name}</span>
+              </div>
 
-				return (
-					<li key={a.sys.id} className='tile'>
-						<Link to={`/${country.fields.slug}/${c.fields.slug}/${a.fields.slug}?language=${language}`}>
-							<div className='img-viewport'>
-								<img src={image} alt='' />
-							</div>
+              {c.fields && <h2>{c.fields.name}</h2>}
+              <span className="author">
+                {moment(c.sys.updatedAt).format("YYYY.MM.DD")}
+              </span>
+            </div>
+          </Link>
+        </li>
+      );
+    }
 
-							<div className='text'>
-								{a.fields.category &&
-								<div className='category'>
-									<i className={a.fields.category.fields.iconClass || "material-icons"}>{a.fields.category.fields.iconText || ((!a.fields.category.fields.iconClass || a.fields.category.fields.iconClass === "material-icons") && "add")}</i>
-									<span>{a.fields.category.fields.name}</span>
-								</div>}
+    if (c.fields.articles) {
+      return c.fields.articles.map((a) => {
+        if (!a.fields) return null;
 
-								<h2>{a.fields.title}</h2>
-								<span className='author'>{moment(a.sys.updatedAt).format('YYYY.MM.DD')}</span>
-							</div>
-						</Link>
-					</li>
-				)
-			});
-		}
-	}
+        let image = "/placeholder.png";
+        a.fields &&
+          a.fields.hero &&
+          a.fields.hero.fields &&
+          a.fields.hero.fields.file &&
+          (image = a.fields.hero.fields.file.url);
+        a.fields &&
+          a.fields.gallery &&
+          a.fields.gallery.fields &&
+          a.fields.gallery.fields.file &&
+          (image = a.fields.gallery.fields.file.url);
 
-	render() {
-		const { country, categories, onNavigate, t, language } = this.props;
-		const showToggle = c => {
-			return (c.fields.subCategories && c.fields.subCategories.length) || (c.fields.articles && c.fields.articles.length && c.fields.type !== "News" && !c.fields.overview);
-		};
-		let showCategory = c => c && c.fields && !c.fields.hide && c.fields.slug && (c.fields.overview || c.fields.articles);
-		const overviewOrFirst = c => c.fields.overview || (c.fields.articles.length && c.fields.articles[0]);
+        return (
+          <li key={a.sys.id} className="tile">
+            <Link
+              to={`/${country.fields.slug}/${c.fields.slug}/${a.fields.slug}?language=${language}`}
+            >
+              <div className="img-viewport">
+                <img src={image} alt="" />
+              </div>
 
-		return (
-			<div className="ArticleListBody">
-				{/* TODO: Translate this */}
-				<HeaderBar title={t("header.Categories", NS).toUpperCase()} />
-				<div className='tiles-desktop'>
-					<div className='ActionsBar'>
-						<div className="left">
-							<div id='articles-list-dropdown' onClick={this.toggleDD}>
-								<div className='content'>
-									<i className={this.state.selectedCategoryClassName || 'material-icons'}>{this.state.selectedIconText || ((!this.state.selectedCategoryClassName || this.state.selectedCategoryClassName === "material-icons") && "add")}</i>
-									<span>{this.state.selectedCategoryName.length ? this.state.selectedCategoryName : t('actions.All Articles', NS)}</span>
-								</div>
-								<i className="material-icons">keyboard_arrow_down</i>
-							</div>
-						</div>
+              <div className="text">
+                {a.fields.category && (
+                  <div className="category">
+                    <i
+                      className={
+                        a.fields.category.fields
+                          ? a.fields.category.fields.iconClass
+                          : "material-icons"
+                      }
+                    >
+                      {a.fields.category.fields
+                        ? a.fields.category.fields.iconText
+                        : (a.fields.category.fields
+                            ? !a.fields.category.fields.iconClass
+                            : a.fields.category.fields.iconClass ===
+                              "material-icons") && "add"}
+                    </i>
+                    <span>
+                      {a.fields.category.fields
+                        ? a.fields.category.fields.name
+                        : ""}
+                    </span>
+                  </div>
+                )}
 
-						{this.state.showCategoriesDD &&
-							<ul id='articles-list-popover'>
-								<li value={0} className={!this.state.selectedCategory ? 'active' : ''} onClick={() => this.onChange({ sys: { id: 0 }, fields: { name: t('actions.All Articles', NS), iconClass: 'material-icons', iconText: 'assignment' } })}><i className='material-icons'>assignment</i><span>{t('actions.All Articles', NS)}</span></li>
-								{
-									(categories || []).filter(showCategory).map(e =>
-										<li key={e.sys.id} value={e.sys.id} className={e.sys.id === this.state.selectedCategory ? 'active' : ''} onClick={() => {this.onChange(e); this.clk(e.fields.slug, true)}}>
-											<i className={e.fields.iconClass || "material-icons"}>{e.fields.iconText || ((!e.fields.iconClass || e.fields.iconClass === "material-icons") && "add")}</i>
-											<span>{e.fields.name}</span>
-										</li>
-									)
-								}
-							</ul>
-						}
-					</div>
+                <h2>{a.fields.title}</h2>
+                <span className="author">
+                  {moment(a.sys.updatedAt).format("YYYY.MM.DD")}
+                </span>
+              </div>
+            </Link>
+          </li>
+        );
+      });
+    }
+  }
 
-					{this.state.showCategoriesDD && <div className="overlay" onClick={this.toggleDD}></div>}
+  render() {
+    const { country, categories, onNavigate, t, language } = this.props;
+    const showToggle = (c) => {
+      return (
+        (c.fields.subCategories && c.fields.subCategories.length) ||
+        (c.fields.articles &&
+          c.fields.articles.length &&
+          c.fields.type !== "News" &&
+          !c.fields.overview)
+      );
+    };
+    let showCategory = (c) =>
+      c &&
+      c.fields &&
+      !c.fields.hide &&
+      c.fields.slug &&
+      (c.fields.overview || c.fields.articles);
+    const overviewOrFirst = (c) =>
+      c.fields.overview || (c.fields.articles.length && c.fields.articles[0]);
 
-					<ul>
-						{(categories || []).filter(showCategory).map(c => {
-							if (c.sys.id === this.state.selectedCategory || !this.state.selectedCategory.length) {
-								return this.renderTiles(c);
-							}
-							return null;
-						})}
-					</ul>
-				</div>
-				<ul className='tiles-mobile'>
-					{(categories || []).filter(showCategory).map((c, i) => (
-						<li key={c.sys.id}>
-							{i > 0 && <hr className="line" />}
+    return (
+      <div className="ArticleListBody">
+        {/* TODO: Translate this */}
+        <HeaderBar title={t("header.Categories", NS).toUpperCase()} />
+        <div className="tiles-desktop">
+          <div className="ActionsBar">
+            <div className="left">
+              <div id="articles-list-dropdown" onClick={this.toggleDD}>
+                <div className="content">
+                  <i
+                    className={
+                      this.state.selectedCategoryClassName || "material-icons"
+                    }
+                  >
+                    {this.state.selectedIconText ||
+                      ((!this.state.selectedCategoryClassName ||
+                        this.state.selectedCategoryClassName ===
+                          "material-icons") &&
+                        "add")}
+                  </i>
+                  <span>
+                    {this.state.selectedCategoryName.length
+                      ? this.state.selectedCategoryName
+                      : t("actions.All Articles", NS)}
+                  </span>
+                </div>
+                <i className="material-icons">keyboard_arrow_down</i>
+              </div>
+            </div>
 
-							<input type="checkbox" className="tabs" name={"tab"} id={`tab-${c.fields.slug}`} onClick={() => {this.clk(c.fields.slug)}} />
+            {this.state.showCategoriesDD && (
+              <ul id="articles-list-popover">
+                <li
+                  value={0}
+                  className={!this.state.selectedCategory ? "active" : ""}
+                  onClick={() =>
+                    this.onChange({
+                      sys: { id: 0 },
+                      fields: {
+                        name: t("actions.All Articles", NS),
+                        iconClass: "material-icons",
+                        iconText: "assignment",
+                      },
+                    })
+                  }
+                >
+                  <i className="material-icons">assignment</i>
+                  <span>{t("actions.All Articles", NS)}</span>
+                </li>
+                {(categories || []).filter(showCategory).map((e) => (
+                  <li
+                    key={e.sys.id}
+                    value={e.sys.id}
+                    className={
+                      e.sys.id === this.state.selectedCategory ? "active" : ""
+                    }
+                    onClick={() => {
+                      this.onChange(e);
+                      this.clk(e.fields.slug, true);
+                    }}
+                  >
+                    <i className={e.fields.iconClass || "material-icons"}>
+                      {e.fields.iconText ||
+                        ((!e.fields.iconClass ||
+                          e.fields.iconClass === "material-icons") &&
+                          "add")}
+                    </i>
+                    <span>{e.fields.name}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
 
-							{showToggle(c) && [
-								<label key="a-1" htmlFor={`tab-${c.fields.slug}`} className="container">
-									<i className={c.fields.iconClass || "material-icons"}>{c.fields.iconText || ((!c.fields.iconClass || c.fields.iconClass === "material-icons") && "add")}</i>
-									<span className="category-name">{c.fields && c.fields.name}</span>
-									<div className="up">
-										<FontAwesomeIcon icon="chevron-up" />
-									</div>
-									<div className="down">
-										<FontAwesomeIcon icon="chevron-down" />
-									</div>
-								</label>,
-								c.fields.categories && (
-									<ul key="a-2">
-										{c.fields.categories.map(
-											a =>
-												a.fields && (
-													<li key={a.sys.id} onClick={() => onNavigate(`/${country.fields.slug}/${a.fields.slug}/${overviewOrFirst(a).fields.slug}`)}>
-														<div className="inner-container article-title">
-															<div> {a.fields.name}</div>
-														</div>
-													</li>
-												)
-										)}
-									</ul>
-								),
-								<ul key="a-3">
-									{c.fields.articles &&
-										c.fields.articles.map(
-											a =>
-												a.fields && (
-													<li key={a.sys.id} onClick={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${a.fields.slug}?language=` + language)}>
-														<div className="inner-container article-title">
-															<div> {a.fields.title}</div>
-														</div>
-													</li>
-												)
-										)}
-								</ul>,
-							]}
+          {this.state.showCategoriesDD && (
+            <div className="overlay" onClick={this.toggleDD}></div>
+          )}
 
-							{!showToggle(c) &&
-								c.fields.overview && (
-									<label
-										key={c.sys.id}
-										htmlFor={`tab-${i}`}
-										className="container"
-										onClick={() => onNavigate(`/${country.fields.slug}/${c.fields.slug}/${c.fields.overview.fields.slug}?language=` + language)}
-									>
-										<i className={c.fields.iconClass || "material-icons"}>{c.fields.iconText || ((!c.fields.iconClass || c.fields.iconClass === "material-icons") && "book")}</i>
-										<span className="category-name">{c.fields && c.fields.name}</span>
-									</label>
-								)}
-						</li>
-					))}
-				</ul>
-			</div>
-		);
-	}
+          <ul>
+            {(categories || []).filter(showCategory).map((c) => {
+              if (
+                c.sys.id === this.state.selectedCategory ||
+                !this.state.selectedCategory.length
+              ) {
+                return this.renderTiles(c);
+              }
+              return null;
+            })}
+          </ul>
+        </div>
+        <ul className="tiles-mobile">
+          {(categories || []).filter(showCategory).map((c, i) => (
+            <li key={c.sys.id}>
+              {i > 0 && <hr className="line" />}
+
+              <input
+                type="checkbox"
+                className="tabs"
+                name={"tab"}
+                id={`tab-${c.fields.slug}`}
+                onClick={() => {
+                  this.clk(c.fields.slug);
+                }}
+              />
+
+              {showToggle(c) && [
+                <label
+                  key="a-1"
+                  htmlFor={`tab-${c.fields.slug}`}
+                  className="container"
+                >
+                  <i className={c.fields.iconClass || "material-icons"}>
+                    {c.fields.iconText ||
+                      ((!c.fields.iconClass ||
+                        c.fields.iconClass === "material-icons") &&
+                        "add")}
+                  </i>
+                  <span className="category-name">
+                    {c.fields && c.fields.name}
+                  </span>
+                  <div className="up">
+                    <FontAwesomeIcon icon="chevron-up" />
+                  </div>
+                  <div className="down">
+                    <FontAwesomeIcon icon="chevron-down" />
+                  </div>
+                </label>,
+                c.fields.categories && (
+                  <ul key="a-2">
+                    {c.fields.categories.map(
+                      (a) =>
+                        a.fields && (
+                          <li
+                            key={a.sys.id}
+                            onClick={() =>
+                              onNavigate(
+                                `/${country.fields.slug}/${a.fields.slug}/${
+                                  overviewOrFirst(a).fields.slug
+                                }`
+                              )
+                            }
+                          >
+                            <div className="inner-container article-title">
+                              <div> {a.fields.name}</div>
+                            </div>
+                          </li>
+                        )
+                    )}
+                  </ul>
+                ),
+                <ul key="a-3">
+                  {c.fields.articles &&
+                    c.fields.articles.map(
+                      (a) =>
+                        a.fields && (
+                          <li
+                            key={a.sys.id}
+                            onClick={() =>
+                              onNavigate(
+                                `/${country.fields.slug}/${c.fields.slug}/${a.fields.slug}?language=` +
+                                  language
+                              )
+                            }
+                          >
+                            <div className="inner-container article-title">
+                              <div> {a.fields.title}</div>
+                            </div>
+                          </li>
+                        )
+                    )}
+                </ul>,
+              ]}
+
+              {!showToggle(c) && c.fields.overview && (
+                <label
+                  key={c.sys.id}
+                  htmlFor={`tab-${i}`}
+                  className="container"
+                  onClick={() =>
+                    onNavigate(
+                      `/${country.fields.slug}/${c.fields.slug}/${c.fields.overview.fields.slug}?language=` +
+                        language
+                    )
+                  }
+                >
+                  <i className={c.fields.iconClass || "material-icons"}>
+                    {c.fields.iconText ||
+                      ((!c.fields.iconClass ||
+                        c.fields.iconClass === "material-icons") &&
+                        "book")}
+                  </i>
+                  <span className="category-name">
+                    {c.fields && c.fields.name}
+                  </span>
+                </label>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
 }
 
 export default translate()(ArticleListBody);

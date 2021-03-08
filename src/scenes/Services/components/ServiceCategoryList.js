@@ -63,7 +63,7 @@ class ServiceCategoryList extends React.Component {
 			<li key={id}>
 				<hr className="line" />
 				<div className="container" onClick={() => { setTimeout(() => onSelectCategory(c), 300) }}>
-					<i className={iconWithPrefix(icon)} style={style} />
+					<i className={icon} style={style} />
 					<span>{categoryName}</span>
 				</div>
 			</li>

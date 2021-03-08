@@ -17,7 +17,6 @@ const nunjucks = require("nunjucks");
 const conf = require("../backend/config");
 const servicesApi = require("../backend/servicesApi");
 const cmsApi = require("../backend/cmsApi").default;
-const _ = require("lodash");
 const toMarkdown = require("to-markdown");
 let { languageDictionary } = conf;
 let instance = null;
@@ -108,10 +107,10 @@ const parseLanguage = function (req) {
 	} else if ("accept-language" in req.headers) {
 		let languages = req.headers["accept-language"]
 			.split(",")
-			.map(l => _.first(l.split("-")))
-			.map(l => _.first(l.split(";")));
+			.map(l => l.split("-")[0])
+			.map(l => l.split(";")[0]);
 
-		const favoriteLanguage = _.first(languages);
+		const favoriteLanguage = languages[0];
 		if (favoriteLanguage !== selectedLanguage) {
 			selectedLanguage = favoriteLanguage;
 		}
@@ -135,12 +134,15 @@ const markdownOptions = {
  * @description 
  */
 const getFirsLevel = (slug, selectedLanguage) => {
+	console.log('ENTRA ACA');
 	return servicesApi
 		.fetchRegions(selectedLanguage)
 		.then(rs => {
-			let selected = _.first(rs.filter(r => r.slug == slug));
+			console.log('2222 ', rs);
+			let selected = rs.filter(r => r.slug == slug)[0];
+			console.log('1111 ', selected);
 			if (selected.level !== 1) {
-				const parents = _.fromPairs(rs.map(r => [r.id, r]));
+				const parents = rs.map(r => [r.id, r]);
 
 				while (selected.level !== 1) {
 					if (!selected.parent || !parents[selected.parent]) break;
@@ -264,11 +266,10 @@ app.get("/:country/:category/:article", function(req, res, err) {
 
 		const selectedLanguage = parseLanguage(req);
 
-    let configKey = _.first(
+    let configKey = 
         Object.keys(conf).filter(k => {
             return req.headers.host.indexOf(k) > -1;
-        })
-    );
+        })[0];
     const {
         country,
         category,
@@ -279,7 +280,7 @@ app.get("/:country/:category/:article", function(req, res, err) {
             getFirsLevel(country, selectedLanguage).then(c => {
                 if (c !== country) {
                     res.redirect(
-                        `/${c}/${category}/${article}?${_.toPairs(req.query)
+                        `/${c}/${category}/${article}?${req.query
 							.map(x => x.join("="))
 							.join("&")}`
 					);
@@ -305,20 +306,20 @@ app.get("/:country/:category/:article", function(req, res, err) {
 								include: 10,
 							})
 							.then(cc => {
-								let match = _.first((c.items || []).filter(i => i.fields.country && i.fields.category && i.fields.country.fields && i.fields.category.fields)
-								.filter(i => i.fields.country.fields.slug === country && i.fields.category.fields.slug === category));
+								let match = (c.items || []).filter(i => i.fields.country && i.fields.category && i.fields.country.fields && i.fields.category.fields)
+								.filter(i => i.fields.country.fields.slug === country && i.fields.category.fields.slug === category)[0];
 
 								console.log('STEP 2\n');
 								
 								if (!match) {
-									let _cnt = _.first(cc.items);
-									let _cat = _.first((_cnt.fields.categories || []).filter(x => {
+									let _cnt = cc.items[0];
+									let _cat = (_cnt.fields.categories || []).filter(x => {
 										return x.fields && x.fields.slug === category;
-									}));
+									})[0];
 									
 									if (_cat) {
 										console.log('STEP 3\n');
-										match = _.first((_cat.fields.articles || []).concat([_cat.fields.overview]).filter(x => x).filter(x => x.fields && x.fields.slug === article));
+										match = (_cat.fields.articles || []).concat([_cat.fields.overview]).filter(x => x).filter(x => x.fields && x.fields.slug === article)[0];
 									}
 								}
 								

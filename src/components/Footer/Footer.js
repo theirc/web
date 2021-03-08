@@ -2,7 +2,6 @@
 import React, { Component } from "react";
 import moment from "moment";
 import { translate } from "react-i18next";
-import _ from 'lodash';
 
 // local
 import i18nHelpers from '../../helpers/i18n';
@@ -36,8 +35,8 @@ class Footer extends Component {
 
 	render() {
 		const { country, t } = this.props;
-		const questionLink = _.has(country, 'fields.slug') && instance.countries[country.fields.slug].questionLink;
-		const showLinkToAdministration = _.has(country, 'fields.slug') && instance.countries[country.fields.slug].switches.showLinkToAdministration;
+		const questionLink = !!(country.fields && country.fields.slug) && instance.countries[country.fields.slug].questionLink;
+		const showLinkToAdministration = !!(country.fields && country.fields.slug)  && instance.countries[country.fields.slug].switches.showLinkToAdministration;
 		const year = moment().year();
 
 		return (

@@ -3,7 +3,6 @@ import instance from './settings';
 
 var request = require("superagent");
 var Promise = require("bluebird");
-var _ = require("lodash");
 const BACKEND_URL = instance.env.backendUrl;
 const INSTANCE_ID = instance.env.instanceId;
 
@@ -158,7 +157,7 @@ module.exports = {
 		return new Promise((resolve, reject) => {
 			const sessionStorage = getSessionStorage();
 			const servicesStored = sessionStorage[`${language}-serviceList`] && !!JSON.parse(sessionStorage[`${language}-serviceList`]).length &&
-				(_.first(JSON.parse(sessionStorage[`${language}-serviceList`])).countryId === countryId)
+				(JSON.parse(sessionStorage[`${language}-serviceList`])[0].countryId === countryId)
 			const servicesFetched = sessionStorage[`${language}-serviceRequest`] &&
 				sessionStorage[`${language}-serviceRequest`] === requestUrl;
 			if (servicesStored && servicesFetched) {
@@ -175,9 +174,21 @@ module.exports = {
 
 						const filteredServices = res.body.filter(service => service.status === "public")
 
-						const orderedServices = _.sortBy(filteredServices, o => {
-							if (o.provider) return o.provider.name.toLowerCase()
-						})
+						function compare(a, b) {
+							// Use toUpperCase() to ignore character casing
+							const provA = a.provider.name.toLowerCase();
+							const provB = b.provider.name.toLowerCase();
+						  
+							let comparison = 0;
+							if (provA > provB) {
+							  comparison = 1;
+							} else if (provA < provB) {
+							  comparison = -1;
+							}
+							return comparison;
+						  }
+						
+						const orderedServices = filteredServices.sort(compare)
 
 						try {
 							// remove unused session items
@@ -223,7 +234,7 @@ module.exports = {
 						reject(err);
 						return;
 					}
-					let services = _.first(res.body);
+					let services = res.body[0];
 
 					resolve(services);
 				});

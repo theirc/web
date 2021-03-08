@@ -1,8 +1,8 @@
 // libs
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import { createMuiTheme } from "material-ui/styles";
+// import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+// import { createMuiTheme } from "material-ui/styles";
 import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
 import { library } from '@fortawesome/fontawesome-svg-core';

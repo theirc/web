@@ -6,7 +6,6 @@ import { push } from "react-router-redux";
 import measureDistance from "@turf/distance";
 import { Redirect } from 'react-router';
 import Promise from "bluebird";
-import _ from "lodash";
 
 // local
 import { EmbedMap } from "./components/EmbedMap";

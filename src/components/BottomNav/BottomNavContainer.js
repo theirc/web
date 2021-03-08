@@ -3,7 +3,6 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { push } from "react-router-redux";
-import _ from 'lodash';
 
 // local
 import { BottomNav } from "../";
@@ -44,7 +43,7 @@ class BottomNavContainer extends React.Component {
 		const { country, onGoToCategories, onGoHome, onGoToSearch, showMapButton, goToMap } = this.props;
 		let selectedIndex = selectedMenuItem();
 
-		const showDepartments = _.has(country, 'fields.slug') && instance.countries[country.fields.slug].switches.showDepartments;
+		const showDepartments = !!(country.fields && country.fields.slug) && instance.countries[country.fields.slug].switches.showDepartments;
 		// TODO: dereference country inside routes?
 		return (
 			<BottomNav

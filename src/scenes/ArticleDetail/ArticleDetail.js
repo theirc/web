@@ -1,6 +1,5 @@
 // libs
 import React from "react";
-import _ from "lodash";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
 import PropTypes from "prop-types";
@@ -119,7 +118,7 @@ const mapDispatch = (d, p) => {
 				if (category.fields.overview && category.fields.overview.fields.slug === slug) {
 					return Promise.resolve(d(actions.selectArticle(category.fields.overview)));
 				} else if (category.fields.articles) {
-					return Promise.resolve(d(actions.selectArticle(_.first(category.fields.articles.filter(a => a && a.fields).filter(a => a.fields.slug === slug)))));
+					return Promise.resolve(d(actions.selectArticle(category.fields.articles.filter(a => a && a.fields).filter(a => a.fields.slug === slug)[0])));
 				}
 			}
 
