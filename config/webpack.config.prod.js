@@ -12,6 +12,8 @@ const eslintFormatter = require("react-dev-utils/eslintFormatter");
 const ModuleScopePlugin = require("react-dev-utils/ModuleScopePlugin");
 const paths = require("./paths");
 const getClientEnvironment = require("./env");
+const HtmlCriticalWebpackPlugin = require("html-critical-webpack-plugin");
+
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // It requires a trailing slash, or the file assets will get an incorrect path.
@@ -282,6 +284,19 @@ module.exports = {
 		new ExtractTextPlugin({
 			filename: cssFilename,
 		}),
+		new HtmlCriticalWebpackPlugin({
+			base: path.resolve(__dirname, '../build'),
+			src: 'index.html',
+			dest: 'index.html',
+			inline: true,
+			minify: true,
+			extract: true,
+			width: 375,
+			height: 565,
+			penthouse: {
+			  blockJSRequests: false,
+			}
+		  }),
 		// Generate a manifest file which contains a mapping of all asset filenames
 		// to their corresponding output file so that tools can pick it up without
 		// having to parse `index.html`.

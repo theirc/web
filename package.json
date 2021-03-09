@@ -133,7 +133,6 @@
 		"url-loader": "0.5.8",
 		"walk": "^2.3.9",
 		"webpack": "2.6.1",
-		"webpack-bundle-analyzer": "^2.9.0",
 		"webpack-dev-middleware": "^1.12.0",
 		"webpack-dev-server": "2.4.5",
 		"webpack-manifest-plugin": "1.1.0",
@@ -188,5 +187,7 @@
 			"./assets/fonts/"
 		]
 	},
-	"devDependencies": {}
+	"devDependencies": {
+		"html-critical-webpack-plugin": "^1.1.0"
+	}
 }
