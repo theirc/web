@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { I18nextProvider } from "react-i18next";
 import { push } from "react-router-redux";
 import { withRouter } from "react-router-dom";
-import moment from "moment";
 
 // local
 import { actions } from "../../shared/redux/store";
@@ -97,8 +96,9 @@ class Skeleton extends React.Component {
 			const sessionStorage = getSessionStorage();
 			const dismissed = JSON.parse(sessionStorage.dismissedNotifications || "[]");
 
+			
 			const notificationFilter = n => {
-				return (!n.fields.expirationDate || moment(n.fields.expirationDate).unix() > moment().unix()) && dismissed.indexOf(n.sys.id) === -1;
+				return (!n.fields.expirationDate || new Date(n.fields.expirationDate).getTime() > new Date().getTime()) && dismissed.indexOf(n.sys.id) === -1;
 			};
 
 			const hideNotification = n => {

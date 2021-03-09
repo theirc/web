@@ -136,7 +136,7 @@ export function withCategory(WrappedComponent) {
     };
 
     componentDidMount() {
-      const { match, country, history, onRender } = this.props;
+      const { match, country, onRender } = this.props;
 
       if (country) {
         const category = this.flatten(
@@ -165,7 +165,7 @@ export function withCategory(WrappedComponent) {
 
     componentWillReceiveProps(nextProps) {
       const { onRender } = this.props;
-      const { country, history, match } = nextProps;
+      const { country, match } = nextProps;
 
       if (country) {
         const category = this.flatten(
@@ -193,7 +193,7 @@ export function withCategory(WrappedComponent) {
 
     render() {
       let category = this.state.category || this.props.category;
-      let { history, match } = this.props;
+      let { match } = this.props;
       let articleItem = null;
       if (
         category &&
@@ -212,10 +212,6 @@ export function withCategory(WrappedComponent) {
         }
       }
 
-      let invalid =
-        category &&
-        category.fields.slug === match.params.category &&
-        !articleItem;
       //return invalid ? (history.push('/404'), null) : <WrappedComponent {...{ category, articleItem, ...this.props }} />;
       return <WrappedComponent {...{ category, articleItem, ...this.props }} />;
     }

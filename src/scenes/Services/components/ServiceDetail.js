@@ -24,7 +24,6 @@ const NS = { ns: 'Services' };
 //temp API Key from Andres Aguilar
 const GMAPS_API_KEY = "AIzaSyAK54Ir69gNM--M_5dRa0fwVH8jxWnJREQ";
 const hotlinkTels = input => input;
-const moment = global.moment;
 
 /**
  * @class
@@ -230,13 +229,6 @@ class ServiceDetail extends React.Component {
 			return o.isAlwaysOpen || o.serviceOpeningHours.length > 0;
 		};
 		const callAux = t("services.Call", NS);
-		// const timeValidation = time => {
-		// 	const m = moment(moment(`2001-01-01 ${time}`).toJSON())
-		// 		.locale(false)
-		// 		.locale(language);
-		// 	console.log(m.hour())
-		// 	return true;
-		// };
 		const serviceProviderElement = s => <span className='providerName'>{s.name}</span>;
 
 		const showTimeTable = openingHours => {
@@ -271,10 +263,18 @@ class ServiceDetail extends React.Component {
 		let sortedContactInformation = service.serviceContactInformations
 
 		let subtitle = (service.serviceCategories && service.serviceCategories.length > 0) ? service.serviceCategories[0].name : '';
-		let phoneNumberWithCode = countryCode + service.phone_number;
-		const url = encodeURIComponent(window.location.href);
-		
-		let lang = '';
+		// let phoneNumberWithCode = countryCode + service.phone_number;
+
+		let appendLeadingZeroes = (n) => {
+			if(n <= 9) {
+			  return "0" + n;
+				  }
+				  return n
+			  }
+		  
+		const updatedDate = (param) => new Date(param)
+		const updatedAtDate = (param) => `${updatedDate(param).getFullYear()}.${appendLeadingZeroes(updatedDate(param).getMonth() + 1)}.${appendLeadingZeroes(updatedDate(param).getDate())}`
+	  
 
 		return (
 			<div>
@@ -304,7 +304,7 @@ class ServiceDetail extends React.Component {
 						</div>
 					</div>
 					<article>
-						<span className='author'><span>{t("services.LAST_UPDATED", NS)}</span> {moment(service.updated_at).format('YYYY.MM.DD')}</span>
+						<span className='author'><span>{t("services.LAST_UPDATED", NS)}</span> {updatedAtDate(service.updatedAt)}</span>
 
 						{providerInfo && <h2 className='provider'>
 							{t("services.Service Provider", NS)}:&nbsp;{serviceProviderElement(providerInfo)}

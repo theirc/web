@@ -2,22 +2,14 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Route, Switch } from "react-router";
-import { push } from "react-router-redux";
-import measureDistance from "@turf/distance";
 import { Redirect } from 'react-router';
-import Promise from "bluebird";
 
 // local
 import { EmbedMap } from "./components/EmbedMap";
-import actions from "../../shared/redux/actions";
 import getSessionStorage from "../../shared/sessionStorage";
-import i18nHelpers from '../../helpers/i18n';
-import instance from '../../backend/settings';
 // import languages from './languages';
 // import routes from './routes';
-import servicesApi from "../../backend/servicesApi";
 
-const NS = { ns: 'Services' };
 //var serviceList = require('./data.json'); //with path
 
 
@@ -46,11 +38,8 @@ class IntegrationServiceMap extends React.Component {
 
 	componentDidMount() {
 		let country = "colombia";
-		let language = "es";
 		let BACKEND_URL =  'https://signpost-cms-qa.azurewebsites.net/api/services/zd/';
-		var requestUrl = "/services/searchlist/?&geographic_region=" + country + "&type_numbers=";
 		
-		const headers = { 'Accept-Language': language };
 		fetch(BACKEND_URL+country, {
 			"headers": {
 				"accept": "*/*",
@@ -84,8 +73,6 @@ class IntegrationServiceMap extends React.Component {
 	render() {	
 		const { match } = this.props;
 		const { serviceList } = this.state;
-		console.log("Render embed map. URL:", match.url);
-		console.log("Match:",match);
 		return ( 
 			<div className='Services'>
 				{serviceList && serviceList.length > 0 && 
@@ -94,7 +81,7 @@ class IntegrationServiceMap extends React.Component {
 					<Route
 						exact
 						path={`${match.url}/all`}
-						component={props => (
+						component={() => (
 							<div>
 								<EmbedMap services={serviceList}/>
 							</div>
@@ -104,7 +91,7 @@ class IntegrationServiceMap extends React.Component {
 				<Route
 					exact
 					path={`${match.url}/by-category/:categoryId/`}
-					component={props => (
+					component={() => (
 						<div>
 							<EmbedMap services={serviceList}/>
 						</div>
@@ -122,7 +109,7 @@ class IntegrationServiceMap extends React.Component {
 				<Route
 					exact
 					path={`${match.url}/by-category/:categoryId/location/:location`}
-					component={props => (							
+					component={() => (							
 							<EmbedMap services={serviceList}/>
 					)}
 				/>				
@@ -139,9 +126,9 @@ class IntegrationServiceMap extends React.Component {
 	}
 }
 
-const mapState = ({ country, language, regions }, p) => ({ country, language, regions });
+const mapState = ({ country, language, regions }) => ({ country, language, regions });
 
-const mapDispatch = (d, p) => ({
+const mapDispatch = () => ({
 	
 });
 

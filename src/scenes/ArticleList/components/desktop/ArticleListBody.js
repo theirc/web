@@ -2,7 +2,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { translate } from "react-i18next";
-import moment from "moment";
 import 'lazysizes'
 
 // local
@@ -111,6 +110,18 @@ class ArticleListBody extends Component {
   renderTiles(c) {
     let { country, language } = this.props;
 
+    
+		let appendLeadingZeroes = (n) => {
+      if(n <= 9) {
+        return "0" + n;
+			}
+			return n
+		}
+    
+    const updatedDate = (param) => new Date(param)
+		const updatedAtDate = (param) => `${updatedDate(param).getFullYear()}.${appendLeadingZeroes(updatedDate(param).getMonth() + 1)}.${appendLeadingZeroes(updatedDate(param).getDate())}`
+
+
     if (!c.fields) {
       console.log("c.fields is null", c);
       return null;
@@ -119,7 +130,6 @@ class ArticleListBody extends Component {
     if (!c.fields.categories && !c.fields.articles) {
       let image = "/placeholder.png";
       if (c.fields.overview) {
-        console.log("EEE ", c.fields.asd.asd.asd !== undefined);
         c.fields &&
           c.fields.overview &&
           c.fields.overview.fields &&
@@ -157,7 +167,7 @@ class ArticleListBody extends Component {
 
               {c.fields && <h2>{c.fields.name}</h2>}
               <span className="author">
-                {moment(c.sys.updatedAt).format("YYYY.MM.DD")}
+                {updatedAtDate(c.sys.updatedAt)}
               </span>
             </div>
           </Link>
@@ -217,7 +227,7 @@ class ArticleListBody extends Component {
 
                 <h2>{a.fields.title}</h2>
                 <span className="author">
-                  {moment(a.sys.updatedAt).format("YYYY.MM.DD")}
+                  {updatedAtDate(a.sys.updatedAt)}
                 </span>
               </div>
             </Link>

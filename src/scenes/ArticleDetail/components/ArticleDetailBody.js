@@ -23,7 +23,6 @@ import { faFacebookF } from "@fortawesome/free-brands-svg-icons";
 
 const NS = { ns: 'ArticleDetail' };
 
-const moment = global.moment;
 const Remarkable = require("remarkable");
 const IG_URL = "https://instagr.am/p/";
 const md = new Remarkable("full", {
@@ -165,6 +164,17 @@ class ArticleDetailBody extends Component {
 		const url = encodeURIComponent(window.location.href);
 		let lang = ''
 
+		const updatedDate = new Date(article.sys.updatedAt)
+
+		let appendLeadingZeroes = (n) => {
+			if(n <= 9) {
+				return "0" + n;
+			}
+			return n
+		}
+
+		const updatedAtDate = `${updatedDate.getFullYear()}.${appendLeadingZeroes(updatedDate.getMonth() + 1)}.${appendLeadingZeroes(updatedDate.getDate())}`
+
 		switch (language) {
 			case 'en':
 				lang = 'en_uk';
@@ -241,7 +251,7 @@ class ArticleDetailBody extends Component {
 						</div>
 					}
 					<div id="maincontent">
-						<span className='author'><span>{t("actions.LAST_UPDATED", NS)}</span> {moment(article.sys.updatedAt).format('YYYY.MM.DD')}</span>
+						<span className='author'><span>{t("actions.LAST_UPDATED", NS)}</span> {updatedAtDate}</span>
 						<div dangerouslySetInnerHTML={{ __html: html }} />
 					</div>
 				</article>

@@ -1,6 +1,5 @@
 // libs
 import React, { Component } from "react";
-import moment from "moment";
 import { translate } from "react-i18next";
 
 // local
@@ -37,7 +36,7 @@ class Footer extends Component {
 		const { country, t } = this.props;
 		const questionLink = !!(country.fields && country.fields.slug) && instance.countries[country.fields.slug].questionLink;
 		const showLinkToAdministration = !!(country.fields && country.fields.slug)  && instance.countries[country.fields.slug].switches.showLinkToAdministration;
-		const year = moment().year();
+		const year = new Date().getFullYear();
 
 		return (
 			<footer className="Footer">
