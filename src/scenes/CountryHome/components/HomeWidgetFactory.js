@@ -1,6 +1,5 @@
 // libs
 import React, { Component } from "react";
-import moment from "moment";
 import { translate } from "react-i18next";
 
 // local
@@ -19,7 +18,7 @@ class HomeWidget extends Component {
 			let category = w.fields.related[0];
 			if (category) {
 				let article = category.fields.articles.sort(function(a,b){
-					return moment(b.sys.updatedAt).unix() - moment(a.sys.updatedAt).unix();
+					return new Date(b.sys.updatedAt).getTime() - new Date(a.sys.updatedAt).getTime();
 				  }).pop();
 				return this.renderArticle(article, category);
 			}

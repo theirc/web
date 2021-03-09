@@ -3,7 +3,6 @@ import React from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import tinycolor from "tinycolor2";
-import moment from 'moment';
 import instance from '../../../backend/settings';
 import 'lazysizes'
 
@@ -97,6 +96,17 @@ class SearchPage extends React.Component {
 		const { country, language, onNavigate } = this.props;
 		let image = a.fields.hero ? a.fields.hero.fields.file.url : '/placeholder.png';
 
+		let appendLeadingZeroes = (n) => {
+			if(n <= 9) {
+			  return "0" + n;
+				  }
+				  return n
+			  }
+		  
+		const updatedDate = (param) => new Date(param)
+		const updatedAtDate = (param) => `${updatedDate(param).getFullYear()}.${appendLeadingZeroes(updatedDate(param).getMonth() + 1)}.${appendLeadingZeroes(updatedDate(param).getDate())}`
+	  
+
 		return (
 			<li className='tile' key={a.sys.id} onClick={() => onNavigate(`/${country.fields.slug}/${a.fields.category.fields.slug}/${a.fields.slug}?language=${language}`)}>
 				<div className='img-viewport'>
@@ -104,7 +114,7 @@ class SearchPage extends React.Component {
 				</div>
 				<div className='text'>
 					{a.fields && <h2>{a.fields.title}</h2>}
-					<span className='author'>{moment(a.sys.updatedAt).format('YYYY.MM.DD')}</span>
+					<span className='author'>{updatedAtDate(a.sys.updatedAt)}</span>
 				</div>
 			</li>)
 	}
