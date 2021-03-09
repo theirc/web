@@ -184,6 +184,8 @@ class AppHeader extends Component {
                 data-src={!(country && language) ? logo : logoBlack}
                 className="app-bar-logo lazyload"
                 alt="bar-logo"
+                width="111.13"
+                height="42"
               />
             </div>
 
@@ -244,6 +246,8 @@ class AppHeader extends Component {
                           data-src={`/images/flags/${country.fields.slug}.png`}
                           alt="country-flag"
                           className="lazyload"
+                          width="30"
+                          height="20.38"
                         />
                       </span>
                     )}
