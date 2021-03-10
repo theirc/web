@@ -130,6 +130,18 @@ module.exports = {
 				],
 				include: paths.appSrc,
 			},
+			{
+				test: /\.(js|jsx)$/,
+				exclude: /node_modules/,
+				use: {
+				  loader: require.resolve("babel-loader"),
+				  options: {
+					presets: [
+					  [ 'es2015', { modules: false }]
+					]
+				  }
+				}
+			  },
 			// ** ADDING/UPDATING LOADERS **
 			// The "file" loader handles all assets unless explicitly excluded.
 			// The `exclude` list *must* be updated with every change to loader extensions.

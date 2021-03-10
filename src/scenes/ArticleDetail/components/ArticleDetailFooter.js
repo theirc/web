@@ -1,7 +1,6 @@
 // libs
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import * as clipboard from "clipboard-polyfill";
 import { translate } from "react-i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -53,7 +52,7 @@ class ArticleDetailFooter extends Component {
 	}
 
 	Copiedlnk() {
-		clipboard.writeText(document.location.href);
+		navigator.clipboard.writeText(document.location.href)
 
 		this.setState(prevState => ({ copied: !prevState.copied }));
 		setTimeout(() => {
