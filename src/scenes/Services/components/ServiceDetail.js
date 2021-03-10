@@ -3,7 +3,6 @@ import React from "react";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
-import * as clipboard from "clipboard-polyfill";
 import { Helmet } from "react-helmet";
 import PropTypes from "prop-types";
 import 'lazysizes'
@@ -66,7 +65,7 @@ class ServiceDetail extends React.Component {
 	}
 
 	Copiedlnk() {
-		clipboard.writeText(document.location.href);
+		navigator.clipboard.writeText(document.location.href)
 
 		this.setState(prevState => ({ copied: !prevState.copied }));
 		setTimeout(() => {
@@ -80,7 +79,7 @@ class ServiceDetail extends React.Component {
 	onCopyLink = () => {
 		this.setState({ copied: true });
 
-		clipboard.writeText(document.location.href);
+		navigator.clipboard.writeText(document.location.href)
 
 		setTimeout(() => this.setState({ copied: false }), 1500);
 	}

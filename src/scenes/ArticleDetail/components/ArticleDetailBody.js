@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom"
 import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
-import * as clipboard from "clipboard-polyfill";
 import FacebookPlayer from "react-facebook-player";
 import YouTube from "react-youtube";
 import InstagramEmbed from 'react-instagram-embed';
@@ -153,7 +152,7 @@ class ArticleDetailBody extends Component {
 
 	onCopyLink = () => {
 		this.setState({ copied: true });
-		clipboard.writeText(document.location.href);
+		navigator.clipboard.writeText(document.location.href)
 		setTimeout(() => this.setState({ copied: false }), 1500);
 	}
 
