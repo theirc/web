@@ -259,7 +259,7 @@ class ServiceMap extends React.Component {
 				}
 
 				{!isOnline &&
-					<div className="ServiceMapContainer2" style={{ width: "100%", backgroundImage: "url('/images/cn-offline-map.png')", backgroundSize: "contain" }}>
+					<div className="ServiceMapContainer2" style={{ width: "100%", backgroundImage: "url('/images/cn-offline-map.jpg')", backgroundSize: "contain" }}>
 						<div id="MapCanvas2"></div>
 					</div>
 				}
