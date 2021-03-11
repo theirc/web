@@ -243,7 +243,7 @@ class AppHeader extends Component {
                         onClick={onChangeCountry || noop}
                       >
                         <img
-                          data-src={`/images/flags/${country.fields.slug}.png`}
+                          data-src={`/images/flags/${country.fields.slug}.jpg`}
                           alt="country-flag"
                           className="lazyload"
                           width="30"
