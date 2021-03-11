@@ -25,7 +25,7 @@ class ServiceDepartmentList extends React.Component {
 		} = this.props;
 		
 		const departmentT = c.data_i18n && c.data_i18n.filter(x => x.language === language)[0];
-		const departmentInfo = departmentT ? departmentT : c;
+		const departmentInfo = (departmentT && departmentT.name.length > 0) ? departmentT : c;
 		
 		const {
 			id,

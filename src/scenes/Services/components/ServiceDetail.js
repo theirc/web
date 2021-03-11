@@ -246,23 +246,6 @@ class ServiceDetail extends React.Component {
 		const url = encodeURIComponent(window.location.href);
 		
 		let lang = '';
-		switch (language) {
-			case 'en':
-				lang = 'en_uk';
-				break;
-			case 'ar':
-				lang = 'ar_ar';
-				break;
-			case 'fr':
-				lang = 'fr_be';
-				break;
-			case 'fa':
-				lang = 'fa_ir';
-				break;
-			default:
-				lang = '';
-				break;
-		}
 
 		return (
 			<div>
@@ -291,15 +274,6 @@ class ServiceDetail extends React.Component {
 
 						</div>
 					</div>
-
-					{instance.brand.url === "refugee.info" && lang.length > 0 &&
-					<div id="readspeaker_button1" className="rs_skip rsbtn rs_preserve">
-						<a rel="nofollow" className="rsbtn_play" accessKey="L" title="ReadSpeaker webReader إستمع إلى هذه الصفحةِ مستخدماً" href={`//app-eu.readspeaker.com/cgi-bin/rsent?customerid=11950&amp;lang=${lang}&amp;readid=ServiceDetail&amp;url=${url}`}>
-							<span className="rsbtn_left rsimg rspart"><span className="rsbtn_text"><span>Listen</span></span></span>
-							<span className="rsbtn_right rsimg rsplay rspart"></span>
-						</a>
-					</div>
-				}
 					<article>
 						<span className='author'><span>{t("services.LAST_UPDATED", NS)}</span> {moment(service.updated_at).format('YYYY.MM.DD')}</span>
 
@@ -309,12 +283,6 @@ class ServiceDetail extends React.Component {
 
 						<h2>{serviceT.name}</h2>
 						<p dangerouslySetInnerHTML={{ __html: hotlinkTels(serviceT.description) }} />
-
-						{/* {serviceT.additionalInformation && <h3>{t("services.Additional Information", NS)}</h3>}
-						{serviceT.additionalInformation && <p dangerouslySetInnerHTML={{ __html: hotlinkTels(serviceT.additionalInformation) }} />} */}
-
-						{/* {serviceT.languages_spoken && <h3>{t("services.Languages Spoken", NS)}</h3>}
-					{serviceT.languages_spoken && <p dangerouslySetInnerHTML={{ __html: serviceT.languages_spoken }} />} */}
 
 						{hasHours(service) && (
 						<span>
@@ -329,15 +297,6 @@ class ServiceDetail extends React.Component {
 							</div>
 						</span>
 					)}
-						{/* {serviceT.address_city && <h4>{t("services.Location", NS)}</h4>}
-					{serviceT.address_city && <p>{serviceT.address_city}</p>} */}
-
-						{serviceT.address && <h3>{t("services.Address", NS)}</h3>}
-						{serviceT.address && <p>{serviceT.address}</p>}
-						{/* {serviceT.address_floor && <p>{serviceT.address_floor}</p>}
-
-					{service.address_in_country_language && <h3>{t("services.Address in Local Language", NS)}</h3>}
-					{service.address_in_country_language && <p>{service.address_in_country_language}</p>} */}
 
 						{service.costOfService && <h3>{t("services.Cost of service", NS)}</h3>}
 						{service.costOfService && <p>{service.costOfService}</p>}

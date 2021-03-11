@@ -76,7 +76,7 @@ class ServiceCategoryListDesktop extends React.Component {
 			region: !l ? c.country.name : l,
 			showFilter: showFilter,
 			cities,
-			city: ci.length > 0 ? ci : t("services.Municipalidades", NS)
+			city: ci ? ci : t("services.Municipalidades", NS)
 		});
 
 		if (ci && categories.length === 0) {
@@ -244,7 +244,7 @@ class ServiceCategoryListDesktop extends React.Component {
 	renderDepartmentButton(department, onSelect) {
 		const { country, language } = this.props;
 		const departmentT = department.data_i18n && department.data_i18n.filter(x => x.language === language)[0];
-		const departmentInfo = departmentT ? departmentT : department;
+		const departmentInfo = (departmentT && departmentT.name.length > 0) ? departmentT : department;
 		return (
 			<button key={`${department.id}-${department.slug}`} className={department.slug === this.state.location.slug ? "location-item-selected" : "location-item"} onClick={() => onSelect(department)}>
 				{department.slug === country.fields.slug && <i className='fa fa-globe' />}<span>{departmentInfo.name}</span>
@@ -350,7 +350,6 @@ class ServiceCategoryListDesktop extends React.Component {
 			};
 		};
 
-		let fullAddress = [serviceInfo.address, serviceInfo.address_city].filter(val => val).join(", ");
 		let mainType = service.serviceCategories ? service.serviceCategories[0] : '';
 		let subTypes = service.serviceCategories.length > 1 ? service.serviceCategories.filter(c => c.id !== mainType.id) : '';
 
@@ -366,7 +365,7 @@ class ServiceCategoryListDesktop extends React.Component {
 					<h2>
 						{providerInfo && providerInfo.name}{" "}
 						<span>
-							{fullAddress}
+							{serviceInfo.address.length > 0 ? serviceInfo.address : service.location}
 							{distance && ` - ${distance}`}
 						</span>
 
@@ -420,10 +419,18 @@ class ServiceCategoryListDesktop extends React.Component {
 					this.renderFiltersPopover(t('services.Service Categories', NS), this.onSelectCategory, categories, this.renderCategoryButton.bind(this), 'categories', FilterTypes.CATEGORY)
 				}
 
-				{showServices && !this.state.showMap &&
+				{showServices && !this.state.showMap && !!servicesRendered.length &&
 					<div className="ServiceList">
 						<div className="ServiceListContainer">
 							{servicesRendered.map(this.renderServiceItem.bind(this))}
+						</div>
+					</div>
+				}
+
+				{showServices && !this.state.showMap && !servicesRendered.length &&
+					<div className="ServiceList">
+						<div className="ServiceListContainer">
+							{t("services.No services found", NS)}
 						</div>
 					</div>
 				}

@@ -23,6 +23,7 @@ export default {
 			"Sunday": "الأحد",
 
 			"COOKIES_BANNER": "يستخدم موقع دليل اللاجئ ملفات تعريف الإرتباط (Cookies) كطريقة لإيصال خدماتنا. عند استمرارك في تصفّح الموقع فذلك يعني أنك توافق على استخدام ملفات تعريف الإرتباط، وتُقر بقراءتك وفهمك لسياستنا في استخدام ملفات تعريف الارتباط ({{cookiePolicy}}) وكذلك سياسة الخصوصية ({{privacyPolicy}}).",
+			"COOKIES_BANNER_IRAQ": "يستخدم موقع 'سمعت بهذا' ملفات تعريف الإرتباط (Cookies) كطريقة لإيصال خدماتنا. عند استمرارك في تصفّح الموقع فذلك يعني أنك توافق على استخدام ملفات تعريف الإرتباط، وتُقر بقراءتك وفهمك لسياستنا في استخدام ملفات تعريف الارتباط ({{cookiePolicy}}) وكذلك سياسة الخصوصية ({{privacyPolicy}}).",
 		},
 	},
 	ur: {
@@ -75,6 +76,7 @@ export default {
 			"Sunday": "Sunday",
 
 			"COOKIES_BANNER": "We use cookies to deliver our services. By continuing to use this site, you accept such use and acknowledge that you have read and understood our {{cookiePolicy}} and {{privacyPolicy}}.",
+			"COOKIES_BANNER_IRAQ": "We use cookies to deliver our services. By continuing to use this site, you accept such use and acknowledge that you have read and understood our {{cookiePolicy}} and {{privacyPolicy}}.",
 		},
 	}
 };
