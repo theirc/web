@@ -20,7 +20,7 @@ class InstanceMovedWidget extends Component {
 
 		return (
 			<div className="InstanceMovedWidget">
-				<span></span>
+				<span style={{backgroundImage: "url('/images/instance-moved.png')"}}></span>
 				<h1>{t(partner.title, NS)}</h1>
 
 				<br /><br />

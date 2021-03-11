@@ -34,7 +34,7 @@ export function withCountry(WrappedComponent) {
       instance.countries[match.params.country] &&
         api.loadCountry(match.params.country, language).then((c) => {
           return onMount(c).then((c) => {
-            servicesApi
+            servicesApi()
               .fetchRegions(language, match.params.country)
               .then((regionList) => {
                 storeRegions(regionList);
@@ -52,7 +52,7 @@ export function withCountry(WrappedComponent) {
 
       if (newProps.language !== language) {
         onMount(match.params.country, newProps.language).then((c) => {
-          servicesApi
+          servicesApi()
             .fetchRegions(language, match.params.country)
             .then((regionList) => {
               storeRegions(regionList);
@@ -64,7 +64,7 @@ export function withCountry(WrappedComponent) {
         });
       } else if (newProps.match.params.country !== match.params.country) {
         onMount(match.params.country, language).then((c) => {
-          servicesApi
+          servicesApi()
             .fetchRegions(language, match.params.country)
             .then((regionList) => {
               storeRegions(regionList);

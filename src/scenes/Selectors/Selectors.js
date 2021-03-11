@@ -86,7 +86,7 @@ class Selectors extends Component {
 					this.selectCountry(country.fields.slug);
 				}
 			} else {
-				servicesApi.fetchCountries(language).then((regionList) => {
+				servicesApi().fetchCountries(language).then((regionList) => {
 					api
 						.listCountries(language)
 						.then(e => e.items.map(a => ({
