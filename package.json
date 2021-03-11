@@ -80,7 +80,7 @@
 		"query-string": "^5.0.1",
 		"react": "^16.0.0",
 		"react-copy-to-clipboard": "^5.0.1",
-		"react-dev-utils": "^3.0.0",
+		"react-dev-utils": "^11.0.4",
 		"react-dom": "^16.0.0",
 		"react-error-overlay": "^1.0.7",
 		"react-facebook-player": "^0.1.0",
