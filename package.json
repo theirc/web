@@ -45,6 +45,7 @@
     "less": "^2.7.2",
     "material-ui": "1.0.0-beta.13",
     "material-ui-icons": "1.0.0-beta.14",
+    "node-sass": "^5.0.0",
     "node-sass-chokidar": "0.0.3",
     "npm-run": "^4.1.2",
     "nunjucks": "^3.0.1",
