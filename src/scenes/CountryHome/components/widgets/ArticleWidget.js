@@ -107,7 +107,7 @@ class ArticleWidget extends Component {
             <img
               className="heroImage lazyload"
               data-src={article.fields.hero.fields.file.url}
-              alt="hero-image"
+              alt="hero"
             />
           </div>
         )}

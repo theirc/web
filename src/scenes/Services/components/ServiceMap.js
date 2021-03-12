@@ -14,9 +14,6 @@ import "./ServiceHome.css";
 import HtmlMarker from "./HtmlMarker";
 
 var tinycolor = require("tinycolor2");
-let iconWithPrefix = vector_icon => vector_icon.indexOf('icon') > -1 ?
-	`${vector_icon.split('-')[0]} ${vector_icon}` :
-	`fa fa-${vector_icon}`;
 let categoryStyle = color => {
 	if (!color) {
 		color = "#000";
@@ -124,7 +121,6 @@ class ServiceMap extends React.Component {
 	componentDidMount() {
 
 		const {
-			defaultLocation,
 			findServicesInLocation,
 			country
 		} = this.props;
@@ -137,7 +133,6 @@ class ServiceMap extends React.Component {
 			This way we can run updates on the content of the map
 		*/
 		if (navigator.onLine) {
-			let isMap = window.google;
 			const map = new window.google.maps.Map(document.getElementById('MapCanvas'), {
 				minZoom: 3,
 				center: { lat: country.fields.coordinates.lat, lng: country.fields.coordinates.lon },

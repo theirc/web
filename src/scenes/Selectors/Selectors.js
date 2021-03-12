@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { push } from "react-router-redux";
 import { Redirect } from "react-router";
 import PropTypes from "prop-types";
-import measureDistance from "@turf/distance";
+// import measureDistance from "@turf/distance";
 
 // local
 import { CountrySelector, LanguageSelector } from "../../components";

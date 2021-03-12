@@ -46,10 +46,6 @@ class ServiceCategoryList extends React.Component {
 
 		const categoryName = translatedName ? translatedName : name;
 
-		let iconWithPrefix = vector_icon => (vector_icon && vector_icon.indexOf('icon') > -1) ?
-								`${vector_icon.split('-')[0]} ${vector_icon}` : 
-								`fa fa-${vector_icon}`;
-
 		let color = this.fixColor(c.color);
 		color = tinycolor(color)
 			.saturate(30)

@@ -204,8 +204,7 @@ class ServiceDetail extends React.Component {
 
 	render() {
 		const { service, relatedServices } = this.state;
-		const { country, goToService, language, t, instance } = this.props;
-		const countryCode = country.fields && country.fields.slug && instance.countries[country.fields.slug].countryCode;
+		const { country, goToService, language, t } = this.props;
 		const weekDays = [
 			{ id: 1, name: "Monday" },
 			{ id: 2, name: "Tuesday" },

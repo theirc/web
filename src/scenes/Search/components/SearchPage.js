@@ -41,9 +41,6 @@ class SearchPage extends React.Component {
 		const { onNavigate, language, measureDistance, country } = this.props;
 		const distance = measureDistance && service.location && measureDistance(service.location);
 
-		let iconWithPrefix = vector_icon => vector_icon.indexOf('icon') > -1 ? 
-								vector_icon.split('-')[0]+' '+vector_icon : 
-								`fa fa-${vector_icon}`;
 		let categoryStyle = color => {
 			if (!color) {
 				color = "#000";
@@ -110,7 +107,7 @@ class SearchPage extends React.Component {
 		return (
 			<li className='tile' key={a.sys.id} onClick={() => onNavigate(`/${country.fields.slug}/${a.fields.category.fields.slug}/${a.fields.slug}?language=${language}`)}>
 				<div className='img-viewport'>
-					<img data-src={image} alt='hero-image-search-page' className="lazyload" />
+					<img data-src={image} alt='hero-search-page' className="lazyload" />
 				</div>
 				<div className='text'>
 					{a.fields && <h2>{a.fields.title}</h2>}
