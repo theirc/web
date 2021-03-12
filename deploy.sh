@@ -125,7 +125,6 @@ cd "$DEPLOYMENT_TARGET"
 echo "Building CSS."
 eval $NPM_CMD run build-css
 
-
 # echo "Building Server."
 # eval $NPM_CMD run build-server
 
