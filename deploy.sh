@@ -130,7 +130,6 @@ eval $NPM_CMD run build-css
 
 echo "Building Client code."
 eval $NPM_CMD run build
-eval $NPM_CMD run postbuild
 
 
 echo "Finished successfully."
