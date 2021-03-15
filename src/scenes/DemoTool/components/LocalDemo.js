@@ -5,7 +5,6 @@ import { Helmet } from "react-helmet";
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
 
 // local
-import i18nHelpers from '../../../helpers/i18n';
 import getSessionStorage from "../../../shared/sessionStorage";
 import instance from '../../../backend/settings';
 import "./LocalDemo.css";

@@ -4,7 +4,7 @@ import { Redirect, Route, Switch, withRouter } from "react-router";
 import { ConnectedRouter } from "react-router-redux";
 
 // local
-import { ArticleDetail, ArticleList, CountryHome, DemoTool,
+import { ArticleDetail, ArticleList, CountryHome,
 	Home, NotFound, Search, Selectors, Services, Subscribe, IntegrationServiceMap } from "./scenes";
 import { history } from "./shared/redux/store";
 import { withCountry, withCategory, withArticle } from "./shared/hoc";
@@ -24,7 +24,7 @@ class ScrollToTop extends Component {
 
 ScrollToTop = withRouter(ScrollToTop);
 const ServicesWithCountry = withCountry(Services);
-const IntegrationServicesMapWithCountry = withCountry(IntegrationServiceMap);
+// const IntegrationServicesMapWithCountry = withCountry(IntegrationServiceMap);
 
 class Router extends Component {
 	render() {

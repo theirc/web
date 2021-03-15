@@ -201,7 +201,7 @@ class ArticleDetailBody extends Component {
 				{hero && hero.fields && hero.fields.file &&
 					<div>
 						<div className="hero">
-							<img data-src={hero.fields.file.url} alt="hero-image" className="lazyload" />
+							<img data-src={hero.fields.file.url} alt="hero-header" className="lazyload" />
 						</div>
 						{hero.fields.description && <credit>{hero.fields.description}</credit>}
 					</div>

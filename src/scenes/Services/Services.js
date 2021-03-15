@@ -84,8 +84,8 @@ class Services extends React.Component {
 					// 	type: "Point",
 					// 	coordinates: [a.longitude, a.latitude],
 					// };
-					// let originalDistance = measureDistance(currentGeoJSON, b, "kilometers");
 					let originalDistance = 0
+					// let originalDistance = measureDistance(currentGeoJSON, b, "kilometers");
 					let distance = originalDistance;
 					let unit = "km";
 

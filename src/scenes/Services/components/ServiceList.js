@@ -58,9 +58,6 @@ class ServiceList extends React.Component {
 		const serviceInfo = serviceT ? serviceT : s;
 		const providerInfo = providerT ? providerT : s.provider;
 
-		let iconWithPrefix = vector_icon => vector_icon.indexOf('icon') > -1 ?
-			`${vector_icon.split('-')[0]} ${vector_icon}` :
-			`fa fa-${vector_icon}`;
 		let categoryStyle = color => {
 			if (!color) {
 				color = "#000";

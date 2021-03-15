@@ -151,7 +151,7 @@ class ArticleListBody extends Component {
             to={`/${country.fields.slug}/${c.fields.slug}/${c.fields.overview.fields.slug}?language=${language}`}
           >
             <div className="img-viewport">
-              <img data-src={image} alt="category-hero-image" className="lazyload" />
+              <img data-src={image} alt="category-hero" className="lazyload" />
             </div>
 
             <div className="text">
@@ -197,7 +197,7 @@ class ArticleListBody extends Component {
               to={`/${country.fields.slug}/${c.fields.slug}/${a.fields.slug}?language=${language}`}
             >
               <div className="img-viewport">
-                <img data-src={image} alt="article-hero-image" className="lazyload" />
+                <img data-src={image} alt="article-hero" className="lazyload" />
               </div>
 
               <div className="text">

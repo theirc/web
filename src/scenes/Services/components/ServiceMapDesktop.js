@@ -14,9 +14,6 @@ import getSessionStorage from "../../../shared/sessionStorage";
 import HtmlMarker from "./HtmlMarker";
 
 var tinycolor = require("tinycolor2");
-let iconWithPrefix = vector_icon => vector_icon.indexOf('icon') > -1 ?
-	`${vector_icon.split('-')[0]} ${vector_icon}` :
-	`fa fa-${vector_icon}`;
 let categoryStyle = color => {
 	if (!color) {
 		color = "#000";
@@ -118,15 +115,12 @@ class ServiceMapDesktop extends React.Component {
 
 	componentDidMount() {
 		const {
-			defaultLocation,
-			services,
 			country
 		} = this.props;
 
 		const sessionStorage = getSessionStorage();
 
 		if (navigator.onLine) {
-			let isMap = window.google;
 			const map = new window.google.maps.Map(document.getElementById('MapCanvas'), {
 				minZoom: 3,
 				center: { lat: country.fields.coordinates.lat, lng: country.fields.coordinates.lon },

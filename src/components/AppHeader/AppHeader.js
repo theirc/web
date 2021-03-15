@@ -15,7 +15,7 @@ import { Interpolate, withTranslation, Trans } from "react-i18next";
 import 'lazysizes'
 
 // local
-import Alert from "../Alert/Alert";
+// import Alert from "../Alert/Alert";
 import selectedMenuItem from "../../helpers/menu-items";
 import i18nHelpers from "../../helpers/i18n";
 import instance from "../../backend/settings";
@@ -144,19 +144,19 @@ class AppHeader extends Component {
       </a>
     );
 
-    let isOnServices = window.location.href.includes("/services");
-    let isOnArticlesGreece =
-      window.location.href.includes("/categories") ||
-      /(\/greece\/.*(\/.)*)/.test(window.location.href);
+    // let isOnServices = window.location.href.includes("/services");
+    // let isOnArticlesGreece =
+    //   window.location.href.includes("/categories") ||
+    //   /(\/greece\/.*(\/.)*)/.test(window.location.href);
 
-    let disclaimersLink = `/greece/refugee-info-greece-closed/refugee-info-stops-operating-in-greece?language=${language}`;
-    disclaimersLink = window.location.href.includes(disclaimersLink)
-      ? "#"
-      : disclaimersLink;
-    let covidLinkCnEs = "/el-salvador/emergencia-por-coronavirus";
-    let covidLinkCnHn = "/honduras/alertas";
-    let covidLinkRiIt = "/italy/coronavirus-emergency";
-    let covidLinkRiGr = "/greece/coronavirus-emergency-in-greece";
+    // let disclaimersLink = `/greece/refugee-info-greece-closed/refugee-info-stops-operating-in-greece?language=${language}`;
+    // disclaimersLink = window.location.href.includes(disclaimersLink)
+    //   ? "#"
+    //   : disclaimersLink;
+    // let covidLinkCnEs = "/el-salvador/emergencia-por-coronavirus";
+    // let covidLinkCnHn = "/honduras/alertas";
+    // let covidLinkRiIt = "/italy/coronavirus-emergency";
+    // let covidLinkRiGr = "/greece/coronavirus-emergency-in-greece";
 
     let selectedIndex = selectedMenuItem();
     let path = window.location.pathname;

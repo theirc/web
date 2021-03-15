@@ -7,10 +7,6 @@ import { Redirect } from 'react-router';
 // local
 import { EmbedMap } from "./components/EmbedMap";
 import getSessionStorage from "../../shared/sessionStorage";
-// import languages from './languages';
-// import routes from './routes';
-
-//var serviceList = require('./data.json'); //with path
 
 
 /**
@@ -26,11 +22,6 @@ class IntegrationServiceMap extends React.Component {
 		countryRegions: null,
 		serviceList: []
 	};
-
-	constructor() {
-		super();
-		// i18nHelpers.loadResource(languages, NS.ns);
-	}
 
 	componentWillMount() {
 		console.log("Will mount")
@@ -116,7 +107,7 @@ class IntegrationServiceMap extends React.Component {
 				<Route component={() => <Redirect to={'/404'}/>} />
 			</Switch>
 			}
-			{!serviceList || serviceList.length === 0 &&
+			{(!serviceList || serviceList.length === 0) &&
 				<div>Loading</div>
 			}
 			</div>

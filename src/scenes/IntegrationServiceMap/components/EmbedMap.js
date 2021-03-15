@@ -8,9 +8,6 @@ import './EmbedMap.css';
 const zdUrl = 'https://signpost-colombia.zendesk.com/hc/es-co/articles/';
 
 var tinycolor = require("tinycolor2");
-let iconWithPrefix = vector_icon => vector_icon.indexOf('icon') > -1 ? 
-								vector_icon.split('-')[0]+' '+vector_icon : 
-								`fa fa-${vector_icon}`;
 let categoryStyle = color => {
 	if (!color) {
 		color = "#000";
@@ -53,10 +50,9 @@ class ServiceIcon extends React.Component {
  */
 class ServiceItem extends React.Component {
 	render() {
-		const { country, language, service } = this.props;
+		const { service } = this.props;
 		const types = service.serviceCategories;
 		console.log(service, types);
-		let zdId = service.zendeskId;
 		return (
 			<div key={service.id} className="Item">
 				<div className="Info">
