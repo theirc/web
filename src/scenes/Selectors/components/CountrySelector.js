@@ -1,6 +1,6 @@
 // libs
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
 // local
 import getSessionStorage from "../../../shared/sessionStorage";
@@ -81,4 +81,4 @@ class CountrySelector extends Component {
 		);
 	}
 }
-export default translate()(CountrySelector);
+export default withTranslation()(CountrySelector);

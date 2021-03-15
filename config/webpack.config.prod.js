@@ -75,7 +75,6 @@ module.exports = {
 		moment: "moment",
 		autolinker: "Autolinker",
 		contentful: "contentful",
-		remarkable: "Remarkable",
 		immutable: "Immutable",
 		bluebird: "Promise",
 		"react-dom": "ReactDOM",

@@ -1,6 +1,6 @@
 // libs
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import tinycolor from "tinycolor2";
 import instance from '../../../backend/settings';
@@ -10,17 +10,9 @@ import 'lazysizes'
 import "./SearchPage.css";
 import "../../Services/components/ServiceCategoryList.css";
 import "../../ArticleList/components/desktop/ArticleListBody.css";
+import Markdown from "markdown-to-jsx";
 
 const NS = { ns: 'Search' };
-
-const Remarkable = require("remarkable");
-
-const md = new Remarkable("full", {
-	html: true,
-	linkify: true,
-	typographer: true,
-	breaks: true,
-});
 
 /**
  * @class
@@ -199,7 +191,7 @@ class SearchPage extends React.Component {
 											{!article.fields.hero && <div className="Image" style={{ backgroundImage: `url('/placeholder.png')` }} />}
 											<div className='Text TextWithImage'>
 												<h2> {article.fields.title}</h2>
-												<p dangerouslySetInnerHTML={{ __html: md.render(article.fields.lead) }} />
+												<Markdown>{article.fields.lead}</Markdown>
 											</div>
 										</div>,
 									];
@@ -230,4 +222,4 @@ class SearchPage extends React.Component {
 
 const mapState = ({ country }, p) => ({ country });
 
-export default translate()(connect(mapState)(SearchPage));
+export default withTranslation()(connect(mapState)(SearchPage));

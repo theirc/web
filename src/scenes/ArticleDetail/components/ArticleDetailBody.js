@@ -6,7 +6,7 @@ import { Helmet } from "react-helmet";
 import FacebookPlayer from "react-facebook-player";
 import YouTube from "react-youtube";
 import InstagramEmbed from 'react-instagram-embed';
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import 'lazysizes'
 
 // local
@@ -19,16 +19,10 @@ import "./ArticleDetailBody.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCopy } from "@fortawesome/pro-regular-svg-icons";
 import { faFacebookF } from "@fortawesome/free-brands-svg-icons";
+import Markdown from "markdown-to-jsx";
 
 const NS = { ns: 'ArticleDetail' };
-
-const Remarkable = require("remarkable");
 const IG_URL = "https://instagr.am/p/";
-const md = new Remarkable("full", {
-	html: true,
-	linkify: true,
-	breaks: true,
-});
 
 /**
  * @class
@@ -192,9 +186,6 @@ class ArticleDetailBody extends Component {
 				break;
 		}
 
-		let html = md.render(content || lead);
-		html = html.replace(/(\+[0-9]{9,14}|00[0-9]{9,15})/g, `<a class="tel" href="tel:$1">$1</a>`);
-
 		let country = article.fields.country.fields.slug;
 
 		let categorySlug = document.location.pathname.split('/')[2];
@@ -251,7 +242,8 @@ class ArticleDetailBody extends Component {
 					}
 					<div id="maincontent">
 						<span className='author'><span>{t("actions.LAST_UPDATED", NS)}</span> {updatedAtDate}</span>
-						<div dangerouslySetInnerHTML={{ __html: html }} />
+						{content && <Markdown>{content}</Markdown>}
+						{lead && <Markdown>{lead}</Markdown>}
 					</div>
 				</article>
 			</div>
@@ -259,4 +251,4 @@ class ArticleDetailBody extends Component {
 	}
 }
 
-export default translate()(ArticleDetailBody);
+export default withTranslation()(ArticleDetailBody);

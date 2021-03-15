@@ -1,6 +1,6 @@
 // libs
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
 // local
 import { ArticleWidget, CategoryWidget, LocalGuideWidget, TopCategoriesWidget } from "../../../components";
@@ -99,4 +99,4 @@ class HomeWidget extends Component {
 	}
 }
 
-export default translate()(HomeWidget);
+export default withTranslation()(HomeWidget);

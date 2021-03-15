@@ -1,6 +1,6 @@
 // libs
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
 // local
 import i18nHelpers from '../../helpers/i18n';
@@ -74,4 +74,4 @@ class Footer extends Component {
 	}
 }
 
-export default translate()(Footer);
+export default withTranslation()(Footer);

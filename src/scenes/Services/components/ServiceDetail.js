@@ -1,6 +1,6 @@
 // libs
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
 import { Helmet } from "react-helmet";
@@ -406,4 +406,4 @@ const mapState = ({ country, language }, p) => ({ country, language });
 
 const mapDispatch = (d, p) => ({ goToService: (country, language, id) => d(push(routes.goToService(country, language, id))) });
 
-export default translate()(connect(mapState, mapDispatch)(ServiceDetail));
+export default withTranslation()(connect(mapState, mapDispatch)(ServiceDetail));

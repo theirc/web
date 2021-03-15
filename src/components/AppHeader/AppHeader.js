@@ -11,7 +11,7 @@ import {
 } from "@fortawesome/pro-light-svg-icons";
 import Headroom from "react-headrooms";
 import PropTypes from "prop-types";
-import { translate, Interpolate } from "react-i18next";
+import { Interpolate, withTranslation, Trans } from "react-i18next";
 import 'lazysizes'
 
 // local
@@ -316,7 +316,7 @@ class AppHeader extends Component {
           <div className={this.state.prvalert ? "hidden" : "privacy-banner"}>
             <div className="content">
               <span className="privacy-banner-separator"></span>
-              <Interpolate
+              <Trans
                 i18nKey="COOKIES_BANNER"
                 cookiePolicy={
                   instance.brand.code === "ri"
@@ -374,4 +374,4 @@ class AppHeader extends Component {
   }
 }
 
-export default translate()(AppHeader);
+export default withTranslation()(AppHeader);

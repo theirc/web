@@ -1,6 +1,6 @@
 // libs
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
 // local
 import instance from '../../../backend/settings';
@@ -35,4 +35,4 @@ class InstanceMovedWidget extends Component {
 	}
 }
 
-export default translate()(InstanceMovedWidget);
+export default withTranslation()(InstanceMovedWidget);

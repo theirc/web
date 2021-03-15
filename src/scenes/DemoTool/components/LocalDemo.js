@@ -1,6 +1,6 @@
 // libs
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { Helmet } from "react-helmet";
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
 
@@ -102,4 +102,4 @@ class LocalDemo extends Component {
 	}
 }
 
-export default translate()(LocalDemo);
+export default withTranslation()(LocalDemo);

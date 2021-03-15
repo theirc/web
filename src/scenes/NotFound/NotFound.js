@@ -1,6 +1,6 @@
 // libs
 import React from 'react';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 // local
@@ -40,4 +40,4 @@ class NotFound extends React.Component {
 	}
 }
 
-export default translate()(NotFound);
+export default withTranslation()(NotFound);

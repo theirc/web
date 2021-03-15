@@ -2,7 +2,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import ReactDOMServer from "react-dom/server";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -267,4 +267,4 @@ const mapState = ({ country, defaultLocation, language }, p) => ({ country, defa
 
 const mapDispatch = (d, p) => ({ goToService: (country, language, id) => d(push(routes.goToService(country, language, id))) });
 
-export default translate()(connect(mapState, mapDispatch)(ServiceMap));
+export default withTranslation()(connect(mapState, mapDispatch)(ServiceMap));

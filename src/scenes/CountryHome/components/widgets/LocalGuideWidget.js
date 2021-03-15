@@ -1,7 +1,7 @@
 // libs
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import 'lazysizes'
 
 // local
@@ -106,4 +106,4 @@ class LocalGuideWidget extends Component {
   }
 }
 
-export default translate()(LocalGuideWidget);
+export default withTranslation()(LocalGuideWidget);

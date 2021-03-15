@@ -1,7 +1,7 @@
 // libs
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import 'lazysizes'
 
 // local
@@ -461,4 +461,4 @@ class ArticleListBody extends Component {
   }
 }
 
-export default translate()(ArticleListBody);
+export default withTranslation()(ArticleListBody);

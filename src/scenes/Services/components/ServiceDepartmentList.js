@@ -1,6 +1,6 @@
 // libs
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
 // local
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
@@ -71,4 +71,4 @@ class ServiceDepartmentList extends React.Component {
 	}
 }
 
-export default translate()(ServiceDepartmentList);
+export default withTranslation()(ServiceDepartmentList);
