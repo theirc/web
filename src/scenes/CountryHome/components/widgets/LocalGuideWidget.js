@@ -6,6 +6,7 @@ import 'lazysizes'
 
 // local
 import "./LocalGuideWidget.css";
+import instance from "../../../../backend/settings";
 
 const NS = { ns: "CountryHome" };
 
@@ -95,7 +96,7 @@ class LocalGuideWidget extends Component {
               </s>
             )}
             {!showMore && (
-              <Link to={`/${country.fields.slug}/services`}>
+              <Link to={instance.brand.code !== 'iq' ? `/${country.fields.slug}/services` : `/${country.fields.slug}/categories`}>
                 {t("global.See More", NS)}
               </Link>
             )}

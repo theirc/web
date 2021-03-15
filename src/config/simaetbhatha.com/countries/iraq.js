@@ -3,7 +3,7 @@ export default {
 	flag: '',
 	languages: ['ar', 'en'],
 	movedToPartner: null,
-	questionLink: 'mailto:jo-khabrona-info@mercycorps.org',
+	questionLink: 'https://m.me/simaetbhatha',
 	switches: {
 		showArticles: true,
 		showDepartments: false,

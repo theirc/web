@@ -18,12 +18,12 @@ $dividerColor: darken($titleBackground, 50%);
 $colorMap: (irc: $accentIRC, nrc: $accentNRC, generic: $accentGreen, mc: $accentRed, pg: $accentPG, cuenta: $accentCuenta, ri: $accentRi);
 $colorInverseMap: (irc: #000000, nrc: #ffffff, generic: #ffffff, mc: #ffffff, pg: #ffffff, cuenta: #ffffff, ri: #ffffff);
 $textColorMap: (irc: #ffffff, nrc: #000000, generic: #000000, mc: #000000, pg: #000000, cuenta: #000000, ri: #000000);
-$borderColorMap: (irc: #FCD735, nrc: #000000, generic: #71D1A7, mc: #000000, pg: #71D1A7, cuenta: #71D1A7, ri: #98DFEA);
+$borderColorMap: (irc: #FCD735, nrc: #000000, generic: #339933, mc: #000000, pg: #71D1A7, cuenta: #339933, ri: #98DFEA);
 $buttonColorMap: (irc: #7FB685, nrc: #000000, generic: #3D3FDA, mc: #000000, pg: #000000, cuenta: #3D3FDA, ri: #FFB45A);
 $linksColorMap: (irc: #292633, nrc: #000000, generic: #3D3FDA, mc: #000000, pg: #000000, cuenta: #3D3FDA, ri: #005377);
-$lgColorMap: (irc: #7FB685, nrc: #000000, generic: #71D1A7, mc: #000000, pg: #000000, cuenta: #71D1A7, ri: #FFB45A);
+$lgColorMap: (irc: #7FB685, nrc: #000000, generic: #339933, mc: #000000, pg: #000000, cuenta: #339933, ri: #FFB45A);
 $footerColorMap: (irc: #7FB685, nrc: #000000, generic: #3D3FDA, mc: #000000, pg: #000000, cuenta: #3D3FDA, ri: #98DFEA);
-$bottomNavColorMap: (irc: #7FB685, nrc: #000000, generic: #71D1A7, mc: #000000, pg: #000000, cuenta: #71D1A7, ri: #9F87AF);
+$bottomNavColorMap: (irc: #7FB685, nrc: #000000, generic: #339933, mc: #000000, pg: #000000, cuenta: #339933, ri: #9F87AF);
 $navBarColorMap: (irc: #16697A, nrc: #000000, generic: #3D3FDA, mc: #000000, pg: #000000, cuenta: #3D3FDA, ri: #005377);
 a {
 	text-decoration: none;
