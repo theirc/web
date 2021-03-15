@@ -1,7 +1,7 @@
 // libs
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // local
@@ -101,4 +101,4 @@ class ArticleDetailFooter extends Component {
 	}
 }
 
-export default translate()(ArticleDetailFooter);
+export default withTranslation()(ArticleDetailFooter);

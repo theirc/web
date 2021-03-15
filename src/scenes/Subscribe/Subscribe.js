@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import 'lazysizes'
 
@@ -247,5 +247,5 @@ class Subscribe extends Component {
 
 const mapState = ({ country, language }, p) => ({ language, country });
 
-export default connect(mapState)(translate()(Subscribe));
+export default connect(mapState)(withTranslation()(Subscribe));
 

@@ -1,7 +1,7 @@
 // libs
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
 // local
 import "./TopCategoriesWidget.css";
@@ -63,4 +63,4 @@ class TopCategoriesWidget extends Component {
   }
 }
 
-export default translate()(TopCategoriesWidget);
+export default withTranslation()(TopCategoriesWidget);

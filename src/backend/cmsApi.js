@@ -1,5 +1,5 @@
 // libs
-import { Promise } from "es6-promise";
+// import { Promise } from "es6-promise";
 
 // local
 import getSessionStorage from "../shared/sessionStorage";

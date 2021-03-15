@@ -1,7 +1,7 @@
 // libs
 import React from "react";
 import tinycolor from "tinycolor2";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
 // local
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
@@ -162,4 +162,4 @@ class ServiceCategoryList extends React.Component {
 	}
 }
 
-export default translate()(ServiceCategoryList);
+export default withTranslation()(ServiceCategoryList);

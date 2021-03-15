@@ -1,7 +1,7 @@
 // libs
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import FacebookPlayer from "react-facebook-player";
 import YouTube from "react-youtube";
 import PropTypes from "prop-types";
@@ -12,16 +12,9 @@ import 'lazysizes'
 // local
 import instance from "../../../../backend/settings";
 import "./ArticleWidget.css";
+import Markdown from "markdown-to-jsx";
 
 const NS = { ns: "CountryHome" };
-
-const Remarkable = require("remarkable");
-const md = new Remarkable("full", {
-  html: true,
-  linkify: true,
-  typographer: true,
-  breaks: true,
-});
 
 class ArticleWidget extends Component {
   static contextTypes = {
@@ -91,11 +84,6 @@ class ArticleWidget extends Component {
     }
     let hero = article.fields.hero;
 
-    md.renderer.rules.link_open = (tokens, idx /*, options, env */) => {
-      // var title = tokens[idx].title;
-      return `<a href="${tokens[idx].href}?language=${language}" ${tokens[idx].title}>`;
-    };
-
     const langRTL = ["ur", "fa", "ar"].indexOf(language) > -1;
 
     console.log('new deploy');
@@ -132,10 +120,7 @@ class ArticleWidget extends Component {
 
             {contentType.sys.id === "video" && this.renderVideo(article)}
 
-            <p
-              className={`${showFullArt ? "faq" : "header"}`}
-              dangerouslySetInnerHTML={{ __html: md.render(content) }}
-            />
+            <Markdown className={`${showFullArt ? "faq" : "header"}`}>{content}</Markdown>
 
             {!showFullArt && (
               <s className="Read-More-lead">
@@ -206,4 +191,4 @@ class ArticleWidget extends Component {
   }
 }
 
-export default translate()(ArticleWidget);
+export default withTranslation()(ArticleWidget);

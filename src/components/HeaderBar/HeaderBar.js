@@ -1,6 +1,6 @@
 // libs
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 
 // local
@@ -49,4 +49,4 @@ class HeaderBar extends Component {
 	}
 }
 
-export default translate()(HeaderBar);
+export default withTranslation()(HeaderBar);

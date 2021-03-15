@@ -3,7 +3,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Route, Switch } from "react-router";
 import { push } from "react-router-redux";
-import measureDistance from "@turf/distance";
+// import measureDistance from "@turf/distance";
 import { Redirect } from 'react-router';
 import Promise from "bluebird";
 
@@ -80,11 +80,12 @@ class Services extends React.Component {
 		return b => {
 			try {
 				if (a && b) {
-					const currentGeoJSON = {
-						type: "Point",
-						coordinates: [a.longitude, a.latitude],
-					};
-					let originalDistance = measureDistance(currentGeoJSON, b, "kilometers");
+					// const currentGeoJSON = {
+					// 	type: "Point",
+					// 	coordinates: [a.longitude, a.latitude],
+					// };
+					// let originalDistance = measureDistance(currentGeoJSON, b, "kilometers");
+					let originalDistance = 0
 					let distance = originalDistance;
 					let unit = "km";
 

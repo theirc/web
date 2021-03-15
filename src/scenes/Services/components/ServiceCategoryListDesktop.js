@@ -1,6 +1,6 @@
 // libs
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
 // import { Link } from 'react-router-dom';
@@ -457,4 +457,4 @@ const mapState = ({ country, language, regions }, p) => ({ country, language, re
 
 const mapDispatch = (d, p) => ({ goToService: (country, language, id) => d(push(routes.goToService(country, language, id))) });
 
-export default translate()(connect(mapState, mapDispatch)(ServiceCategoryListDesktop));
+export default withTranslation()(connect(mapState, mapDispatch)(ServiceCategoryListDesktop));

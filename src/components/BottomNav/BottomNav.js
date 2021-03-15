@@ -1,7 +1,7 @@
 // libs
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFileAlt,
@@ -90,4 +90,4 @@ class BottomNav extends Component {
   }
 }
 
-export default translate()(BottomNav);
+export default withTranslation()(BottomNav);

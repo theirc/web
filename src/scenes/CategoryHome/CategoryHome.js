@@ -7,15 +7,6 @@ import { push } from "react-router-redux";
 import { ArticleListOOD } from '../../components'
 import { Skeleton } from "..";
 
-const Remarkable = require("remarkable");
-
-const md = new Remarkable("full", {
-	html: true,
-	linkify: true,
-	typographer: true,
-	breaks: true,
-});
-
 /**
  * @class
  * @description 
@@ -37,7 +28,6 @@ class CategoryHome extends React.Component {
 						country={country}
 						category={category}
 						onNavigate={onNavigate}
-						md={md}
 						t={t}
 					/>
 				</div>
