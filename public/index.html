@@ -7,10 +7,10 @@
 	<meta name="theme-color" content="#000000">
 
 	<!-- <link rel="manifest" href="%PUBLIC_URL%/manifest.json"> -->
-	<link rel="stylesheet" href="%PUBLIC_URL%/css/app.css" />
-	<link rel="stylesheet" href="%PUBLIC_URL%/css/icomoon-font.css" />
-	<link rel="stylesheet" href="%PUBLIC_URL%/css/urdu-font.css" />
-	<link rel="stylesheet" href="%PUBLIC_URL%/css/material-icons.css" />
+	<link rel="stylesheet" media="print" onload="this.onload=null;this.removeAttribute('media');" href="%PUBLIC_URL%/css/app.css" />
+	<link rel="stylesheet" media="print" onload="this.onload=null;this.removeAttribute('media');" href="%PUBLIC_URL%/css/icomoon-font.css" />
+	<link rel="stylesheet" media="print" onload="this.onload=null;this.removeAttribute('media');" href="%PUBLIC_URL%/css/urdu-font.css" />
+	<link rel="stylesheet" media="print" onload="this.onload=null;this.removeAttribute('media');" href="%PUBLIC_URL%/css/material-icons.css" />
 	<!-- <link rel="stylesheet" href="%PUBLIC_URL%/css/fac4bfa814.css" /> -->
 	<!-- <link href="%PUBLIC_URL%/css/L.Control.Locate.min.css" rel="stylesheet" /> -->
 
@@ -34,16 +34,16 @@
 	
 	<script>localStorage.setItem("notFirstTime", true)</script>
 	
-	<script type="text/javascript">window.rsConf = {
+	<script type="text/javascript" async defer>window.rsConf = {
 			params: '//cdn1.readspeaker.com/script/11950/webReader/webReader.js?pids=wr',
 			general: { usePost: true }
 		}
 	</script>
 	
-	<script src="//cdn1.readspeaker.com/script/11950/webReader/webReader.js?pids=wr" type="text/javascript" async></script>
+	<script src="//cdn1.readspeaker.com/script/11950/webReader/webReader.js?pids=wr" type="text/javascript" async defer></script>
 	<!-- <script src="https://refugeecdn.blob.core.windows.net/$web/webapp-libs/polyfill/v2/polyfill.min.js" async></script>
 	<script src="https://refugeecdn.blob.core.windows.net/$web/webapp-libs/modernizr/2.8.3/modernizr.js" async></script> -->
-	<script>
+	<script async defer>
 		window.fbAsyncInit = function () {
 			FB.init({
 				appId: '{{ appId }}',
@@ -65,15 +65,8 @@
 		}(document, 'script', 'facebook-jssdk'));
 
 	</script>
-
 	<script
-		src="https://refugeecdn.blob.core.windows.net/$web/webapp-libs/contentful/5.0.1/contentful.browser.min.js"></script>
-	<script crossorigin
-		src="https://refugeecdn.blob.core.windows.net/$web/webapp-libs/react/16.7.0/react.production.min.js"></script>
-	<script crossorigin
-		src="https://refugeecdn.blob.core.windows.net/$web/webapp-libs/react-dom/16.7.0/react-dom.production.min.js"></script>
-	<script
-		src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js" async></script>
+		src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js" async defer></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCuAJxGZo3B0NzzLv6DVba2yO47IebNvBg"></script>
 
 	<!-- <script src="%PUBLIC_URL%/css/L.Control.Locate.min.js"></script> -->
