@@ -39,6 +39,12 @@
     }
   }
 
+  .TopCategory {
+    &:hover {
+      text-decoration: none!important;
+    }
+  }
+
   &.CT-article {
     background-color: #f2f2f2;
     border-top: 1px solid #ddd;
@@ -115,10 +121,6 @@
     @include brand-colors-border("border-color");
     border-top: solid 6px;
     &:hover {
-      span {
-        text-decoration: underline;
-      }
-
       .icon {
         color: black;
       }

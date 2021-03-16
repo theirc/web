@@ -64,10 +64,10 @@ export default {
 				"Italy": "n/a"
 			},
 			"menu": {
-				"Articles": "Recursos",
+				"Articles": "Informativos",
 				"Home": "Inicio",
 				"Search": "Buscar",
-				"Services": "Encontrar Ayuda"
+				"Services": "Encontrar Apoyo"
 			}
 		}
 	},

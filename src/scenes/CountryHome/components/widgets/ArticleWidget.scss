@@ -145,6 +145,9 @@
       display: flex;
       flex-direction: column;
       margin: 30px 0;
+      &.only {
+        margin: unset;
+      }
       @media (max-width: $desktopBreakpoint) {
         margin: 0 0 30px 0;
         h1 {

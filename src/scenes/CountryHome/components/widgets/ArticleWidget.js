@@ -86,8 +86,6 @@ class ArticleWidget extends Component {
 
     const langRTL = ["ur", "fa", "ar"].indexOf(language) > -1;
 
-    console.log('new deploy');
-
     return (
       <div className={`Article ArticleWidget Home`} key={article.sys.id}>
         {hero && hero.fields && hero.fields.file && showHero && (
@@ -103,7 +101,7 @@ class ArticleWidget extends Component {
         <div
           className={`${!showFullArticle ? "text-container" : "faq-container"}`}
         >
-          <div className={`${!showFullArticle ? "welcome-container" : ""}`}>
+          <div className={`${!showFullArticle ? "welcome-container" : ""} ${(!facebook || !whatsapp) ? "only" : ""}`}>
             {showFullArt ? (
               <h1>{article.fields.title}</h1>
             ) : (
