@@ -21,6 +21,7 @@
     "cross-env": "^7.0.3",
     "css-loader": "^5.1.2",
     "dotenv": "^8.2.0",
+    "es6-promise": "^4.2.8",
     "extract-text-webpack-plugin": "2.1.0",
     "feathers": "^2.1.4",
     "feathers-client": "^2.4.0",
