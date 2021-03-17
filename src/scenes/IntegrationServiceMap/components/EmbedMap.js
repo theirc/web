@@ -8,9 +8,6 @@ import './EmbedMap.css';
 const zdUrl = 'https://signpost-colombia.zendesk.com/hc/es-co/articles/';
 
 var tinycolor = require("tinycolor2");
-let iconWithPrefix = vector_icon => vector_icon.indexOf('icon') > -1 ? 
-								vector_icon.split('-')[0]+' '+vector_icon : 
-								`fa fa-${vector_icon}`;
 let categoryStyle = color => {
 	if (!color) {
 		color = "#000";
@@ -39,7 +36,7 @@ class ServiceIcon extends React.Component {
 		return type ? (
 			<div className="Icon" key={`${service.id}-${idx}`}>
         
-				<i className={iconWithPrefix(type.icon)} style={categoryStyle(type.color)} />
+				<i className={type.icon} style={categoryStyle(type.color)} />
 			</div>
 		) : (
 				<div />
@@ -53,16 +50,15 @@ class ServiceIcon extends React.Component {
  */
 class ServiceItem extends React.Component {
 	render() {
-		const { country, language, service } = this.props;
+		const { service } = this.props;
 		const types = service.serviceCategories;
 		console.log(service, types);
-		let zdId = service.zendeskId;
 		return (
 			<div key={service.id} className="Item">
 				<div className="Info">
 					<div className="Item-content title">
 						<a href={`${zdUrl+service.zendeskId}`} target="parent"><h1>{service.data_i18n[0].name}</h1></a>
-						<i className="material-icons" id="goToServiceIcon" />
+						{/* <i className="material-icons" id="goToServiceIcon" /> */}
 					</div>
 
 					<h2 className="Item-content">{service.provider && service.provider.data_i18n[0].name}{" "}</h2>

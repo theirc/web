@@ -1,11 +1,11 @@
 // libs
 import React, { Component } from "react";
-import _ from "lodash";
+// import _ from "lodash";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
 import { Redirect } from "react-router";
 import PropTypes from "prop-types";
-import measureDistance from "@turf/distance";
+// import measureDistance from "@turf/distance";
 
 // local
 import { CountrySelector, LanguageSelector } from "../../components";
@@ -86,7 +86,7 @@ class Selectors extends Component {
 					this.selectCountry(country.fields.slug);
 				}
 			} else {
-				servicesApi.fetchCountries(language).then((regionList) => {
+				servicesApi().fetchCountries(language).then((regionList) => {
 					api
 						.listCountries(language)
 						.then(e => e.items.map(a => ({
@@ -134,39 +134,39 @@ class Selectors extends Component {
 		});
 	}
 
-	lookupCoordinates(l) {
-		const {
-			countryList
-		} = this.state;
-		const {
-			coords
-		} = l;
-		const currentGeoJSON = {
-			type: "Point",
-			coordinates: [coords.longitude, coords.latitude],
-		};
+	// lookupCoordinates(l) {
+	// 	const {
+	// 		countryList
+	// 	} = this.state;
+	// 	const {
+	// 		coords
+	// 	} = l;
+	// 	const currentGeoJSON = {
+	// 		type: "Point",
+	// 		coordinates: [coords.longitude, coords.latitude],
+	// 	};
 
-		let first = _.first(
-			_.sortBy(countryList, country => {
-				if (!country.coordinates) {
-					return 1e10;
-				} else {
-					const {
-						lon,
-						lat
-					} = country.coordinates;
-					const countryGeoJSON = {
-						type: "Point",
-						coordinates: [lon, lat],
-					};
+	// 	let first = _.first(
+	// 		_.sortBy(countryList, country => {
+	// 			if (!country.coordinates) {
+	// 				return 1e10;
+	// 			} else {
+	// 				const {
+	// 					lon,
+	// 					lat
+	// 				} = country.coordinates;
+	// 				const countryGeoJSON = {
+	// 					type: "Point",
+	// 					coordinates: [lon, lat],
+	// 				};
 
-					return measureDistance(countryGeoJSON, currentGeoJSON);
-				}
-			})
-		);
+	// 				return measureDistance(countryGeoJSON, currentGeoJSON);
+	// 			}
+	// 		})
+	// 	);
 
-		this.selectCountry(first.slug);
-	}
+	// 	this.selectCountry(first.slug);
+	// }
 
 	filterLangs() {
 		const currentCountry = sessionStorage.getItem('redirect');

@@ -1,10 +1,9 @@
 // libs
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
 // import { Link } from 'react-router-dom';
-import _ from "lodash";
 import tinycolor from "tinycolor2";
 
 // local
@@ -15,6 +14,7 @@ import "../../../components/ActionsBar/ActionsBar.css";
 import "./ServiceHome.css";
 import "./ServiceCategoryList.css";
 import "./ServiceCategoryListDesktop.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const NS = { ns: 'Services' };
 
@@ -221,10 +221,6 @@ class ServiceCategoryListDesktop extends React.Component {
 			return false;
 		}
 
-		let iconWithPrefix = vector_icon => vector_icon.indexOf('icon') > -1 ?
-			`${vector_icon.split('-')[0]} ${vector_icon}` :
-			`fa fa-${vector_icon}`;
-
 		let color = this.fixColor(category.color);
 		color = tinycolor(color).saturate(30).toHexString();
 
@@ -235,7 +231,8 @@ class ServiceCategoryListDesktop extends React.Component {
 		const buttonClass = this.state.category && category.id === this.state.category.id ? "location-item-selected" : "location-item";
 		return (
 			<button key={category.id} className={buttonClass} onClick={() => onSelect(category)}>
-				<i className={iconWithPrefix(icon)} style={style} />
+				<FontAwesomeIcon icon={icon} style={style} />
+				{/* <i className={icon} style={style} /> */}
 				<span>{categoryName}</span>
 			</button>
 		);
@@ -247,7 +244,7 @@ class ServiceCategoryListDesktop extends React.Component {
 		const departmentInfo = (departmentT && departmentT.name.length > 0) ? departmentT : department;
 		return (
 			<button key={`${department.id}-${department.slug}`} className={department.slug === this.state.location.slug ? "location-item-selected" : "location-item"} onClick={() => onSelect(department)}>
-				{department.slug === country.fields.slug && <i className='fa fa-globe' />}<span>{departmentInfo.name}</span>
+				{department.slug === country.fields.slug && <FontAwesomeIcon icon="globe" />}<span>{departmentInfo.name}</span>
 			</button>
 		);
 	}
@@ -257,7 +254,7 @@ class ServiceCategoryListDesktop extends React.Component {
 		const cityName = city[`name_${language}`] ? city[`name_${language}`] : city.name;
 		return (
 			<button key={city.id} className={city.id === this.state.city.id ? "location-item-selected" : "location-item"} onClick={() => onSelect(city)}>
-				{city.level === 1 && <i className='fa fa-globe' />}<span>{cityName}</span>
+				{city.level === 1 && <FontAwesomeIcon icon="globe" />}<span>{cityName}</span>
 			</button>
 		);
 	}
@@ -332,9 +329,6 @@ class ServiceCategoryListDesktop extends React.Component {
 		const serviceInfo = serviceT ? serviceT : service;
 		const providerInfo = (providerT && providerT.name) ? providerT : service.provider;
 
-		let iconWithPrefix = vector_icon => vector_icon.indexOf('icon') > -1 ?
-			`${vector_icon.split('-')[0]} ${vector_icon}` :
-			`fa fa-${vector_icon}`;
 		let categoryStyle = color => {
 			if (!color) {
 				color = "#000";
@@ -356,7 +350,8 @@ class ServiceCategoryListDesktop extends React.Component {
 		return [
 			<li key={service.id} className="Item" onClick={() => goToService(country, language, service.id)}>
 				{mainType && <div className="Icon" key={`${service.id}-0`}>
-					<i className={iconWithPrefix(mainType.icon)} style={categoryStyle(mainType.color)} />
+				<FontAwesomeIcon icon={mainType.icon} style={categoryStyle(mainType.color)} />
+					{/* <i className={mainType.icon} style={categoryStyle(mainType.color)} /> */}
 				</div>}
 
 				<div className="Info">
@@ -372,7 +367,8 @@ class ServiceCategoryListDesktop extends React.Component {
 						<div className="Icons">
 							{subTypes.length > 0 && subTypes.map((t, idx) => (
 								<div className="Icon" key={`${service.id}-${idx}`}>
-									<i className={iconWithPrefix(t.icon)} style={categoryStyle(t.color)} />
+									<FontAwesomeIcon icon={t.icon} style={categoryStyle(t.color)} />
+									{/* <i className={t.icon} style={categoryStyle(t.color)} /> */}
 								</div>
 							))}
 						</div>
@@ -454,4 +450,4 @@ const mapState = ({ country, language, regions }, p) => ({ country, language, re
 
 const mapDispatch = (d, p) => ({ goToService: (country, language, id) => d(push(routes.goToService(country, language, id))) });
 
-export default translate()(connect(mapState, mapDispatch)(ServiceCategoryListDesktop));
+export default withTranslation()(connect(mapState, mapDispatch)(ServiceCategoryListDesktop));

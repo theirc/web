@@ -24,7 +24,7 @@
 
 	.Signpost {
 		a {
-			@include brand-colors("color");
+			color: black;
 			opacity: 1;
 			.rtl & {
 				flex: 1;
@@ -48,25 +48,53 @@
 
 	.light {
 		display: flex;
-		justify-content: center;
+		justify-content: flex-end;
 		align-items: center;
-		flex-direction: column;
 		min-height: 100px;
-		padding: 5px;
+		padding: 10px;
+		@media (max-width: $desktopBreakpoint) {
+			min-height: 140px;
+			padding: 10px 10px 57px 10px;
+			box-sizing: border-box;
+			justify-content: space-between;
+			p {
+				margin: unset!important;
+				font-size: 10px!important;
+			}
+			.link-container {
+				svg {
+					font-size: 0.9em;
+				}
+				h3 {
+					font-size: 0.9em;
+				}
+			}
+		}
 		h3 {
 			margin:10px;
 
 		}
 		p {
-			margin-bottom: 0;
-			color: black;
-
+			margin: 0 20px;
+			color: white;
+			font-size: 14px
 		}
 		&,
 		a {
-			@include brand-colors( "background-color");
-			@include brand-colors-inverse( "color");
+			// @include brand-colors( "color");
+			@include brand-colors-footer( "background-color");
 
+		}
+		.link-container {
+			a {
+				color: white;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			svg {
+				font-size: 1.2em;
+			}
 		}
 	}
 
@@ -76,9 +104,8 @@
 		align-items: center;
 		align-content: center;
 		flex-direction: column;
-		min-height: 200px;
 		padding: 5px;
-		background-color: #000000;
+		background-color: #f8f8f8;
 		color: #ffffff;
 
 		img.app-store-logo {
@@ -96,7 +123,7 @@
 
 			&.Signpost {
 				span {
-					color: #888;
+					color: black;
 				}
 			}
 
@@ -114,7 +141,7 @@
 				line-height: normal;
 				letter-spacing: normal;
 				text-align: center;
-				color: #ffffff;
+				color: black;
 				color: var(--white);
 			}
 		}

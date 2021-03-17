@@ -1,6 +1,6 @@
 // libs
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
 // local
 import instance from '../../../backend/settings';
@@ -20,7 +20,7 @@ class InstanceMovedWidget extends Component {
 
 		return (
 			<div className="InstanceMovedWidget">
-				<span></span>
+				<span style={{backgroundImage: "url('/images/instance-moved.jpg')"}}></span>
 				<h1>{t(partner.title, NS)}</h1>
 
 				<br /><br />
@@ -35,4 +35,4 @@ class InstanceMovedWidget extends Component {
 	}
 }
 
-export default translate()(InstanceMovedWidget);
+export default withTranslation()(InstanceMovedWidget);

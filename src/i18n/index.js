@@ -5,7 +5,7 @@
 
 // libs
 import i18n from "i18next";
-import { reactI18nextModule } from "react-i18next";
+import { initReactI18next } from "react-i18next";
 
 // local
 import i18nConfig from "./config.js";
@@ -24,6 +24,6 @@ const options = {
 	},
 };
 
-i18n.use(reactI18nextModule).init(options);
+i18n.use(initReactI18next).init(options);
 
 export default i18n;

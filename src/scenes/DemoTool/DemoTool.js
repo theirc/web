@@ -1,6 +1,5 @@
 // libs
 import React from "react";
-import moment from "moment";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
 
@@ -30,7 +29,7 @@ class DemoTool extends React.Component {
 			const sessionStorage = getSessionStorage();
 			const { firstRequest } = sessionStorage;
 			if (!firstRequest) {
-				sessionStorage.firstRequest = moment().toString();
+				sessionStorage.firstRequest = new Date().toString();
 			}
 		}
 	}

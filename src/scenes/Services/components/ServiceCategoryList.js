@@ -1,7 +1,7 @@
 // libs
 import React from "react";
 import tinycolor from "tinycolor2";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
 // local
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
@@ -46,10 +46,6 @@ class ServiceCategoryList extends React.Component {
 
 		const categoryName = translatedName ? translatedName : name;
 
-		let iconWithPrefix = vector_icon => (vector_icon && vector_icon.indexOf('icon') > -1) ?
-								`${vector_icon.split('-')[0]} ${vector_icon}` : 
-								`fa fa-${vector_icon}`;
-
 		let color = this.fixColor(c.color);
 		color = tinycolor(color)
 			.saturate(30)
@@ -63,7 +59,7 @@ class ServiceCategoryList extends React.Component {
 			<li key={id}>
 				<hr className="line" />
 				<div className="container" onClick={() => { setTimeout(() => onSelectCategory(c), 300) }}>
-					<i className={iconWithPrefix(icon)} style={style} />
+					<i className={icon} style={style} />
 					<span>{categoryName}</span>
 				</div>
 			</li>
@@ -162,4 +158,4 @@ class ServiceCategoryList extends React.Component {
 	}
 }
 
-export default translate()(ServiceCategoryList);
+export default withTranslation()(ServiceCategoryList);

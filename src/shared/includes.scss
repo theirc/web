@@ -4,7 +4,7 @@ $accentRed: #e60000;
 $accentNRC: #ff7602;
 $accentPG: #59c2ed;
 $accentCuenta: #29991f;
-$accentRi: #FFB45A;
+$accentRi: #cf5c36;
 
 $smBreakpoint: 800px;
 $desktopBreakpoint: 1000px;
@@ -17,7 +17,14 @@ $dividerColor: darken($titleBackground, 50%);
 
 $colorMap: (irc: $accentIRC, nrc: $accentNRC, generic: $accentGreen, mc: $accentRed, pg: $accentPG, cuenta: $accentCuenta, ri: $accentRi);
 $colorInverseMap: (irc: #000000, nrc: #ffffff, generic: #ffffff, mc: #ffffff, pg: #ffffff, cuenta: #ffffff, ri: #ffffff);
-
+$textColorMap: (irc: #ffffff, nrc: #000000, generic: #000000, mc: #000000, pg: #000000, cuenta: #000000, ri: #000000);
+$borderColorMap: (irc: #FCD735, nrc: #000000, generic: #339933, mc: #000000, pg: #71D1A7, cuenta: #339933, ri: #005377);
+$buttonColorMap: (irc: #7FB685, nrc: #000000, generic: #3D3FDA, mc: #000000, pg: #000000, cuenta: #3D3FDA, ri: #cf5c36);
+$linksColorMap: (irc: #292633, nrc: #000000, generic: #3D3FDA, mc: #000000, pg: #000000, cuenta: #3D3FDA, ri: #005377);
+$lgColorMap: (irc: #7FB685, nrc: #000000, generic: #339933, mc: #000000, pg: #000000, cuenta: #339933, ri: #cf5c36);
+$footerColorMap: (irc: #7FB685, nrc: #000000, generic: #3D3FDA, mc: #000000, pg: #000000, cuenta: #3D3FDA, ri: #005377);
+$bottomNavColorMap: (irc: #7FB685, nrc: #000000, generic: #339933, mc: #000000, pg: #000000, cuenta: #339933, ri: #9F87AF);
+$navBarColorMap: (irc: #16697A, nrc: #000000, generic: #3D3FDA, mc: #000000, pg: #000000, cuenta: #3D3FDA, ri: #005377);
 a {
 	text-decoration: none;
 }
@@ -60,6 +67,72 @@ a {
 		}
 	}
 }
+
+@mixin brand-colors-text($prop) {
+	@each $org in map-keys($map: $textColorMap) {
+		.#{$org} &  {
+			#{$prop}: map-get($map: $textColorMap, $key: $org);
+		}
+	}
+}
+
+@mixin brand-colors-border($prop) {
+	@each $org in map-keys($map: $borderColorMap) {
+		.#{$org} &  {
+			#{$prop}: map-get($map: $borderColorMap, $key: $org);
+		}
+	}
+}
+
+@mixin brand-colors-button($prop) {
+	@each $org in map-keys($map: $buttonColorMap) {
+		.#{$org} &  {
+			#{$prop}: map-get($map: $buttonColorMap, $key: $org);
+		}
+	}
+}
+
+@mixin brand-colors-link($prop) {
+	@each $org in map-keys($map: $linksColorMap) {
+		.#{$org} &  {
+			#{$prop}: map-get($map: $linksColorMap, $key: $org);
+		}
+	}
+}
+
+@mixin brand-colors-lg($prop) {
+	@each $org in map-keys($map: $lgColorMap) {
+		.#{$org} &  {
+			#{$prop}: map-get($map: $lgColorMap, $key: $org);
+		}
+	}
+}
+
+@mixin brand-colors-footer($prop) {
+	@each $org in map-keys($map: $footerColorMap) {
+		.#{$org} &  {
+			#{$prop}: map-get($map: $footerColorMap, $key: $org);
+		}
+	}
+}
+
+@mixin brand-colors-bottom-nav-border($prop) {
+	@each $org in map-keys($map: $bottomNavColorMap) {
+		.#{$org} &  {
+			#{$prop}: map-get($map: $bottomNavColorMap, $key: $org);
+		}
+	}
+}
+
+@mixin brand-colors-bottom-nav-links($prop) {
+	@each $org in map-keys($map: $navBarColorMap) {
+		.#{$org} &  {
+			#{$prop}: map-get($map: $navBarColorMap, $key: $org);
+		}
+	}
+}
+
+
 
 
 // Flexbox Mixins

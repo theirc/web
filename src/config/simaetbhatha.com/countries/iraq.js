@@ -3,7 +3,7 @@ export default {
 	flag: '',
 	languages: ['ar', 'en'],
 	movedToPartner: null,
-	questionLink: 'mailto:jo-khabrona-info@mercycorps.org',
+	questionLink: 'https://m.me/simaetbhatha',
 	switches: {
 		showArticles: true,
 		showDepartments: false,
@@ -12,7 +12,8 @@ export default {
 	},
 	thirdParty: {
 		facebook: {
-			page: 'https://www.facebook.com/simaetbhatha'
+			page: 'https://www.facebook.com/simaetbhatha',
+			messenger: 'https://m.me/simaetbhatha'
 		}
 	}
 };

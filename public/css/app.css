@@ -1,5 +1,6 @@
 @import url("cairo-font.css");
 @import url("hi-font-icons.css");
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;600;900&display=swap');
 
 html,
 body {
@@ -28,7 +29,7 @@ body .rtl.language-ur {
 }
 html .ltr,
 body .ltr {
-	font-family: "Roboto", sans-serif;
+	font-family: "Heebo", "Roboto", sans-serif;
 	padding: 0;
 }
 

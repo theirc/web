@@ -1,32 +1,70 @@
 @import "../../../../shared/includes.scss";
 .TopCategories {
-    h3 {
-        font-size: 25px;
-        margin: 0 auto 25px;
-        text-align: center;
-        text-transform: uppercase;
-        width: 80%;
+  .top-container{
+    .title-line {
+      &.rtl {
+        margin-right: 0;
+        margin-left: 20px;
+      }
+      &.ltr {
+        margin-left: 0;
+        margin-right: 20px;
+      }
+    }
+  }
+  h3 {
+    font-size: 25px;
+    text-transform: none;
 
-        @media (max-width: $desktopBreakpoint) {
-            display: block;
-            font-size: 1.17em;
-            margin-block-start: 1em;
-            margin-block-end: 1em;
-            margin-inline-start: 0px;
-            margin-inline-end: 0px;
-            font-weight: bold;
-            text-align: left;
-        }
+    @media (max-width: $desktopBreakpoint) {
+      display: block;
+      font-size: 1.17em;
+      margin-block-start: 1em;
+      margin-block-end: 1em;
+      margin-inline-start: 0px;
+      margin-inline-end: 0px;
+      font-weight: bold;
+      text-align: left;
     }
-    .ltr & {
-        s {
-            float: right;
-        }
+  }
+  .ltr & {
+    s {
+      float: right;
     }
-    .rtl & {
-        s {
-            float: left;
-        }
+  }
+  .rtl & {
+    s {
+      float: left;
     }
-
+  }
+  .categories-container {
+      @media (min-width: $desktopBreakpoint) {
+          display: grid;
+          grid-template-columns: 48% 48%;
+          grid-column-gap: 4%;
+      }
+      .TopCategory {
+        display: grid;
+        grid-template-columns: 20% 78% 2%;
+        text-align: left;
+        color: black;
+        @media (min-width: $desktopBreakpoint) {
+          grid-template-columns: 20% 70% 10%;
+          grid-template-rows: 0;
+        }
+        .icon {
+          grid-column-start: 1;
+          display: flex;
+        }
+        &-title {
+          text-align: left;
+          text-decoration: underline;
+          text-transform: none!important;
+        }
+        &-description {
+          text-align: left;
+          grid-column-start: 2;
+        }
+      }
+  }
 }

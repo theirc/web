@@ -1,211 +1,344 @@
 // libs
 import React, { Component } from "react";
-import { Search } from "material-ui-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faFileAlt,
+  faMapMarkerAlt,
+  faHome,
+  faSearch,
+  faTimesCircle,
+  faTimes,
+} from "@fortawesome/pro-light-svg-icons";
 import Headroom from "react-headrooms";
 import PropTypes from "prop-types";
-import { translate, Interpolate } from "react-i18next";
-import { Close, Home, List, Assignment } from "material-ui-icons";
+import { Interpolate, withTranslation, Trans } from "react-i18next";
+import 'lazysizes'
 
 // local
-import Alert from '../Alert/Alert';
+// import Alert from "../Alert/Alert";
 import selectedMenuItem from "../../helpers/menu-items";
-import i18nHelpers from '../../helpers/i18n';
-import instance from '../../backend/settings';
-import languages from './languages';
+import i18nHelpers from "../../helpers/i18n";
+import instance from "../../backend/settings";
+import languages from "./languages";
 import "./AppHeader.css";
 
-const NS = { ns: 'AppHeader' };
+const NS = { ns: "AppHeader" };
 
 /**
  * @class
- * @description 
+ * @description
  */
 class AppHeader extends Component {
-	
-	static propTypes = {
-		onChangeCountry: PropTypes.func,
-		onGoToSearch: PropTypes.func,
-		onGoHome: PropTypes.func,
-		country: PropTypes.object,
-		language: PropTypes.string,
-		onGoToServices: PropTypes.func,
-		onGoToCategories: PropTypes.func,
-	};
-	
-	
-	state = {
-		search: false,
-		prvalert: localStorage.getItem("privacy-policy"),
-		searchText: "",
-		active: false,
-	};
+  static propTypes = {
+    onChangeCountry: PropTypes.func,
+    onGoToSearch: PropTypes.func,
+    onGoHome: PropTypes.func,
+    country: PropTypes.object,
+    language: PropTypes.string,
+    onGoToServices: PropTypes.func,
+    onGoToCategories: PropTypes.func,
+  };
 
-	constructor() {
-		super();
-		i18nHelpers.loadResource(languages, NS.ns);
-	}
+  state = {
+    search: false,
+    prvalert: localStorage.getItem("privacy-policy"),
+    searchText: "",
+    active: false,
+  };
 
-	toggleClass() {
-		const { currentState } = this.state.active;
-		this.setState({ active: !currentState });
-	}
+  constructor() {
+    super();
+    i18nHelpers.loadResource(languages, NS.ns);
+  }
 
-	toggleSearch() {
-		const { search } = this.state;
-		if (!search) {
-			//window.scrollTo(0, 0);
-		}
-		this.setState({ search: !search });
-	}
+  toggleClass() {
+    const { currentState } = this.state.active;
+    this.setState({ active: !currentState });
+  }
 
-	closeAlert() {
-		this.setState({ prvalert: true });
-		localStorage.setItem("privacy-policy", true);
-	}
+  toggleSearch() {
+    const { search } = this.state;
+    if (!search) {
+      //window.scrollTo(0, 0);
+    }
+    this.setState({ search: !search });
+  }
 
-	handleInputChange(event) {
-		const target = event.target;
-		const value = target.type === "checkbox" ? target.checked : target.value;
-		const name = target.name;
+  closeAlert() {
+    this.setState({ prvalert: true });
+    localStorage.setItem("privacy-policy", true);
+  }
 
-		this.setState({
-			[name]: value,
-		});
-	}
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.type === "checkbox" ? target.checked : target.value;
+    const name = target.name;
 
-	handleSubmit(event) {
-		const { onGoToSearch } = this.props;
-		const { searchText } = this.state;
+    this.setState({
+      [name]: value,
+    });
+  }
 
-		onGoToSearch(searchText);
+  handleSubmit(event) {
+    const { onGoToSearch } = this.props;
+    const { searchText } = this.state;
 
-		setTimeout(() => {
-			this.setState({ search: false, searchText: "" });
-		}, 200);
+    onGoToSearch(searchText);
 
-		event.preventDefault();
-	}
+    setTimeout(() => {
+      this.setState({ search: false, searchText: "" });
+    }, 200);
 
-	render() {
-		const {
-			country,
-			headerColor,
-			homePage,
-			language,
-			onChangeCountry,
-			onChangeLanguage,
-			onGoHome,
-			onGoToCategories,
-			onGoToServices,
-			t,
-		} = this.props;
+    event.preventDefault();
+  }
 
-		const { search, searchText } = this.state;
-		const backgroundDark = headerColor === 'light' ? false : true;
-		const logo = instance.brand.images.logo || "/logo.svg";
-		const logoBlack = instance.brand.images.logoBlack || logo;
-		const noop = () => console.log("noop");
-		const cookiePolicyLinkGreece = <a href="/greece/privacy/cookies" target="_blank" rel="noopener noreferrer">Cookie Policy</a>;
-		const privacyPolicyLinkGreece = <a href="/greece/privacy/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>;
-		const cookiePolicyLinkIraq = <a href="/iraq/privacy/cookies" target="_blank" rel="noopener noreferrer">Cookie Policy</a>;
-		const privacyPolicyLinkIraq = <a href="/iraq/privacy/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>;
+  render() {
+    const {
+      country,
+      headerColor,
+      homePage,
+      language,
+      onChangeCountry,
+      onChangeLanguage,
+      onGoHome,
+      onGoToCategories,
+      onGoToServices,
+      t,
+    } = this.props;
 
-		let isOnServices = window.location.href.includes("/services");
-		let isOnArticlesGreece = window.location.href.includes("/categories") || /(\/greece\/.*(\/.)*)/.test(window.location.href);
+    const { search, searchText } = this.state;
+    const backgroundDark = headerColor === "light" ? false : true;
+    const logo = instance.brand.images.logo || "/logo.svg";
+    const logoBlack = instance.brand.images.logoBlack || logo;
+    const noop = () => console.log("noop");
+    const cookiePolicyLinkGreece = (
+      <a
+        href="/greece/privacy/cookies"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Cookie Policy
+      </a>
+    );
+    const privacyPolicyLinkGreece = (
+      <a
+        href="/greece/privacy/privacy-policy"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Privacy Policy
+      </a>
+    );
+    const cookiePolicyLinkIraq = (
+      <a href="/iraq/privacy/cookies" target="_blank" rel="noopener noreferrer">
+        Cookie Policy
+      </a>
+    );
+    const privacyPolicyLinkIraq = (
+      <a
+        href="/iraq/privacy/privacy-policy"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Privacy Policy
+      </a>
+    );
 
-		let disclaimersLink = `/greece/refugee-info-greece-closed/refugee-info-stops-operating-in-greece?language=${language}`;
-		disclaimersLink = window.location.href.includes(disclaimersLink) ? '#' : disclaimersLink;
-		let covidLinkCnEs = '/el-salvador/emergencia-por-coronavirus';
-		let covidLinkCnHn = '/honduras/alertas';
-		let covidLinkRiIt = '/italy/coronavirus-emergency';
-		let covidLinkRiGr = '/greece/coronavirus-emergency-in-greece';
+    // let isOnServices = window.location.href.includes("/services");
+    // let isOnArticlesGreece =
+    //   window.location.href.includes("/categories") ||
+    //   /(\/greece\/.*(\/.)*)/.test(window.location.href);
 
-		let selectedIndex = selectedMenuItem();
-		let path = window.location.pathname;
+    // let disclaimersLink = `/greece/refugee-info-greece-closed/refugee-info-stops-operating-in-greece?language=${language}`;
+    // disclaimersLink = window.location.href.includes(disclaimersLink)
+    //   ? "#"
+    //   : disclaimersLink;
+    // let covidLinkCnEs = "/el-salvador/emergencia-por-coronavirus";
+    // let covidLinkCnHn = "/honduras/alertas";
+    // let covidLinkRiIt = "/italy/coronavirus-emergency";
+    // let covidLinkRiGr = "/greece/coronavirus-emergency-in-greece";
 
-		return (
-			<div className={backgroundDark ? 'AppHeader' : 'AppHeaderLight'}>
-				<Headroom tolerance={5} offset={200}>
-					<div className={[homePage ? "header-opacity" : "", backgroundDark ? 'app-bar' : 'app-bar-light', !(country && language) ? 'app-bar-black' : ''].join(" ")}>
+    let selectedIndex = selectedMenuItem();
+    let path = window.location.pathname;
+    const langRTL = ["ur", "fa", "ar"].indexOf(language) > -1;
 
-						<div className={["app-bar-container logo", !(country && language) ? "logo-centered" : ""].join(" ")} onClick={path.includes('selectors') ? noop : onGoHome || noop}>
-							<img onClick={onGoHome} src={backgroundDark ? logo : logoBlack} className="app-bar-logo" alt="bar-logo" />
-						</div>
+    return (
+      <div className={backgroundDark ? "AppHeader" : "AppHeaderLight"}>
+        <Headroom tolerance={5} offset={200}>
+          <div
+            className={[
+              homePage ? "header-opacity" : "",
+              backgroundDark ? "app-bar" : "app-bar-light",
+              !(country && language) ? "app-bar-black" : "",
+            ].join(" ")}
+          >
+            <div
+              className={[
+                "app-bar-container logo",
+                !(country && language) ? "logo-centered" : "",
+              ].join(" ")}
+              onClick={path.includes("selectors") ? noop : onGoHome || noop}
+            >
+              <img
+                onClick={onGoHome}
+                data-src={!(country && language) ? logo : logoBlack}
+                className="app-bar-logo lazyload"
+                alt="bar-logo"
+                width="111.13"
+                height="42"
+              />
+            </div>
 
-						{country && language &&
-							(
-								<div className="app-bar-container buttons">
-									<div className="app-bar-buttons">
-										<span className={`app-bar-selectors top-menu ${selectedIndex === 0 ? "Selected" : ""}`} color="contrast" onClick={onGoHome || noop}>
-											<Home /><span className='menu-item'>{t("menu.Home", NS)}</span>
-										</span>
+            {country && language && (
+              <div className="app-bar-container buttons">
+                <div className="app-bar-buttons">
+                  <span
+                    className={`app-bar-selectors top-menu ${
+                      langRTL ? "rtl" : "ltr"
+                    } ${selectedIndex === 0 ? "Selected" : ""}`}
+                    color="contrast"
+                    onClick={onGoHome || noop}
+                  >
+                    <FontAwesomeIcon icon={faHome} />
+                    <span className="menu-item">{t("menu.Home", NS)}</span>
+                  </span>
 
-										{instance.countries[country.fields.slug].switches.showArticles &&
-											<span className={`app-bar-selectors top-menu ${selectedIndex === 1 ? "Selected" : ""}`} color="contrast" onClick={onGoToCategories || noop}>
-												<Assignment /><span className='menu-item'>{t("menu.Articles", NS)}</span>
-											</span>
-										}
+                  {instance.countries[country.fields.slug].switches
+                    .showArticles && (
+                    <span
+                      className={`app-bar-selectors top-menu ${
+                        langRTL ? "rtl" : "ltr"
+                      } ${selectedIndex === 1 ? "Selected" : ""}`}
+                      color="contrast"
+                      onClick={onGoToCategories || noop}
+                    >
+                      <FontAwesomeIcon icon={faFileAlt} />
+                      <span className="menu-item">
+                        {t("menu.Articles", NS)}
+                      </span>
+                    </span>
+                  )}
 
-										{instance.countries[country.fields.slug].switches.showServices &&
-											<span className={`app-bar-selectors top-menu ${selectedIndex === 2 ? "Selected" : ""}`} color="contrast" onClick={onGoToServices || noop}>
-												<List /><span className='menu-item'>{t("menu.Services", NS)}</span>
-											</span>
-										}
+                  {instance.countries[country.fields.slug].switches
+                    .showServices && (
+                    <span
+                      className={`app-bar-selectors top-menu ${
+                        langRTL ? "rtl" : "ltr"
+                      } ${selectedIndex === 2 ? "Selected" : ""}`}
+                      color="contrast"
+                      onClick={onGoToServices || noop}
+                    >
+                      <FontAwesomeIcon icon={faMapMarkerAlt} />
+                      <span className="menu-item">
+                        {t("menu.Services", NS)}
+                      </span>
+                    </span>
+                  )}
 
-										<span className='selectors'>
-											{!instance.switches.disableCountrySelector &&
-												<span className="country" color="contrast" onClick={onChangeCountry || noop}>
-													<img src={`/images/flags/${country.fields.slug}.png`} alt='' />
-												</span>
-											}
+                  <span className="selectors">
+                    {!instance.switches.disableCountrySelector && (
+                      <span
+                        className="country"
+                        color="contrast"
+                        onClick={onChangeCountry || noop}
+                      >
+                        <img
+                          data-src={`/images/flags/${country.fields.slug}.jpg`}
+                          alt="country-flag"
+                          className="lazyload"
+                          width="30"
+                          height="20.38"
+                        />
+                      </span>
+                    )}
 
-											{!instance.switches.disableLanguageSelector &&
-												<span className="lang" color="contrast" onClick={onChangeLanguage}>
-													{language || " "}
-												</span>
-											}
-										</span>
+                    {!instance.switches.disableLanguageSelector && (
+                      <span
+                        className="lang"
+                        color="contrast"
+                        onClick={onChangeLanguage}
+                      >
+                        {language || " "}
+                      </span>
+                    )}
+                  </span>
 
-										<div className="app-bar-separator separator-searchIcon" />
+                  {!search && (
+                    <FontAwesomeIcon
+                      icon={faSearch}
+                      className="search-btn"
+                      onClick={this.toggleSearch.bind(this)}
+                    />
+                  )}
 
-										{!search && <Search className='search-btn' onClick={this.toggleSearch.bind(this)} />}
+                  {search && (
+                    <FontAwesomeIcon
+                      icon={faTimes}
+                      className="search-btn"
+                      onClick={this.toggleSearch.bind(this)}
+                    />
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+        </Headroom>
 
-										{search && <i className="fa fa-times search-btn" onClick={this.toggleSearch.bind(this)} />}
+        {search && (
+          <div className="search-bar-container">
+            <form onSubmit={this.handleSubmit.bind(this)} className="SearchBar">
+              <input
+                autoComplete="off"
+                autoFocus
+                name="searchText"
+                placeholder={t("menu.Search", NS)}
+                type="text"
+                value={searchText}
+                onChange={this.handleInputChange.bind(this)}
+              />
+              {searchText && (
+                <FontAwesomeIcon
+                  icon={faTimesCircle}
+                  className="search-bar-inner-icon"
+                  onClick={() => this.setState({ searchText: "" })}
+                />
+              )}
+              <FontAwesomeIcon
+                icon={faSearch}
+                className="search-bar-inner-icon"
+                onClick={this.handleSubmit.bind(this)}
+              />
+            </form>
+          </div>
+        )}
 
-									</div>
-								</div>
-							)
-						}
-					</div>
-				</Headroom>
+        {!this.state.prvalert && instance.switches.cookieBanner && (
+          <div className={this.state.prvalert ? "hidden" : "privacy-banner"}>
+            <div className="content">
+              <span className="privacy-banner-separator"></span>
+              <Trans
+                i18nKey="COOKIES_BANNER"
+                cookiePolicy={
+                  instance.brand.code === "ri"
+                    ? cookiePolicyLinkGreece
+                    : cookiePolicyLinkIraq
+                }
+                privacyPolicy={
+                  instance.brand.code === "ri"
+                    ? privacyPolicyLinkGreece
+                    : privacyPolicyLinkIraq
+                }
+              />
+            </div>
+            <FontAwesomeIcon
+              icon={faTimes}
+              className="close-alert"
+              onClick={this.closeAlert.bind(this)}
+            />
+          </div>
+        )}
 
-				{search && (
-					<form onSubmit={this.handleSubmit.bind(this)} className="SearchBar">
-						<input autoComplete="off" autoFocus name="searchText" placeholder={t("menu.Search", NS)} type="text" value={searchText} onChange={this.handleInputChange.bind(this)} />
-						{searchText && <i className="fa fa-times-circle" onClick={() => this.setState({ searchText: "" })} />}
-						<i className="fa fa-search" onClick={this.handleSubmit.bind(this)} />
-					</form>
-				)}
-
-				{!this.state.prvalert && instance.switches.cookieBanner && (
-					<div className={this.state.prvalert ? 'hidden' : 'privacy-banner'}>
-						<div className='content'>
-							<span className="privacy-banner-separator"></span>
-							{instance.brand.code === 'ri' ? 
-								<Interpolate i18nKey="COOKIES_BANNER" cookiePolicy={cookiePolicyLinkGreece} privacyPolicy={privacyPolicyLinkGreece} /> : 
-								<Interpolate i18nKey="COOKIES_BANNER_IRAQ" cookiePolicy={cookiePolicyLinkIraq} privacyPolicy={privacyPolicyLinkIraq} />
-							}
-						</div>
-						<Close
-							className="close-alert"
-							color="contrast"
-							size={36}
-							onClick={this.closeAlert.bind(this)}
-						/>
-					</div>
-				)}
-
-				{/* {(isOnServices || isOnArticlesGreece) && window.location.href.includes('/greece/') &&
+        {/* {(isOnServices || isOnArticlesGreece) && window.location.href.includes('/greece/') &&
 					<Alert
 						link={covidLinkRiGr}
 						header={isOnServices ? t('banner.Greece.ServicesHeader', NS) : t('banner.Greece.ArticlesHeader', NS)}
@@ -217,7 +350,7 @@ class AppHeader extends Component {
 					<Alert link={covidLinkRiGr} message={t('banner.Greece.Home', NS)} />
 				} */}
 
-				{window.location.href.includes('/jordan') &&
+        {/* {window.location.href.includes('/jordan') &&
 					<Alert message={t('banner.Jordan', NS)} fontColor='white'/>
 				}
 				
@@ -235,11 +368,10 @@ class AppHeader extends Component {
 
 				{(window.location.href.endsWith('/greece') || window.location.href.includes('/greece/services'))  &&
 					<Alert link='' message={t('banner.Greece.Covid', NS)} fontColor='black'/>
-				}
-
-			</div>
-		);
-	}
+				} */}
+      </div>
+    );
+  }
 }
 
-export default translate()(AppHeader);
+export default withTranslation()(AppHeader);

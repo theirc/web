@@ -2,9 +2,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import ReactDOMServer from "react-dom/server";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 // local
 import routes from '../routes';
@@ -13,9 +14,6 @@ import getSessionStorage from "../../../shared/sessionStorage";
 import HtmlMarker from "./HtmlMarker";
 
 var tinycolor = require("tinycolor2");
-let iconWithPrefix = vector_icon => vector_icon.indexOf('icon') > -1 ?
-	`${vector_icon.split('-')[0]} ${vector_icon}` :
-	`fa fa-${vector_icon}`;
 let categoryStyle = color => {
 	if (!color) {
 		color = "#000";
@@ -43,7 +41,7 @@ class ServiceIcon extends React.Component {
 		const { service, idx, type } = this.props;
 		return type ? (
 			<div className="Icon" key={`${service.id}-${idx}`} style={{ 'fontSize': '18px' }}>
-				<i className={iconWithPrefix(type.icon)} style={categoryStyle(type.color)} />
+				<i className={type.icon} style={categoryStyle(type.color)} />
 			</div>
 		) : (
 				<div />
@@ -95,7 +93,7 @@ class ServiceItem extends React.Component {
 					</h2>
 				</div>
 
-				<i className="material-icons arrow" id="goToServiceIcon" />
+				<FontAwesomeIcon icon="angle-right" className="arrow" id="goToServiceIcon" />
 			</div>
 		);
 	}
@@ -117,15 +115,12 @@ class ServiceMapDesktop extends React.Component {
 
 	componentDidMount() {
 		const {
-			defaultLocation,
-			services,
 			country
 		} = this.props;
 
 		const sessionStorage = getSessionStorage();
 
 		if (navigator.onLine) {
-			let isMap = window.google;
 			const map = new window.google.maps.Map(document.getElementById('MapCanvas'), {
 				minZoom: 3,
 				center: { lat: country.fields.coordinates.lat, lng: country.fields.coordinates.lon },
@@ -240,4 +235,4 @@ const mapState = ({ country, language }, p) => ({ country, language });
 
 const mapDispatch = (d, p) => ({ goToService: (country, language, id) => d(push(routes.goToService(country, language, id))) });
 
-export default translate()(connect(mapState, mapDispatch)(ServiceMapDesktop));
+export default withTranslation()(connect(mapState, mapDispatch)(ServiceMapDesktop));

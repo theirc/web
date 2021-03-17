@@ -2,9 +2,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import ReactDOMServer from "react-dom/server";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 // local
 import routes from '../routes';
@@ -13,9 +14,6 @@ import "./ServiceHome.css";
 import HtmlMarker from "./HtmlMarker";
 
 var tinycolor = require("tinycolor2");
-let iconWithPrefix = vector_icon => vector_icon.indexOf('icon') > -1 ?
-	`${vector_icon.split('-')[0]} ${vector_icon}` :
-	`fa fa-${vector_icon}`;
 let categoryStyle = color => {
 	if (!color) {
 		color = "#000";
@@ -46,7 +44,7 @@ class ServiceIcon extends React.Component {
 
 		return type ? (
 			<div className="Icon" key={`${s.id}-${idx}`} style={{ 'fontSize': '18px' }}>
-				<i className={iconWithPrefix(type.icon)} style={categoryStyle(type.color)} />
+				<i className={type.icon} style={categoryStyle(type.color)} />
 			</div>
 		) : <div />;
 	}
@@ -98,7 +96,7 @@ class ServiceItem extends React.Component {
 					</h2>
 				</div>
 
-				<i className="material-icons arrow" id="goToServiceIcon" />
+				<FontAwesomeIcon icon="angle-right" className="arrow" />
 			</div>
 		);
 	}
@@ -123,7 +121,6 @@ class ServiceMap extends React.Component {
 	componentDidMount() {
 
 		const {
-			defaultLocation,
 			findServicesInLocation,
 			country
 		} = this.props;
@@ -136,7 +133,6 @@ class ServiceMap extends React.Component {
 			This way we can run updates on the content of the map
 		*/
 		if (navigator.onLine) {
-			let isMap = window.google;
 			const map = new window.google.maps.Map(document.getElementById('MapCanvas'), {
 				minZoom: 3,
 				center: { lat: country.fields.coordinates.lat, lng: country.fields.coordinates.lon },
@@ -258,7 +254,7 @@ class ServiceMap extends React.Component {
 				}
 
 				{!isOnline &&
-					<div className="ServiceMapContainer2" style={{ width: "100%", backgroundImage: "url('/images/cn-offline-map.png')", backgroundSize: "contain" }}>
+					<div className="ServiceMapContainer2" style={{ width: "100%", backgroundImage: "url('/images/cn-offline-map.jpg')", backgroundSize: "contain" }}>
 						<div id="MapCanvas2"></div>
 					</div>
 				}
@@ -271,4 +267,4 @@ const mapState = ({ country, defaultLocation, language }, p) => ({ country, defa
 
 const mapDispatch = (d, p) => ({ goToService: (country, language, id) => d(push(routes.goToService(country, language, id))) });
 
-export default translate()(connect(mapState, mapDispatch)(ServiceMap));
+export default withTranslation()(connect(mapState, mapDispatch)(ServiceMap));

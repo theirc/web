@@ -1,6 +1,6 @@
 // libs
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
 // local
 import "./LanguageSelector.css";
@@ -54,4 +54,4 @@ class LanguageSelector extends Component {
 	}
 }
 
-export default translate()(LanguageSelector);
+export default withTranslation()(LanguageSelector);

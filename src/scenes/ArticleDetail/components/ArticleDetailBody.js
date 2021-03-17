@@ -3,13 +3,11 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom"
 import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
-import * as clipboard from "clipboard-polyfill";
-import { LibraryBooks, Link } from "material-ui-icons";
 import FacebookPlayer from "react-facebook-player";
 import YouTube from "react-youtube";
 import InstagramEmbed from 'react-instagram-embed';
-import { translate } from "react-i18next";
-import _ from 'lodash';
+import { withTranslation } from "react-i18next";
+import 'lazysizes'
 
 // local
 import { history } from "../../../shared/redux/store";
@@ -18,17 +16,13 @@ import instance from '../../../backend/settings';
 import fbHelper from '../../../helpers/facebook';
 import "../../../components/ActionsBar/ActionsBar.css";
 import "./ArticleDetailBody.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCopy } from "@fortawesome/pro-regular-svg-icons";
+import { faFacebookF } from "@fortawesome/free-brands-svg-icons";
+import Markdown from "markdown-to-jsx";
 
 const NS = { ns: 'ArticleDetail' };
-
-const moment = global.moment;
-const Remarkable = require("remarkable");
 const IG_URL = "https://instagr.am/p/";
-const md = new Remarkable("full", {
-	html: true,
-	linkify: true,
-	breaks: true,
-});
 
 /**
  * @class
@@ -152,7 +146,7 @@ class ArticleDetailBody extends Component {
 
 	onCopyLink = () => {
 		this.setState({ copied: true });
-		clipboard.writeText(document.location.href);
+		navigator.clipboard.writeText(document.location.href)
 		setTimeout(() => this.setState({ copied: false }), 1500);
 	}
 
@@ -162,6 +156,17 @@ class ArticleDetailBody extends Component {
 		const { contentType } = article.sys;
 		const url = encodeURIComponent(window.location.href);
 		let lang = ''
+
+		const updatedDate = new Date(article.sys.updatedAt)
+
+		let appendLeadingZeroes = (n) => {
+			if(n <= 9) {
+				return "0" + n;
+			}
+			return n
+		}
+
+		const updatedAtDate = `${updatedDate.getFullYear()}.${appendLeadingZeroes(updatedDate.getMonth() + 1)}.${appendLeadingZeroes(updatedDate.getDate())}`
 
 		switch (language) {
 			case 'en':
@@ -181,12 +186,10 @@ class ArticleDetailBody extends Component {
 				break;
 		}
 
-		let html = md.render(content || lead);
-		html = html.replace(/(\+[0-9]{9,14}|00[0-9]{9,15})/g, `<a class="tel" href="tel:$1">$1</a>`);
-
-		let country = _.get(article, 'fields.country.fields.slug');
+		let country = article.fields.country.fields.slug;
 
 		let categorySlug = document.location.pathname.split('/')[2];
+		let categoryIcon = article.fields.category.fields.iconClass.replace('fa fa-','');
 		return (
 			<div ref={r => (this._ref = r)} id="articleDetailBody" className={["ArticleDetailBody", loading ? "loading" : "loaded"].join(" ")}>
 				<Helmet>
@@ -195,10 +198,10 @@ class ArticleDetailBody extends Component {
 
 				<HeaderBar subtitle={(category.fields.articles || []).length > 1 && `${category.fields.name}:`} title={title} />
 
-				{_.has(hero, 'fields.file') &&
+				{hero && hero.fields && hero.fields.file &&
 					<div>
 						<div className="hero">
-							<img src={hero.fields.file.url} alt="" />
+							<img data-src={hero.fields.file.url} alt="hero-header" className="lazyload" />
 						</div>
 						{hero.fields.description && <credit>{hero.fields.description}</credit>}
 					</div>
@@ -206,21 +209,21 @@ class ArticleDetailBody extends Component {
 
 				<div className='ActionsBar'>
 					<div className='left'>
-						{_.has(article, 'fields.category.fields') &&
+						{article && article.fields && article.fields.category && article.fields.category.fields && 
 							<div className='btn' onClick={() => country ? history.push(`/${country}/${categorySlug}`) : history.goBack()}>
-								<i className="material-icons">keyboard_arrow_left</i>
-								<i className={article.fields.category.fields.iconClass || "material-icons"}>{article.fields.category.fields.iconText || ((!article.fields.category.fields.iconClass || article.fields.category.fields.iconClass === "material-icons") && "add")}</i>
+								<FontAwesomeIcon icon="chevron-left" className="arrow-left" />
+								<FontAwesomeIcon icon={categoryIcon} />
 								<span>{article.fields.category.fields.name}</span>
 							</div>
 						}
-						{!_.has(article, 'fields.category.fields') && <span style={{ visibility: 'hidden' }}></span>}
+						{!(article && article.fields && article.fields.category && article.fields.category.fields) && <span style={{ visibility: 'hidden' }}></span>}
 					</div>
 
 					<div className="social">
-						<div href='#' className="social-btn" onClick={() => fbHelper.share(language)}><i className="fa fa-facebook-f" /></div>
+						<div href='#' className="social-btn" onClick={() => fbHelper.share(language)}><FontAwesomeIcon icon={faFacebookF} /></div>
 
 						<div href='#' className="social-btn" onClick={this.onCopyLink}>
-							{!this.state.copied ? <Link /> : <LibraryBooks />}
+							{!this.state.copied ? <FontAwesomeIcon icon="link" /> : <FontAwesomeIcon icon={faCopy} />}
 							{this.state.copied && <span className='copied'>{t('actions.Copied', NS)}</span>}
 						</div>
 					</div>
@@ -238,8 +241,9 @@ class ArticleDetailBody extends Component {
 						</div>
 					}
 					<div id="maincontent">
-						<span className='author'><span>{t("actions.LAST_UPDATED", NS)}</span> {moment(article.sys.updatedAt).format('YYYY.MM.DD')}</span>
-						<div dangerouslySetInnerHTML={{ __html: html }} />
+						<span className='author'><span>{t("actions.LAST_UPDATED", NS)}</span> {updatedAtDate}</span>
+						{content && <Markdown>{content}</Markdown>}
+						{lead && <Markdown>{lead}</Markdown>}
 					</div>
 				</article>
 			</div>
@@ -247,4 +251,4 @@ class ArticleDetailBody extends Component {
 	}
 }
 
-export default translate()(ArticleDetailBody);
+export default withTranslation()(ArticleDetailBody);

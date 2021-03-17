@@ -1,13 +1,11 @@
 // libs
 import React from "react";
-import { translate } from "react-i18next";
-import _ from "lodash";
+import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
-import { LibraryBooks, Link } from "material-ui-icons";
-import * as clipboard from "clipboard-polyfill";
 import { Helmet } from "react-helmet";
 import PropTypes from "prop-types";
+import 'lazysizes'
 
 // local
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
@@ -16,13 +14,15 @@ import fbHelpers from '../../../helpers/facebook';
 import "../../../components/ActionsBar/ActionsBar.css";
 import "./ServiceDetail.css";
 import "./ServiceHome.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCopy } from "@fortawesome/pro-regular-svg-icons";
+import { faFacebookF, faViber, faWhatsapp, faSkype, faTelegramPlane, faInstagram, faTwitter } from "@fortawesome/free-brands-svg-icons";
 
 const NS = { ns: 'Services' };
 
 //temp API Key from Andres Aguilar
 const GMAPS_API_KEY = "AIzaSyAK54Ir69gNM--M_5dRa0fwVH8jxWnJREQ";
 const hotlinkTels = input => input;
-const moment = global.moment;
 
 /**
  * @class
@@ -65,7 +65,7 @@ class ServiceDetail extends React.Component {
 	}
 
 	Copiedlnk() {
-		clipboard.writeText(document.location.href);
+		navigator.clipboard.writeText(document.location.href)
 
 		this.setState(prevState => ({ copied: !prevState.copied }));
 		setTimeout(() => {
@@ -79,7 +79,7 @@ class ServiceDetail extends React.Component {
 	onCopyLink = () => {
 		this.setState({ copied: true });
 
-		clipboard.writeText(document.location.href);
+		navigator.clipboard.writeText(document.location.href)
 
 		setTimeout(() => this.setState({ copied: false }), 1500);
 	}
@@ -105,69 +105,98 @@ class ServiceDetail extends React.Component {
 	}
 
 	renderContactInformation(ci, callAux) {
-		let { text, type } = ci;
+		let { value, type, id } = ci;
 		let typography;
 		let action;
 		let typeText;
 		let textClass = 'noPhoneFormat';
+		const toUrl = u => (u.indexOf("http") === -1 ? `http://${u}` : u);
 
 		switch (type) {
 			case "whatsapp":
-				typography = "MenuIcon fa fa-whatsapp";
-				action = `whatsapp://send?phone=${text}`;
+				typography = faWhatsapp;
+				action = `whatsapp://send?phone=${value}`;
 				typeText = "Whatsapp: ";
 				break;
 
 			case "skype":
-				typography = "MenuIcon fa fa-skype";
-				action = `skype:${text}?chat`;
+				typography = faSkype;
+				action = `skype:${value}?chat`;
 				typeText = "Skype: ";
 				break;
 
 			case "facebook_messenger":
-				typography = "MenuIcon fa fa-facebook";
-				action = `http://m.me/${text}`;
-				typeText = "Facebook Messenger: ";
+				typography = faFacebookF;
+				action = `${toUrl(value)}`;
+				typeText = "Facebook: ";
 				break;
 
 			case "viber":
-				typography = "MenuIcon fa fa-phone";
-				action = `viber://add?number=${text}`;
+				typography = faViber;
+				action = `viber://add?number=${value}`;
 				typeText = "Viber: ";
 				break;
 
 			case "phone":
-				typography = "MenuIcon fa fa-phone";
-				action = `tel:${text}`;
+				typography = "phone";
+				action = `tel:${value}`;
 				typeText = callAux + ":";
+				textClass = 'phoneFormat';
+				break;
+			
+			case "telegram":
+				typography = faTelegramPlane;
+				action = `tel:${value}`;
+				typeText = "Telegram: ";
 				textClass = 'phoneFormat';
 				break;
 
 			case "email":
-				typography = "MenuIcon fa fa-envelope-o";
-				action = `mailto:${text}`;
+				typography = "envelope";
+				action = `mailto:${value}`;
 				typeText = "Email: ";
 				break;
 
 			case "instagram":
-				typography = "MenuIcon fa fa-envelope-o";
-				action = `https://www.instagram.com/${text}`;
+				typography = faInstagram;
+				action = `${toUrl(value)}`;
 				typeText = "Instagram: ";
+				break;
+
+			case "twitter":
+				typography = faTwitter;
+				action = `${toUrl(value)}`;
+				typeText = "Twitter: ";
+				break;
+
+			case "signal":
+				typography = "phone";
+				action = `tel:${value}`;
+				typeText = "Signal: ";
+				textClass = 'phoneFormat';
+				break;
+
+			case "website":
+				typography = "external-link-alt";
+				action = `${toUrl(value)}`;
+				typeText = "Website: ";
 				break;
 
 			default:
 				break;
 		}
 		return (
-			<div className="Selector" onClick={() => window.open(action)}>
+			<div className="Selector" onClick={() => window.open(action)} key={id}>
 				<span className='icon-placeholder'>
-					<i className={typography} aria-hidden="true" />
+					<FontAwesomeIcon className="MenuIcon" icon={typography} />
 				</span>
 
 				<h1>
-					<div className="ContactInformation">
-						{typeText}<a href={action} className={textClass}>{text}</a>
-					</div>
+					<span style={{ display: 'inline-block', overflow: 'hidden' }}>{typeText}</span>
+					<div className="field" style={{
+						display: 'inline-block', direction: 'ltr', marginLeft: '5px',
+						overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
+					}}>{value}</div>
 				</h1>
 			</div>
 		)
@@ -175,8 +204,7 @@ class ServiceDetail extends React.Component {
 
 	render() {
 		const { service, relatedServices } = this.state;
-		const { country, goToService, language, t, instance } = this.props;
-		const countryCode = _.has(country, 'fields.slug') && instance.countries[country.fields.slug].countryCode;
+		const { country, goToService, language, t } = this.props;
 		const weekDays = [
 			{ id: 1, name: "Monday" },
 			{ id: 2, name: "Tuesday" },
@@ -195,18 +223,10 @@ class ServiceDetail extends React.Component {
 			);
 		}
 
-		const toUrl = u => (u.indexOf("http") === -1 ? `http://${u}` : u);
 		const hasHours = o => {
 			return o.isAlwaysOpen || o.serviceOpeningHours.length > 0;
 		};
 		const callAux = t("services.Call", NS);
-		// const timeValidation = time => {
-		// 	const m = moment(moment(`2001-01-01 ${time}`).toJSON())
-		// 		.locale(false)
-		// 		.locale(language);
-		// 	console.log(m.hour())
-		// 	return true;
-		// };
 		const serviceProviderElement = s => <span className='providerName'>{s.name}</span>;
 
 		const showTimeTable = openingHours => {
@@ -238,14 +258,21 @@ class ServiceDetail extends React.Component {
 		const providerT = service.provider.data_i18n.filter(x => x.language === language)[0]
 		const providerInfo = (providerT && providerT.name) ? providerT : service.provider;
 
-		let sortedContactInformation = _.sortBy(service.contact_information || [], ci => {
-			return ci.index;
-		});
-		let subtitle = (service.serviceCategories && service.serviceCategories.length > 0) ? _.first(service.serviceCategories).name : '';
-		let phoneNumberWithCode = countryCode + service.phone_number;
-		const url = encodeURIComponent(window.location.href);
-		
-		let lang = '';
+		let sortedContactInformation = service.serviceContactInformations
+
+		let subtitle = (service.serviceCategories && service.serviceCategories.length > 0) ? service.serviceCategories[0].name : '';
+		// let phoneNumberWithCode = countryCode + service.phone_number;
+
+		let appendLeadingZeroes = (n) => {
+			if(n <= 9) {
+			  return "0" + n;
+				  }
+				  return n
+			  }
+		  
+		const updatedDate = (param) => new Date(param)
+		const updatedAtDate = (param) => `${updatedDate(param).getFullYear()}.${appendLeadingZeroes(updatedDate(param).getMonth() + 1)}.${appendLeadingZeroes(updatedDate(param).getDate())}`
+	  
 
 		return (
 			<div>
@@ -258,24 +285,24 @@ class ServiceDetail extends React.Component {
 
 					{service.image &&
 						<div className="hero">
-							<div className="HeroImageContainer"><img src={service.image} alt={service.name} /></div>
+							<div className="HeroImageContainer"><img data-src={service.image} alt={service.name} className="lazyload" /></div>
 						</div>
 					}
 
 					<div className='ActionsBar'>
 						<div className="left"></div>
 						<div className="social">
-							<div href='#' className="social-btn" onClick={() => fbHelpers.share(language)}><i className="fa fa-facebook-f" style={{ fontSize: 16 }} /></div>
+							<div href='#' className="social-btn" onClick={() => fbHelpers.share(language)}><FontAwesomeIcon icon={faFacebookF} /></div>
 
 							<div href='#' className="social-btn" onClick={this.onCopyLink}>
-								{!this.state.copied ? <Link /> : <LibraryBooks />}
+								{!this.state.copied ? <FontAwesomeIcon icon="link" /> : <FontAwesomeIcon icon={faCopy} />}
 								{this.state.copied && <span className='copied'>{t('services.Copied', NS)}</span>}
 							</div>
 
 						</div>
 					</div>
 					<article>
-						<span className='author'><span>{t("services.LAST_UPDATED", NS)}</span> {moment(service.updated_at).format('YYYY.MM.DD')}</span>
+						<span className='author'><span>{t("services.LAST_UPDATED", NS)}</span> {updatedAtDate(service.updatedAt)}</span>
 
 						{providerInfo && <h2 className='provider'>
 							{t("services.Service Provider", NS)}:&nbsp;{serviceProviderElement(providerInfo)}
@@ -319,84 +346,19 @@ class ServiceDetail extends React.Component {
 							{service.latitude && service.longitude && (
 								<div className="Selector" onClick={() => window.open(`https://www.google.com/maps/search/?api=1&query=${service.latitude},${service.longitude}`)}>
 									<span className='icon-placeholder'>
-										<i className="MenuIcon fa fa-map" aria-hidden="true" />
+										<FontAwesomeIcon icon="map-marker-alt" className="MenuIcon" />
 									</span>
 
 									<h1>{t("services.Get directions", NS)}</h1>
 								</div>
 							)}
 
-							{service.phone && (
-								<div className="Selector" onClick={() => window.open(`tel:${service.phone}`)}>
-									<span className='icon-placeholder'>
-										<i className="MenuIcon fa fa-phone" aria-hidden="true" />
-									</span>
-
-									<h1>
-										{t("services.Call", NS)}:
-									<a className="phoneFormat" href={`tel:${service.phone}`} >{service.phone}</a>
-									</h1>
-								</div>
-							)}
-
-							{service.email && (
-								<div className="Selector" onClick={() => window.open(`mailto:${service.email}`)}>
-									<span className='icon-placeholder'>
-										<i className="MenuIcon fa fa-envelope-o" aria-hidden="true" />
-									</span>
-
-									<h1>
-										<span style={{ display: 'inline-block', overflow: 'hidden' }}>{t('services.Email', NS)}:&nbsp;</span>
-										<div className='field' style={{
-											display: 'inline-block', direction: 'ltr',
-											overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
-										}}>
-											{service.email}
-										</div>
-									</h1>
-								</div>
-							)}
-
-							{service.website && (
-								<div className="Selector" onClick={() => window.open(`${toUrl(service.website)}`)}>
-									<span className='icon-placeholder'>
-										<i className="MenuIcon fa fa-external-link" aria-hidden="true" />
-									</span>
-
-									<h1>
-										<span style={{ display: 'inline-block', overflow: 'hidden' }}>{t('services.Website', NS)}:&nbsp;</span>
-										<div className='field' style={{
-											display: 'inline-block', direction: 'ltr',
-											overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
-										}}>
-											{service.website}
-										</div>
-									</h1>
-								</div>
-							)}
-
-							{service.facebook && (
-								<div className="Selector" onClick={() => window.open(`${toUrl(service.facebook)}`)}>
-									<span className='icon-placeholder'><i className="MenuIcon fa fa-facebook-f" aria-hidden="true" /></span>
-
-									<h1>
-										<span style={{ display: 'inline-block', overflow: 'hidden' }}>{t('Facebook')}:&nbsp;</span>
-										<div className='field' style={{
-											display: 'inline-block', direction: 'ltr',
-											overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'
-										}}>
-											{service.facebook}
-										</div>
-									</h1>
-								</div>
-							)}
-
-							{service.contact_information && sortedContactInformation.map(ci => this.renderContactInformation(ci, callAux))}
+							{service.serviceContactInformations && sortedContactInformation.map(ci => this.renderContactInformation(ci, callAux))}
 
 							{(relatedServices || []).length > 0 && (
 								<div className="Selector" onClick={() => this.showServices()}>
 									<span className='icon-placeholder'>
-										<i className="MenuIcon fa fa-angle-right" aria-hidden="true" />
+										<FontAwesomeIcon icon="angle-right" className="MenuIcon" />
 									</span>
 									<h1>{t("services.OTHER_SERVICES", NS)}</h1>
 								</div>)
@@ -413,7 +375,7 @@ class ServiceDetail extends React.Component {
 										<div key={r.id} onClick={() => goToService(country, language, r.id)}>
 											<div className="Selector related">
 												<span className='icon-placeholder'>
-													<i className="MenuIcon fa fa-angle-right" aria-hidden="true" />
+													<FontAwesomeIcon icon="angle-right" className="MenuIcon" />
 												</span>
 												<h1 href="#/" ><div style={{
 													display: 'inline-block', direction: 'ltr', overflow: 'hidden',
@@ -426,7 +388,7 @@ class ServiceDetail extends React.Component {
 
 									<div className="Selector back" onClick={() => this.showServices()}>
 										<span className='icon-placeholder'>
-											<i className="MenuIcon fa fa-angle-left" aria-hidden="true" />
+											<FontAwesomeIcon icon="angle-left" className="MenuIcon" />
 										</span>
 
 										<h1>{t("services.Back", NS)}</h1>
@@ -444,4 +406,4 @@ const mapState = ({ country, language }, p) => ({ country, language });
 
 const mapDispatch = (d, p) => ({ goToService: (country, language, id) => d(push(routes.goToService(country, language, id))) });
 
-export default translate()(connect(mapState, mapDispatch)(ServiceDetail));
+export default withTranslation()(connect(mapState, mapDispatch)(ServiceDetail));

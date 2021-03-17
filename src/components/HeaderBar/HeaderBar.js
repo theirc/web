@@ -1,10 +1,11 @@
 // libs
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 
 // local
 import "./HeaderBar.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const generateKey = pre => {
 	return `${pre}_${new Date().getTime()}`;
@@ -34,10 +35,10 @@ class HeaderBar extends Component {
 
 					{children && [
 						<div className="up" key={"up"}>
-							<i className="material-icons">keyboard_arrow_up</i>
+							<FontAwesomeIcon icon="chevron-up" />
 						</div>,
 						<div className="down" key={"down"}>
-							<i className="material-icons">keyboard_arrow_down</i>
+							<FontAwesomeIcon icon="chevron-down" />
 						</div>,
 					]}
 				</label>
@@ -48,4 +49,4 @@ class HeaderBar extends Component {
 	}
 }
 
-export default translate()(HeaderBar);
+export default withTranslation()(HeaderBar);

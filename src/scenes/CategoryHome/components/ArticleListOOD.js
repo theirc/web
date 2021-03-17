@@ -1,9 +1,11 @@
 // libs
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // local
 import "./ArticleListOOD.css";
+import Markdown from "markdown-to-jsx";
 
 /**
  * @class
@@ -12,7 +14,7 @@ import "./ArticleListOOD.css";
 class ArticleListOOD extends React.Component {
 
 	render() {
-		const { country, category, onNavigate, md } = this.props;
+		const { country, category, onNavigate } = this.props;
 		return (
 			<div className="ArticleListOOD">
 				<div className="Title">
@@ -34,12 +36,12 @@ class ArticleListOOD extends React.Component {
 
 								<div className={`Text ${article.fields.hero ? 'TextWithImage' : ''}`}>
 									<h2> {article.fields.title}</h2>
-									<p dangerouslySetInnerHTML={{ __html: md.render(article.fields.lead) }} />
+									<Markdown>{article.fields.lead}</Markdown>
 								</div>
 
 								<s className="Read-More">
 									<a href="#/">Read More</a>
-									<i className="material-icons">arrow_right</i>
+									<FontAwesomeIcon icon="arrow-right" />
 								</s>
 							</div>,
 						];
@@ -50,4 +52,4 @@ class ArticleListOOD extends React.Component {
 	}
 }
 
-export default translate()(ArticleListOOD);
+export default withTranslation()(ArticleListOOD);

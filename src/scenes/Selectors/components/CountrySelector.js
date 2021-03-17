@@ -1,7 +1,6 @@
 // libs
 import React, { Component } from "react";
-import { translate } from "react-i18next";
-import _ from "lodash";
+import { withTranslation } from "react-i18next";
 
 // local
 import getSessionStorage from "../../../shared/sessionStorage";
@@ -37,7 +36,7 @@ class CountrySelector extends Component {
 			backToLanguage
 		} = this.props;
 		let disableLanguageSelector = instance.switches.disableLanguageSelector;
-		let countryList = this.props.countryList.map(_.identity);
+		let countryList = this.props.countryList;
 		let regionList = this.props.regionList.filter(r => r.languages.split(',').map(a => a.trim()).indexOf(language) > -1).map(r => r.slug);
 		let availableCountryList = countryList.filter(c => regionList.indexOf(c.fields.slug) > -1 && instance.countries[c.fields.slug]);
 
@@ -82,4 +81,4 @@ class CountrySelector extends Component {
 		);
 	}
 }
-export default translate()(CountrySelector);
+export default withTranslation()(CountrySelector);

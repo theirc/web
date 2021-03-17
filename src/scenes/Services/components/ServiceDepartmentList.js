@@ -1,7 +1,6 @@
 // libs
 import React from "react";
-import _ from "lodash";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
 // local
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
@@ -59,9 +58,7 @@ class ServiceDepartmentList extends React.Component {
 			);
 		}
 
-		let sortedRegions = _.sortBy(allRegions || [], c => {
-			return c.name;
-		});
+		let sortedRegions = allRegions.sort((a, b) => a.name.localeCompare(b.name));
 
 		return [
 			<HeaderBar key={"Header"} title={t("services.Locations", NS).toUpperCase()} />,
@@ -74,4 +71,4 @@ class ServiceDepartmentList extends React.Component {
 	}
 }
 
-export default translate()(ServiceDepartmentList);
+export default withTranslation()(ServiceDepartmentList);

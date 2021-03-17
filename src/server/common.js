@@ -1,4 +1,3 @@
-const _ = require("lodash");
 const instance = require('../backend/settings').default;
 
 module.exports = {
@@ -15,10 +14,10 @@ module.exports = {
 		} else if ("accept-language" in req.headers) {
 			let languages = req.headers["accept-language"]
 				.split(",")
-				.map(l => _.first(l.split("-")))
-				.map(l => _.first(l.split(";")));
+				.map(l => l.split("-")[0])
+				.map(l => l.split(";")[0]);
 
-			const favoriteLanguage = _.first(languages);
+			const favoriteLanguage = languages[0];
 			if (favoriteLanguage !== selectedLanguage) {
 				selectedLanguage = favoriteLanguage;
 			}

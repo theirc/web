@@ -1,8 +1,6 @@
 // libs
 import React, { Component } from "react";
-import moment from "moment";
-import _ from "lodash";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
 // local
 import { ArticleWidget, CategoryWidget, LocalGuideWidget, TopCategoriesWidget } from "../../../components";
@@ -17,19 +15,21 @@ class HomeWidget extends Component {
 	renderWidget(w) {
 
 		if (w.fields.type === "Latest Article of Category") {
-			let category = _.first(w.fields.related);
+			let category = w.fields.related[0];
 			if (category) {
-				let article = _.last(_.sortBy(category.fields.articles, a => moment(a.sys.updatedAt).unix()));
+				let article = category.fields.articles.sort(function(a,b){
+					return new Date(b.sys.updatedAt).getTime() - new Date(a.sys.updatedAt).getTime();
+				  }).pop();
 				return this.renderArticle(article, category);
 			}
 		} else if (w.fields.type === "First Article of Category") {
-			let category = _.first(w.fields.related);
+			let category = w.fields.related[0];
 			if (category) {
-				let article = category.fields.overview || _.first(category.fields.articles);
+				let article = category.fields.overview || category.fields.articles[0];
 				return this.renderArticle(article, category, true, w.fields.showFullArticle);
 			}
-		} else if (w.fields.type === "Top Categories") {
-			let categories = Array.from(w.fields.related || []).filter(r => r.sys.contentType.sys.id === "category");
+		} else if (w.fields.type === "Top Categories" & w.fields.title !== "Lo más nuevo") { //TODO: IMPROVE CONDITION - TITLE SHOULD NOT BE A CONDITION
+			let categories = Array.from(w.fields.related || []).filter(r => r.sys.contentType && r.sys.contentType.sys.id === "category");
 			return this.renderTopCategories(categories);
 		} else if (w.fields.type === "Local Guide") {
 			let guideItems = Array.from(w.fields.related || []).filter(r => r.sys.contentType && r.sys.contentType.sys.id === "localGuideItem");
@@ -99,4 +99,4 @@ class HomeWidget extends Component {
 	}
 }
 
-export default translate()(HomeWidget);
+export default withTranslation()(HomeWidget);

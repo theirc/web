@@ -3,7 +3,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Route, Switch } from "react-router";
 import { push } from "react-router-redux";
-import measureDistance from "@turf/distance";
+// import measureDistance from "@turf/distance";
 import { Redirect } from 'react-router';
 import Promise from "bluebird";
 
@@ -80,11 +80,12 @@ class Services extends React.Component {
 		return b => {
 			try {
 				if (a && b) {
-					const currentGeoJSON = {
-						type: "Point",
-						coordinates: [a.longitude, a.latitude],
-					};
-					let originalDistance = measureDistance(currentGeoJSON, b, "kilometers");
+					// const currentGeoJSON = {
+					// 	type: "Point",
+					// 	coordinates: [a.longitude, a.latitude],
+					// };
+					let originalDistance = 0
+					// let originalDistance = measureDistance(currentGeoJSON, b, "kilometers");
 					let distance = originalDistance;
 					let unit = "km";
 
@@ -155,7 +156,7 @@ class Services extends React.Component {
 			}
 		}
 
-		return servicesApi
+		return servicesApi()
 			.fetchAllServices(countryId, language, categoryId, regionId, cityId)
 			.then(services => ({ services, category: null }));
 	}
@@ -166,12 +167,12 @@ class Services extends React.Component {
 		const countryId = (regions.find(r => r.country.slug === country.fields.slug)).country.id;
 
 		if (regionId && !cityId) {
-			return servicesApi.fetchCategoriesByRegion(language, regionId);
+			return servicesApi().fetchCategoriesByRegion(language, regionId);
 		} else if (cityId) {
-			return servicesApi.fetchCategoriesByCity(language, cityId)
+			return servicesApi().fetchCategoriesByCity(language, cityId)
 		}
 
-		return servicesApi.fetchCategoriesByCountry(language, countryId);
+		return servicesApi().fetchCategoriesByCountry(language, countryId);
 	}
 
 	getLocation() {
@@ -241,7 +242,7 @@ class Services extends React.Component {
 		const onOpenDepartment = (id, department, name, location) => {
 			const { language } = this.props
 			let cities;
-			servicesApi.fetchCities(id, language)
+			servicesApi().fetchCities(id, language)
 				.then(city => cities = city)
 				.then(() => { 
 					this.setState({ regionId: id, locationName: name, regionName: name, region: department, location: department, cities, cityId: null, cityName: null, city: null })
@@ -291,11 +292,11 @@ class Services extends React.Component {
 									{!isMobile &&
 										<ServiceCategoryListDesktop
 											{...props}
-											fetchCategories={(countryId) => servicesApi.fetchCategoriesByCountry(language, countryId)}
-											fetchCategoriesByRegion={(regionId) => servicesApi.fetchCategoriesByRegion(language, regionId)}
-											fetchCategoriesByCity={(cityId) => servicesApi.fetchCategoriesByCity(language, cityId)}
-											fetchCitiesByRegion={(regionId) => servicesApi.fetchCities(regionId, language)}
-											fetchServices={(countryId, category, regionId, cityId) => servicesApi.fetchAllServices(countryId, language, category, regionId, cityId)}
+											fetchCategories={(countryId) => servicesApi().fetchCategoriesByCountry(language, countryId)}
+											fetchCategoriesByRegion={(regionId) => servicesApi().fetchCategoriesByRegion(language, regionId)}
+											fetchCategoriesByCity={(cityId) => servicesApi().fetchCategoriesByCity(language, cityId)}
+											fetchCitiesByRegion={(regionId) => servicesApi().fetchCities(regionId, language)}
+											fetchServices={(countryId, category, regionId, cityId) => servicesApi().fetchAllServices(countryId, language, category, regionId, cityId)}
 											goTo={(location, category, mapview, cities) => {this.goTo(location, category, mapview); this.setState({cities})}}
 											mapView={true}
 											measureDistance={this.measureDistance(geolocation, language)}
@@ -323,11 +324,11 @@ class Services extends React.Component {
 									{!isMobile &&
 										<ServiceCategoryListDesktop
 											{...props}
-											fetchCategories={(countryId) => servicesApi.fetchCategoriesByCountry(language, countryId)}
-											fetchCategoriesByRegion={(regionId) => servicesApi.fetchCategoriesByRegion(language, regionId)}
-											fetchCategoriesByCity={(cityId) => servicesApi.fetchCategoriesByCity(language, cityId)}
-											fetchCitiesByRegion={(regionId) => servicesApi.fetchCities(regionId, language)}
-											fetchServices={(countryId, category, regionId, cityId) => servicesApi.fetchAllServices(countryId, language, category, regionId, cityId)} /* TODO: Fix number of services */
+											fetchCategories={(countryId) => servicesApi().fetchCategoriesByCountry(language, countryId)}
+											fetchCategoriesByRegion={(regionId) => servicesApi().fetchCategoriesByRegion(language, regionId)}
+											fetchCategoriesByCity={(cityId) => servicesApi().fetchCategoriesByCity(language, cityId)}
+											fetchCitiesByRegion={(regionId) => servicesApi().fetchCities(regionId, language)}
+											fetchServices={(countryId, category, regionId, cityId) => servicesApi().fetchAllServices(countryId, language, category, regionId, cityId)} /* TODO: Fix number of services */
 											goTo={(location, category, mapview, cities) => {this.goTo(location, category, mapview); this.setState({cities})}}
 											measureDistance={this.measureDistance(geolocation, language)}
 											cities={this.state.cities}
@@ -387,7 +388,7 @@ class Services extends React.Component {
 									<ServiceDetail
 										{...props}
 										instance = {instance}
-										fetchService={() => servicesApi.fetchServicePreviewById(language, props.match.params.serviceId)}
+										fetchService={() => servicesApi().fetchServicePreviewById(language, props.match.params.serviceId)}
 									/>
 								</div>
 							</Skeleton>
@@ -402,7 +403,7 @@ class Services extends React.Component {
 									<ServiceDetail
 										{...props}
 										instance = {instance}
-										fetchService={() => servicesApi.fetchServiceById(language, props.match.params.serviceId)}
+										fetchService={() => servicesApi().fetchServiceById(language, props.match.params.serviceId)}
 									/>
 								</div>
 							</Skeleton>
@@ -424,11 +425,11 @@ class Services extends React.Component {
 									<ServiceCategoryListDesktop
 										{...props}
 										category={props.match.params.categoryId}
-										fetchCitiesByRegion={(regionId) => servicesApi.fetchCities(regionId, language)}
-										fetchCategories={(countryId) => servicesApi.fetchCategoriesByCountry(language, countryId)}
-										fetchCategoriesByRegion={(regionId) => servicesApi.fetchCategoriesByRegion(language, regionId)}
-										fetchCategoriesByCity={(cityId) => servicesApi.fetchCategoriesByCity(language, cityId)}
-										fetchServices={(countryId, category, regionId, cityId) => servicesApi.fetchAllServices(countryId, language, category, regionId, cityId)}
+										fetchCitiesByRegion={(regionId) => servicesApi().fetchCities(regionId, language)}
+										fetchCategories={(countryId) => servicesApi().fetchCategoriesByCountry(language, countryId)}
+										fetchCategoriesByRegion={(regionId) => servicesApi().fetchCategoriesByRegion(language, regionId)}
+										fetchCategoriesByCity={(cityId) => servicesApi().fetchCategoriesByCity(language, cityId)}
+										fetchServices={(countryId, category, regionId, cityId) => servicesApi().fetchAllServices(countryId, language, category, regionId, cityId)}
 										goTo={(location, category, mapview, cities) => {this.goTo(location, category, mapview); this.setState({cities})}}
 										mapView={true}
 										measureDistance={this.measureDistance(geolocation, language)}
@@ -458,11 +459,11 @@ class Services extends React.Component {
 									<ServiceCategoryListDesktop
 										{...props}
 										category={props.match.params.categoryId}
-										fetchCitiesByRegion={(regionId) => servicesApi.fetchCities(regionId, language)}
-										fetchCategories={(countryId) => servicesApi.fetchCategoriesByCountry(language, countryId)}
-										fetchCategoriesByRegion={(regionId) => servicesApi.fetchCategoriesByRegion(language, regionId)}
-										fetchCategoriesByCity={(cityId) => servicesApi.fetchCategoriesByCity(language, cityId)}
-										fetchServices={(countryId, category, regionId, cityId) => servicesApi.fetchAllServices(countryId, language, category, regionId, cityId)}
+										fetchCitiesByRegion={(regionId) => servicesApi().fetchCities(regionId, language)}
+										fetchCategories={(countryId) => servicesApi().fetchCategoriesByCountry(language, countryId)}
+										fetchCategoriesByRegion={(regionId) => servicesApi().fetchCategoriesByRegion(language, regionId)}
+										fetchCategoriesByCity={(cityId) => servicesApi().fetchCategoriesByCity(language, cityId)}
+										fetchServices={(countryId, category, regionId, cityId) => servicesApi().fetchAllServices(countryId, language, category, regionId, cityId)}
 										goTo={(location, category, mapview, cities) => {this.goTo(location, category, mapview); this.setState({cities})}}
 										measureDistance={this.measureDistance(geolocation, language)}
 										cities={this.state.cities}
@@ -492,11 +493,11 @@ class Services extends React.Component {
 								{!isMobile &&
 									<ServiceCategoryListDesktop
 										{...props}
-										fetchCitiesByRegion={(regionId) => servicesApi.fetchCities(regionId, language)}
-										fetchCategories={(countryId) => servicesApi.fetchCategoriesByCountry(language, countryId)}
-										fetchCategoriesByRegion={(regionId) => servicesApi.fetchCategoriesByRegion(language, regionId)}
-										fetchCategoriesByCity={(cityId) => servicesApi.fetchCategoriesByCity(language, cityId)}
-										fetchServices={(countryId, category, regionId, cityId) => servicesApi.fetchAllServices(countryId, language, category, regionId, cityId)}
+										fetchCitiesByRegion={(regionId) => servicesApi().fetchCities(regionId, language)}
+										fetchCategories={(countryId) => servicesApi().fetchCategoriesByCountry(language, countryId)}
+										fetchCategoriesByRegion={(regionId) => servicesApi().fetchCategoriesByRegion(language, regionId)}
+										fetchCategoriesByCity={(cityId) => servicesApi().fetchCategoriesByCity(language, cityId)}
+										fetchServices={(countryId, category, regionId, cityId) => servicesApi().fetchAllServices(countryId, language, category, regionId, cityId)}
 										goTo={(location, category, mapview, cities) => {this.goTo(location, category, mapview); this.setState({cities})}}
 										location={props.match.params.location}
 										measureDistance={this.measureDistance(geolocation, language)}
@@ -525,11 +526,11 @@ class Services extends React.Component {
 									<ServiceCategoryListDesktop
 										{...props}
 										category={props.match.params.categoryId}
-										fetchCitiesByRegion={(regionId) => servicesApi.fetchCities(regionId, language)}
-										fetchCategories={(countryId) => servicesApi.fetchCategoriesByCountry(language, countryId)}
-										fetchCategoriesByRegion={(regionId) => servicesApi.fetchCategoriesByRegion(language, regionId)}
-										fetchCategoriesByCity={(cityId) => servicesApi.fetchCategoriesByCity(language, cityId)}
-										fetchServices={(countryId, category, regionId, cityId) => servicesApi.fetchAllServices(countryId, language, category, regionId, cityId)}
+										fetchCitiesByRegion={(regionId) => servicesApi().fetchCities(regionId, language)}
+										fetchCategories={(countryId) => servicesApi().fetchCategoriesByCountry(language, countryId)}
+										fetchCategoriesByRegion={(regionId) => servicesApi().fetchCategoriesByRegion(language, regionId)}
+										fetchCategoriesByCity={(cityId) => servicesApi().fetchCategoriesByCity(language, cityId)}
+										fetchServices={(countryId, category, regionId, cityId) => servicesApi().fetchAllServices(countryId, language, category, regionId, cityId)}
 										goTo={(location, category, mapview, cities) => {this.goTo(location, category, mapview); this.setState({cities})}}
 										location={props.match.params.location}
 										measureDistance={this.measureDistance(geolocation, language)}
@@ -556,12 +557,12 @@ class Services extends React.Component {
 								{!isMobile &&
 									<ServiceCategoryListDesktop
 										{...props}
-										fetchCitiesByRegion={(regionId) => servicesApi.fetchCities(regionId, language)}
+										fetchCitiesByRegion={(regionId) => servicesApi().fetchCities(regionId, language)}
 										category={props.match.params.categoryId}
-										fetchCategories={(countryId) => servicesApi.fetchCategoriesByCountry(language, countryId)}
-										fetchCategoriesByRegion={(regionId) => servicesApi.fetchCategoriesByRegion(language, regionId)}
-										fetchCategoriesByCity={(cityId) => servicesApi.fetchCategoriesByCity(language, cityId)}
-										fetchServices={(countryId, category, regionId, cityId) => servicesApi.fetchAllServices(countryId, language, category, regionId, cityId)}
+										fetchCategories={(countryId) => servicesApi().fetchCategoriesByCountry(language, countryId)}
+										fetchCategoriesByRegion={(regionId) => servicesApi().fetchCategoriesByRegion(language, regionId)}
+										fetchCategoriesByCity={(cityId) => servicesApi().fetchCategoriesByCity(language, cityId)}
+										fetchServices={(countryId, category, regionId, cityId) => servicesApi().fetchAllServices(countryId, language, category, regionId, cityId)}
 										goTo={(location, category, mapview, cities) => {this.goTo(location, category, mapview); this.setState({cities})}}
 										location={props.match.params.location}
 										mapView={true}
@@ -590,11 +591,11 @@ class Services extends React.Component {
 								{!isMobile &&
 									<ServiceCategoryListDesktop
 										{...props}
-										fetchCitiesByRegion={(regionId) => servicesApi.fetchCities(regionId, language)}
-										fetchCategories={(countryId) => servicesApi.fetchCategoriesByCountry(language, countryId)}
-										fetchCategoriesByRegion={(regionId) => servicesApi.fetchCategoriesByRegion(language, regionId)}
-										fetchCategoriesByCity={(cityId) => servicesApi.fetchCategoriesByCity(language, cityId)}
-										fetchServices={(countryId, category, regionId, cityId) => servicesApi.fetchAllServices(countryId, language, category, regionId, cityId)}
+										fetchCitiesByRegion={(regionId) => servicesApi().fetchCities(regionId, language)}
+										fetchCategories={(countryId) => servicesApi().fetchCategoriesByCountry(language, countryId)}
+										fetchCategoriesByRegion={(regionId) => servicesApi().fetchCategoriesByRegion(language, regionId)}
+										fetchCategoriesByCity={(cityId) => servicesApi().fetchCategoriesByCity(language, cityId)}
+										fetchServices={(countryId, category, regionId, cityId) => servicesApi().fetchAllServices(countryId, language, category, regionId, cityId)}
 										goTo={(location, category, mapview, cities) => {this.goTo(location, category, mapview); this.setState({cities})}}
 										location={props.match.params.location}
 										measureDistance={this.measureDistance(geolocation, language)}
@@ -621,11 +622,11 @@ class Services extends React.Component {
 								{!isMobile &&
 									<ServiceCategoryListDesktop
 										{...props}
-										fetchCitiesByRegion={(regionId) => servicesApi.fetchCities(regionId, language)}
-										fetchCategories={(countryId) => servicesApi.fetchCategoriesByCountry(language, countryId)}
-										fetchCategoriesByRegion={(regionId) => servicesApi.fetchCategoriesByRegion(language, regionId)}
-										fetchCategoriesByCity={(cityId) => servicesApi.fetchCategoriesByCity(language, cityId)}
-										fetchServices={(countryId, category, regionId, cityId) => servicesApi.fetchAllServices(countryId, language, category, regionId, cityId)}
+										fetchCitiesByRegion={(regionId) => servicesApi().fetchCities(regionId, language)}
+										fetchCategories={(countryId) => servicesApi().fetchCategoriesByCountry(language, countryId)}
+										fetchCategoriesByRegion={(regionId) => servicesApi().fetchCategoriesByRegion(language, regionId)}
+										fetchCategoriesByCity={(cityId) => servicesApi().fetchCategoriesByCity(language, cityId)}
+										fetchServices={(countryId, category, regionId, cityId) => servicesApi().fetchAllServices(countryId, language, category, regionId, cityId)}
 										goTo={(location, category, mapview, cities) => {this.goTo(location, category, mapview); this.setState({cities})}}
 										location={props.match.params.location}
 										mapView={true}

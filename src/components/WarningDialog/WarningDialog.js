@@ -1,19 +1,10 @@
 // libs
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Close } from "material-ui-icons";
+import Markdown from "markdown-to-jsx";
 
 // local
 import "./WarningDialog.css";
-
-const Remarkable = require("remarkable");
-
-const md = new Remarkable("full", {
-	html: true,
-	linkify: true,
-	typographer: true,
-	breaks: true,
-});
 
 /**
  * @class
@@ -66,17 +57,20 @@ export default class WarningDialog extends Component {
 		if (hide) {
 			return null;
 		}
-		let html = md.render(children || text);
-		//html = html.replace(/\s(\+[1-9]{1}[0-9]{5,14})|00[0-9]{5,15}/g, `<a class="tel" href="tel:$1">$1</a>`);
 
 		return (
 			<div className={[containerClassName, (hiding && "warning--hiding") || ""].join(" ")}>
-				<div className="warning-dialog-container-inner" dangerouslySetInnerHTML={{ __html: html }} />
+				<div className="warning-wrapper">
+				<div className="warning-dialog-container-inner">
+					{children && <Markdown>{children}</Markdown>}
+					{text && <Markdown>{text}</Markdown>}
+				</div>
 				{dismissable && (
 					<div className="warning-dialog-close" onClick={() => this.hide()}>
-						<Close />
+						{/* <Close /> */}
 					</div>
 				)}
+				</div>
 			</div>
 		);
 	}

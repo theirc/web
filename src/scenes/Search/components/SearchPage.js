@@ -1,26 +1,18 @@
 // libs
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import tinycolor from "tinycolor2";
-import moment from 'moment';
 import instance from '../../../backend/settings';
+import 'lazysizes'
 
 // local
 import "./SearchPage.css";
 import "../../Services/components/ServiceCategoryList.css";
 import "../../ArticleList/components/desktop/ArticleListBody.css";
+import Markdown from "markdown-to-jsx";
 
 const NS = { ns: 'Search' };
-
-const Remarkable = require("remarkable");
-
-const md = new Remarkable("full", {
-	html: true,
-	linkify: true,
-	typographer: true,
-	breaks: true,
-});
 
 /**
  * @class
@@ -41,9 +33,6 @@ class SearchPage extends React.Component {
 		const { onNavigate, language, measureDistance, country } = this.props;
 		const distance = measureDistance && service.location && measureDistance(service.location);
 
-		let iconWithPrefix = vector_icon => vector_icon.indexOf('icon') > -1 ? 
-								vector_icon.split('-')[0]+' '+vector_icon : 
-								`fa fa-${vector_icon}`;
 		let categoryStyle = color => {
 			if (!color) {
 				color = "#000";
@@ -66,7 +55,7 @@ class SearchPage extends React.Component {
 		return [
 			<li key={service.id} className="Item" onClick={() => onNavigate(`/${country.fields.slug}/services/${service.id}?language=${language}`)}>
 				<div className="Icon" key={`${service.id}-0`}>
-					<i className={iconWithPrefix(mainType.icon)} style={categoryStyle(mainType.color)} />
+					<i className={mainType.icon} style={categoryStyle(mainType.color)} />
 				</div>
 
 				<div className="Info">
@@ -81,13 +70,13 @@ class SearchPage extends React.Component {
 						<div className="Icons">
 							{subTypes.map((t, idx) => (
 								<div className="Icon" key={`${service.id}-${idx}`}>
-									<i className={iconWithPrefix(t.icon)} style={categoryStyle(t.color)} />
+									<i className={t.icon} style={categoryStyle(t.color)} />
 								</div>
 							))}
 						</div>
 					</h2>
 				</div>
-				<i className="material-icons" />
+				{/* <i className="material-icons" /> */}
 			</li>,
 		];
 	}
@@ -96,14 +85,25 @@ class SearchPage extends React.Component {
 		const { country, language, onNavigate } = this.props;
 		let image = a.fields.hero ? a.fields.hero.fields.file.url : '/placeholder.png';
 
+		let appendLeadingZeroes = (n) => {
+			if(n <= 9) {
+			  return "0" + n;
+				  }
+				  return n
+			  }
+		  
+		const updatedDate = (param) => new Date(param)
+		const updatedAtDate = (param) => `${updatedDate(param).getFullYear()}.${appendLeadingZeroes(updatedDate(param).getMonth() + 1)}.${appendLeadingZeroes(updatedDate(param).getDate())}`
+	  
+
 		return (
 			<li className='tile' key={a.sys.id} onClick={() => onNavigate(`/${country.fields.slug}/${a.fields.category.fields.slug}/${a.fields.slug}?language=${language}`)}>
 				<div className='img-viewport'>
-					<img src={image} alt='' />
+					<img data-src={image} alt='hero-search-page' className="lazyload" />
 				</div>
 				<div className='text'>
 					{a.fields && <h2>{a.fields.title}</h2>}
-					<span className='author'>{moment(a.sys.updatedAt).format('YYYY.MM.DD')}</span>
+					<span className='author'>{updatedAtDate(a.sys.updatedAt)}</span>
 				</div>
 			</li>)
 	}
@@ -191,7 +191,7 @@ class SearchPage extends React.Component {
 											{!article.fields.hero && <div className="Image" style={{ backgroundImage: `url('/placeholder.png')` }} />}
 											<div className='Text TextWithImage'>
 												<h2> {article.fields.title}</h2>
-												<p dangerouslySetInnerHTML={{ __html: md.render(article.fields.lead) }} />
+												<Markdown>{article.fields.lead}</Markdown>
 											</div>
 										</div>,
 									];
@@ -222,4 +222,4 @@ class SearchPage extends React.Component {
 
 const mapState = ({ country }, p) => ({ country });
 
-export default translate()(connect(mapState)(SearchPage));
+export default withTranslation()(connect(mapState)(SearchPage));

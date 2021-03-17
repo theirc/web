@@ -1,9 +1,8 @@
 // libs
 import React from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
-import _ from "lodash";
 
 // local
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
@@ -59,9 +58,6 @@ class ServiceList extends React.Component {
 		const serviceInfo = serviceT ? serviceT : s;
 		const providerInfo = providerT ? providerT : s.provider;
 
-		let iconWithPrefix = vector_icon => vector_icon.indexOf('icon') > -1 ?
-			`${vector_icon.split('-')[0]} ${vector_icon}` :
-			`fa fa-${vector_icon}`;
 		let categoryStyle = color => {
 			if (!color) {
 				color = "#000";
@@ -85,7 +81,7 @@ class ServiceList extends React.Component {
 		return [
 			<li key={s.id} className="Item" onClick={() => goToService(country, language, s.id)}>
 				<div className="Icon" key={`${s.id}-0`}>
-					<i className={iconWithPrefix(mainType.icon)} style={categoryStyle(mainType.color)} />
+					<i className={mainType.icon} style={categoryStyle(mainType.color)} />
 				</div>
 
 				<div className="Info">
@@ -100,7 +96,7 @@ class ServiceList extends React.Component {
 						<div className="Icons">
 							{subTypes.map((t, idx) => (
 								<div className="Icon" key={`${s.id}-${idx}`}>
-									<i className={iconWithPrefix(t.icon)} style={categoryStyle(t.color)} />
+									<i className={t.icon} style={categoryStyle(t.color)} />
 								</div>
 							))}
 						</div>
@@ -175,4 +171,4 @@ const mapState = ({ country, language }, p) => ({ country, language });
 
 const mapDispatch = (d, p) => ({ goToService: (country, language, id) => d(push(routes.goToService(country, language, id))) });
 
-export default translate()(connect(mapState, mapDispatch)(ServiceList));
+export default withTranslation()(connect(mapState, mapDispatch)(ServiceList));

@@ -1,9 +1,8 @@
 // libs
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import * as clipboard from "clipboard-polyfill";
-import { NavigateBefore, NavigateNext } from "material-ui-icons";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // local
 import "./ArticleDetailFooter.css";
@@ -53,7 +52,7 @@ class ArticleDetailFooter extends Component {
 	}
 
 	Copiedlnk() {
-		clipboard.writeText(document.location.href);
+		navigator.clipboard.writeText(document.location.href)
 
 		this.setState(prevState => ({ copied: !prevState.copied }));
 		setTimeout(() => {
@@ -79,7 +78,7 @@ class ArticleDetailFooter extends Component {
 				<div className='nav'>
 					{previous && (
 						<div className="page-selector prev" onClick={() => onNavigateTo(previous.fields.slug)}>
-							{!rtl ? <NavigateBefore className="icon" /> : <NavigateNext className="icon" />}
+							{!rtl ? <FontAwesomeIcon icon="chevron-left" className="icon" /> : <FontAwesomeIcon icon="chevron-right" className="icon" />}
 
 							<div className='caption'>
 								<h1>{previous.fields.title}</h1>
@@ -93,7 +92,7 @@ class ArticleDetailFooter extends Component {
 								<h1>{next.fields.title}</h1>
 							</div>
 
-							{!rtl ? <NavigateNext className="icon" /> : <NavigateBefore className="icon" />}
+							{!rtl ? <FontAwesomeIcon icon="chevron-right" className="icon" /> : <FontAwesomeIcon icon="chevron-left" className="icon" />}
 						</div>
 					)}
 				</div>
@@ -102,4 +101,4 @@ class ArticleDetailFooter extends Component {
 	}
 }
 
-export default translate()(ArticleDetailFooter);
+export default withTranslation()(ArticleDetailFooter);

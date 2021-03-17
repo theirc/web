@@ -16,10 +16,10 @@ export default {
 				"Italy": "n/a"
 			},
 			"menu": {
-				"Articles": "المقالات ",
+				"Articles": "مصادر ",
 				"Home": "الصفحة الرئيسية",
 				"Search": "بحث",
-				"Services": "الخـدمات"
+				"Services": "الحصول على المساعدة"
 			}
 		}
 	},
@@ -40,10 +40,10 @@ export default {
 				"Italy": "Information about COVID-19 and government emergency measures >"
 			},
 			"menu": {
-				"Articles": "Articles",
+				"Articles": "Resources",
 				"Home": "Home",
 				"Search": "Search",
-				"Services": "Services"
+				"Services": "Find Help"
 			}
 		}
 	},
@@ -67,7 +67,7 @@ export default {
 				"Articles": "Informativos",
 				"Home": "Inicio",
 				"Search": "Buscar",
-				"Services": "Servicios"
+				"Services": "Encontrar Apoyo"
 			}
 		}
 	},
@@ -88,10 +88,10 @@ export default {
 				"Italy": "n/a"
 			},
 			"menu": {
-				"Articles": "مقاله‌ها",
+				"Articles": "کمک پیدا کنید",
 				"Home": "خانه",
 				"Search": "جستجو",
-				"Services": "خدمات"
+				"Services": "کمک پیدا کنید"
 			}
 		}
 	},
@@ -112,10 +112,10 @@ export default {
 				"Italy": "Informations sur COVID-19 et mesures d'urgence gouvernementales"
 			},
 			"menu": {
-				"Articles": "Articles",
+				"Articles": "Ressources",
 				"Home": "Accueil",
 				"Search": "Chercher",
-				"Services": "Services"
+				"Services": "Trouver de l'aide"
 			}
 		}
 	},
@@ -136,10 +136,10 @@ export default {
 				"Italy": "n/a"
 			},
 			"menu": {
-				"Articles": "مضامین",
+				"Articles": "حوالہ جات",
 				"Home": "صفحہ اوّل ",
 				"Search": "تلاش کریں",
-				"Services": "خدمات"
+				"Services": "مدد تلاش کریں"
 			}
 		}
 	}
