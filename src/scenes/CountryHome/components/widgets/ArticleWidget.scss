@@ -289,7 +289,13 @@
 }
 
 .faq {
-  p {
+  p, a {
     text-decoration: underline;
+    display: block;
+    margin-top: 0;
+    font-weight: 300;
+    line-height: 1.6;
+    opacity: 1;
+    margin-bottom: 1em;
   }
 }
