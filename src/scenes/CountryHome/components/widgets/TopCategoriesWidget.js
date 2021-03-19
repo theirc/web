@@ -30,7 +30,7 @@ class TopCategoriesWidget extends Component {
 
         <div className="categories-container">
           {categories.map((c) => {
-            let categoryIcon = c.fields.iconClass.replace('fa fa-','');
+            let categoryIcon = c.fields.iconClass && c.fields.iconClass.replace('fa fa-','');
             let article = articleFunc(c);
             return (
               <Link
