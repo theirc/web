@@ -13,13 +13,12 @@ import "./HomeWidgetFactory.css";
 class HomeWidget extends Component {
 
 	renderWidget(w) {
-
 		if (w.fields.type === "Latest Article of Category") {
 			let category = w.fields.related[0];
 			if (category) {
 				let article = category.fields.articles.sort(function(a,b){
 					return new Date(b.sys.updatedAt).getTime() - new Date(a.sys.updatedAt).getTime();
-				  }).pop();
+				  })[0];
 				return this.renderArticle(article, category);
 			}
 		} else if (w.fields.type === "First Article of Category") {

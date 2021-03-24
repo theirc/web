@@ -49,8 +49,8 @@ class SearchPage extends React.Component {
 		};
 
 		let fullAddress = [service.address, service.address_city].filter(val => val).join(", ");
-		let mainType = service.type ? service.type : service.types[0];
-		let subTypes = service.types.filter(t => t.id > 0 && t.id !== mainType.id);
+		let mainType = service.serviceCategories ? service.serviceCategories[0] : '';
+		let subTypes = service.serviceCategories.length > 1 ? service.serviceCategories.filter(c => c.id !== mainType.id) : '';
 
 		return [
 			<li key={service.id} className="Item" onClick={() => onNavigate(`/${country.fields.slug}/services/${service.id}?language=${language}`)}>
@@ -68,7 +68,7 @@ class SearchPage extends React.Component {
 						</span>
 
 						<div className="Icons">
-							{subTypes.map((t, idx) => (
+							{subTypes.length > 0 && subTypes.map((t, idx) => (
 								<div className="Icon" key={`${service.id}-${idx}`}>
 									<i className={t.icon} style={categoryStyle(t.color)} />
 								</div>
@@ -149,7 +149,7 @@ class SearchPage extends React.Component {
 								</div>
 							</div>
 
-							{!searchingServices && services && services.length > 0 &&
+							{!searchingServices && services && services.length > 3 &&
 								<div className="show-action"><button className="show-more" onClick={this.toggleServices}>{toggleServicelabel}</button></div>
 							}
 
@@ -191,7 +191,7 @@ class SearchPage extends React.Component {
 											{!article.fields.hero && <div className="Image" style={{ backgroundImage: `url('/placeholder.png')` }} />}
 											<div className='Text TextWithImage'>
 												<h2> {article.fields.title}</h2>
-												<Markdown>{article.fields.lead}</Markdown>
+												{article.fields && article.fields.lead && (<Markdown>{article.fields.lead}</Markdown>)}
 											</div>
 										</div>,
 									];
