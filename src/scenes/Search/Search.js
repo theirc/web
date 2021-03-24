@@ -12,6 +12,7 @@ import languages from './languages';
 import cmsApi from '../../backend/cmsApi';
 import { SearchPage } from "../../components";
 import { Skeleton } from "../../scenes";
+import getSessionStorage from "../../shared/sessionStorage";
 
 const NS = { ns: 'Search' };
 
@@ -50,29 +51,35 @@ class Search extends React.Component {
 
 	search(props) {
 		const { location, country, language } = props;
+		const sessionStorage = getSessionStorage();
+		let countries;
+		if (sessionStorage[`${language}-countries`]) {
+			countries = JSON.parse(sessionStorage[`${language}-countries`]);
+		}
+		let countryId = countries.filter(x => x.slug === country.fields.slug)[0].id
 		const qs = queryString.parse(location.search);
 		this.setState({ articles: [], services: [], searchingArticles: true, searchingServices: true, term: qs.q });
 		const languageDictionary = config.languageDictionary || {};
 
-		setTimeout(s => {
-			cmsApi().client
-				.getEntries({
-					content_type: "article",
-					"fields.country.sys.id": country.sys.id,
-					query: qs.q,
-					locale: languageDictionary[language] || language,
-				})
-				.then(response => this.setState({ articles: response.items, searchingArticles: false }))
-				.catch(e => {
-					this.setState({ articles: [], searchingArticles: false });
-				});
-			servicesApi()
-				.fetchAllServices(country.fields.slug, language, null, null, null, qs.q)
-				.then(response => this.setState({ services: response.results, searchingServices: false }))
-				.catch(e => {
-					this.setState({ services: [], searchingServices: false });
-				});
-		}, 10);
+		cmsApi().client
+			.getEntries({
+				content_type: "article",
+				"fields.country.sys.id": country.sys.id,
+				query: qs.q,
+				locale: languageDictionary[language] || language,
+			})
+			.then(response => this.setState({ articles: response.items, searchingArticles: false }))
+			.catch(e => {
+				this.setState({ articles: [], searchingArticles: false });
+			});
+		servicesApi()
+			.fetchAllServices(countryId, language, null, null, null, qs.q)
+			.then(response => {
+				console.log('3333 ', response);
+				this.setState({ services: response, searchingServices: false })})
+			.catch(e => {
+				this.setState({ services: [], searchingServices: false });
+			});
 	}
 
 	render() {
