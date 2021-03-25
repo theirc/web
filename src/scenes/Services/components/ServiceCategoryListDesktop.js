@@ -68,8 +68,8 @@ class ServiceCategoryListDesktop extends React.Component {
     const { categories } = this.state;
 
     let l = "";
-	let ci = "";
-	console.log('PROPS ', this.props);
+    let ci = "";
+    console.log("PROPS ", this.props);
 
     if (match.params.region) {
       let tempL = regions.filter((r) => r.slug === match.params.region);
@@ -80,7 +80,7 @@ class ServiceCategoryListDesktop extends React.Component {
           ci = tempCi.length > 0 ? tempCi[0] : "";
         }
         if (!showFilter) {
-			console.log('FFFF ', category);
+          console.log("FFFF ", category);
           this.handleFetchServices(
             c.country.id,
             category,
@@ -111,7 +111,7 @@ class ServiceCategoryListDesktop extends React.Component {
       });
     } else {
       if (!showFilter) {
-		  console.log('TTT ', category);
+        console.log("TTT ", category);
         this.handleFetchServices(c.country.id, category);
       }
       if (fetchCategories && categories.length === 0) {
@@ -130,8 +130,7 @@ class ServiceCategoryListDesktop extends React.Component {
   }
 
   handleFetchServices(country, category = "", region = "", city = "") {
-	const { fetchServices } = this.props;
-	console.log('4444 ', category);
+    const { fetchServices } = this.props;
     fetchServices(country, category, region, city).then((services) => {
       let servicesFiltered = [];
       for (let x = 0; x < 10 && x < services.length; x++) {
@@ -167,7 +166,12 @@ class ServiceCategoryListDesktop extends React.Component {
         cat = categories.filter((c) => c.id === parseInt(category, 10))[0];
       }
       cat
-        ? this.setState({ categories, category: cat, loaded: true, showServices: true })
+        ? this.setState({
+            categories,
+            category: cat,
+            loaded: true,
+            showServices: true,
+          })
         : this.setState({ categories, loaded: true, showServices: true });
     });
   }
@@ -191,7 +195,7 @@ class ServiceCategoryListDesktop extends React.Component {
 
     const servicesFiltered = [];
     for (
-      let x = serviceCount - 1;
+      let x = serviceCount;
       servicesFiltered.length < 10 && x < services.length;
       x++
     ) {
@@ -202,7 +206,7 @@ class ServiceCategoryListDesktop extends React.Component {
       loadingMoreServices: false,
       showMore: servicesFiltered.length === 10,
       servicesRendered: [...this.state.servicesRendered, ...servicesFiltered],
-      serviceCount: this.state.servicesRendered.length,
+      serviceCount: serviceCount + servicesFiltered.length,
     });
   };
 
@@ -244,7 +248,7 @@ class ServiceCategoryListDesktop extends React.Component {
   onSelectMunicipality = (element) => {
     this.setState({ location: element, city: element });
 
-	this.handleFetchCategoriesCity(element.id);
+    this.handleFetchCategoriesCity(element.id);
   };
 
   onSelectCategory = (element) => {
