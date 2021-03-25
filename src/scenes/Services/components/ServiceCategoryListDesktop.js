@@ -54,11 +54,9 @@ class ServiceCategoryListDesktop extends React.Component {
     const {
       category,
       country,
-      cities,
       fetchCategories,
       fetchCitiesByRegion,
       fetchCategoriesByRegion,
-      location,
       regions,
       showFilter,
       t,
@@ -69,7 +67,6 @@ class ServiceCategoryListDesktop extends React.Component {
 
     let l = "";
     let ci = "";
-    console.log("PROPS ", this.props);
 
     if (match.params.region) {
       let tempL = regions.filter((r) => r.slug === match.params.region);
@@ -258,10 +255,6 @@ class ServiceCategoryListDesktop extends React.Component {
   showServices = (mapState = null) => {
     const { goTo } = this.props;
     const { location, category, cities, city, region } = this.state;
-
-    console.log("111 ", region);
-    console.log("222 ", city);
-    console.log("333 ", location);
 
     let showMap = mapState != null ? mapState : this.state.showMap;
     this.setState({ showMap, showServices: true });
