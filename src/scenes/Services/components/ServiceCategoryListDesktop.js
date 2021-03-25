@@ -141,7 +141,7 @@ class ServiceCategoryListDesktop extends React.Component {
 		const { services, serviceCount } = this.state;
 
 		const servicesFiltered = [];
-		for (let x = serviceCount - 1; servicesFiltered.length < 10 && x < services.length; x++) {
+		for (let x = serviceCount; servicesFiltered.length < 10 && x < services.length; x++) {
 			servicesFiltered.push(services[x])
 		}
 
@@ -149,7 +149,7 @@ class ServiceCategoryListDesktop extends React.Component {
 			loadingMoreServices: false,
 			showMore: servicesFiltered.length === 10,
 			servicesRendered: [...this.state.servicesRendered, ...servicesFiltered],
-			serviceCount: this.state.servicesRendered.length
+			serviceCount: serviceCount + servicesFiltered.length
 		})
 	}
 
