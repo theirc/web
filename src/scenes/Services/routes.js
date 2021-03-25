@@ -23,4 +23,5 @@ export default {
 	servicesInLocationMap: (country, location) => (`/${country.fields.slug}/services/by-location/${location}/map`),
 	servicesInRegionMap: (country, region) => (`/${country.fields.slug}/services/by-region/${region}/map`),
 	servicesInCityMap: (country, region, city) => (`/${country.fields.slug}/services/${region}/by-city/${city}/map`),
+	goToCountry: (country) => (`/${country.fields.slug}/services/`)
 };

@@ -232,6 +232,7 @@ class Services extends React.Component {
 			servicesInCategoryMap,
 			servicesInLocationMap,
 			match,
+			goToCountry
 		} = this.props;
 
 		const { isMobile, cities, countryRegions, geolocation, locationName } = this.state;
@@ -252,11 +253,16 @@ class Services extends React.Component {
 		const onOpenDepartment = (id, department, name, location) => {
 			const { language } = this.props
 			let cities;
-			servicesApi().fetchCities(id, language)
-				.then(city => cities = city)
-				.then(() => { 
-					this.setState({ regionId: id, locationName: name, regionName: name, region: department, location: department, cities, cityId: null, cityName: null, city: null })
-				});
+			if (department !== country.fields.slug) {
+				servicesApi().fetchCities(id, language)
+					.then(city => cities = city)
+					.then(() => { 
+						this.setState({ regionId: id, locationName: name, regionName: name, region: department, location: department, cities, cityId: null, cityName: null, city: null })
+						goToLocation(country, department);
+					});
+			} else {
+				goToCountry(country);
+			}
 		}
 
 		const goToLocations = (iscountrylist) => {
@@ -382,7 +388,6 @@ class Services extends React.Component {
 										allRegions={countryRegions}
 										onOpenDepartment={(id, department, name) => {
 											onOpenDepartment(id, department, name);
-											goToLocation(country, department);
 										}}
 									/>
 								</div>
@@ -964,6 +969,7 @@ const mapDispatch = (d, p) => ({
 	listServicesInCategory: (country, category) => d(push(routes.listServicesInCategory(country, category))),
 	servicesInCategoryMap: (country, category, location) => d(push(routes.servicesInCategoryMap(country, category, location))),
 	servicesInLocationMap: (country, location) => d(push(routes.servicesInLocationMap(country, location))),
+	goToCountry: (country) => d(push(routes.goToCountry(country))),
 	showErrorMessage: (error) => d(actions.showErrorMessage(error)),
 });
 
