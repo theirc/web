@@ -190,20 +190,14 @@ class Services extends React.Component {
 			goToRegionCategoryMap,
 			goToCityCategoryMap,
 			goToCategoryMap,
-			goToLocationMap,
 			goToRegionMap,
 			goToCityMap,
 			goToMap,
 			listAllServices,
-			listAllServicesinLocation,
 			listAllServicesinRegion,
 			listAllServicesinCity,
 			listServicesInCategory,
 		} = this.props;
-
-		console.log('444 ', region.slug);
-		console.log('555 ', city.slug);
-		console.log('666 ', category);
 
 		if ((!region || region.slug === country.fields.slug) && !category) {
 			mapview ? goToMap(country) : listAllServices(country);
@@ -218,12 +212,6 @@ class Services extends React.Component {
 		} else if (region && region.slug && city && city.slug && category) {
 			mapview ? goToCityCategoryMap(country, category.id, region.slug, city.slug) : goToCityByCategory(country, category.id, region.slug, city.slug);
 		}
-		// else if (location  && !category) {
-		// 	mapview ? goToLocationMap(country, location.slug) : listAllServicesinLocation(country, location.slug, region.slug, city.slug);
-		// } else if ((!location || location.level === 1) && category) {
-		// } else if (location && category) {
-		// 	mapview ? goToLocationCategoryMap(country, location.slug, category.id) : goToLocationByCategory(country, category.id, location.slug);
-		// }
 	}
 
 	render() {
@@ -970,7 +958,7 @@ const mapDispatch = (d, p) => ({
 	goToCityCategoryMap: (country, category, region, city) => d(push(routes.goToCityCategoryMap(country, category, region, city))),
 	goToMap: (country) => d(push(routes.goToMap(country))),
 	listAllServices: (country) => d(push(routes.listAllServices(country))),
-	listAllServicesinLocation: (country, location, region, city) => d(push(routes.listAllServicesinLocation(country, location, region, city))),
+	listAllServicesinLocation: (country, location) => d(push(routes.listAllServicesinLocation(country, location))),
 	listAllServicesinRegion: (country, region) => d(push(routes.listAllServicesinRegion(country, region))),
 	listAllServicesinCity: (country, region, city) => d(push(routes.listAllServicesinCity(country, region, city))),
 	listServicesInCategory: (country, category) => d(push(routes.listServicesInCategory(country, category))),

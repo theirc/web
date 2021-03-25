@@ -15,7 +15,7 @@ export default {
 	goToMap: (country) => (`/${country.fields.slug}/services/map/`),
 	goToService: (country, language, id) => (`/${country.fields.slug}/services/${id}?language=${language}`),
 	listAllServices: (country) => (`/${country.fields.slug}/services/all/`),
-	listAllServicesinLocation: (country, location, region, city) => (`/${country.fields.slug}/services/by-location/${location}/${region}/${city}/all/`),
+	listAllServicesinLocation: (country, location) => (`/${country.fields.slug}/services/by-location/${location}/all/`),
 	listAllServicesinRegion: (country, region) => (`/${country.fields.slug}/services/by-region/${region}/all/`),
 	listAllServicesinCity: (country, region, city) => (`/${country.fields.slug}/services/${region}/by-city/${city}/all/`),
 	listServicesInCategory: (country, category) => (`/${country.fields.slug}/services/by-category/${category.id}/`),
