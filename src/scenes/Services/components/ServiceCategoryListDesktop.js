@@ -62,7 +62,7 @@ class ServiceCategoryListDesktop extends React.Component {
       t,
       match,
     } = this.props;
-    let c = regions.filter((r) => r.country.slug === country.fields.slug)[0];
+    let c = {id: regions[0].countryID, name: country.fields.name, slug: country.fields.slug}
     const { categories } = this.state;
 
     let l = "";
@@ -77,9 +77,8 @@ class ServiceCategoryListDesktop extends React.Component {
           ci = tempCi.length > 0 ? tempCi[0] : "";
         }
         if (!showFilter) {
-          console.log("FFFF ", category);
           this.handleFetchServices(
-            c.country.id,
+            c.id,
             category,
             l ? l.id : "",
             ci ? ci.id : ""
@@ -108,20 +107,19 @@ class ServiceCategoryListDesktop extends React.Component {
       });
     } else {
       if (!showFilter) {
-        console.log("TTT ", category);
-        this.handleFetchServices(c.country.id, category);
+        this.handleFetchServices(c.id, category);
       }
       if (fetchCategories && categories.length === 0) {
-        this.handleFetchCategories(c.country.id, category);
+        this.handleFetchCategories(c.id, category);
       }
     }
 
-    let department = ci ? ci : l ? l : c.country;
+    let department = ci ? ci : l ? l : c;
 
     this.setState({
       loaded: true,
       location: department,
-      region: !l ? c.country.name : l,
+      region: !l ? c.name : l,
       showFilter: showFilter,
     });
   }
@@ -550,7 +548,7 @@ class ServiceCategoryListDesktop extends React.Component {
           <h2>
             {providerInfo && providerInfo.name}{" "}
             <span>
-              {serviceInfo.address.length > 0
+              {(serviceInfo.address && serviceInfo.address.length > 0)
                 ? serviceInfo.address
                 : service.location}
               {distance && ` - ${distance}`}
@@ -578,12 +576,10 @@ class ServiceCategoryListDesktop extends React.Component {
   render() {
     const { categories, loaded, showServices, servicesRendered } = this.state;
     const { t, regions, country } = this.props;
-    let regionsRender = regions.filter(
-      (r) => r.country && r.country.slug === country.fields.slug && r.isActive
-    );
-    regionsRender[0].country.name = country.fields.name;
-    regionsRender.unshift(regionsRender[0].country);
-
+    const countryData = {id: regions[0].countryID, name: country.fields.name, slug: country.fields.slug}
+    
+    let regionsRender = [...regions]
+    if (regionsRender[0].slug !== country.fields.slug) regionsRender.unshift(countryData);
     const cities = this.state.cities;
 
     !loaded && this.renderLoader();

@@ -67,11 +67,11 @@ function servicesApi() {
   function fetchRegions(language, countrySlug) {
     return new Promise((resolve, reject) => {
       const sessionStorage = getSessionStorage();
-      // const country = sessionStorage[`${language}-countries`] ?
-      // JSON.parse(sessionStorage[`${language}-countries`]).filter(c => c.slug === countrySlug)[0] : '';
-      // var requestUrl =
-      // "/regions/list/" + (country ? `?countryId=${country.id}&language=${language}&hasService=1` : "");
-      var requestUrl = "/regions/list/";
+      const country = sessionStorage[`${language}-countries`] ?
+      JSON.parse(sessionStorage[`${language}-countries`]).filter(c => c.slug === countrySlug)[0] : '';
+      var requestUrl =
+      "/regions/list" + (country ? `?countryId=${country.id}&language=${language}&hasService=1` : "");
+      // var requestUrl = `/regions/list/&language=${language}`;
       request
         .get(BACKEND_URL + requestUrl)
         .set("Accept-Language", language)
@@ -213,8 +213,8 @@ function servicesApi() {
 
             function compare(a, b) {
               // Use toUpperCase() to ignore character casing
-              const provA = a.provider.name.toLowerCase();
-              const provB = b.provider.name.toLowerCase();
+              const provA = a.provider && a.provider.name.toLowerCase();
+              const provB = b.provider && b.provider.name.toLowerCase();
 
               let comparison = 0;
               if (provA > provB) {
