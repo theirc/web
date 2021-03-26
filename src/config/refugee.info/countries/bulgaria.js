@@ -1,4 +1,5 @@
 export default {
+	id: '',
 	countryCode: '+359', 
 	flag: '',
 	languages: ['ar', 'en', 'fa', 'ur'],

@@ -30,12 +30,12 @@ export function withCountry(WrappedComponent) {
 
       // country does not exist
       !instance.countries[match.params.country] && history.push("/404");
-
+      
       instance.countries[match.params.country] &&
         api.loadCountry(match.params.country, language).then((c) => {
           return onMount(c).then((c) => {
             servicesApi()
-              .fetchRegions(language, match.params.country)
+              .fetchRegions(language, instance.countries[match.params.country].id)
               .then((regionList) => {
                 storeRegions(regionList);
                 this.setState({
@@ -53,7 +53,7 @@ export function withCountry(WrappedComponent) {
       if (newProps.language !== language) {
         onMount(match.params.country, newProps.language).then((c) => {
           servicesApi()
-            .fetchRegions(language, match.params.country)
+            .fetchRegions(language, instance.countries[match.params.country].id)
             .then((regionList) => {
               storeRegions(regionList);
               this.setState({
@@ -65,7 +65,7 @@ export function withCountry(WrappedComponent) {
       } else if (newProps.match.params.country !== match.params.country) {
         onMount(match.params.country, language).then((c) => {
           servicesApi()
-            .fetchRegions(language, match.params.country)
+            .fetchRegions(language, instance.countries[match.params.country].id)
             .then((regionList) => {
               storeRegions(regionList);
               this.setState({
@@ -182,10 +182,6 @@ export function withCategory(WrappedComponent) {
         this.setState({
           category,
         });
-
-        // category does not exist
-        // console.log("Category exists?: ", category);
-        //!category && history.push('/404');
 
         onRender(category);
       }
