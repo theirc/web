@@ -252,7 +252,7 @@ function servicesApi() {
   function fetchServiceById(language, serviceId) {
     return new Promise((resolve, reject) => {
       request
-        .get(BACKEND_URL + "/services/" + serviceId)
+        .get(BACKEND_URL + "/services/" + serviceId +'&language=' + language)
         .set("Accept-Language", language)
         .end((err, res) => {
           if (err) {

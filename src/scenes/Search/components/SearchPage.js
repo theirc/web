@@ -149,7 +149,7 @@ class SearchPage extends React.Component {
 								</div>
 							</div>
 
-							{!searchingServices && services && services.length > 3 &&
+							{!searchingServices && services && services.length > 4 &&
 								<div className="show-action"><button className="show-more" onClick={this.toggleServices}>{toggleServicelabel}</button></div>
 							}
 
