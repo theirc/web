@@ -54,10 +54,12 @@ class Services extends React.Component {
 
 	componentWillMount() {
 		let { regions, country, changeDefaultLocation } = this.props;
-		let countryRegions = regions.filter(r => r.country && r.country.slug === country.fields.slug && r.isActive);
-		countryRegions.unshift(countryRegions[0].country)
+		const countryData = {id: regions[0].countryID, name: country.fields.name, slug: country.fields.slug}
+		let countryRegions = [...regions];
+		
+		if (countryRegions[0].slug !== country.fields.slug) countryRegions.unshift(countryData);
 
-		this.setState({ countryRegions });
+		this.setState({ countryRegions});
 
 		const { coordinates } = country.fields;
 		if (coordinates) {
@@ -133,8 +135,7 @@ class Services extends React.Component {
 	fetchAllInLocation(location, categoryId = null) {
 		const { language, showErrorMessage, regions } = this.props;
 		const { sortingByLocationEnabled, errorWithGeolocation, fetchingLocation, geolocation, regionId, cityId } = this.state;
-		const country = regions.find(r => r.country.slug === location);
-		const countryId = country ? country.country.id : '';
+		const countryId = regions[0].countryID;
 
 		if (!errorWithGeolocation) {
 			if (sortingByLocationEnabled && fetchingLocation) {
@@ -162,9 +163,9 @@ class Services extends React.Component {
 	}
 
 	serviceTypes() {
-		const { language, country, regions } = this.props;
+		const { language, regions } = this.props;
 		const { regionId, cityId } = this.state;
-		const countryId = (regions.find(r => r.country.slug === country.fields.slug)).country.id;
+		const countryId = regions[0].countryID;
 
 		if (regionId && !cityId) {
 			return servicesApi().fetchCategoriesByRegion(language, regionId);
@@ -183,10 +184,8 @@ class Services extends React.Component {
 	goTo(region, city, location, category, mapview = false) {
 		const {
 			country,
-			goToLocationByCategory,
 			goToRegionByCategory,
 			goToCityByCategory,
-			goToLocationCategoryMap,
 			goToRegionCategoryMap,
 			goToCityCategoryMap,
 			goToCategoryMap,
