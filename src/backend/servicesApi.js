@@ -64,14 +64,11 @@ function servicesApi() {
     });
   }
 
-  function fetchRegions(language, countrySlug) {
+  function fetchRegions(language, country) {
     return new Promise((resolve, reject) => {
       const sessionStorage = getSessionStorage();
-      const country = sessionStorage[`${language}-countries`] ?
-      JSON.parse(sessionStorage[`${language}-countries`]).filter(c => c.slug === countrySlug)[0] : '';
       var requestUrl =
-      "/regions/list" + (country ? `?countryId=${country.id}&language=${language}&hasService=1` : "");
-      // var requestUrl = `/regions/list/&language=${language}`;
+      "/regions/list" + (country ? `?countryId=${country}&language=${language}&hasService=1` : "");
       request
         .get(BACKEND_URL + requestUrl)
         .set("Accept-Language", language)
