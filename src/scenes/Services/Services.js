@@ -132,44 +132,78 @@ class Services extends React.Component {
 		});
 	}
 
-	fetchAllInLocation(location, categoryId = null) {
+	fetchAllInLocation(country = '', region = '', city = '', categoryId = null) {
 		const { language, showErrorMessage, regions } = this.props;
-		const { sortingByLocationEnabled, errorWithGeolocation, fetchingLocation, geolocation, regionId, cityId } = this.state;
+		const { sortingByLocationEnabled, errorWithGeolocation, fetchingLocation, geolocation, cities, regionId, cityId } = this.state;
+		
 		const countryId = regions[0].countryID;
 
-		if (!errorWithGeolocation) {
-			if (sortingByLocationEnabled && fetchingLocation) {
-				return new Promise(() => { });
-			}
-
-			if (sortingByLocationEnabled && !fetchingLocation && !geolocation) {
-				this.setState({ fetchingLocation: true });
-				this.findUsersPosition()
-					.then(pos => {
-						this.setState({ fetchingLocation: false, geolocation: pos });
-					})
-					.catch(e => {
-						showErrorMessage("Error loading geolocation");
-						this.setState({ errorWithGeolocation: true, fetchingLocation: false });
-					});
-
-				return new Promise(() => { });
-			}
+		if (country && !region && !city) {
+			return this.fetchServices(countryId, language, categoryId, null, null)
 		}
 
+		let regionData;
+		let cityData;
+		let citiesList;
+
+		if (region && !regionId) {
+			regionData = regions.filter(x => x.slug === region)[0];
+			this.setState({regionId: regionData.id})
+		}
+
+		if (city && cities && cities.length && !cityId) {
+			cityData = cities.filter(x => x.slug === city)[0];
+		} else if (city && !cities && !cityId) {
+			servicesApi().fetchCities(regionId ? regionId : regionData.id, language)
+					.then(city => citiesList = city)
+					.then(() => {
+						cityData = citiesList.filter(x => x.slug === city)[0];
+						this.setState({ cities: citiesList, cityId: cityData.id, cityName: cityData.name, city: cityData })
+					})
+					.then(() => {
+						return this.fetchServices(countryId, language, categoryId, regionId ? regionId : regionData.id, cityId ? cityId: cityData.id)
+					})
+		}
+
+		return servicesApi()
+			.fetchAllServices(countryId, language, categoryId, regionId ? regionId : regionData.id, cityId)
+			.then(services => ({ services, category: null }));
+		// if (!errorWithGeolocation) {
+		// 	if (sortingByLocationEnabled && fetchingLocation) {
+		// 		return new Promise(() => { });
+		// 	}
+
+		// 	if (sortingByLocationEnabled && !fetchingLocation && !geolocation) {
+		// 		this.setState({ fetchingLocation: true });
+		// 		this.findUsersPosition()
+		// 			.then(pos => {
+		// 				this.setState({ fetchingLocation: false, geolocation: pos });
+		// 			})
+		// 			.catch(e => {
+		// 				showErrorMessage("Error loading geolocation");
+		// 				this.setState({ errorWithGeolocation: true, fetchingLocation: false });
+		// 			});
+
+		// 		return new Promise(() => { });
+		// 	}
+		// }
+
+	}
+
+	fetchServices(countryId, language, categoryId, regionId, cityId) {
 		return servicesApi()
 			.fetchAllServices(countryId, language, categoryId, regionId, cityId)
 			.then(services => ({ services, category: null }));
 	}
 
-	serviceTypes() {
+	serviceTypes(countryWide = false) {
 		const { language, regions } = this.props;
 		const { regionId, cityId } = this.state;
 		const countryId = regions[0].countryID;
 
-		if (regionId && !cityId) {
+		if (!countryWide && regionId && !cityId) {
 			return servicesApi().fetchCategoriesByRegion(language, regionId);
-		} else if (cityId) {
+		} else if (!countryWide && cityId) {
 			return servicesApi().fetchCategoriesByCity(language, cityId)
 		}
 
@@ -217,36 +251,52 @@ class Services extends React.Component {
 		const {
 			country,
 			goToLocation,
+			goToRegion,
+			goToCity,
 			goToLocationList,
 			goToDepartmentList,
 			goToLocationMap,
+			goToRegionMap,
+			goToCityMap,
 			goToCategoryMap,
 			goToLocationCategoryMap,
+			goToRegionCategoryMap,
+			goToCityCategoryMap,
 			goToLocationByCategory,
+			goToRegionByCategory,
+			goToCityByCategory,
 			goToMap,
 			language,
 			listAllServices,
 			listAllServicesinLocation,
+			listAllServicesinRegion,
+			listAllServicesinCity,
 			listServicesInCategory,
 			servicesInCategoryMap,
 			servicesInLocationMap,
+			servicesInRegionMap,
+			servicesInCityMap,
 			match,
 			goToCountry
 		} = this.props;
 
-		const { isMobile, cities, countryRegions, geolocation, locationName } = this.state;
+		const { isMobile, cities, countryRegions, geolocation, locationName, region, city } = this.state;
 
 		const onSelectCategory = (c) => {
 			this.setState({ categoryName: c.name, category: c.id });
-			listServicesInCategory(this.props.country, c);
-			if (this.state.location) {
-				goToLocationByCategory(this.props.country, c.id, this.state.location);
+			listServicesInCategory(country, c);
+			if (region && region !== country.fields.slug && !city) {
+				goToRegionByCategory(country, c.id, region)
+			} else if (region && region !== country.fields.slug && city) {
+				goToCityByCategory(country, c.id, region, city)
 			}
 		};
 
 		const onOpenLocation = (location, name) => {
+			const { region } = this.state
 			this.sessionStorage.location = JSON.stringify(location);
-			this.setState({ location: location.slug, region: null, cityId: location.id, city: location, cityName: name, locationName: name });
+			this.setState({ location: location.slug, cityId: location.id, city: location, cityName: name, locationName: name });
+			goToCity(country, region, location.slug)
 		}
 
 		const onOpenDepartment = (id, department, name, location) => {
@@ -257,7 +307,7 @@ class Services extends React.Component {
 					.then(city => cities = city)
 					.then(() => { 
 						this.setState({ regionId: id, locationName: name, regionName: name, region: department, location: department, cities, cityId: null, cityName: null, city: null })
-						goToLocation(country, department);
+						goToRegion(country, department);
 					});
 			} else {
 				goToCountry(country);
@@ -275,17 +325,25 @@ class Services extends React.Component {
 		}
 
 		const onGoToMap = (isCountryWide = null) => {
+			const { region, city } = this.state
 			this.setState({ keepPreviousZoom: false });
-			if (!isCountryWide && this.state.location) {
-				goToLocationMap(this.props.country, this.state.location);
+			if (!isCountryWide && region && region !== country.fields.slug && !city) {
+				goToRegionMap(country, region)
+			} else if (!isCountryWide && region && region !== country.fields.slug && city) {
+				goToCityMap(country, region, city)
 			} else {
 				goToMap(this.props.country);
 			}
 		}
 
-		const onGoToLocationMap = (location) => {
+		const onGoToLocationMap = (region, city = '') => {
+			const { country } = this.props;
 			this.setState({ keepPreviousZoom: false });
-			goToLocationMap(this.props.country, location);
+			if (region && !city) {
+				goToRegionMap(country, region);
+			} else if (region && city) {
+				goToCityMap(country, region, city)
+			}
 		}
 
 		return (
@@ -368,7 +426,6 @@ class Services extends React.Component {
 										departmentName={this.state.regionName}
 										openLocation={(location, name) => {
 											onOpenLocation(location, name);
-											goToLocation(country, location.slug);
 										}}
 									/>
 								</div>
@@ -432,7 +489,7 @@ class Services extends React.Component {
 								{isMobile &&
 									<ServiceMap
 										{...props}
-										findServicesInLocation={() => this.fetchAllInLocation(this.getLocation(), props.match.params.categoryId)}
+										findServicesInLocation={() => this.fetchAllInLocation(country.fields.slug, null, null, props.match.params.categoryId)}
 									/>
 								}
 								{!isMobile &&
@@ -454,7 +511,6 @@ class Services extends React.Component {
 						</Skeleton>
 					)}
 				/>
-
 				<Route
 					exact
 					path={`${match.url}/by-category/:categoryId/`}
@@ -465,7 +521,7 @@ class Services extends React.Component {
 									<ServiceList
 										{...props}
 										measureDistance={this.measureDistance(geolocation, language)}
-										servicesByType={() => this.fetchAllInLocation(this.getLocation(), props.match.params.categoryId)}
+										servicesByType={() => this.fetchAllInLocation(country.fields.slug, null, null, props.match.params.categoryId)}
 										showMap={() => goToCategoryMap(country, props.match.params.categoryId)}
 									/>
 								}
@@ -489,7 +545,7 @@ class Services extends React.Component {
 				/>
 				<Route
 					exact
-					path={`${match.url}/by-location/:location/`}
+					path={`${match.url}/by-region/:region/`}
 					component={props => (
 						<Skeleton headerColor='light'>
 							<div className="SkeletonContainer">
@@ -497,8 +553,8 @@ class Services extends React.Component {
 									<ServiceCategoryList
 										fetchCategories={() => this.serviceTypes()}
 										onSelectCategory={onSelectCategory}
-										listAllServices={() => listAllServicesinLocation(country, props.match.params.location)}
-										goToMap={() => onGoToLocationMap(props.match.params.location)}
+										listAllServices={() => listAllServicesinRegion(country, props.match.params.region)}
+										goToMap={() => onGoToLocationMap(props.match.params.region)}
 										goToLocationList={() => { goToLocations(false) }}
 										locationName={locationName}
 										departmentSelected={this.state.region}
@@ -523,6 +579,41 @@ class Services extends React.Component {
 					)}
 				/>
 				<Route
+					exact
+					path={`${match.url}/:region/by-city/:city/`}
+					component={props => (
+						<Skeleton headerColor='light'>
+							<div className="SkeletonContainer">
+								{isMobile &&
+									<ServiceCategoryList
+										fetchCategories={() => this.serviceTypes()}
+										onSelectCategory={onSelectCategory}
+										listAllServices={() => listAllServicesinCity(country, props.match.params.region, props.match.params.city)}
+										goToMap={() => onGoToLocationMap(props.match.params.region, props.match.params.city)}
+										goToLocationList={() => { goToLocations(false) }}
+										locationName={locationName}
+										departmentSelected={this.state.region}
+									/>
+								}
+								{!isMobile &&
+									<ServiceCategoryListDesktop
+										{...props}
+										fetchCitiesByRegion={(regionId) => servicesApi().fetchCities(regionId, language)}
+										fetchCategories={(countryId) => servicesApi().fetchCategoriesByCountry(language, countryId)}
+										fetchCategoriesByRegion={(regionId) => servicesApi().fetchCategoriesByRegion(language, regionId)}
+										fetchCategoriesByCity={(cityId) => servicesApi().fetchCategoriesByCity(language, cityId)}
+										fetchServices={(countryId, category, regionId, cityId) => servicesApi().fetchAllServices(countryId, language, category, regionId, cityId)}
+										goTo={(region, city, location, category, mapview, cities) => {this.goTo(region, city, location, category, mapview); this.setState({cities})}}
+										location={props.match.params.location}
+										measureDistance={this.measureDistance(geolocation, language)}
+										cities={this.state.cities}
+									/>
+								}
+							</div>
+						</Skeleton>
+					)}
+				/>
+				{/* <Route
 					exact
 					path={`${match.url}/by-category/:categoryId/location/:location`}
 					component={props => (
@@ -554,7 +645,7 @@ class Services extends React.Component {
 							</div>
 						</Skeleton>
 					)}
-				/>
+				/> */}
 				<Route
 					exact
 					path={`${match.url}/by-category/:categoryId/region/:region`}
@@ -565,8 +656,8 @@ class Services extends React.Component {
 									<ServiceList
 										{...props}
 										measureDistance={this.measureDistance(geolocation, language)}
-										servicesByType={() => this.fetchAllInLocation(props.match.params.location, props.match.params.categoryId)}
-										showMap={() => goToLocationCategoryMap(country, props.match.params.location, props.match.params.categoryId)}
+										servicesByType={() => this.fetchAllInLocation(country.fields.slug, props.match.params.region, null, props.match.params.categoryId)}
+										showMap={() => goToRegionCategoryMap(country, props.match.params.categoryId, props.match.params.region)}
 									/>
 								}
 								{!isMobile &&
@@ -598,8 +689,8 @@ class Services extends React.Component {
 									<ServiceList
 										{...props}
 										measureDistance={this.measureDistance(geolocation, language)}
-										servicesByType={() => this.fetchAllInLocation(props.match.params.location, props.match.params.categoryId)}
-										showMap={() => goToLocationCategoryMap(country, props.match.params.location, props.match.params.categoryId)}
+										servicesByType={() => this.fetchAllInLocation(country.fields.slug, props.match.params.region, props.match.params.city, props.match.params.categoryId)}
+										showMap={() => goToCityCategoryMap(country, props.match.params.categoryId, props.match.params.region, props.match.params.city)}
 									/>
 								}
 								{!isMobile &&
@@ -621,7 +712,7 @@ class Services extends React.Component {
 						</Skeleton>
 					)}
 				/>
-				<Route
+				{/* <Route
 					exact
 					path={`${match.url}/by-category/:categoryId/location/:location/map`}
 					component={props => (
@@ -653,7 +744,7 @@ class Services extends React.Component {
 							</div>
 						</Skeleton>
 					)}
-				/>
+				/> */}
 				<Route
 					exact
 					path={`${match.url}/by-category/:categoryId/region/:region/map`}
@@ -663,7 +754,7 @@ class Services extends React.Component {
 								{isMobile &&
 									<ServiceMap
 										{...props}
-										findServicesInLocation={() => this.fetchAllInLocation(props.match.params.location, props.match.params.categoryId)}
+										findServicesInLocation={() => this.fetchAllInLocation(country.fields.slug, props.match.params.region, null, props.match.params.categoryId)}
 										keepPreviousZoom={this.state.keepPreviousZoom}
 									/>
 								}
@@ -696,7 +787,7 @@ class Services extends React.Component {
 								{isMobile &&
 									<ServiceMap
 										{...props}
-										findServicesInLocation={() => this.fetchAllInLocation(props.match.params.location, props.match.params.categoryId)}
+										findServicesInLocation={() => this.fetchAllInLocation(country.fields.slug, props.match.params.region, props.match.params.city, props.match.params.categoryId)}
 										keepPreviousZoom={this.state.keepPreviousZoom}
 									/>
 								}
@@ -720,7 +811,7 @@ class Services extends React.Component {
 						</Skeleton>
 					)}
 				/>
-				<Route
+				{/* <Route
 					exact
 					path={`${match.url}/by-location/:location/all`}
 					component={props => (
@@ -751,19 +842,19 @@ class Services extends React.Component {
 							</div>
 						</Skeleton>
 					)}
-				/>
+				/> */}
 				<Route
 					exact
 					path={`${match.url}/by-region/:region/all/`}
 					component={props => (
-						<Skeleton headerColor='light' showMapButton={true} goToMap={() => servicesInLocationMap(country, this.state.location)}>
+						<Skeleton headerColor='light' showMapButton={true} goToMap={() => servicesInRegionMap(country, region)}>
 							<div className="SkeletonContainer">
 								{isMobile &&
 									<ServiceList
 										{...props}
 										measureDistance={this.measureDistance(geolocation, language)}
-										servicesByType={() => this.fetchAllInLocation(props.match.params.location)}
-										showMap={() => goToLocationMap(country, props.match.params.location)}
+										servicesByType={() => this.fetchAllInLocation(country.fields.slug, props.match.params.region)}
+										showMap={() => goToRegionMap(country, props.match.params.region)}
 									/>
 								}
 								{!isMobile &&
@@ -788,14 +879,14 @@ class Services extends React.Component {
 					exact
 					path={`${match.url}/:region/by-city/:city/all`}
 					component={props => (
-						<Skeleton headerColor='light' showMapButton={true} goToMap={() => servicesInLocationMap(country, this.state.location)}>
+						<Skeleton headerColor='light' showMapButton={true} goToMap={() => servicesInCityMap(country, region, city)}>
 							<div className="SkeletonContainer">
 								{isMobile &&
 									<ServiceList
 										{...props}
 										measureDistance={this.measureDistance(geolocation, language)}
-										servicesByType={() => this.fetchAllInLocation(props.match.params.location)}
-										showMap={() => goToLocationMap(country, props.match.params.location)}
+										servicesByType={() => this.fetchAllInLocation(country.fields.slug, props.match.params.region, props.match.params.city)}
+										showMap={() => goToCityMap(country, props.match.params.region, props.match.params.city)}
 									/>
 								}
 								{!isMobile &&
@@ -816,7 +907,7 @@ class Services extends React.Component {
 						</Skeleton>
 					)}
 				/>
-				<Route
+				{/* <Route
 					exact
 					path={`${match.url}/by-location/:location/map/`}
 					component={props => (
@@ -847,7 +938,7 @@ class Services extends React.Component {
 							</div>
 						</Skeleton>
 					)}
-				/>
+				/> */}
 				<Route
 					exact
 					path={`${match.url}/by-region/:region/map/`}
@@ -857,7 +948,7 @@ class Services extends React.Component {
 								{isMobile &&
 									<ServiceMap
 										{...props}
-										findServicesInLocation={() => this.fetchAllInLocation(props.match.params.location)}
+										findServicesInLocation={() => this.fetchAllInLocation(country.fields.slug, props.match.params.region)}
 										keepPreviousZoom={this.state.keepPreviousZoom}
 									/>
 								}
@@ -889,7 +980,7 @@ class Services extends React.Component {
 								{isMobile &&
 									<ServiceMap
 										{...props}
-										findServicesInLocation={() => this.fetchAllInLocation(props.match.params.location)}
+										findServicesInLocation={() => this.fetchAllInLocation(country.fields.slug, props.match.params.region, props.match.params.city)}
 										keepPreviousZoom={this.state.keepPreviousZoom}
 									/>
 								}
@@ -920,7 +1011,7 @@ class Services extends React.Component {
 							<div className="SkeletonContainer">
 								{isMobile &&
 									<ServiceCategoryList
-										fetchCategories={() => this.serviceTypes()}
+										fetchCategories={() => this.serviceTypes(true)}
 										onSelectCategory={onSelectCategory}
 										listAllServices={() => listAllServices(country)}
 										goToMap={() => onGoToMap(true)}
@@ -949,6 +1040,8 @@ const mapDispatch = (d, p) => ({
 	changeDefaultLocation: (location) => d(actions.changeDefaultLocation(location)),
 	goToCategoryMap: (country, category) => d(push(routes.goToCategoryMap(country, category))),
 	goToLocation: (country, location) => d(push(routes.goToLocation(country, location))),
+	goToRegion: (country, region) => d(push(routes.goToRegion(country, region))),
+	goToCity: (country, region, city) => d(push(routes.goToCity(country, region, city))),
 	goToLocationByCategory: (country, category, location) => d(push(routes.goToLocationByCategory(country, category, location))),
 	goToRegionByCategory: (country, category, region) => d(push(routes.goToRegionByCategory(country, category, region))),
 	goToCityByCategory: (country, category, region, city) => d(push(routes.goToCityByCategory(country, category, region, city))),
