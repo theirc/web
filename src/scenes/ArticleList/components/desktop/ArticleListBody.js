@@ -203,7 +203,8 @@ class ArticleListBody extends Component {
               <div className="text">
                 {a.fields.category && (
                   <div className="category">
-                    <i
+                    <FontAwesomeIcon icon={(a.fields.category.fields && a.fields.category.fields.iconClass) ? a.fields.category.fields.iconClass.replace('fa fa-',''): ''} />
+                    {/* <i
                       className={
                         a.fields.category.fields
                           ? a.fields.category.fields.iconClass
@@ -216,7 +217,7 @@ class ArticleListBody extends Component {
                             ? !a.fields.category.fields.iconClass
                             : a.fields.category.fields.iconClass ===
                               "material-icons") && "add"}
-                    </i>
+                    </i> */}
                     <span>
                       {a.fields.category.fields
                         ? a.fields.category.fields.name
@@ -257,6 +258,9 @@ class ArticleListBody extends Component {
     const overviewOrFirst = (c) =>
       c.fields.overview || (c.fields.articles.length && c.fields.articles[0]);
 
+    let categoriesRender = categories.map(cat => cat.fields && cat.fields.iconClass && cat.fields.iconClass.replace('fa fa-',''));
+    console.log('123 ', categoriesRender);
+
     return (
       <div className="ArticleListBody">
         {/* TODO: Translate this */}
@@ -266,7 +270,8 @@ class ArticleListBody extends Component {
             <div className="left">
               <div id="articles-list-dropdown" onClick={this.toggleDD}>
                 <div className="content">
-                  <i
+                  <FontAwesomeIcon icon={this.state.selectedIconText} className={this.state.selectedCategoryClassName} />
+                  {/* <i
                     className={
                       this.state.selectedCategoryClassName || "material-icons"
                     }
@@ -276,7 +281,7 @@ class ArticleListBody extends Component {
                         this.state.selectedCategoryClassName ===
                           "material-icons") &&
                         "add")}
-                  </i>
+                  </i> */}
                   <span>
                     {this.state.selectedCategoryName.length
                       ? this.state.selectedCategoryName
@@ -318,12 +323,15 @@ class ArticleListBody extends Component {
                       this.clk(e.fields.slug, true);
                     }}
                   >
-                    <i className={e.fields.iconClass || "material-icons"}>
+                    <div className="icon-container">
+                      <FontAwesomeIcon icon={e.fields.iconClass.replace('fa fa-','')} className={e.fields.iconText} />
+                    </div>
+                    {/* <i className={e.fields.iconClass || "material-icons"}>
                       {e.fields.iconText ||
                         ((!e.fields.iconClass ||
                           e.fields.iconClass === "material-icons") &&
                           "add")}
-                    </i>
+                    </i> */}
                     <span>{e.fields.name}</span>
                   </li>
                 ))}
