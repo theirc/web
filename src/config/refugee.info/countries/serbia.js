@@ -1,4 +1,5 @@
 export default {
+	id: '',
 	countryCode: '', // +381 code was included in services already
 	flag: '',
 	languages: ['ar', 'en', 'fa', 'ur'],

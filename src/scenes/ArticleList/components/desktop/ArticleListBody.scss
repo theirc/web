@@ -101,7 +101,7 @@
 						font-weight: lighter;
 						padding-bottom: 15px;
 						
-						i {
+						i, svg {
 							text-align: center;
 							min-width: 20px;
 						}
@@ -337,6 +337,11 @@
 
 		transition: display 2s ease-in-out;
 	}
-
+	.icon-container {
+		display: flex;
+		margin: 0 7px;
+		width: 19px;
+		justify-content: center;
+	}
 }
 
