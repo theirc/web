@@ -2,6 +2,8 @@ export default {
 	goToCategoryMap: (country, category) => (`/${country.fields.slug}/services/by-category/${category}/map/`),
 	goToDepartmentList: (country) => (`/${country.fields.slug}/services/departments/`),
 	goToLocation: (country, location) => (`/${country.fields.slug}/services/by-location/${location}/`),
+	goToRegion: (country, region) => (`/${country.fields.slug}/services/by-region/${region}/`),
+	goToCity: (country, region, city) => (`/${country.fields.slug}/services/${region}/by-city/${city}/`),
 	goToLocationByCategory: (country, category, location) => (`/${country.fields.slug}/services/by-category/${category}/location/${location}`),
 	goToRegionByCategory: (country, category, region) => (`/${country.fields.slug}/services/by-category/${category}/region/${region}`),
 	goToCityByCategory: (country, category, region, city) => (`/${country.fields.slug}/services/by-category/${category}/region/${region}/city/${city}`),
