@@ -258,9 +258,6 @@ class ArticleListBody extends Component {
     const overviewOrFirst = (c) =>
       c.fields.overview || (c.fields.articles.length && c.fields.articles[0]);
 
-    let categoriesRender = categories.map(cat => cat.fields && cat.fields.iconClass && cat.fields.iconClass.replace('fa fa-',''));
-    console.log('123 ', categoriesRender);
-
     return (
       <div className="ArticleListBody">
         {/* TODO: Translate this */}
@@ -324,7 +321,7 @@ class ArticleListBody extends Component {
                     }}
                   >
                     <div className="icon-container">
-                      <FontAwesomeIcon icon={e.fields.iconClass.replace('fa fa-','')} className={e.fields.iconText} />
+                      <FontAwesomeIcon icon={e.fields.iconClass ? e.fields.iconClass.replace('fa fa-','') : ''} className={e.fields.iconText} />
                     </div>
                     {/* <i className={e.fields.iconClass || "material-icons"}>
                       {e.fields.iconText ||
