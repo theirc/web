@@ -119,7 +119,7 @@ class ServiceCategoryListDesktop extends React.Component {
     this.setState({
       loaded: true,
       location: department,
-      region: !l ? c.name : l,
+      region: !l ? c : l,
       showFilter: showFilter,
     });
   }

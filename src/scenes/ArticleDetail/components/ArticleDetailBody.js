@@ -243,7 +243,6 @@ class ArticleDetailBody extends Component {
 					<div id="maincontent">
 						<span className='author'><span>{t("actions.LAST_UPDATED", NS)}</span> {updatedAtDate}</span>
 						{content && <Markdown>{content}</Markdown>}
-						{lead && <Markdown>{lead}</Markdown>}
 					</div>
 				</article>
 			</div>
