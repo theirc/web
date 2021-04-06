@@ -24,7 +24,9 @@ export default {
 				"Whatsapp": "قم بزيارة صفحتنا واستخدم الدردشة للحصول على إجابات لأسئلتك",
 				"Facebook": "قم بزيارة صفحتنا واستخدم الدردشة للحصول على إجابات لأسئلتك",
 				"Facebook Button": "اذهب الى الفيس بوك",
-				"Whatsapp Button": "اذهب إلى WhatsApp"
+				"Whatsapp Button": "اذهب إلى WhatsApp",
+				"Whatsapp Title": "WhatsApp",
+				"Facebook Title": "الفيسبوك رسول"
 			}
 		}
 	},
@@ -53,7 +55,9 @@ export default {
 				"Whatsapp": "Visit our page and use the chat to get your questions answered",
 				"Facebook": "Visit our page and use the chat to get your questions answered",
 				"Facebook Button": "Go to Facebook",
-				"Whatsapp Button": "Go to Whatsapp"
+				"Whatsapp Button": "Go to Whatsapp",
+				"Whatsapp Title": "whatsapp",
+				"Facebook Title": "Facebook Messenger"
 			}
 		}
 	},
@@ -82,7 +86,9 @@ export default {
 				"Whatsapp": "Visite nuestra página y utilice el chat para obtener respuestas a sus preguntas",
 				"Facebook": "Visite nuestra página y utilice el chat para obtener respuestas a sus preguntas",
 				"Facebook Button": "Ir a Facebook",
-				"Whatsapp Button": "Ir a Whatsapp"
+				"Whatsapp Button": "Ir a Whatsapp",
+				"Whatsapp Title": "WhatsApp",
+				"Facebook Title": "Facebook Messenger"
 			}
 		}
 	},
@@ -111,7 +117,9 @@ export default {
 				"Whatsapp": "به صفحه ما مراجعه کنید و از چت برای پاسخگویی به سوالات خود استفاده کنید",
 				"Facebook": "به صفحه ما مراجعه کنید و از چت برای پاسخگویی به سوالات خود استفاده کنید",
 				"Facebook Button": "به فیس بوک برو",
-				"Whatsapp Button": "به WhatsApp بروید"
+				"Whatsapp Button": "به WhatsApp بروید",
+				"Whatsapp Title": "واتساپ",
+				"Facebook Title": "پیام رسان فیس بوک"
 			}
 		}
 	},
@@ -140,7 +148,9 @@ export default {
 				"Whatsapp": "Visitez notre page et utilisez le chat pour obtenir des réponses à vos questions",
 				"Facebook": "Visitez notre page et utilisez le chat pour obtenir des réponses à vos questions",
 				"Facebook Button": "Aller sur Facebook",
-				"Whatsapp Button": "Allez sur WhatsApp"
+				"Whatsapp Button": "Allez sur WhatsApp",
+				"Whatsapp Title": "WhatsApp",
+				"Facebook Title": "Facebook Messenger"
 			}
 		}
 	},
@@ -169,7 +179,9 @@ export default {
 				"Whatsapp": "ہمارے صفحے پر جائیں اور اپنے سوالات کے جوابات حاصل کرنے کے لئے چیٹ کا استعمال کریں",
 				"Facebook": "ہمارے صفحے پر جائیں اور اپنے سوالات کے جوابات حاصل کرنے کے لئے چیٹ کا استعمال کریں",
 				"Facebook Button": "فیس بک پر جائیں",
-				"Whatsapp Button": "به فیس بوک برو"
+				"Whatsapp Button": "به فیس بوک برو",
+				"Whatsapp Title": "واٹس ایپ",
+				"Facebook Title": "فیس بک میسنجر"
 			}
 		}
 	}
