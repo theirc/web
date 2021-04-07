@@ -62,7 +62,11 @@ class ServiceCategoryListDesktop extends React.Component {
       t,
       match,
     } = this.props;
-    let c = {id: regions[0].countryID, name: country.fields.name, slug: country.fields.slug}
+    let c = {
+      id: regions[0].countryID,
+      name: country.fields.name,
+      slug: country.fields.slug,
+    };
     const { categories } = this.state;
 
     let l = "";
@@ -326,11 +330,7 @@ class ServiceCategoryListDesktop extends React.Component {
 
   renderDepartmentButton(department, onSelect) {
     const { country, language } = this.props;
-    const departmentT =
-      department.data_i18n &&
-      department.data_i18n.filter((x) => x.language === language)[0];
-    const departmentInfo =
-      departmentT && departmentT.name.length > 0 ? departmentT : department;
+    const departmentName = department.translatedName ? department.translatedName : department.name;
     return (
       <button
         key={`${department.id}-${department.slug}`}
@@ -344,15 +344,14 @@ class ServiceCategoryListDesktop extends React.Component {
         {department.slug === country.fields.slug && (
           <FontAwesomeIcon icon="globe" />
         )}
-        <span>{departmentInfo.name}</span>
+        <span>{departmentName}</span>
       </button>
     );
   }
 
   renderMunicipalityButton(city, onSelect) {
-    const { language } = this.props;
-    const cityName = city[`name_${language}`]
-      ? city[`name_${language}`]
+    const cityName = city.translatedName
+      ? city.translatedName
       : city.name;
     return (
       <button
@@ -371,24 +370,25 @@ class ServiceCategoryListDesktop extends React.Component {
   }
 
   renderFilters = () => {
-    let { cities } = this.state;
+    let { cities, category, region, city } = this.state;
     let { t, language } = this.props;
 
-    let categoryName = this.state.category
-      ? this.state.category.name
-      : t("services.All Categories", NS);
-    let region = this.state.region.name
-      ? this.state.region.data_i18n &&
-        this.state.region.data_i18n.filter((x) => x.language === language)[0]
-        ? this.state.region.data_i18n.filter((x) => x.language === language)[0]
-            .name
-        : this.state.region.name
-      : this.state.region;
-    let city = this.state.city.name
-      ? this.state.city[`name_${language}`]
-        ? this.state.city[`name_${language}`]
-        : this.state.city.name
-      : this.state.city;
+    let categoryName =
+      category && category.translatedName
+        ? category.translatedName
+        : category && category.name
+        ? category.name
+        : t("services.All Categories", NS);
+    let regionName = region && region.translatedName
+      ? region.translatedName 
+      : region && region.name
+      ? region.name
+      : region;
+    let cityName = city && city.translatedName
+      ? city.translatedName
+      : city && city.name
+      ? city.name
+      : city;
 
     return (
       <div className="ActionsBar">
@@ -400,7 +400,7 @@ class ServiceCategoryListDesktop extends React.Component {
               this.openFilters(FilterTypes.DEPARTMENT);
             }}
           >
-            <span>{region}</span>
+            <span>{regionName}</span>
             <i className="material-icons">keyboard_arrow_down</i>
           </div>
 
@@ -411,7 +411,7 @@ class ServiceCategoryListDesktop extends React.Component {
                 this.openFilters(FilterTypes.MUNICIPALITY);
               }}
             >
-              <span>{city}</span>
+              <span>{cityName}</span>
               <i className="material-icons">keyboard_arrow_down</i>
             </div>
           )}
@@ -548,7 +548,7 @@ class ServiceCategoryListDesktop extends React.Component {
           <h2>
             {providerInfo && providerInfo.name}{" "}
             <span>
-              {(serviceInfo.address && serviceInfo.address.length > 0)
+              {serviceInfo.address && serviceInfo.address.length > 0
                 ? serviceInfo.address
                 : service.location}
               {distance && ` - ${distance}`}
@@ -576,10 +576,15 @@ class ServiceCategoryListDesktop extends React.Component {
   render() {
     const { categories, loaded, showServices, servicesRendered } = this.state;
     const { t, regions, country } = this.props;
-    const countryData = {id: regions[0].countryID, name: country.fields.name, slug: country.fields.slug}
-    
-    let regionsRender = [...regions]
-    if (regionsRender[0].slug !== country.fields.slug) regionsRender.unshift(countryData);
+    const countryData = {
+      id: regions[0].countryID,
+      name: country.fields.name,
+      slug: country.fields.slug,
+    };
+
+    let regionsRender = [...regions];
+    if (regionsRender[0].slug !== country.fields.slug)
+      regionsRender.unshift(countryData);
     const cities = this.state.cities;
 
     !loaded && this.renderLoader();

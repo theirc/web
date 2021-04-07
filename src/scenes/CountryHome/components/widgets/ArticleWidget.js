@@ -143,7 +143,7 @@ class ArticleWidget extends Component {
                       <FontAwesomeIcon icon={faWhatsapp} />
                     </div>
                   </div>
-                  <h1 className="social-title">WhatsApp</h1>
+                  <h1 className="social-title">{t("social.Whatsapp Title", NS)}</h1>
                   <span className="social-text">
                     {t("social.Whatsapp", NS)}
                   </span>
@@ -163,7 +163,7 @@ class ArticleWidget extends Component {
                       <FontAwesomeIcon icon={faFacebookF} />
                     </div>
                   </div>
-                  <h1 className="social-title">Facebook Messenger</h1>
+                  <h1 className="social-title">{t("social.Facebook Title", NS)}</h1>
                   <span className="social-text">
                     {t("social.Facebook", NS)}
                   </span>

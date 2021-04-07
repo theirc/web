@@ -37,9 +37,8 @@ class CountrySelector extends Component {
 		} = this.props;
 		let disableLanguageSelector = instance.switches.disableLanguageSelector;
 		let countryList = this.props.countryList;
-		let regionList = this.props.regionList.filter(r => r.languages.split(',').map(a => a.trim()).indexOf(language) > -1).map(r => r.slug);
+		let regionList = this.props.regionList.map(r => r.slug);
 		let availableCountryList = countryList.filter(c => regionList.indexOf(c.fields.slug) > -1 && instance.countries[c.fields.slug]);
-
 		availableCountryList = this.filterCountry(availableCountryList, language);
 
 		if (global.navigator && navigator.geolocation) {

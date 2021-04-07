@@ -12,7 +12,7 @@ import languages from './languages';
 import cmsApi from '../../backend/cmsApi';
 import { SearchPage } from "../../components";
 import { Skeleton } from "../../scenes";
-import getSessionStorage from "../../shared/sessionStorage";
+import instance from '../../backend/settings';
 
 const NS = { ns: 'Search' };
 
@@ -51,12 +51,7 @@ class Search extends React.Component {
 
 	search(props) {
 		const { location, country, language } = props;
-		const sessionStorage = getSessionStorage();
-		let countries;
-		if (sessionStorage[`${language}-countries`]) {
-			countries = JSON.parse(sessionStorage[`${language}-countries`]);
-		}
-		let countryId = countries.filter(x => x.slug === country.fields.slug)[0].id
+		let countryId = instance.countries[country.fields.slug] && instance.countries[country.fields.slug].id;
 		const qs = queryString.parse(location.search);
 		this.setState({ articles: [], services: [], searchingArticles: true, searchingServices: true, term: qs.q });
 		const languageDictionary = config.languageDictionary || {};
@@ -75,7 +70,6 @@ class Search extends React.Component {
 		servicesApi()
 			.fetchAllServices(countryId, language, null, null, null, qs.q)
 			.then(response => {
-				console.log('3333 ', response);
 				this.setState({ services: response, searchingServices: false })})
 			.catch(e => {
 				this.setState({ services: [], searchingServices: false });

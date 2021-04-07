@@ -186,7 +186,7 @@ class ArticleDetailBody extends Component {
 				break;
 		}
 
-		let country = article.fields.country.fields.slug;
+		let country = article.fields.country && article.fields.country.fields.slug;
 
 		let categorySlug = document.location.pathname.split('/')[2];
 		let categoryIcon = article.fields.category.fields.iconClass && article.fields.category.fields.iconClass.replace('fa fa-','');

@@ -16,7 +16,7 @@ export default {
 				"Italy": "n/a"
 			},
 			"menu": {
-				"Articles": "مصادر ",
+				"Articles": "المقالات ",
 				"Home": "الصفحة الرئيسية",
 				"Search": "بحث",
 				"Services": "الحصول على المساعدة"
@@ -40,7 +40,7 @@ export default {
 				"Italy": "Information about COVID-19 and government emergency measures >"
 			},
 			"menu": {
-				"Articles": "Resources",
+				"Articles": "Articles",
 				"Home": "Home",
 				"Search": "Search",
 				"Services": "Find Help"
@@ -88,7 +88,7 @@ export default {
 				"Italy": "n/a"
 			},
 			"menu": {
-				"Articles": "کمک پیدا کنید",
+				"Articles": "مقاله‌ها",
 				"Home": "خانه",
 				"Search": "جستجو",
 				"Services": "کمک پیدا کنید"
@@ -112,7 +112,7 @@ export default {
 				"Italy": "Informations sur COVID-19 et mesures d'urgence gouvernementales"
 			},
 			"menu": {
-				"Articles": "Ressources",
+				"Articles": "Articles",
 				"Home": "Accueil",
 				"Search": "Chercher",
 				"Services": "Trouver de l'aide"
@@ -136,7 +136,7 @@ export default {
 				"Italy": "n/a"
 			},
 			"menu": {
-				"Articles": "حوالہ جات",
+				"Articles": "مضامین",
 				"Home": "صفحہ اوّل ",
 				"Search": "تلاش کریں",
 				"Services": "مدد تلاش کریں"
