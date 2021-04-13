@@ -2,10 +2,10 @@ export default {
 	"ar": {
 		"ArticleList": {
 			"header": {
-				"Categories": "Resources"
+				"Categories": "Articles"
 			},
 			"actions": {
-				"All Articles": "كل الموارد",
+				"All Articles": "جميع المقالات",
 				"": ""
 			}
 		}
@@ -13,10 +13,10 @@ export default {
 	"en": {
 		"ArticleList": {
 			"header": {
-				"Categories": "Resources"
+				"Categories": "Articles"
 			},
 			"actions": {
-				"All Articles": "All Resources",
+				"All Articles": "All Articles",
 				"": ""
 			}
 		}
@@ -35,10 +35,10 @@ export default {
 	"fa": {
 		"ArticleList": {
 			"header": {
-				"Categories": "Resources"
+				"Categories": "Articles"
 			},
 			"actions": {
-				"All Articles": "همه منابع",
+				"All Articles": "همه مقالات",
 				"": ""
 			}
 		}
@@ -46,10 +46,10 @@ export default {
 	"fr": {
 		"ArticleList": {
 			"header": {
-				"Categories": "Resurces"
+				"Categories": "Articles"
 			},
 			"actions": {
-				"All Articles": "Tous les ressources",
+				"All Articles": "Tous les articles",
 				"": ""
 			}
 		}
@@ -57,10 +57,10 @@ export default {
 	"ur": {
 		"ArticleList": {
 			"header": {
-				"Categories": "Resources"
+				"Categories": "Articles"
 			},
 			"actions": {
-				"All Articles": "تمام وسائل",
+				"All Articles": "تمام مضامین",
 				"": ""
 			}
 		}
