@@ -82,6 +82,8 @@ class AppHeader extends Component {
   handleSubmit(event) {
     const { onGoToSearch } = this.props;
     const { searchText } = this.state;
+    
+    if (!searchText) return false
 
     onGoToSearch(searchText);
 

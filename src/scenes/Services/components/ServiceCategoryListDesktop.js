@@ -123,7 +123,7 @@ class ServiceCategoryListDesktop extends React.Component {
     this.setState({
       loaded: true,
       location: department,
-      region: !l ? c.name : l,
+      region: !l ? c : l,
       showFilter: showFilter,
     });
   }
@@ -330,11 +330,7 @@ class ServiceCategoryListDesktop extends React.Component {
 
   renderDepartmentButton(department, onSelect) {
     const { country, language } = this.props;
-    const departmentT =
-      department.data_i18n &&
-      department.data_i18n.filter((x) => x.language === language)[0];
-    const departmentInfo =
-      departmentT && departmentT.name.length > 0 ? departmentT : department;
+    const departmentName = department.translatedName ? department.translatedName : department.name;
     return (
       <button
         key={`${department.id}-${department.slug}`}
@@ -348,15 +344,14 @@ class ServiceCategoryListDesktop extends React.Component {
         {department.slug === country.fields.slug && (
           <FontAwesomeIcon icon="globe" />
         )}
-        <span>{departmentInfo.name}</span>
+        <span>{departmentName}</span>
       </button>
     );
   }
 
   renderMunicipalityButton(city, onSelect) {
-    const { language } = this.props;
-    const cityName = city[`name_${language}`]
-      ? city[`name_${language}`]
+    const cityName = city.translatedName
+      ? city.translatedName
       : city.name;
     return (
       <button
@@ -384,16 +379,15 @@ class ServiceCategoryListDesktop extends React.Component {
         : category && category.name
         ? category.name
         : t("services.All Categories", NS);
-    let regionName = region.name
-      ? region.data_i18n &&
-        region.data_i18n.filter((x) => x.language === language)[0]
-        ? region.data_i18n.filter((x) => x.language === language)[0].name
-        : region.name
+    let regionName = region && region.translatedName
+      ? region.translatedName 
+      : region && region.name
+      ? region.name
       : region;
-    let cityName = city.name
-      ? city[`name_${language}`]
-        ? city[`name_${language}`]
-        : city.name
+    let cityName = city && city.translatedName
+      ? city.translatedName
+      : city && city.name
+      ? city.name
       : city;
 
     return (

@@ -68,7 +68,10 @@ function servicesApi() {
     return new Promise((resolve, reject) => {
       const sessionStorage = getSessionStorage();
       var requestUrl =
-      "/regions/list" + (country ? `?countryId=${country}&language=${language}&hasService=1` : "");
+        "/regions/list" +
+        (country
+          ? `?countryId=${country}&language=${language}&hasService=1`
+          : "");
       request
         .get(BACKEND_URL + requestUrl)
         .set("Accept-Language", language)
@@ -204,9 +207,9 @@ function servicesApi() {
               return;
             }
 
-            const filteredServices = res.body.filter(
-              (service) => service.status === "public"
-            );
+            const filteredServices = res.body.filter((service) => {
+              return service && service.status === "public";
+            });
 
             function compare(a, b) {
               // Use toUpperCase() to ignore character casing
@@ -249,7 +252,7 @@ function servicesApi() {
   function fetchServiceById(language, serviceId) {
     return new Promise((resolve, reject) => {
       request
-        .get(BACKEND_URL + "/services/" + serviceId +'&language=' + language)
+        .get(BACKEND_URL + "/services/" + serviceId + "?language=" + language)
         .set("Accept-Language", language)
         .end((err, res) => {
           if (err) {
@@ -280,17 +283,17 @@ function servicesApi() {
   }
 
   return {
-	fetchCategoriesByCountry,
-	fetchCategoriesByRegion,
-	fetchCategoriesByCity,
-	fetchRegions,
-	fetchCities,
-	fetchCountries,
-	fetchCategoryById,
-	fetchAllServices,
-	fetchServiceById,
-	fetchServicePreviewById
-  }
+    fetchCategoriesByCountry,
+    fetchCategoriesByRegion,
+    fetchCategoriesByCity,
+    fetchRegions,
+    fetchCities,
+    fetchCountries,
+    fetchCategoryById,
+    fetchAllServices,
+    fetchServiceById,
+    fetchServicePreviewById,
+  };
 }
 
 export default servicesApi;
