@@ -71,7 +71,7 @@ class LocalGuideWidget extends Component {
                 && c.fields.backgroundImage.fields.file && c.fields.backgroundImage.fields.file.url && (
                   <img data-src={c.fields.backgroundImage.fields.file.url} alt="local-guide-hero-image" className="lazyload" />
                 )}
-                <div className="text-container">
+                <div className={`text-container ${langRTL ? "rtl" : "ltr"}`}>
                   <h1 className="title">{c.fields.title}</h1>
                   <span className="description">{typeof c.fields.description === 'string' ? c.fields.description : c.fields.description.content[0].content[0].value}</span>
                   <Link

@@ -98,6 +98,11 @@
           font-weight: 600;
           text-decoration: underline;
         }
+        &.rtl {
+          .description {
+            text-align: right;
+          }
+        }
       }
 
       &.first-item {
