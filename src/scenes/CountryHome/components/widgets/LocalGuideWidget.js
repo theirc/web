@@ -67,8 +67,7 @@ class LocalGuideWidget extends Component {
             } ${guideItems.length !== 2 && i === 0 ? "first-item" : ""}`}
             >
               <div className="Overlay">
-                {c.fields && c.fields.backgroundImage && c.fields.backgroundImage.fields 
-                && c.fields.backgroundImage.fields.file && c.fields.backgroundImage.fields.file.url && (
+                {c?.fields?.backgroundImage?.fields?.file && c.fields.backgroundImage.fields.file.url && (
                   <img data-src={c.fields.backgroundImage.fields.file.url} alt="local-guide-hero-image" className="lazyload" />
                 )}
                 <div className={`text-container ${langRTL ? "rtl" : "ltr"}`}>

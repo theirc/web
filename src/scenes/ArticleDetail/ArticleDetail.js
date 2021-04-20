@@ -115,7 +115,7 @@ const mapDispatch = (d, p) => {
 	return {
 		onMount: (category, slug) => {
 			if (category && (category.fields.articles || category.fields.overview)) {
-				if (category.fields.overview && category.fields.overview.fields.slug === slug) {
+				if (category?.fields?.overview?.fields?.slug === slug) {
 					return Promise.resolve(d(actions.selectArticle(category.fields.overview)));
 				} else if (category.fields.articles) {
 					return Promise.resolve(d(actions.selectArticle(category.fields.articles.filter(a => a && a.fields).filter(a => a.fields.slug === slug)[0])));
