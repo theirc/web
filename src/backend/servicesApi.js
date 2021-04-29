@@ -72,27 +72,33 @@ function servicesApi() {
         (country
           ? `?countryId=${country}&language=${language}&hasService=1`
           : "");
-      request
-        .get(BACKEND_URL + requestUrl)
-        .set("Accept-Language", language)
-        .end((err, res) => {
-          if (err) {
-            reject(err);
-            return;
-          }
+      if (sessionStorage[`${language}-regions`]) {
+        resolve(JSON.parse(sessionStorage[`${language}-regions`]));
+      } else {
+        request
+          .get(BACKEND_URL + requestUrl)
+          .set("Accept-Language", language)
+          .end((err, res) => {
+            if (err) {
+              reject(err);
+              return;
+            }
 
-          try {
-            // remove unused session items
-            instance.languages.map((i) =>
-              sessionStorage.removeItem(`${i[0]}-regions`)
-            );
-            sessionStorage[`${language}-regions`] = JSON.stringify(res.body);
-          } catch (e) {
-            console.log("Session storage is full. Regions Request not cached.");
-          }
+            try {
+              // remove unused session items
+              instance.languages.map((i) =>
+                sessionStorage.removeItem(`${i[0]}-regions`)
+              );
+              sessionStorage[`${language}-regions`] = JSON.stringify(res.body.filter(x => x.isActive && x.isActive === 1));
+            } catch (e) {
+              console.log(
+                "Session storage is full. Regions Request not cached."
+              );
+            }
 
-          resolve(res.body);
-        });
+            resolve(res.body.filter(x => x.isActive && x.isActive === 1));
+          });
+      }
     });
   }
 
@@ -109,8 +115,7 @@ function servicesApi() {
             reject(err);
             return;
           }
-
-          resolve(res.body);
+          resolve(res.body.filter(x => x.isActive && x.isActive === 1));
         });
     });
   }
