@@ -198,10 +198,10 @@ class ArticleDetailBody extends Component {
 
 				<HeaderBar subtitle={(category.fields.articles || []).length > 1 && `${category.fields.name}:`} title={title} />
 
-				{hero && hero.fields && hero.fields.file &&
+				{hero?.fields?.file &&
 					<div>
 						<div className="hero">
-							<img data-src={hero.fields.file.url} alt="hero-header" className="lazyload" />
+							<img src={hero.fields.file.url} alt="hero-header" className="lazyload" />
 						</div>
 						{hero.fields.description && <credit>{hero.fields.description}</credit>}
 					</div>
@@ -209,7 +209,7 @@ class ArticleDetailBody extends Component {
 
 				<div className='ActionsBar'>
 					<div className='left'>
-						{article && article.fields && article.fields.category && article.fields.category.fields && 
+						{article?.fields?.category?.fields && 
 							<div className='btn' onClick={() => country ? history.push(`/${country}/${categorySlug}`) : history.goBack()}>
 								<FontAwesomeIcon icon="chevron-left" className="arrow-left" />
 								<FontAwesomeIcon icon={categoryIcon} />
