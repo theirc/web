@@ -53,23 +53,34 @@
       list-style: none;
 
       &::before {
-        font-family: "FontAwesome";
+        font-family: "Font Awesome 5 Pro";
       }
     }
   }
   .pos + ul {
     li {
       &::before {
+        display: none;
         content: "\f00c ";
         color: #29991f;
+        font-weight: 900;
+      }
+      svg {
+        color: #29991f;
+        font-weight: 900;
       }
     }
   }
   .neg + ul {
     li {
       &::before {
+        display: none;
         content: "\f00d ";
         color: #e60000;
+      }
+      svg {
+        color: #e60000;
+        font-weight: 900;
       }
     }
   }
@@ -255,6 +266,6 @@
   }
   .arrow-left {
     height: 10px;
-    width: 16px!important;
+    width: 16px !important;
   }
 }
