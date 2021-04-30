@@ -174,16 +174,19 @@
       text-decoration: underline;
     }
 
-    s:not(.Read-More) a {
-      @media (min-width: $desktopBreakpoint) {
-        &:before {
-          border: 2px solid;
-          @include brand-colors("border-color");
-          display: inline-block;
-          height: 6px;
-          margin-right: 5px;
-          width: 2px;
-          color: blue !important;
+    s:not(.Read-More) {
+      display: block;
+      a {
+        @media (min-width: $desktopBreakpoint) {
+          &:before {
+            border: 2px solid;
+            @include brand-colors("border-color");
+            display: inline-block;
+            height: 6px;
+            margin-right: 5px;
+            width: 2px;
+            color: blue !important;
+          }
         }
       }
     }
