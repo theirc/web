@@ -134,13 +134,10 @@ const markdownOptions = {
  * @description 
  */
 const getFirsLevel = (slug, selectedLanguage) => {
-	console.log('ENTRA ACA');
-	return servicesApi
+	return servicesApi()
 		.fetchRegions(selectedLanguage)
 		.then(rs => {
-			console.log('2222 ', rs);
 			let selected = rs.filter(r => r.slug == slug)[0];
-			console.log('1111 ', selected);
 			if (selected.level !== 1) {
 				const parents = rs.map(r => [r.id, r]);
 
