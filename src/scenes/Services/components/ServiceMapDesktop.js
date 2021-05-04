@@ -163,15 +163,19 @@ class ServiceMapDesktop extends React.Component {
 			if (this.props.services.length) {
 
 				let locationServices = this.props.services.filter(s => s.latitude != null && s.longitude != null && s.status === "public");
-
+				
 				const markers = locationServices.map((s, index) => {
+					
 					const mainType = s.serviceCategories ? s.serviceCategories[0] : '';
 					let markerDiv = ReactDOMServer.renderToString(<ServiceIcon idx={0} service={s} type={mainType} />);
-
+					
 					let popupEl = document.createElement("div");
 					ReactDOM.render(<ServiceItem service={s} {...this.props} />, popupEl);
+					
+					var newLat = parseFloat(s.latitude) + (Math.random() -.5) / 375; // This is a tweak to move the marker 25mts so they won't be over each other
+					var newLng = parseFloat(s.longitude) + (Math.random() -.5) / 375; // This is a tweak to move the marker 25mts so they won't be over each other
 
-					let marker = new HtmlMarker(new global.google.maps.LatLng(s.latitude, s.longitude), this.map, {
+					let marker = new HtmlMarker(new global.google.maps.LatLng(newLat, newLng), this.map, {
 						html: markerDiv
 					});
 
