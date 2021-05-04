@@ -88,7 +88,7 @@ class ArticleWidget extends Component {
 
     return (
       <div className={`Article ArticleWidget Home`} key={article.sys.id}>
-        {hero && hero.fields && hero.fields.file && showHero && (
+        {hero?.fields?.file && showHero && (
           <div className="hero">
             <img
               className="heroImage lazyload"

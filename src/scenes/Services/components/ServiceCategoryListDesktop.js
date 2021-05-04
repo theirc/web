@@ -330,7 +330,9 @@ class ServiceCategoryListDesktop extends React.Component {
 
   renderDepartmentButton(department, onSelect) {
     const { country, language } = this.props;
-    const departmentName = department.translatedName ? department.translatedName : department.name;
+    const departmentName = department.translatedName
+      ? department.translatedName
+      : department.name;
     return (
       <button
         key={`${department.id}-${department.slug}`}
@@ -350,9 +352,7 @@ class ServiceCategoryListDesktop extends React.Component {
   }
 
   renderMunicipalityButton(city, onSelect) {
-    const cityName = city.translatedName
-      ? city.translatedName
-      : city.name;
+    const cityName = city.translatedName ? city.translatedName : city.name;
     return (
       <button
         key={city.id}
@@ -379,16 +379,18 @@ class ServiceCategoryListDesktop extends React.Component {
         : category && category.name
         ? category.name
         : t("services.All Categories", NS);
-    let regionName = region && region.translatedName
-      ? region.translatedName 
-      : region && region.name
-      ? region.name
-      : region;
-    let cityName = city && city.translatedName
-      ? city.translatedName
-      : city && city.name
-      ? city.name
-      : city;
+    let regionName =
+      region && region.translatedName
+        ? region.translatedName
+        : region && region.name
+        ? region.name
+        : region;
+    let cityName =
+      city && city.translatedName
+        ? city.translatedName
+        : city && city.name
+        ? city.name
+        : city;
 
     return (
       <div className="ActionsBar">
@@ -492,13 +494,12 @@ class ServiceCategoryListDesktop extends React.Component {
     const { country, goToService, language, measureDistance } = this.props;
     const distance =
       measureDistance && service.location && measureDistance(service.location);
-    const serviceT =
-      service.data_i18n &&
-      service.data_i18n.filter((x) => x.language === language)[0];
-    const providerT =
-      service.provider &&
-      service.provider.data_i18n &&
-      service.provider.data_i18n.filter((p) => p.language === language)[0];
+    const serviceT = service?.data_i18n?.filter(
+      (x) => x.language === language
+    )[0];
+    const providerT = service?.provider?.data_i18n?.filter(
+      (p) => p.language === language
+    )[0];
     const serviceInfo = serviceT ? serviceT : service;
     const providerInfo =
       providerT && providerT.name ? providerT : service.provider;
@@ -546,9 +547,9 @@ class ServiceCategoryListDesktop extends React.Component {
           <h1>{serviceInfo.name}</h1>
 
           <h2>
-            {providerInfo && providerInfo.name}{" "}
+            {providerInfo?.name}{" "}
             <span>
-              {serviceInfo.address && serviceInfo.address.length > 0
+              {serviceInfo?.address?.length > 0
                 ? serviceInfo.address
                 : service.location}
               {distance && ` - ${distance}`}
