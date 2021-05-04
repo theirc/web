@@ -140,7 +140,7 @@ class Skeleton extends React.Component {
 						homePage={homePage}
 					/>
 					
-					{!!window.location.href.endsWith(`/${country.fields.slug}`) && notifications}
+					{country && country.fields && !!window.location.href.endsWith(`/${country.fields.slug}`) && notifications}
 
 					{children}
 					
