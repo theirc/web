@@ -199,7 +199,10 @@ class ServiceMap extends React.Component {
 					let popupEl = document.createElement("div");
 					ReactDOM.render(<ServiceItem service={s} {...this.props} />, popupEl);
 
-					let marker = new HtmlMarker(new global.google.maps.LatLng(s.latitude, s.longitude), this.map, {
+					var newLat = parseFloat(s.latitude) + (Math.random() -.5) / 375; // This is a tweak to move the marker 25mts so they won't be over each other
+					var newLng = parseFloat(s.longitude) + (Math.random() -.5) / 375; // This is a tweak to move the marker 25mts so they won't be over each other
+
+					let marker = new HtmlMarker(new global.google.maps.LatLng(newLat, newLng), this.map, {
 						html: markerDiv
 					});
 

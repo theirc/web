@@ -256,7 +256,7 @@
       list-style: none;
 
       &::before {
-        font-family: "FontAwesome";
+        font-family: "Font Awesome 5 Pro";
       }
     }
   }
@@ -265,6 +265,7 @@
       &::before {
         content: "\f00c ";
         color: green;
+        font-weight: 900;
       }
     }
   }

@@ -189,7 +189,7 @@ class ArticleDetailBody extends Component {
 		let country = article.fields.country && article.fields.country.fields.slug;
 
 		let categorySlug = document.location.pathname.split('/')[2];
-		let categoryIcon = article.fields.category.fields.iconClass && article.fields.category.fields.iconClass.replace('fa fa-','');
+		let categoryIcon = article?.fields?.category?.fields?.iconClass?.replace('fa fa-','');
 		return (
 			<div ref={r => (this._ref = r)} id="articleDetailBody" className={["ArticleDetailBody", loading ? "loading" : "loaded"].join(" ")}>
 				<Helmet>
@@ -201,7 +201,7 @@ class ArticleDetailBody extends Component {
 				{hero && hero.fields && hero.fields.file &&
 					<div>
 						<div className="hero">
-							<img data-src={hero.fields.file.url} alt="hero-header" className="lazyload" />
+							<img src={hero.fields.file.url} alt="hero-header" className="lazyload" />
 						</div>
 						{hero.fields.description && <credit>{hero.fields.description}</credit>}
 					</div>
