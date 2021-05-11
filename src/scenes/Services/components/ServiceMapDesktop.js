@@ -41,7 +41,7 @@ class ServiceIcon extends React.Component {
 		const { service, idx, type } = this.props;
 		return type ? (
 			<div className="Icon" key={`${service.id}-${idx}`} style={{ 'fontSize': '18px' }}>
-				<i className={type.icon} style={categoryStyle(type.color)} />
+				<FontAwesomeIcon icon={type.icon} style={categoryStyle(type.color)} />
 			</div>
 		) : (
 				<div />
