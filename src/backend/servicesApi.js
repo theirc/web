@@ -6,7 +6,7 @@ var Promise = require("bluebird");
 const BACKEND_URL = instance.env.backendUrl;
 const INSTANCE_ID = instance.env.instanceId;
 
-export function fetchCategoriesByCountry(language, countryId) {
+export const fetchCategoriesByCountry = (language, countryId) => {
   return new Promise((resolve, reject) => {
     request
       .get(
@@ -63,7 +63,7 @@ export const fetchCategoriesByCity = (language, cityId) => {
   });
 };
 
-export const fetchRegions = (language, country) => {
+export function fetchRegions(language, country) {
   return new Promise((resolve, reject) => {
     const sessionStorage = getSessionStorage();
     var requestUrl =
