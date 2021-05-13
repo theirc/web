@@ -9,7 +9,7 @@ const fbHelpers = {
 			let { href } = window.location;
 			console.log(href);
 
-			// href += (href.includes("?") ? "&" : "?") + "language=" + language;
+			href += (href.includes("?") ? "&" : "?") + "language=" + language;
 	
 			if (FB) {
 				FB.ui({	method: "share", href }, (response) => {});
