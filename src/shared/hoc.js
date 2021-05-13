@@ -45,6 +45,9 @@ export function withCountry(WrappedComponent) {
               .catch((e) => {
                 throw fetchRegions
               });
+          })
+          .catch((e) => {
+            throw fetchRegions
           });
         });
     }
@@ -65,6 +68,9 @@ export function withCountry(WrappedComponent) {
             .catch((e) => {
               throw fetchRegions
             });
+        })
+        .catch((e) => {
+          throw fetchRegions
         });
       } else if (newProps.match.params.country !== match.params.country) {
         onMount(match.params.country, language).then((c) => {
@@ -79,6 +85,9 @@ export function withCountry(WrappedComponent) {
             .catch((e) => {
               throw fetchRegions
             });
+        })
+        .catch((e) => {
+          throw fetchRegions
         });
       }
     }
