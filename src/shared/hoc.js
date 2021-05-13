@@ -41,6 +41,9 @@ export function withCountry(WrappedComponent) {
                   country: c,
                   loaded: true,
                 });
+              })
+              .catch((e) => {
+                throw fetchRegions
               });
           });
         });
@@ -58,6 +61,9 @@ export function withCountry(WrappedComponent) {
                 country: c,
                 loaded: true,
               });
+            })
+            .catch((e) => {
+              throw fetchRegions
             });
         });
       } else if (newProps.match.params.country !== match.params.country) {
@@ -69,6 +75,9 @@ export function withCountry(WrappedComponent) {
                 country: c,
                 loaded: true,
               });
+            })
+            .catch((e) => {
+              throw fetchRegions
             });
         });
       }

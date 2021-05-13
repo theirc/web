@@ -44,7 +44,7 @@
 	<script src="//cdn1.readspeaker.com/script/11950/webReader/webReader.js?pids=wr" type="text/javascript" async defer></script>
 	<!-- <script src="https://refugeecdn.blob.core.windows.net/$web/webapp-libs/polyfill/v2/polyfill.min.js" async></script>
 	<script src="https://refugeecdn.blob.core.windows.net/$web/webapp-libs/modernizr/2.8.3/modernizr.js" async></script> -->
-	<script async defer>
+	<!-- <script>
 		window.fbAsyncInit = function () {
 			FB.init({
 				appId: '{{ appId }}',
@@ -65,7 +65,18 @@
 			fjs.parentNode.insertBefore(js, fjs);
 		}(document, 'script', 'facebook-jssdk'));
 
-	</script>
+	</script> -->
+	<script>
+		window.fbAsyncInit = function() {
+		  FB.init({
+			appId            : '{{ appId }}',
+			autoLogAppEvents : true,
+			xfbml            : true,
+			version          : 'v10.0'
+		  });
+		};
+	  </script>
+	  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
 	<script
 		src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js" async defer></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCuAJxGZo3B0NzzLv6DVba2yO47IebNvBg"></script>
