@@ -4,7 +4,7 @@ export default {
 			"menu": {
 				"Articles": "المقالات ",
 				"Home": "الصفحة الرئيسية",
-				"Services": "الخـدمات"
+				"Services": "الحصول على المساعدة"
 			}
 		}
 	},
@@ -13,7 +13,7 @@ export default {
 			"menu": {
 				"Articles": "Articles",
 				"Home": "Home",
-				"Services": "Services"
+				"Services": "Find Help"
 			}
 		}
 	},
@@ -22,7 +22,7 @@ export default {
 			"menu": {
 				"Articles": "Informativos",
 				"Home": "Inicio",
-				"Services": "Servicios"
+				"Services": "Encontrar Apoyo"
 			}
 		}
 	},
@@ -31,7 +31,7 @@ export default {
 			"menu": {
 				"Articles": "مقاله‌ها",
 				"Home": "خانه",
-				"Services": "خدمات"
+				"Services": "کمک پیدا کنید"
 			}
 		}
 	},
@@ -40,7 +40,7 @@ export default {
 			"menu": {
 				"Articles": "Articles",
 				"Home": "Accueil",
-				"Services": "Services"
+				"Services": "Trouver de l'aide"
 			}
 		}
 	},
@@ -49,7 +49,7 @@ export default {
 			"menu": {
 				"Articles": "مضامین",
 				"Home": "صفحہ اوّل ",
-				"Services": "خدمات"
+				"Services": "مدد تلاش کریں"
 			}
 		}
 	}

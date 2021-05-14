@@ -17,9 +17,11 @@ $padding: 20px 20px 20px 20px;
 	align-items: center;
 	justify-items: center;
 	justify-content: flex-end;
+	cursor: pointer;
 }
 .warning-dialog-container-yellow {
-	background-color: #ffda1a;
+	// background-color: #ffda1a;
+	@include brand-colors("background-color");
 
 	@extend .warning-dialog-container;
 }

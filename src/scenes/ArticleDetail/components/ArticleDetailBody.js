@@ -1,19 +1,19 @@
 // libs
 import React, { Component } from "react";
-import ReactDOM from "react-dom"
+import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
 import FacebookPlayer from "react-facebook-player";
 import YouTube from "react-youtube";
-import InstagramEmbed from 'react-instagram-embed';
+import InstagramEmbed from "react-instagram-embed";
 import { withTranslation } from "react-i18next";
-import 'lazysizes'
+import "lazysizes";
 
 // local
 import { history } from "../../../shared/redux/store";
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
-import instance from '../../../backend/settings';
-import fbHelper from '../../../helpers/facebook';
+import instance from "../../../backend/settings";
+import fbHelper from "../../../helpers/facebook";
 import "../../../components/ActionsBar/ActionsBar.css";
 import "./ArticleDetailBody.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -21,7 +21,7 @@ import { faCopy } from "@fortawesome/pro-regular-svg-icons";
 import { faFacebookF } from "@fortawesome/free-brands-svg-icons";
 import Markdown from "markdown-to-jsx";
 
-const NS = { ns: 'ArticleDetail' };
+const NS = { ns: "ArticleDetail" };
 const IG_URL = "https://instagr.am/p/";
 
 /**

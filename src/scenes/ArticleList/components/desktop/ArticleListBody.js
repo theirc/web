@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { withTranslation } from "react-i18next";
-import 'lazysizes'
+import "lazysizes";
 
 // local
 import HeaderBar from "../../../../components/HeaderBar/HeaderBar";
@@ -28,9 +28,8 @@ class ArticleListBody extends Component {
   componentWillMount() {
     let category = decodeURIComponent(document.location.pathname.split("/")[2]);
     category !== "categories" &&
-      !this.props.categories.filter(
-        (c) => c.fields && c.fields.slug === category
-      ).length &&
+      !this.props.categories.filter((c) => c?.fields?.slug === category)
+        .length &&
       this.props.history.push("/404");
   }
 
@@ -42,11 +41,10 @@ class ArticleListBody extends Component {
     let selectedCategory =
       category !== "categories" &&
       categories.filter(
-        (c) => c.fields && c.fields.slug === decodeURIComponent(category)
+        (c) => c?.fields?.slug === decodeURIComponent(category)
       );
 
-    selectedCategory &&
-      selectedCategory.length &&
+    selectedCategory?.length &&
       this.setState({
         selectedCategory: selectedCategory[0].sys.id,
         selectedCategoryName: selectedCategory[0].fields.name,
@@ -110,17 +108,18 @@ class ArticleListBody extends Component {
   renderTiles(c) {
     let { country, language } = this.props;
 
-    
-		let appendLeadingZeroes = (n) => {
-      if(n <= 9) {
+    let appendLeadingZeroes = (n) => {
+      if (n <= 9) {
         return "0" + n;
-			}
-			return n
-		}
-    
-    const updatedDate = (param) => new Date(param)
-		const updatedAtDate = (param) => `${updatedDate(param).getFullYear()}.${appendLeadingZeroes(updatedDate(param).getMonth() + 1)}.${appendLeadingZeroes(updatedDate(param).getDate())}`
+      }
+      return n;
+    };
 
+    const updatedDate = (param) => new Date(param);
+    const updatedAtDate = (param) =>
+      `${updatedDate(param).getFullYear()}.${appendLeadingZeroes(
+        updatedDate(param).getMonth() + 1
+      )}.${appendLeadingZeroes(updatedDate(param).getDate())}`;
 
     if (!c.fields) {
       console.log("c.fields is null", c);
@@ -130,18 +129,9 @@ class ArticleListBody extends Component {
     if (!c.fields.categories && !c.fields.articles) {
       let image = "/placeholder.png";
       if (c.fields.overview) {
-        c.fields &&
-          c.fields.overview &&
-          c.fields.overview.fields &&
-          c.fields.overview.fields.hero &&
-          c.fields.overview.fields.hero.fields &&
-          c.fields.overview.fields.hero.fields.file &&
+        c?.fields?.overview?.fields?.hero?.fields?.file &&
           (image = c.fields.overview.fields.hero.fields.file.url);
-        c.fields.overview &&
-          c.fields.overview.fields &&
-          c.fields.overview.fields.gallery &&
-          c.fields.overview.fields.gallery.fields &&
-          c.fields.overview.fields.gallery.fields.file &&
+        c?.fields?.overview?.fields?.gallery?.fields?.file &&
           (image = c.fields.overview.fields.gallery.fields.file.url);
       }
 
@@ -166,9 +156,7 @@ class ArticleListBody extends Component {
               </div>
 
               {c.fields && <h2>{c.fields.name}</h2>}
-              <span className="author">
-                {updatedAtDate(c.sys.updatedAt)}
-              </span>
+              <span className="author">{updatedAtDate(c.sys.updatedAt)}</span>
             </div>
           </Link>
         </li>
@@ -180,15 +168,9 @@ class ArticleListBody extends Component {
         if (!a.fields) return null;
 
         let image = "/placeholder.png";
-        a.fields &&
-          a.fields.hero &&
-          a.fields.hero.fields &&
-          a.fields.hero.fields.file &&
+        a?.fields?.hero?.fields?.file &&
           (image = a.fields.hero.fields.file.url);
-        a.fields &&
-          a.fields.gallery &&
-          a.fields.gallery.fields &&
-          a.fields.gallery.fields.file &&
+        a?.fields?.gallery?.fields?.file &&
           (image = a.fields.gallery.fields.file.url);
 
         return (
@@ -201,9 +183,19 @@ class ArticleListBody extends Component {
               </div>
 
               <div className="text">
-                {a.fields.category && (
+                {a?.fields?.category && (
                   <div className="category">
-                    <FontAwesomeIcon icon={(a.fields.category.fields && a.fields.category.fields.iconClass) ? a.fields.category.fields.iconClass.replace('fa fa-',''): ''} />
+                    <FontAwesomeIcon
+                      icon={
+                        a.fields.category.fields &&
+                        a.fields.category.fields.iconClass
+                          ? a.fields.category.fields.iconClass.replace(
+                              "fa fa-",
+                              ""
+                            )
+                          : ""
+                      }
+                    />
                     {/* <i
                       className={
                         a.fields.category.fields
@@ -219,7 +211,7 @@ class ArticleListBody extends Component {
                               "material-icons") && "add"}
                     </i> */}
                     <span>
-                      {a.fields.category.fields
+                      {a?.fields?.category?.fields
                         ? a.fields.category.fields.name
                         : ""}
                     </span>
@@ -227,9 +219,7 @@ class ArticleListBody extends Component {
                 )}
 
                 <h2>{a.fields.title}</h2>
-                <span className="author">
-                  {updatedAtDate(a.sys.updatedAt)}
-                </span>
+                <span className="author">{updatedAtDate(a.sys.updatedAt)}</span>
               </div>
             </Link>
           </li>
@@ -267,7 +257,10 @@ class ArticleListBody extends Component {
             <div className="left">
               <div id="articles-list-dropdown" onClick={this.toggleDD}>
                 <div className="content">
-                  <FontAwesomeIcon icon={this.state.selectedIconText} className={this.state.selectedCategoryClassName} />
+                  <FontAwesomeIcon
+                    icon={this.state.selectedIconText}
+                    className={this.state.selectedCategoryClassName}
+                  />
                   {/* <i
                     className={
                       this.state.selectedCategoryClassName || "material-icons"
@@ -321,7 +314,14 @@ class ArticleListBody extends Component {
                     }}
                   >
                     <div className="icon-container">
-                      <FontAwesomeIcon icon={e.fields.iconClass ? e.fields.iconClass.replace('fa fa-','') : ''} className={e.fields.iconText} />
+                      <FontAwesomeIcon
+                        icon={
+                          e.fields.iconClass
+                            ? e.fields.iconClass.replace("fa fa-", "")
+                            : ""
+                        }
+                        className={e.fields.iconText}
+                      />
                     </div>
                     {/* <i className={e.fields.iconClass || "material-icons"}>
                       {e.fields.iconText ||
@@ -454,7 +454,7 @@ class ArticleListBody extends Component {
                         "book")}
                   </i>
                   <span className="category-name">
-                    {c.fields && c.fields.name}
+                    {c?.fields?.name}
                   </span>
                 </label>
               )}

@@ -5,6 +5,7 @@ import Markdown from "markdown-to-jsx";
 
 // local
 import "./WarningDialog.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 /**
  * @class
@@ -67,7 +68,7 @@ export default class WarningDialog extends Component {
 				</div>
 				{dismissable && (
 					<div className="warning-dialog-close" onClick={() => this.hide()}>
-						{/* <Close /> */}
+						<FontAwesomeIcon icon='times' />
 					</div>
 				)}
 				</div>
