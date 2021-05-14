@@ -60,6 +60,7 @@
     "react-helmet": "^6.1.0",
     "react-i18next": "^11.8.10",
     "react-instagram-embed": "^2.0.0",
+    "react-meta-tags": "^1.0.1",
     "react-native": "^0.64.0",
     "react-native-device-info": "^8.0.5",
     "react-native-extra-dimensions-android": "^1.2.5",
