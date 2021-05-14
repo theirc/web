@@ -7,7 +7,6 @@ const fbHelpers = {
 		if (global.window) {
 			const { FB } = global.window;
 			let { href } = window.location;
-			console.log(href);
 
 			href += (href.includes("?") ? "&" : "?") + "language=" + language;
 	
