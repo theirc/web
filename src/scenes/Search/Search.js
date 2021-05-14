@@ -6,7 +6,7 @@ import { push } from "react-router-redux";
 
 // local
 import config from '../../backend/config';
-import servicesApi from "../../backend/servicesApi";
+import {fetchAllServices} from "../../backend/servicesApi";
 import i18nHelpers from '../../helpers/i18n';
 import languages from './languages';
 import cmsApi from '../../backend/cmsApi';
@@ -67,8 +67,7 @@ class Search extends React.Component {
 			.catch(e => {
 				this.setState({ articles: [], searchingArticles: false });
 			});
-		servicesApi()
-			.fetchAllServices(countryId, language, null, null, null, qs.q)
+		fetchAllServices(countryId, language, null, null, null, qs.q)
 			.then(response => {
 				this.setState({ services: response, searchingServices: false })})
 			.catch(e => {

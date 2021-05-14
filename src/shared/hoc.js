@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 
 // local
 import { actions } from "./redux/store";
-import servicesApi from "../backend/servicesApi";
+import { fetchRegions } from "../backend/servicesApi";
 import instance from "../backend/settings";
 import Skeleton from "../components/Skeleton/Skeleton";
 
@@ -34,15 +34,20 @@ export function withCountry(WrappedComponent) {
       instance.countries[match.params.country] &&
         api.loadCountry(match.params.country, language).then((c) => {
           return onMount(c).then((c) => {
-            servicesApi()
-              .fetchRegions(language, instance.countries[match.params.country].id)
+            fetchRegions(language, instance.countries[match.params.country].id)
               .then((regionList) => {
                 storeRegions(regionList);
                 this.setState({
                   country: c,
                   loaded: true,
                 });
+              })
+              .catch((e) => {
+                throw fetchRegions
               });
+          })
+          .catch((e) => {
+            throw fetchRegions
           });
         });
     }
@@ -52,27 +57,37 @@ export function withCountry(WrappedComponent) {
 
       if (newProps.language !== language) {
         onMount(match.params.country, newProps.language).then((c) => {
-          servicesApi()
-            .fetchRegions(language, instance.countries[match.params.country].id)
+          fetchRegions(language, instance.countries[match.params.country].id)
             .then((regionList) => {
               storeRegions(regionList);
               this.setState({
                 country: c,
                 loaded: true,
               });
+            })
+            .catch((e) => {
+              throw fetchRegions
             });
+        })
+        .catch((e) => {
+          throw fetchRegions
         });
       } else if (newProps.match.params.country !== match.params.country) {
         onMount(match.params.country, language).then((c) => {
-          servicesApi()
-            .fetchRegions(language, instance.countries[match.params.country].id)
+          fetchRegions(language, instance.countries[match.params.country].id)
             .then((regionList) => {
               storeRegions(regionList);
               this.setState({
                 country: c,
                 loaded: true,
               });
+            })
+            .catch((e) => {
+              throw fetchRegions
             });
+        })
+        .catch((e) => {
+          throw fetchRegions
         });
       }
     }
