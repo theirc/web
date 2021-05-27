@@ -15,7 +15,7 @@ const logger = require("winston");
 const fs = require("fs");
 const nunjucks = require("nunjucks");
 const conf = require("../backend/config");
-const servicesApi = require("../backend/servicesApi");
+const servicesApi = require("../backend/servicesApi").default;
 const cmsApi = require("../backend/cmsApi").default;
 const toMarkdown = require("to-markdown");
 let { languageDictionary } = conf;
@@ -134,22 +134,23 @@ const markdownOptions = {
  * @description 
  */
 const getFirsLevel = (slug, selectedLanguage) => {
-	return servicesApi()
-		.fetchRegions(selectedLanguage)
-		.then(rs => {
-			let selected = rs.filter(r => r.slug == slug)[0];
-			if (selected.level !== 1) {
-				const parents = rs.map(r => [r.id, r]);
+	// return servicesApi()
+	// 	.fetchRegions(selectedLanguage)
+	// 	.then(rs => {
+	// 		let selected = rs.filter(r => r.slug == slug)[0];
+	// 		if (selected.level !== 1) {
+	// 			const parents = rs.map(r => [r.id, r]);
 
-				while (selected.level !== 1) {
-					if (!selected.parent || !parents[selected.parent]) break;
+	// 			while (selected.level !== 1) {
+	// 				if (!selected.parent || !parents[selected.parent]) break;
 
-					selected = parents[selected.parent];
-				}
-			}
-			return selected.slug;
-		})
-		.catch(() => slug);
+	// 				selected = parents[selected.parent];
+	// 			}
+	// 		}
+	// 		return selected.slug;
+	// 	})
+	// 	.catch(() => slug);
+	console.log('this');
 };
 
 // Host the public folder
@@ -173,7 +174,7 @@ app.get("/preview/:serviceId/", function (req, res, err) {
 	} = req.params;
 
 	try {
-		servicesApi
+		servicesApi()
 			.fetchServicePreviewById(selectedLanguage, serviceId)
 			.then(s => {
 				return getFirsLevel(s.region.slug, selectedLanguage).then(c => {
@@ -200,7 +201,7 @@ app.get("/:country/services/:serviceId/", function (req, res, err) {
 				res.redirect(`/${c}/services/${serviceId}`);
 				return;
 			}
-			servicesApi
+			servicesApi()
 				.fetchServiceById(selectedLanguage, serviceId)
 				.then(s => {
 					return mainRequest({

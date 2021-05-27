@@ -41,7 +41,7 @@ class ServiceIcon extends React.Component {
 		const { service, idx, type } = this.props;
 		return type ? (
 			<div className="Icon" key={`${service.id}-${idx}`} style={{ 'fontSize': '18px' }}>
-				<i className={type.icon} style={categoryStyle(type.color)} />
+				<FontAwesomeIcon icon={type.icon} style={categoryStyle(type.color)} />
 			</div>
 		) : (
 				<div />
@@ -172,6 +172,9 @@ class ServiceMapDesktop extends React.Component {
 					let popupEl = document.createElement("div");
 					ReactDOM.render(<ServiceItem service={s} {...this.props} />, popupEl);
 					
+					var newLat = parseFloat(s.latitude) + (Math.random() -.5) / 375; // This is a tweak to move the marker 25mts so they won't be over each other
+					var newLng = parseFloat(s.longitude) + (Math.random() -.5) / 375; // This is a tweak to move the marker 25mts so they won't be over each other
+
 					var newLat = parseFloat(s.latitude) + (Math.random() -.5) / 375; // This is a tweak to move the marker 25mts so they won't be over each other
 					var newLng = parseFloat(s.longitude) + (Math.random() -.5) / 375; // This is a tweak to move the marker 25mts so they won't be over each other
 

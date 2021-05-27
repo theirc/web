@@ -170,23 +170,28 @@
       }
     }
 
+    s {
+      a {
+        display: block;
+        width: fit-content;
+      }
+    }
+
     li a {
       text-decoration: underline;
     }
 
-    s:not(.Read-More) {
+    s:not(.Read-More) a {
       display: block;
-      a {
-        @media (min-width: $desktopBreakpoint) {
-          &:before {
-            border: 2px solid;
-            @include brand-colors("border-color");
-            display: inline-block;
-            height: 6px;
-            margin-right: 5px;
-            width: 2px;
-            color: blue !important;
-          }
+      @media (min-width: $desktopBreakpoint) {
+        &:before {
+          border: 2px solid;
+          @include brand-colors("border-color");
+          display: inline-block;
+          height: 6px;
+          margin-right: 5px;
+          width: 2px;
+          color: blue !important;
         }
       }
     }

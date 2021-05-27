@@ -90,7 +90,7 @@ class ServiceList extends React.Component {
 					<h2>
 						{providerInfo ? providerInfo.name : ''}{" "}
 						<span>
-							{serviceInfo.address}
+							{serviceInfo.address.length > 0 ? serviceInfo.address : s.location}
 							{distance && ` - ${distance}`}
 						</span>
 						<div className="Icons">

@@ -14,7 +14,7 @@ import { actions } from "../../shared/redux/store";
 import i18nHelpers from '../../helpers/i18n';
 import instance from '../../backend/settings';
 import languages from './languages';
-import servicesApi from "../../backend/servicesApi";
+import { fetchCountries } from "../../backend/servicesApi";
 import getSessionStorage from "../../shared/sessionStorage";
 
 const NS = { ns: 'Selectors' };
@@ -86,7 +86,7 @@ class Selectors extends Component {
 					this.selectCountry(country.fields.slug);
 				}
 			} else {
-				servicesApi().fetchCountries(language).then((regionList) => {
+				fetchCountries(language).then((regionList) => {
 					api
 						.listCountries(language)
 						.then(e => e.items.map(a => ({
