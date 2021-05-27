@@ -1,0 +1,232 @@
+@import "../../shared/includes.scss";
+
+.Subscribe {
+	margin: 0 auto;
+	max-width: 1024px;
+
+	.ltr & {
+		s {
+			float: right;
+		}
+	}
+
+	.rtl & {
+		s {
+			float: left;
+		}
+	}
+
+	.Subscribe-content {
+		border-top: 1px solid #ddd;
+		font-weight: 300;
+		padding-left: 16px;
+		padding-right: 16px;
+
+		.subtitle {
+			font-size: 15px;
+		}
+
+		.subscribe-form {
+			background-color: #f0f0f0;
+			border: 1px solid #ddd;
+			border-radius: 5px;
+			color: #5e5e5e;
+			min-height: 214px;
+			max-width: 500px;
+			margin: 50px auto;
+			padding: 10px;
+			text-align: center;
+
+			p {
+				font-size: 14px;
+				font-style: italic;
+			}
+		
+			#phone-wrapper {
+				label {
+					color: black;
+					font-size: 20px;
+				}
+			
+				#country-code {
+					width: 40px;
+				}
+				#phone-number {
+					width: 135px;
+				}
+			
+				.subscribe-input {
+					border: 1px solid #ddd;
+					border-radius: 5px;
+					font-size: 20px;
+					height: 30px;
+					margin: 10px 5px;
+					padding: 5px 10px;
+				}
+			}
+
+			.all-set {
+				padding: 10px;
+			
+				h4 {
+					margin: unset;
+					padding-bottom: 10px;
+				}
+			}
+			
+			.label {
+				color: black;
+				padding: 10px 0;
+			}
+
+			.warning {
+				color: red;
+				font-size: 14px;
+				min-height: 30px;
+			}
+
+			.verify-input {
+				border: 1px solid #ddd;
+				border-radius: 5px;
+				font-size: 20px;
+				letter-spacing: 10px;
+				margin: 10px auto;
+				padding: 5px 10px 5px 22px;
+				height: 30px;
+				width: 93px;
+			}
+
+			.subscribe-button {
+				@include darken-brand-colors("background-color", 10%);
+				@include brand-colors-inverse("color");
+				border: none;
+				border-radius: 5px;
+				cursor: pointer;
+				font-size: 16px;
+				height: 41px;
+				margin: 10px 0;
+				padding: 0 40px;
+				text-align: center;
+				white-space: nowrap;
+			
+				&:hover {
+					@include brand-colors("background-color");
+					text-decoration: underline;
+				}
+			
+				&.disabled {
+					cursor: default;
+					opacity: 0.7;
+			
+					&:hover {
+						@include darken-brand-colors("background-color", 10%);
+						text-decoration: none;
+					}
+				}
+			}
+			
+		}
+
+		.how-it-works {
+			background-color: #f0f0f0;
+			border: 1px solid #ddd;
+			border-radius: 5px;
+			margin-bottom: 20px;
+			padding: 10px;
+
+			.title {
+				display: flex;
+				align-items: center;
+				padding-left: 15px;
+			}
+
+			h4 {
+				align-items: center;
+				display: flex;
+				
+				&:hover {
+					cursor: pointer;
+					text-decoration: underline;
+				}
+			}
+			@media (max-width: $desktopBreakpoint) {
+				.how-it-works--wrapper {
+					flex-direction: column;
+
+					.step {
+						flex-direction: row !important;
+						max-width: unset !important;
+
+						.step--text {
+							padding-right: 20px !important;
+							width: 50% !important;
+
+							.text {
+								border-bottom: unset !important;
+								height: unset !important;
+							}
+						}
+
+						.step--image {
+							max-height: unset !important;
+							width: 50% !important;
+						}
+					}
+				}
+			}
+
+			.how-it-works--wrapper {
+				display: flex;
+				justify-content: space-between;
+				margin-bottom: 20px;
+				
+				.step {
+					align-items: center;
+					border: 1px solid #ddd;
+					border-radius: 15px;
+					@include brand-colors-inverse("background-color");
+					display: flex;
+					flex-direction: column;
+					margin: 5px;
+					max-width: 200px;
+					padding: 20px;
+					
+					.step--text {
+						align-items: inherit;
+						display: inherit;
+						flex-direction: column;
+
+						.circle {
+							align-items: center;
+							@include brand-colors("color");
+							display: flex;
+							font-size: 70px;
+							font-weight: bold;
+							justify-content: center;
+							margin-bottom: 25px;
+							height: 100px;
+							width: 100px;
+						}
+	
+						.text {
+							border-bottom: 1px solid #ddd;
+							border-top: 1px solid #ddd;
+							font-size: 14px;
+							height: 85px;
+							margin-bottom: 20px;
+							padding: 15px 5px 5px;
+						}
+					}
+
+					.step--image {
+						
+						img {
+							border: 1px solid #eee;
+							width: 100%;
+						}
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,20 @@
+@import "../../../shared/includes.scss";
+
+.LocalDemo {
+  font-size: 14px; 
+}
+.downloadButton{
+  width: 200px;
+  background-color:#29991f;
+  color: black;
+  height: 70px;
+  text-align: center;
+  cursor: pointer;
+  font-family: Roboto;
+  font-size: 16px;
+}
+.LocalDemo .content{
+  width: 100%;
+  text-align: center;
+  padding: 20px;
+}

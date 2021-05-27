@@ -1,0 +1,220 @@
+@import "./shared/includes.scss";
+
+::selection {
+	@include brand-colors("background-color");
+	@include brand-colors-inverse("color");
+}
+::-moz-selection {
+	@include brand-colors("background-color");
+	@include brand-colors-inverse("color");
+}
+
+.green {
+	color: green;
+}
+.red {
+	color: red;
+}
+.yellow {
+	color: yellow;
+}
+.blue {
+	color: yellow;
+}
+
+.LoaderContainer {
+	display: flex;
+	min-height: unquote("calc(100vh)");
+}
+
+.loader {
+	font-size: 10px;
+	margin: 50px auto;
+	width: 5vw;
+	height: 5vw;
+	border-radius: 50%;
+	position: relative;
+	-webkit-animation: load3 1.4s infinite linear;
+	animation: load3 1.4s infinite linear;
+	-webkit-transform: translateZ(0);
+	-ms-transform: translateZ(0);
+	transform: translateZ(0);
+	content: " ";
+
+	@each $org in map-keys($map: $colorMap) {
+		.#{$org} & {
+			$color: map-get($map: $colorMap, $key: $org);
+
+			background: $color;
+			background: -moz-linear-gradient(left, $color 10%, white 42%);
+			background: -webkit-linear-gradient(left, $color 10%, swhite 42%);
+			background: -o-linear-gradient(left, $color 10%, white 42%);
+			background: -ms-linear-gradient(left, $color 10%, white 42%);
+			background: linear-gradient(to right, $color 10%, white 42%);
+		}
+	}
+}
+.loader:before {
+	width: 50%;
+	height: 50%;
+	border-radius: 100% 0 0 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	content: "";
+
+	@each $org in map-keys($map: $colorMap) {
+		.#{$org} & {
+			$color: map-get($map: $colorMap, $key: $org);
+
+			background: $color;
+		}
+	}
+}
+.loader:after {
+	background: #ffffff;
+	width: 75%;
+	height: 75%;
+	border-radius: 50%;
+	content: "";
+	margin: auto;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+}
+i.material-icons,
+i.icon,
+i.fa {
+	.rtl & {
+		/*
+		-moz-transform: scaleX(-1);
+		-o-transform: scaleX(-1);
+		-webkit-transform: scaleX(-1);
+		transform: scaleX(-1);
+		filter: FlipH;
+		-ms-filter: "FlipH";
+		*/
+	}
+}
+
+credit:before {
+	content: " ";
+	padding-right: 5px;
+	padding-left: 5px;
+}
+credit::after {
+	content: " ";
+	padding-right: 5px;
+	padding-left: 5px;
+}
+credit {
+	display: block;
+	background-color: rgba(0, 0, 0, 0.5);
+	color: white;
+	position: relative;
+	width: 100%;
+	margin-top: -30px;
+	height: 30px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	text-align: right;
+	line-height: 30px;
+}
+imagelabel {
+	display: block;
+	width: 100%;
+	overflow: hidden;
+	text-align: center;
+	font-style: italic;
+}
+btn,
+btn-muted,
+btnmuted {
+	& > a {
+		display: flex;
+		text-transform: capitalize;
+
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+
+		min-height: 44px;
+
+		font-size: 16px;
+		letter-spacing: 0;
+		font-weight: bold;
+		line-height: 20px;
+
+		padding-right: 5px;
+		padding-left: 5px;
+
+		padding-bottom: 3px;
+		padding-top: 3px;
+	}
+}
+
+btn {
+	& > a {
+		@include brand-colors("background-color");
+		@include brand-colors-inverse("color");
+
+		&:active {
+			border: 1px black solid;
+			@include darken-brand-colors("border-color",40%);
+			@include darken-brand-colors("background-color",10%);
+		}
+		&:hover {
+			border: 0;
+		}
+
+		& {
+			font-size: 100%;
+			text-decoration: none;
+			@include brand-colors-inverse("color");
+			border: 0;
+		}
+	}
+}
+
+btn-muted,
+btn.muted,
+btnmuted {
+	& > a {
+		background-color: #f2f2f2;
+		color: lighten(black, 20%);
+		font-size: 100%;
+		text-decoration: none;
+		border: 0;
+
+		&:active {
+			background-color: $dividerColor;
+		}
+		&:hover {
+			border: 0;
+		}
+	}
+}
+
+#root {
+	// background-color: darken(gray, 30%);
+}
+
+
+
+.tel {
+	direction: ltr;
+	display: inline-block;
+}
+
+.rtl a {
+	text-decoration: none;
+	line-height: 100%;
+
+}
+.rtl s > a {border-bottom: none;}
+li {
+}
+.language-ur{
+}
