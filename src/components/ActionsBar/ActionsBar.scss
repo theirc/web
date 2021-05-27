@@ -1,0 +1,197 @@
+@import "../../shared/includes.scss";
+
+$buttonBorderColor: #ddd;
+$buttonBorderColorHover: #bbb;
+$buttonBgColor: #f2f2f2;
+
+%widget-styles {
+	background-color: $buttonBgColor;
+	border: 1px solid $buttonBorderColor;
+	border-radius: 5px;
+	box-sizing: border-box;
+}
+
+%button-styles {
+	@extend %widget-styles;
+	align-items: center;
+	cursor: pointer;
+	margin: 0 5px;
+	padding: 2px 5px;
+
+	&:hover {
+		border-color: $buttonBorderColorHover;
+	}
+}
+
+.ActionsBar {
+	border-bottom: 1px solid $buttonBorderColor;
+	border-top: 1px solid $buttonBorderColor;
+	box-sizing: border-box;
+	display: flex;
+	font-size: 14px;
+	justify-content: space-between;
+	height: 65px;
+	margin-bottom: 20px;
+	padding: 10px 5px;
+
+	div {
+		display: inherit;
+		height: 100%;
+	}
+
+	svg {
+		font-size: 16px;
+		margin: 0 7px
+	}
+
+	.left {
+		// Article Details
+		.btn {
+			@extend %button-styles;
+			display: inherit;
+			height: inherit;
+			overflow: hidden;
+
+			span {
+				padding: 0 10px;
+			}
+		}
+
+		// Articles List
+		#articles-list-dropdown {
+			@extend %button-styles;
+			justify-content: space-between;
+			width: 400px;
+
+			&:active {
+				border-style: solid;
+			}
+
+			.content {
+				align-items: inherit;
+				height: unset;
+
+				i {
+					padding: 0 5px;
+				}
+
+				span {
+					padding: 0 5px;
+				}
+			}
+		}
+
+		// Services List
+		#services-list-map-toggle {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			padding: 0 5px;
+		
+			div {
+				display: inline-block;
+			}
+		
+			input {
+				cursor: pointer;
+				width: 50px;
+				height: 25px;
+				margin: -9px 0 0;
+			}
+		
+			span {
+				font-size: 12px;
+				text-align: center;
+			}
+		
+			.toggle-btn {
+				border: 1px solid transparent;
+				box-sizing: border-box;
+				margin: 0 0 5px;
+		
+				div {
+					border: 1px solid $buttonBorderColor;
+					box-shadow: none;
+					margin: -1px 0 0 -1px;
+				}
+		
+				&.hover {
+					border: 1px solid $buttonBorderColorHover;
+					div {
+						border: 1px solid #ccc;
+					}
+				}
+			}
+		}
+		
+	}
+
+	#articles-list-popover {
+		@extend %widget-styles;
+		box-shadow: 0 0 8px -5px;
+		height: max-content;
+		margin: 43px 5px;
+		position: absolute;
+		width: 400px;
+		z-index: 2;
+
+		li {
+			align-items: center;
+			display: flex;
+			font-size: 14px;
+			min-height: 22px;
+			padding: 5px;
+
+			&:hover {
+				background-color: #ccc !important;
+				cursor: pointer;
+			}
+
+			i {
+				display: inline-block;
+				text-align: center;
+				min-width: 32px;
+			}
+
+			&.active {
+				background-color: #ddd;
+			}
+		}
+	}
+
+	.social {
+		.social-btn {
+			@extend %button-styles;
+			justify-content: center;
+			height: inherit;
+			position: relative;
+			width: 45px;
+
+			.copied {
+				background-color: gray;
+				border-radius: 3px;
+				color: white;
+				font-size: 12px;
+				padding: 3px;
+				position: absolute;
+				right: 0;
+				top: 50px;
+			}
+		}
+	}
+
+	.line {
+		margin: 0 5px;
+		border-right: 1px solid $buttonBorderColor;
+	}
+}
+
+.rtl {
+	.ActionsBar {
+		.copied {
+			right: unset !important;
+			left: 0;
+		}
+	}
+}
+
