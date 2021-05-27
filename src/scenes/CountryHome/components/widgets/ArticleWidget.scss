@@ -1,0 +1,302 @@
+@import "../../../../shared/includes.scss";
+@mixin socialMedia {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 23% 73%;
+  column-gap: 4%;
+  background-color: #f3f3f6;
+  padding: 5%;
+  box-sizing: border-box;
+  min-height: 175px;
+  &.rtl {
+    grid-template-rows: 19% 49% 28%;
+    row-gap: 4%;
+    .social-title {
+      align-self: flex-start;
+    }
+  }
+  &.ltr {
+    grid-template-rows: 20% 50% 30%;
+    .social-title {
+      align-self: flex-end;
+    }
+  }
+  .icon-container {
+    grid-row-start: 1;
+    grid-row-end: 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .icon-background {
+      width: 80%;
+      height: 80%;
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      padding: 8px;
+      svg {
+        color: #3b5998;
+        font-size: 3.5rem;
+      }
+    }
+  }
+  h1 {
+    margin: 0;
+    text-transform: none;
+  }
+  span {
+    align-self: center;
+    font-size: 14px;
+  }
+  a {
+    width: 100%;
+    color: #fff;
+    @include brand-colors-button("background-color");
+    @include brand-colors-button("border-color");
+    border: 1px solid transparent;
+    font-size: 1rem;
+    line-height: 1.5;
+    box-sizing: border-box;
+    justify-content: center;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    border-radius: 5px;
+  }
+  @media (max-width: $desktopBreakpoint) {
+    .icon-container {
+      grid-row-end: 3;
+      justify-content: center;
+      margin-bottom: 16px;
+      .icon-background {
+        width: 50%;
+        svg {
+          font-size: 2rem;
+        }
+      }
+    }
+    .social-title {
+      font-size: 1em;
+    }
+    .social-text {
+      font-size: 13px;
+    }
+    a {
+      grid-column-start: 1;
+      grid-column-end: 3;
+    }
+  }
+}
+
+.Article {
+  position: relative;
+  @media (min-width: $desktopBreakpoint) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    .Read-More-lead {
+      display: flex;
+    }
+    .Read-More-secondary {
+      display: none;
+    }
+  }
+  .Facebook {
+    width: 100%;
+  }
+
+  .YouTube {
+    width: 100%;
+  }
+  h3 {
+    text-transform: uppercase;
+  }
+  .text-container {
+    @media (max-width: $desktopBreakpoint) {
+      display: flex;
+      flex-direction: column;
+      margin: 0px 20px;
+      padding: 20px;
+      bottom: 3rem;
+      .Read-More-lead {
+        display: none;
+      }
+      .Read-More-secondary {
+        display: flex;
+        align-self: center;
+        margin-top: 20px;
+        a {
+          font-weight: 600;
+        }
+      }
+    }
+    max-width: 1024px;
+    display: grid;
+    grid-template-columns: 49% 49%;
+    grid-column-gap: 2%;
+    background: white;
+    padding: 1.5% 2%;
+    box-sizing: border-box;
+    position: relative;
+    bottom: 6rem;
+    .welcome-container {
+      display: flex;
+      flex-direction: column;
+      margin: 30px 0;
+      &.only {
+        margin: unset;
+      }
+      @media (max-width: $desktopBreakpoint) {
+        margin: 0 0 30px 0;
+        h1 {
+          font-size: 30px !important;
+        }
+        p {
+          font-size: 14px;
+        }
+      }
+      h1 {
+        font-size: 39px;
+        text-transform: none;
+      }
+      p {
+        p:nth-child(3) {
+          display: none;
+        }
+        p:nth-child(2) {
+          display: none;
+        }
+      }
+    }
+    .social-media-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      .facebook-container {
+        @include socialMedia();
+        &.only {
+          height: unset;
+        }
+      }
+      .whatsapp-container {
+        @include socialMedia();
+        &.only {
+          height: unset;
+        }
+        margin-bottom: 1rem;
+        .fa-whatsapp {
+          color: #25d366 !important;
+        }
+      }
+    }
+  }
+  .faq-container {
+    width: 100%;
+  }
+  p {
+    margin-top: 0;
+    font-weight: 300;
+    line-height: 1.6;
+    opacity: 1;
+    u {
+      text-decoration: none;
+    }
+    p:hover {
+      opacity: 0.85;
+    }
+    a {
+      color: black !important;
+    }
+  }
+
+  .hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    .heroImage {
+      object-fit: cover;
+      align-self: baseline;
+    }
+  }
+
+  .hero > img {
+    width: 100%;
+  }
+  .hero .overlay {
+    @media (min-width: $desktopBreakpoint) {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      opacity: 0.5;
+      background-color: #000000;
+    }
+  }
+
+  .pos,
+  .neg {
+    display: none;
+    visibility: hidden;
+    height: 0;
+    width: 0;
+    margin: 0;
+    padding: 0;
+  }
+  .pos + ul,
+  .neg + ul {
+    padding: 0;
+
+    li {
+      list-style: none;
+
+      &::before {
+        font-family: "Font Awesome 5 Pro";
+      }
+    }
+  }
+  .pos + ul {
+    li {
+      &::before {
+        content: "\f00c ";
+        color: green;
+        font-weight: 900;
+      }
+    }
+  }
+  .neg + ul {
+    li {
+      &::before {
+        content: "\f00d ";
+        color: red;
+      }
+    }
+  }
+
+  .Read-More {
+    &-lead {
+      text-decoration: underline;
+      margin: 26px 0;
+    }
+    &-secondary {
+      text-decoration: underline;
+    }
+  }
+}
+
+.faq {
+  p, a {
+    text-decoration: underline;
+    display: block;
+    margin-top: 0;
+    font-weight: 300;
+    line-height: 1.6;
+    opacity: 1;
+    margin-bottom: 1em;
+  }
+}

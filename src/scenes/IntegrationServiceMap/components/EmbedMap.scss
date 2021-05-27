@@ -1,0 +1,25 @@
+.html-marker-icon{
+  .Icon{
+    font-size: 22px;
+    text-align: center;
+    background-color: white;
+    height: 40px;
+    width: 40px;
+    border-radius: 40px;
+    border: none;
+    line-height: 40px;
+    box-shadow: 0 0 0 5px rgba(0,40,80,.15);
+  }
+} 
+
+.Item-content{
+	address {
+		padding: 5px 0;
+	}
+
+	.Icon{
+    display: flex;
+    min-width: 20px;
+    padding: 0 10px 15px 5px;
+  }
+} 
