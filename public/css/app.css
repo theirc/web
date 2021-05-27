@@ -1,0 +1,122 @@
+@import url("cairo-font.css");
+@import url("hi-font-icons.css");
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;600;900&display=swap');
+
+html,
+body {
+	min-height: 100vh;
+	max-width: 100vw;
+	padding: 0;
+	margin: 0;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font: inherit;
+	vertical-align: baseline;
+	outline: none;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+html .rtl,
+body .rtl {
+	font-family: "Cairo", "Roboto", sans-serif;
+}
+html .rtl.language-ur,
+body .rtl.language-ur {
+	font-family: "NastaleeqNuma", "Cairo", sans-serif;
+}
+html .ltr,
+body .ltr {
+	font-family: "Heebo", "Roboto", sans-serif;
+	padding: 0;
+}
+
+html .ltr.language-ti,
+body .ltr.language-ti {
+	font-family: "EthiopicHiwua", sans-serif;
+}
+
+#root {
+	overflow: hidden;
+}
+#root > span > div {
+	background-color: white;
+}
+
+a:before {
+	content: " ";
+}
+::selection {
+	background-color: black;
+	color: #fdda14;
+}
+::-moz-selection {
+	background-color: black;
+	color: #fdda14;
+}
+::-webkit-selection {
+	background-color: black;
+	color: #fdda14;
+}
+
+.App {
+	text-align: center;
+}
+
+.App-logo {
+	animation: App-logo-spin infinite 20s linear;
+	height: 80px;
+}
+
+.App-header {
+	background-color: #222;
+	height: 150px;
+	padding: 20px;
+	color: white;
+}
+
+.App-intro {
+	font-size: large;
+}
+
+@keyframes App-logo-spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+ltr {
+	display: inline-block;
+	direction: ltr !important;
+}
+
+rtl {
+	display: inline;
+	direction: rtl !important;
+}
+
+@-webkit-keyframes load3 {
+	0% {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+	100% {
+		-webkit-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}
+@keyframes load3 {
+	0% {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+	100% {
+		-webkit-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}

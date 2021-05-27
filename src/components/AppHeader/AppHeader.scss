@@ -1,0 +1,725 @@
+/*
+Less me
+*/
+@import "../../shared/includes.scss";
+
+.app-bar {
+  @include align-items(center);
+  @include flexbox();
+  @include flex-direction(row);
+  @include justify-content(flex-start);
+  height: 64px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  @media (max-width: $desktopBreakpoint) {
+    box-shadow: 0 1px 1px 0;
+    background-color: #ffffff;
+  }
+}
+
+.app-bar-light {
+  @include align-items(center);
+  @include flexbox();
+  @include flex-direction(row);
+  @include justify-content(flex-start);
+
+  height: 64px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+
+  @media (max-width: $desktopBreakpoint) {
+    box-shadow: 0 1px 1px 0;
+    background-color: #ffffff;
+  }
+}
+
+.app-bar-container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  color: white;
+  flex: 1;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  height: 50;
+  padding: 0 15px;
+}
+
+.headerBackground {
+  display: block;
+  background-color: #ffffff;
+  width: 100%;
+  height: 64px;
+  @media (min-width: $desktopBreakpoint) {
+    display: none;
+  }
+}
+.headerBackgroundLight {
+  display: block;
+  background-color: #ffffff;
+  width: 100%;
+  height: 64px;
+  @media (min-width: $desktopBreakpoint) {
+    display: none;
+  }
+}
+
+.logo-centered {
+  align-items: center;
+  justify-content: center;
+}
+
+// make the selected item look lighter for black bg
+.AppHeader {
+  .app-bar-buttons {
+    .app-bar-selectors {
+      &.top-menu {
+        &.Selected {
+          border-bottom: 3px solid;
+          @include brand-colors-border("border-bottom-color");
+        }
+      }
+    }
+  }
+}
+
+.selectors {
+  align-items: center;
+  display: flex;
+  padding: 0;
+  height: 36px;
+  border-radius: 2px;
+  span {
+    cursor: pointer;
+    padding: 0 10px;
+  }
+
+  .country {
+    align-items: center;
+    display: inherit;
+
+    img {
+      border: 1px solid #333;
+      border-radius: 2px;
+      width: 28px;
+
+      &:hover {
+        border: 1px solid white;
+      }
+    }
+  }
+
+  .lang {
+    font-size: 14px;
+    font-weight: lighter;
+    text-transform: uppercase;
+	font-weight: bold;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.app-bar-buttons {
+  color: #000000;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: row;
+
+  .app-bar-selectors {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    font-size: 14px;
+    margin: 16px 5px;
+
+    @media (max-width: 320px) {
+      font-size: 10px;
+    }
+    @media (min-width: 321px) {
+      font-size: 12px;
+      margin: 16px 8px;
+    }
+    @media (min-width: 960px) {
+      font-size: 14px;
+      font-weight: 600;
+      margin: 8px 30px 0;
+    }
+
+    &.top-menu {
+      border-bottom: 3px solid;
+      border-bottom-color: transparent;
+      padding-bottom: 1%;
+      .menu-item {
+		font-weight: bold;
+        white-space: pre;
+		@include brand-colors-bottom-nav-links("color");
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      &.Selected {
+		@include brand-colors-border("border-bottom-color");
+        font-size: 15px;
+      }
+    }
+
+    svg {
+      font-size: 24px;
+    }
+    &.rtl {
+      svg {
+        margin-left: 10px;
+      }
+    }
+    &.ltr {
+      svg {
+        margin-right: 10px;
+      }
+    }
+  }
+  @-moz-document url-prefix() {
+    .search-button {
+      padding-bottom: 40px !important;
+    }
+  }
+}
+.top-menu {
+  @media (max-width: $desktopBreakpoint) {
+    display: none !important;
+  }
+}
+
+.app-bar-separator {
+  border-left-width: 1px;
+  border-left-color: #ccc;
+  border-left-style: solid;
+  height: 25px;
+}
+
+.fa-times {
+  padding: 0 6px 0 6px;
+}
+
+.AppHeader {
+  .app-bar-logo {
+    height: 42px;
+    cursor: pointer;
+    width: auto;
+  }
+}
+
+.AppHeaderLight {
+  .app-bar-logo {
+    height: 42px;
+    cursor: pointer;
+    width: auto;
+  }
+
+  .country {
+    img {
+      border: 1px solid #999;
+
+      &:hover {
+        border: 1px solid #555;
+      }
+    }
+  }
+}
+
+.headroom {
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  background-color: #ffffff;
+  box-shadow: 0px 1px 8px -5px;
+  z-index: 3;
+}
+
+.headroom--top {
+  background-color: #ffffff;
+}
+
+.headroom--unfixed {
+  position: relative;
+  -ms-transform: translateY(0%);
+  -moz-transform: translateY(0%);
+  -webkit-transform: translateY(0%);
+  transform: translateY(0);
+}
+
+.headroom--scrolled {
+  -moz-transition: transform 200ms ease-in-out;
+  -webkit-transition: transform 200ms ease-in-out;
+  transition: transform 200ms ease-in-out;
+}
+
+.headroom--unpinned {
+  @extend .headroom--scrolled;
+  position: fixed;
+  -ms-transform: translateY(-65px);
+  -moz-transform: translateY(-65px);
+  -webkit-transform: translateY(-65px);
+  transform: translateY(-65px);
+}
+.header-opacity {
+  background-color: #ffffff;
+}
+
+.headroom--pinned {
+  @extend .headroom--scrolled;
+  position: fixed;
+  -ms-transform: translateY(0%);
+  -moz-transform: translateY(0%);
+  -webkit-transform: translateY(0%);
+  transform: translateY(0%);
+}
+
+.AppHeaderLight {
+  .headroom {
+    background-color: #ffffff;
+    box-shadow: 0px 1px 8px -5px;
+    z-index: 3;
+  }
+
+  .headroom--top {
+    background-color: #ffffff;
+  }
+  .app-bar-buttons {
+    color: #000000;
+  }
+}
+
+.AppHeader {
+  .search-bar-container {
+    display: flex;
+    justify-content: center;
+    background-color: #ffffff;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+    .SearchBar {
+      background-color: #ffffff;
+      height: 30px;
+      padding: 16px 16px 8px 16px;
+      position: relative;
+      width: 100%;
+      @media (min-width: $desktopBreakpoint) {
+        max-width: 1024px;
+        z-index: 1;
+        input {
+          color: #000000;
+
+          &::placeholder {
+            color: #000000;
+          }
+        }
+      }
+      input {
+        -webkit-appearance: none;
+        line-height: 25px;
+        font-size: 18px;
+        width: 100%;
+        box-sizing: border-box;
+        border: 0;
+        background-color: inherit;
+        border-bottom: 1px #ddd solid;
+        color: #333;
+        padding: 0;
+      }
+      input:focus {
+        outline: none;
+      }
+      .fa-times-circle {
+        margin-inline-start: -33px;
+        margin: 5px 5px;
+        top: 13px;
+
+        .ltr & {
+          right: 55px;
+        }
+        .rtl & {
+          left: 55px;
+        }
+      }
+      .fa-search {
+        margin: 5px 5px;
+        padding-left: 8px;
+        cursor: pointer;
+        @media (min-width: $desktopBreakpoint) {
+          top: 13px;
+        }
+        @media (max-width: $desktopBreakpoint) {
+          top: 18px;
+        }
+        .ltr & {
+          right: 5px;
+          @media (min-width: $desktopBreakpoint) {
+            right: 30px;
+          }
+        }
+        .rtl & {
+          left: 5px;
+          @media (min-width: $desktopBreakpoint) {
+            left: 30px;
+          }
+        }
+      }
+      .fa {
+        color: #000000;
+        width: 25px;
+        position: absolute;
+        @media (min-width: $desktopBreakpoint) {
+          font-size: 20px;
+        }
+        @media (max-width: $desktopBreakpoint) {
+          font-size: 15px;
+        }
+      }
+    }
+  }
+}
+.AppHeaderLight {
+  .search-bar-container {
+    display: flex;
+    justify-content: center;
+    background-color: #ffffff;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+    .SearchBar {
+      background-color: white;
+      height: 30px;
+      padding: 8px 16px;
+      position: relative;
+      width: 100%;
+      @media (min-width: $desktopBreakpoint) {
+        max-width: 1024px;
+        z-index: 1;
+      }
+
+      input {
+        -webkit-appearance: none;
+        line-height: 25px;
+        font-size: 18px;
+        width: 100%;
+        box-sizing: border-box;
+        border: 0;
+        background-color: inherit;
+        border-bottom: 1px #ddd solid;
+        color: black;
+        padding: 0;
+      }
+
+      input:focus {
+        outline: none;
+      }
+      .fa-times-circle {
+        margin-inline-start: -33px;
+        margin: 5px 5px;
+        top: 2px;
+
+        .ltr & {
+          right: 55px;
+        }
+        .rtl & {
+          left: 55px;
+        }
+      }
+      .fa-search {
+        margin: 5px 5px;
+        padding-left: 8px;
+        top: 2px;
+        cursor: pointer;
+        @media (min-width: $desktopBreakpoint) {
+          top: 13px;
+        }
+        @media (max-width: $desktopBreakpoint) {
+          top: 16px;
+        }
+        .ltr & {
+          right: 5px;
+          @media (min-width: $desktopBreakpoint) {
+            right: 30px;
+          }
+        }
+        .rtl & {
+          left: 5px;
+          @media (min-width: $desktopBreakpoint) {
+            left: 30px;
+          }
+        }
+      }
+      .fa {
+        color: rgb(36, 36, 36);
+        width: 25px;
+        position: absolute;
+        @media (min-width: $desktopBreakpoint) {
+          font-size: 20px;
+        }
+        @media (max-width: $desktopBreakpoint) {
+          font-size: 15px;
+        }
+      }
+    }
+  }
+}
+.app-bar-black {
+  background-color: #000000;
+}
+.AppHeader,
+.AppHeaderLight {
+  margin-top: 64px;
+
+  .privacy-banner {
+    align-items: center;
+    background-color: black;
+    bottom: 0;
+    color: white;
+    display: flex;
+    flex: 1;
+    font-size: 14px;
+    font-weight: 300;
+    flex-direction: row;
+    justify-content: space-between;
+    left: 0;
+    right: 0;
+    opacity: 0.85;
+    padding: 16px;
+    padding-bottom: 1em;
+    position: fixed;
+    z-index: 2;
+
+    a {
+      color: white;
+      text-decoration: underline;
+    }
+
+    span {
+      padding: 4px;
+    }
+
+    .content {
+      display: flex;
+    }
+
+    .privacy-banner-separator {
+      border-left-width: 1px;
+      border-left-color: #ffda1a;
+      border-left-style: solid;
+      height: auto;
+      margin-left: 7px;
+    }
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+$icon-width: 22px;
+$icon-height: 22px;
+$icon-width: 20px;
+$icon-height: 20px;
+$border-width: 2px;
+$transition-duration: 0.3s;
+$color: #ffffff;
+
+.search-close > span:first-of-type {
+  position: relative;
+  top: 50%;
+  left: 35%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  max-width: $icon-width;
+  height: $icon-height;
+  cursor: pointer;
+  margin-top: 22px;
+  .rtl & {
+    left: 0;
+  }
+}
+
+.search-close > span:first-of-type:before,
+.search-close > span:first-of-type:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  border: $border-width solid $color;
+}
+
+.search-close > span:first-of-type:before {
+  width: 75%;
+  height: 75%;
+  border-radius: 50%;
+  border-width: $border-width;
+  transform: rotate(45deg);
+  -moz-transform: rotate(45deg); /* FF3.5/3.6 */
+  -o-transform: rotate(45deg); /* Opera 10.5 */
+  -webkit-transform: rotate(45deg); /* Saf3.1+ */
+  transition: all $transition-duration, background-color 0s linear 0s;
+  filter: progid:DXImageTransform.Microsoft.Matrix(sizingMethod="auto expand", M11=0.7071067811865476, M12=-0.7071067811865475, M21=0.7071067811865475, M22=0.7071067811865476); /* IE6,IE7 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(SizingMethod='auto expand', M11=0.7071067811865476, M12=-0.7071067811865475, M21=0.7071067811865475, M22=0.7071067811865476)"; /* IE8 */
+}
+
+.search-close > span:first-of-type:after {
+  border-width: ($border-width / 2);
+  width: 0;
+  height: 35%;
+  left: 75%;
+  top: 75%;
+  margin-left: 0;
+  margin-top: 0;
+  background-color: $color;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  transition: all $transition-duration;
+}
+
+.active > span:first-of-type:before {
+  width: 0;
+  height: 100%;
+  border-radius: 0;
+  border-width: ($border-width / 2);
+  left: 50%;
+  background-color: $color;
+  transition: all $transition-duration, background-color 0s linear 0.3s;
+  transform: translateX(-$border-width / 2) rotate(45deg);
+}
+
+.active > span:first-of-type:after {
+  height: 100%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.MuiIconButton-label-30 > i,
+.MuiSvgIcon-root-102 {
+  display: none;
+}
+
+.search-btn {
+  cursor: pointer;
+  opacity: 0.6;
+  @media (min-width: $desktopBreakpoint) {
+    width: 26px !important;
+    height: 26px !important;
+    font-size: 27px !important;
+  }
+  @media (max-width: $desktopBreakpoint) {
+    width: 16px!important;
+    height: 16px!important;
+    font-size: 20px!important;
+  }
+  padding: 2px;
+  margin-left: 18px;
+  border-radius: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  .rtl & {
+    padding-right: 18px;
+  }
+
+  // .ltr & {
+  // 	padding-left: 18px;
+  // }
+}
+
+.SearchButton {
+  width: 100%;
+  display: flex;
+  align-items: inherit;
+  justify-content: inherit;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  max-width: $icon-width;
+  height: $icon-height;
+  cursor: pointer;
+  margin-top: 24px;
+  margin-left: 20px;
+}
+
+.SearchButton:before,
+.SearchButton:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  border: $border-width solid $color;
+}
+
+.SearchButton:before {
+  width: 75%;
+  height: 75%;
+  border-radius: 50%;
+  border-width: $border-width;
+  transform: rotate(45deg);
+  transition: all $transition-duration, background-color 0s linear 0s;
+}
+
+.active .SearchButton:before {
+  width: 0;
+  height: 100%;
+  border-radius: 0;
+  border-width: ($border-width / 2);
+  left: 50%;
+  background-color: $color;
+  transition: all $transition-duration, background-color 0s linear 0.3s;
+  transform: translateX(-$border-width / 2) rotate(45deg);
+}
+
+.SearchButton:after {
+  border-width: ($border-width / 2);
+  width: 0;
+  height: 35%;
+  left: 75%;
+  top: 75%;
+  margin-left: 0;
+  margin-top: 0;
+  background-color: $color;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  transition: all $transition-duration;
+}
+
+.active .SearchButton:after {
+  height: 100%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.SearchButton svg {
+  display: none;
+}
+
+.fa-times:before {
+  margin-left: 3px;
+}
+
+.search-bar-inner-icon {
+  position: absolute;
+}
+
+.close-alert {
+  height: 24px;
+  width: 24px!important;
+}

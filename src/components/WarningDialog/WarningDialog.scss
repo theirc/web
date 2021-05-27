@@ -1,0 +1,103 @@
+@import "../../shared/includes.scss";
+
+$padding: 20px 20px 20px 20px;
+.warning-dialog-container {
+	padding: $padding;
+	display: flex;
+	align-items: center;
+
+	color: black;
+	p {
+		color: black;
+	}
+}
+.warning-dialog-close {
+	justify-self: flex-end;
+	display: flex;
+	align-items: center;
+	justify-items: center;
+	justify-content: flex-end;
+	cursor: pointer;
+}
+.warning-dialog-container-yellow {
+	// background-color: #ffda1a;
+	@include brand-colors("background-color");
+
+	@extend .warning-dialog-container;
+}
+
+.warning-dialog-container-red {
+	background-color: #e60000;
+
+	@extend .warning-dialog-container;
+	color: white;
+	p {
+		color: white;
+	}
+}
+
+.warning-dialog-container-green {
+	background-color: #29991f;
+
+	@extend .warning-dialog-container;
+	color: white;
+	p {
+		color: white;
+	}
+}
+
+.warning-wrapper {
+	justify-content: space-between;
+    align-items: stretch;
+    color: #292633;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex: 1 1 0%;
+    flex: 1 1 0%;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    font-size: 16px;
+    font-weight: bold;
+    height: auto;
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 16px;
+	position: relative;
+	.warning-dialog-container-inner {
+		p {
+			padding: 0;
+			margin: 0;
+		}
+		.ltr & {
+			border-left: 1px solid white;
+			padding-left: 15px;
+		}
+		.rtl & {
+			border-right: 4px solid white;
+			padding-right: 15px;
+		}
+	
+		.warning-dialog-container-yellow & {
+			.ltr & {
+				border-left-color: black;
+			}
+			.rtl & {
+				border-right-color: black;
+			}
+		}
+	}
+}
+
+
+.warning--hiding {
+	padding: 0;
+	margin: 0;
+	transition: padding 1s;
+}
+
+.warning--hiding {
+	.warning-dialog-container-inner,
+	.warning-dialog-close {
+		display: none;
+	}
+}
