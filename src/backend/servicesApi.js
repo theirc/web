@@ -137,14 +137,14 @@ export const fetchCountries = (language) => {
             instance.languages.map((i) =>
               sessionStorage.removeItem(`${i[0]}-countries`)
             );
-            sessionStorage[`${language}-countries`] = JSON.stringify(res.body.filter(x => x.isActive && x.isActive === 1));
+            sessionStorage[`${language}-countries`] = JSON.stringify(res.body);
           } catch (e) {
             console.log(
               "Session storage is full. Countries Request not cached."
             );
           }
 
-          resolve(res.body.filter(x => x.isActive && x.isActive === 1));
+          resolve(res.body);
         });
     }
   });
