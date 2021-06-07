@@ -20,10 +20,10 @@ export const fetchCategoriesByCountry = (language, countryId) => {
           return;
         }
 
-        resolve(res.body);
+        resolve(res.body.sort((a, b) => a.name.localeCompare(b.name)));
       });
   });
-}
+};
 
 export const fetchCategoriesByRegion = (language, regionId) => {
   return new Promise((resolve, reject) => {
@@ -39,7 +39,7 @@ export const fetchCategoriesByRegion = (language, regionId) => {
           return;
         }
 
-        resolve(res.body);
+        resolve(res.body.sort((a, b) => a.name.localeCompare(b.name)));
       });
   });
 };
@@ -58,7 +58,7 @@ export const fetchCategoriesByCity = (language, cityId) => {
           return;
         }
 
-        resolve(res.body);
+        resolve(res.body.sort((a, b) => a.name.localeCompare(b.name)));
       });
   });
 };
@@ -88,16 +88,22 @@ export function fetchRegions(language, country) {
               sessionStorage.removeItem(`${i[0]}-regions`)
             );
             sessionStorage[`${language}-regions`] = JSON.stringify(
-              res.body.filter((x) => x.isActive && x.isActive === 1)
+              res.body
+                .filter((x) => x.isActive && x.isActive === 1)
+                .sort((a, b) => a.name.localeCompare(b.name))
             );
           } catch (e) {
             console.log("Session storage is full. Regions Request not cached.");
           }
-          resolve(res.body.filter((x) => x.isActive && x.isActive === 1));
+          resolve(
+            res.body
+              .filter((x) => x.isActive && x.isActive === 1)
+              .sort((a, b) => a.name.localeCompare(b.name))
+          );
         });
     }
   });
-};
+}
 
 export const fetchCities = (regionId, language) => {
   return new Promise((resolve, reject) => {
@@ -112,7 +118,11 @@ export const fetchCities = (regionId, language) => {
           reject(err);
           return;
         }
-        resolve(res.body.filter((x) => x.isActive && x.isActive === 1));
+        resolve(
+          res.body
+            .filter((x) => x.isActive && x.isActive === 1)
+            .sort((a, b) => a.name.localeCompare(b.name))
+        );
       });
   });
 };
@@ -233,9 +243,8 @@ export const fetchAllServices = (
               sessionStorage.removeItem(`${i[0]}-serviceList`);
               sessionStorage.removeItem(`${i[0]}-serviceRequest`);
             });
-            sessionStorage[`${language}-serviceList`] = JSON.stringify(
-              orderedServices
-            );
+            sessionStorage[`${language}-serviceList`] =
+              JSON.stringify(orderedServices);
             sessionStorage[`${language}-serviceRequest`] = requestUrl;
           } catch (e) {
             console.log(
