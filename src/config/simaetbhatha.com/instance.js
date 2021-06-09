@@ -31,7 +31,7 @@ export default {
 	},
 	thirdParty: {
 		facebook: {
-			appId: '708254579325899',
+			appId: '154471931830995',
 		}
 	}
 };

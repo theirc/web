@@ -12,7 +12,7 @@ import {
 import Headroom from "react-headrooms";
 import PropTypes from "prop-types";
 import { Interpolate, withTranslation, Trans } from "react-i18next";
-import 'lazysizes'
+import "lazysizes";
 
 // local
 // import Alert from "../Alert/Alert";
@@ -82,8 +82,8 @@ class AppHeader extends Component {
   handleSubmit(event) {
     const { onGoToSearch } = this.props;
     const { searchText } = this.state;
-    
-    if (!searchText) return false
+
+    if (!searchText) return false;
 
     onGoToSearch(searchText);
 
@@ -115,7 +115,7 @@ class AppHeader extends Component {
     const noop = () => console.log("noop");
     const cookiePolicyLinkGreece = (
       <a
-        href="/greece/privacy/cookies"
+        href="/greece/about-us/cookies"
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -124,7 +124,7 @@ class AppHeader extends Component {
     );
     const privacyPolicyLinkGreece = (
       <a
-        href="/greece/privacy/privacy-policy"
+        href="/greece/about-us/privacy-policy"
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -320,16 +320,22 @@ class AppHeader extends Component {
               <span className="privacy-banner-separator"></span>
               <Trans
                 i18nKey="COOKIES_BANNER"
-                cookiePolicy={
-                  instance.brand.code === "ri"
-                    ? cookiePolicyLinkGreece
-                    : cookiePolicyLinkIraq
-                }
-                privacyPolicy={
-                  instance.brand.code === "ri"
-                    ? privacyPolicyLinkGreece
-                    : privacyPolicyLinkIraq
-                }
+                values={{
+                  cookiePolicy: "Cookie Policy",
+                  privacyPolicy: "Privacy Policy",
+                }}
+                cookiePolicy={cookiePolicyLinkGreece}
+                components={{
+                  generalContainer: <span>placeholder</span>,
+                  cookieLink:
+                    instance.brand.code === "ri"
+                      ? cookiePolicyLinkGreece
+                      : cookiePolicyLinkIraq,
+                  privacyPolicy:
+                    instance.brand.code === "ri"
+                      ? privacyPolicyLinkGreece
+                      : privacyPolicyLinkIraq,
+                }}
               />
             </div>
             <FontAwesomeIcon

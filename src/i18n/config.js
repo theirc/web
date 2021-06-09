@@ -75,8 +75,7 @@ export default {
 			"Saturday": "Saturday",
 			"Sunday": "Sunday",
 
-			"COOKIES_BANNER": "We use cookies to deliver our services. By continuing to use this site, you accept such use and acknowledge that you have read and understood our {{cookiePolicy}} and {{privacyPolicy}}.",
-			"COOKIES_BANNER_IRAQ": "We use cookies to deliver our services. By continuing to use this site, you accept such use and acknowledge that you have read and understood our {{cookiePolicy}} and {{privacyPolicy}}.",
+			"COOKIES_BANNER": "<generalContainer>We use cookies to deliver our services. By continuing to use this site, you accept such use and acknowledge that you have read and understood our <cookieLink>{{cookiePolicy}}</cookieLink> and <privacyPolicy>{{privacyPolicy}}</privacyPolicy>.</generalContainer>"
 		},
 	}
 };
