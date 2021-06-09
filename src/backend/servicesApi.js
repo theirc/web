@@ -218,20 +218,15 @@ export const fetchAllServices = (
           }
 
           const filteredServices = res.body.filter((service) => {
-            return service && service.status === "public";
+            return service?.status === "public";
           });
 
           function compare(a, b) {
-            // Use toUpperCase() to ignore character casing
-            const provA = a.provider && a.provider.name.toLowerCase();
-            const provB = b.provider && b.provider.name.toLowerCase();
+            const provA = a?.provider?.name?.toLowerCase();
+            const provB = b?.provider?.name?.toLowerCase();
 
             let comparison = 0;
-            if (provA > provB) {
-              comparison = 1;
-            } else if (provA < provB) {
-              comparison = -1;
-            }
+            comparison = provA > provB ? 1 : provA < provB ? -1 : 0;
             return comparison;
           }
 

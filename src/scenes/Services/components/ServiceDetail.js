@@ -265,6 +265,7 @@ class ServiceDetail extends React.Component {
         ).length
       );
     };
+
     const callAux = t("services.Call", NS);
     const serviceProviderElement = (s) => (
       <span className="providerName">{s.name}</span>
@@ -273,13 +274,27 @@ class ServiceDetail extends React.Component {
     const showTimeTable = (openingHours) => {
       return weekDays.map((w, i) => {
         let hours = openingHours.filter((h) => h.day === w.id);
-        if (!hours || hours.length <= 0) {
-          return (
-            <tr key={`tr-${w.name}-${i}`}>
-              <td className="week">{t(w.name)}</td>
-              <td colSpan="3">{t("services.Closed", NS)}</td>
-            </tr>
-          );
+        // function to convert time format from 24 to 12 hs
+        if (instance.brand.url === 'cuentanos.org') {
+        	hours.map(x => {
+        		if (!!x.open) {
+        			let open = x.open?.split(':').map(Number);
+        			let ampmOpen = open[0] >=12 ? 'pm' : 'am';
+        			open[0] = open[0] % 12;
+        			open[0] = open[0] ? open[0] : 12;
+        			open[1] = open[1] < 10 ? '0'+open[1] : open[1];
+        			x.open = open[0] + ':' + open[1] + ' ' + ampmOpen;
+        		}
+        		if (!!x.close) {
+        			let close = x.close?.split(':').map(Number);
+        			let ampmClose = close[0] >=12 ? 'pm' : 'am';
+        			close[0] = close[0] % 12;
+        			close[0] = close[0] ? close[0] : 12;
+        			close[1] = close[1] < 10 ? '0'+close[1] : close[1];
+        			x.close = close[0] + ':' + close[1] + ' ' + ampmClose;;
+        		}
+        		return x
+        	})
         }
 
         return hours.map((h) => (
@@ -287,9 +302,19 @@ class ServiceDetail extends React.Component {
             <td rowSpan="1" className="week">
               {t(w.name)}
             </td>
-            <td>{h.open}</td>
-            <td>-</td>
-            <td>{h.close}</td>
+            <td className={`${!h.open && !h.close && "not-visible"}`}>
+              {h.open}
+            </td>
+            <td className={`${!h.open && !h.close && "not-visible"}`}>-</td>
+            <td className={`${!h.open && !h.close && "not-visible"}`}>
+              {h.close}
+            </td>
+            <td
+              className={`${!!h.open && !!h.close && "not-visible"}`}
+              colSpan="3"
+            >
+              {t("services.Closed", NS)}
+            </td>
           </tr>
         ));
       });

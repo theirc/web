@@ -9,4 +9,9 @@
 		border-bottom: 2px black solid;
 		@include brand-colors("border-bottom-color");
 	}
+    .openingTable {
+        .not-visible {
+            display: none;
+        }
+    }
 }
