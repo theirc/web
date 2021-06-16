@@ -277,7 +277,7 @@ class ServiceDetail extends React.Component {
         // function to convert time format from 24 to 12 hs
         if (instance.brand.url === 'cuentanos.org') {
         	hours.map(x => {
-        		if (!!x.open) {
+        		if (!!x.open.trim()) {
         			let open = x.open?.split(':').map(Number);
         			let ampmOpen = open[0] >=12 ? 'pm' : 'am';
         			open[0] = open[0] % 12;
@@ -285,7 +285,7 @@ class ServiceDetail extends React.Component {
         			open[1] = open[1] < 10 ? '0'+open[1] : open[1];
         			x.open = open[0] + ':' + open[1] + ' ' + ampmOpen;
         		}
-        		if (!!x.close) {
+        		if (!!x.close.trim()) {
         			let close = x.close?.split(':').map(Number);
         			let ampmClose = close[0] >=12 ? 'pm' : 'am';
         			close[0] = close[0] % 12;
@@ -302,15 +302,15 @@ class ServiceDetail extends React.Component {
             <td rowSpan="1" className="week">
               {t(w.name)}
             </td>
-            <td className={`${!h.open && !h.close && "not-visible"}`}>
+            <td className={`${!h.open.trim() && !h.close.trim() && "not-visible"}`}>
               {h.open}
             </td>
-            <td className={`${!h.open && !h.close && "not-visible"}`}>-</td>
-            <td className={`${!h.open && !h.close && "not-visible"}`}>
+            <td className={`${!h.open.trim() && !h.close.trim() && "not-visible"}`}>-</td>
+            <td className={`${!h.open.trim() && !h.close.trim() && "not-visible"}`}>
               {h.close}
             </td>
             <td
-              className={`${!!h.open && !!h.close && "not-visible"}`}
+              className={`${!!h.open.trim() && !!h.close.trim() && "not-visible"}`}
               colSpan="3"
             >
               {t("services.Closed", NS)}
