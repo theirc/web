@@ -277,18 +277,22 @@ class ServiceDetail extends React.Component {
         // function to convert time format from 24 to 12 hs
         if (instance.brand.url === 'cuentanos.org') {
         	hours.map(x => {
-        		if (!!x.open.trim()) {
+            x.open = x.open.toLowerCase();
+            x.close = x.close.toLowerCase();
+        		if (!!x.open.trim() && !x.open.includes('am')) {
         			let open = x.open?.split(':').map(Number);
         			let ampmOpen = open[0] >=12 ? 'pm' : 'am';
         			open[0] = open[0] % 12;
+              open[0] = open[0] < 10 ? '0'+open[0] : open[0];
         			open[0] = open[0] ? open[0] : 12;
         			open[1] = open[1] < 10 ? '0'+open[1] : open[1];
         			x.open = open[0] + ':' + open[1] + ' ' + ampmOpen;
         		}
-        		if (!!x.close.trim()) {
+        		if (!!x.close.trim() && !x.close.includes('pm')) {
         			let close = x.close?.split(':').map(Number);
         			let ampmClose = close[0] >=12 ? 'pm' : 'am';
         			close[0] = close[0] % 12;
+        			close[0] = close[0] < 10 ? '0'+close[0] : close[0];
         			close[0] = close[0] ? close[0] : 12;
         			close[1] = close[1] < 10 ? '0'+close[1] : close[1];
         			x.close = close[0] + ':' + close[1] + ' ' + ampmClose;;
