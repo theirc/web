@@ -6,6 +6,7 @@ import { push } from "react-router-redux";
 import { Helmet } from "react-helmet";
 import PropTypes from "prop-types";
 import "lazysizes";
+import { MetaTags } from "react-meta-tags";
 
 // local
 import HeaderBar from "../../../components/HeaderBar/HeaderBar";
@@ -380,6 +381,12 @@ class ServiceDetail extends React.Component {
           <Helmet>
             <title>{serviceT.name}</title>
           </Helmet>
+
+          <MetaTags>
+            <meta property="og:title" content={serviceT.name} />
+            <meta property="og:image" content={service.image} />
+            <meta property="og:description" content={serviceT.description} />
+          </MetaTags>
 
           <HeaderBar subtitle={`${subtitle}:`} title={serviceT.name} />
 

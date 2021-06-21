@@ -1,79 +1,106 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="theme-color" content="#000000" />
 
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="theme-color" content="#000000">
+    <!-- <link rel="manifest" href="%PUBLIC_URL%/manifest.json"> -->
+    <link
+      rel="stylesheet"
+      media="print"
+      onload="this.onload=null;this.removeAttribute('media');"
+      href="%PUBLIC_URL%/css/app.css"
+    />
+    <link
+      rel="stylesheet"
+      media="print"
+      onload="this.onload=null;this.removeAttribute('media');"
+      href="%PUBLIC_URL%/css/icomoon-font.css"
+    />
+    <link
+      rel="stylesheet"
+      media="print"
+      onload="this.onload=null;this.removeAttribute('media');"
+      href="%PUBLIC_URL%/css/urdu-font.css"
+    />
+    <link
+      rel="stylesheet"
+      media="print"
+      onload="this.onload=null;this.removeAttribute('media');"
+      href="%PUBLIC_URL%/css/material-icons.css"
+    />
+    <!-- <link rel="stylesheet" href="%PUBLIC_URL%/css/fac4bfa814.css" /> -->
+    <!-- <link href="%PUBLIC_URL%/css/L.Control.Locate.min.css" rel="stylesheet" /> -->
+    <script
+      data-search-pseudo-elements
+      defer
+      src="https://pro.fontawesome.com/releases/v5.10.1/js/all.js"
+    ></script>
 
-	<!-- <link rel="manifest" href="%PUBLIC_URL%/manifest.json"> -->
-	<link rel="stylesheet" media="print" onload="this.onload=null;this.removeAttribute('media');" href="%PUBLIC_URL%/css/app.css" />
-	<link rel="stylesheet" media="print" onload="this.onload=null;this.removeAttribute('media');" href="%PUBLIC_URL%/css/icomoon-font.css" />
-	<link rel="stylesheet" media="print" onload="this.onload=null;this.removeAttribute('media');" href="%PUBLIC_URL%/css/urdu-font.css" />
-	<link rel="stylesheet" media="print" onload="this.onload=null;this.removeAttribute('media');" href="%PUBLIC_URL%/css/material-icons.css" />
-	<!-- <link rel="stylesheet" href="%PUBLIC_URL%/css/fac4bfa814.css" /> -->
-	<!-- <link href="%PUBLIC_URL%/css/L.Control.Locate.min.css" rel="stylesheet" /> -->
-	<script data-search-pseudo-elements defer src="https://pro.fontawesome.com/releases/v5.10.1/js/all.js"></script>
-
-	<title></title>
-	<meta property="og:url" content="{{ url }}" />
-	<meta property="og:type" content="article" />
-	<meta property="og:title" content="{{ title }}" />
+    <title></title>
+    <meta property="og:url" content="{{ url }}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="{{ title }}" />
 	<meta property="og:description" content="{{ description }}" />
 	<meta property="og:image" content="{{ image }}" />
-	<meta property="og:image:width" content="500" />
-	<meta property="og:image:height" content="500" />
-	<meta property="fb:app_id" content="{{ appId }}" />
+    <meta property="og:image:width" content="500" />
+    <meta property="og:image:height" content="500" />
+    <meta property="fb:app_id" content="{{ appId }}" />
+  </head>
 
-	
-</head>
+  <body>
+    <noscript> You need to enable JavaScript to run this app. </noscript>
 
-<body>
-	<noscript>
-		You need to enable JavaScript to run this app.
-	</noscript>
-	
-	<div id="root"></div>
-	
-	<script>localStorage.setItem("notFirstTime", true)</script>
-	
-	<script type="text/javascript" async defer>window.rsConf = {
-			params: '//cdn1.readspeaker.com/script/11950/webReader/webReader.js?pids=wr',
-			general: { usePost: true }
-		}
-	</script>
-	
-	<script src="//cdn1.readspeaker.com/script/11950/webReader/webReader.js?pids=wr" type="text/javascript" async defer></script>
-	<!-- <script src="https://refugeecdn.blob.core.windows.net/$web/webapp-libs/polyfill/v2/polyfill.min.js" async></script>
+    <div id="root"></div>
+
+    <script>
+      localStorage.setItem("notFirstTime", true);
+    </script>
+
+    <script type="text/javascript" async defer>
+      window.rsConf = {
+        params:
+          "//cdn1.readspeaker.com/script/11950/webReader/webReader.js?pids=wr",
+        general: { usePost: true },
+      };
+    </script>
+
+    <script
+      src="//cdn1.readspeaker.com/script/11950/webReader/webReader.js?pids=wr"
+      type="text/javascript"
+      async
+      defer
+    ></script>
+    <!-- <script src="https://refugeecdn.blob.core.windows.net/$web/webapp-libs/polyfill/v2/polyfill.min.js" async></script>
 	<script src="https://refugeecdn.blob.core.windows.net/$web/webapp-libs/modernizr/2.8.3/modernizr.js" async></script> -->
-	<script>
-		window.fbAsyncInit = function () {
-			FB.init({
-				appId: '{{ appId }}',
-				autoLogAppEvents: true,
-				xfbml: true,
-				version: 'v2.10'
-			});
-			FB.AppEvents.logPageView();
-		};
-		(function (d, s, id) {
-			var js, fjs = d.getElementsByTagName(s)[0];
-			if (d.getElementById(id)) {
-				return;
-			}
-			js = d.createElement(s);
-			js.id = id;
-			js.src = "https://connect.facebook.net/en_US/sdk.js";
-			fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));
+    <script>
+      window.fbAsyncInit = function () {
+        FB.init({
+          appId: "{{ appId }}",
+          autoLogAppEvents: true,
+          xfbml: true,
+          version: "v11.0",
+        });
+      };
+    </script>
+    <script
+      async
+      defer
+      crossorigin="anonymous"
+      src="https://connect.facebook.net/en_US/sdk.js"
+    ></script>
+    <script
+      src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"
+      async
+      defer
+    ></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCuAJxGZo3B0NzzLv6DVba2yO47IebNvBg"></script>
 
-	</script>
-	<script
-		src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js" async defer></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCuAJxGZo3B0NzzLv6DVba2yO47IebNvBg"></script>
-
-	<!-- <script src="%PUBLIC_URL%/css/L.Control.Locate.min.js"></script> -->
-	<div id="fb-root"></div>
-</body>
-
+    <!-- <script src="%PUBLIC_URL%/css/L.Control.Locate.min.js"></script> -->
+    <div id="fb-root"></div>
+  </body>
 </html>
