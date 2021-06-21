@@ -30,25 +30,33 @@ export function withCountry(WrappedComponent) {
 
       // country does not exist
       !instance.countries[match.params.country] && history.push("/404");
-      
+
       instance.countries[match.params.country] &&
         api.loadCountry(match.params.country, language).then((c) => {
-          return onMount(c).then((c) => {
-            fetchRegions(language, instance.countries[match.params.country].id)
-              .then((regionList) => {
-                storeRegions(regionList);
-                this.setState({
-                  country: c,
-                  loaded: true,
-                });
-              })
-              .catch((e) => {
-                throw fetchRegions
-              });
-          })
-          .catch((e) => {
-            throw fetchRegions
-          });
+          return onMount(c)
+            .then((c) => {
+              try {
+                fetchRegions(
+                  language,
+                  instance.countries[match.params.country].id
+                )
+                  .then((regionList) => {
+                    storeRegions(regionList);
+                    this.setState({
+                      country: c,
+                      loaded: true,
+                    });
+                  })
+                  .catch((e) => {
+                    throw fetchRegions;
+                  });
+              } catch (error) {
+                throw fetchRegions;
+              }
+            })
+            .catch((e) => {
+              throw fetchRegions;
+            });
         });
     }
 
@@ -56,39 +64,55 @@ export function withCountry(WrappedComponent) {
       const { match, onMount, language, storeRegions } = this.props;
 
       if (newProps.language !== language) {
-        onMount(match.params.country, newProps.language).then((c) => {
-          fetchRegions(language, instance.countries[match.params.country].id)
-            .then((regionList) => {
-              storeRegions(regionList);
-              this.setState({
-                country: c,
-                loaded: true,
-              });
-            })
-            .catch((e) => {
-              throw fetchRegions
-            });
-        })
-        .catch((e) => {
-          throw fetchRegions
-        });
+        onMount(match.params.country, newProps.language)
+          .then((c) => {
+            try {
+              fetchRegions(
+                language,
+                instance.countries[match.params.country].id
+              )
+                .then((regionList) => {
+                  storeRegions(regionList);
+                  this.setState({
+                    country: c,
+                    loaded: true,
+                  });
+                })
+                .catch((e) => {
+                  throw fetchRegions;
+                });
+            } catch (error) {
+              throw fetchRegions;
+            }
+          })
+          .catch((e) => {
+            throw fetchRegions;
+          });
       } else if (newProps.match.params.country !== match.params.country) {
-        onMount(match.params.country, language).then((c) => {
-          fetchRegions(language, instance.countries[match.params.country].id)
-            .then((regionList) => {
-              storeRegions(regionList);
-              this.setState({
-                country: c,
-                loaded: true,
-              });
-            })
-            .catch((e) => {
-              throw fetchRegions
-            });
-        })
-        .catch((e) => {
-          throw fetchRegions
-        });
+        onMount(match.params.country, language)
+          .then((c) => {
+            try {
+              fetchRegions(
+                language,
+                instance.countries[match.params.country].id
+              )
+                .then((regionList) => {
+                  storeRegions(regionList);
+                  this.setState({
+                    country: c,
+                    loaded: true,
+                  });
+                })
+                .catch((e) => {
+                  throw fetchRegions;
+                });
+            } catch (error) {
+              throw fetchRegions;
+            }
+          })
+          .catch((e) => {
+            throw fetchRegions;
+          });
       }
     }
 
