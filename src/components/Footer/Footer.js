@@ -34,8 +34,8 @@ class Footer extends Component {
 
 	render() {
 		const { country, t } = this.props;
-		const questionLink = !!(country.fields && country.fields.slug) && instance.countries[country.fields.slug].questionLink;
-		const showLinkToAdministration = !!(country.fields && country.fields.slug)  && instance.countries[country.fields.slug].switches.showLinkToAdministration;
+		const questionLink = !!country?.fields?.slug && instance.countries[country.fields.slug].questionLink;
+		const showLinkToAdministration = !!country?.fields?.slug  && instance.countries[country.fields.slug].switches.showLinkToAdministration;
 		const year = new Date().getFullYear();
 
 		return (

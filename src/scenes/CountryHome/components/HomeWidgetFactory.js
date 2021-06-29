@@ -92,7 +92,6 @@ class HomeWidget extends Component {
 					</div> : null
 			);
 		} catch (e) {
-			console.log("Ignoring", e);
 			return null;
 		}
 	}

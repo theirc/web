@@ -71,7 +71,6 @@ var mainRequest = function (context) {
 
 		context.title = instance.brand.tabTitle;
 		context.image = context.image ? context.image : instance.brand.images.thumbnail;
-		console.log('mainRequest',originalUrl);
 
 		fs.readFile(path.join(path.dirname(path.dirname(__dirname)), "build", "index.html"), (err, data) => {
 			if (err) throw err;
@@ -89,9 +88,7 @@ var mainRequest = function (context) {
 
 const initInstance = (hostname) => {
 	instance = require('../backend/settings').default;
-	// console.log('Setting up instance for hostname: ', hostname);
 	instance = instance.loader(hostname);
-	// console.log(instance);
 }
 
 /**
@@ -166,7 +163,6 @@ app.get("/bulgaria/*", function (req, res, err) {
 require('./twilio-routes.js')(app);
 
 app.get("/preview/:serviceId/", function (req, res, err) {
-	console.log('Service Details Preview');
 
 	const selectedLanguage = parseLanguage(req);
 	const {
@@ -189,7 +185,6 @@ app.get("/preview/:serviceId/", function (req, res, err) {
 
 app.get("/:country/services/:serviceId/", function (req, res, err) {
 	const selectedLanguage = parseLanguage(req);
-	console.log('Service Details');
 	const {
 		country,
 		serviceId
@@ -210,10 +205,9 @@ app.get("/:country/services/:serviceId/", function (req, res, err) {
 						image: s.image,
 					})(req, res, err);
 				})
-				.catch(e => {console.log('catch', e);return mainRequest({})(req, res, err)});
+				.catch(e => {return mainRequest({})(req, res, err)});
 		});
 	} catch (e) {
-		console.log(e);
 		mainRequest({
 			description: e.toString(),
 			image: ""
@@ -222,7 +216,6 @@ app.get("/:country/services/:serviceId/", function (req, res, err) {
 });
 
 app.get("/:country/services/", function (req, res, err) {
-	console.log('Service List');
 
 	const selectedLanguage = parseLanguage(req);
 	const {
@@ -258,7 +251,6 @@ app.get('/:country/subscribe/:category', function(req, res, err){
 })
 
 app.get("/:country/:category/:article", function(req, res, err) {
-		console.log('Article Details');
 
 		initInstance(req.headers.host);
 
@@ -285,8 +277,7 @@ app.get("/:country/:category/:article", function(req, res, err) {
 					return;
 				}
 
-				languageDictionary = Object.assign(languageDictionary, conf[configKey]); // TODO: replace this config by the new instances
-				console.log('LOCALE: ', languageDictionary[selectedLanguage] || selectedLanguage);
+				languageDictionary = Object.assign(languageDictionary, conf[configKey]);
 				let cms = cmsApi(instance.env.thirdParty.contentful);
 				cms.client
 					.getEntries({
@@ -295,7 +286,6 @@ app.get("/:country/:category/:article", function(req, res, err) {
 						locale: languageDictionary[selectedLanguage] || selectedLanguage,
 					})
 					.then(c => {
-						console.log('STEP 1\n');
 						return cms.client
 							.getEntries({
 								content_type: "country",
@@ -307,7 +297,6 @@ app.get("/:country/:category/:article", function(req, res, err) {
 								let match = (c.items || []).filter(i => i.fields.country && i.fields.category && i.fields.country.fields && i.fields.category.fields)
 								.filter(i => i.fields.country.fields.slug === country && i.fields.category.fields.slug === category)[0];
 
-								console.log('STEP 2\n');
 								
 								if (!match) {
 									let _cnt = cc.items[0];
@@ -316,14 +305,11 @@ app.get("/:country/:category/:article", function(req, res, err) {
 									})[0];
 									
 									if (_cat) {
-										console.log('STEP 3\n');
 										match = (_cat.fields.articles || []).concat([_cat.fields.overview]).filter(x => x).filter(x => x.fields && x.fields.slug === article)[0];
 									}
 								}
 								
-								// console.log("match" + match);
 								if (!match) {
-									console.log('STEP 4\n');
 									return cms.client
 										.getEntries({
 											content_type: "country",
@@ -338,7 +324,6 @@ app.get("/:country/:category/:article", function(req, res, err) {
 											}
 										});
 								} else {
-									console.log('STEP 5\n');
 									return mainRequest({
 										title: match.fields.title,
 										description: (match.fields.lead || "").replace(/&nbsp;/gi, " "),
@@ -349,7 +334,6 @@ app.get("/:country/:category/:article", function(req, res, err) {
 
 					})
 					.catch(e => {
-						console.log(e);
 						// res.redirect(`/${country}/`);
 						res.redirect(`/404`);
 					});

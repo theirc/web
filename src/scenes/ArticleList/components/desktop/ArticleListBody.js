@@ -85,7 +85,6 @@ class ArticleListBody extends Component {
 
   onChange = (e) => {
     const { history, country } = this.props;
-    console.log("DDD ", e);
     this.setState({
       selectedCategory: e.sys.id,
       selectedIconText: e.fields.iconText,
@@ -122,7 +121,6 @@ class ArticleListBody extends Component {
       )}.${appendLeadingZeroes(updatedDate(param).getDate())}`;
 
     if (!c.fields) {
-      console.log("c.fields is null", c);
       return null;
     }
 

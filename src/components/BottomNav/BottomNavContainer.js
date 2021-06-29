@@ -43,7 +43,7 @@ class BottomNavContainer extends React.Component {
 		const { country, onGoToCategories, onGoHome, onGoToSearch, showMapButton, goToMap } = this.props;
 		let selectedIndex = selectedMenuItem();
 
-		const showDepartments = !!(country.fields && country.fields.slug) && instance.countries[country.fields.slug].switches.showDepartments;
+		const showDepartments = !!country?.fields?.slug && instance.countries[country.fields.slug].switches.showDepartments;
 		// TODO: dereference country inside routes?
 		return (
 			<BottomNav

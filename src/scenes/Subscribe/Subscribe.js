@@ -110,7 +110,6 @@ class Subscribe extends Component {
 	}
 
 	handleVerificationSubmit() {
-		// console.log("Submit code");
 		const phone = '+' + this.state.countryCode + this.state.phone;
 		const options = {
 			method: 'POST',
@@ -131,7 +130,6 @@ class Subscribe extends Component {
 
 	render() {
 		const { category, t } = this.props;
-		// console.log("state:", this.state);
 
 		return (
 			<Skeleton headerColor='light'>
