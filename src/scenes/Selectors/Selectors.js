@@ -236,7 +236,6 @@ class Selectors extends Component {
 				}
 
 			case 3:
-				console.log('DetectLocationSelector');
 				return null;
 				// return <DetectLocationSelector onBackToList={() => this.setState({ currentPage: 2 })} onLocationFound={l => this.lookupCoordinates(l)} onLocationError={l => this.logError(l)} />;
 

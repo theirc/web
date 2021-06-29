@@ -91,7 +91,6 @@ module.exports = function (app) {
 	});
 	app.get("/get-articles/:slug/:category", (req, res, err) => {
 
-		console.log("get category");
 		const {
 			slug,
 			category,
@@ -147,7 +146,6 @@ module.exports = function (app) {
 					locale: locale,
 				})
 				.then(c => {
-					console.log(c.items[0].fields.options[category - 1].fields.article_Detail[article - 1]);
 					let id = c.items[0].fields.options[category - 1].fields.article_Detail[article - 1].sys.id;
 					cms.client
 						.getEntries({
@@ -155,7 +153,6 @@ module.exports = function (app) {
 							locale: locale,
 						})
 						.then(a => {
-							console.log("--------");
 							let entities = cms.client.parseEntries(a);
 							let includes = a.includes.Entry.map(i => { return i.fields });
 							let country = entities.items[0].fields.country.fields;
@@ -166,7 +163,6 @@ module.exports = function (app) {
 							res.send(article);
 						})
 						.catch(e => {
-							console.log(e);
 							res.send(e);
 						})
 

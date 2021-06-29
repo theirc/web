@@ -246,7 +246,7 @@ class ArticleDetailBody extends Component {
         <MetaTags>
           <meta property="og:description" content={content} />
           <meta property="og:title" content={title} />
-          <meta property="og:image" content={hero.fields.file.url} />
+          <meta property="og:image" content={hero?.fields?.file?.url} />
         </MetaTags>
 
         <HeaderBar
@@ -274,29 +274,23 @@ class ArticleDetailBody extends Component {
 
         <div className="ActionsBar">
           <div className="left">
-            {article &&
-              article.fields &&
-              article.fields.category &&
-              article.fields.category.fields && (
-                <div
-                  className="btn"
-                  onClick={() =>
-                    country
-                      ? history.push(`/${country}/${categorySlug}`)
-                      : history.goBack()
-                  }
-                >
-                  <FontAwesomeIcon icon="chevron-left" className="arrow-left" />
-                  <FontAwesomeIcon icon={categoryIcon} />
-                  <span>{article.fields.category.fields.name}</span>
-                </div>
-              )}
-            {!(
-              article &&
-              article.fields &&
-              article.fields.category &&
-              article.fields.category.fields
-            ) && <span style={{ visibility: "hidden" }}></span>}
+            {article?.fields?.category?.fields && (
+              <div
+                className="btn"
+                onClick={() =>
+                  country
+                    ? history.push(`/${country}/${categorySlug}`)
+                    : history.goBack()
+                }
+              >
+                <FontAwesomeIcon icon="chevron-left" className="arrow-left" />
+                <FontAwesomeIcon icon={categoryIcon} />
+                <span>{article.fields.category.fields.name}</span>
+              </div>
+            )}
+            {!article?.fields?.category?.fields && (
+              <span style={{ visibility: "hidden" }}></span>
+            )}
           </div>
 
           <div className="social">

@@ -52,7 +52,6 @@ class ServiceItem extends React.Component {
 	render() {
 		const { service } = this.props;
 		const types = service.serviceCategories;
-		console.log(service, types);
 		return (
 			<div key={service.id} className="Item">
 				<div className="Info">
@@ -94,10 +93,7 @@ class EmbedMap extends React.Component {
 	infoWindow = null;
 
 	componentDidMount() {
-		console.log("Embed props:", this.props);
-
     let isMap = window.google;
-    console.log(isMap);
 	  const map = new window.google.maps.Map(document.getElementById('MapCanvas'), {
 	    minZoom: 3,
       center: { lat: 4.6403306, lng: -74.0430238 },
@@ -147,7 +143,6 @@ class EmbedMap extends React.Component {
 				if (this.props.match && this.props.match.params.location){
 					locationServices = locationServices.filter(s => s.region.slug === this.props.match.params.location);
 				}
-				console.log("new filtered list", locationServices);
 				const markers = locationServices.map((s, index) => {
 					let mainType = s.serviceCategories[0];
 					let markerDiv = ReactDOMServer.renderToString(<ServiceIcon idx={0} service={s} type={mainType} />);
@@ -194,12 +189,7 @@ class EmbedMap extends React.Component {
 		const {
 			loaded,
 			errorMessage
-		} = this.state;
-
-		/*
-			Very small tweak on the render. toggling the visibility so we can run the L.map on didMount
-    */
-    console.log("Loaded:", loaded);    
+		} = this.state;  
 
 		return (
 			<div className="ServiceMap">

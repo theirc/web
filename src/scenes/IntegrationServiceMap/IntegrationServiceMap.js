@@ -24,7 +24,6 @@ class IntegrationServiceMap extends React.Component {
 	};
 
 	componentWillMount() {
-		console.log("Will mount")
 	}
 
 	componentDidMount() {
@@ -49,11 +48,9 @@ class IntegrationServiceMap extends React.Component {
 			.then(res => res.json())
 			.then(response => {
 				let services = response;
-				console.log(services);
 				this.setState({serviceList: services});
 			})
-			.catch((err) => {
-				console.log("error", err);				
+			.catch((err) => {			
 				return;
 			});
 
