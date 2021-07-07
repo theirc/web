@@ -23,10 +23,10 @@ export default {
 			"social": {
 				"Whatsapp": "قم بزيارة صفحتنا واستخدم الدردشة للحصول على إجابات لأسئلتك",
 				"Facebook": "قم بزيارة صفحتنا واستخدم الدردشة للحصول على إجابات لأسئلتك",
-				"Facebook Button": "اذهب الى الفيس بوك",
+				"Facebook Button": "اذهب الى الفيسبوك",
 				"Whatsapp Button": "اذهب إلى WhatsApp",
 				"Whatsapp Title": "WhatsApp",
-				"Facebook Title": "الفيسبوك رسول"
+				"Facebook Title": "فيسبوك ماسنجر"
 			}
 		}
 	},
@@ -116,10 +116,10 @@ export default {
 			"social": {
 				"Whatsapp": "به صفحه ما مراجعه کنید و از چت برای پاسخگویی به سوالات خود استفاده کنید",
 				"Facebook": "به صفحه ما مراجعه کنید و از چت برای پاسخگویی به سوالات خود استفاده کنید",
-				"Facebook Button": "به فیس بوک برو",
+				"Facebook Button": "به فیسبوک برو",
 				"Whatsapp Button": "به WhatsApp بروید",
 				"Whatsapp Title": "واتساپ",
-				"Facebook Title": "پیام رسان فیس بوک"
+				"Facebook Title": "فیسبوک مسنجر"
 			}
 		}
 	},
