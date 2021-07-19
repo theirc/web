@@ -272,11 +272,11 @@ class ServiceDetail extends React.Component {
       <span className="providerName">{s.name}</span>
     );
 
-    const showTimeTable = (openingHours) => {
+    const showTimeTable = (ampmEnabled, openingHours) => {
       return weekDays.map((w, i) => {
         let hours = openingHours.filter((h) => h.day === w.id);
         // function to convert time format from 24 to 12 hs
-        if (instance.brand.url === 'cuentanos.org') {
+        if (!!ampmEnabled) {
         	hours.map(x => {
             x.open = x.open.toLowerCase();
             x.close = x.close.toLowerCase();
@@ -473,7 +473,7 @@ class ServiceDetail extends React.Component {
                   {!service.isAlwaysOpen && (
                     <table>
                       <tbody>
-                        {showTimeTable(service.serviceOpeningHours)}
+                        {showTimeTable(service?.country?.ampmEnabled, service.serviceOpeningHours)}
                       </tbody>
                     </table>
                   )}
