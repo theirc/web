@@ -16,6 +16,6 @@ export default {
 			page: 'https://www.facebook.com/Cu%C3%A9ntanos-2039927102928299/',
 			messenger: 'https://m.me/cuentsv'
 		},
-		whatsapp: 'http://bit.ly/3iQnEwl'
+		whatsapp: 'https://bit.ly/3zgBeAM'
 	}
 };
