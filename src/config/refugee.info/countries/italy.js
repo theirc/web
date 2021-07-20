@@ -15,6 +15,7 @@ export default {
 		facebook: {
 			page: 'https://www.facebook.com/Refugee.Info.Italy/',
 			messenger: 'https://m.me/refugee.info.italy'
-		}
+		},
+		whatsapp: 'https://bit.ly/3roCXB9'
 	}
 };
