@@ -58,7 +58,7 @@ class ArticleWidget extends Component {
     } = this.props;
 
     const whatsapp =
-      instance.countries[country.fields.slug].thirdParty.whatsapp;
+      instance.countries[country.fields.slug].thirdParty.whatsapp[language];
     const facebook =
       instance.countries[country.fields.slug].thirdParty.facebook.messenger;
 
