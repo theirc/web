@@ -277,29 +277,29 @@ class ServiceDetail extends React.Component {
         let hours = openingHours.filter((h) => h.day === w.id);
         // function to convert time format from 24 to 12 hs
         if (!!ampmEnabled) {
-        	hours.map(x => {
+          hours.map((x) => {
             x.open = x.open.toLowerCase();
             x.close = x.close.toLowerCase();
-        		if (!!x.open.trim() && !x.open.includes('am')) {
-        			let open = x.open?.split(':').map(Number);
-        			let ampmOpen = open[0] >=12 ? 'pm' : 'am';
-        			open[0] = open[0] % 12;
-              open[0] = open[0] < 10 ? '0'+open[0] : open[0];
-        			open[0] = open[0] ? open[0] : 12;
-        			open[1] = open[1] < 10 ? '0'+open[1] : open[1];
-        			x.open = open[0] + ':' + open[1] + ' ' + ampmOpen;
-        		}
-        		if (!!x.close.trim() && !x.close.includes('pm')) {
-        			let close = x.close?.split(':').map(Number);
-        			let ampmClose = close[0] >=12 ? 'pm' : 'am';
-        			close[0] = close[0] % 12;
-        			close[0] = close[0] < 10 ? '0'+close[0] : close[0];
-        			close[0] = close[0] ? close[0] : 12;
-        			close[1] = close[1] < 10 ? '0'+close[1] : close[1];
-        			x.close = close[0] + ':' + close[1] + ' ' + ampmClose;;
-        		}
-        		return x
-        	})
+            if (!!x.open.trim() && !x.open.includes("am")) {
+              let open = x.open?.split(":").map(Number);
+              let ampmOpen = open[0] >= 12 ? "pm" : "am";
+              open[0] = open[0] % 12;
+              open[0] = open[0] < 10 ? "0" + open[0] : open[0];
+              open[0] = open[0] ? open[0] : 12;
+              open[1] = open[1] < 10 ? "0" + open[1] : open[1];
+              x.open = open[0] + ":" + open[1] + " " + ampmOpen;
+            }
+            if (!!x.close.trim() && !x.close.includes("pm")) {
+              let close = x.close?.split(":").map(Number);
+              let ampmClose = close[0] >= 12 ? "pm" : "am";
+              close[0] = close[0] % 12;
+              close[0] = close[0] < 10 ? "0" + close[0] : close[0];
+              close[0] = close[0] ? close[0] : 12;
+              close[1] = close[1] < 10 ? "0" + close[1] : close[1];
+              x.close = close[0] + ":" + close[1] + " " + ampmClose;
+            }
+            return x;
+          });
         }
 
         return hours.map((h) => (
@@ -307,15 +307,31 @@ class ServiceDetail extends React.Component {
             <td rowSpan="1" className="week">
               {t(w.name)}
             </td>
-            <td className={`${!h.open.trim() && !h.close.trim() && "not-visible"}`}>
+            <td
+              className={`${
+                !h.open.trim() && !h.close.trim() && "not-visible"
+              }`}
+            >
               {h.open}
             </td>
-            <td className={`${!h.open.trim() && !h.close.trim() && "not-visible"}`}>-</td>
-            <td className={`${!h.open.trim() && !h.close.trim() && "not-visible"}`}>
+            <td
+              className={`${
+                !h.open.trim() && !h.close.trim() && "not-visible"
+              }`}
+            >
+              -
+            </td>
+            <td
+              className={`${
+                !h.open.trim() && !h.close.trim() && "not-visible"
+              }`}
+            >
               {h.close}
             </td>
             <td
-              className={`${!!h.open.trim() && !!h.close.trim() && "not-visible"}`}
+              className={`${
+                !!h.open.trim() && !!h.close.trim() && "not-visible"
+              }`}
               colSpan="3"
             >
               {t("services.Closed", NS)}
@@ -464,6 +480,12 @@ class ServiceDetail extends React.Component {
                 __html: hotlinkTels(serviceT.description),
               }}
             />
+            {service.localAddress && (
+              <>
+                <h3>{t("services.Address in Local Language", NS)}</h3>
+                <p>{service.localAddress}</p>
+              </>
+            )}
 
             {hasHours(service) && (
               <span>
@@ -473,7 +495,10 @@ class ServiceDetail extends React.Component {
                   {!service.isAlwaysOpen && (
                     <table>
                       <tbody>
-                        {showTimeTable(service?.country?.ampmEnabled, service.serviceOpeningHours)}
+                        {showTimeTable(
+                          service?.country?.ampmEnabled,
+                          service.serviceOpeningHours
+                        )}
                       </tbody>
                     </table>
                   )}
