@@ -272,31 +272,53 @@ class ServiceDetail extends React.Component {
       <span className="providerName">{s.name}</span>
     );
 
+    const convert12to24hs = (time12hs) => {
+      const [time, modifier] = time12hs.split(" ");
+      if(modifier === "--") return time;
+      let [hours, minutes] = time.split(":");
+      if (hours === "12") {
+        hours = "00";
+      }
+
+      if (modifier === "PM") {
+        hours = parseInt(hours, 10) + 12;
+      }
+
+      return `${hours}:${minutes}`;
+    };
+
+    const convert24to12hs = (time24hs) => {
+      let time = time24hs?.split(":").map(Number);
+      let ampm = time[0] >= 12 ? "pm" : "am";
+      time[0] = time[0] % 12;
+      time[0] = time[0] < 10 ? "0" + time[0] : time[0];
+      time[0] = time[0] ? time[0] : 12;
+      time[1] = time[1] < 10 ? "0" + time[1] : time[1];
+      return time[0] + ":" + time[1] + " " + ampm;
+    };
+
     const showTimeTable = (ampmEnabled, openingHours) => {
       return weekDays.map((w, i) => {
         let hours = openingHours.filter((h) => h.day === w.id);
-        // function to convert time format from 24 to 12 hs
         if (!!ampmEnabled) {
           hours.map((x) => {
             x.open = x.open.toLowerCase();
             x.close = x.close.toLowerCase();
-            if (!!x.open.trim() && !x.open.includes("am")) {
-              let open = x.open?.split(":").map(Number);
-              let ampmOpen = open[0] >= 12 ? "pm" : "am";
-              open[0] = open[0] % 12;
-              open[0] = open[0] < 10 ? "0" + open[0] : open[0];
-              open[0] = open[0] ? open[0] : 12;
-              open[1] = open[1] < 10 ? "0" + open[1] : open[1];
-              x.open = open[0] + ":" + open[1] + " " + ampmOpen;
+            if (!!x.open.trim() && (!x.open.includes("am") || !x.open.includes("pm"))) {
+              x.open = convert24to12hs(x.open);
             }
-            if (!!x.close.trim() && !x.close.includes("pm")) {
-              let close = x.close?.split(":").map(Number);
-              let ampmClose = close[0] >= 12 ? "pm" : "am";
-              close[0] = close[0] % 12;
-              close[0] = close[0] < 10 ? "0" + close[0] : close[0];
-              close[0] = close[0] ? close[0] : 12;
-              close[1] = close[1] < 10 ? "0" + close[1] : close[1];
-              x.close = close[0] + ":" + close[1] + " " + ampmClose;
+            if (!!x.close.trim() && (!x.close.includes("pm") || !x.close.includes("am"))) {
+              x.close = convert24to12hs(x.close);
+            }
+            return x;
+          });
+        } else {
+          hours.map((x) => {
+            if (!!x.open.includes("AM") || !!x.open.includes("PM") || !!x.open.includes("--")) {
+              x.open = convert12to24hs(x.open);
+            }
+            if (!!x.close.includes("PM") || !!x.close.includes("AM") || !!x.close.includes("--")) {
+              x.close = convert12to24hs(x.close);
             }
             return x;
           });
