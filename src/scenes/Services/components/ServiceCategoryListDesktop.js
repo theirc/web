@@ -132,7 +132,7 @@ class ServiceCategoryListDesktop extends React.Component {
     const { fetchServices } = this.props;
     fetchServices(country, category, region, city).then((services) => {
       let servicesFiltered = [];
-      for (let x = 0; x < 10 && x < services.length; x++) {
+      for (let x = 0; x < 50 && x < services.length; x++) {
         servicesFiltered.push(services[x]);
       }
       this.setState({
@@ -195,7 +195,7 @@ class ServiceCategoryListDesktop extends React.Component {
     const servicesFiltered = [];
     for (
       let x = serviceCount;
-      servicesFiltered.length < 10 && x < services.length;
+      servicesFiltered.length < 50 && x < services.length;
       x++
     ) {
       servicesFiltered.push(services[x]);
@@ -203,7 +203,7 @@ class ServiceCategoryListDesktop extends React.Component {
 
     this.setState({
       loadingMoreServices: false,
-      showMore: servicesFiltered.length === 10,
+      showMore: servicesFiltered.length === 50,
       servicesRendered: [...this.state.servicesRendered, ...servicesFiltered],
       serviceCount: serviceCount + servicesFiltered.length,
     });
@@ -660,7 +660,7 @@ class ServiceCategoryListDesktop extends React.Component {
 
         {!this.state.showMap &&
           this.state.showMore &&
-          servicesRendered.length >= 10 &&
+          servicesRendered.length >= 50 &&
           !this.state.loadingMoreServices && (
             <div className="show-more">
               <button onClick={this.onShowMore}>
@@ -672,7 +672,7 @@ class ServiceCategoryListDesktop extends React.Component {
         {!this.state.showMap &&
           this.state.showMore &&
           this.state.loadingMoreServices &&
-          servicesRendered.length >= 10 && <div className="loader" />}
+          servicesRendered.length >= 50 && <div className="loader" />}
 
         {this.state.showFilter && (
           <div className="overlay" onClick={this.closeFilters}></div>

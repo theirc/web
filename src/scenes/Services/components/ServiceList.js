@@ -38,7 +38,7 @@ class ServiceList extends React.Component {
         .then(({ services, category }) => {
 
 		  let servicesFiltered = [];
-          for (let x = 0; x < 10 && x < services.length; x++) {
+          for (let x = 0; x < 50 && x < services.length; x++) {
             servicesFiltered.push(services[x]);
           }
 
@@ -64,7 +64,7 @@ class ServiceList extends React.Component {
       listAllServices()
         .then(({ services, category }) => {
           let servicesFiltered = [];
-          for (let x = 0; x < 10 && x < services.length; x++) {
+          for (let x = 0; x < 50 && x < services.length; x++) {
             servicesFiltered.push(services[x]);
           }
 
@@ -103,7 +103,7 @@ class ServiceList extends React.Component {
     const servicesFiltered = [];
     for (
       let x = serviceCount;
-      servicesFiltered.length < 10 && x < services.length;
+      servicesFiltered.length < 50 && x < services.length;
       x++
     ) {
       servicesFiltered.push(services[x]);
@@ -111,7 +111,7 @@ class ServiceList extends React.Component {
 
     this.setState({
       loadingMoreServices: false,
-      showMore: servicesFiltered.length === 10,
+      showMore: servicesFiltered.length === 50,
       servicesRendered: [...this.state.servicesRendered, ...servicesFiltered],
       serviceCount: serviceCount + servicesFiltered.length,
     });
@@ -251,7 +251,7 @@ class ServiceList extends React.Component {
           </div>
         )}
 
-        {servicesRendered.length >= 10 && !this.state.loadingMoreServices && (
+        {servicesRendered.length >= 50 && !this.state.loadingMoreServices && (
           <div className="show-more">
             <button onClick={this.onShowMore}>
               {t("services.Show More", NS)}
