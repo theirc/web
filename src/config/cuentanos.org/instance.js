@@ -23,7 +23,8 @@ export default {
 	envs: {
 		qa: require('./envs/qa').default,
 		staging: require('./envs/staging').default,
-		www: require('./envs/www').default
+		'theirc-refugee-info-frontend-staging': require('./envs/theirc-refugee-info-frontend-staging').default,
+		www: require('./envs/www').default,
 	},
 	languages: [['es', 'Español']],
 	switches: {
