@@ -38,7 +38,8 @@ export default {
 				"Show All": "عرض الكل",
 				"Show More": "أظهر المزيد",
 				"Visiting hours": "ساعات الزّيارة",
-				"Website": "الموقـع الإلكترونـي"
+				"Website": "الموقـع الإلكترونـي",
+				"ServiceInvalid": "الخدمة لم تعد متوفرة",
 			}
 		}
 	},
@@ -81,7 +82,8 @@ export default {
 				"Show All": "Show All",
 				"Show More": "Show More",
 				"Visiting hours": "Visiting hours",
-				"Website": "Website"
+				"Website": "Website",
+				"ServiceInvalid": "Service is no longer Valid"
 			}
 		}
 	},
@@ -124,7 +126,8 @@ export default {
 				"Show All": "Mostrar Todos",
 				"Show More": "Mostrar Más",
 				"Visiting hours": "Horario de visita",
-				"Website": "Sitio web"
+				"Website": "Sitio web",
+				"ServiceInvalid": "El servicio ya no es válido"
 			}
 		}
 	},
@@ -167,7 +170,8 @@ export default {
 				"Show All": "نمایش همه",
 				"Show More": "بیشتر نشان بده، اطلاعات بیشتر",
 				"Visiting hours": "ساعات بازدید",
-				"Website": "وبسایت"
+				"Website": "وبسایت",
+				"ServiceInvalid": "این سرویس دیگر در دسترس نمی باشد."
 			}
 		}
 	},
@@ -210,7 +214,8 @@ export default {
 				"Show All": "Montre tout",
 				"Show More": "Montre plus",
 				"Visiting hours": "Heures d'ouverture",
-				"Website": "Site Internet:"
+				"Website": "Site Internet:",
+				"ServiceInvalid": "Le service n'est plus valide"
 			}
 		}
 	},
@@ -253,7 +258,8 @@ export default {
 				"Show All": "سارے دکھاو",
 				"Show More": "مزید دکھائیں",
 				"Visiting hours": "ملنے کے اوقات",
-				"Website": "ویب سائٹ"
+				"Website": "ویب سائٹ",
+				"ServiceInvalid": "سروس"
 			}
 		}
 	}

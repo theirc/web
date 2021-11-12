@@ -274,7 +274,7 @@ class ServiceDetail extends React.Component {
 
     const convert12to24hs = (time12hs) => {
       const [time, modifier] = time12hs.split(" ");
-      if(modifier === "--") return time;
+      if (modifier === "--") return time;
       let [hours, minutes] = time.split(":");
       if (hours === "12") {
         hours = "00";
@@ -304,20 +304,34 @@ class ServiceDetail extends React.Component {
           hours.map((x) => {
             x.open = x.open.toLowerCase();
             x.close = x.close.toLowerCase();
-            if (!!x.open.trim() && (!x.open.includes("am") || !x.open.includes("pm"))) {
+            if (
+              !!x.open.trim() &&
+              (!x.open.includes("am") || !x.open.includes("pm"))
+            ) {
               x.open = convert24to12hs(x.open);
             }
-            if (!!x.close.trim() && (!x.close.includes("pm") || !x.close.includes("am"))) {
+            if (
+              !!x.close.trim() &&
+              (!x.close.includes("pm") || !x.close.includes("am"))
+            ) {
               x.close = convert24to12hs(x.close);
             }
             return x;
           });
         } else {
           hours.map((x) => {
-            if (!!x.open.includes("AM") || !!x.open.includes("PM") || !!x.open.includes("--")) {
+            if (
+              !!x.open.includes("AM") ||
+              !!x.open.includes("PM") ||
+              !!x.open.includes("--")
+            ) {
               x.open = convert12to24hs(x.open);
             }
-            if (!!x.close.includes("PM") || !!x.close.includes("AM") || !!x.close.includes("--")) {
+            if (
+              !!x.close.includes("PM") ||
+              !!x.close.includes("AM") ||
+              !!x.close.includes("--")
+            ) {
               x.close = convert12to24hs(x.close);
             }
             return x;
@@ -427,6 +441,14 @@ class ServiceDetail extends React.Component {
           </MetaTags>
 
           <HeaderBar subtitle={`${subtitle}:`} title={serviceT.name} />
+          {(this.state.service.status === "archived" ||
+            this.state.service.status === "private") && (
+            <label>
+              <h2 className="service-invalid">
+                {t("services.ServiceInvalid", NS)}
+              </h2>
+            </label>
+          )}
 
           {service.image && (
             <div className="hero">

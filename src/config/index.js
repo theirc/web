@@ -8,6 +8,7 @@ const instances = {
 	'khabrona.info': ki,
 	'refugee.info': ri,
 	'simaetbhatha.com': iq,
+	'azurewebsites.net': cn,
 };
 
 export default instances;
