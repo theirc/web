@@ -30,7 +30,7 @@ import {
 const NS = { ns: "Services" };
 
 //temp API Key from Andres Aguilar
-const GMAPS_API_KEY = "AIzaSyAK54Ir69gNM--M_5dRa0fwVH8jxWnJREQ";
+const GMAPS_API_KEY = "AIzaSyA5JEhPpPYSRGaU2m_lu2XNUV7uyuyaQ3s";
 const hotlinkTels = (input) => input;
 
 /**
