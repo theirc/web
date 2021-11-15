@@ -22,7 +22,9 @@ export default {
 	env: null, // dynamically loaded
 	envs: {
 		qa: require('./envs/qa').default,
+		'theirc-refugee-info-frontend-qa': require('./envs/theirc-refugee-info-frontend-qa').default,
 		staging: require('./envs/staging').default,
+		'theirc-refugee-info-frontend-staging': require('./envs/theirc-refugee-info-frontend-staging').default,
 		www: require('./envs/www').default
 	},
 	languages: [['es', 'Español']],
