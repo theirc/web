@@ -12,6 +12,8 @@ import i18nHelpers from '../../helpers/i18n';
 import languages from './languages';
 import { actions } from "../../shared/redux/store";
 import { Skeleton } from "..";
+import MetaTags from "react-meta-tags";
+import { Helmet } from "react-helmet";
 
 const NS = { ns: 'ArticleDetail' };
 const Promise = require("bluebird");
@@ -92,6 +94,14 @@ class ArticleDetail extends React.Component {
 
 		return (
 			<Skeleton headerColor='light'>
+				<Helmet>
+          <title>{article?.fields?.title}</title>
+        </Helmet>
+        <MetaTags>
+          <meta property="og:description" content={article?.fields?.content} />
+          <meta property="og:title" content={article?.fields?.title} />
+          <meta property="og:image" content={article?.fields?.hero?.fields?.file?.url} />
+        </MetaTags>
 				<div className="SkeletonContainer">
 					<Placeholder>
 						<ArticleDetailBody key={"ArticleDetailBody"} direction={direction} category={category} language={language} other={other} article={article} loading={loading} onNavigate={onNavigate} />
