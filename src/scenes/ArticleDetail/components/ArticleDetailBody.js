@@ -242,6 +242,9 @@ class ArticleDetailBody extends Component {
       >
         <Helmet>
           <title>{title}</title>
+          <meta property="og:description" content={content} />
+          <meta property="og:title" content={title} />
+          <meta property="og:image" content={hero?.fields?.file?.url} />
         </Helmet>
         <MetaTags>
           <meta property="og:description" content={content} />
