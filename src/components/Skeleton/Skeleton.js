@@ -9,203 +9,251 @@ import { withRouter } from "react-router-dom";
 import { actions } from "../../shared/redux/store";
 import { AppHeader, BottomNavContainer, Footer, WarningDialog } from "..";
 import i18n from "../../i18n"; // initialized i18next instance
-import instance from '../../backend/settings';
+import instance from "../../backend/settings";
 import getSessionStorage from "../../shared/sessionStorage";
 import "./Skeleton.css";
 
 /**
  * @class
- * @description 
+ * @description
  */
 class Skeleton extends React.Component {
-	state = {
-		errorMessage: null,
-	};
+  state = {
+    errorMessage: null,
+  };
 
-	// When language is null, recover the previously set language
-	componentWillMount() {
-		const {language, location, changeLanguage} = this.props;
-		!location.pathname.includes('selectors') && !language && changeLanguage(instance.defaultLanguage);
-	}
+  // When language is null, recover the previously set language
+  componentWillMount() {
+    const { language, location, changeLanguage } = this.props;
+    !location.pathname.includes("selectors") &&
+      !language &&
+      changeLanguage(instance.defaultLanguage);
+  }
 
-	componentDidMount() {
-		const { language, errorMessage } = this.props;
-		i18n.changeLanguage(language);
+  componentDidMount() {
+    const { language, errorMessage } = this.props;
+    i18n.changeLanguage(language);
 
-		if (errorMessage) {
-			this.setState({ errorMessage });
-			setTimeout(() => {
-				this.setState({ errorMessage: null });
-			}, 20 * 1000);
-		}
-	}
+    if (errorMessage) {
+      this.setState({ errorMessage });
+      setTimeout(() => {
+        this.setState({ errorMessage: null });
+      }, 20 * 1000);
+    }
+  }
 
-	componentWillUpdate(newProps) {
-		const { language, errorMessage } = this.props;
+  componentWillUpdate(newProps) {
+    const { language, errorMessage } = this.props;
 
-		if (language !== newProps.language) {
-			i18n.changeLanguage(newProps.language);
-		}
+    if (language !== newProps.language) {
+      i18n.changeLanguage(newProps.language);
+    }
 
-		if (newProps.errorMessage && errorMessage !== newProps.errorMessage) {
-			this.setState({ errorMessage: newProps.errorMessage });
-			setTimeout(() => {
-				this.setState({ errorMessage: null });
-			}, 20 * 1000);
-		}
-	}
+    if (newProps.errorMessage && errorMessage !== newProps.errorMessage) {
+      this.setState({ errorMessage: newProps.errorMessage });
+      setTimeout(() => {
+        this.setState({ errorMessage: null });
+      }, 20 * 1000);
+    }
+  }
 
-	render() {
-		const {
-			children,
-			country,
-			language,
-			match,
-			onGoHome,
-			onGoToServices,
-			onGoToCategories,
-			onGoToSearch,
-			onChangeLocation,
-			onChangeLanguage,
-			deviceType,
-			router,
-			hideFooter,
-			hideFeatures,
-			removeErrorMessage,
-			showMapButton,
-			goToMap,
-			headerColor
-		} = this.props;
-		const { hideShareButtons, homePage } = this.props;
-		const { errorMessage } = this.state;
-		const showDepartments = !!(country && country.fields && country.fields.slug)  && instance.countries[country.fields.slug] && instance.countries[country.fields.slug].switches.showDepartments;
-		let notifications = [];
+  render() {
+    const {
+      children,
+      country,
+      language,
+      match,
+      onGoHome,
+      onGoToServices,
+      onGoToCategories,
+      onGoToSearch,
+      onChangeLocation,
+      onChangeLanguage,
+      deviceType,
+      router,
+      hideFooter,
+      hideFeatures,
+      removeErrorMessage,
+      showMapButton,
+      goToMap,
+      headerColor,
+    } = this.props;
+    const { hideShareButtons, homePage } = this.props;
+    const { errorMessage } = this.state;
+    const showDepartments =
+      !!(country && country.fields && country.fields.slug) &&
+      instance.countries[country.fields.slug] &&
+      instance.countries[country.fields.slug].switches.showDepartments;
+    let notifications = [];
 
-		const notificationType = n => {
-			switch (n.fields.type) {
-				case "Warning":
-					return "red";
-				case "Announcement":
-					return "green";
-				default:
-					return "yellow";
-			}
-		};
+    const notificationType = (n) => {
+      switch (n.fields.type) {
+        case "Warning":
+          return "red";
+        case "Announcement":
+          return "green";
+        default:
+          return "yellow";
+      }
+    };
 
-		if (country && language) {
-			const sessionStorage = getSessionStorage();
-			const dismissed = JSON.parse(sessionStorage.dismissedNotifications || "[]");
+    if (country && language) {
+      const sessionStorage = getSessionStorage();
+      const dismissed = JSON.parse(
+        sessionStorage.dismissedNotifications || "[]"
+      );
 
-			
-			const notificationFilter = n => {
-				return (!n.fields.expirationDate || new Date(n.fields.expirationDate).getTime() > new Date().getTime()) && dismissed.indexOf(n.sys.id) === -1;
-			};
+      const notificationFilter = (n) => {
+        return (
+          (!n.fields.expirationDate ||
+            new Date(n.fields.expirationDate).getTime() >
+              new Date().getTime()) &&
+          dismissed.indexOf(n.sys.id) === -1
+        );
+      };
 
-			const hideNotification = n => {
-				dismissed.push(n.sys.id);
-				sessionStorage.dismissedNotifications = JSON.stringify(dismissed);
-			};
+      const hideNotification = (n) => {
+        dismissed.push(n.sys.id);
+        sessionStorage.dismissedNotifications = JSON.stringify(dismissed);
+      };
 
-			notifications = (country.fields.notifications || []).filter(notificationFilter).map(n => (
-				<WarningDialog type={notificationType(n)} key={n.sys.id} onHide={() => hideNotification(n)} autoDismiss={n.fields.autoDismiss} dismissable={n.fields.dismissable}>
-					{n.fields.content}
-				</WarningDialog>
-			));
-		}
+      notifications = (country.fields.notifications || [])
+        .filter(notificationFilter)
+        .map((n) => {
+          if (!n?.fields?.content?.length) return false
+          return (
+            <WarningDialog
+              type={notificationType(n)}
+              key={n.sys.id}
+              onHide={() => hideNotification(n)}
+              autoDismiss={n.fields.autoDismiss}
+              dismissable={n.fields.dismissable}
+            >
+              {n.fields.content}
+            </WarningDialog>
+          );
+        });
+    }
 
-		if (errorMessage) {
-			let error = (
-				<WarningDialog type={"red"} key={"Error"} onHide={() => removeErrorMessage()} autoDismiss={true} dismissable={true}>
-					{errorMessage}
-				</WarningDialog>
-			);
-			notifications = [error].concat(notifications);
-		}
+    if (errorMessage) {
+      let error = (
+        <WarningDialog
+          type={"red"}
+          key={"Error"}
+          onHide={() => removeErrorMessage()}
+          autoDismiss={true}
+          dismissable={true}
+        >
+          {errorMessage}
+        </WarningDialog>
+      );
+      notifications = [error].concat(notifications);
+    }
 
-		let showFooter = !hideFooter && country && language;
+    let showFooter = !hideFooter && country && language;
 
-		return (
-			<I18nextProvider i18n={i18n}>
-				<div className="Skeleton">
-					<AppHeader
-						country={hideFeatures ? null : country}
-						language={hideFeatures ? null : language}
-						onGoHome={onGoHome(country)}
-						onGoToServices={onGoToServices(country)}
-						onGoToCategories={onGoToCategories(country)}
-						onGoToSearch={q => onGoToSearch(country, q)}
-						onChangeCountry={onChangeLocation}
-						onChangeLanguage={onChangeLanguage.bind(this, router.location.pathname, language)}
-						headerColor={headerColor}
-						homePage={homePage}
-					/>
-					
-					{country && country.fields && !!window.location.href.endsWith(`/${country.fields.slug}`) && notifications}
+    return (
+      <I18nextProvider i18n={i18n}>
+        <div className="Skeleton">
+          <AppHeader
+            country={hideFeatures ? null : country}
+            language={hideFeatures ? null : language}
+            onGoHome={onGoHome(country)}
+            onGoToServices={onGoToServices(country)}
+            onGoToCategories={onGoToCategories(country)}
+            onGoToSearch={(q) => onGoToSearch(country, q)}
+            onChangeCountry={onChangeLocation}
+            onChangeLanguage={onChangeLanguage.bind(
+              this,
+              router.location.pathname,
+              language
+            )}
+            headerColor={headerColor}
+            homePage={homePage}
+          />
 
-					{children}
-					
-					{showFooter && !hideFeatures && (
-						<Footer
-							onChangeLocation={onChangeLocation}
-							onChangeLanguage={onChangeLanguage.bind(this, router.location.pathname, language)}
-							deviceType={deviceType}
-							country={country}
-							language={language}
-							hideShareButtons={hideShareButtons}
-						/>
-					)}
+          {country &&
+            country.fields &&
+            notifications}
 
-					{country && language && !hideFeatures && <BottomNavContainer match={match} showMapButton={showMapButton} goToMap={goToMap} showDepartments={showDepartments} />}
-				</div>
-			</I18nextProvider>
-		);
-	}
+          {children}
+
+          {showFooter && !hideFeatures && (
+            <Footer
+              onChangeLocation={onChangeLocation}
+              onChangeLanguage={onChangeLanguage.bind(
+                this,
+                router.location.pathname,
+                language
+              )}
+              deviceType={deviceType}
+              country={country}
+              language={language}
+              hideShareButtons={hideShareButtons}
+            />
+          )}
+
+          {country && language && !hideFeatures && (
+            <BottomNavContainer
+              match={match}
+              showMapButton={showMapButton}
+              goToMap={goToMap}
+              showDepartments={showDepartments}
+            />
+          )}
+        </div>
+      </I18nextProvider>
+    );
+  }
 }
 
-const mapState = ({ country, language, deviceType, router, errorMessage }, p) => {
-	return {
-		country,
-		language,
-		deviceType,
-		router,
-		errorMessage,
-	};
+const mapState = (
+  { country, language, deviceType, router, errorMessage },
+  p
+) => {
+  return {
+    country,
+    language,
+    deviceType,
+    router,
+    errorMessage,
+  };
 };
 
 const mapDispatch = (d, p) => {
-	return {
-		onGoHome: country => () => {
-			if (country) d(push(`/${country.fields.slug || ""}`));
-		},
-		onGoToSearch: (country, query) => {
-			if (country) d(push(`/${country.fields.slug}/search?q=${query}`));
-		},
-		onGoToServices: country => () => {
-			if (country) d(push(`/${country.fields.slug || ""}/services`));
-		},
-		onGoToCategories: country => () => {
-			if (country) d(push(`/${country.fields.slug || ""}/categories`));
-		},
-		onChangeLocation: () => {
-			d(actions.changeCountry(null));
-			d(push(`/selectors`));
-		},
-		onChangeLanguage: (redirect, language) => {
-			const sessionStorage = getSessionStorage();
-			if (sessionStorage) {
-				sessionStorage.redirect = redirect;
-			}
+  return {
+    onGoHome: (country) => () => {
+      if (country) d(push(`/${country.fields.slug || ""}`));
+    },
+    onGoToSearch: (country, query) => {
+      if (country) d(push(`/${country.fields.slug}/search?q=${query}`));
+    },
+    onGoToServices: (country) => () => {
+      if (country) d(push(`/${country.fields.slug || ""}/services`));
+    },
+    onGoToCategories: (country) => () => {
+      if (country) d(push(`/${country.fields.slug || ""}/categories`));
+    },
+    onChangeLocation: () => {
+      d(actions.changeCountry(null));
+      d(push(`/selectors`));
+    },
+    onChangeLanguage: (redirect, language) => {
+      const sessionStorage = getSessionStorage();
+      if (sessionStorage) {
+        sessionStorage.redirect = redirect;
+      }
 
-			// Save language in instance before setting it to null
-			instance.defaultLanguage = language;
-			d(actions.changeLanguage(null));
-			d(push(`/selectors`));
-		},
-		changeLanguage: language => d(actions.changeLanguage(language)),
-		removeErrorMessage() {
-			d(actions.showErrorMessage(null));
-		}
-	};
+      // Save language in instance before setting it to null
+      instance.defaultLanguage = language;
+      d(actions.changeLanguage(null));
+      d(push(`/selectors`));
+    },
+    changeLanguage: (language) => d(actions.changeLanguage(language)),
+    removeErrorMessage() {
+      d(actions.showErrorMessage(null));
+    },
+  };
 };
 
 export default withRouter(connect(mapState, mapDispatch)(Skeleton));
