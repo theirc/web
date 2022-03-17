@@ -57,7 +57,7 @@ class ArticleWidget extends Component {
       language,
     } = this.props;
 
-    const whatsapp = instance.countries[country.fields.slug].thirdParty.whatsapp && instance.countries[country.fields.slug].thirdParty.whatsapp[language];
+    const whatsapp = instance.countries[country.fields.slug].thirdParty.whatsapp && (instance.countries[country.fields.slug].thirdParty.whatsapp[language] || instance.countries[country.fields.slug].thirdParty.whatsapp['en']);
     const facebook = instance.countries[country.fields.slug].thirdParty.facebook.messenger;
 
     if (!article) {
