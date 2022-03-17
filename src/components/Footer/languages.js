@@ -82,5 +82,33 @@ export default {
 				"Can't find specific information?": "مخصوص معلومات نہیں مل سکیں؟"
 			}
 		}
+	},
+	"ps": {
+		"Footer": {
+			"dark": {
+				"Change Location": "Change Location",
+				"Change Language": "Change Language",
+				"Find us on Facebook": "Find us on Facebook",
+				"Part of the ": "پروژي برخه"
+			},
+			"light": {
+				"Ask us a question": "له موږ څخه پوښتنه وکړئ",
+				"Can't find specific information?": "ځانګړي معلومات نشی  ترلاسه کولی؟"
+			}
+		}
+	},
+	"fa-AF": {
+		"Footer": {
+			"dark": {
+				"Change Location": "Change Location",
+				"Change Language": "Change Language",
+				"Find us on Facebook": "Find us on Facebook",
+				"Part of the ": "بخشی از پروژه ی"
+			},
+			"light": {
+				"Ask us a question": "از ما سوال بپرسید",
+				"Can't find specific information?": "نمی توانید معلومات مشخصی را دریافت کنید؟"
+			}
+		}
 	}
 }

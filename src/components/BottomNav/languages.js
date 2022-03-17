@@ -52,5 +52,14 @@ export default {
 				"Services": "مدد تلاش کریں"
 			}
 		}
+	},
+	"ps": {
+		"BottomNav": {
+			"menu": {
+				"Articles": "مقالې",
+				"Home": "کور پاڼه",
+				"Services": "مدد تلاش کریں"
+			}
+		}
 	}
 }

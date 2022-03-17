@@ -14,7 +14,7 @@ class TopCategoriesWidget extends Component {
     let articleFunc = (category) =>
       category.fields.overview || category.fields.articles[0];
     const { country, t, categories, language } = this.props;
-    const langRTL = ["ur", "fa", "ar"].indexOf(language) > -1;
+    const langRTL = ["ur", "fa", "ar", "ps", "fa-AF"].indexOf(language) > -1;
 
     
     /*jshint ignore:start*/

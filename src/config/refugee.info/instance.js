@@ -27,7 +27,7 @@ export default {
 		'theirc-refugee-info-frontend-staging': require('./envs/theirc-refugee-info-frontend-staging').default,
 		www: require('./envs/www').default
 	},
-  languages: [['en', 'English'], ['ar', 'العربيـة'], ['fa', 'فارسی'], ['fr', 'Français'], ['ur', 'اردو']], // English shows first in LanguageSelector
+  languages: [['en', 'English'], ['ar', 'العربيـة'], ['fa', 'فارسی'], ['fr', 'Français'], ['ur', 'اردو'], ['ps', 'پښتو'], ['fa-AF', 'دری']], // English shows first in LanguageSelector
   // Note: in countries/xxx.js you can set the available languages for each country with a `languages` array, however you need to remember to set the same values for said country in each environment's DataBase `regions_geographicregion` table's `languages_available` column
 	switches: { // TODO: change this to enable
 		cookieBanner: true,

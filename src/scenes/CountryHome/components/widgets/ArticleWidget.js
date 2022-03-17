@@ -82,7 +82,7 @@ class ArticleWidget extends Component {
     }
     let hero = article.fields.hero;
 
-    const langRTL = ["ur", "fa", "ar"].indexOf(language) > -1;
+    const langRTL = ["ur", "fa", "ar", "ps", "fa-AF"].indexOf(language) > -1;
 
     return (
       <div className={`Article ArticleWidget Home`} key={article.sys.id}>

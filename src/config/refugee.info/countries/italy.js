@@ -2,7 +2,7 @@ export default {
 	id: 11,
 	countryCode: '',
 	flag: '',
-	languages: ['en', 'fr'],
+	languages: ['en', 'fr', 'ps', 'fa-AF'],
 	movedToPartner: null,
 	questionLink: 'https://www.facebook.com/Refugee.Info.Italy/',
 	switches: {
@@ -18,7 +18,9 @@ export default {
 		},
 		whatsapp: {
 			en: 'https://bit.ly/3iuHG0n',
-			fr: 'https://bit.ly/3hXxAWJ'
+			fr: 'https://bit.ly/3hXxAWJ',
+			ps: 'https://bit.ly/3iuHG0n',
+			fa: 'https://bit.ly/3iuHG0n',
 		},
 	}
 };

@@ -162,7 +162,7 @@ class AppHeader extends Component {
 
     let selectedIndex = selectedMenuItem();
     let path = window.location.pathname;
-    const langRTL = ["ur", "fa", "ar"].indexOf(language) > -1;
+    const langRTL = ["ur", "fa", "ar", "ps", "fa-AF"].indexOf(language) > -1;
 
     return (
       <div className={backgroundDark ? "AppHeader" : "AppHeaderLight"}>
