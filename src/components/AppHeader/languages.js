@@ -88,7 +88,7 @@ export default {
 				"Italy": "n/a"
 			},
 			"menu": {
-				"Articles": "مقاله‌ها",
+				"Articles": "مقاله ها",
 				"Home": "خانه",
 				"Search": "جستجو",
 				"Services": "کمک پیدا کنید"

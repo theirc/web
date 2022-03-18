@@ -105,20 +105,20 @@ export default {
 			},
 			"global": {
 				"Read More": "بیشتر بخوانید",
-				"See More": "بیشتر ببینید"
+				"See More": "مشاهده بیشتر"
 			},
 			"guide": {
 				"Local Guide": "راهنمای محلی"
 			},
 			"top": {
-				"Top Categories": "طبقه‌بندی‌های برتر"
+				"Top Categories": "دسته های برتر"
 			},
 			"social": {
-				"Whatsapp": "به صفحه ما مراجعه کنید و از چت برای پاسخگویی به سوالات خود استفاده کنید",
-				"Facebook": "به صفحه ما مراجعه کنید و از چت برای پاسخگویی به سوالات خود استفاده کنید",
-				"Facebook Button": "به فیسبوک برو",
-				"Whatsapp Button": "به WhatsApp بروید",
-				"Whatsapp Title": "واتساپ",
+				"Whatsapp": "از صفحه ما دیدن کنید و از چت برای دریافت پاسخ سوالات خود استفاده کنید",
+				"Facebook": "از صفحه ما دیدن کنید و از چت برای دریافت پاسخ سوالات خود استفاده کنید",
+				"Facebook Button": "به فیسبوک ما بروید",
+				"Whatsapp Button": "به واتس آپ ما بروید",
+				"Whatsapp Title": "واتس آپ",
 				"Facebook Title": "فیسبوک مسنجر"
 			}
 		}

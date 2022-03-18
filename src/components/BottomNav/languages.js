@@ -29,7 +29,7 @@ export default {
 	"fa": {
 		"BottomNav": {
 			"menu": {
-				"Articles": "مقاله‌ها",
+				"Articles": "مقاله ها",
 				"Home": "خانه",
 				"Services": "کمک پیدا کنید"
 			}

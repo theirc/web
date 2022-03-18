@@ -47,11 +47,11 @@ export default {
 				"Change Location": "تغییر مکان",
 				"Change Language": "تغییرِ زبان",
 				"Find us on Facebook": "ما را در فیسبوک پیدا کنید",
-				"Part of the ": "بخشی از"
+				"Part of the ": "بخشی از پروژه ی"
 			},
 			"light": {
 				"Ask us a question": "از ما سوال بپرسید",
-				"Can't find specific information?": "نمی‌توانید اطلاعات خاص و مشخصی را پیدا کنید؟"
+				"Can't find specific information?": "نمی توانید معلومات مشخصی را دریافت کنید؟"
 			}
 		}
 	},
