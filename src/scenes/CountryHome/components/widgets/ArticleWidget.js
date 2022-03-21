@@ -57,7 +57,7 @@ class ArticleWidget extends Component {
       language,
     } = this.props;
 
-    const whatsapp = instance.countries[country.fields.slug].thirdParty.whatsapp && instance.countries[country.fields.slug].thirdParty.whatsapp[language];
+    const whatsapp = instance.countries[country.fields.slug].thirdParty.whatsapp && (instance.countries[country.fields.slug].thirdParty.whatsapp[language] || instance.countries[country.fields.slug].thirdParty.whatsapp['en']);
     const facebook = instance.countries[country.fields.slug].thirdParty.facebook.messenger;
 
     if (!article) {
@@ -82,7 +82,7 @@ class ArticleWidget extends Component {
     }
     let hero = article.fields.hero;
 
-    const langRTL = ["ur", "fa", "ar"].indexOf(language) > -1;
+    const langRTL = ["ur", "fa", "ar", "ps", "fa-AF"].indexOf(language) > -1;
 
     return (
       <div className={`Article ArticleWidget Home`} key={article.sys.id}>

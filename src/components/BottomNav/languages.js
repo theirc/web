@@ -29,7 +29,7 @@ export default {
 	"fa": {
 		"BottomNav": {
 			"menu": {
-				"Articles": "مقاله‌ها",
+				"Articles": "مقاله ها",
 				"Home": "خانه",
 				"Services": "کمک پیدا کنید"
 			}
@@ -49,6 +49,15 @@ export default {
 			"menu": {
 				"Articles": "مضامین",
 				"Home": "صفحہ اوّل ",
+				"Services": "مدد تلاش کریں"
+			}
+		}
+	},
+	"ps": {
+		"BottomNav": {
+			"menu": {
+				"Articles": "مقالې",
+				"Home": "کور پاڼه",
 				"Services": "مدد تلاش کریں"
 			}
 		}

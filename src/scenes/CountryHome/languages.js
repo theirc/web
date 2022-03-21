@@ -105,20 +105,20 @@ export default {
 			},
 			"global": {
 				"Read More": "بیشتر بخوانید",
-				"See More": "بیشتر ببینید"
+				"See More": "مشاهده بیشتر"
 			},
 			"guide": {
 				"Local Guide": "راهنمای محلی"
 			},
 			"top": {
-				"Top Categories": "طبقه‌بندی‌های برتر"
+				"Top Categories": "دسته های برتر"
 			},
 			"social": {
-				"Whatsapp": "به صفحه ما مراجعه کنید و از چت برای پاسخگویی به سوالات خود استفاده کنید",
-				"Facebook": "به صفحه ما مراجعه کنید و از چت برای پاسخگویی به سوالات خود استفاده کنید",
-				"Facebook Button": "به فیسبوک برو",
-				"Whatsapp Button": "به WhatsApp بروید",
-				"Whatsapp Title": "واتساپ",
+				"Whatsapp": "از صفحه ما دیدن کنید و از چت برای دریافت پاسخ سوالات خود استفاده کنید",
+				"Facebook": "از صفحه ما دیدن کنید و از چت برای دریافت پاسخ سوالات خود استفاده کنید",
+				"Facebook Button": "به فیسبوک ما بروید",
+				"Whatsapp Button": "به واتس آپ ما بروید",
+				"Whatsapp Title": "واتس آپ",
 				"Facebook Title": "فیسبوک مسنجر"
 			}
 		}
@@ -182,6 +182,68 @@ export default {
 				"Whatsapp Button": "به فیس بوک برو",
 				"Whatsapp Title": "واٹس ایپ",
 				"Facebook Title": "فیس بک میسنجر"
+			}
+		}
+	},
+	"ps": {
+		"CountryHome": {
+			"banner": {
+				"Bulgaria title": "Sorry! Refugee.Info has stopped providing information about Bulgaria. Refugee.info no longer hosts content on Bulgaria.",
+				"Bulgaria text": "Instead, we helped the Foundation for Access to Rights create a new site for refugees in Bulgaria: refugeelife.bg.",
+				"Bulgaria label": "Visit www.refugeelife.bg",
+				"Serbia title": "Sorry! Refugee.Info no longer hosts content on Serbia.",
+				"Serbia text": "Instead, we helped the Belgrade Centre for Human Rights create a new site for refugees in Serbia.",
+				"Serbia articles label": "Articles",
+				"Serbia services label": "Services",
+			},
+			"global": {
+				"Read More": "Read More",
+				"See More": "ټول وګورئ"
+			},
+			"guide": {
+				"Local Guide": "محلي لارښود"
+			},
+			"top": {
+				"Top Categories": "غوره کټګورۍ"
+			},
+			"social": {
+				"Whatsapp": "زموږله ویب پاڼې لیدنه وکړئ او د چت له لاري  دخپلو پوښتنو ځوابونه ترلاسه کړئ.",
+				"Facebook": "زموږله ویب پاڼې لیدنه وکړئ او د چت له لاري  دخپلو پوښتنو ځوابونه ترلاسه کړئ.",
+				"Facebook Button": "زموږ فیسبوک ته لاړ شئ",
+				"Whatsapp Button": "زموږ واتس آپ ته لاړ شئ",
+				"Whatsapp Title": "واتس آپ",
+				"Facebook Title": "فیسبوک مسنجر"
+			}
+		}
+	},
+	"fa-AF": {
+		"CountryHome": {
+			"banner": {
+				"Bulgaria title": "Sorry! Refugee.Info has stopped providing information about Bulgaria. Refugee.info no longer hosts content on Bulgaria.",
+				"Bulgaria text": "Instead, we helped the Foundation for Access to Rights create a new site for refugees in Bulgaria: refugeelife.bg.",
+				"Bulgaria label": "Visit www.refugeelife.bg",
+				"Serbia title": "Sorry! Refugee.Info no longer hosts content on Serbia.",
+				"Serbia text": "Instead, we helped the Belgrade Centre for Human Rights create a new site for refugees in Serbia.",
+				"Serbia articles label": "Articles",
+				"Serbia services label": "Services",
+			},
+			"global": {
+				"Read More": "Read More",
+				"See More": "مشاهده بیشتر"
+			},
+			"guide": {
+				"Local Guide": "راهنمای محلی"
+			},
+			"top": {
+				"Top Categories": "دسته های برتر"
+			},
+			"social": {
+				"Whatsapp": "از صفحه ما دیدن کنید و از چت برای دریافت پاسخ سوالات خود استفاده کنید",
+				"Facebook": "از صفحه ما دیدن کنید و از چت برای دریافت پاسخ سوالات خود استفاده کنید",
+				"Facebook Button": "به فیسبوک ما بروید",
+				"Whatsapp Button": "به واتس آپ ما بروید",
+				"Whatsapp Title": "واتس آپ",
+				"Facebook Title": "فیسبوک مسنجر"
 			}
 		}
 	}

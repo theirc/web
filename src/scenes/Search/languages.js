@@ -100,5 +100,22 @@ export default {
 				"Results for": "کے نتائج"
 			}
 		}
+	},
+	"ps": {
+		"Search": {
+			"buttons": {
+				"Show More": "مزید دکھائیں",
+				"Show Less": "دکھائیں کم"
+			},
+			"list": {
+				"No articles found with the keywords used": "کوئی آرٹیکلز نہیں استعمال کیا جاتا مطلوبہ الفاظ کے ساتھ پایا",
+				"No services found with the keywords used": "کوئی خدمات کا استعمال کیا مطلوبہ الفاظ کے ساتھ پایا",
+				"Services": "خدمات",
+				"Articles": "مقالې"
+			},
+			"title": {
+				"Results for": "کے نتائج"
+			}
+		}
 	}
 }
