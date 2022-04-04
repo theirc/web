@@ -98,8 +98,8 @@ class ArticleDetailBody extends Component {
     this.replaceLinks();
     const ReadSpeaker = window.ReadSpeaker;
     const rspkr = window.rspkr;
-    ReadSpeaker.init();
-    ReadSpeaker.q(function () {
+    ReadSpeaker?.init();
+    ReadSpeaker?.q(function () {
       rspkr.ui.addClickEvents();
     });
   }
@@ -112,7 +112,7 @@ class ArticleDetailBody extends Component {
   componentWillUnmount() {
     const ReadSpeaker = window.ReadSpeaker;
     const rspkr = window.rspkr;
-    ReadSpeaker.q(function () {
+    ReadSpeaker?.q(function () {
       if (rspkr.ui.getActivePlayer()) {
         rspkr.ui.getActivePlayer().close();
       }

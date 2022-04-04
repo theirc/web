@@ -64,5 +64,16 @@ export default {
 				"": ""
 			}
 		}
+	},
+	"ps": {
+		"ArticleList": {
+			"header": {
+				"Categories": "Articles"
+			},
+			"actions": {
+				"All Articles": "ټولې مقالې",
+				"": ""
+			}
+		}
 	}
 }
