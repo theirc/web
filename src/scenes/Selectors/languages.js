@@ -70,5 +70,17 @@ export default {
 				"Choose your language": "اپنی زبان کا انتخاب کریں"
 			}
 		}
+	},
+	"ps": {
+		"Selectors": {
+			"country": {
+				"Where are you now?": "آپ اس وقت کہاں ہیں؟",
+				"Detect My Location": "میرے مقام کا پتہ لگائیں",
+				"Choose a different language": "ایک مختلف زبان کا انتخاب کریں"
+			},
+			"language": {
+				"Choose your language": "خپله ژبه غوره کړئ"
+			}
+		}
 	}
 }

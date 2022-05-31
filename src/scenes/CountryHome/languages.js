@@ -197,7 +197,7 @@ export default {
 				"Serbia services label": "Services",
 			},
 			"global": {
-				"Read More": "Read More",
+				"Read More": "ټول ولولئ",
 				"See More": "ټول وګورئ"
 			},
 			"guide": {
@@ -228,7 +228,7 @@ export default {
 				"Serbia services label": "Services",
 			},
 			"global": {
-				"Read More": "Read More",
+				"Read More": "بیشتر بخوانید",
 				"See More": "مشاهده بیشتر"
 			},
 			"guide": {
