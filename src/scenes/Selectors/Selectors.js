@@ -111,18 +111,24 @@ class Selectors extends Component {
 	}
 
 	selectCountry(country, timeout = 200) {
-		setTimeout(() => {
-			if (country !== "detect-me") {
-				this.setState({
-					currentPage: -1,
-					redirect: `/${country}`,
-				});
-			} else {
-				this.setState({
-					currentPage: 3
-				});
-			}
-		}, timeout);
+		if (country !== 'greece' && country !== 'italy') {
+			setTimeout(() => {
+				if (country !== "detect-me") {
+					console.log('ENTRA ACA', this.state);
+					this.setState({
+						currentPage: -1,
+						redirect: `/${country}`,
+					});
+				} else {
+					this.setState({
+						currentPage: 3
+					});
+				}
+			}, timeout);
+		} else {
+			const lang = this.state.language === 'en' ? 'en-us' : this.state.language;
+			window.location.href = `https://signpost-${country}.zendesk.com/hc/${lang}`;
+		}
 	}
 
 	backToLanguage() {
